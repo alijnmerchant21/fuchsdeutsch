@@ -1,0 +1,55 @@
+# Fuchsdeutsch
+
+Free German course, A1 to C2. First course: B2.1 (the B1+ bridge into B2).
+
+Stack: Next.js (App Router) + Supabase (Google login, Postgres). Deploys to Vercel.
+
+## Run it
+
+```
+npm install
+npm run dev
+```
+
+Open http://localhost:3000. With no `.env.local` the app runs in **demo mode**: sign in with any name and email, progress is saved in the browser only.
+
+## Go live (in this order)
+
+1. **Supabase**: create a project at supabase.com. In SQL Editor, run `supabase/schema.sql`.
+2. **Google login**: Supabase > Authentication > Providers > Google. Follow the two-field setup (client id + secret from Google Cloud Console). Add your site URL under Authentication > URL Configuration.
+3. **Keys**: copy `.env.example` to `.env.local` and fill in the two `NEXT_PUBLIC_SUPABASE_*` values (Supabase > Project Settings > API).
+4. **Admin**: sign in once, then run in SQL Editor: `update public.profiles set is_admin = true where email = 'you@example.com';`
+5. **GitHub + Vercel**: push this folder to a GitHub repo, import it in Vercel, add the same two env vars there.
+6. **Voices**: copy `scripts/voices.example.json` to `scripts/voices.json`, put in ElevenLabs voice ids, run `ELEVENLABS_API_KEY=... npm run audio`. Commit the MP3s in `public/audio/`. Until then the player uses the browser's German voice.
+
+## Where things are
+
+| What | Where |
+| --- | --- |
+| Course outline (8 chapters) | `content/course.ts` |
+| Kapitel 1: texts, audio scripts, exercises, exam | `content/kapitel1.ts` |
+| Word explanations (German + English) | `content/glossary.ts` |
+| Speakers and dialects | `content/speakers.ts` |
+| Final exam (Goethe format) | `content/final.ts` |
+| Game word lists | `content/games.ts` |
+| Trial length, deposit, pass mark | `lib/config.ts` |
+| Login, progress, streak, XP | `lib/store.tsx` |
+| Unlock rules | `lib/unlock.ts` |
+| Design tokens and all styles | `app/globals.css` |
+
+## Add a chapter
+
+Copy `content/kapitel1.ts` to `content/kapitel2.ts`, rewrite the content, and replace the `soon(2, ...)` line in `content/course.ts` with the import. Locking, exam, progress and the dashboard pick it up automatically.
+
+## Rules built in
+
+- A section opens when the one before it is finished. A chapter opens when the exam of the chapter before is passed (60%).
+- The final exam opens when every chapter exam is passed.
+- Admin view (Admin page) opens everything without changing the admin's own progress.
+- Easy mode: explanations in simple German + English. Deutsch pur: simple German only.
+- Streak: one activity a day. A streak freeze covers one missed day. A new freeze every 7 days, at most 2.
+- Trial: `TRIAL_START` + 45 days in `lib/config.ts`. The deposit is described on the site but no payment is taken yet.
+
+## Not built yet (the data model leaves room)
+
+Payments for the deposit, AI tutor, live AI conversation, daily town hall, forum and live chat, embedded videos (each module has a video slot: set `url` on the `video` block).

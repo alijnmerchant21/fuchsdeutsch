@@ -9,3 +9,5 @@ dev.log
 _src.tgz
 tsconfig.tsbuildinfo
 next-env.d.ts
+.content-tmp
+.audio-tmp

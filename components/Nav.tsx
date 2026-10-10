@@ -20,6 +20,7 @@ export function Nav() {
       <nav className="nav-links" aria-label="Hauptnavigation">
         {link('/lernen', 'Lernen')}
         {link('/spiele', 'Spiele')}
+        {link('/bestenliste', 'Bestenliste')}
         {link('/community', 'Community')}
         {isAdmin && link('/admin', 'Admin')}
       </nav>
@@ -34,7 +35,8 @@ export function Nav() {
               <button type="button" aria-pressed={progress.mode === 'easy'} onClick={() => setMode('easy')} title="Erklärungen auf Deutsch und Englisch">Easy</button>
               <button type="button" aria-pressed={progress.mode === 'advanced'} onClick={() => setMode('advanced')} title="Erklärungen nur auf Deutsch">Deutsch pur</button>
             </div>
-            <button type="button" className="avatar" title={`${user.name}: abmelden`} onClick={() => void signOut()} aria-label="Abmelden">{user.name.slice(0, 1).toUpperCase()}</button>
+            <Link href="/willkommen" className="avatar" title={`${user.name}: Profil bearbeiten`} aria-label="Profil bearbeiten">{user.name.slice(0, 1).toUpperCase()}</Link>
+            <button type="button" className="link-btn small" onClick={() => void signOut()}>Abmelden</button>
           </>
         )}
         {ready && !user && <Link href="/login" className="btn btn-sm">Anmelden</Link>}

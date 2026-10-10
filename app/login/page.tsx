@@ -13,7 +13,12 @@ export default function Login() {
   const [msg, setMsg] = useState<string | null>(null);
   const [left, setLeft] = useState<number | null>(null);
   useEffect(() => setLeft(trialDaysLeft()), []);
-  useEffect(() => { if (ready && user) router.replace('/lernen'); }, [ready, user, router]);
+  useEffect(() => {
+    if (!ready || !user) return;
+    // Go back to the page that asked for the login. Only same-site paths are allowed.
+    const next = new URLSearchParams(window.location.search).get('next') || '';
+    router.replace(next.startsWith('/') && !next.startsWith('//') ? next : '/lernen');
+  }, [ready, user, router]);
 
   const magic = async (e: React.FormEvent) => {
     e.preventDefault();

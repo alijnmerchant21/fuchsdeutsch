@@ -8,7 +8,6 @@ import { PASS_MARK } from '@/lib/config';
 import { dayKey, streakAlive, useStore } from '@/lib/store';
 import { chapterOpen, chapterPercent, examOpen, finalOpen, sectionKey, sectionOpen } from '@/lib/unlock';
 
-const DAILY_GOAL = 50;
 
 function Week() {
   const { progress } = useStore();
@@ -26,6 +25,7 @@ function Week() {
 function Dashboard() {
   const { user, progress, isAdmin, adminView } = useStore();
   const admin = isAdmin && adminView;
+  const DAILY_GOAL = progress.profile?.goal || 50;
   const today = progress.days[dayKey()] || 0;
   const alive = streakAlive(progress.streak);
   const goalPct = Math.min(100, Math.round((today / DAILY_GOAL) * 100));
@@ -46,7 +46,7 @@ function Dashboard() {
         <div className="hello">
           <Fox size={96} mood={today >= DAILY_GOAL ? 'proud' : alive ? 'happy' : 'sleepy'} className="bob" />
           <div>
-            <h1>Hallo {user!.name}!</h1>
+            <h1>Hallo {user!.name.split(' ')[0]}!</h1>
             <p className="lead">{today >= DAILY_GOAL ? 'Tagesziel geschafft. Fuchsi ist stolz auf dich.' : alive ? 'Schön, dass du wieder da bist.' : 'Heute ist ein guter Tag für zehn Minuten Deutsch.'}</p>
             {next && <Link href={next.href} className="btn btn-lg">Weiter: {next.label}</Link>}
           </div>

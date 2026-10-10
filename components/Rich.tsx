@@ -1,6 +1,6 @@
 'use client';
 import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
-import { glossary } from '@/content/glossary';
+import { glossary, termLabel } from '@/content/glossary';
 import { useStore } from '@/lib/store';
 import { speakWord } from '@/lib/audio';
 
@@ -25,10 +25,10 @@ export function Term({ shown, entryKey }: { shown: string; entryKey: string }) {
     <span className="term" ref={ref}>
       <button type="button" className="term-word" aria-expanded={open} onClick={() => setOpen((o) => !o)}>{shown}</button>
       {open && (
-        <span className="term-pop" role="dialog" aria-label={`Erklärung: ${entryKey}`}>
+        <span className="term-pop" role="dialog" aria-label={`Erklärung: ${termLabel(entryKey)}`}>
           <span className="term-head">
-            <strong>{entryKey === 'sichLangweilen' ? 'sich langweilen' : entryKey}</strong>
-            <button type="button" className="icon-btn" aria-label="Wort anhören" onClick={() => speakWord(entryKey === 'sichLangweilen' ? 'sich langweilen' : entryKey)}>🔊</button>
+            <strong>{termLabel(entryKey)}</strong>
+            <button type="button" className="icon-btn" aria-label="Wort anhören" onClick={() => speakWord(termLabel(entryKey))}>🔊</button>
           </span>
           <span className="term-de">{entry.de}</span>
           {progress.mode === 'easy' && <span className="term-en">{entry.en}</span>}

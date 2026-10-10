@@ -27,7 +27,8 @@ Open http://localhost:3000. With no `.env.local` the app runs in **demo mode**: 
 | What | Where |
 | --- | --- |
 | Course outline (8 chapters) | `content/course.ts` |
-| Kapitel 1: texts, audio scripts, exercises, exam | `content/kapitel1.ts` |
+| Kapitel 1 to 8: texts, audio scripts, exercises, exam, games | `content/kapitel1.ts` … `content/kapitel8.ts` |
+| Short builders used by the chapter files | `content/helpers.ts` |
 | Word explanations (German + English) | `content/glossary.ts` |
 | Speakers and dialects | `content/speakers.ts` |
 | Final exam (Goethe format) | `content/final.ts` |
@@ -37,9 +38,11 @@ Open http://localhost:3000. With no `.env.local` the app runs in **demo mode**: 
 | Unlock rules | `lib/unlock.ts` |
 | Design tokens and all styles | `app/globals.css` |
 
-## Add a chapter
+## Add or change content
 
-Copy `content/kapitel1.ts` to `content/kapitel2.ts`, rewrite the content, and replace the `soon(2, ...)` line in `content/course.ts` with the import. Locking, exam, progress and the dashboard pick it up automatically.
+Each chapter is one file. Copy `content/kapitel8.ts` for a new chapter, add it to `content/course.ts`, its games to `content/games.ts` and its glossary to `content/glossary.ts`. Locking, exam, progress and the dashboard pick it up automatically.
+
+After any content change run `npm run check`. It verifies every exercise: answers in range, word banks complete, glossary links, speakers, exam size.
 
 ## Rules built in
 
@@ -52,4 +55,4 @@ Copy `content/kapitel1.ts` to `content/kapitel2.ts`, rewrite the content, and re
 
 ## Not built yet (the data model leaves room)
 
-Payments for the deposit, AI tutor, live AI conversation, daily town hall, forum and live chat, embedded videos (each module has a video slot: set `url` on the `video` block).
+Payments for the deposit, AI tutor (also for free writing and speaking, which are replaced by checkable sentence building for now), live AI conversation, daily town hall, forum and live chat, videos.

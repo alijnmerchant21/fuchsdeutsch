@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { allAudio, loadContent } from './load-content.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const key = process.env.ELEVENLABS_API_KEY;
@@ -15,18 +16,8 @@ const voicesPath = join(root, 'scripts', 'voices.json');
 if (!existsSync(voicesPath)) { console.error('Create scripts/voices.json (copy voices.example.json and fill in voice ids).'); process.exit(1); }
 const voices = JSON.parse(readFileSync(voicesPath, 'utf8'));
 
-// Collect audio blocks straight from the content files (they are plain data).
-const files = ['content/kapitel1.ts', 'content/final.ts'];
-const blocks = [];
-for (const f of files) {
-  const src = readFileSync(join(root, f), 'utf8');
-  const re = /t: 'audio', id: '([^']+)'[\s\S]*?lines: \[([\s\S]*?)\n\s*\],/g;
-  let m;
-  while ((m = re.exec(src))) {
-    const lines = [...m[2].matchAll(/speaker: '([^']+)', text: '((?:[^'\\]|\\.)*)'/g)].map((x) => ({ speaker: x[1], text: x[2].replace(/\\'/g, "'") }));
-    blocks.push({ id: m[1], lines });
-  }
-}
+// Collect every listening text from the course content.
+const blocks = allAudio(loadContent()).map((b) => ({ id: b.id, lines: b.lines }));
 console.log(`Found ${blocks.length} listening texts.`);
 
 const out = join(root, 'public', 'audio');

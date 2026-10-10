@@ -33,7 +33,7 @@ export default function Landing() {
           </p>
           <div className="hero-cta">
             <Link href={start} className="btn btn-lg">{user ? 'Continue learning' : 'Start learning free'}</Link>
-            <Link href="/spiele" className="btn btn-lg btn-ghost">Play a game first</Link>
+            <Link href="/spiele" className="btn btn-lg btn-ghost">See the games</Link>
           </div>
         </div>
         <div className="hero-demo" aria-label="Try it: tap a word">
@@ -86,7 +86,7 @@ export default function Landing() {
           <li className="t-butter"><b>Einstieg</b><span>Warm up with a quick this-or-that.</span></li>
           <li className="t-mint"><b>Three modules</b><span>Read, listen, learn the grammar, practice.</span></li>
           <li className="t-rose"><b>Alltag und Beruf</b><span>Real situations: calls, appointments, messages.</span></li>
-          <li className="t-sky"><b>Games</b><span>Four mini games per chapter.</span></li>
+          <li className="t-sky"><b>Games</b><span>Four mini games per chapter, with a leaderboard.</span></li>
           <li className="t-lilac"><b>Chapter exam</b><span>Pass it and the next chapter opens.</span></li>
         </ol>
         <p className="flow-foot">At the end of the course you sit a full exam in the Goethe format: Lesen, Hören, Schreiben, Sprechen.</p>
@@ -111,9 +111,9 @@ export default function Landing() {
 
       <section className="games-strip" aria-labelledby="games-h">
         <h2 id="games-h">Games you can play right now</h2>
-        <p className="lead">No account needed. Each one opens on its own page.</p>
+        <p className="lead">Each game opens on its own page. Sign in free so your points are saved and you show up on the leaderboard.</p>
         <div className="game-grid">
-          {games.map((g) => (
+          {games.slice(0, 4).map((g) => (
             <Link key={g.id} href={`/spiele/${g.id}`} className={`game-card t-${g.tone}`}>
               <span className="game-emoji" aria-hidden>{g.emoji}</span>
               <b>{g.title}</b>

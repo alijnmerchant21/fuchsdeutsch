@@ -7,6 +7,17 @@ import { supabase } from './supabase';
 export type Mode = 'easy' | 'advanced';
 export interface User { id: string; email: string; name: string }
 export interface ExamResult { best: number; passed: boolean; attempts: number }
+/** Answers from the welcome form. */
+export interface LearnerProfile {
+  name: string;
+  gender: 'frau' | 'mann' | 'divers' | 'none';
+  reasons: string[];
+  nativeLanguage: string;
+  /** Daily XP goal. */
+  goal: number;
+  /** Show first name and points on the leaderboard. */
+  board: boolean;
+}
 export interface Streak { count: number; best: number; last: string | null; freezes: number }
 
 export interface Progress {
@@ -22,6 +33,7 @@ export interface Progress {
   days: Record<string, number>;
   streak: Streak;
   joined: string;
+  profile?: LearnerProfile;
 }
 
 const emptyProgress = (): Progress => ({
@@ -62,6 +74,7 @@ interface Store {
   signInGoogle: () => Promise<void>;
   signInEmail: (email: string) => Promise<string | null>;
   signOut: () => Promise<void>;
+  saveProfile: (p: LearnerProfile) => void;
   setMode: (m: Mode) => void;
   setAdminView: (on: boolean) => void;
   setDemoAdmin: (on: boolean) => void;
@@ -89,7 +102,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [adminView, setAdminViewState] = useState(false);
   const [progress, setProgress] = useState<Progress>(emptyProgress);
   const userRef = useRef<User | null>(null);
-  userRef.current = user;
 
   const loadLocal = useCallback((u: User) => {
     setProgress({ ...emptyProgress(), ...readLS<Partial<Progress>>(lsKey(u.id), {}) });
@@ -158,8 +170,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return { ...p, xp: p.xp + xp, days: { ...p.days, [today]: (p.days[today] || 0) + xp }, streak: bumpStreak(p.streak, today) };
   };
 
+  // The name from the welcome form wins over the one from the login provider.
+  const shownUser = useMemo(() => (user ? { ...user, name: progress.profile?.name || user.name } : null), [user, progress.profile?.name]);
+  userRef.current = shownUser;
+
   const store = useMemo<Store>(() => ({
-    ready, user, isAdmin, adminView, progress,
+    ready, user: shownUser, isAdmin, adminView, progress,
+    saveProfile: (profile) => update((p) => ({ ...p, profile })),
     signInDemo: (name, email) => {
       const u: User = { id: 'demo-' + email.toLowerCase().replace(/[^a-z0-9]/g, '-'), email, name };
       writeLS(LS_USER, u); setUser(u); loadLocal(u);
@@ -195,7 +212,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       return earn(next, firstPass ? 100 : 10);
     }),
     recordGame: (id, score, xp) => update((p) => earn({ ...p, games: { ...p.games, [id]: Math.max(p.games[id] || 0, score) } }, xp)),
-  }), [ready, user, isAdmin, adminView, progress, loadLocal, update]);
+  }), [ready, shownUser, isAdmin, adminView, progress, loadLocal, update]);
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
 }

@@ -10,7 +10,7 @@ import { DEMO_MODE } from '@/lib/config';
 import { useStore } from '@/lib/store';
 import { supabase } from '@/lib/supabase';
 
-interface Row { id: string; email: string; name: string; xp: number; streak: number; last_active: string | null; created_at: string }
+interface Row { id: string; email: string; name: string; xp: number; streak: number; last_active: string | null; created_at: string; profile: { name?: string; gender?: string; reasons?: string[]; nativeLanguage?: string } | null }
 
 function Admin() {
   const { isAdmin, adminView, setAdminView, setDemoAdmin } = useStore();
@@ -18,7 +18,7 @@ function Admin() {
   useEffect(() => {
     const sb = supabase();
     if (!sb || !isAdmin) return;
-    void sb.from('profiles').select('id,email,name,xp,streak,last_active,created_at').order('created_at', { ascending: false }).limit(200)
+    void sb.from('profiles').select('id,email,name,xp,streak,last_active,created_at,profile:progress->profile').order('created_at', { ascending: false }).limit(200)
       .then(({ data }) => setRows((data as Row[]) || []));
   }, [isAdmin]);
 
@@ -78,14 +78,14 @@ function Admin() {
       <p><Link href="/abschlusspruefung" className="btn btn-sm">Abschlussprüfung ansehen</Link></p>
 
       <h2>Lernende</h2>
-      {DEMO_MODE ? <p className="muted">Im Demo-Modus gibt es keine Datenbank. Nach der Supabase-Einrichtung erscheint hier die Liste aller Konten mit E-Mail, XP, Serie und letzter Aktivität.</p> : (
+      {DEMO_MODE ? <p className="muted">Im Demo-Modus gibt es keine Datenbank. Nach der Supabase-Einrichtung erscheint hier die Liste aller Konten mit E-Mail, Profilangaben, XP, Serie und letzter Aktivität.</p> : (
         <div className="card table-wrap">
           <table>
-            <thead><tr><th>Name</th><th>E-Mail</th><th>XP</th><th>Serie</th><th>Zuletzt aktiv</th><th>Dabei seit</th></tr></thead>
+            <thead><tr><th>Name</th><th>E-Mail</th><th>Anrede</th><th>Warum Deutsch</th><th>Muttersprache</th><th>XP</th><th>Serie</th><th>Zuletzt aktiv</th><th>Dabei seit</th></tr></thead>
             <tbody>
-              {(rows || []).map((r) => <tr key={r.id}><td>{r.name}</td><td>{r.email}</td><td>{r.xp}</td><td>{r.streak}</td><td>{r.last_active || 'noch nie'}</td><td>{new Date(r.created_at).toLocaleDateString('de-DE')}</td></tr>)}
-              {rows && rows.length === 0 && <tr><td colSpan={6}>Noch keine Konten.</td></tr>}
-              {!rows && <tr><td colSpan={6}>Lade …</td></tr>}
+              {(rows || []).map((r) => <tr key={r.id}><td>{r.profile?.name || r.name}</td><td>{r.email}</td><td>{r.profile?.gender || ''}</td><td>{(r.profile?.reasons || []).join(', ')}</td><td>{r.profile?.nativeLanguage || ''}</td><td>{r.xp}</td><td>{r.streak}</td><td>{r.last_active || 'noch nie'}</td><td>{new Date(r.created_at).toLocaleDateString('de-DE')}</td></tr>)}
+              {rows && rows.length === 0 && <tr><td colSpan={9}>Noch keine Konten.</td></tr>}
+              {!rows && <tr><td colSpan={9}>Lade …</td></tr>}
             </tbody>
           </table>
         </div>

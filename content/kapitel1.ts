@@ -8,12 +8,18 @@ const einstieg: Section = {
   kind: 'einstieg',
   label: 'Einstieg',
   title: 'Eule oder Lerche?',
-  goals: ['über Gewohnheiten sprechen', 'Vorlieben nennen und begründen'],
-  minutes: 8,
+  goals: ['das Kapitel kennenlernen', 'über Gewohnheiten sprechen', 'Vorlieben nennen und begründen'],
+  minutes: 10,
   tone: 'butter',
   blocks: [
     {
-      t: 'text', id: 'e-intro',
+      t: 'overview', id: 'e-over', title: 'Kapitel 1: Zeit ist relativ',
+      body: 'In diesem Kapitel dreht sich alles um die **Zeit**: Wie sah der Alltag früher aus, und warum haben wir heute so oft Stress? Warum vergeht ein schöner Abend schnell und eine Stunde im Wartezimmer langsam? Du liest eine Kolumne und einen Sachtext, hörst Menschen aus Norddeutschland, Wien, Berlin und Zürich und lernst, wie man am Telefon einen Termin vereinbart, verschiebt oder absagt.\n\nDie Grammatik hilft dir beim Erzählen: Du wiederholst die drei Zeitformen der Vergangenheit und lernst, welche Ergänzungen wichtige Verben brauchen.',
+      en: 'This chapter is about time: everyday life then and now, why time feels fast or slow, and how to arrange, move or cancel an appointment on the phone. Grammar: the three past tenses, and which objects common verbs need. Each chapter has 8 sections, 4 games and an exam at the end.',
+      learn: ['über früher und heute erzählen und die passende Zeitform wählen', 'einen Sachtext verstehen und kurz zusammenfassen', 'Termine vereinbaren, verschieben und absagen', 'Dialekte aus vier Regionen besser verstehen'],
+    },
+    {
+      t: 'text', id: 'e-intro', kicker: 'Zum Einstieg',
       body: 'Manche Menschen springen um sechs Uhr aus dem Bett. Andere werden erst um Mitternacht richtig wach. Bist du eine [[Eule]] oder eine [[Lerche]]? Planst du alles, oder bist du lieber [[spontan]]?',
     },
     {
@@ -49,13 +55,14 @@ const einstieg: Section = {
       ],
     },
     {
-      t: 'write', id: 'e-write',
-      task: 'Stell dich vor.',
-      taskEn: 'Introduce yourself in 3 to 4 sentences.',
-      prompt: 'Schreib drei bis vier Sätze: Bist du Eule oder Lerche? Planst du gern? Begründe mit **weil** oder **denn**.',
-      minWords: 25,
-      hints: ['Ich bin eher …', 'Ich mag … lieber als …, weil …'],
-      sample: 'Ich bin eher eine Eule, weil ich abends die besten Ideen habe. Morgens brauche ich zuerst einen Kaffee und viel Ruhe. Ich plane meine Woche gern, denn so vergesse ich nichts. Am Wochenende bin ich aber lieber spontan.',
+      t: 'compose', id: 'e-write',
+      task: 'Stell dich vor. Bau drei Sätze.', taskEn: 'Introduce yourself. Build three sentences from the parts.',
+      prompt: 'Bist du Eule oder Lerche? So kannst du es sagen und mit **weil** oder **denn** begründen.',
+      steps: [
+        { say: 'Sag, welcher Typ du bist, und begründe mit „weil“.', sayEn: 'Say which type you are and give a reason with "weil" (verb at the end).', words: ['Ich bin', 'eher eine Eule,', 'weil ich', 'abends', 'die besten Ideen', 'habe.'] },
+        { say: 'Beschreib deinen Morgen.', sayEn: 'Describe your morning.', words: ['Morgens', 'brauche ich', 'zuerst', 'einen Kaffee.'] },
+        { say: 'Sag, dass du gern planst, und begründe mit „denn“.', sayEn: 'Say that you like to plan and give a reason with "denn" (normal word order).', words: ['Ich plane', 'meine Woche gern,', 'denn', 'so vergesse', 'ich nichts.'] },
+      ],
     },
   ],
 };
@@ -192,11 +199,15 @@ Tauschen möchte ich nicht. Aber ich habe etwas von ihr gelernt: Seit einem Mona
       options: ['Lena soll ihm das Telefon erklären.', 'Früher war die Arbeit leichter.', 'Lena hat auch abends keine richtige Ruhe.'], answer: 2,
     },
     {
-      t: 'write', id: 'm1-write', task: 'Und bei dir?', taskEn: 'Write about your own life 10 years ago. Use Präteritum for war/hatte and Perfekt for the rest.',
-      prompt: 'Wie war dein Leben vor zehn Jahren? Schreib fünf Sätze. Benutze **war** und **hatte** im Präteritum, die anderen Verben im Perfekt.',
-      minWords: 40,
-      hints: ['Vor zehn Jahren war ich …', 'Damals hatte ich …', 'Ich habe oft …'],
-      sample: 'Vor zehn Jahren war ich noch Studentin und hatte sehr wenig Geld. Ich habe in einer kleinen Wohnung mit zwei Freundinnen gewohnt. Abends haben wir oft zusammen gekocht und lange geredet. Am Wochenende bin ich mit dem Fahrrad zu meinen Eltern gefahren. Ich hatte kein Smartphone, aber ich hatte viel mehr Zeit.',
+      t: 'compose', id: 'm1-write',
+      task: 'Wie war das Leben vor zehn Jahren? Bau den Text.', taskEn: 'What was life like ten years ago? Build the text. Use Präteritum for war/hatte and Perfekt for the other verbs.',
+      prompt: 'Eine Person erzählt von früher. **war** und **hatte** stehen im Präteritum, die anderen Verben im Perfekt.',
+      steps: [
+        { say: 'Vor zehn Jahren: Studentin, wenig Geld.', sayEn: 'Ten years ago: a student with little money.', words: ['Vor zehn Jahren', 'war ich', 'noch Studentin', 'und hatte', 'sehr wenig Geld.'] },
+        { say: 'Wohnen: kleine Wohnung, zwei Freundinnen.', sayEn: 'Living: a small flat with two friends.', words: ['Ich habe', 'mit zwei Freundinnen', 'in einer kleinen Wohnung', 'gewohnt.'] },
+        { say: 'Abends: oft zusammen kochen.', sayEn: 'In the evenings: often cooking together.', words: ['Abends', 'haben wir', 'oft zusammen', 'gekocht.'] },
+        { say: 'Wochenende: mit dem Fahrrad zu den Eltern.', sayEn: 'Weekends: by bike to the parents.', words: ['Am Wochenende', 'bin ich', 'mit dem Fahrrad', 'zu meinen Eltern', 'gefahren.'] },
+      ],
     },
   ],
 };
@@ -268,11 +279,15 @@ const modul2: Section = {
     },
     { t: 'video', id: 'm2-video', title: 'Video zum Thema Alltag', source: 'Videoplatz für dieses Modul', url: null },
     {
-      t: 'write', id: 'm2-write', task: 'Stell ein Lied vor.', taskEn: 'Present a song from your country about time or everyday life.',
-      prompt: 'Kennst du ein Lied zum Thema **Zeit** oder **Alltag** aus deinem Land? Stell es kurz vor: Wer singt? Worum geht es? Wie findest du es?',
-      minWords: 40,
-      hints: ['Ich möchte das Lied … von … vorstellen.', 'In dem Lied geht es um …', 'Ich finde den Text …, weil …'],
-      sample: 'Ich möchte das Lied „Kal Ho Naa Ho“ aus Indien vorstellen. Es ist aus einem Film von 2003. In dem Lied geht es darum, dass man jeden Moment genießen soll, weil niemand weiß, was morgen kommt. Die Melodie ist ruhig und ein bisschen traurig. Ich finde den Text schön, weil er mich daran erinnert, nicht alles auf später zu verschieben.',
+      t: 'compose', id: 'm2-write',
+      task: 'Stell ein Lied vor. Bau den Text.', taskEn: 'Present a song. Build the text.',
+      prompt: 'So stellst du ein Lied zum Thema **Zeit** oder **Alltag** vor.',
+      steps: [
+        { say: 'Nenne das Lied.', sayEn: 'Name the song.', words: ['Ich möchte', 'ein Lied', 'aus meinem Land', 'vorstellen.'] },
+        { say: 'Sag, worum es geht.', sayEn: 'Say what it is about.', words: ['In dem Lied', 'geht es darum,', 'dass man', 'jeden Moment', 'genießen soll.'] },
+        { say: 'Beschreib die Melodie.', sayEn: 'Describe the melody.', words: ['Die Melodie', 'ist ruhig', 'und', 'ein bisschen traurig.'] },
+        { say: 'Sag deine Meinung und begründe.', sayEn: 'Give your opinion with a reason.', words: ['Ich finde', 'den Text schön,', 'weil er', 'mich an meine Kindheit', 'erinnert.'] },
+      ],
     },
   ],
 };
@@ -389,11 +404,15 @@ Das erklärt auch, warum die Jahre scheinbar immer schneller vergehen. Kindern b
       hint: 'Akkusativ-Pronomen steht vor dem Dativ.',
     },
     {
-      t: 'write', id: 'm3-write', task: 'Fass einen Text zusammen.', taskEn: 'Summarize text A or B in 4 to 5 sentences using your notes.',
-      prompt: 'Wähle Text A oder Text B. Fass ihn mit deinen Notizen in vier bis fünf Sätzen zusammen, für eine Person, die den Text nicht gelesen hat.',
-      minWords: 45,
-      hints: ['In dem Text geht es um …', 'Der Text erklärt, warum …', 'Ein Beispiel dafür ist …'],
-      sample: 'In Text B geht es um unser Zeitempfinden. Der Text erklärt, dass wir Zeit sehr subjektiv wahrnehmen. Wenn wir uns langweilen, vergeht die Zeit langsam, aber später erinnern wir uns kaum daran. Wenn wir viel Neues erleben, vergeht sie schnell, und im Rückblick scheint sie lang. Deshalb haben Erwachsene oft das Gefühl, dass die Jahre immer schneller vergehen.',
+      t: 'compose', id: 'm3-write',
+      task: 'Fass Text B zusammen. Bau die Zusammenfassung.', taskEn: 'Summarize text B. Build the summary sentence by sentence.',
+      prompt: 'Eine Zusammenfassung ist kurz und nennt nur das Wichtigste, für eine Person, die den Text nicht gelesen hat.',
+      steps: [
+        { say: 'Nenne das Thema.', sayEn: 'Name the topic.', words: ['In dem Text', 'geht es', 'um unser', 'Zeitempfinden.'] },
+        { say: 'Langeweile: Zeit vergeht langsam.', sayEn: 'Boredom: time passes slowly.', words: ['Wenn wir', 'uns langweilen,', 'vergeht', 'die Zeit', 'langsam.'] },
+        { say: 'Viel Neues: Zeit vergeht schnell.', sayEn: 'Lots of new things: time passes quickly.', words: ['Wenn wir', 'viel Neues erleben,', 'vergeht', 'sie', 'schnell.'] },
+        { say: 'Folge für Erwachsene.', sayEn: 'The consequence for adults.', words: ['Deshalb', 'haben Erwachsene', 'oft das Gefühl,', 'dass die Jahre', 'immer schneller', 'vergehen.'] },
+      ],
     },
   ],
 };
@@ -501,11 +520,15 @@ const kommunikation: Section = {
       ],
     },
     {
-      t: 'write', id: 'k-write', task: 'Schreib eine kurze Nachricht.', taskEn: 'Write a short, polite message to reschedule a hairdresser appointment.',
-      prompt: 'Du hast am Samstag um 11 Uhr einen Termin beim Friseur. Du kannst nicht kommen. Schreib eine höfliche Nachricht: Entschuldige dich, nenne kurz den Grund und schlag einen neuen Termin vor.',
-      minWords: 35,
-      hints: ['Leider ist mir etwas dazwischengekommen.', 'Könnten wir den Termin auf … verschieben?', 'Vielen Dank für Ihr Verständnis.'],
-      sample: 'Guten Tag, ich habe am Samstag um 11 Uhr einen Termin bei Ihnen. Leider ist mir etwas dazwischengekommen, weil ich am Wochenende arbeiten muss. Könnten wir den Termin auf Dienstag oder Mittwoch nach 17 Uhr verschieben? Vielen Dank für Ihr Verständnis. Mit freundlichen Grüßen, Dana Okafor',
+      t: 'compose', id: 'k-write',
+      task: 'Schreib eine höfliche Nachricht an den Friseur.', taskEn: 'Write a polite message to the hairdresser to reschedule. Build it sentence by sentence.',
+      prompt: 'Du hast am Samstag um 11 Uhr einen Termin beim Friseur und kannst nicht kommen.',
+      steps: [
+        { say: 'Nenne deinen Termin.', sayEn: 'Mention your appointment.', words: ['Guten Tag,', 'ich habe', 'am Samstag um 11 Uhr', 'einen Termin', 'bei Ihnen.'] },
+        { say: 'Sag, dass du nicht kommen kannst.', sayEn: 'Say that something came up.', words: ['Leider', 'ist mir', 'etwas', 'dazwischengekommen.'] },
+        { say: 'Schlag einen neuen Termin vor.', sayEn: 'Suggest a new time.', words: ['Könnten wir', 'den Termin', 'auf Dienstag', 'verschieben?'] },
+        { say: 'Bedanke dich.', sayEn: 'Say thank you.', words: ['Vielen Dank', 'für', 'Ihr Verständnis.'] },
+      ],
     },
   ],
 };
@@ -576,7 +599,7 @@ const uebungen: Section = {
   kind: 'uebung',
   label: 'Übungen',
   title: 'Training: Wörter rund um die Zeit',
-  goals: ['Wortschatz zum Thema Zeit festigen', 'eine Kurzbiografie schreiben', 'Aussprache: Betonung im Satz'],
+  goals: ['Wortschatz zum Thema Zeit festigen', 'eine Kurzbiografie bauen', 'Aussprache: Betonung im Satz'],
   minutes: 20,
   tone: 'butter',
   blocks: [
@@ -628,11 +651,15 @@ const uebungen: Section = {
       body: `**Selin Aydın** wurde 1991 in Dortmund geboren. Schon als Kind zeichnete sie Comics. Nach dem Abitur studierte sie Grafikdesign in Münster. 2015 zog sie nach Hamburg und arbeitete dort drei Jahre lang in einer Werbeagentur. Nachdem sie ihren ersten Comic veröffentlicht hatte, machte sie sich selbstständig. Heute lebt sie mit ihrer Familie in Lübeck und unterrichtet an einer Kunstschule.`,
     },
     {
-      t: 'write', id: 'u-biow', task: 'Schreib eine Kurzbiografie.', taskEn: 'Write a short biography in Präteritum about someone you know (or invent a person).',
-      prompt: 'Schreib eine Kurzbiografie über eine Person aus deiner Familie oder eine erfundene Person. Benutze das **Präteritum** und mindestens einen Satz mit **nachdem**.',
-      minWords: 50,
-      hints: ['… wurde … in … geboren.', 'Nach der Schule …', 'Nachdem er/sie … hatte, …'],
-      sample: 'Mein Großvater Rahim wurde 1948 in Pune geboren. Als junger Mann arbeitete er in einer Druckerei. 1975 heiratete er meine Großmutter und zog mit ihr nach Mumbai. Nachdem er zehn Jahre gespart hatte, eröffnete er einen kleinen Buchladen. Er las jeden Abend und kannte fast jedes Buch im Laden. Mit 70 Jahren ging er in Rente, aber samstags stand er immer noch hinter der Kasse.',
+      t: 'compose', id: 'u-biow',
+      task: 'Bau eine Kurzbiografie im Präteritum.', taskEn: 'Build a short biography in the Präteritum.',
+      prompt: 'Das ist die Geschichte von **Rahim**, einem Buchhändler aus Pune.',
+      steps: [
+        { say: 'Geburt: 1948, Pune.', sayEn: 'Birth: 1948 in Pune.', words: ['Rahim', 'wurde', '1948', 'in Pune', 'geboren.'] },
+        { say: 'Als junger Mann: Arbeit in einer Druckerei.', sayEn: 'As a young man: work in a print shop.', words: ['Als junger Mann', 'arbeitete er', 'in einer Druckerei.'] },
+        { say: 'Zuerst zehn Jahre sparen, dann ein Buchladen. Benutze „nachdem“.', sayEn: 'First ten years of saving, then a bookshop. Use "nachdem" with the past perfect.', words: ['Nachdem er', 'zehn Jahre', 'gespart hatte,', 'eröffnete er', 'einen kleinen Buchladen.'] },
+        { say: 'Mit 70: Rente.', sayEn: 'At 70: retirement.', words: ['Mit 70 Jahren', 'ging er', 'in Rente.'] },
+      ],
     },
     {
       t: 'audio', id: 'u-aus', title: 'Aussprache: Informationen im Satz betonen',
@@ -688,7 +715,7 @@ const wortschatz: Section = {
         'Ich kann mit Notizen einen Text zusammenfassen.',
         'Ich weiß, welche Ergänzungen wichtige Verben brauchen.',
         'Ich kann einen Termin vereinbaren, verschieben und absagen.',
-        'Ich kann eine Kurzbiografie schreiben.',
+        'Ich kann eine Kurzbiografie im Präteritum bauen.',
       ],
     },
     {

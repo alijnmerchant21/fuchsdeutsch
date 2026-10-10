@@ -43,7 +43,9 @@ interface Base {
   taskEn?: string;
 }
 
-export interface TextBlock extends Base { t: 'text'; title?: string; kicker?: string; body: Rich }
+export interface TextBlock extends Base { t: 'text'; title?: string; kicker?: string; body: Rich; /** English note, easy mode only. */ en?: string }
+/** Opens a chapter: what it is about and what you will be able to do afterwards. */
+export interface OverviewBlock extends Base { t: 'overview'; title: string; body: Rich; en?: string; learn: string[] }
 export interface AudioBlock extends Base { t: 'audio'; title: string; lines: AudioLine[]; note?: Rich }
 export interface GrammarBlock extends Base {
   t: 'grammar';
@@ -76,9 +78,15 @@ export interface OrderBlock extends Base { t: 'order'; words: string[]; answers:
 export interface SortBlock extends Base { t: 'sort'; cats: string[]; items: { text: string; cat: number }[] }
 export interface WriteBlock extends Base { t: 'write'; prompt: Rich; minWords: number; hints?: string[]; sample: string }
 
-export type Exercise = McqBlock | GapBlock | MatchBlock | OrderBlock | SortBlock | WriteBlock;
+/**
+ * Guided writing that can be checked: the learner builds a short text sentence by sentence.
+ * `words` are listed in the correct order and shuffled on screen.
+ */
+export interface ComposeBlock extends Base { t: 'compose'; prompt: Rich; steps: { say: string; sayEn?: string; words: string[] }[] }
+
+export type Exercise = McqBlock | GapBlock | MatchBlock | OrderBlock | SortBlock | WriteBlock | ComposeBlock;
 export type Block =
-  | TextBlock | AudioBlock | GrammarBlock | PhrasesBlock | TipBlock | VideoBlock
+  | TextBlock | OverviewBlock | AudioBlock | GrammarBlock | PhrasesBlock | TipBlock | VideoBlock
   | PollBlock | ChecklistBlock | CardsBlock | Exercise;
 
 export type SectionKind = 'einstieg' | 'modul' | 'kommunikation' | 'grammatik' | 'uebung' | 'wortschatz';
@@ -113,6 +121,15 @@ export interface Chapter {
   games: string[];
 }
 
+/** A mini game. Four engines, each fed with chapter-specific data. */
+interface GameBase { id: string; title: string; blurb: string; skill: string; tone: Tone; chapter: number; emoji: string; rules: string }
+export type GameDef = GameBase & (
+  | { engine: 'sprint'; label: string; items: { q: string; sub?: string; a: string; wrong: string[] }[] }
+  | { engine: 'memory'; kinds: [string, string]; pairs: [string, string][] }
+  | { engine: 'satzbau'; sentences: { parts: string[]; hint: string }[] }
+  | { engine: 'regen'; buckets: [string, string, string]; words: [string, 0 | 1 | 2][] }
+);
+
 export interface Course {
   id: string;
   level: string;
@@ -123,4 +140,4 @@ export interface Course {
 }
 
 export const isExercise = (b: Block): b is Exercise =>
-  b.t === 'mcq' || b.t === 'gap' || b.t === 'match' || b.t === 'order' || b.t === 'sort' || b.t === 'write';
+  b.t === 'mcq' || b.t === 'gap' || b.t === 'match' || b.t === 'order' || b.t === 'sort' || b.t === 'write' || b.t === 'compose';

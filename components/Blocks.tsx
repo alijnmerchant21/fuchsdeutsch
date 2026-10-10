@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type {
-  Block, CardsBlock, ChecklistBlock, GapBlock, GrammarBlock, MatchBlock, McqBlock, OrderBlock,
+  Block, CardsBlock, ChecklistBlock, ComposeBlock, GapBlock, GrammarBlock, MatchBlock, McqBlock, OrderBlock,
   PhrasesBlock, PollBlock, SortBlock, WriteBlock,
 } from '@/content/types';
 import { useStore } from '@/lib/store';
@@ -268,6 +268,57 @@ export function Write({ b, onScore }: ExProps<WriteBlock>) {
   );
 }
 
+/* ---------- Guided writing: build a text sentence by sentence ---------- */
+export function Compose({ b, onScore }: ExProps<ComposeBlock>) {
+  const { progress } = useStore();
+  const [step, setStep] = useState(0);
+  const [line, setLine] = useState<number[]>([]);
+  const [fails, setFails] = useState(0);
+  const [bad, setBad] = useState(false);
+  const finished = step >= b.steps.length;
+  const cur = b.steps[Math.min(step, b.steps.length - 1)];
+  const pool = useMemo(() => shuffle(cur.words.map((w, i) => ({ w, i }))), [cur]);
+  const text = b.steps.slice(0, step).map((s) => s.words.join(' ')).join(' ');
+
+  const add = (i: number) => {
+    const next = [...line, i];
+    setLine(next); setBad(false);
+    if (next.length < cur.words.length) return;
+    if (norm(next.map((x) => cur.words[x]).join(' ')) === norm(cur.words.join(' '))) {
+      sparkle(0.5, 0.6); setLine([]); setFails(0);
+      if (step + 1 >= b.steps.length) onScore(1);
+      setStep(step + 1);
+    } else { setBad(true); setFails((f) => f + 1); setTimeout(() => { setLine([]); setBad(false); }, 700); }
+  };
+
+  return (
+    <div className="ex">
+      <Rich text={b.prompt} className="ex-q" />
+      <div className="compose-text" aria-label="Dein Text">
+        {text ? <p>{text}</p> : <p className="muted">Dein Text entsteht hier, Satz für Satz.</p>}
+      </div>
+      {finished ? (
+        <div className="ex-actions">
+          <span className="ok-msg">Fertig! Lies deinen Text einmal laut.</span>
+          <button type="button" className="chip-btn" onClick={() => speakWord(text)}>🔊 Anhören</button>
+        </div>
+      ) : (
+        <>
+          <p className="compose-say"><b>Satz {step + 1} von {b.steps.length}:</b> {cur.say}{progress.mode === 'easy' && cur.sayEn && <span className="en">{cur.sayEn}</span>}</p>
+          <div className={`order-line ${bad ? 'is-wrong shake' : ''}`}>
+            {line.length === 0 && <span className="muted">Tippe die Wörter in der richtigen Reihenfolge an.</span>}
+            {line.map((i) => <button key={i} type="button" className="chip chip-in" onClick={() => setLine(line.filter((x) => x !== i))}>{cur.words[i]}</button>)}
+          </div>
+          <div className="bank" key={step}>
+            {pool.map(({ w, i }) => <button key={i} type="button" className={`chip ${line.includes(i) ? 'is-used' : ''}`} disabled={line.includes(i)} onClick={() => add(i)}>{w}</button>)}
+          </div>
+          {fails >= 2 && <p className="hint-msg">Tipp: Der Satz beginnt mit „{cur.words[0]}“{cur.words.length > 3 ? ` und endet mit „${cur.words[cur.words.length - 1]}“` : ''}.</p>}
+        </>
+      )}
+    </div>
+  );
+}
+
 /* ---------- Not graded ---------- */
 function Grammar({ b }: { b: GrammarBlock }) {
   const { progress } = useStore();
@@ -363,6 +414,12 @@ function Cards({ b }: { b: CardsBlock }) {
   );
 }
 
+function EnNote({ text }: { text?: string }) {
+  const { progress } = useStore();
+  if (!text || progress.mode !== 'easy') return null;
+  return <p className="en-box"><span aria-hidden>🇬🇧</span> {text}</p>;
+}
+
 /* ---------- Dispatcher ---------- */
 export function BlockView({ b, exam, reveal, onScore }: { b: Block; exam?: boolean; reveal?: boolean; onScore?: (id: string, score: number) => void }) {
   const score = (s: number) => onScore?.(b.id, s);
@@ -373,8 +430,20 @@ export function BlockView({ b, exam, reveal, onScore }: { b: Block; exam?: boole
           {b.kicker && <p className="kicker">{b.kicker}</p>}
           {b.title && <h3>{b.title}</h3>}
           <Rich text={b.body} />
+          <EnNote text={b.en} />
         </article>
       );
+      case 'overview': return (
+        <div className="overview">
+          <p className="kicker">Darum geht es</p>
+          <h3>{b.title}</h3>
+          <Rich text={b.body} />
+          <EnNote text={b.en} />
+          <p className="overview-label">Nach diesem Kapitel kannst du</p>
+          <ul className="goals">{b.learn.map((l) => <li key={l}>{l}</li>)}</ul>
+        </div>
+      );
+      case 'compose': return <Compose b={b} onScore={score} />;
       case 'audio': return <AudioPlayer b={b} />;
       case 'grammar': return <Grammar b={b} />;
       case 'phrases': return <Phrases b={b} />;

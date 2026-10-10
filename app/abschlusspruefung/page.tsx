@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { BlockView } from '@/components/Blocks';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
-import { Rich } from '@/components/Rich';
 import { course } from '@/content/course';
 import { finalHoeren, finalLesen, finalSchreiben, finalSprechen } from '@/content/final';
 import type { ExamItem } from '@/content/types';
@@ -16,8 +15,8 @@ import { finalOpen } from '@/lib/unlock';
 const modules = [
   { id: 'lesen', name: 'Lesen', tone: 'mint', minutes: 20 },
   { id: 'hoeren', name: 'Hören', tone: 'sky', minutes: 15 },
-  { id: 'schreiben', name: 'Schreiben', tone: 'lilac', minutes: finalSchreiben.minutes },
-  { id: 'sprechen', name: 'Sprechen', tone: 'rose', minutes: finalSprechen.minutes },
+  { id: 'schreiben', name: 'Schreiben', tone: 'lilac', minutes: 20 },
+  { id: 'sprechen', name: 'Sprechen', tone: 'rose', minutes: 10 },
 ] as const;
 type ModId = (typeof modules)[number]['id'];
 
@@ -29,7 +28,7 @@ function Auto({ items, reveal, onPct }: { items: ExamItem[]; reveal: boolean; on
       {items.map((it, i) => (
         <li key={it.q.id} className="exam-item">
           {it.stimulus && <BlockView b={it.stimulus} />}
-          <p className="exam-num">Aufgabe {i + 1} <span className="muted">({it.points} Punkte)</span></p>
+          <p className="exam-num">Aufgabe {i + 1} <span className="muted">({it.points} {it.points === 1 ? 'Punkt' : 'Punkte'})</span></p>
           <BlockView b={it.q} exam reveal={reveal} onScore={(id, s) => {
             const next = { ...scores, [id]: s }; setScores(next);
             onPct(Math.round((items.reduce((a, x) => a + (next[x.q.id] || 0) * x.points, 0) / total) * 100));
@@ -37,35 +36,6 @@ function Auto({ items, reveal, onPct }: { items: ExamItem[]; reveal: boolean; on
         </li>
       ))}
     </ol>
-  );
-}
-
-function Self({ prompt, criteria, minWords, reveal, onPct }: { prompt: string; criteria: string[]; minWords?: number; reveal: boolean; onPct: (p: number) => void }) {
-  const [text, setText] = useState('');
-  const [on, setOn] = useState<boolean[]>(() => criteria.map(() => false));
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-  const ready = minWords ? words >= minWords : true;
-  return (
-    <div className="exam-item">
-      <Rich text={prompt} className="ex-q" />
-      {minWords !== undefined && (
-        <>
-          <textarea className="write" rows={10} value={text} disabled={reveal} onChange={(e) => setText(e.target.value)} placeholder="Schreib hier …" aria-label="Dein Text" />
-          <p className="muted small">{words} / {minWords} Wörter</p>
-        </>
-      )}
-      <p className="task-de">Bewerte dich ehrlich. Jeder Punkt zählt 25 Prozent.</p>
-      <ul className="checklist">
-        {criteria.map((c, i) => (
-          <li key={i}><label className={on[i] ? 'is-on' : ''}>
-            <input type="checkbox" checked={on[i]} disabled={reveal || !ready} onChange={() => { const next = on.map((v, j) => (j === i ? !v : v)); setOn(next); onPct(next.filter(Boolean).length * 25); }} />
-            <span className="box" aria-hidden>{on[i] ? '✓' : ''}</span><span>{c}</span>
-          </label></li>
-        ))}
-      </ul>
-      {!ready && <p className="muted small">Schreib zuerst deinen Text, dann kannst du dich bewerten.</p>}
-      <p className="muted small">Später bewertet hier der KI-Tutor deinen Text und deine Aufnahme.</p>
-    </div>
   );
 }
 
@@ -92,7 +62,7 @@ function Final() {
         <ul className="goals">
           <li>Vier Module. Jedes Modul hat 100 Punkte.</li>
           <li>Bestanden, wenn du in jedem Modul mindestens {PASS_MARK} Punkte hast.</li>
-          <li>Vorschau: Diese Fassung prüft den Stoff aus Kapitel 1. Sie wächst mit jedem neuen Kapitel.</li>
+          <li>Die Prüfung umfasst den Stoff aller acht Kapitel. Alle Aufgaben werden automatisch ausgewertet.</li>
         </ul>
       </header>
 
@@ -117,8 +87,8 @@ function Final() {
 
       <div hidden={tab !== 'lesen'}><Auto items={finalLesen} reveal={done} onPct={set('lesen')} /></div>
       <div hidden={tab !== 'hoeren'}><Auto items={finalHoeren} reveal={done} onPct={set('hoeren')} /></div>
-      <div hidden={tab !== 'schreiben'}><Self prompt={finalSchreiben.prompt} criteria={finalSchreiben.criteria} minWords={finalSchreiben.minWords} reveal={done} onPct={set('schreiben')} /></div>
-      <div hidden={tab !== 'sprechen'}><Self prompt={finalSprechen.prompt} criteria={finalSprechen.criteria} reveal={done} onPct={set('sprechen')} /></div>
+      <div hidden={tab !== 'schreiben'}><Auto items={finalSchreiben} reveal={done} onPct={set('schreiben')} /></div>
+      <div hidden={tab !== 'sprechen'}><Auto items={finalSprechen} reveal={done} onPct={set('sprechen')} /></div>
 
       {!done && (
         <footer className="lesson-end">

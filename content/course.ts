@@ -1,26 +1,20 @@
-import type { Chapter, Course } from './types';
+import type { Course } from './types';
 import { kapitel1 } from './kapitel1';
-
-const soon = (number: number, title: string, theme: string, grammar: string): Chapter => ({
-  id: `kapitel-${number}`, number, title, theme, grammar, sections: [], exam: [], games: [],
-});
+import { kapitel2 } from './kapitel2';
+import { kapitel3 } from './kapitel3';
+import { kapitel4 } from './kapitel4';
+import { kapitel5 } from './kapitel5';
+import { kapitel6 } from './kapitel6';
+import { kapitel7 } from './kapitel7';
+import { kapitel8 } from './kapitel8';
 
 export const b21: Course = {
   id: 'b2-1',
   level: 'B2.1',
   title: 'Deutsch B2.1',
-  blurb: 'Der Brückenkurs von B1 nach B2. Acht Kapitel, jedes mit Lesen, Hören, Grammatik, Spielen und einer Prüfung.',
+  blurb: 'Der Brückenkurs von B1 nach B2. Acht Kapitel, jedes mit Lesen, Hören, Grammatik, vier Spielen und einer Prüfung.',
   weeks: 8,
-  chapters: [
-    kapitel1,
-    soon(2, 'Kopfsache', 'Lernen, Gedächtnis, Wissen', 'Infinitiv mit und ohne zu. Modalverben und Alternativen.'),
-    soon(3, 'Vier Wände', 'Wohnen, Umziehen, Nachbarn', 'Wechselpräpositionen. Adjektivdeklination.'),
-    soon(4, 'Von Beruf', 'Arbeit, Berufswege, Bewerbung', 'Genitiv. Präpositionen mit Genitiv.'),
-    soon(5, 'Meins, deins, unsers', 'Konsum, Geld, Werbung', 'Passiv in allen Zeiten. Passiv mit Modalverben.'),
-    soon(6, 'Gut in Form', 'Körper, Gesundheit, Ernährung', 'Finalsätze mit damit und um … zu.'),
-    soon(7, 'Miteinander', 'Zusammenleben, Werte, Regeln', 'Relativsätze.'),
-    soon(8, 'Grüner wird es nicht', 'Umwelt, Klima, Natur', 'Relativsätze mit wo, was und Präposition.'),
-  ],
+  chapters: [kapitel1, kapitel2, kapitel3, kapitel4, kapitel5, kapitel6, kapitel7, kapitel8],
 };
 
 export const courses: Course[] = [b21];

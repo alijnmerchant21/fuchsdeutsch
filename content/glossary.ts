@@ -1,8 +1,16 @@
 import type { GlossaryEntry } from './types';
+import { glossary2 } from './kapitel2';
+import { glossary3 } from './kapitel3';
+import { glossary4 } from './kapitel4';
+import { glossary5 } from './kapitel5';
+import { glossary6 } from './kapitel6';
+import { glossary7 } from './kapitel7';
+import { glossary8 } from './kapitel8';
+
 
 // Every [[Wort]] in a text looks up its entry here.
 // Easy mode shows `de` + `en`. Advanced mode shows `de` only.
-export const glossary: Record<string, GlossaryEntry> = {
+const glossary1: Record<string, GlossaryEntry> = {
   Nachtmensch: { de: 'Eine Person, die abends und nachts wach und aktiv ist.', en: 'night owl', ex: 'Ich bin ein Nachtmensch, vor zehn Uhr kann ich nicht denken.' },
   Frühaufsteher: { de: 'Eine Person, die gern sehr früh aufsteht.', en: 'early riser', ex: 'Frühaufsteher sind morgens sofort fit.' },
   Eule: { de: 'Ein Vogel, der nachts wach ist. Auch: ein Mensch, der spät ins Bett geht.', en: 'owl; a night person' },
@@ -59,3 +67,11 @@ export const glossary: Record<string, GlossaryEntry> = {
   heutzutage: { de: 'In der Zeit, in der wir jetzt leben.', en: 'nowadays' },
   Lebenslauf: { de: 'Ein Text mit den wichtigsten Stationen im Leben: Schule, Ausbildung, Arbeit.', en: 'CV, résumé' },
 };
+
+// Later chapters win if a word appears twice, so each chapter can give its own example.
+export const glossary: Record<string, GlossaryEntry> = {
+  ...glossary1, ...glossary2, ...glossary3, ...glossary4, ...glossary5, ...glossary6, ...glossary7, ...glossary8,
+};
+
+/** "sichEinigen" is stored without a space so it can be a key. Show it as "sich einigen". */
+export const termLabel = (key: string) => key.replace(/^sich([A-ZÄÖÜ])/, (_m, c: string) => `sich ${c.toLowerCase()}`);

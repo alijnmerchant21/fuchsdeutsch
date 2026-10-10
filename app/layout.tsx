@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import '@fontsource-variable/bricolage-grotesque';
 import '@fontsource-variable/figtree';
 import './globals.css';
 import { StoreProvider } from '@/lib/store';

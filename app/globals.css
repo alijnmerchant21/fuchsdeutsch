@@ -751,3 +751,6 @@ input:focus, textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 3px va
 .course-tab[aria-selected='true'] small { color: #d1d7dc; }
 .admin-course { margin: 26px 0 10px; font-size: 1.3rem; }
 .rich p { white-space: pre-line; }
+
+.btn-text { background: none; border: 0; padding: 4px 0; color: var(--ink-2); font: inherit; font-size: 0.9rem; text-decoration: underline; cursor: pointer; align-self: center; }
+.btn-text:hover { color: var(--ink); }

@@ -75,6 +75,8 @@ interface Store {
   signInDemo: (name: string, email: string) => void;
   signInGoogle: () => Promise<void>;
   signInEmail: (email: string) => Promise<string | null>;
+  /** Email + password. Sends no email, so no rate limit. Accounts are created in the Supabase dashboard. */
+  signInPassword: (email: string, password: string) => Promise<string | null>;
   signOut: () => Promise<void>;
   saveProfile: (p: LearnerProfile) => void;
   setCourse: (id: string) => void;
@@ -193,6 +195,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       const sb = supabase();
       if (!sb) return 'Supabase ist nicht eingerichtet.';
       const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/lernen` } });
+      return error ? error.message : null;
+    },
+    signInPassword: async (email, password) => {
+      const sb = supabase();
+      if (!sb) return 'Supabase ist nicht eingerichtet.';
+      const { error } = await sb.auth.signInWithPassword({ email, password });
       return error ? error.message : null;
     },
     signOut: async () => {

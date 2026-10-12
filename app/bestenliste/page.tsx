@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
+import { courseById } from '@/content/course';
 import { games } from '@/content/games';
 import { DEMO_MODE } from '@/lib/config';
 import { useStore } from '@/lib/store';
@@ -52,7 +53,7 @@ function Board() {
           {[...new Set(games.map((g) => `${g.course || 'b2-1'}|${g.chapter}`))].map((k) => {
             const [c, n] = k.split('|');
             return (
-              <optgroup key={k} label={`${c === 'a1' ? 'A1' : 'B2.1'}, Kapitel ${n}`}>
+              <optgroup key={k} label={`${courseById(c)?.level ?? c}, Kapitel ${n}`}>
                 {games.filter((g) => (g.course || 'b2-1') === c && g.chapter === Number(n)).map((g) => <option key={g.id} value={g.id}>{g.title}</option>)}
               </optgroup>
             );

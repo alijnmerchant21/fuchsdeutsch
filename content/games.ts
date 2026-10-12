@@ -7,6 +7,7 @@ import { games6 } from './kapitel6';
 import { games7 } from './kapitel7';
 import { games8 } from './kapitel8';
 import { gamesA1 } from './a1/course';
+import { gamesA2 } from './a2/course';
 
 // Kapitel 1 game data. The games of the other chapters live in their chapter files.
 const partizipien: { inf: string; aux: 'hat' | 'ist'; p: string; wrong: string[] }[] = [
@@ -85,5 +86,5 @@ const games1: GameDef[] = [
   },
 ];
 
-export const games: GameDef[] = [...gamesA1, ...games1, ...games2, ...games3, ...games4, ...games5, ...games6, ...games7, ...games8];
+export const games: GameDef[] = [...gamesA1, ...gamesA2, ...games1, ...games2, ...games3, ...games4, ...games5, ...games6, ...games7, ...games8];
 export const gameById = (id: string) => games.find((g) => g.id === id);

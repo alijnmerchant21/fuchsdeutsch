@@ -1,5 +1,6 @@
 import type { Chapter, Course } from './types';
 import { a1 } from './a1/course';
+import { a2 } from './a2/course';
 import { kapitel1 } from './kapitel1';
 import { kapitel2 } from './kapitel2';
 import { kapitel3 } from './kapitel3';
@@ -25,7 +26,7 @@ export const b21: Course = {
 };
 
 /** All open courses, easiest first. Add a Course object here to open a new level. */
-export const courses: Course[] = [a1, b21];
+export const courses: Course[] = [a1, a2, b21];
 // Planned levels, shown on the landing page.
 export const roadmapLevels = ['A1', 'A2', 'B1', 'B2.1', 'B2.2', 'C1', 'C2'];
 

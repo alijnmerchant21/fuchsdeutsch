@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
-import { course } from '@/content/course';
+import { courses } from '@/content/course';
 import { games } from '@/content/games';
 import { isExercise } from '@/content/types';
 import { DEMO_MODE } from '@/lib/config';
@@ -53,6 +53,9 @@ function Admin() {
       {DEMO_MODE && <p><button type="button" className="link-btn" onClick={() => setDemoAdmin(false)}>Admin-Modus verlassen (Demo)</button></p>}
 
       <h2>Kursinhalt</h2>
+      {courses.map((course) => (
+      <section key={course.id}>
+      <h3 className="admin-course">{course.title}</h3>
       {course.chapters.map((ch) => (
         <details key={ch.id} className="card outline" open={ch.sections.length > 0}>
           <summary><b>Kapitel {ch.number}: {ch.title}</b> <span className="muted small">{ch.sections.length ? `${ch.sections.length} Abschnitte, ${ch.exam.length} Prüfungsaufgaben` : 'in Arbeit'}</span></summary>
@@ -75,7 +78,9 @@ function Admin() {
           {ch.games.length > 0 && <p className="small">Spiele: {games.filter((g) => ch.games.includes(g.id)).map((g) => <Link key={g.id} href={`/spiele/${g.id}`} className="chip-btn">{g.emoji} {g.title}</Link>)}</p>}
         </details>
       ))}
-      <p><Link href="/abschlusspruefung" className="btn btn-sm">Abschlussprüfung ansehen</Link></p>
+      <p><Link href={`/pruefung/${course.id}`} className="btn btn-sm">Abschlussprüfung {course.level} ansehen</Link></p>
+      </section>
+      ))}
 
       <h2>Lernende</h2>
       {DEMO_MODE ? <p className="muted">Im Demo-Modus gibt es keine Datenbank. Nach der Supabase-Einrichtung erscheint hier die Liste aller Konten mit E-Mail, Profilangaben, XP, Serie und letzter Aktivität.</p> : (

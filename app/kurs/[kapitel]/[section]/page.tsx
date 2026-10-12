@@ -5,7 +5,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { BlockView } from '@/components/Blocks';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
-import { chapterById, course } from '@/content/course';
+import { findChapter } from '@/content/course';
+import { glossaryFor } from '@/content/glossary';
+import { GlossaryContext } from '@/components/Rich';
 import { isExercise } from '@/content/types';
 import { party } from '@/lib/fx';
 import { useStore } from '@/lib/store';
@@ -16,8 +18,10 @@ function Lesson() {
   const router = useRouter();
   const { progress, isAdmin, adminView, completeSection } = useStore();
   const admin = isAdmin && adminView;
-  const ch = chapterById(kapitel);
-  const ci = course.chapters.findIndex((c) => c.id === kapitel);
+  const found = findChapter(kapitel);
+  const ch = found?.chapter;
+  const course = found?.course;
+  const ci = found?.index ?? -1;
   const si = ch ? ch.sections.findIndex((s) => s.id === section) : -1;
   const sec = ch && si >= 0 ? ch.sections[si] : null;
   const [solved, setSolved] = useState<Record<string, boolean>>({});
@@ -25,7 +29,7 @@ function Lesson() {
   useEffect(() => { setSolved({}); setCelebrate(false); window.scrollTo(0, 0); }, [section]);
 
   const exercises = useMemo(() => (sec ? sec.blocks.filter(isExercise) : []), [sec]);
-  if (!ch || !sec) return <main className="page center"><Fox size={90} mood="wow" /><h1>Diese Seite gibt es nicht.</h1><Link className="btn" href="/lernen">Zur Kursübersicht</Link></main>;
+  if (!ch || !sec || !course) return <main className="page center"><Fox size={90} mood="wow" /><h1>Diese Seite gibt es nicht.</h1><Link className="btn" href="/lernen">Zur Kursübersicht</Link></main>;
 
   const allowed = chapterOpen(course, ci, progress, admin) && sectionOpen(ch, si, progress, admin);
   if (!allowed) return <main className="page center"><Fox size={90} mood="sleepy" /><h1>Noch geschlossen</h1><p className="lead">Schließe zuerst den Abschnitt davor ab.</p><Link className="btn" href="/lernen">Zur Kursübersicht</Link></main>;
@@ -37,6 +41,7 @@ function Lesson() {
   const pct = exercises.length ? Math.round((nSolved / exercises.length) * 100) : 100;
   const nextSec = ch.sections[si + 1];
   const nextHref = nextSec ? `/kurs/${ch.id}/${nextSec.id}` : `/kurs/${ch.id}/pruefung`;
+  const glossary = glossaryFor(course.id);
   const xp = 20 + exercises.length * 5;
 
   const finish = () => {
@@ -45,6 +50,7 @@ function Lesson() {
   };
 
   return (
+    <GlossaryContext.Provider value={glossary}>
     <main className={`page lesson t-${sec.tone}`}>
       <div className="lesson-bar">
         <Link href="/lernen" className="back" aria-label="Zur Kursübersicht">←</Link>
@@ -53,7 +59,7 @@ function Lesson() {
       </div>
 
       <header className="lesson-head">
-        <p className="lesson-label">Kapitel {ch.number}, {sec.label}</p>
+        <p className="lesson-label">{course.level}, Kapitel {ch.number}, {sec.label}</p>
         <h1>{sec.title}</h1>
         <ul className="goals">{sec.goals.map((g) => <li key={g}>{g}</li>)}</ul>
       </header>
@@ -80,6 +86,7 @@ function Lesson() {
         )}
       </footer>
     </main>
+    </GlossaryContext.Provider>
   );
 }
 

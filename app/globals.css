@@ -740,3 +740,14 @@ input:focus, textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 3px va
 .board-pick select { font: inherit; padding: 9px 12px; border: 1px solid var(--ink-2); border-radius: var(--r-sm); background: var(--paper); color: var(--ink); max-width: 100%; }
 .chapter-games { margin-top: 28px; }
 .chapter-games h2 { font-size: 1.15rem; margin-bottom: 0; }
+
+/* Course switcher on the dashboard */
+.course-pick { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.course-tab { display: flex; flex-direction: column; align-items: flex-start; min-width: 130px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 16px; transition: background 0.15s, border-color 0.15s; }
+.course-tab b { font-size: 1.2rem; font-weight: 800; }
+.course-tab small { color: var(--ink-2); }
+.course-tab:hover { border-color: var(--ink); }
+.course-tab[aria-selected='true'] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.course-tab[aria-selected='true'] small { color: #d1d7dc; }
+.admin-course { margin: 26px 0 10px; font-size: 1.3rem; }
+.rich p { white-space: pre-line; }

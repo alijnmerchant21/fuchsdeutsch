@@ -7,12 +7,13 @@ const err = (where, msg) => errors.push(`${where}: ${msg}`);
 const norm = (s) => s.trim().toLowerCase().replace(/\s+/g, ' ').replace(/ß/g, 'ss').replace(/[.!?,]+$/g, '');
 const stats = { sections: 0, blocks: 0, exercises: 0, audio: 0, examItems: 0, words: 0 };
 
+let glossary = {};
 function rich(where, s) {
   if (!s) return;
   stats.words += s.split(/\s+/).length;
   for (const m of s.matchAll(/\[\[([^\]]+)\]\]/g)) {
     const [a, b] = m[1].split('|');
-    if (!(data.glossary[a] || (b && data.glossary[b]))) err(where, `glossary entry missing for [[${m[1]}]]`);
+    if (!(glossary[a] || (b && glossary[b]))) err(where, `glossary entry missing for [[${m[1]}]]`);
   }
   if (/~~|\{\{|\}\}/.test(s)) err(where, 'stray markup in text');
 }
@@ -91,35 +92,49 @@ for (const g of data.games) {
   if (g.engine === 'regen') for (const w of g.words) if (!(w[1] >= 0 && w[1] <= 2) || !w[0]) err(`game ${g.id}`, `bad entry ${JSON.stringify(w)}`);
 }
 
-for (const ch of data.course.chapters) {
-  if (ch.sections.length !== 8) err(ch.id, `has ${ch.sections.length} sections, expected 8`);
-  if (ch.sections[0]?.blocks[0]?.t !== 'overview') err(ch.id, 'does not start with a chapter overview');
-  if (ch.games.length !== 4) err(ch.id, 'needs 4 games');
-  for (const g of ch.games) if (!gameIds.has(g)) err(ch.id, `unknown game "${g}"`);
-  const secIds = new Set();
-  for (const s of ch.sections) {
-    stats.sections++;
-    if (secIds.has(s.id)) err(ch.id, `duplicate section id ${s.id}`);
-    secIds.add(s.id);
+let nChapters = 0;
+const points = [];
+for (const course of data.courses) {
+  glossary = data.glossaryFor(course.id);
+  for (const ch of course.chapters) {
+    nChapters++;
+    const tag = `${course.id}/${ch.id}`;
+    if (ch.sections.length !== 8) err(tag, `has ${ch.sections.length} sections, expected 8`);
+    if (ch.sections[0]?.blocks[0]?.t !== 'overview') err(tag, 'does not start with a chapter overview');
+    if (ch.games.length !== 4) err(tag, 'needs 4 games');
+    for (const g of ch.games) {
+      const def = data.games.find((x) => x.id === g);
+      if (!def) err(tag, `unknown game "${g}"`);
+      else if ((def.course || 'b2-1') !== course.id || def.chapter !== ch.number) err(tag, `game "${g}" is labeled for another course or chapter`);
+    }
+    const secIds = new Set();
+    for (const s of ch.sections) {
+      stats.sections++;
+      if (secIds.has(s.id)) err(tag, `duplicate section id ${s.id}`);
+      secIds.add(s.id);
+      const seen = new Set();
+      for (const b of s.blocks) block(`${tag}/${s.id}`, b, seen);
+    }
     const seen = new Set();
-    for (const b of s.blocks) block(`${ch.id}/${s.id}`, b, seen);
+    let p = 0;
+    for (const it of ch.exam) {
+      stats.examItems++; p += it.points;
+      if (it.stimulus) block(`${tag}/exam`, it.stimulus, seen);
+      block(`${tag}/exam`, it.q, seen);
+    }
+    if (ch.exam.length < 10) err(tag, 'exam has fewer than 10 items');
+    points.push(`${course.level} K${ch.number}=${p}`);
   }
-  const seen = new Set();
-  let points = 0;
-  for (const it of ch.exam) {
-    stats.examItems++; points += it.points;
-    if (it.stimulus) block(`${ch.id}/exam`, it.stimulus, seen);
-    block(`${ch.id}/exam`, it.q, seen);
+  for (const [key, part] of Object.entries(course.final)) {
+    const seen = new Set();
+    if (part.length < 5) err(`${course.id}/final/${key}`, 'fewer than 5 items');
+    for (const it of part) { if (it.stimulus) block(`${course.id}/final/${key}`, it.stimulus, seen); block(`${course.id}/final/${key}`, it.q, seen); }
   }
-  if (ch.exam.length < 10) err(ch.id, 'exam has fewer than 10 items');
-  ch._points = points;
 }
-for (const key of ['finalLesen', 'finalHoeren', 'finalSchreiben', 'finalSprechen']) {
-  const seen = new Set();
-  for (const it of data.final[key]) { if (it.stimulus) block(`final/${key}`, it.stimulus, seen); block(`final/${key}`, it.q, seen); }
-}
+const chapterIds = data.courses.flatMap((c) => c.chapters.map((ch) => ch.id));
+if (new Set(chapterIds).size !== chapterIds.length) err('courses', 'chapter ids must be unique across courses');
 
-console.log(`Chapters: ${data.course.chapters.length}, sections: ${stats.sections}, blocks: ${stats.blocks}, exercises: ${stats.exercises}, listening texts: ${allAudio(data).length}, exam items: ${stats.examItems}, games: ${data.games.length}, glossary entries: ${Object.keys(data.glossary).length}`);
-console.log('Exam points per chapter: ' + data.course.chapters.map((c) => `K${c.number}=${c._points}`).join(', '));
+console.log(`Courses: ${data.courses.length}, chapters: ${nChapters}, sections: ${stats.sections}, blocks: ${stats.blocks}, exercises: ${stats.exercises}, listening texts: ${allAudio(data).length}, exam items: ${stats.examItems}, games: ${data.games.length}, glossary entries: ${data.courses.map((c) => `${c.level} ${Object.keys(data.glossaryFor(c.id)).length}`).join(', ')}`);
+console.log('Exam points per chapter: ' + points.join(', '));
 if (errors.length) { console.log(`\n${errors.length} problem(s):`); errors.forEach((e) => console.log(' - ' + e)); process.exit(1); }
 console.log('No problems found.');

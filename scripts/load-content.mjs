@@ -11,15 +11,22 @@ export function loadContent() {
   const require = createRequire(import.meta.url);
   const ts = require('typescript');
   const out = mkdtempSync(join(tmpdir(), 'fuchsdeutsch-'));
-  for (const f of readdirSync(join(root, 'content')).filter((x) => x.endsWith('.ts'))) {
-    const js = ts.transpileModule(readFileSync(join(root, 'content', f), 'utf8'), { compilerOptions: { module: 'commonjs', target: 'es2020' } }).outputText;
-    writeFileSync(join(out, f.replace(/\.ts$/, '.js')), js);
-  }
+  const { mkdirSync } = require('node:fs');
+  // Transpile content/ and its subfolders (content/a1/ …), keeping the folder structure.
+  const walk = (dir, rel) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (e.isDirectory()) { mkdirSync(join(out, rel, e.name), { recursive: true }); walk(join(dir, e.name), join(rel, e.name)); }
+      else if (e.name.endsWith('.ts')) {
+        const js = ts.transpileModule(readFileSync(join(dir, e.name), 'utf8'), { compilerOptions: { module: 'commonjs', target: 'es2020' } }).outputText;
+        writeFileSync(join(out, rel, e.name.replace(/\.ts$/, '.js')), js);
+      }
+    }
+  };
+  walk(join(root, 'content'), '');
   writeFileSync(join(out, 'package.json'), '{"type":"commonjs"}');
   const data = {
-    course: require(join(out, 'course.js')).course,
-    final: require(join(out, 'final.js')),
-    glossary: require(join(out, 'glossary.js')).glossary,
+    courses: require(join(out, 'course.js')).courses,
+    glossaryFor: require(join(out, 'glossary.js')).glossaryFor,
     speakers: require(join(out, 'speakers.js')).speakers,
     games: require(join(out, 'games.js')).games,
   };
@@ -30,12 +37,14 @@ export function loadContent() {
 /** Every listening text in the course, including the ones inside exams. */
 export function allAudio(data) {
   const list = [];
-  for (const ch of data.course.chapters) {
-    for (const s of ch.sections) for (const b of s.blocks) if (b.t === 'audio') list.push(b);
-    for (const it of ch.exam) if (it.stimulus?.t === 'audio') list.push(it.stimulus);
+  for (const course of data.courses) {
+    for (const ch of course.chapters) {
+      for (const s of ch.sections) for (const b of s.blocks) if (b.t === 'audio') list.push(b);
+      for (const it of ch.exam) if (it.stimulus?.t === 'audio') list.push(it.stimulus);
+    }
+    for (const part of Object.values(course.final)) for (const it of part) if (it.stimulus?.t === 'audio') list.push(it.stimulus);
   }
-  for (const key of ['finalLesen', 'finalHoeren', 'finalSchreiben', 'finalSprechen']) {
-    for (const it of data.final[key]) if (it.stimulus?.t === 'audio') list.push(it.stimulus);
-  }
+  const ids = new Set();
+  for (const b of list) { if (ids.has(b.id)) throw new Error(`Two listening texts share the id "${b.id}". Audio file names must be unique.`); ids.add(b.id); }
   return list;
 }

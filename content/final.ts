@@ -1,4 +1,4 @@
-import type { ExamItem } from './types';
+import type { ExamItem, FinalExam } from './types';
 import { audio, gap, mcq, order, text, x } from './helpers';
 
 // Final exam in the format of the Goethe-Zertifikat: four modules, each scored out of 100 percent,
@@ -93,3 +93,5 @@ export const finalSprechen: ExamItem[] = [
   x(4, order('f-p7', ['Ich schlage vor,', 'dass wir', 'uns am Samstag', 'treffen.'], { task: 'Sprechen, Teil 2: Bau deinen Vorschlag für ein gemeinsames Vorhaben.' })),
   x(3, order('f-p8', ['Das ist', 'ein Gerät,', 'mit dem man', 'Wäsche', 'trocknet.'], { task: 'Dir fällt das Wort „Trockner“ nicht ein. Umschreib es.' })),
 ];
+
+export const finalB21: FinalExam = { lesen: finalLesen, hoeren: finalHoeren, schreiben: finalSchreiben, sprechen: finalSprechen };

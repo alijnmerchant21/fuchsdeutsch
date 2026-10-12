@@ -49,11 +49,14 @@ function Board() {
         <label className="sr-only" htmlFor="board-game">Spiel wählen</label>
         <select id="board-game" value={tab === 'xp' ? '' : tab} onChange={(e) => setTab(e.target.value || 'xp')}>
           <option value="">Rangliste für ein Spiel …</option>
-          {[...new Set(games.map((g) => g.chapter))].map((c) => (
-            <optgroup key={c} label={`Kapitel ${c}`}>
-              {games.filter((g) => g.chapter === c).map((g) => <option key={g.id} value={g.id}>{g.title}</option>)}
-            </optgroup>
-          ))}
+          {[...new Set(games.map((g) => `${g.course || 'b2-1'}|${g.chapter}`))].map((k) => {
+            const [c, n] = k.split('|');
+            return (
+              <optgroup key={k} label={`${c === 'a1' ? 'A1' : 'B2.1'}, Kapitel ${n}`}>
+                {games.filter((g) => (g.course || 'b2-1') === c && g.chapter === Number(n)).map((g) => <option key={g.id} value={g.id}>{g.title}</option>)}
+              </optgroup>
+            );
+          })}
         </select>
       </div>
       <div className="card board">

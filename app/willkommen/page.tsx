@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
 import { useStore, type LearnerProfile } from '@/lib/store';
+import { courses } from '@/content/course';
 
 const genders: { id: LearnerProfile['gender']; de: string }[] = [
   { id: 'frau', de: 'Frau' }, { id: 'mann', de: 'Mann' }, { id: 'divers', de: 'Divers' }, { id: 'none', de: 'Keine Angabe' },
@@ -20,7 +21,7 @@ const reasons: { id: string; de: string; en: string }[] = [
 const goals = [{ xp: 25, de: 'Locker', sub: '5 Minuten am Tag' }, { xp: 50, de: 'Normal', sub: '10 Minuten am Tag' }, { xp: 100, de: 'Ernsthaft', sub: '20 Minuten am Tag' }];
 
 function Form() {
-  const { user, progress, saveProfile } = useStore();
+  const { user, progress, saveProfile, setCourse } = useStore();
   const router = useRouter();
   const old = progress.profile;
   // A login by email link only knows the address, so do not suggest "name@..." as a first name.
@@ -31,12 +32,14 @@ function Form() {
   const [lang, setLang] = useState(old?.nativeLanguage || '');
   const [goal, setGoal] = useState(old?.goal || 50);
   const [board, setBoard] = useState(old?.board ?? true);
+  const [level, setLevel] = useState(progress.course || courses[0].id);
   const ok = name.trim().length >= 2 && why.length > 0;
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!ok) return;
     saveProfile({ name: name.trim(), gender, reasons: why, nativeLanguage: lang.trim(), goal, board });
+    setCourse(level);
     const next = new URLSearchParams(window.location.search).get('next') || '';
     router.replace(next.startsWith('/') && !next.startsWith('//') && !next.startsWith('/willkommen') ? next : '/lernen');
   };
@@ -47,7 +50,7 @@ function Form() {
         <Fox size={84} mood="happy" />
         <div>
           <h1>{old ? 'Dein Profil' : 'Schön, dass du da bist'}</h1>
-          <p className="lead">Fünf kurze Fragen, damit der Kurs zu dir passt. <span className="en">Five quick questions so the course fits you.</span></p>
+          <p className="lead">Ein paar kurze Fragen, damit der Kurs zu dir passt. <span className="en">A few quick questions so the course fits you.</span></p>
         </div>
       </header>
       <form className="card form" onSubmit={submit}>
@@ -68,6 +71,17 @@ function Form() {
             {reasons.map((r) => (
               <button key={r.id} type="button" className="choice" aria-pressed={why.includes(r.id)} title={r.en}
                 onClick={() => setWhy(why.includes(r.id) ? why.filter((x) => x !== r.id) : [...why, r.id])}>{r.de}</button>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Mit welchem Kurs startest du? <span className="en">Which course do you want to start with? You can switch any time.</span></legend>
+          <div className="choices goals-row">
+            {courses.map((c) => (
+              <button key={c.id} type="button" className="choice choice-big" aria-pressed={level === c.id} onClick={() => setLevel(c.id)}>
+                <b>{c.level}</b><small>{c.blurbEn}</small>
+              </button>
             ))}
           </div>
         </fieldset>

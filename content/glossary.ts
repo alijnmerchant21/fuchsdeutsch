@@ -1,4 +1,5 @@
 import type { GlossaryEntry } from './types';
+import { glossaryA1 } from './a1/glossary';
 import { glossary2 } from './kapitel2';
 import { glossary3 } from './kapitel3';
 import { glossary4 } from './kapitel4';
@@ -72,6 +73,10 @@ const glossary1: Record<string, GlossaryEntry> = {
 export const glossary: Record<string, GlossaryEntry> = {
   ...glossary1, ...glossary2, ...glossary3, ...glossary4, ...glossary5, ...glossary6, ...glossary7, ...glossary8,
 };
+
+/** Each course has its own word explanations, so A1 learners get simpler ones. */
+const glossaries: Record<string, Record<string, GlossaryEntry>> = { 'b2-1': glossary, a1: glossaryA1 };
+export const glossaryFor = (courseId: string) => glossaries[courseId] || glossary;
 
 /** "sichEinigen" is stored without a space so it can be a key. Show it as "sich einigen". */
 export const termLabel = (key: string) => key.replace(/^sich([A-ZÄÖÜ])/, (_m, c: string) => `sich ${c.toLowerCase()}`);

@@ -34,6 +34,8 @@ export interface Progress {
   streak: Streak;
   joined: string;
   profile?: LearnerProfile;
+  /** Course shown on the dashboard. */
+  course?: string;
 }
 
 const emptyProgress = (): Progress => ({
@@ -75,6 +77,7 @@ interface Store {
   signInEmail: (email: string) => Promise<string | null>;
   signOut: () => Promise<void>;
   saveProfile: (p: LearnerProfile) => void;
+  setCourse: (id: string) => void;
   setMode: (m: Mode) => void;
   setAdminView: (on: boolean) => void;
   setDemoAdmin: (on: boolean) => void;
@@ -177,6 +180,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const store = useMemo<Store>(() => ({
     ready, user: shownUser, isAdmin, adminView, progress,
     saveProfile: (profile) => update((p) => ({ ...p, profile })),
+    setCourse: (course) => update((p) => ({ ...p, course })),
     signInDemo: (name, email) => {
       const u: User = { id: 'demo-' + email.toLowerCase().replace(/[^a-z0-9]/g, '-'), email, name };
       writeLS(LS_USER, u); setUser(u); loadLocal(u);

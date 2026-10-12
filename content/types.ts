@@ -122,7 +122,7 @@ export interface Chapter {
 }
 
 /** A mini game. Four engines, each fed with chapter-specific data. */
-interface GameBase { id: string; title: string; blurb: string; skill: string; tone: Tone; chapter: number; emoji: string; rules: string }
+interface GameBase { id: string; /** Course id, default 'b2-1'. */ course?: string; title: string; blurb: string; skill: string; tone: Tone; chapter: number; emoji: string; rules: string }
 export type GameDef = GameBase & (
   | { engine: 'sprint'; label: string; items: { q: string; sub?: string; a: string; wrong: string[] }[] }
   | { engine: 'memory'; kinds: [string, string]; pairs: [string, string][] }
@@ -130,13 +130,22 @@ export type GameDef = GameBase & (
   | { engine: 'regen'; buckets: [string, string, string]; words: [string, 0 | 1 | 2][] }
 );
 
+export interface FinalExam { lesen: ExamItem[]; hoeren: ExamItem[]; schreiben: ExamItem[]; sprechen: ExamItem[] }
+
 export interface Course {
   id: string;
   level: string;
   title: string;
+  /** Name of the official exam the final exam is modeled on. */
+  examName: string;
   blurb: string;
+  /** English one-liner for the landing page and course picker. */
+  blurbEn: string;
   weeks: number;
+  /** Key under which the final exam result is stored in progress.exams. */
+  finalKey: string;
   chapters: Chapter[];
+  final: FinalExam;
 }
 
 export const isExercise = (b: Block): b is Exercise =>

@@ -23,5 +23,12 @@ export const speakers: Record<string, Speaker> = {
   ben: { id: 'ben', name: 'Ben', origin: 'Leipzig', style: 'Podcast, locker', lang: 'de-DE', pitch: 0.95, rate: 1.05 },
   urs: { id: 'urs', name: 'Urs', origin: 'Bern, Schweiz', style: 'Schweizer Hochdeutsch, ruhig', lang: 'de-CH', pitch: 0.8, rate: 0.85 },
   resi: { id: 'resi', name: 'Resi', origin: 'Innsbruck, Österreich', style: 'Tirolerisch, fröhlich', lang: 'de-AT', pitch: 1.25, rate: 0.98 },
+  // A1 cast: the Fuchsbau flat share in Leipzig. They speak slowly and clearly.
+  nele: { id: 'nele', name: 'Nele', origin: 'Leipzig', style: 'Studentin, freundlich, langsam', lang: 'de-DE', pitch: 1.2, rate: 0.82 },
+  kenji: { id: 'kenji', name: 'Kenji', origin: 'Osaka, Japan', style: 'lernt Deutsch, Koch, ruhig', lang: 'de-DE', pitch: 0.95, rate: 0.78 },
+  amara: { id: 'amara', name: 'Amara', origin: 'Accra, Ghana', style: 'lernt Deutsch, Pflegerin, fröhlich', lang: 'de-DE', pitch: 1.3, rate: 0.8 },
+  felix: { id: 'felix', name: 'Felix', origin: 'Wien, Österreich', style: 'Musiker, gemütlich', lang: 'de-AT', pitch: 0.85, rate: 0.82 },
+  frauKlein: { id: 'frauKlein', name: 'Frau Klein', origin: 'Kassel', style: 'Lehrerin, sehr deutlich', lang: 'de-DE', pitch: 1.05, rate: 0.75 },
+  herrAdler: { id: 'herrAdler', name: 'Herr Adler', origin: 'Hamburg', style: 'Verkäufer, freundlich, langsam', lang: 'de-DE', pitch: 0.85, rate: 0.8 },
   lena: { id: 'lena', name: 'Lena', origin: 'Husum', style: 'neugierig, jung', lang: 'de-DE', pitch: 1.35, rate: 1.05 },
 };

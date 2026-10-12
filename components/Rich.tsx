@@ -1,12 +1,17 @@
 'use client';
-import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
-import { glossary, termLabel } from '@/content/glossary';
+import { createContext, Fragment, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { glossary as defaultGlossary, termLabel } from '@/content/glossary';
+import type { GlossaryEntry } from '@/content/types';
+
+/** Which word list the current page explains words from (set per course). */
+export const GlossaryContext = createContext<Record<string, GlossaryEntry>>(defaultGlossary);
 import { useStore } from '@/lib/store';
 import { speakWord } from '@/lib/audio';
 
 /** A word with an explanation. Easy mode: German + English. Advanced mode: German only. */
 export function Term({ shown, entryKey }: { shown: string; entryKey: string }) {
   const { progress } = useStore();
+  const glossary = useContext(GlossaryContext);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const entry = glossary[entryKey];
@@ -39,7 +44,7 @@ export function Term({ shown, entryKey }: { shown: string; entryKey: string }) {
   );
 }
 
-function inline(text: string, keyBase: string): ReactNode[] {
+function inline(text: string, keyBase: string, glossary: Record<string, GlossaryEntry>): ReactNode[] {
   const out: ReactNode[] = [];
   const re = /\[\[([^\]]+)\]\]|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
   let last = 0; let m: RegExpExecArray | null; let i = 0;
@@ -64,13 +69,15 @@ function inline(text: string, keyBase: string): ReactNode[] {
 }
 
 export function Inline({ text }: { text: string }) {
-  return <>{inline(text, 'i')}</>;
+  const glossary = useContext(GlossaryContext);
+  return <>{inline(text, 'i', glossary)}</>;
 }
 
 export function Rich({ text, className }: { text: string; className?: string }) {
+  const glossary = useContext(GlossaryContext);
   return (
     <div className={className ? `rich ${className}` : 'rich'}>
-      {text.split(/\n\n+/).map((p, i) => <p key={i}>{inline(p, `p${i}`)}</p>)}
+      {text.split(/\n\n+/).map((p, i) => <p key={i}>{inline(p, `p${i}`, glossary)}</p>)}
     </div>
   );
 }

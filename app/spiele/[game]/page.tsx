@@ -39,7 +39,7 @@ function GamePage() {
       {phase === 'intro' && (
         <div className="game-intro card pop">
           <Fox size={110} mood="happy" className="bob" />
-          <p className="muted small">Kapitel {meta.chapter}, {meta.skill}</p>
+          <p className="muted small">{meta.course === 'a1' ? 'A1' : 'B2.1'}, Kapitel {meta.chapter}, {meta.skill}</p>
           <p className="lead">{meta.rules}</p>
           <button type="button" className="btn btn-lg" onClick={() => { setBefore(record); setPhase('play'); }}>Los geht’s</button>
         </div>

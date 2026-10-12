@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
-import { course } from '@/content/course';
+import { courseById, courses } from '@/content/course';
 import { games } from '@/content/games';
 import { PASS_MARK } from '@/lib/config';
 import { dayKey, streakAlive, useStore } from '@/lib/store';
@@ -23,8 +23,9 @@ function Week() {
 }
 
 function Dashboard() {
-  const { user, progress, isAdmin, adminView } = useStore();
+  const { user, progress, isAdmin, adminView, setCourse } = useStore();
   const admin = isAdmin && adminView;
+  const course = courseById(progress.course) || courses[0];
   const DAILY_GOAL = progress.profile?.goal || 50;
   const today = progress.days[dayKey()] || 0;
   const alive = streakAlive(progress.streak);
@@ -67,6 +68,17 @@ function Dashboard() {
         </div>
       </section>
 
+      <div className="course-pick" role="tablist" aria-label="Kurs wählen">
+        {courses.map((c) => {
+          const done = c.chapters.filter((ch) => progress.exams[ch.id]?.passed).length;
+          return (
+            <button key={c.id} type="button" role="tab" aria-selected={c.id === course.id} className="course-tab" onClick={() => setCourse(c.id)}>
+              <b>{c.level}</b>
+              <small>{done} / {c.chapters.length} Kapitel</small>
+            </button>
+          );
+        })}
+      </div>
       <h2 className="course-title">{course.title} <span className="pill t-lilac">{course.chapters.length} Kapitel</span></h2>
       <p className="lead">{course.blurb}</p>
 
@@ -128,8 +140,8 @@ function Dashboard() {
         <div className={`chapter final ${finalOpen(course, progress, admin) ? 'is-open' : 'is-locked'}`}>
           <div className="chapter-head">
             <span className="chapter-num">🎓</span>
-            <div><h3>Abschlussprüfung im Goethe-Format</h3><p className="muted small">Lesen, Hören, Schreiben, Sprechen. Öffnet sich nach allen Kapitelprüfungen.</p></div>
-            {finalOpen(course, progress, admin) ? <Link href="/abschlusspruefung" className="btn btn-sm">Öffnen</Link> : <span className="lock">🔒</span>}
+            <div><h3>Abschlussprüfung: {course.examName}</h3><p className="muted small">Lesen, Hören, Schreiben, Sprechen. Öffnet sich nach allen Kapitelprüfungen.</p></div>
+            {finalOpen(course, progress, admin) ? <Link href={`/pruefung/${course.id}`} className="btn btn-sm">Öffnen</Link> : <span className="lock">🔒</span>}
           </div>
         </div>
       </div>

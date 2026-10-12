@@ -1,6 +1,6 @@
 # Fuchsdeutsch
 
-Free German course, A1 to C2. First course: B2.1 (the B1+ bridge into B2).
+Free German course, A1 to C2. Open courses: A1 (12 chapters, Start Deutsch 1 style final) and B2.1 (8 chapters, the B1+ bridge into B2). A1 content lives in content/a1/, B2.1 in content/kapitel1-8.ts. Add a course by adding a Course object to `courses` in content/course.ts.
 
 Stack: Next.js (App Router) + Supabase (Google login, Postgres). Deploys to Vercel.
 

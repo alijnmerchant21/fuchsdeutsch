@@ -68,3 +68,16 @@ export const artikel = (words: string): [string, 0 | 1 | 2][] =>
     const [art, noun] = w.split(' ');
     return [noun, (['der', 'die', 'das'].indexOf(art)) as 0 | 1 | 2];
   });
+
+import type { Chapter } from './types';
+
+/** Audio files are named after the block id, so prefix every listening text with its chapter id.
+ *  That keeps file names unique across all chapters and courses. */
+export const scopeAudio = (ch: Chapter): Chapter => {
+  const scope = <T extends { t: string; id: string }>(b: T): T => (b.t === 'audio' && !b.id.startsWith(ch.id) ? { ...b, id: `${ch.id}-${b.id}` } : b);
+  return {
+    ...ch,
+    sections: ch.sections.map((s) => ({ ...s, blocks: s.blocks.map(scope) })),
+    exam: ch.exam.map((it) => (it.stimulus ? { ...it, stimulus: scope(it.stimulus) } : it)),
+  };
+};

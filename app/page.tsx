@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
-import { course, roadmapLevels } from '@/content/course';
+import { courses, roadmapLevels } from '@/content/course';
 import { games } from '@/content/games';
 import { DEPOSIT_USD, TRIAL_DAYS, trialDaysLeft } from '@/lib/config';
 import { useStore } from '@/lib/store';
@@ -25,7 +25,7 @@ export default function Landing() {
     <main className="landing">
       <section className="hero">
         <div className="hero-copy">
-          <p className="hero-level">German {course.level} is open. A1 to C2 are on the way.</p>
+          <p className="hero-level">German {courses.map((c) => c.level).join(' and ')} are open. The other levels are on the way.</p>
           <h1>Learn German the way people speak it.</h1>
           <p className="lead">
             Reading, grammar and listening with voices from Vienna, Berlin, Zurich and the North Sea coast.
@@ -89,7 +89,7 @@ export default function Landing() {
           <li className="t-sky"><b>Games</b><span>Four mini games per chapter, with a leaderboard.</span></li>
           <li className="t-lilac"><b>Chapter exam</b><span>Pass it and the next chapter opens.</span></li>
         </ol>
-        <p className="flow-foot">At the end of the course you sit a full exam in the Goethe format: Lesen, Hören, Schreiben, Sprechen.</p>
+        <p className="flow-foot">Each course ends with a full exam modeled on the official Goethe exams: Lesen, Hören, Schreiben, Sprechen.</p>
       </section>
 
       <section className="two">
@@ -126,7 +126,7 @@ export default function Landing() {
       <section className="roadmap" aria-labelledby="road-h">
         <h2 id="road-h">Where this is going</h2>
         <div className="levels">
-          {roadmapLevels.map((l) => <span key={l} className={`level ${l === course.level ? 'is-open' : ''}`}>{l}{l === course.level ? ' open now' : ''}</span>)}
+          {roadmapLevels.map((l) => { const open = courses.some((c) => c.level === l); return <span key={l} className={`level ${open ? 'is-open' : ''}`}>{l}{open ? ' open now' : ''}</span>; })}
         </div>
         <ul className="soon">
           <li><b>AI tutor</b> Ask questions about any exercise and get an explanation.</li>

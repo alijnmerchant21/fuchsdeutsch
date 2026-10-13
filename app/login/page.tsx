@@ -17,7 +17,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [wait, setWait] = useState(0);
   useEffect(() => setLeft(trialDaysLeft()), []);
-  // Countdown so people do not click "Link schicken" again and again.
+  // Countdown so people do not click "Send me a link" again and again.
   useEffect(() => {
     if (wait <= 0) return;
     const t = setTimeout(() => setWait((w) => w - 1), 1000);
@@ -37,13 +37,13 @@ export default function Login() {
     const err = await signInEmail(email);
     setSending(false);
     if (!err) {
-      setMsg('Schau in dein Postfach (auch im Spam-Ordner). Wir haben dir einen Link geschickt.');
+      setMsg('Check your inbox (and spam folder). We sent you a login link.');
       setWait(60);
     } else if (/rate limit|too many|security purposes/i.test(err)) {
-      setMsg('Gerade wurden zu viele E-Mails verschickt. Bitte versuch es in ein paar Minuten noch einmal, oder melde dich mit Google an.');
+      setMsg('Too many emails were sent just now. Please try again in a few minutes, or log in with Google.');
       setWait(120);
     } else {
-      setMsg(`Das hat nicht geklappt: ${err}`);
+      setMsg(`That did not work: ${err}`);
     }
   };
 
@@ -53,45 +53,45 @@ export default function Login() {
     setSending(true);
     const err = await signInPassword(email, password);
     setSending(false);
-    if (err) setMsg(/invalid login/i.test(err) ? 'E-Mail oder Passwort ist falsch.' : `Das hat nicht geklappt: ${err}`);
+    if (err) setMsg(/invalid login/i.test(err) ? 'Wrong email or password.' : `That did not work: ${err}`);
   };
 
   return (
     <main className="page narrow login">
       <Fox size={110} mood="happy" className="bob" />
-      <h1>Willkommen im Fuchsbau</h1>
-      <p className="lead">Melde dich an, damit dein Fortschritt und deine Serie gespeichert werden.</p>
+      <h1>Willkommen! <span className="en">Welcome</span></h1>
+      <p className="lead">Log in so your progress and streak are saved.</p>
 
       {DEMO_MODE ? (
         <form className="card form" onSubmit={(e) => { e.preventDefault(); if (name.trim() && email.includes('@')) signInDemo(name.trim(), email.trim()); }}>
-          <p className="pill t-butter">Demo-Modus: Der Fortschritt bleibt nur in diesem Browser.</p>
-          <label>Dein Vorname<input value={name} onChange={(e) => setName(e.target.value)} placeholder="z. B. Dana" autoComplete="given-name" required /></label>
-          <label>E-Mail<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="du@beispiel.de" autoComplete="email" required /></label>
-          <button className="btn btn-lg" type="submit">Kurs starten</button>
+          <p className="pill t-butter">Demo mode: progress stays in this browser only.</p>
+          <label>Your first name<input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Dana" autoComplete="given-name" required /></label>
+          <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" required /></label>
+          <button className="btn btn-lg" type="submit">Start the course</button>
         </form>
       ) : (
         <div className="card form">
           <button type="button" className="btn btn-lg btn-google" onClick={() => void signInGoogle()}>
             <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.500-4.800 7.200l7.700 6c4.500-4.200 6.900-10.300 6.900-17.700z"/><path fill="#FBBC05" d="M10.500 28.600c-.5-1.400-.8-3-.8-4.600s.3-3.200.8-4.600l-7.900-6.200C1 16.500 0 20.100 0 24s1 7.500 2.600 10.800l7.900-6.200z"/><path fill="#34A853" d="M24 48c6.500 0 11.900-2.100 15.900-5.800l-7.700-6c-2.200 1.500-5 2.300-8.200 2.300-6.300 0-11.600-4.200-13.500-9.900l-7.900 6.200C6.500 42.600 14.600 48 24 48z"/></svg>
-            Mit Google anmelden
+            Continue with Google
           </button>
-          <p className="or"><span>{usePw ? 'oder mit Passwort' : 'oder per E-Mail-Link'}</span></p>
+          <p className="or"><span>{usePw ? 'or with a password' : 'or get a link by email'}</span></p>
           {usePw ? (
             <form onSubmit={withPassword} className="form">
-              <label>E-Mail<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="du@beispiel.de" autoComplete="email" required /></label>
-              <label>Passwort<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required /></label>
-              <button className="btn" type="submit" disabled={sending}>{sending ? 'Einen Moment …' : 'Anmelden'}</button>
+              <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" required /></label>
+              <label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required /></label>
+              <button className="btn" type="submit" disabled={sending}>{sending ? 'One moment …' : 'Log in'}</button>
             </form>
           ) : (
             <form onSubmit={magic} className="form">
-              <label>E-Mail<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="du@beispiel.de" autoComplete="email" required /></label>
+              <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" required /></label>
               <button className="btn" type="submit" disabled={sending || wait > 0}>
-                {sending ? 'Wird geschickt …' : wait > 0 ? `Noch einmal in ${wait} s` : 'Link schicken'}
+                {sending ? 'Sending …' : wait > 0 ? `Try again in ${wait} s` : 'Send me a link'}
               </button>
             </form>
           )}
           <button type="button" className="btn-text" onClick={() => { setUsePw(!usePw); setMsg(null); }}>
-            {usePw ? 'Stattdessen einen Link per E-Mail bekommen' : 'Ich habe ein Passwort'}
+            {usePw ? 'Get a link by email instead' : 'I have a password'}
           </button>
           {msg && <p className="pill t-mint" role="status">{msg}</p>}
         </div>

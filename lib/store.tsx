@@ -77,6 +77,8 @@ interface Store {
   signInEmail: (email: string) => Promise<string | null>;
   /** Email + password. Sends no email, so no rate limit. Accounts are created in the Supabase dashboard. */
   signInPassword: (email: string, password: string) => Promise<string | null>;
+  /** Lets a signed-in user add or change a password, so they do not need email links. */
+  setPassword: (password: string) => Promise<string | null>;
   signOut: () => Promise<void>;
   saveProfile: (p: LearnerProfile) => void;
   setCourse: (id: string) => void;
@@ -130,8 +132,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setUser(u);
       loadLocal(u); // instant, from cache
       const { data } = await sb.from('profiles').select('is_admin, progress').eq('id', u.id).maybeSingle();
+      // The database decides who is admin (flag in profiles or an admin email, see supabase/004_admin_email.sql).
+      const { data: adminRpc } = await sb.rpc('is_admin');
+      setIsAdmin(!!adminRpc || !!data?.is_admin);
       if (data) {
-        setIsAdmin(!!data.is_admin);
         if (data.progress && Object.keys(data.progress).length) {
           const remote = { ...emptyProgress(), ...(data.progress as Partial<Progress>) };
           const local = readLS<Partial<Progress>>(lsKey(u.id), {});
@@ -201,6 +205,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       const sb = supabase();
       if (!sb) return 'Supabase ist nicht eingerichtet.';
       const { error } = await sb.auth.signInWithPassword({ email, password });
+      return error ? error.message : null;
+    },
+    setPassword: async (password) => {
+      const sb = supabase();
+      if (!sb) return 'Supabase ist nicht eingerichtet.';
+      const { error } = await sb.auth.updateUser({ password });
       return error ? error.message : null;
     },
     signOut: async () => {

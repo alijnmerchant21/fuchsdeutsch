@@ -50,12 +50,7 @@ export function speakLines(lines: AudioLine[], onLine: (i: number) => void, onEn
   return () => { stopped = true; synth.cancel(); };
 }
 
-export function speakWord(text: string) {
-  if (!canSpeak()) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'de-DE'; u.rate = 0.9;
-  const v = pickVoice('de-DE', 0);
-  if (v) u.voice = v;
-  window.speechSynthesis.speak(u);
+/** Word playback uses recorded assets only; browser TTS is intentionally disabled. */
+export function speakWord(_text: string) {
+  /* no-op until per-word or line MP3s exist */
 }

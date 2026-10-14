@@ -18,5 +18,11 @@
   "ben": "VOICE_ID_HERE  (Leipzig, Podcast, locker)",
   "urs": "VOICE_ID_HERE  (Bern, Schweiz, Schweizer Hochdeutsch, ruhig)",
   "resi": "VOICE_ID_HERE  (Innsbruck, Österreich, Tirolerisch, fröhlich)",
-  "lena": "VOICE_ID_HERE  (Husum, neugierig, jung)"
+  "lena": "VOICE_ID_HERE  (Husum, neugierig, jung)",
+  "nele": { "id": "VOICE_ID_HERE  (Leipzig, Studentin, freundlich)", "speed": 0.9 },
+  "kenji": { "id": "VOICE_ID_HERE  (Japaner, lernt Deutsch, ruhig)", "speed": 0.88 },
+  "amara": { "id": "VOICE_ID_HERE  (Ghanaerin, lernt Deutsch, fröhlich)", "speed": 0.9 },
+  "felix": { "id": "VOICE_ID_HERE  (Wien, Österreich, Musiker, gemütlich)", "speed": 0.9 },
+  "frauKlein": { "id": "VOICE_ID_HERE  (Kassel, Lehrerin, sehr deutlich)", "speed": 0.85 },
+  "herrAdler": { "id": "VOICE_ID_HERE  (Hamburg, Verkäufer, freundlich)", "speed": 0.9 }
 }

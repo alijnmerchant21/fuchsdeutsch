@@ -11,3 +11,5 @@ tsconfig.tsbuildinfo
 next-env.d.ts
 .content-tmp
 .audio-tmp
+# Local PDFs and clones for content authoring only (never committed).
+.content-sources/

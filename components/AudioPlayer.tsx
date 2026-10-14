@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { AudioBlock } from '@/content/types';
 import { speakers } from '@/content/speakers';
-import { canSpeak, hasRecording, speakLines } from '@/lib/audio';
+import { hasRecording } from '@/lib/audio';
 import { Rich } from './Rich';
 
 export function AudioPlayer({ b }: { b: AudioBlock }) {
@@ -29,7 +29,8 @@ export function AudioPlayer({ b }: { b: AudioBlock }) {
       void a.play();
       stop.current = () => a.pause();
     } else {
-      stop.current = speakLines(b.lines, setLine, () => { setPlaying(false); setLine(-1); }, slow ? 0.8 : 1);
+      setPlaying(false);
+      setShowText(true);
     }
   };
 
@@ -52,7 +53,7 @@ export function AudioPlayer({ b }: { b: AudioBlock }) {
         <button type="button" className="chip-btn" aria-pressed={slow} onClick={() => setSlow((s) => !s)}>🐢 Langsam</button>
         <button type="button" className="chip-btn" aria-pressed={showText} onClick={() => setShowText((s) => !s)}>📄 Text {showText ? 'verstecken' : 'zeigen'}</button>
         {plays > 0 && <span className="muted small">{plays}× gehört</span>}
-        {!recorded && <span className="muted small">{canSpeak() ? 'Vorschau mit Browser-Stimme' : 'Dein Browser kann nicht vorlesen. Lies den Text.'}</span>}
+        {!recorded && <span className="muted small">Audio wird aufgenommen — lies den Text unten oder komm später wieder.</span>}
       </div>
       {b.note && <div className="audio-note"><Rich text={b.note} /></div>}
       {showText && (

@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { DEMO_MODE, PASS_MARK } from './config';
+import { authCallbackUrl } from './site';
 import { supabase } from './supabase';
 
 export type Mode = 'easy' | 'advanced';
@@ -198,12 +199,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     },
     signInGoogle: async () => {
       const sb = supabase();
-      if (sb) await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: `${window.location.origin}/lernen` } });
+      if (sb) await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: authCallbackUrl('/lernen') } });
     },
     signInEmail: async (email) => {
       const sb = supabase();
       if (!sb) return 'Supabase ist nicht eingerichtet.';
-      const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/lernen` } });
+      const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: authCallbackUrl('/lernen') } });
       return error ? error.message : null;
     },
     signInPassword: async (email, password) => {

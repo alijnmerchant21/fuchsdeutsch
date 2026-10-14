@@ -44,8 +44,8 @@ function Auto({ items, reveal, onPct }: { items: ExamItem[]; reveal: boolean; on
 function Final() {
   const { course: courseId } = useParams<{ course: string }>();
   const course = courseById(courseId);
-  const { progress, isAdmin, adminView, recordExam } = useStore();
-  const admin = isAdmin && adminView;
+  const { progress, isAdmin, recordExam } = useStore();
+  const admin = isAdmin;
   const [tab, setTab] = useState<ModId>('lesen');
   const [pct, setPct] = useState<Record<ModId, number>>({ lesen: 0, hoeren: 0, schreiben: 0, sprechen: 0 });
   const [done, setDone] = useState(false);

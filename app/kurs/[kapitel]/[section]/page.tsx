@@ -16,8 +16,8 @@ import { chapterOpen, sectionKey, sectionOpen } from '@/lib/unlock';
 function Lesson() {
   const { kapitel, section } = useParams<{ kapitel: string; section: string }>();
   const router = useRouter();
-  const { progress, isAdmin, adminView, completeSection } = useStore();
-  const admin = isAdmin && adminView;
+  const { progress, isAdmin, completeSection } = useStore();
+  const admin = isAdmin;
   const found = findChapter(kapitel);
   const ch = found?.chapter;
   const course = found?.course;

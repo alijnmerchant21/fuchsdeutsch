@@ -42,8 +42,8 @@ function Admin() {
       <h1>Admin</h1>
       <div className="card admin-switch">
         <div>
-          <h2>Ganzen Kurs ohne Sperren ansehen</h2>
-          <p className="muted">Wenn das an ist, sind alle Abschnitte, Prüfungen und die Abschlussprüfung offen. Dein eigener Fortschritt ändert sich nicht.</p>
+          <h2>Kurs als Admin durchsehen</h2>
+          <p className="muted">Als Admin sind alle Abschnitte und Prüfungen immer offen. Hier kannst du die Lehrer-Ansicht in der Navigation ein- oder ausblenden. Dein Fortschritt wird nicht gezählt.</p>
         </div>
         <div className="seg" role="group" aria-label="Admin-Ansicht">
           <button type="button" aria-pressed={adminView} onClick={() => setAdminView(true)}>An</button>

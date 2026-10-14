@@ -462,29 +462,22 @@ td strong { background: var(--butter); border-radius: 4px; padding: 0 3px; }
 .pop { animation: pop 0.4s var(--ease); }
 .shake { animation: shake 0.4s; }
 .bob { animation: bob 3.2s ease-in-out infinite; }
-/* Fuchsi: every part has its own small loop so the fox feels alive, never frantic */
-.fox { overflow: visible; }
-.fox-head { transform-origin: 60px 80px; animation: fox-tilt 7s ease-in-out infinite; }
-.fox-ear-l { transform-origin: 32px 46px; animation: ear-l 5.5s ease-in-out infinite; }
-.fox-ear-r-inner { transform-origin: 32px 46px; animation: ear-l 5.5s ease-in-out 1.7s infinite; }
-.fox-eye { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
-.fox-shadow { transform-origin: 60px 113px; animation: fox-shadow 7s ease-in-out infinite; }
-.fox-wow .fox-shadow { animation: fox-shadow-hop 0.9s var(--ease) infinite; }
-.fox-nose { transform-origin: 60px 88px; animation: sniff 3.8s ease-in-out infinite; }
-.fox-wow .fox-head { animation: fox-hop 0.9s var(--ease) infinite; }
-.fox-wow .fox-ear-l, .fox-wow .fox-ear-r-inner { animation-duration: 1.2s; }
-.fox-proud .fox-head { animation: fox-nod 2.4s ease-in-out infinite; }
-.fox-sleepy .fox-head { animation: fox-breathe 4s ease-in-out infinite; }
-.fox-sleepy .fox-ear-l, .fox-sleepy .fox-ear-r-inner { animation: none; transform: rotate(-10deg); }
-.fox-sparkles path { transform-box: fill-box; transform-origin: center; animation: twinkle 1.6s ease-in-out infinite; }
-.fox-sparkles path:nth-child(2) { animation-delay: 0.5s; }
-.fox-sparkles path:nth-child(3) { animation-delay: 1s; }
-.fox-zzz text { animation: zzz 3s ease-in-out infinite; }
-.fox-zzz text:nth-child(2) { animation-delay: 0.8s; }
-/* Hover or tap: a quick happy wiggle with both ears up */
-.fox:hover .fox-head, .brand:hover .fox-head { animation: fox-wiggle 0.6s var(--ease); }
-.fox:hover .fox-ear-l, .brand:hover .fox-ear-l, .fox:hover .fox-ear-r-inner, .brand:hover .fox-ear-r-inner { animation: none; transform: rotate(8deg); }
-.fox-ear-l, .fox-ear-r-inner { transition: transform 0.25s var(--ease); }
+/* Fuchsi — photorealistic mascot (see components/Fox.tsx) */
+.fox-img { position: relative; display: inline-block; line-height: 0; vertical-align: middle; }
+.fox-photo {
+  display: block; border-radius: 50%; object-fit: cover; object-position: 50% 38%;
+  box-shadow: 0 6px 18px rgba(28, 29, 31, 0.14), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  transition: transform 0.25s var(--ease), filter 0.25s;
+}
+.fox-img.fox-wow .fox-photo { animation: fox-hop-img 0.9s var(--ease) infinite; }
+.fox-img.fox-proud .fox-photo { filter: saturate(1.08) brightness(1.03); animation: fox-nod-img 2.4s ease-in-out infinite; }
+.fox-img.fox-sleepy .fox-photo { filter: saturate(0.82) brightness(0.94); transform: rotate(4deg); }
+.fox-mood-extra { position: absolute; pointer-events: none; font-family: var(--display); font-weight: 800; }
+.fox-mood-proud { top: -2%; right: -4%; font-size: 1.1em; animation: twinkle 1.6s ease-in-out infinite; }
+.fox-mood-sleepy { top: 0; right: -8%; font-size: 0.72em; color: var(--ink-2); animation: zzz 3s ease-in-out infinite; }
+.fox-img:hover .fox-photo, .brand:hover .fox-photo { transform: scale(1.04) rotate(-2deg); }
+@keyframes fox-hop-img { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+@keyframes fox-nod-img { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 @keyframes pop { 0% { transform: scale(0.85); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 @keyframes shake { 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
 @keyframes bob { 50% { transform: translateY(-7px); } }

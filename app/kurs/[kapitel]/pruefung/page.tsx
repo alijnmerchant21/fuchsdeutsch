@@ -12,8 +12,8 @@ import { chapterOpen, examOpen } from '@/lib/unlock';
 
 function Exam() {
   const { kapitel } = useParams<{ kapitel: string }>();
-  const { progress, isAdmin, adminView, recordExam } = useStore();
-  const admin = isAdmin && adminView;
+  const { progress, isAdmin, recordExam } = useStore();
+  const admin = isAdmin;
   const found = findChapter(kapitel);
   const ch = found?.chapter;
   const course = found?.course;

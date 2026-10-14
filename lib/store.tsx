@@ -134,7 +134,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       const { data } = await sb.from('profiles').select('is_admin, progress').eq('id', u.id).maybeSingle();
       // The database decides who is admin (flag in profiles or an admin email, see supabase/004_admin_email.sql).
       const { data: adminRpc } = await sb.rpc('is_admin');
-      setIsAdmin(!!adminRpc || !!data?.is_admin);
+      const admin = !!(adminRpc || data?.is_admin);
+      setIsAdmin(admin);
+      if (admin) {
+        setAdminViewState(true);
+        writeLS(LS_ADMIN, { is: true, view: true });
+      }
       if (data) {
         if (data.progress && Object.keys(data.progress).length) {
           const remote = { ...emptyProgress(), ...(data.progress as Partial<Progress>) };
@@ -185,7 +190,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const store = useMemo<Store>(() => ({
     ready, user: shownUser, isAdmin, adminView, progress,
-    saveProfile: (profile) => update((p) => ({ ...p, profile })),
+    saveProfile: (profile) => { if (isAdmin) return; update((p) => ({ ...p, profile })); },
     setCourse: (course) => update((p) => ({ ...p, course })),
     signInDemo: (name, email) => {
       const u: User = { id: 'demo-' + email.toLowerCase().replace(/[^a-z0-9]/g, '-'), email, name };
@@ -225,15 +230,18 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (!DEMO_MODE) return; // real admins are set in the database
       setIsAdmin(on); setAdminViewState(on); writeLS(LS_ADMIN, { is: on, view: on });
     },
-    completeSection: (key, xp) => update((p) => (p.done[key] ? p : earn({ ...p, done: { ...p.done, [key]: new Date().toISOString() } }, xp))),
-    recordExam: (key, percent) => update((p) => {
-      const old = p.exams[key];
-      const passed = percent >= PASS_MARK;
-      const firstPass = passed && !old?.passed;
-      const next = { ...p, exams: { ...p.exams, [key]: { best: Math.max(old?.best || 0, percent), passed: passed || !!old?.passed, attempts: (old?.attempts || 0) + 1 } } };
-      return earn(next, firstPass ? 100 : 10);
-    }),
-    recordGame: (id, score, xp) => update((p) => earn({ ...p, games: { ...p.games, [id]: Math.max(p.games[id] || 0, score) } }, xp)),
+    completeSection: (key, xp) => { if (isAdmin) return; update((p) => (p.done[key] ? p : earn({ ...p, done: { ...p.done, [key]: new Date().toISOString() } }, xp))); },
+    recordExam: (key, percent) => {
+      if (isAdmin) return;
+      update((p) => {
+        const old = p.exams[key];
+        const passed = percent >= PASS_MARK;
+        const firstPass = passed && !old?.passed;
+        const next = { ...p, exams: { ...p.exams, [key]: { best: Math.max(old?.best || 0, percent), passed: passed || !!old?.passed, attempts: (old?.attempts || 0) + 1 } } };
+        return earn(next, firstPass ? 100 : 10);
+      });
+    },
+    recordGame: (id, score, xp) => { if (isAdmin) return; update((p) => earn({ ...p, games: { ...p.games, [id]: Math.max(p.games[id] || 0, score) } }, xp)); },
   }), [ready, shownUser, isAdmin, adminView, progress, loadLocal, update]);
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;

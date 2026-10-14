@@ -6,10 +6,10 @@ import { Fox } from './Fox';
 
 /** Pages inside the course need a signed-in learner who has filled in the welcome form. */
 export function RequireUser({ children, allowNew = false }: { children: ReactNode; allowNew?: boolean }) {
-  const { ready, user, progress } = useStore();
+  const { ready, user, progress, isAdmin } = useStore();
   const router = useRouter();
   const path = usePathname();
-  const needsForm = !allowNew && !!user && !progress.profile;
+  const needsForm = !isAdmin && !allowNew && !!user && !progress.profile;
   useEffect(() => {
     if (!ready) return;
     // Remember where the learner wanted to go, so login can send them back there.

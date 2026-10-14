@@ -6,7 +6,7 @@ import { DEMO_MODE, DEPOSIT_USD, TRIAL_DAYS, trialDaysLeft } from '@/lib/config'
 import { useStore } from '@/lib/store';
 
 export default function Login() {
-  const { user, ready, signInDemo, signInGoogle, signInEmail, signInPassword } = useStore();
+  const { user, ready, isAdmin, signInDemo, signInGoogle, signInEmail, signInPassword } = useStore();
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,8 +27,12 @@ export default function Login() {
     if (!ready || !user) return;
     // Go back to the page that asked for the login. Only same-site paths are allowed.
     const next = new URLSearchParams(window.location.search).get('next') || '';
+    if (isAdmin) {
+      router.replace('/admin');
+      return;
+    }
     router.replace(next.startsWith('/') && !next.startsWith('//') ? next : '/lernen');
-  }, [ready, user, router]);
+  }, [ready, user, isAdmin, router]);
 
   const magic = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,12 +101,14 @@ export default function Login() {
         </div>
       )}
 
-      <p className="deal-mini">
-        <b>Free forever. No charges, no hidden fees.</b>{' '}
-        {left !== null && left > 0
-          ? `You are inside the ${TRIAL_DAYS}-day trial period (${left} days left), so no deposit is needed.`
-          : `New learners put down a $${DEPOSIT_USD} deposit per course and get 100% back when they finish in time.`}
-      </p>
+      {!isAdmin && (
+        <p className="deal-mini">
+          <b>Free forever. No charges, no hidden fees.</b>{' '}
+          {left !== null && left > 0
+            ? `You are inside the ${TRIAL_DAYS}-day trial period (${left} days left), so no deposit is needed.`
+            : `New learners put down a $${DEPOSIT_USD} deposit per course and get 100% back when they finish in time.`}
+        </p>
+      )}
     </main>
   );
 }

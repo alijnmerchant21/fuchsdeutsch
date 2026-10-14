@@ -6,8 +6,9 @@ import { courseById, courses } from '@/content/course';
 import { games } from '@/content/games';
 import { PASS_MARK } from '@/lib/config';
 import { dayKey, streakAlive, useStore } from '@/lib/store';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { chapterOpen, chapterPercent, examOpen, finalOpen, sectionKey, sectionOpen } from '@/lib/unlock';
-
 
 function Week() {
   const { progress } = useStore();
@@ -23,15 +24,29 @@ function Week() {
 }
 
 function Dashboard() {
-  const { user, progress, isAdmin, adminView, setCourse } = useStore();
-  const admin = isAdmin && adminView;
+  const { user, progress, isAdmin, setCourse } = useStore();
+  const router = useRouter();
+  const admin = isAdmin;
+
+  useEffect(() => {
+    if (isAdmin) router.replace('/admin');
+  }, [isAdmin, router]);
+
+  if (isAdmin) {
+    return (
+      <main className="page center">
+        <Fox size={90} mood="happy" className="bob" />
+        <p className="muted">Weiterleitung zum Admin-Bereich …</p>
+      </main>
+    );
+  }
   const course = courseById(progress.course) || courses[0];
   const DAILY_GOAL = progress.profile?.goal || 50;
   const today = progress.days[dayKey()] || 0;
   const alive = streakAlive(progress.streak);
   const goalPct = Math.min(100, Math.round((today / DAILY_GOAL) * 100));
 
-  // Next thing to do
+  // Next thing to do — learner only (admins are redirected above)
   let next: { href: string; label: string } | null = null;
   for (let ci = 0; ci < course.chapters.length && !next; ci++) {
     const ch = course.chapters[ci];

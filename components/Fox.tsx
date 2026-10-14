@@ -2,21 +2,21 @@ import Image from 'next/image';
 
 type Mood = 'happy' | 'wow' | 'sleepy' | 'proud';
 
-/** Fuchsi — photorealistic 3D fox mascot (see public/fox-mascot.jpg). Mood tweaks use CSS only. */
+/** Fuchsi — low-poly 3D fox mark (public/fox-logo.png). */
 export function Fox({ size = 120, mood = 'happy', className = '' }: { size?: number; mood?: Mood; className?: string }) {
   return (
     <span
-      className={`fox fox-img fox-${mood} ${className}`}
+      className={`fox fox-brand fox-${mood} ${className}`}
       style={{ width: size, height: size }}
       role="img"
       aria-label="Fuchsi, der Lernfuchs"
     >
       <Image
-        src="/fox-mascot.jpg"
+        src="/fox-logo.png"
         alt=""
         width={512}
         height={512}
-        className="fox-photo"
+        className="fox-logo-img"
         sizes={`${size}px`}
         style={{ width: size, height: size }}
         priority={size >= 96}

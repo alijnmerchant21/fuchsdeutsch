@@ -462,20 +462,20 @@ td strong { background: var(--butter); border-radius: 4px; padding: 0 3px; }
 .pop { animation: pop 0.4s var(--ease); }
 .shake { animation: shake 0.4s; }
 .bob { animation: bob 3.2s ease-in-out infinite; }
-/* Fuchsi — photorealistic mascot (see components/Fox.tsx) */
-.fox-img { position: relative; display: inline-block; line-height: 0; vertical-align: middle; }
-.fox-photo {
-  display: block; border-radius: 50%; object-fit: cover; object-position: 50% 38%;
-  box-shadow: 0 6px 18px rgba(28, 29, 31, 0.14), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
-  transition: transform 0.25s var(--ease), filter 0.25s;
+/* Fuchsi — low-poly brand mark (public/fox-logo.png) */
+.fox-brand { position: relative; display: inline-block; line-height: 0; vertical-align: middle; }
+.fox-logo-img {
+  display: block; object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(28, 29, 31, 0.14));
+  transition: transform 0.25s var(--ease);
 }
-.fox-img.fox-wow .fox-photo { animation: fox-hop-img 0.9s var(--ease) infinite; }
-.fox-img.fox-proud .fox-photo { filter: saturate(1.08) brightness(1.03); animation: fox-nod-img 2.4s ease-in-out infinite; }
-.fox-img.fox-sleepy .fox-photo { filter: saturate(0.82) brightness(0.94); transform: rotate(4deg); }
+.fox-brand.fox-wow .fox-logo-img { animation: fox-hop-img 0.9s var(--ease) infinite; }
+.fox-brand.fox-proud .fox-logo-img { animation: fox-nod-img 2.4s ease-in-out infinite; }
+.fox-brand.fox-sleepy .fox-logo-img { filter: saturate(0.88) drop-shadow(0 3px 6px rgba(28, 29, 31, 0.1)); transform: rotate(3deg); }
 .fox-mood-extra { position: absolute; pointer-events: none; font-family: var(--display); font-weight: 800; }
 .fox-mood-proud { top: -2%; right: -4%; font-size: 1.1em; animation: twinkle 1.6s ease-in-out infinite; }
 .fox-mood-sleepy { top: 0; right: -8%; font-size: 0.72em; color: var(--ink-2); animation: zzz 3s ease-in-out infinite; }
-.fox-img:hover .fox-photo, .brand:hover .fox-photo { transform: scale(1.04) rotate(-2deg); }
+.fox-brand:hover .fox-logo-img, .brand:hover .fox-logo-img { transform: scale(1.05) rotate(-2deg); }
 @keyframes fox-hop-img { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
 @keyframes fox-nod-img { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 @keyframes pop { 0% { transform: scale(0.85); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }

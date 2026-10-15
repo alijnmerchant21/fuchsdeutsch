@@ -179,6 +179,11 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['gefallen', 'schön finden', 'to like (it pleases me)'], ['passen', 'die Größe ist richtig', 'to fit'], ['stehen', 'gut aussehen an jemandem', 'to suit'],
       ['das Kaufhaus', 'großes Geschäft', 'department store'], ['die Rolltreppe', 'bewegt sich', 'escalator'], ['der Flohmarkt', 'alte Sachen kaufen', 'flea market'],
     ]),
+    match('w-extra-clothes', [['die Jacke', 'jacket'], ['die Hose', 'trousers'], ['das Hemd', 'shirt'], ['die Schuhe', 'shoes'], ['gefallen', 'to like (appeal)'], ['passen', 'to fit']],
+      { task: 'Kleidung', taskEn: 'Clothes.' }),
+    gap('w-extra-gap', ['Die Jacke {{gefällt}} mir.', 'Die Hose {{passt}} gut.', 'Ich schenke {{ihm}} einen Schal.', 'Die Farbe ist {{zu}} dunkel.'],
+      { bank: ['gefällt', 'passt', 'ihm', 'zu'], task: 'Gefallen und passen', taskEn: 'Liking and fitting.' }),
+    mcq('w-extra-q1', '„Wie ___ Ihnen die Jacke?“', ['gefällt', 'gefallen', 'gefällt es'], 0),
     checklist('w-check', ['Ich kann Kleidung nennen.', 'Ich kann im Kaufhaus nach etwas fragen.', 'Ich kann sagen, was mir gefällt und passt.', 'Ich kenne die Pronomen im Dativ.', 'Ich kann über eine Reise im Perfekt erzählen.']),
   ]);
 

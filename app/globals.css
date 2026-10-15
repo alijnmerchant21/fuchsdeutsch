@@ -448,6 +448,20 @@ td strong { background: var(--butter); border-radius: 4px; padding: 0 3px; }
 .rain-buckets .bucket { min-height: 84px; justify-content: center; box-shadow: var(--shadow); }
 .rain-buckets .bucket:active { transform: translateY(4px); box-shadow: none; }
 
+/* ---------- Stories ---------- */
+.story-list { display: grid; gap: 12px; margin: 16px 0 28px; }
+.story-card {
+  display: grid; gap: 4px; text-decoration: none;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 18px 20px; box-shadow: var(--shadow); transition: transform 0.12s var(--ease);
+}
+.story-card:hover { transform: translateY(-2px); background: var(--tone); }
+.story-go { font-weight: 700; margin-top: 4px; }
+.story-read .story-body { font-size: 1.08rem; line-height: 1.7; }
+.story-read .story-body p { margin-bottom: 1em; }
+.choice.is-ok { background: var(--mint); border-color: var(--ink); }
+.choice.is-bad { background: var(--rose); border-color: var(--ink); }
+
 /* ---------- Admin ---------- */
 .admin-switch { display: flex; gap: 20px; align-items: center; justify-content: space-between; background: var(--lilac); margin: 16px 0 28px; }
 .admin-switch h2 { font-size: 1.3rem; }

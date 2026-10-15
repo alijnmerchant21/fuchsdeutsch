@@ -182,6 +182,13 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Ampel', 'rot, gelb, grün', 'traffic light'], ['weit', 'nicht nah', 'far'], ['der Frühling', 'März bis Mai', 'spring'],
       ['der Sommer', 'Juni bis August', 'summer'], ['der Herbst', 'September bis November', 'autumn, fall'], ['der Winter', 'Dezember bis Februar', 'winter'],
     ]),
+    match('w-extra-dir', [['geradeaus', 'straight ahead'], ['links', 'left'], ['rechts', 'right'], ['die Ampel', 'traffic light'], ['der Bahnhof', 'train station'], ['die Haltestelle', 'bus/tram stop']],
+      { task: 'Stadt und Weg', taskEn: 'City and directions.' }),
+    gap('w-extra-gap', ['Gehen Sie {{geradeaus}} bis zur Ampel.', 'Dann {{links}}.', 'Der Bahnhof ist {{rechts}}.', 'Ich habe {{kein}} Auto.'],
+      { bank: ['geradeaus', 'links', 'rechts', 'kein'], task: 'Wegbeschreibung', taskEn: 'Directions.' }),
+    sort('w-extra-season', ['Frühling/Sommer', 'Herbst/Winter'], [['März', 0], ['Juli', 0], ['Oktober', 1], ['Dezember', 1], ['der Sommer', 0], ['der Winter', 1]],
+      { task: 'Jahreszeiten', taskEn: 'Seasons.' }),
+    mcq('w-extra-q1', '„Wie komme ich ___ Bahnhof?“', ['zum', 'zur', 'zu dem'], 0),
     checklist('w-check', ['Ich kann Orte in der Stadt nennen.', 'Ich kann nach dem Weg fragen.', 'Ich verstehe einfache Wegbeschreibungen.', 'Ich kenne ein/eine und kein/keine.', 'Ich kenne die Monate und Jahreszeiten.']),
     mcq('w-q1', 'Du suchst den Bahnhof. Was fragst du?', ['Wo bist du Bahnhof?', 'Entschuldigung, wie komme ich zum Bahnhof?', 'Gehen Sie zum Bahnhof!'], 1, { task: 'Letzter Check', taskEn: 'Last check before the exam.' }),
   ]);

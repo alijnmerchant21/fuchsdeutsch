@@ -191,6 +191,12 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       'Zeit': ['Hast du am Freitag Zeit?', 'Am Freitag kann ich nicht.', 'Am Samstag habe ich Zeit.'],
       'Beruf und Alter': ['Was bist du von Beruf?', 'Ich bin Koch.', 'Wie alt bist du? Ich bin 28.'],
     }),
+    match('w-extra-days', [['Montag', 'Monday'], ['Mittwoch', 'Wednesday'], ['Freitag', 'Friday'], ['Samstag', 'Saturday'], ['Sonntag', 'Sunday'], ['Wochenende', 'weekend']],
+      { task: 'Wochentage', taskEn: 'Weekdays.' }),
+    gap('w-extra-gap', ['Am {{Montag}} arbeite ich.', 'Am {{Samstag}} habe ich Zeit.', 'Ich bin {{Lehrer}} von Beruf.', 'Sie ist {{Ärztin}}.'],
+      { bank: ['Montag', 'Samstag', 'Lehrer', 'Ärztin'], task: 'Ergänze.', taskEn: 'Fill in.' }),
+    mcq('w-extra-q1', '„___ du am Freitag Zeit?“', ['Hast', 'Hat', 'Haben'], 0),
+    mcq('w-extra-q2', '72 =', ['siebzigzwei', 'zweiundsiebzig', 'siebzigundzwei'], 1),
     checklist('w-check', ['Ich kann über meine Hobbys sprechen.', 'Ich kenne die Wochentage.', 'Ich kann Zahlen bis 100 sagen.', 'Ich kann meinen Beruf nennen.', 'Ich kann Ja/Nein-Fragen stellen.', 'Ich lerne Nomen mit Artikel und Plural.']),
   ]);
 

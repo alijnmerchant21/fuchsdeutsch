@@ -170,6 +170,11 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Kantine', 'Restaurant in der Firma', 'canteen'], ['der Drucker', 'macht Papier aus Dateien', 'printer'], ['zu Hause', 'wo ich wohne', 'at home'],
       ['nach Hause', 'dahin, wo ich wohne', 'home (direction)'], ['mit dem Bus', 'Verkehrsmittel', 'by bus'], ['Viele Grüße', 'am Ende einer E-Mail', 'best regards'],
     ]),
+    match('w-extra-work', [['das Praktikum', 'internship'], ['die E-Mail', 'email'], ['mit dem Bus', 'by bus'], ['mit dem Fahrrad', 'by bike'], ['zu Fuß', 'on foot'], ['der Kollege', 'colleague']],
+      { task: 'Arbeit und Weg', taskEn: 'Work and commuting.' }),
+    gap('w-extra-gap', ['Ich fahre {{mit}} dem Bus zur Arbeit.', 'Ich komme {{zu}} Fuß.', 'Viele Grüße {{an}} dich!', 'Ich arbeite {{bei}} einer Firma.'],
+      { bank: ['mit', 'zu', 'an', 'bei'], task: 'Präpositionen', taskEn: 'Prepositions.' }),
+    mcq('w-extra-q1', 'Höflicher E-Mail-Anfang:', ['Hi!!!', 'Sehr geehrte Frau Klein,', 'Tschüss'], 1),
     checklist('w-check', ['Ich kann über meine Arbeit sprechen.', 'Ich kann sagen, wie ich zur Arbeit komme.', 'Ich kann eine kurze E-Mail schreiben.', 'Ich kann Small Talk machen.', 'Ich kenne die Präpositionen mit Dativ.']),
   ]);
 

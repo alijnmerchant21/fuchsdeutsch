@@ -171,6 +171,13 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Eltern', 'Mutter und Vater', 'parents'], ['die Geschwister', 'Brüder und Schwestern', 'siblings'], ['der Sohn / die Tochter', 'Kinder', 'son / daughter'],
       ['können', 'fähig sein', 'can'], ['müssen', 'keine Wahl haben', 'must'], ['wollen', 'einen Wunsch haben', 'to want'],
     ]),
+    match('w-extra-time', [['halb acht', '7:30'], ['Viertel nach drei', '3:15'], ['Viertel vor fünf', '4:45'], ['acht Uhr', '8:00'], ['aufstehen', 'to get up'], ['der Termin', 'appointment']],
+      { task: 'Uhrzeit und Alltag', taskEn: 'Time and daily life.' }),
+    gap('w-extra-gap', ['Ich stehe um sieben Uhr {{auf}}.', 'Meine {{Mutter}} ist Lehrerin.', 'Mein {{Vater}} liest gern.', 'Kann ich einen {{Termin}} machen?'],
+      { bank: ['auf', 'Mutter', 'Vater', 'Termin'], task: 'Familie und Tag', taskEn: 'Family and day.' }),
+    mcq('w-extra-q1', '„Wie spät ___ es?“', ['ist', 'bist', 'sind'], 0),
+    mcq('w-extra-q2', '„Ich ___ um acht zur Arbeit.“', ['gehe', 'gehst', 'geht'], 0),
+    text('w-story-tip', 'Optional lesen: **Mein Tag** und **Meine Familie**.', { kicker: 'Extra', en: 'Optional reading: “Mein Tag” and “Meine Familie”.' }),
     checklist('w-check', ['Ich kann die Uhrzeit sagen.', 'Ich kann meinen Tag beschreiben.', 'Ich kann meine Familie vorstellen.', 'Ich kann am Telefon einen Termin machen.', 'Ich kann mich entschuldigen.', 'Ich kenne die Satzklammer.']),
   ]);
 

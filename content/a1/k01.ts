@@ -17,6 +17,10 @@ export const glossaryA1k1: Record<string, GlossaryEntry> = {
   Mitbewohner: { de: 'Eine Person, die mit dir in einer Wohnung wohnt.', en: 'roommate' },
   willkommen: { de: 'Schön, dass du da bist!', en: 'welcome' },
   Entschuldigung: { de: 'Das sagt man, wenn man etwas fragt oder etwas falsch macht.', en: 'excuse me, sorry' },
+  Adresse: { de: 'Straße, Hausnummer, PLZ und Stadt.', en: 'address' },
+  Alter: { de: 'Wie alt man ist. „Ich bin 22 Jahre alt.“', en: 'age' },
+  Nationalität: { de: 'Aus welchem Land man kommt. „Ich bin Japaner.“', en: 'nationality' },
+  Formular: { de: 'Ein Papier oder eine Seite mit Fragen. Man füllt es aus.', en: 'form' },
 };
 
 const einstieg = section('einstieg', 'einstieg', 'Einstieg', 'Hallo, Deutsch!', 'butter', 8,
@@ -89,6 +93,13 @@ const teil2 = section('teil-2', 'modul', 'Teil 2', 'Woher kommst du?', 'sky', 15
       ['Sag, wo du wohnst.', 'Say where you live.', ['Ich', 'wohne', 'in Berlin.']],
       ['Sag, was du sprichst.', 'Say which languages you speak.', ['Ich spreche', 'Portugiesisch', 'und Englisch.']],
     ], { task: 'Bau eine Vorstellung.', taskEn: 'Build an introduction, sentence by sentence.' }),
+    tip('t2-nat', 'Nationalität', 'Oft sagst du **Ich komme aus …** Oder: **Ich bin Japaner / Japanerin. Ich bin Deutscher / Deutsche.**\n\nAchtung: *Ich bin aus Japan* geht auch, aber *Ich komme aus Japan* ist klarer.'),
+    match('t2-nat-match', [['Japan', 'Japaner / Japanerin'], ['Deutschland', 'Deutscher / Deutsche'], ['Österreich', 'Österreicher / Österreicherin'], ['die Türkei', 'Türke / Türkin'], ['Ghana', 'Ghanaer / Ghanaerin'], ['Brasilien', 'Brasilianer / Brasilianerin']],
+      { task: 'Land und Nationalität', taskEn: 'Match the country to the nationality.' }),
+    gap('t2-nat-gap', ['Kenji ist {{Japaner}}. Er kommt aus Osaka.', 'Felix ist {{Österreicher}}. Er kommt aus Wien.', 'Amara kommt {{aus}} Ghana.', 'Nele kommt {{aus}} Deutschland.'],
+      { bank: ['Japaner', 'Österreicher', 'aus', 'aus'], task: 'Ergänze.', taskEn: 'Fill in nationality or „aus“.' }),
+    mcq('t2-q3', '„Ich bin 24 Jahre ___.“', ['alt', 'Alter', 'Jahre'], 0, { task: 'Alter sagen', taskEn: 'Saying your age.' }),
+    order('t2-order-age', ['Wie', 'alt', 'bist', 'du?'], { task: 'Bau die Frage zum Alter.', taskEn: 'Build the age question.' }),
   ]);
 
 const teil3 = section('teil-3', 'modul', 'Teil 3', 'Zahlen und Buchstaben', 'lilac', 15,
@@ -125,6 +136,13 @@ const teil3 = section('teil-3', 'modul', 'Teil 3', 'Zahlen und Buchstaben', 'lil
     }),
     mcq('t3-q3', 'Wie spricht man den Buchstaben **W**?', ['„dabbel-ju“', '„we“ wie in Wetter', '„wau“'], 1, { task: 'Teste dich.', taskEn: 'Test yourself.' }),
     mcq('t3-q4', 'Was bedeutet „at“ in einer E-Mail-Adresse?', ['@', '.', '-'], 0),
+    tip('t3-form', 'Auf einem Formular', 'Oft brauchst du: **Name**, [[Adresse]], [[Handynummer]], E-Mail, [[Alter]] / Geburtsdatum.\n\nBeispiel: *Fuchsstraße 12, 04109 Leipzig.*'),
+    match('t3-form-match', [['Name', 'Kenji Tanaka'], ['Adresse', 'Fuchsstraße 12, Leipzig'], ['Telefon', '0176 4582391'], ['E-Mail', 'kenji.tanaka@mail.de'], ['Alter', '22 Jahre']],
+      { task: 'Was gehört wohin auf dem Formular?', taskEn: 'Match the form field to the example.' }),
+    gap('t3-addr', ['Meine Adresse ist Fuchsstraße {{zwölf}}.', 'Die Postleitzahl beginnt oft mit {{null}}4 …', 'Meine Handynummer beginnt mit {{null}}176.'],
+      { bank: ['zwölf', 'null', 'null'], task: 'Zahlen in der Adresse', taskEn: 'Numbers in an address.' }),
+    sort('t3-sort-abc', ['A–M', 'N–Z'], [['Amara', 0], ['Felix', 0], ['Kenji', 0], ['Leipzig', 0], ['Nele', 1], ['Osaka', 1], ['Wien', 1], ['Zürich', 1]],
+      { task: 'Alphabet: A–M oder N–Z?', taskEn: 'Alphabet: first half or second half?' }),
   ]);
 
 const wg = section('wg', 'kommunikation', 'Die Fuchsbau-WG', 'Folge 1: Der Neue', 'rose', 10,
@@ -173,6 +191,15 @@ const grammatik = section('grammatik', 'grammatik', 'Grammatik', 'Alles auf eine
       { task: 'Ergänze das Verb.', taskEn: 'Fill in the verb in the right form.' }),
     mcq('g-q1', 'Welcher Satz ist richtig?', ['Woher du kommst?', 'Woher kommst du?', 'Woher kommt du?'], 1),
     mcq('g-q2', '„Amara ___ aus Ghana.“', ['komme', 'kommst', 'kommt'], 2),
+    tip('g-neg', 'Nein sagen (kurz)', 'Einfach: **Nein.** Oder: **Nein, danke.** / **Nein, ich heiße nicht Max.**\n\nSpäter lernst du *nicht* und *kein* genauer.'),
+    gap('g-gap2', ['{{Ich}} heiße Nele.', '{{Du}} kommst aus Indien.', '{{Er}} wohnt in Berlin.', '{{Wir}} sprechen Deutsch.', '{{Ihr}} seid super.', '{{Sie}} heißen Frau Klein. (höflich)'],
+      { bank: ['Ich', 'Du', 'Er', 'Wir', 'Ihr', 'Sie'], task: 'Welches Pronomen?', taskEn: 'Which personal pronoun?' }),
+    sort('g-sort-verb', ['richtig', 'falsch'], [
+      ['Ich wohne in Leipzig.', 0], ['Woher du kommst?', 1], ['Er spricht Englisch.', 0],
+      ['Kommst du aus Japan?', 0], ['Wir ist die WG.', 1], ['Sie heißen Amara.', 0],
+    ], { task: 'Richtiger Satzbau?', taskEn: 'Correct word order?' }),
+    mcq('g-q3', '„Jetzt ___ ich in Leipzig.“', ['wohne', 'wohnst', 'wohnt'], 0),
+    mcq('g-q4', '„___ heißt du?“', ['Was', 'Wie', 'Wo'], 1),
   ]);
 
 const uebungen = section('uebungen', 'uebung', 'Übungen', 'Training', 'butter', 15,
@@ -189,6 +216,13 @@ const uebungen = section('uebungen', 'uebung', 'Übungen', 'Training', 'butter',
     ], { task: 'Hör zu und sprich nach.', taskEn: 'Listen and repeat the spelling.' }),
     mcq('u-q1', 'Frau Klein buchstabiert: L, E, I, P, Z, I, G. Welche Stadt ist das?', ['Leipzig', 'Lübeck', 'Linz'], 0),
     mcq('u-q2', 'Welche Zahl ist **dreizehn**?', ['3', '13', '30'], 1),
+    match('u-match-greet', [['Guten Morgen!', 'am Vormittag'], ['Guten Tag!', 'am Tag'], ['Guten Abend!', 'am Abend'], ['Gute Nacht!', 'vor dem Schlafen'], ['Auf Wiedersehen!', 'höflich gehen'], ['Tschüss!', 'bei Freunden gehen']],
+      { task: 'Wann sagst du was?', taskEn: 'When do you say what?' }),
+    gap('u-gap2', ['{{Wie}} heißt du?', '{{Woher}} kommst du?', '{{Wo}} wohnst du?', '{{Wie}} alt bist du?', '{{Was}} sprichst du?'],
+      { bank: ['Wie', 'Woher', 'Wo', 'Wie', 'Was'], task: 'W-Fragen trainieren', taskEn: 'Practice W-questions.' }),
+    order('u-order3', ['Meine', 'Adresse', 'ist', 'Fuchsstraße', '12.'], { task: 'Bau den Satz zur Adresse.', taskEn: 'Build the address sentence.' }),
+    mcq('u-q3', 'Du sprichst mit dem Arzt. Was fragst du?', ['Wie geht’s?', 'Wie geht es Ihnen?', 'Hi!'], 1),
+    mcq('u-q4', '„0176 …“ Das ist eine …', ['E-Mail', 'Handynummer', 'Adresse'], 1),
   ]);
 
 const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', 'Das kann ich jetzt', 'mint', 8,
@@ -198,10 +232,14 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['Auf Wiedersehen!', 'so geht man höflich', 'goodbye'], ['Wie geht’s?', 'Frage nach dem Befinden', 'how are you?'], ['Danke, gut.', 'mir geht es gut', 'fine, thanks'],
       ['heißen', 'einen Namen haben', 'to be called'], ['kommen aus', 'aus einem Land sein', 'to come from'], ['wohnen in', 'in einer Stadt leben', 'to live in'],
       ['sprechen', 'eine Sprache benutzen', 'to speak'], ['die Handynummer', 'Nummer vom Handy', 'cell number'], ['buchstabieren', 'Buchstabe für Buchstabe sagen', 'to spell'],
+      ['die Adresse', 'Straße und Stadt', 'address'], ['das Alter', 'wie alt man ist', 'age'], ['die Nationalität', 'aus welchem Land', 'nationality'],
+      ['Wie alt bist du?', 'Frage nach dem Alter', 'how old are you?'], ['Ich bin … Jahre alt.', 'Antwort zum Alter', 'I am … years old'], ['das Formular', 'Papier mit Fragen', 'form'],
     ]),
-    checklist('w-check', ['Ich kann Hallo und Tschüss sagen.', 'Ich kann sagen, wie ich heiße, woher ich komme und wo ich wohne.', 'Ich kann fragen: Wie geht’s?', 'Ich kann bis 20 zählen.', 'Ich kann meinen Namen buchstabieren.', 'Ich kenne den Unterschied zwischen du und Sie.']),
+    checklist('w-check', ['Ich kann Hallo und Tschüss sagen.', 'Ich kann sagen, wie ich heiße, woher ich komme und wo ich wohne.', 'Ich kann fragen: Wie geht’s?', 'Ich kann bis 20 zählen.', 'Ich kann meinen Namen buchstabieren.', 'Ich kenne den Unterschied zwischen du und Sie.', 'Ich kann mein Alter und meine Adresse sagen.', 'Ich kann Land und Nationalität zuordnen.']),
+    text('w-story-tip', 'Willst du mehr lesen? Die kurze Geschichte **Willkommen, Kenji!** wiederholt die Wörter aus diesem Kapitel — optional, ohne Prüfung.', { kicker: 'Extra', en: 'Want more reading? The short story “Willkommen, Kenji!” revisits this chapter’s words — optional, no exam.' }),
     mcq('w-q1', 'Du triffst deine Chefin am Morgen. Was sagst du?', ['Hi, wie geht’s?', 'Guten Morgen, wie geht es Ihnen?', 'Tschüss!'], 1, { task: 'Letzter Check', taskEn: 'Last check before the exam.' }),
     mcq('w-q2', '„Ich ___ Nele.“', ['bin', 'bist', 'ist'], 0),
+    mcq('w-q3', '„Meine ___ ist Fuchsstraße 12.“', ['Alter', 'Adresse', 'Nationalität'], 1),
   ]);
 
 export const a1k1: Chapter = {

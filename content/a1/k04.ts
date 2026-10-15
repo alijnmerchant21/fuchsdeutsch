@@ -179,6 +179,13 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Flasche', 'für Wasser oder Saft', 'bottle'], ['das Kilo', '1000 Gramm', 'kilo'], ['kosten', 'einen Preis haben', 'to cost'],
       ['mögen', 'gut finden', 'to like'], ['möchten', 'höflich wollen', 'would like'], ['das Frühstück', 'Essen am Morgen', 'breakfast'],
     ]),
+    match('w-extra-food', [['das Brot', 'bread'], ['der Käse', 'cheese'], ['das Obst', 'fruit'], ['das Gemüse', 'vegetables'], ['die Milch', 'milk'], ['das Wasser', 'water']],
+      { task: 'Lebensmittel', taskEn: 'Food words.' }),
+    gap('w-extra-gap', ['Ich möchte {{einen}} Apfel.', 'Ich mag {{keinen}} Fisch.', 'Was {{kostet}} das Brot?', 'Ein Kilo Tomaten, {{bitte}}.'] ,
+      { bank: ['einen', 'keinen', 'kostet', 'bitte'], task: 'Einkaufen', taskEn: 'Shopping.' }),
+    mcq('w-extra-q1', '„Ich ___ gern Pizza.“', ['möchte', 'mag', 'muss'], 1),
+    mcq('w-extra-q2', '„Ich ___ einen Kaffee, bitte.“', ['mag', 'möchte', 'bin'], 1),
+    text('w-story-tip', 'Optional lesen: die Geschichte **Einkaufen** wiederholt Wörter aus diesem Kapitel.', { kicker: 'Extra', en: 'Optional reading: the story “Einkaufen” revisits this chapter’s words.' }),
     checklist('w-check', ['Ich kann Lebensmittel nennen.', 'Ich kann einkaufen und nach Preisen fragen.', 'Ich kann sagen, was ich mag und was ich möchte.', 'Ich kenne den Akkusativ: den, einen, keinen.', 'Ich kann ä, ö, ü aussprechen.']),
     mcq('w-q1', 'Was sagt der Verkäufer?', ['Was darf es sein?', 'Was möchtest du sein?', 'Was kostest du?'], 0, { task: 'Letzter Check', taskEn: 'Last check before the exam.' }),
   ]);

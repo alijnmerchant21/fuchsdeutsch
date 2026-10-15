@@ -7,6 +7,7 @@ import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
 import { findChapter } from '@/content/course';
 import { glossaryFor } from '@/content/glossary';
+import { storiesAfterChapter } from '@/content/stories';
 import { GlossaryContext } from '@/components/Rich';
 import { isExercise } from '@/content/types';
 import { party } from '@/lib/fx';
@@ -41,6 +42,7 @@ function Lesson() {
   const pct = exercises.length ? Math.round((nSolved / exercises.length) * 100) : 100;
   const nextSec = ch.sections[si + 1];
   const nextHref = nextSec ? `/kurs/${ch.id}/${nextSec.id}` : `/kurs/${ch.id}/pruefung`;
+  const extras = !nextSec ? storiesAfterChapter(ch.id) : [];
   const glossary = glossaryFor(course.id);
   const xp = 20 + exercises.length * 5;
 
@@ -77,6 +79,14 @@ function Lesson() {
             <h2>Geschafft! +{xp} XP</h2>
             <p>{nextSec ? `Weiter geht es mit: ${nextSec.title}` : 'Alle Abschnitte fertig. Jetzt kommt die Kapitelprüfung.'}</p>
             <Link href={nextHref} className="btn btn-lg">{nextSec ? 'Nächster Abschnitt' : 'Zur Prüfung'}</Link>
+            {extras.length > 0 && (
+              <p className="muted small">
+                Optional lesen:{' '}
+                {extras.map((s, i) => (
+                  <span key={s.id}>{i > 0 ? ', ' : ''}<Link href={`/geschichten/${s.id}`}>{s.title}</Link></span>
+                ))}
+              </p>
+            )}
           </div>
         ) : (
           <>

@@ -181,6 +181,11 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['der Strand', 'Sand am Meer', 'beach'], ['die Berge (Pl.)', 'hoch, zum Wandern', 'mountains'], ['die Insel', 'Land im Wasser', 'island'],
       ['buchen', 'reservieren', 'to book'], ['der Norden', '⬆️ auf der Karte', 'north'], ['die Fähre', 'Schiff für Autos und Menschen', 'ferry'],
     ]),
+    match('w-extra-travel', [['der Urlaub', 'holiday'], ['das Hotel', 'hotel'], ['die Fahrkarte', 'ticket'], ['sonnig', 'sunny'], ['regnerisch', 'rainy'], ['buchen', 'to book']],
+      { task: 'Urlaub und Wetter', taskEn: 'Holiday and weather.' }),
+    gap('w-extra-gap', ['Wir fahren {{in}} den Urlaub.', 'Am {{Wochenende}} fahren wir los.', 'Man {{kann}} hier gut wandern.', 'Viele Grüße {{aus}} Hamburg!'],
+      { bank: ['in', 'Wochenende', 'kann', 'aus'], task: 'Reise und Postkarte', taskEn: 'Travel and postcard.' }),
+    mcq('w-extra-q1', 'Wetter: „Es ___.“ (Regen)', ['regnet', 'regnerisch', 'Regen'], 0),
     checklist('w-check', ['Ich kann über Urlaubspläne sprechen.', 'Ich kann das Wetter beschreiben.', 'Ich kann am Telefon ein Zimmer buchen.', 'Ich kann eine Postkarte schreiben.', 'Ich kenne man, wer/wen/wem und die Zeitangaben mit Dativ.']),
     text('w-end', 'Herzlichen Glückwunsch! Du hast alle zwölf Kapitel geschafft. Nach der Kapitelprüfung kommt die **Abschlussprüfung A1**. Sie ist wie die Prüfung *Start Deutsch 1*: Hören, Lesen, Schreiben und Sprechen. Viel Erfolg!', { kicker: 'Geschafft!', en: 'Congratulations, you finished all twelve chapters. After this chapter exam comes the A1 final exam, modeled on Start Deutsch 1. Good luck!' }),
   ]);

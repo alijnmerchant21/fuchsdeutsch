@@ -165,6 +165,11 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Erkältung', 'Schnupfen und Husten', 'cold'], ['der Arzt / die Ärztin', 'hilft Kranken', 'doctor'], ['die Apotheke', 'hier gibt es Medikamente', 'pharmacy'],
       ['das Rezept', 'Papier vom Arzt für Medikamente', 'prescription'], ['Gute Besserung!', 'Werd schnell gesund!', 'get well soon'], ['dürfen', 'erlaubt sein', 'may, be allowed'],
     ]),
+    match('w-extra-body', [['der Kopf', 'head'], ['der Bauch', 'stomach'], ['der Hals', 'throat'], ['das Fieber', 'fever'], ['die Apotheke', 'pharmacy'], ['weh tun', 'to hurt']],
+      { task: 'Körper und Gesundheit', taskEn: 'Body and health.' }),
+    gap('w-extra-gap', ['Mir tut der {{Kopf}} weh.', 'Ich habe {{Fieber}}.', 'Sie {{sollen}} viel trinken.', 'Hier {{dürfen}} Sie nicht rauchen.'],
+      { bank: ['Kopf', 'Fieber', 'sollen', 'dürfen'], task: 'Beim Arzt', taskEn: 'At the doctor.' }),
+    mcq('w-extra-q1', 'Imperativ (du): „___ bitte das Fenster auf!“', ['Mach', 'Macht', 'Machen'], 0),
     checklist('w-check', ['Ich kann Körperteile nennen.', 'Ich kann sagen, was mir wehtut.', 'Ich verstehe einfache Anweisungen beim Arzt.', 'Ich kann Tipps mit dem Imperativ geben.', 'Ich kenne sollen und dürfen.']),
   ]);
 

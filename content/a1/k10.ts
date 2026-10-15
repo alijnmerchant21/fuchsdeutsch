@@ -153,6 +153,11 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Prüfung', 'ein Test', 'exam'], ['bestehen', 'die Prüfung ist gut', 'to pass'], ['umziehen', 'neue Wohnung', 'to move'],
       ['geboren', 'der Anfang vom Leben', 'born'], ['zurückrufen', 'noch einmal anrufen', 'to call back'], ['die Mailbox', 'Nachricht am Telefon', 'voicemail'],
     ]),
+    match('w-extra-perf', [['gemacht', 'machen'], ['gegangen', 'gehen'], ['gekommen', 'kommen'], ['gesehen', 'sehen'], ['gesprochen', 'sprechen'], ['geschrieben', 'schreiben']],
+      { task: 'Partizip Perfekt', taskEn: 'Past participles.' }),
+    gap('w-extra-gap', ['Gestern habe ich Pizza {{gegessen}}.', 'Ich bin nach Hause {{gegangen}}.', 'Wir haben Deutsch {{gesprochen}}.', 'Sie ist spät {{gekommen}}.'] ,
+      { bank: ['gegessen', 'gegangen', 'gesprochen', 'gekommen'], task: 'Perfekt', taskEn: 'Present perfect.' }),
+    mcq('w-extra-q1', 'Welches Verb braucht meist **sein**?', ['machen', 'gehen', 'lesen'], 1),
     checklist('w-check', ['Ich kann sagen, was ich gestern gemacht habe.', 'Ich kenne das Perfekt mit haben und sein.', 'Ich kann über Schule und Beruf sprechen.', 'Ich kann eine Nachricht am Telefon verstehen.', 'Ich kann Jahreszahlen sagen.']),
   ]);
 

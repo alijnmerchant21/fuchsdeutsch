@@ -19,6 +19,7 @@ export function Nav() {
       <nav className="nav-links" aria-label="Hauptnavigation">
         {!isAdmin && link('/lernen', 'Lernen')}
         {link('/spiele', 'Spiele')}
+        {!isAdmin && link('/geschichten', 'Geschichten')}
         {!isAdmin && link('/bestenliste', 'Bestenliste')}
         {!isAdmin && link('/community', 'Community')}
         {isAdmin && link('/admin', 'Admin')}

@@ -180,6 +180,12 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['anfangen', 'beginnen', 'to start'], ['bestellen', 'im Café sagen, was man möchte', 'to order'], ['bezahlen', 'Geld geben', 'to pay'],
       ['das Trinkgeld', 'extra Geld für den Kellner', 'tip'], ['gestern', 'der Tag vor heute', 'yesterday'], ['war / hatte', 'Vergangenheit von sein / haben', 'was / had'],
     ]),
+    match('w-extra-party', [['einladen', 'to invite'], ['das Geschenk', 'present'], ['bestellen', 'to order'], ['bezahlen', 'to pay'], ['gestern', 'yesterday'], ['Alles Gute!', 'congratulations']],
+      { task: 'Party und Café', taskEn: 'Party and café.' }),
+    gap('w-extra-gap', ['Ich lade dich {{ein}}.', 'Wir fangen um acht Uhr {{an}}.', 'Ich möchte einen Kaffee {{bestellen}}.', 'Gestern {{war}} ich im Café.'],
+      { bank: ['ein', 'an', 'bestellen', 'war'], task: 'Trennbare Verben und gestern', taskEn: 'Separable verbs and yesterday.' }),
+    mcq('w-extra-q1', '„Kommst du zur Party?“ — Höfliche Absage:', ['Nein.', 'Leider kann ich nicht.', 'Tschüss!'], 1),
+    text('w-story-tip', 'Optional lesen: **Im Café**.', { kicker: 'Extra', en: 'Optional reading: “Im Café”.' }),
     checklist('w-check', ['Ich kann das Datum sagen.', 'Ich kann zu einer Party einladen und antworten.', 'Ich kann im Café bestellen und bezahlen.', 'Ich kenne trennbare Verben.', 'Ich kann mit war und hatte über gestern sprechen.']),
   ]);
 

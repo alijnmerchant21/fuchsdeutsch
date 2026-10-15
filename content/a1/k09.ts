@@ -165,6 +165,11 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Miete', 'Geld für die Wohnung', 'rent'], ['die Nebenkosten', 'Wasser, Heizung …', 'utilities'], ['hell', 'mit viel Licht', 'bright'],
       ['stehen / liegen / hängen', 'wo etwas ist', 'stand / lie / hang'], ['auf / unter', 'oben / unten', 'on / under'], ['neben', 'an der Seite', 'next to'],
     ]),
+    match('w-extra-home', [['das Wohnzimmer', 'living room'], ['die Küche', 'kitchen'], ['das Bad', 'bathroom'], ['der Schrank', 'cupboard/wardrobe'], ['das Sofa', 'sofa'], ['die Miete', 'rent']],
+      { task: 'Wohnung und Möbel', taskEn: 'Flat and furniture.' }),
+    gap('w-extra-gap', ['Das Buch {{liegt}} auf dem Tisch.', 'Der Schrank {{steht}} an der Wand.', 'Das Bild {{hängt}} über dem Sofa.', 'Ich gehe {{in}} die Küche.'],
+      { bank: ['liegt', 'steht', 'hängt', 'in'], task: 'Wo? und Wohin?', taskEn: 'Where? and Where to?' }),
+    mcq('w-extra-q1', '„Wo ist die Lampe?“ — Richtige Antwort:', ['In die Küche.', 'In der Küche.', 'Zur Küche.'], 1),
     checklist('w-check', ['Ich kann Zimmer und Möbel nennen.', 'Ich kann meine Wohnung beschreiben.', 'Ich verstehe Wohnungsanzeigen.', 'Ich kann sagen, wo etwas steht, liegt oder hängt.', 'Ich kenne den Unterschied zwischen Wo? und Wohin?']),
   ]);
 

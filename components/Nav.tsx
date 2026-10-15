@@ -23,7 +23,6 @@ export function Nav() {
           <nav className="v3-navlinks" aria-label="Hauptnavigation">
             {!isAdmin && link('/lernen', 'Start')}
             {!isAdmin && link('/kurs', 'Mein Kurs')}
-            {link('/spiele', 'Spiele')}
             {!isAdmin && link('/geschichten', 'Geschichten')}
             {!isAdmin && link('/bestenliste', 'Bestenliste')}
             {isAdmin && link('/admin', 'Admin')}

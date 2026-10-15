@@ -6,6 +6,20 @@ Format: newest first. Branch commits: `fdd45e2` → `b308c64` → `9160179` → 
 
 ---
 
+## 2026-10-15 — Closed beta, privacy page, English hints, games removed
+
+- Homepage is a two-step closed-beta sign-up: email and consent, then the same welcome questions new learners answer. "Free during the beta", deposit struck out.
+- The answers are stored with the sign-up (`beta_signups.profile`). When an approved tester logs in, they are applied to the account, so the welcome form is never asked twice.
+- Only approved emails (and admins) can use the course. Others see "You’re on the list". Existing accounts are approved automatically.
+- `supabase/006_beta.sql`: `beta_signups` table, `beta_signup()`, `beta_profile()`, `beta_access()`, `my_beta_profile()`. Until it is run, the site stays open.
+- Admin page: Beta-Warteliste with Freigeben / zurücknehmen and "copy approved emails".
+- Site-wide footer with Privacy and Contact. English privacy page at `/privacy`. No Impressum for now.
+- A1 to B1: every German instruction shows an English line (tasks, exercise feedback, lesson player, exams). Missing translations live in `content/taskEn.ts`, and `npm run check` fails if one is missing.
+- Welcome questions moved into `components/ProfileForm.tsx` (used by `/willkommen` and the homepage).
+- Games page and game links removed (game data kept in `content/` for later). Leaderboard ranks by XP only.
+
+---
+
 ## 2026-10-15 — Step-by-step lesson flow (v3 UI)
 
 ### Lessons

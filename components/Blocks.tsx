@@ -8,6 +8,7 @@ import { useStore } from '@/lib/store';
 import { norm, shuffle, sparkle } from '@/lib/fx';
 import { speakWord } from '@/lib/audio';
 import { AudioPlayer } from './AudioPlayer';
+import { De, useHints } from './Hint';
 import { Inline, Rich, Task } from './Rich';
 
 /**
@@ -122,10 +123,10 @@ export function Gap({ b, exam, reveal, onScore }: ExProps<GapBlock>) {
       </ol>
       {!exam && (
         <div className="ex-actions">
-          {!(checked && allRight) && <button type="button" className="btn btn-sm" onClick={check} disabled={vals.every((v) => !v)}>Prüfen</button>}
-          {checked && !allRight && <span className="hint-msg">Fast! Schau dir die roten Felder noch einmal an.</span>}
-          {checked && allRight && <span className="ok-msg">{shown ? 'Das ist die Lösung. Lies die Sätze noch einmal laut.' : 'Richtig!'}</span>}
-          {tries >= 2 && !allRight && <button type="button" className="link-btn" onClick={solve}>Lösung zeigen</button>}
+          {!(checked && allRight) && <button type="button" className="btn btn-sm" onClick={check} disabled={vals.every((v) => !v)}><De en="Check" inline>Prüfen</De></button>}
+          {checked && !allRight && <span className="hint-msg"><De en="Almost! Look at the red fields again.">Fast! Schau dir die roten Felder noch einmal an.</De></span>}
+          {checked && allRight && <span className="ok-msg">{shown ? <De en="This is the answer. Read the sentences aloud once more.">Das ist die Lösung. Lies die Sätze noch einmal laut.</De> : <De en="Correct!" inline>Richtig!</De>}</span>}
+          {tries >= 2 && !allRight && <button type="button" className="link-btn" onClick={solve}><De en="Show answer" inline>Lösung zeigen</De></button>}
         </div>
       )}
     </div>
@@ -164,8 +165,8 @@ export function Match({ b, onScore }: ExProps<MatchBlock>) {
           ))}
         </div>
       </div>
-      {left === null && done.length < b.pairs.length && <p className="muted small">Tippe zuerst links, dann rechts.</p>}
-      {done.length === b.pairs.length && <p className="ok-msg">Alle Paare gefunden!</p>}
+      {left === null && done.length < b.pairs.length && <p className="muted small"><De en="Tap left first, then right.">Tippe zuerst links, dann rechts.</De></p>}
+      {done.length === b.pairs.length && <p className="ok-msg"><De en="All pairs found!" inline>Alle Paare gefunden!</De></p>}
     </div>
   );
 }
@@ -184,7 +185,7 @@ export function Order({ b, exam, reveal, onScore }: ExProps<OrderBlock>) {
   return (
     <div className="ex">
       <div className={`order-line is-${shownState}`} aria-label="Dein Satz">
-        {line.length === 0 && <span className="muted">Tippe auf die Wörter …</span>}
+        {line.length === 0 && <span className="muted"><De en="Tap the words …" inline>Tippe auf die Wörter …</De></span>}
         {line.map((i) => <button key={i} type="button" className="chip chip-in" disabled={locked} onClick={() => change(line.filter((x) => x !== i))}>{b.words[i]}</button>)}
       </div>
       <div className="bank">
@@ -192,12 +193,12 @@ export function Order({ b, exam, reveal, onScore }: ExProps<OrderBlock>) {
           <button key={i} type="button" className={`chip ${line.includes(i) ? 'is-used' : ''}`} disabled={locked || line.includes(i)} onClick={() => change([...line, i])}>{w}</button>
         ))}
       </div>
-      {reveal && !isRight(line) && <p className="why">Richtig: {b.answers[0]}</p>}
+      {reveal && !isRight(line) && <p className="why"><De en="Correct answer" inline>Richtig</De>: {b.answers[0]}</p>}
       {!exam && (
         <div className="ex-actions">
-          {state !== 'right' && <button type="button" className="btn btn-sm" disabled={line.length !== b.words.length} onClick={check}>Prüfen</button>}
-          {state === 'wrong' && <span className="hint-msg">Noch nicht. {b.hint ? `Tipp: ${b.hint}` : 'Wo steht das Verb?'}</span>}
-          {state === 'right' && <span className="ok-msg">Richtig!</span>}
+          {state !== 'right' && <button type="button" className="btn btn-sm" disabled={line.length !== b.words.length} onClick={check}><De en="Check" inline>Prüfen</De></button>}
+          {state === 'wrong' && <span className="hint-msg"><De en={b.hint ? 'Not yet. See the tip.' : 'Not yet. Where does the verb go?'}>Noch nicht. {b.hint ? `Tipp: ${b.hint}` : 'Wo steht das Verb?'}</De></span>}
+          {state === 'right' && <span className="ok-msg"><De en="Correct!" inline>Richtig!</De></span>}
         </div>
       )}
     </div>
@@ -224,7 +225,7 @@ export function Sort({ b, onScore }: ExProps<SortBlock>) {
         {left.map((it) => (
           <button key={it.i} type="button" aria-pressed={sel === it.i} className={`chip ${sel === it.i ? 'is-picked' : ''}`} onClick={() => setSel(sel === it.i ? null : it.i)}>{it.text}</button>
         ))}
-        {left.length === 0 && <span className="ok-msg">Alles sortiert!</span>}
+        {left.length === 0 && <span className="ok-msg"><De en="All sorted!" inline>Alles sortiert!</De></span>}
       </div>
       <div className="buckets" style={{ gridTemplateColumns: `repeat(${b.cats.length}, minmax(0, 1fr))` }}>
         {b.cats.map((c, ci) => (
@@ -236,7 +237,7 @@ export function Sort({ b, onScore }: ExProps<SortBlock>) {
           </button>
         ))}
       </div>
-      {sel === null && left.length > 0 && <p className="muted small">Tippe auf eine Karte, dann auf die passende Gruppe.</p>}
+      {sel === null && left.length > 0 && <p className="muted small"><De en="Tap a card, then the group it belongs to.">Tippe auf eine Karte, dann auf die passende Gruppe.</De></p>}
     </div>
   );
 }
@@ -254,14 +255,14 @@ export function Write({ b, onScore }: ExProps<WriteBlock>) {
       <textarea className="write" rows={6} value={text} disabled={done} onChange={(e) => setText(e.target.value)} placeholder="Schreib hier …" aria-label="Dein Text" />
       <div className="ex-actions">
         <span className="meter" aria-hidden><i style={{ width: `${pct}%` }} /></span>
-        <span className="muted small">{words} / {b.minWords} Wörter</span>
-        {!done && <button type="button" className="btn btn-sm" disabled={words < b.minWords} onClick={() => { setDone(true); onScore(1); }}>Fertig</button>}
+        <span className="muted small">{words} / {b.minWords} <De en="words" inline>Wörter</De></span>
+        {!done && <button type="button" className="btn btn-sm" disabled={words < b.minWords} onClick={() => { setDone(true); onScore(1); }}><De en="Done" inline>Fertig</De></button>}
       </div>
       {done && (
         <div className="sample">
-          <p className="sample-label">Beispieltext zum Vergleichen</p>
+          <p className="sample-label"><De en="Sample text to compare">Beispieltext zum Vergleichen</De></p>
           <p>{b.sample}</p>
-          <p className="muted small">Vergleiche: Hast du ähnliche Zeitformen und Satzanfänge benutzt?</p>
+          <p className="muted small"><De en="Compare: did you use similar tenses and sentence starts?">Vergleiche: Hast du ähnliche Zeitformen und Satzanfänge benutzt?</De></p>
         </div>
       )}
     </div>
@@ -270,7 +271,7 @@ export function Write({ b, onScore }: ExProps<WriteBlock>) {
 
 /* ---------- Guided writing: build a text sentence by sentence ---------- */
 export function Compose({ b, onScore }: ExProps<ComposeBlock>) {
-  const { progress } = useStore();
+  const hints = useHints();
   const [step, setStep] = useState(0);
   const [line, setLine] = useState<number[]>([]);
   const [fails, setFails] = useState(0);
@@ -295,18 +296,18 @@ export function Compose({ b, onScore }: ExProps<ComposeBlock>) {
     <div className="ex">
       <Rich text={b.prompt} className="ex-q" />
       <div className="compose-text" aria-label="Dein Text">
-        {text ? <p>{text}</p> : <p className="muted">Dein Text entsteht hier, Satz für Satz.</p>}
+        {text ? <p>{text}</p> : <p className="muted"><De en="Your text appears here, sentence by sentence.">Dein Text entsteht hier, Satz für Satz.</De></p>}
       </div>
       {finished ? (
         <div className="ex-actions">
-          <span className="ok-msg">Fertig! Lies deinen Text einmal laut.</span>
+          <span className="ok-msg"><De en="Done! Read your text aloud once.">Fertig! Lies deinen Text einmal laut.</De></span>
           <button type="button" className="chip-btn" onClick={() => speakWord(text)}>🔊 Anhören</button>
         </div>
       ) : (
         <>
-          <p className="compose-say"><b>Satz {step + 1} von {b.steps.length}:</b> {cur.say}{progress.mode === 'easy' && cur.sayEn && <span className="en">{cur.sayEn}</span>}</p>
+          <p className="compose-say"><b>Satz {step + 1} von {b.steps.length}:</b> {cur.say}{hints && cur.sayEn && <span className="en">{cur.sayEn}</span>}</p>
           <div className={`order-line ${bad ? 'is-wrong shake' : ''}`}>
-            {line.length === 0 && <span className="muted">Tippe die Wörter in der richtigen Reihenfolge an.</span>}
+            {line.length === 0 && <span className="muted"><De en="Tap the words in the right order.">Tippe die Wörter in der richtigen Reihenfolge an.</De></span>}
             {line.map((i) => <button key={i} type="button" className="chip chip-in" onClick={() => setLine(line.filter((x) => x !== i))}>{cur.words[i]}</button>)}
           </div>
           <div className="bank" key={step}>
@@ -435,11 +436,11 @@ export function BlockView({ b, exam, reveal, onScore }: { b: Block; exam?: boole
       );
       case 'overview': return (
         <div className="overview">
-          <p className="kicker">Darum geht es</p>
+          <p className="kicker"><De en="What this is about" inline>Darum geht es</De></p>
           <h3>{b.title}</h3>
           <Rich text={b.body} />
           <EnNote text={b.en} />
-          <p className="overview-label">Nach diesem Kapitel kannst du</p>
+          <p className="overview-label"><De en="After this chapter you can" inline>Nach diesem Kapitel kannst du</De></p>
           <ul className="goals">{b.learn.map((l) => <li key={l}>{l}</li>)}</ul>
         </div>
       );

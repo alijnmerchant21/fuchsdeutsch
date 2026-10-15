@@ -7,6 +7,7 @@ import { RequireUser } from '@/components/Guard';
 import { findChapter } from '@/content/course';
 import { glossaryFor } from '@/content/glossary';
 import { GlossaryContext } from '@/components/Rich';
+import { De, HintProvider } from '@/components/Hint';
 import { useStore } from '@/lib/store';
 import { chapterOpen, examOpen } from '@/lib/unlock';
 
@@ -25,17 +26,19 @@ function Exam() {
   const nextCh = course.chapters[ci + 1];
   return (
     <GlossaryContext.Provider value={glossaryFor(course.id)}>
+    <HintProvider course={course.id}>
     <main className="page lesson t-lilac">
       <ExamRunner
         items={ch.exam}
         title={`${course.level}, Prüfung Kapitel ${ch.number}: ${ch.title}`}
-        intro="Grammatik, Lesen, Hören und Redemittel aus diesem Kapitel. Nimm dir etwa 20 Minuten Zeit."
+        intro={<De en="Grammar, reading, listening and phrases from this chapter. Take about 20 minutes.">Grammatik, Lesen, Hören und Redemittel aus diesem Kapitel. Nimm dir etwa 20 Minuten Zeit.</De>}
         onFinish={(pct) => recordExam(ch.id, pct)}
-        backHref="/lernen"
+        backHref="/kurs"
         passHref={nextCh ? '/kurs' : `/pruefung/${course.id}`}
         passLabel={nextCh ? `Kapitel ${nextCh.number} ist jetzt offen` : 'Zur Abschlussprüfung'}
       />
     </main>
+    </HintProvider>
     </GlossaryContext.Provider>
   );
 }

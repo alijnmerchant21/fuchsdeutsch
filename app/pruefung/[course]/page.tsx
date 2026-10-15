@@ -8,6 +8,7 @@ import { useParams } from 'next/navigation';
 import { courseById } from '@/content/course';
 import { glossaryFor } from '@/content/glossary';
 import { GlossaryContext } from '@/components/Rich';
+import { De, HintProvider } from '@/components/Hint';
 import type { ExamItem } from '@/content/types';
 import { PASS_MARK } from '@/lib/config';
 import { party } from '@/lib/fx';
@@ -61,14 +62,15 @@ function Final() {
 
   return (
     <GlossaryContext.Provider value={glossaryFor(course.id)}>
+    <HintProvider course={course.id}>
     <main className="page lesson t-peach">
       <header className="lesson-head">
         <p className="lesson-label">{course.title}</p>
         <h1>Abschlussprüfung {course.level}</h1>
         <ul className="goals">
-          <li>Im Format: {course.examName}. Vier Module, jedes Modul hat 100 Punkte.</li>
-          <li>Bestanden, wenn du in jedem Modul mindestens {PASS_MARK} Punkte hast.</li>
-          <li>Die Prüfung umfasst den Stoff aller {course.chapters.length} Kapitel. Alle Aufgaben werden automatisch ausgewertet.</li>
+          <li><De en={`Format: ${course.examName}. Four modules, 100 points each.`}>Im Format: {course.examName}. Vier Module, jedes Modul hat 100 Punkte.</De></li>
+          <li><De en={`You pass with at least ${PASS_MARK} points in every module.`}>Bestanden, wenn du in jedem Modul mindestens {PASS_MARK} Punkte hast.</De></li>
+          <li><De en={`Covers all ${course.chapters.length} chapters. Everything is marked automatically.`}>Die Prüfung umfasst den Stoff aller {course.chapters.length} Kapitel. Alle Aufgaben werden automatisch ausgewertet.</De></li>
         </ul>
       </header>
 
@@ -76,9 +78,9 @@ function Final() {
         <div className={`result card pop ${allPass ? 't-mint' : 't-rose'}`} role="status">
           <Fox size={96} mood={allPass ? 'proud' : 'sleepy'} />
           <div>
-            <h2>{allPass ? 'Bestanden! Herzlichen Glückwunsch.' : 'Noch nicht bestanden'}</h2>
+            <h2>{allPass ? <De en="Passed! Congratulations." inline>Bestanden! Herzlichen Glückwunsch.</De> : <De en="Not passed yet" inline>Noch nicht bestanden</De>}</h2>
             <ul className="result-mods">{modules.map((m) => <li key={m.id} className={pct[m.id] >= PASS_MARK ? 'ok' : 'no'}>{m.name}: <b>{pct[m.id]}</b> / 100</li>)}</ul>
-            <Link href="/lernen" className="btn">Zur Kursübersicht</Link>
+            <Link href="/kurs" className="btn"><De en="Course overview" inline>Zur Kursübersicht</De></Link>
           </div>
         </div>
       )}
@@ -98,11 +100,12 @@ function Final() {
 
       {!done && (
         <footer className="lesson-end">
-          <p className="muted">Bearbeite alle vier Module. Gib erst dann ab.</p>
-          <button type="button" className="btn btn-lg" onClick={submit}>Prüfung abgeben</button>
+          <p className="muted"><De en="Do all four modules, then hand in.">Bearbeite alle vier Module. Gib erst dann ab.</De></p>
+          <button type="button" className="btn btn-lg" onClick={submit}><De en="Hand in" inline>Prüfung abgeben</De></button>
         </footer>
       )}
     </main>
+    </HintProvider>
     </GlossaryContext.Provider>
   );
 }

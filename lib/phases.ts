@@ -68,6 +68,14 @@ export const KIND_LABEL: Record<StepKind, string> = {
   practice: 'Üben',
 };
 
+export const KIND_EN: Record<StepKind, string> = {
+  intro: 'Intro',
+  read: 'Read',
+  listen: 'Listen',
+  rule: 'Rule',
+  practice: 'Practice',
+};
+
 /** Short line under each step in the rail and in the preview. */
 export function stepHint(s: Step): string {
   const n = s.items.filter(isExercise).length;

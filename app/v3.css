@@ -201,3 +201,45 @@ a.v3-secrow:hover b { text-decoration: underline; }
 .v3-next b { font-size: 1.1rem; }
 .v3-goals { margin: 8px 0 0; padding-left: 1.1em; }
 .v3-goals li { margin: 3px 0; font-weight: 600; }
+
+/* ---------- beta sign-up ---------- */
+.v3-beta { max-width: 620px; margin: 0 auto; padding: 26px; display: flex; flex-direction: column; gap: 14px; text-align: left; scroll-margin-top: 90px; }
+.v3-beta h2 { font-size: 1.5rem; font-weight: 800; margin: 10px 0 4px; }
+.v3-beta p { margin: 0; }
+.v3-beta label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 0.95rem; }
+.v3-beta input, .v3-beta select, .v3-beta textarea { font: inherit; font-weight: 400; padding: 11px 12px; border: 1px solid #d6d6da; border-radius: 10px; background: #fff; min-height: 46px; }
+.v3-beta input:focus, .v3-beta select:focus, .v3-beta textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+.v3-beta textarea { resize: vertical; min-height: 64px; }
+.v3-beta-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.v3-beta .v3-check { flex-direction: row; align-items: flex-start; gap: 10px; font-weight: 400; font-size: 0.9rem; color: var(--ink-2); }
+.v3-beta .v3-check input { min-height: 0; width: 20px; height: 20px; margin-top: 1px; flex: none; accent-color: var(--ink); }
+.v3-beta .v3-btn { width: 100%; }
+.v3-beta[role='status'] { align-items: center; text-align: center; }
+.v3-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.v3-err { background: #fde7da; border-radius: 10px; padding: 10px 12px; font-size: 0.92rem; }
+.v3-strike { color: var(--ink-2); font-weight: 600; margin-right: 6px; }
+
+/* ---------- footer and legal pages ---------- */
+.v3-footer { border-top: 1px solid var(--line); background: #fff; margin-top: 40px; }
+.v3-footer-in { max-width: 1180px; margin: 0 auto; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; font-size: 0.9rem; color: var(--ink-2); }
+.v3-footer-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.v3-footer-links a { color: var(--ink-2); text-decoration: none; font-weight: 600; padding: 8px 0; }
+.v3-footer-links a:hover { color: var(--ink); text-decoration: underline; }
+.v3-legal { max-width: 760px; }
+.v3-legal h1 { margin-bottom: 6px; }
+.v3-legal h2 { font-size: 1.1rem; font-weight: 800; margin: 26px 0 6px; }
+.v3-legal p, .v3-legal li { line-height: 1.6; color: #2c2e33; }
+.v3-legal ul { padding-left: 1.2em; }
+.v3-legal-en { background: var(--sky); border-radius: 12px; padding: 12px 14px; }
+
+/* ---------- English hints (A1 to B1) ---------- */
+.v3-de { display: inline-flex; flex-direction: column; gap: 1px; }
+.v3-en-sub { display: inline; font-size: 0.8em; font-weight: 500; color: var(--ink-2); font-style: normal; }
+.v3-de > .v3-en-sub { display: block; margin-top: 1px; }
+.v3-btn .v3-en-sub, .btn .v3-en-sub { color: inherit; opacity: 0.75; }
+.v3-btn-en { display: block; font-size: 0.75em; font-weight: 500; opacity: 0.75; }
+.v3-btn:has(.v3-btn-en) { flex-direction: column; gap: 0; line-height: 1.2; }
+.v3-rail-en { font-weight: 500; color: var(--ink-3); }
+.v3-beta-profile { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 90px; }
+.v3-beta-step h2 { font-size: 1.5rem; font-weight: 800; margin: 10px 0 4px; }
+.v3-beta-step p { margin: 0; }

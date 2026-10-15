@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { RequireUser } from '@/components/Guard';
 import { Crumbs, EnSwitch } from '@/components/Player';
 import { courseById, courses } from '@/content/course';
-import { games } from '@/content/games';
 import type { Chapter } from '@/content/types';
 import { PASS_MARK } from '@/lib/config';
 import { currentChapterIndex } from '@/lib/next';
@@ -30,7 +29,6 @@ function CoursePage() {
 
   const done = course.chapters.map((c, i) => ({ c, i })).filter(({ c, i }) => i !== focus && progress.exams[c.id]?.passed);
   const later = course.chapters.map((c, i) => ({ c, i })).filter(({ c, i }) => i !== focus && !progress.exams[c.id]?.passed);
-  const chGames = games.filter((g) => ch.games.includes(g.id));
 
   const cta = (() => {
     if (nextSi >= 0) {
@@ -121,14 +119,6 @@ function CoursePage() {
             )}
           </div>
 
-          {chGames.length > 0 && (
-            <div className="v3-games">
-              <span className="v3-eyebrow">Spiele zu Kapitel {ch.number}</span>
-              <div className="v3-row">
-                {chGames.map((g) => <Link key={g.id} href={`/spiele/${g.id}`} className={`v3-game t-${g.tone}`}>{g.title}</Link>)}
-              </div>
-            </div>
-          )}
         </section>
 
         {done.length > 0 && (

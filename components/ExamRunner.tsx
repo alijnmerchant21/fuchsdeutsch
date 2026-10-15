@@ -1,4 +1,5 @@
 'use client';
+import { De } from './Hint';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { ExamItem } from '@/content/types';
@@ -9,7 +10,7 @@ import { Fox } from './Fox';
 
 /** Runs a list of exam questions: no feedback while answering, full review after handing in. */
 export function ExamRunner({ items, title, intro, onFinish, backHref, passHref, passLabel }: {
-  items: ExamItem[]; title: string; intro: string; onFinish: (percent: number) => void;
+  items: ExamItem[]; title: string; intro: React.ReactNode; onFinish: (percent: number) => void;
   backHref: string; passHref?: string; passLabel?: string;
 }) {
   const [started, setStarted] = useState(false);
@@ -36,12 +37,12 @@ export function ExamRunner({ items, title, intro, onFinish, backHref, passHref, 
         <h1>{title}</h1>
         <p className="lead">{intro}</p>
         <ul className="goals">
-          <li>{items.length} Aufgaben, {total} Punkte</li>
-          <li>Bestanden ab {PASS_MARK} Prozent</li>
-          <li>Während der Prüfung gibt es kein Feedback. Die Auswertung kommt am Ende.</li>
-          <li>Du kannst die Prüfung wiederholen.</li>
+          <li><De en={`${items.length} tasks, ${total} points`}>{items.length} Aufgaben, {total} Punkte</De></li>
+          <li><De en={`Pass mark: ${PASS_MARK} percent`}>Bestanden ab {PASS_MARK} Prozent</De></li>
+          <li><De en="No feedback during the exam. You see your results at the end.">Während der Prüfung gibt es kein Feedback. Die Auswertung kommt am Ende.</De></li>
+          <li><De en="You can retake the exam.">Du kannst die Prüfung wiederholen.</De></li>
         </ul>
-        <button type="button" className="btn btn-lg" onClick={() => setStarted(true)}>Prüfung starten</button>
+        <button type="button" className="btn btn-lg" onClick={() => setStarted(true)}><De en="Start exam" inline>Prüfung starten</De></button>
       </div>
     );
   }
@@ -53,13 +54,13 @@ export function ExamRunner({ items, title, intro, onFinish, backHref, passHref, 
         <div className={`result card pop ${passed ? 't-mint' : 't-rose'}`} role="status">
           <Fox size={96} mood={passed ? 'proud' : 'sleepy'} />
           <div>
-            <h2>{passed ? 'Bestanden!' : 'Noch nicht bestanden'}</h2>
+            <h2>{passed ? <De en="Passed!" inline>Bestanden!</De> : <De en="Not passed yet" inline>Noch nicht bestanden</De>}</h2>
             <p className="result-pct">{result}%</p>
-            <p>{passed ? 'Stark. Unten siehst du alle Antworten.' : `Du brauchst ${PASS_MARK}%. Schau dir unten die Lösungen an und versuch es noch einmal.`}</p>
+            <p>{passed ? <De en="Great. All answers are shown below.">Stark. Unten siehst du alle Antworten.</De> : <De en={`You need ${PASS_MARK}%. Look at the answers below and try again.`}>{`Du brauchst ${PASS_MARK}%. Schau dir unten die Lösungen an und versuch es noch einmal.`}</De>}</p>
             <div className="hero-cta">
               {passed && passHref && <Link href={passHref} className="btn">{passLabel}</Link>}
-              <button type="button" className={`btn ${passed ? 'btn-ghost' : ''}`} onClick={retry}>Noch einmal versuchen</button>
-              <Link href={backHref} className="btn btn-ghost">Zur Kursübersicht</Link>
+              <button type="button" className={`btn ${passed ? 'btn-ghost' : ''}`} onClick={retry}><De en="Try again" inline>Noch einmal versuchen</De></button>
+              <Link href={backHref} className="btn btn-ghost"><De en="Course overview" inline>Zur Kursübersicht</De></Link>
             </div>
           </div>
         </div>
@@ -74,7 +75,7 @@ export function ExamRunner({ items, title, intro, onFinish, backHref, passHref, 
         {items.map((it, i) => (
           <li key={it.q.id} className="exam-item">
             {it.stimulus && <BlockView b={it.stimulus} />}
-            <p className="exam-num">Aufgabe {i + 1} <span className="muted">({it.points} {it.points === 1 ? 'Punkt' : 'Punkte'})</span></p>
+            <p className="exam-num"><De en={`Task ${i + 1}`} inline>Aufgabe {i + 1}</De> <span className="muted">({it.points} {it.points === 1 ? 'Punkt' : 'Punkte'})</span></p>
             <BlockView b={it.q} exam reveal={result !== null}
               onScore={(id, s) => { setScores((x) => ({ ...x, [id]: s })); setTouched((x) => ({ ...x, [id]: true })); }} />
           </li>
@@ -82,8 +83,8 @@ export function ExamRunner({ items, title, intro, onFinish, backHref, passHref, 
       </ol>
       {result === null && (
         <footer className="lesson-end">
-          {answered < items.length && <p className="muted">{items.length - answered} Aufgaben sind noch offen. Du kannst trotzdem abgeben.</p>}
-          <button type="button" className="btn btn-lg" onClick={submit}>Prüfung abgeben</button>
+          {answered < items.length && <p className="muted"><De en={`${items.length - answered} tasks are still open. You can hand in anyway.`}>{items.length - answered} Aufgaben sind noch offen. Du kannst trotzdem abgeben.</De></p>}
+          <button type="button" className="btn btn-lg" onClick={submit}><De en="Hand in" inline>Prüfung abgeben</De></button>
         </footer>
       )}
     </div>

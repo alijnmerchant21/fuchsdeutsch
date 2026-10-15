@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
-import { courseById } from '@/content/course';
-import { games } from '@/content/games';
 import { DEMO_MODE } from '@/lib/config';
 import { useStore } from '@/lib/store';
 import { supabase } from '@/lib/supabase';
@@ -13,7 +11,7 @@ interface Row { player: string; score: number; streak_days: number; is_me: boole
 
 function Board() {
   const { user, progress } = useStore();
-  const [tab, setTab] = useState<string>('xp');
+  const tab: string = 'xp';
   const [rows, setRows] = useState<Row[] | null>(null);
   const [error, setError] = useState(false);
 
@@ -42,29 +40,14 @@ function Board() {
         <Fox size={84} mood="proud" />
         <div>
           <h1>Bestenliste</h1>
-          <p className="lead">Wer lernt am fleißigsten? Punkte gibt es für Abschnitte, Prüfungen und Spiele.</p>
+          <p className="lead">Wer lernt am fleißigsten? Punkte gibt es für Abschnitte und Prüfungen.</p>
         </div>
       </header>
-      <div className="board-pick">
-        <button type="button" className="choice" aria-pressed={tab === 'xp'} onClick={() => setTab('xp')}>Gesamt (XP)</button>
-        <label className="sr-only" htmlFor="board-game">Spiel wählen</label>
-        <select id="board-game" value={tab === 'xp' ? '' : tab} onChange={(e) => setTab(e.target.value || 'xp')}>
-          <option value="">Rangliste für ein Spiel …</option>
-          {[...new Set(games.map((g) => `${g.course || 'b2-1'}|${g.chapter}`))].map((k) => {
-            const [c, n] = k.split('|');
-            return (
-              <optgroup key={k} label={`${courseById(c)?.level ?? c}, Kapitel ${n}`}>
-                {games.filter((g) => (g.course || 'b2-1') === c && g.chapter === Number(n)).map((g) => <option key={g.id} value={g.id}>{g.title}</option>)}
-              </optgroup>
-            );
-          })}
-        </select>
-      </div>
       <div className="card board">
         {rows === null && <p className="muted pad-s">Lade …</p>}
         {error && <p className="muted pad-s">Die Bestenliste ist noch nicht eingerichtet. Führe in Supabase die Datei supabase/002_profile_leaderboard.sql aus.</p>}
         {rows && !error && rows.length === 0 && (
-          <p className="muted pad-s">Noch keine Einträge. {tab === 'xp' ? <Link href="/lernen">Starte den ersten Abschnitt</Link> : <Link href={`/spiele/${tab}`}>Spiel die erste Runde</Link>} und steh ganz oben.</p>
+          <p className="muted pad-s">Noch keine Einträge. {tab === 'xp' ? <Link href="/lernen">Starte den ersten Abschnitt</Link> : null} und steh ganz oben.</p>
         )}
         {rows && rows.length > 0 && (
           <ol className="board-list">

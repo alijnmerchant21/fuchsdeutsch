@@ -7,8 +7,9 @@ import type { Chapter, Course, Section } from '@/content/types';
 import { isExercise } from '@/content/types';
 import { storiesAfterChapter } from '@/content/stories';
 import { party } from '@/lib/fx';
-import { buildSteps, KIND_LABEL, leadInstruction, stepHint, type Step } from '@/lib/phases';
+import { buildSteps, KIND_EN, KIND_LABEL, leadInstruction, stepHint, type Step } from '@/lib/phases';
 import { useStore } from '@/lib/store';
+import { De, useForcedHints, useHints } from './Hint';
 import { sectionKey } from '@/lib/unlock';
 
 type Screen = { si: number; kind: 'lead' } | { si: number; kind: 'item'; b: Step['items'][number]; n: number; of: number };
@@ -51,7 +52,8 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
   const screens = useMemo(() => flatten(steps), [steps]);
   const key = sectionKey(ch.id, sec.id);
   const wasDone = !!progress.done[key];
-  const easy = progress.mode === 'easy';
+  const easy = useHints();
+  const forced = useForcedHints();
 
   const [pos, setPos] = useState(0);
   const [solved, setSolved] = useState<Record<string, boolean>>({});
@@ -78,12 +80,14 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
     return wasDone || isAdmin || !!solved[scr.b.id];
   })();
 
-  const upNext = (() => {
-    if (last) return wasDone ? (nextSec ? `Als Nächstes: ${nextSec.label}` : 'Als Nächstes: Kapitelprüfung') : 'Als Nächstes: Abschnitt abschließen';
+  const upNext = ((): { de: string; en: string } => {
+    if (last) return wasDone
+      ? (nextSec ? { de: `Als Nächstes: ${nextSec.label}`, en: `Next: ${nextSec.label}` } : { de: 'Als Nächstes: Kapitelprüfung', en: 'Next: chapter exam' })
+      : { de: 'Als Nächstes: Abschnitt abschließen', en: 'Next: finish the section' };
     const nx = screens[pos + 1];
-    if (nx.si === scr!.si && nx.kind === 'item') return `Als Nächstes: Aufgabe ${nx.n + 1} von ${nx.of}`;
+    if (nx.si === scr!.si && nx.kind === 'item') return { de: `Als Nächstes: Aufgabe ${nx.n + 1} von ${nx.of}`, en: `Next: task ${nx.n + 1} of ${nx.of}` };
     const st = steps[nx.si];
-    return `Als Nächstes: ${KIND_LABEL[st.kind]} · ${st.title}`;
+    return { de: `Als Nächstes: ${KIND_LABEL[st.kind]} · ${st.title}`, en: `Next: ${KIND_EN[st.kind]}` };
   })();
 
   const go = () => {
@@ -94,6 +98,10 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
     window.scrollTo({ top: 0 });
   };
 
+  const EN: Record<string, string> = {
+    'Fertig': 'Done', 'Abschnitt abschließen': 'Finish section', 'Weiter': 'Next', 'Verstanden': 'Got it',
+    'Ich habe zugehört': 'I listened', 'Los geht’s': 'Let’s go', 'Ich habe den Text gelesen': 'I read the text',
+  };
   const goLabel = (() => {
     if (last) return wasDone ? 'Fertig' : 'Abschnitt abschließen';
     if (scr?.kind === 'lead') {
@@ -110,17 +118,17 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
         <Crumbs parts={[['Start', '/lernen'], [course.title, '/kurs'], [`Kapitel ${ch.number}`, '/kurs'], [sec.label]]} />
         <section className="v3-card v3-done">
           <div className="v3-done-fox"><Fox size={96} mood="proud" className="bob" /></div>
-          <h1>{sec.label} geschafft!</h1>
+          <h1><De en="Section done!">{sec.label} geschafft!</De></h1>
           <div className="v3-chips">
             {!isAdmin && <span className="v3-chip t-lilac">{wasDone ? 'Wiederholt' : `+${xp} XP`}</span>}
             {exercises.length > 0 && <span className="v3-chip t-mint">{exercises.length} Aufgaben gelöst</span>}
           </div>
           <div className="v3-box">
-            <p className="v3-eyebrow">Das kannst du jetzt</p>
+            <p className="v3-eyebrow"><De en="What you can do now" inline>Das kannst du jetzt</De></p>
             <ul className="v3-goals">{sec.goals.map((g) => <li key={g}>{g}</li>)}</ul>
           </div>
           <div className="v3-box t-peach v3-next">
-            <p className="v3-eyebrow">Als Nächstes</p>
+            <p className="v3-eyebrow"><De en="Next" inline>Als Nächstes</De></p>
             <b>{nextSec ? `${nextSec.label} · ${nextSec.title}` : `Kapitelprüfung · Kapitel ${ch.number}`}</b>
             <span className="muted">{nextSec ? `ca. ${nextSec.minutes} Min` : 'Bestehen ab 60 %'}</span>
           </div>
@@ -128,8 +136,8 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
             <p className="muted small">Optional lesen: {extras.map((s, i) => <span key={s.id}>{i > 0 ? ', ' : ''}<Link href={`/geschichten/${s.id}`}>{s.title}</Link></span>)}</p>
           )}
           <div className="v3-row v3-center">
-            <Link href="/kurs" className="v3-btn ghost">Zur Kapitelübersicht</Link>
-            <Link href={nextHref} className="v3-btn">{nextSec ? `${nextSec.label} starten` : 'Zur Prüfung'}</Link>
+            <Link href="/kurs" className="v3-btn ghost"><De en="Chapter overview" inline>Zur Kapitelübersicht</De></Link>
+            <Link href={nextHref} className="v3-btn"><De en={nextSec ? 'Start next section' : 'Go to the exam'} inline>{nextSec ? `${nextSec.label} starten` : 'Zur Prüfung'}</De></Link>
           </div>
         </section>
       </main>
@@ -161,7 +169,7 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
               return (
                 <li key={i} className={`v3-rstep ${state}`} aria-current={i === scr.si ? 'step' : undefined}>
                   <span className="v3-rdot">{i < scr.si ? '✓' : i + 1}</span>
-                  <span><b>{KIND_LABEL[st.kind]}</b><small>{st.title}</small><small className="v3-rhint">{stepHint(st)}</small></span>
+                  <span><b>{KIND_LABEL[st.kind]}{forced && <small className="v3-rail-en"> · {KIND_EN[st.kind]}</small>}</b><small>{st.title}</small><small className="v3-rhint">{stepHint(st)}</small></span>
                 </li>
               );
             })}
@@ -171,7 +179,7 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
         <section className={`v3-card v3-pane t-${sec.tone}`}>
           <div className="v3-panehead">
             <span className="v3-eyebrow">
-              Schritt {scr.si + 1} von {steps.length} · {KIND_LABEL[step.kind]}
+              Schritt {scr.si + 1} von {steps.length} · {KIND_LABEL[step.kind]}{forced && ` (${KIND_EN[step.kind]})`}
               {scr.kind === 'item' && <> · <b>{isExercise(scr.b) ? 'Aufgabe' : 'Teil'} {scr.n + 1} von {scr.of}</b></>}
             </span>
             <EnSwitch />
@@ -190,7 +198,7 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
               {step.leads.length > 0 && (
                 <div className="v3-peek">
                   <button type="button" className="v3-textbtn" onClick={() => setPeek(!peek)} aria-expanded={peek}>
-                    {peek ? `${peekLabel} ausblenden` : `${peekLabel} nochmal ansehen`}
+                    {peek ? `${peekLabel} ausblenden` : `${peekLabel} nochmal ansehen`}{forced && <small className="v3-en-sub">{peek ? 'Hide' : 'See it again'}</small>}
                   </button>
                   {peek && <div className="v3-peekbox v3-fade">{step.leads.map((b) => <BlockView key={b.id} b={b} />)}</div>}
                 </div>
@@ -199,9 +207,9 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
           )}
 
           <div className="v3-actionbar">
-            {pos > 0 && <button type="button" className="v3-btn ghost" onClick={() => setPos(pos - 1)}>Zurück</button>}
-            <span className="v3-upnext">{canGo ? upNext : 'Löse die Aufgabe, dann geht es weiter.'}</span>
-            <button type="button" className={`v3-btn ${canGo && scr.kind === 'item' && isExercise(scr.b) ? 'is-ready' : ''}`} disabled={!canGo} onClick={go}>{goLabel}</button>
+            {pos > 0 && <button type="button" className="v3-btn ghost" onClick={() => setPos(pos - 1)}><De en="Back" inline>Zurück</De></button>}
+            <span className="v3-upnext">{canGo ? <De en={upNext.en}>{upNext.de}</De> : <De en="Solve the task to continue.">Löse die Aufgabe, dann geht es weiter.</De>}</span>
+            <button type="button" className={`v3-btn ${canGo && scr.kind === 'item' && isExercise(scr.b) ? 'is-ready' : ''}`} disabled={!canGo} onClick={go}>{goLabel}{forced && EN[goLabel] && <small className="v3-btn-en">{EN[goLabel]}</small>}</button>
           </div>
         </section>
       </div>

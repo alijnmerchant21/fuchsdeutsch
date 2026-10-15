@@ -5,6 +5,7 @@ import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
 import { Player } from '@/components/Player';
 import { GlossaryContext } from '@/components/Rich';
+import { HintProvider } from '@/components/Hint';
 import { findChapter } from '@/content/course';
 import { glossaryFor } from '@/content/glossary';
 import { useStore } from '@/lib/store';
@@ -28,7 +29,7 @@ function Lesson() {
   }
   return (
     <GlossaryContext.Provider value={glossaryFor(course.id)}>
-      <Player course={course} ch={ch} sec={sec} si={si} />
+      <HintProvider course={course.id}><Player course={course} ch={ch} sec={sec} si={si} /></HintProvider>
     </GlossaryContext.Provider>
   );
 }

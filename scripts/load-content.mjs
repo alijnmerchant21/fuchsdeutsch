@@ -29,6 +29,7 @@ export function loadContent() {
     glossaryFor: require(join(out, 'glossary.js')).glossaryFor,
     speakers: require(join(out, 'speakers.js')).speakers,
     games: require(join(out, 'games.js')).games,
+    taskEn: require(join(out, 'taskEn.js')).TASK_EN,
   };
   rmSync(out, { recursive: true, force: true });
   return data;

@@ -134,6 +134,18 @@ for (const course of data.courses) {
 const chapterIds = data.courses.flatMap((c) => c.chapters.map((ch) => ch.id));
 if (new Set(chapterIds).size !== chapterIds.length) err('courses', 'chapter ids must be unique across courses');
 
+// A1 to B1: every German task line needs English (taskEn on the block or content/taskEn.ts).
+for (const c of data.courses.filter((x) => ['a1', 'a2', 'b1'].includes(x.id))) {
+  const walk = (o) => {
+    if (Array.isArray(o)) return o.forEach(walk);
+    if (o && typeof o === 'object') {
+      if (typeof o.task === 'string' && !o.taskEn && !data.taskEn[o.task.trim()]) err(`${c.id}/${o.id}`, `task has no English: "${o.task}" (add taskEn or an entry in content/taskEn.ts)`);
+      Object.values(o).forEach(walk);
+    }
+  };
+  walk(c.chapters); walk(c.final);
+}
+
 console.log(`Courses: ${data.courses.length}, chapters: ${nChapters}, sections: ${stats.sections}, blocks: ${stats.blocks}, exercises: ${stats.exercises}, listening texts: ${allAudio(data).length}, exam items: ${stats.examItems}, games: ${data.games.length}, glossary entries: ${data.courses.map((c) => `${c.level} ${Object.keys(data.glossaryFor(c.id)).length}`).join(', ')}`);
 console.log('Exam points per chapter: ' + points.join(', '));
 if (errors.length) { console.log(`\n${errors.length} problem(s):`); errors.forEach((e) => console.log(' - ' + e)); process.exit(1); }

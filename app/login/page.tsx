@@ -1,8 +1,9 @@
 'use client';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
-import { DEMO_MODE, DEPOSIT_USD, TRIAL_DAYS, trialDaysLeft } from '@/lib/config';
+import { DEMO_MODE } from '@/lib/config';
 import { useStore } from '@/lib/store';
 
 export default function Login() {
@@ -11,12 +12,10 @@ export default function Login() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [msg, setMsg] = useState<string | null>(null);
-  const [left, setLeft] = useState<number | null>(null);
   const [sending, setSending] = useState(false);
   const [usePw, setUsePw] = useState(false);
   const [password, setPassword] = useState('');
   const [wait, setWait] = useState(0);
-  useEffect(() => setLeft(trialDaysLeft()), []);
   // Countdown so people do not click "Send me a link" again and again.
   useEffect(() => {
     if (wait <= 0) return;
@@ -64,7 +63,7 @@ export default function Login() {
     <main className="page narrow login">
       <Fox size={110} mood="happy" className="bob" />
       <h1>Willkommen! <span className="en">Welcome</span></h1>
-      <p className="lead">Log in so your progress and streak are saved.</p>
+      <p className="lead">Fuchsdeutsch is in a closed beta. Log in with the email you signed up with.</p>
 
       {DEMO_MODE ? (
         <form className="card form" onSubmit={(e) => { e.preventDefault(); if (name.trim() && email.includes('@')) signInDemo(name.trim(), email.trim()); }}>
@@ -103,10 +102,8 @@ export default function Login() {
 
       {!isAdmin && (
         <p className="deal-mini">
-          <b>Free forever. No charges, no hidden fees.</b>{' '}
-          {left !== null && left > 0
-            ? `You are inside the ${TRIAL_DAYS}-day trial period (${left} days left), so no deposit is needed.`
-            : `New learners put down a $${DEPOSIT_USD} deposit per course and get 100% back when they finish in time.`}
+          <b>Free during the beta. No deposit needed.</b>{' '}
+          Not on the list yet? <Link href="/#beta">Join the free beta</Link>.
         </p>
       )}
     </main>

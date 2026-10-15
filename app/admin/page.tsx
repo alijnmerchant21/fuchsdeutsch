@@ -4,11 +4,71 @@ import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { RequireUser } from '@/components/Guard';
 import { courses } from '@/content/course';
-import { games } from '@/content/games';
 import { isExercise } from '@/content/types';
 import { DEMO_MODE } from '@/lib/config';
 import { useStore } from '@/lib/store';
 import { supabase } from '@/lib/supabase';
+
+interface Beta { email: string; profile: { name?: string; course?: string; reasons?: string[]; nativeLanguage?: string; goal?: number } | null; approved: boolean; created_at: string }
+
+function BetaList() {
+  const [rows, setRows] = useState<Beta[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [filter, setFilter] = useState<'waiting' | 'approved' | 'all'>('waiting');
+  const load = () => {
+    const sb = supabase();
+    if (!sb) return;
+    void sb.from('beta_signups').select('email,profile,approved,created_at').order('created_at', { ascending: true }).limit(1000)
+      .then(({ data, error: err }) => { if (err) setError(err.message); else setRows((data as Beta[]) || []); });
+  };
+  useEffect(load, []);
+  const setApproved = async (email: string, approved: boolean) => {
+    const sb = supabase();
+    if (!sb) return;
+    const { error: err } = await sb.from('beta_signups').update({ approved, approved_at: approved ? new Date().toISOString() : null }).eq('email', email);
+    if (err) setError(err.message); else setRows((r) => (r || []).map((x) => (x.email === email ? { ...x, approved } : x)));
+  };
+  const copy = () => {
+    const list = (rows || []).filter((r) => r.approved).map((r) => r.email).join(', ');
+    void navigator.clipboard?.writeText(list);
+  };
+  if (DEMO_MODE) return <p className="muted">Im Demo-Modus gibt es keine Warteliste. Nach der Supabase-Einrichtung und supabase/006_beta.sql erscheinen hier alle Anmeldungen.</p>;
+  if (error) return <p className="muted">Die Warteliste ist noch nicht eingerichtet oder nicht lesbar ({error}). Führe in Supabase die Datei supabase/006_beta.sql aus.</p>;
+  const waiting = (rows || []).filter((r) => !r.approved).length;
+  const approved = (rows || []).filter((r) => r.approved).length;
+  const shown = (rows || []).filter((r) => filter === 'all' || (filter === 'approved' ? r.approved : !r.approved));
+  return (
+    <>
+      <div className="v3-row">
+        <div className="seg" role="group" aria-label="Filter">
+          <button type="button" aria-pressed={filter === 'waiting'} onClick={() => setFilter('waiting')}>Wartend ({waiting})</button>
+          <button type="button" aria-pressed={filter === 'approved'} onClick={() => setFilter('approved')}>Freigegeben ({approved})</button>
+          <button type="button" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>Alle</button>
+        </div>
+        <button type="button" className="link-btn" onClick={copy}>Freigegebene E-Mails kopieren</button>
+      </div>
+      <div className="card table-wrap">
+        <table>
+          <thead><tr><th>E-Mail</th><th>Name</th><th>Kurs</th><th>Warum Deutsch</th><th>Muttersprache</th><th>Angemeldet</th><th>Status</th></tr></thead>
+          <tbody>
+            {shown.map((r) => (
+              <tr key={r.email}>
+                <td>{r.email}</td><td>{r.profile?.name || <span className="muted">Fragen offen</span>}</td><td>{r.profile?.course || ''}</td><td>{(r.profile?.reasons || []).join(', ')}</td><td>{r.profile?.nativeLanguage || ''}</td>
+                <td>{new Date(r.created_at).toLocaleDateString('de-DE')}</td>
+                <td>{r.approved
+                  ? <button type="button" className="link-btn" onClick={() => void setApproved(r.email, false)}>Freigegeben · zurücknehmen</button>
+                  : <button type="button" className="btn btn-sm" onClick={() => void setApproved(r.email, true)}>Freigeben</button>}</td>
+              </tr>
+            ))}
+            {rows && shown.length === 0 && <tr><td colSpan={7}>Keine Einträge.</td></tr>}
+            {!rows && <tr><td colSpan={7}>Lade …</td></tr>}
+          </tbody>
+        </table>
+      </div>
+      <p className="muted small">Freigegebene Personen können sich mit genau dieser E-Mail anmelden. Schick ihnen danach eine kurze E-Mail mit dem Link zur Seite.</p>
+    </>
+  );
+}
 
 interface Row { id: string; email: string; name: string; xp: number; streak: number; last_active: string | null; created_at: string; profile: { name?: string; gender?: string; reasons?: string[]; nativeLanguage?: string } | null }
 
@@ -52,6 +112,9 @@ function Admin() {
       </div>
       {DEMO_MODE && <p><button type="button" className="link-btn" onClick={() => setDemoAdmin(false)}>Admin-Modus verlassen (Demo)</button></p>}
 
+      <h2>Beta-Warteliste</h2>
+      <BetaList />
+
       <h2>Kursinhalt</h2>
       {courses.map((course) => (
       <section key={course.id}>
@@ -75,7 +138,6 @@ function Admin() {
               </tbody>
             </table>
           )}
-          {ch.games.length > 0 && <p className="small">Spiele: {games.filter((g) => ch.games.includes(g.id)).map((g) => <Link key={g.id} href={`/spiele/${g.id}`} className="chip-btn">{g.emoji} {g.title}</Link>)}</p>}
         </details>
       ))}
       <p><Link href={`/pruefung/${course.id}`} className="btn btn-sm">Abschlussprüfung {course.level} ansehen</Link></p>

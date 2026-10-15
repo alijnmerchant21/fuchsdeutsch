@@ -6,6 +6,7 @@ import type { GlossaryEntry } from '@/content/types';
 /** Which word list the current page explains words from (set per course). */
 export const GlossaryContext = createContext<Record<string, GlossaryEntry>>(defaultGlossary);
 import { useStore } from '@/lib/store';
+import { taskEnglish, useHints } from './Hint';
 import { speakWord } from '@/lib/audio';
 
 /** A word with an explanation. Easy mode: German + English. Advanced mode: German only. */
@@ -82,14 +83,15 @@ export function Rich({ text, className }: { text: string; className?: string }) 
   );
 }
 
-/** Task instruction: German always, English underneath in easy mode. */
+/** Task instruction: German always. English underneath on A1 to B1, and in easy mode on higher levels. */
 export function Task({ de, en }: { de?: string; en?: string }) {
-  const { progress } = useStore();
+  const hints = useHints();
   if (!de) return null;
+  const english = taskEnglish(de, en);
   return (
     <div className="task">
       <p className="task-de">{de}</p>
-      {progress.mode === 'easy' && en && <p className="task-en">{en}</p>}
+      {hints && english && <p className="task-en">{english}</p>}
     </div>
   );
 }

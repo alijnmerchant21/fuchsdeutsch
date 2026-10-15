@@ -70,6 +70,12 @@ interface Store {
   ready: boolean;
   user: User | null;
   isAdmin: boolean;
+  /** Closed beta: may this account use the course? null while checking. */
+  access: boolean | null;
+  /** Beta step 1: put an email on the list. 'ok' = answer the welcome questions next, 'exists' = already done, else an error. */
+  joinBeta: (email: string) => Promise<string>;
+  /** Beta step 2: store the welcome answers with the sign-up, so they are not asked again after approval. */
+  saveBetaProfile: (email: string, profile: LearnerProfile, course: string) => Promise<string>;
   /** Admin switch: see the whole course unlocked. */
   adminView: boolean;
   progress: Progress;
@@ -94,6 +100,21 @@ interface Store {
 const Ctx = createContext<Store | null>(null);
 const LS_USER = 'fd:user';
 const LS_ADMIN = 'fd:admin';
+const LS_BETA = 'fd:beta';
+type BetaAnswers = Partial<LearnerProfile> & { course?: string };
+
+/** Turns the answers stored with a beta sign-up into the learner profile. */
+function withAnswers(p: Progress, a: BetaAnswers, fallbackName: string): Progress {
+  const profile: LearnerProfile = {
+    name: String(a.name || fallbackName).slice(0, 40),
+    gender: a.gender && ['frau', 'mann', 'divers', 'none'].includes(a.gender) ? a.gender : 'none',
+    reasons: Array.isArray(a.reasons) ? a.reasons.map(String).slice(0, 10) : [],
+    nativeLanguage: String(a.nativeLanguage || '').slice(0, 40),
+    goal: [25, 50, 100].includes(Number(a.goal)) ? Number(a.goal) : 50,
+    board: a.board !== false,
+  };
+  return { ...p, profile, course: a.course || p.course };
+}
 const lsKey = (id: string) => `fd:progress:${id}`;
 
 function readLS<T>(key: string, fallback: T): T {
@@ -107,6 +128,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [access, setAccess] = useState<boolean | null>(null);
   const [adminView, setAdminViewState] = useState(false);
   const [progress, setProgress] = useState<Progress>(emptyProgress);
   const userRef = useRef<User | null>(null);
@@ -123,13 +145,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (u) { setUser(u); loadLocal(u); }
       const admin = readLS<{ is: boolean; view: boolean }>(LS_ADMIN, { is: false, view: false });
       setIsAdmin(admin.is); setAdminViewState(admin.is && admin.view);
+      setAccess(true); // demo mode has no list, everyone is in
       setReady(true);
       return;
     }
     const apply = async (session: { user: { id: string; email?: string; user_metadata?: Record<string, string> } } | null) => {
-      if (!session) { setUser(null); setIsAdmin(false); setAdminViewState(false); setProgress(emptyProgress()); setReady(true); return; }
+      if (!session) { setAccess(null); setUser(null); setIsAdmin(false); setAdminViewState(false); setProgress(emptyProgress()); setReady(true); return; }
       const su = session.user;
       const u: User = { id: su.id, email: su.email || '', name: su.user_metadata?.full_name || su.user_metadata?.name || (su.email || 'Lernfuchs').split('@')[0] };
+      setAccess(null); // decided below, after the welcome answers are in place
       setUser(u);
       loadLocal(u); // instant, from cache
       const { data } = await sb.from('profiles').select('is_admin, progress').eq('id', u.id).maybeSingle();
@@ -137,20 +161,38 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       const { data: adminRpc } = await sb.rpc('is_admin');
       const admin = !!(adminRpc || data?.is_admin);
       setIsAdmin(admin);
+      let answers: BetaAnswers | null = null;
+      let acc = true;
+      if (!admin) {
+        // Closed beta. If supabase/006_beta.sql has not been run yet, keep the site open.
+        const { data: ok, error } = await sb.rpc('beta_access');
+        acc = error ? true : !!ok;
+        if (ok) {
+          const { data: a } = await sb.rpc('my_beta_profile');
+          if (a && typeof a === 'object') answers = a as BetaAnswers;
+        }
+      }
       if (admin) {
         setAdminViewState(true);
         writeLS(LS_ADMIN, { is: true, view: true });
       }
+      let cur: Progress = { ...emptyProgress(), ...readLS<Partial<Progress>>(lsKey(u.id), {}) };
       if (data) {
         if (data.progress && Object.keys(data.progress).length) {
           const remote = { ...emptyProgress(), ...(data.progress as Partial<Progress>) };
-          const local = readLS<Partial<Progress>>(lsKey(u.id), {});
           // Keep whichever copy has more XP so offline work is never lost.
-          if ((remote.xp || 0) >= (local.xp || 0)) { setProgress(remote); writeLS(lsKey(u.id), remote); }
+          if ((remote.xp || 0) >= (cur.xp || 0)) { cur = remote; setProgress(remote); writeLS(lsKey(u.id), remote); }
         }
       } else {
         await sb.from('profiles').upsert({ id: u.id, email: u.email, name: u.name });
       }
+      // Beta testers answered the welcome questions when they signed up. Use them instead of asking again.
+      if (!admin && answers && !cur.profile) {
+        const next = withAnswers(cur, answers, u.name);
+        setProgress(next); writeLS(lsKey(u.id), next);
+        await sb.from('profiles').upsert({ id: u.id, email: u.email, name: u.name, progress: next });
+      }
+      setAccess(acc);
       setAdminViewState(readLS<{ view: boolean }>(LS_ADMIN, { view: false }).view);
       setReady(true);
     };
@@ -190,12 +232,32 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   userRef.current = shownUser;
 
   const store = useMemo<Store>(() => ({
-    ready, user: shownUser, isAdmin, adminView, progress,
+    ready, user: shownUser, isAdmin, access, adminView, progress,
+    joinBeta: async (email) => {
+      const e = email.trim().toLowerCase();
+      const sb = supabase();
+      if (!sb) return readLS<Record<string, unknown>>(LS_BETA, {})[e] ? 'exists' : 'ok';
+      const { data, error } = await sb.rpc('beta_signup', { p_email: e });
+      if (error) return /check constraint|violates/i.test(error.message) ? 'Please check your email address.' : 'Something went wrong. Please try again in a moment.';
+      return String(data);
+    },
+    saveBetaProfile: async (email, profile, course) => {
+      const e = email.trim().toLowerCase();
+      const sb = supabase();
+      if (!sb) { writeLS(LS_BETA, { ...readLS<Record<string, unknown>>(LS_BETA, {}), [e]: { ...profile, course } }); return 'ok'; }
+      const { data, error } = await sb.rpc('beta_profile', { p_email: e, p_profile: { ...profile, course } });
+      if (error) return 'Something went wrong. Please try again in a moment.';
+      return String(data);
+    },
     saveProfile: (profile) => { if (isAdmin) return; update((p) => ({ ...p, profile })); },
     setCourse: (course) => update((p) => ({ ...p, course })),
     signInDemo: (name, email) => {
       const u: User = { id: 'demo-' + email.toLowerCase().replace(/[^a-z0-9]/g, '-'), email, name };
-      writeLS(LS_USER, u); setUser(u); loadLocal(u);
+      writeLS(LS_USER, u); setUser(u);
+      const cur: Progress = { ...emptyProgress(), ...readLS<Partial<Progress>>(lsKey(u.id), {}) };
+      const answers = readLS<Record<string, BetaAnswers>>(LS_BETA, {})[email.trim().toLowerCase()];
+      const next = answers && !cur.profile ? withAnswers(cur, answers, name) : cur;
+      writeLS(lsKey(u.id), next); setProgress(next);
     },
     signInGoogle: async () => {
       const sb = supabase();
@@ -243,7 +305,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       });
     },
     recordGame: (id, score, xp) => { if (isAdmin) return; update((p) => earn({ ...p, games: { ...p.games, [id]: Math.max(p.games[id] || 0, score) } }, xp)); },
-  }), [ready, shownUser, isAdmin, adminView, progress, loadLocal, update]);
+  }), [ready, shownUser, isAdmin, access, adminView, progress, loadLocal, update]);
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
 }

@@ -13,3 +13,6 @@ next-env.d.ts
 .audio-tmp
 # Local PDFs and clones for content authoring only (never committed).
 .content-sources/
+
+# Local v3 UI clone (not deployed)
+fuchsdeutsch-v3/

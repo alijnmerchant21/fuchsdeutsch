@@ -6,45 +6,43 @@ import { streakAlive, useStore } from '@/lib/store';
 import { Fox } from './Fox';
 
 export function Nav() {
-  const { user, progress, setMode, isAdmin, adminView, signOut, ready } = useStore();
+  const { user, progress, isAdmin, adminView, signOut, ready } = useStore();
   const path = usePathname();
-  const link = (href: string, label: string) => (
-    <Link href={href} className={`nav-link ${path === href || (href !== '/' && path.startsWith(href)) ? 'is-here' : ''}`}>{label}</Link>
+  const here = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+  const link = (href: string, label: string, also?: string) => (
+    <Link href={href} className={`v3-navlink ${here(href) || (also && here(also)) ? 'is-here' : ''}`}>{label}</Link>
   );
+  const alive = streakAlive(progress.streak);
   return (
-    <header className="nav">
-      <Link href={user ? (isAdmin ? '/admin' : '/lernen') : '/'} className="brand" aria-label={`${BRAND} Startseite`}>
-        <Fox size={38} /><span>{BRAND}</span>
-      </Link>
-      <nav className="nav-links" aria-label="Hauptnavigation">
-        {!isAdmin && link('/lernen', 'Lernen')}
-        {link('/spiele', 'Spiele')}
-        {!isAdmin && link('/geschichten', 'Geschichten')}
-        {!isAdmin && link('/bestenliste', 'Bestenliste')}
-        {!isAdmin && link('/community', 'Community')}
-        {isAdmin && link('/admin', 'Admin')}
-      </nav>
-      <div className="nav-right">
+    <header className="v3-nav">
+      <div className="v3-nav-in">
+        <Link href={user ? (isAdmin ? '/admin' : '/lernen') : '/'} className="v3-brand" aria-label={`${BRAND} Startseite`}>
+          <Fox size={34} /><span>{BRAND}</span>
+        </Link>
         {user && (
-          <>
-            {!isAdmin && (
-              <>
-                <span className={`stat streak ${streakAlive(progress.streak) ? 'is-alive' : ''}`} title={streakAlive(progress.streak) ? 'Deine Serie läuft' : 'Lerne heute, um eine Serie zu starten'}>
-                  <span className="flame" aria-hidden>🔥</span>{streakAlive(progress.streak) ? progress.streak.count : 0}<span className="sr-only"> Tage Serie</span>
-                </span>
-                <span className="stat" title="Erfahrungspunkte"><span aria-hidden>⭐</span>{progress.xp}<span className="sr-only"> XP</span></span>
-                <div className="seg" role="group" aria-label="Erklärungen">
-                  <button type="button" aria-pressed={progress.mode === 'easy'} onClick={() => setMode('easy')} title="Erklärungen auf Deutsch und Englisch">Easy</button>
-                  <button type="button" aria-pressed={progress.mode === 'advanced'} onClick={() => setMode('advanced')} title="Erklärungen nur auf Deutsch">Deutsch pur</button>
-                </div>
-                <Link href="/willkommen" className="avatar" title={`${user.name}: Profil bearbeiten`} aria-label="Profil bearbeiten">{user.name.slice(0, 1).toUpperCase()}</Link>
-              </>
-            )}
-            {isAdmin && <span className="pill t-lilac">Admin</span>}
-            <button type="button" className="link-btn small" onClick={() => void signOut()}>Abmelden</button>
-          </>
+          <nav className="v3-navlinks" aria-label="Hauptnavigation">
+            {!isAdmin && link('/lernen', 'Start')}
+            {!isAdmin && link('/kurs', 'Mein Kurs')}
+            {link('/spiele', 'Spiele')}
+            {!isAdmin && link('/geschichten', 'Geschichten')}
+            {!isAdmin && link('/bestenliste', 'Bestenliste')}
+            {isAdmin && link('/admin', 'Admin')}
+          </nav>
         )}
-        {ready && !user && <Link href="/login" className="btn btn-sm">Anmelden</Link>}
+        <div className="v3-nav-right">
+          {user && !isAdmin && (
+            <>
+              <span className={`v3-chip t-butter ${alive ? '' : 'is-off'}`} title={alive ? 'Deine Serie läuft' : 'Lerne heute, um eine Serie zu starten'}>
+                <span aria-hidden>🔥</span> {alive ? progress.streak.count : 0}<span className="sr-only"> Tage Serie</span>
+              </span>
+              <span className="v3-chip t-lilac" title="Erfahrungspunkte">{progress.xp} XP</span>
+              <Link href="/willkommen" className="v3-avatar" title={`${user.name}: Profil bearbeiten`} aria-label="Profil bearbeiten">{user.name.slice(0, 1).toUpperCase()}</Link>
+            </>
+          )}
+          {user && isAdmin && <span className="v3-chip t-lilac">Admin</span>}
+          {user && <button type="button" className="v3-textbtn" onClick={() => void signOut()}>Abmelden</button>}
+          {ready && !user && <Link href="/login" className="v3-btn small">Anmelden</Link>}
+        </div>
       </div>
       {isAdmin && adminView && <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div>}
     </header>

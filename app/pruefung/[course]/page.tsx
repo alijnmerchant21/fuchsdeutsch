@@ -51,9 +51,9 @@ function Final() {
   const [done, setDone] = useState(false);
   const set = (id: ModId) => (p: number) => setPct((x) => ({ ...x, [id]: p }));
 
-  if (!course) return <main className="page center"><Fox size={90} mood="wow" /><h1>Diesen Kurs gibt es nicht.</h1><Link className="btn" href="/lernen">Zur Kursübersicht</Link></main>;
+  if (!course) return <main className="page center"><Fox size={90} mood="wow" /><h1>Diesen Kurs gibt es nicht.</h1><Link className="btn" href="/kurs">Zur Kursübersicht</Link></main>;
   if (!finalOpen(course, progress, admin)) {
-    return <main className="page center"><Fox size={90} mood="sleepy" /><h1>Noch geschlossen</h1><p className="lead">Die Abschlussprüfung öffnet sich, wenn du alle Kapitelprüfungen bestanden hast.</p><Link className="btn" href="/lernen">Zur Kursübersicht</Link></main>;
+    return <main className="page center"><Fox size={90} mood="sleepy" /><h1>Noch geschlossen</h1><p className="lead">Die Abschlussprüfung öffnet sich, wenn du alle Kapitelprüfungen bestanden hast.</p><Link className="btn" href="/kurs">Zur Kursübersicht</Link></main>;
   }
   const allPass = modules.every((m) => pct[m.id] >= PASS_MARK);
   const avg = Math.round(modules.reduce((a, m) => a + pct[m.id], 0) / modules.length);

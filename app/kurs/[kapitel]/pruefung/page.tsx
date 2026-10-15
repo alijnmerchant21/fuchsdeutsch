@@ -18,9 +18,9 @@ function Exam() {
   const ch = found?.chapter;
   const course = found?.course;
   const ci = found?.index ?? -1;
-  if (!ch || !course || !ch.exam.length) return <main className="page center"><Fox size={90} mood="wow" /><h1>Diese Prüfung gibt es noch nicht.</h1><Link className="btn" href="/lernen">Zur Kursübersicht</Link></main>;
+  if (!ch || !course || !ch.exam.length) return <main className="page center"><Fox size={90} mood="wow" /><h1>Diese Prüfung gibt es noch nicht.</h1><Link className="btn" href="/kurs">Zur Kursübersicht</Link></main>;
   if (!(chapterOpen(course, ci, progress, admin) && examOpen(ch, progress, admin))) {
-    return <main className="page center"><Fox size={90} mood="sleepy" /><h1>Noch geschlossen</h1><p className="lead">Schließe zuerst alle Abschnitte von Kapitel {ch.number} ab.</p><Link className="btn" href="/lernen">Zur Kursübersicht</Link></main>;
+    return <main className="page center"><Fox size={90} mood="sleepy" /><h1>Noch geschlossen</h1><p className="lead">Schließe zuerst alle Abschnitte von Kapitel {ch.number} ab.</p><Link className="btn" href="/kurs">Zur Kursübersicht</Link></main>;
   }
   const nextCh = course.chapters[ci + 1];
   return (
@@ -32,7 +32,7 @@ function Exam() {
         intro="Grammatik, Lesen, Hören und Redemittel aus diesem Kapitel. Nimm dir etwa 20 Minuten Zeit."
         onFinish={(pct) => recordExam(ch.id, pct)}
         backHref="/lernen"
-        passHref={nextCh ? '/lernen' : `/pruefung/${course.id}`}
+        passHref={nextCh ? '/kurs' : `/pruefung/${course.id}`}
         passLabel={nextCh ? `Kapitel ${nextCh.number} ist jetzt offen` : 'Zur Abschlussprüfung'}
       />
     </main>

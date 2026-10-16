@@ -31,5 +31,10 @@ export function De({ children, en, inline = false }: { children: ReactNode; en: 
     : <span className="v3-de">{children}<small className="v3-en-sub">{en}</small></span>;
 }
 
+/** English-only helper line (diagrams, captions). Shows on A1 to B1 and in easy mode. */
+export function En({ children }: { children: ReactNode }) {
+  return useHints() ? <small className="v3-en-sub v3-en-block">{children}</small> : null;
+}
+
 /** English for a German task line, from the block or the shared list. */
 export const taskEnglish = (de: string | undefined, en: string | undefined) => en || (de ? TASK_EN[de.trim()] : undefined);

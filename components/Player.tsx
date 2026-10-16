@@ -10,6 +10,8 @@ import { party } from '@/lib/fx';
 import { buildSteps, KIND_EN, KIND_LABEL, leadInstruction, stepHint, type Step } from '@/lib/phases';
 import { useStore } from '@/lib/store';
 import { De, useForcedHints, useHints } from './Hint';
+import { CastStrip } from './Cast';
+import { ChapterContext, imageSrc, sceneId, useImages } from '@/lib/images';
 import { sectionKey } from '@/lib/unlock';
 
 type Screen = { si: number; kind: 'lead' } | { si: number; kind: 'item'; b: Step['items'][number]; n: number; of: number };
@@ -53,6 +55,7 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
   const key = sectionKey(ch.id, sec.id);
   const wasDone = !!progress.done[key];
   const easy = useHints();
+  const pics = useImages();
   const forced = useForcedHints();
 
   const [pos, setPos] = useState(0);
@@ -152,6 +155,7 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
   const peekLabel = step.kind === 'rule' ? 'Regel' : step.kind === 'listen' ? 'Hörtext' : 'Text';
 
   return (
+    <ChapterContext.Provider value={ch.id}>
     <main className="v3-page v3-fade">
       <Crumbs parts={[['Start', '/lernen'], [course.title, '/kurs'], [`Kapitel ${ch.number}`, '/kurs'], [sec.label]]} />
       <div className="v3-titlerow">
@@ -187,6 +191,11 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
 
           {scr.kind === 'lead' ? (
             <div key={`lead-${scr.si}`} className="v3-fade v3-stack">
+              {(() => {
+                const src = step.leads.map((b) => imageSrc(pics, sceneId(ch.id, b))).find(Boolean);
+                return src ? <figure className="v3-scene"><img src={src} alt="" /></figure> : null;
+              })()}
+              {step.kind === 'intro' && course.id === 'a1' && ch.number === 1 && <CastStrip />}
               <div className="v3-what"><span aria-hidden>i</span><div><b>Was jetzt?</b> {instr.de}{easy && <em> {instr.en}</em>}</div></div>
               {step.leads.map((b) => <BlockView key={b.id} b={b} />)}
             </div>
@@ -214,5 +223,6 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
         </section>
       </div>
     </main>
+    </ChapterContext.Provider>
   );
 }

@@ -6,6 +6,16 @@ Format: newest first. Branch commits: `fdd45e2` → `b308c64` → `9160179` → 
 
 ---
 
+## 2026-10-16 — Pictures and visual grammar for A1
+
+- `content/a1/images.ts`: fixed looks for the cast, 65 scene prompts (one per reading, listening and episode), 80 picture-vocabulary prompts. One shared pastel picture-book style.
+- `npm run images` (`scripts/generate-images.mjs`): makes the pictures with FLUX.1 schnell on Cloudflare Workers AI, free for about 170 a day. Saves `public/images/<id>.webp` and `manifest.json`. Resumes where it stopped.
+- Lessons show the scene picture on reading and listening screens. Audio players show cast faces. Match exercises show drawn objects instead of emoji. Chapter cards get a banner. The Fuchsbau-WG cast cards sit on the A1 course page and in the first lesson.
+- Visual grammar drawn in code (`content/a1/visuals.ts`, `components/GrammarVisual.tsx`): verb positions and the sentence bracket, article colors, clock, prepositions, wo/wohin, seasons, compass. 17 diagrams in A1.
+- Pictures only appear once their file exists, so the site looks the same until you run the script. `npm run check` flags picture keys that match no block.
+
+---
+
 ## 2026-10-15 — Closed beta, privacy page, English hints, games removed
 
 - Homepage is a two-step closed-beta sign-up: email and consent, then the same welcome questions new learners answer. "Free during the beta", deposit struck out.

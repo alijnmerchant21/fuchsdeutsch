@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { RequireUser } from '@/components/Guard';
+import { CastStrip } from '@/components/Cast';
+import { imageSrc, sceneId, useImages } from '@/lib/images';
 import { Crumbs, EnSwitch } from '@/components/Player';
 import { courseById, courses } from '@/content/course';
 import type { Chapter } from '@/content/types';
@@ -26,6 +28,8 @@ function CoursePage() {
   const exam = progress.exams[ch.id];
   const remaining = ch.sections.slice(Math.max(0, nextSi)).reduce((a, s) => a + s.minutes, 0);
   const isCurrent = focus === cur;
+  const pics = useImages();
+  const banner = overview ? imageSrc(pics, sceneId(ch.id, overview)) : null;
 
   const done = course.chapters.map((c, i) => ({ c, i })).filter(({ c, i }) => i !== focus && progress.exams[c.id]?.passed);
   const later = course.chapters.map((c, i) => ({ c, i })).filter(({ c, i }) => i !== focus && !progress.exams[c.id]?.passed);
@@ -61,6 +65,7 @@ function CoursePage() {
 
       <div className="v3-narrow v3-stack-lg">
         <section className={`v3-card v3-focus ${isCurrent ? 'is-current' : ''}`}>
+          {banner && <figure className="v3-banner"><img src={banner} alt="" /></figure>}
           <div className="v3-row">
             {isCurrent ? <span className="v3-chip t-lilac">Du bist hier</span> : <button type="button" className="v3-textbtn" onClick={() => setFocus(cur)}>← Zurück zu deinem Kapitel</button>}
             <span className="v3-eyebrow">Kapitel {ch.number}</span>
@@ -120,6 +125,8 @@ function CoursePage() {
           </div>
 
         </section>
+
+        {course.id === 'a1' && <section className="v3-card v3-castcard"><CastStrip /></section>}
 
         {done.length > 0 && (
           <section className="v3-card v3-list">

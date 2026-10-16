@@ -9,6 +9,9 @@ import { norm, shuffle, sparkle } from '@/lib/fx';
 import { speakWord } from '@/lib/audio';
 import { AudioPlayer } from './AudioPlayer';
 import { De, useHints } from './Hint';
+import { GrammarVisual } from './GrammarVisual';
+import { VISUALS } from '@/content/a1/visuals';
+import { imageSrc, useChapter, useImages, vocabImageId } from '@/lib/images';
 import { Inline, Rich, Task } from './Rich';
 
 /**
@@ -135,7 +138,20 @@ export function Gap({ b, exam, reveal, onScore }: ExProps<GapBlock>) {
 
 /* ---------- Matching ---------- */
 const tones = ['mint', 'sky', 'lilac', 'butter', 'rose', 'peach'];
+/** Shows a drawn picture instead of an emoji when the pair's word has one. */
+function useMatchPictures(pairs: [string, string][]) {
+  const m = useImages();
+  return (text: string, i: number) => {
+    const [a, c] = pairs[i];
+    const word = text === a ? c : a;
+    const src = imageSrc(m, vocabImageId(word));
+    if (!src || !/\p{Extended_Pictographic}/u.test(text)) return text;
+    return <img src={src} alt={text} className="match-pic" loading="lazy" />;
+  };
+}
+
 export function Match({ b, onScore }: ExProps<MatchBlock>) {
+  const pic = useMatchPictures(b.pairs);
   const rights = useMemo(() => shuffle(b.pairs.map((p, i) => ({ text: p[1], i }))), [b.pairs]);
   const [left, setLeft] = useState<number | null>(null);
   const [done, setDone] = useState<number[]>([]);
@@ -154,14 +170,14 @@ export function Match({ b, onScore }: ExProps<MatchBlock>) {
           {b.pairs.map((p, i) => (
             <button key={i} type="button" disabled={done.includes(i)} aria-pressed={left === i}
               className={`option ${left === i ? 'is-picked' : ''} ${done.includes(i) ? `is-matched t-${tones[done.indexOf(i) % tones.length]}` : ''}`}
-              onClick={() => setLeft(i)}>{p[0]}</button>
+              onClick={() => setLeft(i)}>{pic(p[0], i)}</button>
           ))}
         </div>
         <div className="match-col">
           {rights.map((r) => (
             <button key={r.i} type="button" disabled={done.includes(r.i)}
               className={`option ${done.includes(r.i) ? `is-matched t-${tones[done.indexOf(r.i) % tones.length]}` : ''} ${bad === r.i ? 'is-wrong shake' : ''}`}
-              onClick={() => tryRight(r.i)}>{r.text}</button>
+              onClick={() => tryRight(r.i)}>{pic(r.text, r.i)}</button>
           ))}
         </div>
       </div>
@@ -323,10 +339,13 @@ export function Compose({ b, onScore }: ExProps<ComposeBlock>) {
 /* ---------- Not graded ---------- */
 function Grammar({ b }: { b: GrammarBlock }) {
   const { progress } = useStore();
+  const ch = useChapter();
+  const visual = ch ? VISUALS[`${ch}/${b.id}`] : undefined;
   return (
     <div className="grammar">
       <h3><span className="g-badge" aria-hidden>G</span>{b.title}</h3>
       {b.intro && <Rich text={b.intro} />}
+      {visual && <GrammarVisual v={visual} />}
       {b.rows && (
         <div className="table-wrap">
           <table>

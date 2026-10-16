@@ -146,6 +146,18 @@ for (const c of data.courses.filter((x) => ['a1', 'a2', 'b1'].includes(x.id))) {
   walk(c.chapters); walk(c.final);
 }
 
+// A1 pictures and diagrams must point at real blocks.
+{
+  const a1 = data.courses.find((x) => x.id === 'a1');
+  const keys = new Set();
+  for (const ch of a1.chapters) for (const sec of ch.sections) for (const b of sec.blocks) { keys.add(`${ch.id}/${b.id}`); if (b.t === 'audio') keys.add(b.id); }
+  for (const k of Object.keys(data.images.SCENES)) if (!keys.has(k)) err('content/a1/images.ts', `scene key "${k}" matches no block`);
+  for (const k of Object.keys(data.visuals.VISUALS)) if (!keys.has(k)) err('content/a1/visuals.ts', `diagram key "${k}" matches no block`);
+  const words = new Set();
+  for (const ch of a1.chapters) for (const sec of ch.sections) for (const b of sec.blocks) if (b.t === 'match') b.pairs.forEach((p) => p.forEach((w) => words.add(w)));
+  for (const w of Object.keys(data.images.VOCAB)) if (!words.has(w)) err('content/a1/images.ts', `vocabulary word "${w}" is in no match exercise`);
+}
+
 console.log(`Courses: ${data.courses.length}, chapters: ${nChapters}, sections: ${stats.sections}, blocks: ${stats.blocks}, exercises: ${stats.exercises}, listening texts: ${allAudio(data).length}, exam items: ${stats.examItems}, games: ${data.games.length}, glossary entries: ${data.courses.map((c) => `${c.level} ${Object.keys(data.glossaryFor(c.id)).length}`).join(', ')}`);
 console.log('Exam points per chapter: ' + points.join(', '));
 if (errors.length) { console.log(`\n${errors.length} problem(s):`); errors.forEach((e) => console.log(' - ' + e)); process.exit(1); }

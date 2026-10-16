@@ -22,6 +22,17 @@ Open http://localhost:3000. With no `.env.local` the app runs in **demo mode**: 
 5. **GitHub + Vercel**: push this folder to a GitHub repo, import it in Vercel, add the same two env vars there.
 6. **Voices**: copy `scripts/voices.example.json` to `scripts/voices.json`, put in ElevenLabs voice ids, run `ELEVENLABS_API_KEY=... npm run audio`. Commit the MP3s in `public/audio/`. Until then the player uses the browser's German voice.
 
+## Pictures (A1)
+
+Character cards, scene pictures and picture vocabulary are made with FLUX on Cloudflare Workers AI, free for about 170 pictures a day.
+
+1. Cloudflare account > Workers AI > "Use REST API": copy the account id and create a token.
+2. Put `CF_ACCOUNT_ID` and `CF_API_TOKEN` in `.env.local`.
+3. `npm run images -- --dry` to see the list, then `npm run images`. Run it again the next day if the quota runs out.
+4. Look through `public/images/`. To remake one: `npm run images -- --only <id> --force`. Commit the files and `manifest.json`.
+
+Prompts live in `content/a1/images.ts` (cast looks, one scene per text or listening, vocabulary). Grammar diagrams are drawn in code: `content/a1/visuals.ts` and `components/GrammarVisual.tsx`. Pictures only show once they are in the manifest.
+
 ## Where things are
 
 | What | Where |

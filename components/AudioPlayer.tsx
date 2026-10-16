@@ -1,4 +1,5 @@
 'use client';
+import { castImageId, imageSrc, useImages } from '@/lib/images';
 import { useEffect, useRef, useState } from 'react';
 import type { AudioBlock } from '@/content/types';
 import { speakers } from '@/content/speakers';
@@ -6,6 +7,7 @@ import { hasRecording } from '@/lib/audio';
 import { Rich } from './Rich';
 
 export function AudioPlayer({ b }: { b: AudioBlock }) {
+  const pics = useImages();
   const [playing, setPlaying] = useState(false);
   const [line, setLine] = useState(-1);
   const [showText, setShowText] = useState(false);
@@ -44,7 +46,7 @@ export function AudioPlayer({ b }: { b: AudioBlock }) {
           <h3>{b.title}</h3>
           <div className="cast">
             {cast.map((s) => (
-              <span key={s.id} className="cast-chip"><b>{s.name}</b> {s.origin}, {s.style}</span>
+              <span key={s.id} className="cast-chip">{imageSrc(pics, castImageId(s.id)) && <img src={imageSrc(pics, castImageId(s.id))!} alt="" className="cast-face" />}<b>{s.name}</b> {s.origin}, {s.style}</span>
             ))}
           </div>
         </div>

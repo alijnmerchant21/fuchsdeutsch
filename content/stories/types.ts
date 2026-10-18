@@ -1,7 +1,7 @@
 export interface Story {
   id: string;
   /** CEFR level this story fits. */
-  level: 'A1' | 'A2' | 'B1';
+  level: 'A1' | 'A2' | 'B1' | 'B2';
   title: string;
   /** Minutes of reading time. */
   minutes: number;

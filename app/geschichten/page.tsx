@@ -6,7 +6,7 @@ import { RequireUser } from '@/components/Guard';
 import { stories } from '@/content/stories';
 
 function List() {
-  const levels = (['A1', 'A2', 'B1'] as const).map((l) => ({ l, list: stories.filter((s) => s.level === l) })).filter((x) => x.list.length);
+  const levels = (['A1', 'A2', 'B1', 'B2'] as const).map((l) => ({ l, list: stories.filter((s) => s.level === l) })).filter((x) => x.list.length);
   const tints = ['t-butter', 't-sky', 't-lilac'];
   return (
     <main className="page">

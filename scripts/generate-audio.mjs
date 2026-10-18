@@ -6,6 +6,7 @@
 //   npm run audio -- --only t1-audio --force  remake one file
 //   npm run audio -- --prefix a1-k1- --max-chars 9000   one chapter, never more than 9000 characters
 //   npm run audio -- --credits                how many credits each key has left
+//   npm run audio -- --course b2-1 --key ELEVENLABS_API_KEY_paid   use only this one key
 // Setup: ELEVENLABS_API_KEY in .env.local, and a voice for each speaker in scripts/voices.json.
 // More keys: ELEVENLABS_API_KEY_1, _2, … (or ELEVENLABS_API_KEYS=a,b,c). When one runs out of credits,
 // the next one is used. A voice that one account cannot use is tried on the next account.
@@ -27,7 +28,10 @@ const flag = (name) => args.includes(`--${name}`);
 const opt = (name) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
 
 // Every key in .env.local, in order: ELEVENLABS_API_KEY, then ELEVENLABS_API_KEY_1, _2, …, then ELEVENLABS_API_KEYS.
-const keys = [...new Set([
+// --key NAME uses only that one variable from .env.local (e.g. --key ELEVENLABS_API_KEY_paid).
+const onlyKey = opt('key');
+if (onlyKey && !process.env[onlyKey]?.trim()) { console.error(`${onlyKey} is not set in .env.local.`); process.exit(1); }
+const keys = onlyKey ? [process.env[onlyKey].trim()] : [...new Set([
   process.env.ELEVENLABS_API_KEY,
   ...Object.keys(process.env).filter((k) => /^ELEVENLABS_API_KEY_\d+$/.test(k)).sort((a, b) => Number(a.split('_').pop()) - Number(b.split('_').pop())).map((k) => process.env[k]),
   ...(process.env.ELEVENLABS_API_KEYS || '').split(','),

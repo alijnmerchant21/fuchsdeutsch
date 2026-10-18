@@ -30,5 +30,9 @@ export const speakers: Record<string, Speaker> = {
   felix: { id: 'felix', name: 'Felix', origin: 'Wien, Österreich', style: 'Musiker, gemütlich', lang: 'de-AT', pitch: 0.85, rate: 0.82 },
   frauKlein: { id: 'frauKlein', name: 'Frau Klein', origin: 'Kassel', style: 'Lehrerin, sehr deutlich', lang: 'de-DE', pitch: 1.05, rate: 0.75 },
   herrAdler: { id: 'herrAdler', name: 'Herr Adler', origin: 'Hamburg', style: 'Verkäufer, freundlich, langsam', lang: 'de-DE', pitch: 0.85, rate: 0.8 },
+  // B1 (Season 3) additions.
+  sofia: { id: 'sofia', name: 'Sofia', origin: 'São Paulo, Brasilien', style: 'neu in der WG, UX-Designerin, lebhaft', lang: 'de-DE', pitch: 1.25, rate: 0.95 },
+  lina: { id: 'lina', name: 'Lina', origin: 'Leipzig', style: 'Felix’ Freundin, Lehrerin, warm', lang: 'de-DE', pitch: 1.2, rate: 0.98 },
+  herrVogt: { id: 'herrVogt', name: 'Herr Vogt', origin: 'München', style: 'Hausverwalter, förmlich, sachlich', lang: 'de-DE', pitch: 0.8, rate: 0.95 },
   lena: { id: 'lena', name: 'Lena', origin: 'Husum', style: 'neugierig, jung', lang: 'de-DE', pitch: 1.35, rate: 1.05 },
 };

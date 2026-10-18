@@ -126,7 +126,7 @@ function CoursePage() {
 
         </section>
 
-        {(course.id === 'a1' || course.id === 'a2') && <section className="v3-card v3-castcard"><CastStrip /></section>}
+        {['a1', 'a2', 'b1'].includes(course.id) && <section className="v3-card v3-castcard"><CastStrip course={course.id} /></section>}
 
         {done.length > 0 && (
           <section className="v3-card v3-list">

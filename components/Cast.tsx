@@ -2,17 +2,20 @@
 import { CAST, castImageId, imageSrc, useImages } from '@/lib/images';
 import { De } from './Hint';
 
-const MAIN = ['nele', 'kenji', 'amara', 'felix', 'frauKlein', 'herrLehmann'];
+const MAIN: Record<string, string[]> = {
+  default: ['nele', 'kenji', 'amara', 'felix', 'frauKlein', 'herrLehmann'],
+  b1: ['nele', 'amara', 'felix', 'sofia', 'kenji', 'herrLehmann'],
+};
 const TINTS = ['#fdf0b5', '#cfe6fb', '#cdeedb', '#e2dbfa', '#ffd9c2', '#fbd5e0'];
 
 /** The Fuchsbau-WG: picture (once made), name and role. */
-export function CastStrip({ title = true }: { title?: boolean }) {
+export function CastStrip({ title = true, course = 'default' }: { title?: boolean; course?: string }) {
   const pics = useImages();
   return (
     <div className="cast-strip">
       {title && <p className="v3-eyebrow"><De en="Meet the flat share" inline>Die Fuchsbau-WG</De></p>}
       <div className="cast-grid">
-        {MAIN.map((id, i) => {
+        {(MAIN[course] || MAIN.default).map((id, i) => {
           const c = CAST[id];
           const src = imageSrc(pics, castImageId(id));
           return (

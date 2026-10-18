@@ -21,7 +21,14 @@ export const CAST: Record<string, { name: string; look: string; role: string }> 
   felix: { name: 'Felix', role: 'Musiker aus Wien', look: 'Felix, an Austrian man of 26 with messy blond hair, light stubble, denim jacket' },
   frauKlein: { name: 'Frau Klein', role: 'Deutschlehrerin', look: 'Frau Klein, a German teacher in her fifties with a short gray bob, lavender cardigan, kind face' },
   herrLehmann: { name: 'Herr Lehmann', role: 'Nachbar', look: 'Herr Lehmann, an old man of 75 with a white mustache, flat cap and brown vest' },
+  // B1 (Season 3) additions.
+  sofia: { name: 'Sofia', role: 'UX-Designerin aus São Paulo', look: 'Sofia, a Brazilian woman of 27 with light brown skin, dark curly hair to the shoulders, small gold hoop earrings, coral orange shirt' },
+  lina: { name: 'Lina', role: 'Felix’ Freundin, Lehrerin', look: 'Lina, a German woman of 27 with a long straight dark blond ponytail, green rain jacket, warm smile' },
+  herrVogt: { name: 'Herr Vogt', role: 'Hausverwalter', look: 'Herr Vogt, a German man of 50 with short gray hair, rimless glasses, dark blue suit and a leather folder' },
 };
+
+/** Who gets a portrait in each course's picture run. */
+export const CAST_BY_COURSE: Record<string, string[]> = { a1: ['nele', 'kenji', 'amara', 'felix', 'frauKlein', 'herrLehmann'], b1: ['sofia', 'lina', 'herrVogt'] };
 
 export const who = (...ids: string[]) => ids.map((i) => CAST[i].look).join('; ');
 export const wg = who('nele', 'kenji', 'amara', 'felix');

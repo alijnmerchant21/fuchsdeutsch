@@ -24,7 +24,7 @@ const T = {
   en: {
     h1: 'Learn German, one calm step at a time.',
     lead: 'Short lessons, a story you follow from chapter to chapter, and exams at your level. Free for a limited time.',
-    cont: 'Continue learning',
+    cont: 'Continue learning', startFree: 'Start for free',
     features: [
       { icon: '🧭', title: 'One step at a time', text: 'Read, check, learn the rule, practice' },
       { icon: '🏠', title: 'A story to follow', text: 'Life in the Fuchsbau flat share' },
@@ -49,7 +49,7 @@ const T = {
   de: {
     h1: 'Deutsch lernen, ganz in Ruhe, Schritt für Schritt.',
     lead: 'Kurze Lektionen, eine Geschichte von Kapitel zu Kapitel und Prüfungen auf deinem Niveau. Für kurze Zeit kostenlos.',
-    cont: 'Weiterlernen',
+    cont: 'Weiterlernen', startFree: 'Kostenlos starten',
     features: [
       { icon: '🧭', title: 'Ein Schritt nach dem anderen', text: 'Lesen, prüfen, die Regel lernen, üben' },
       { icon: '🏠', title: 'Eine Geschichte', text: 'Das Leben in der Fuchsbau-WG' },
@@ -215,6 +215,7 @@ export default function Landing() {
           <h1>{t.h1}</h1>
           <p className="lead">{t.lead}</p>
           {ready && user && access !== false && <div className="hero-cta"><Link href="/lernen" className="btn btn-lg">{t.cont}</Link></div>}
+          {ready && !user && <div className="hero-cta"><a href="#beta" className="btn btn-lg">{t.startFree}</a><Link href="/login" className="btn btn-lg btn-ghost">{t.login}</Link></div>}
         </div>
         <div className="lp-hero-art" aria-hidden>
           <div className="lp-blob" />
@@ -225,8 +226,6 @@ export default function Landing() {
           <p className="lp-say" key={say}><b>{bubbles[say].de}</b> = {bubbles[say].en}</p>
         </div>
       </section>
-
-      {ready && (!user || access === false) && <section aria-label="Beta sign-up"><BetaForm lang={lang} /></section>}
 
       <section aria-labelledby="courses-h">
         <h2 id="courses-h" className="lp-h2">{t.levels}</h2>
@@ -253,6 +252,8 @@ export default function Landing() {
           <a href="/pruefung" className="btn btn-lg">{t.examGo} →</a>
         </div>
       </section>
+
+      {ready && (!user || access === false) && <section aria-label="Beta sign-up"><BetaForm lang={lang} /></section>}
 
       <section aria-label="What you get">
         <div className="lp-features">

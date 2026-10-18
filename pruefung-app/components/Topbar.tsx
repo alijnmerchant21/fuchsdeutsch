@@ -58,7 +58,6 @@ export function Topbar() {
         </span>
       )}
       {user && <button className="linkbtn" onClick={() => void signOut()}>{path === '/setup' ? t('Abmelden', 'Log out') : 'Abmelden'}</button>}
-      {ready && !user && path !== '/login' && <Link className="btn navbtn" href="/login">{t('Anmelden', 'Log in')}</Link>}
       <button className="ghost" onClick={flip} title={t('Hell oder dunkel', 'Light or dark')} aria-label={t('Hell oder dunkel', 'Light or dark')}>{theme === 'dark' ? '☀' : '☾'}</button>
     </header>
   );

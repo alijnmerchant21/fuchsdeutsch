@@ -45,7 +45,6 @@ export function Nav() {
           )}
           {user && isAdmin && <span className="v3-chip t-lilac">Admin</span>}
           {user && <button type="button" className="v3-textbtn" onClick={() => void signOut().then(() => router.push('/'))}>{lang === 'en' ? 'Log out' : 'Abmelden'}</button>}
-          {ready && !user && <Link href="/login" className="v3-btn small">{lang === 'en' ? 'Log in' : 'Anmelden'}</Link>}
         </div>
       </div>
       {isAdmin && adminView && <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div>}

@@ -36,15 +36,7 @@ export function Topbar() {
         <span className="soon" aria-disabled="true" title={t('Kommt bald', 'Coming soon')}>{t('Spiele', 'Games')} <small>{t('bald', 'soon')}</small></span>
         <span className="soon" aria-disabled="true" title={t('Kommt bald', 'Coming soon')}>Tausend <small>{t('bald', 'soon')}</small></span>
       </nav>
-      {user ? (
-        <span className="topsub">{candidate?.exam_date ? `Goethe-Zertifikat ${(candidate.level ?? 'b1').toUpperCase()} · Prüfung am ${new Date(candidate.exam_date + 'T12:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long' })}` : 'Goethe-Zertifikat A1 bis B2'}</span>
-      ) : (
-        <nav className="navlinks" aria-label="Seite">
-          <button type="button" onClick={() => go('how')}>{t('So funktioniert es', 'How it works')}</button>
-          <button type="button" onClick={() => go('why')}>{t('Warum anders', 'Why different')}</button>
-          <button type="button" onClick={() => go('preise')}>{t('Preise', 'Pricing')}</button>
-        </nav>
-      )}
+      {user ? <span className="topsub">{candidate?.exam_date ? `Goethe-Zertifikat ${(candidate.level ?? 'b1').toUpperCase()} · Prüfung am ${new Date(candidate.exam_date + 'T12:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long' })}` : 'Goethe-Zertifikat A1 bis B2'}</span> : <span className="topspace" />}
       {DEMO_MODE && <span className="mtag">Demo</span>}
       {isAdmin && <Link className="linkbtn" href="/admin">Admin</Link>}
       {user && path !== '/setup' ? (
@@ -59,6 +51,14 @@ export function Topbar() {
       )}
       {user && <button className="linkbtn" onClick={() => void signOut()}>{path === '/setup' ? t('Abmelden', 'Log out') : 'Abmelden'}</button>}
       <button className="ghost" onClick={flip} title={t('Hell oder dunkel', 'Light or dark')} aria-label={t('Hell oder dunkel', 'Light or dark')}>{theme === 'dark' ? '☀' : '☾'}</button>
+      {/* Second row for visitors: parts of the landing page. */}
+      {!user && (
+        <nav className="navlinks" aria-label={t('Auf dieser Seite', 'On this page')}>
+          <button type="button" onClick={() => go('how')}>{t('So funktioniert es', 'How it works')}</button>
+          <button type="button" onClick={() => go('why')}>{t('Warum anders', 'Why different')}</button>
+          <button type="button" onClick={() => go('preise')}>{t('Preise', 'Pricing')}</button>
+        </nav>
+      )}
     </header>
   );
 }

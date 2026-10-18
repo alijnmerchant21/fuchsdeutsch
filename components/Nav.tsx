@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useUiLang } from '@/lib/lang';
 import { BRAND } from '@/lib/config';
@@ -16,6 +17,20 @@ export function Nav() {
     <Link href={href} className={`v3-navlink ${here(href) || (also && here(also)) ? 'is-here' : ''}`}>{label}</Link>
   );
   const alive = streakAlive(progress.streak);
+  const en = lang === 'en';
+  // Light or dark. layout.tsx sets it before paint; FDPTHEME is shared with Fuchsdeutsch Prüfung.
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  useEffect(() => { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'); }, []);
+  const flip = () => {
+    const n = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', n);
+    try { localStorage.setItem('FDPTHEME', n); } catch { /* storage unavailable */ }
+    setTheme(n);
+  };
+  // Second row on the homepage for visitors: jump to a part of the page.
+  const sections = path === '/' && ready && !user
+    ? [{ id: 'levels', label: en ? 'Levels' : 'Niveaus' }, { id: 'exam', label: en ? 'Exam prep' : 'Prüfungstraining' }, { id: 'features', label: en ? 'What you get' : 'Was du bekommst' }, { id: 'beta', label: en ? 'Free beta' : 'Kostenlose Beta' }]
+    : [];
   return (
     <header className="v3-nav">
       <div className="v3-nav-in">
@@ -45,8 +60,16 @@ export function Nav() {
           )}
           {user && isAdmin && <span className="v3-chip t-lilac">Admin</span>}
           {user && <button type="button" className="v3-textbtn" onClick={() => void signOut().then(() => router.push('/'))}>{lang === 'en' ? 'Log out' : 'Abmelden'}</button>}
+          <button type="button" className="v3-theme" onClick={flip} title={en ? 'Light or dark' : 'Hell oder dunkel'} aria-label={en ? 'Light or dark' : 'Hell oder dunkel'}>{theme === 'dark' ? '☀' : '☾'}</button>
         </div>
       </div>
+      {sections.length > 0 && (
+        <nav className="v3-subnav" aria-label={en ? 'On this page' : 'Auf dieser Seite'}>
+          <div className="v3-subnav-in">
+            {sections.map((x) => <a key={x.id} href={`#${x.id}`} className="v3-navlink">{x.label}</a>)}
+          </div>
+        </nav>
+      )}
       {isAdmin && adminView && <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div>}
     </header>
   );

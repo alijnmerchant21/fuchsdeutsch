@@ -227,7 +227,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section aria-labelledby="courses-h">
+      <section id="levels" aria-labelledby="courses-h">
         <h2 id="courses-h" className="lp-h2">{t.levels}</h2>
         <div className="lp-courses lp-courses-4">
           {LEVELS.map((l) => {
@@ -244,7 +244,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="lp-exam" aria-labelledby="exam-h">
+      <section id="exam" className="lp-exam" aria-labelledby="exam-h">
         <div className="lp-exam-card t-peach">
           <span className="v3-tag">{t.exam}</span>
           <h2 id="exam-h">{t.examTitle}</h2>
@@ -255,7 +255,7 @@ export default function Landing() {
 
       {ready && (!user || access === false) && <section aria-label="Beta sign-up"><BetaForm lang={lang} /></section>}
 
-      <section aria-label="What you get">
+      <section id="features" aria-label="What you get">
         <div className="lp-features">
           {t.features.map((f) => (
             <div key={f.title} className="lp-feature">

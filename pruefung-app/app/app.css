@@ -271,3 +271,11 @@ button.lp-ribbon.rise{display:flex}
 @media(max-width:560px){.levelpick{grid-template-columns:repeat(2,1fr)}}
 .ads.adlist{grid-template-columns:1fr}
 .ads.adlist .ad b{font-weight:500}
+.betatag{display:inline-block;background:var(--lilac-soft);color:var(--lilac-ink);font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.agree{display:flex;gap:10px;align-items:flex-start;margin:14px 0 16px;font-size:14.5px;line-height:1.5;color:var(--dim)}
+.agree input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--ink,#1d1d1f)}
+.signbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.signbtns .btn,.signin .btn.wide{display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.signform{margin-top:6px}
+.switchline{margin:16px 0 0}
+@media(max-width:520px){.signbtns{grid-template-columns:1fr}}

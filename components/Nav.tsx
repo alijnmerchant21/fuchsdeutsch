@@ -28,6 +28,8 @@ export function Nav() {
             {!isAdmin && link('/kurs', 'Mein Kurs')}
             {!isAdmin && link('/geschichten', 'Geschichten')}
             {!isAdmin && link('/bestenliste', 'Bestenliste')}
+            {/* Fuchsdeutsch Prüfung is its own app under /pruefung, so a full page load, not a client link. */}
+            <a href="/pruefung" className={`v3-navlink ${path.startsWith('/pruefung') ? 'is-here' : ''}`}>Prüfung</a>
             {isAdmin && link('/admin', 'Admin')}
           </nav>
         )}

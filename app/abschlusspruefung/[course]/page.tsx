@@ -75,7 +75,7 @@ function Final() {
             : <li><De en={`Format: ${course.examName}. Four modules, 100 points each.`}>Im Format: {course.examName}. Vier Module, jedes Modul hat 100 Punkte.</De></li>}
           <li><De en={`You pass with at least ${PASS_MARK} points in every module.`}>Bestanden, wenn du in jedem Modul mindestens {PASS_MARK} Punkte hast.</De></li>
           <li><De en={`Covers all ${course.chapters.length} chapters. Everything is marked automatically.`}>Die Prüfung umfasst den Stoff aller {course.chapters.length} Kapitel. Alle Aufgaben werden automatisch ausgewertet.</De></li>
-          {course.finalStyle === 'course' && <li><De en={`Preparing for the real ${course.level} exam? Full mock tests in the official format are coming in Fuchsdeutsch Prüfung.`}>Du willst dich auf die echte {course.level}-Prüfung vorbereiten? Komplette Modelltests im Prüfungsformat gibt es bald in Fuchsdeutsch Prüfung.</De></li>}
+          {course.finalStyle === 'course' && <li><De en={`Preparing for the real ${course.level} exam? Full mock tests in the official format are in Fuchsdeutsch Prüfung.`}>Du willst dich auf die echte {course.level}-Prüfung vorbereiten? Komplette Modelltests im Prüfungsformat gibt es in <a href="/pruefung">Fuchsdeutsch Prüfung</a>.</De></li>}
         </ul>
       </header>
 

@@ -317,3 +317,8 @@ a.v3-secrow:hover b { text-decoration: underline; }
 .v3-beta-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .v3-beta-choice .btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 @media (max-width: 520px) { .v3-beta-choice { grid-template-columns: 1fr; } }
+
+/* Homepage: Fuchsdeutsch Prüfung teaser */
+.lp-exam-card { display: grid; gap: 10px; justify-items: start; padding: 28px; border-radius: var(--r-lg, 20px); background: var(--tone); border: 1px solid var(--line, #e3e3e3); }
+.lp-exam-card h2 { margin: 0; }
+.lp-exam-card p { margin: 0; max-width: 60ch; color: var(--ink-2, #555); }

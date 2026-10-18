@@ -1,0 +1,82 @@
+[
+ {
+  "id": "b1-mock-1",
+  "title": "Modelltest 1",
+  "en": "Full B1 mock test 1 at real exam length: Hören 40 min, Lesen 65 min, Schreiben 60 min",
+  "sections": [
+   {
+    "module": "hoeren",
+    "title": "Hören",
+    "minutes": 40,
+    "sets": [
+     "b1-h1-a",
+     "b1-h2-a",
+     "b1-h3-a",
+     "b1-h4-a"
+    ]
+   },
+   {
+    "module": "lesen",
+    "title": "Lesen",
+    "minutes": 65,
+    "sets": [
+     "b1-l1-a",
+     "b1-l2-a",
+     "b1-l3-a",
+     "b1-l4-a",
+     "b1-l5-a"
+    ]
+   },
+   {
+    "module": "schreiben",
+    "title": "Schreiben",
+    "minutes": 60,
+    "sets": [
+     "b1-s1-a",
+     "b1-s2-a",
+     "b1-s3-a"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "b1-mock-2",
+  "title": "Modelltest 2",
+  "en": "Full B1 mock test 2 at real exam length: Hören 40 min, Lesen 65 min, Schreiben 60 min",
+  "sections": [
+   {
+    "module": "hoeren",
+    "title": "Hören",
+    "minutes": 40,
+    "sets": [
+     "b1-h1-b",
+     "b1-h2-b",
+     "b1-h3-b",
+     "b1-h4-b"
+    ]
+   },
+   {
+    "module": "lesen",
+    "title": "Lesen",
+    "minutes": 65,
+    "sets": [
+     "b1-l1-b",
+     "b1-l2-b",
+     "b1-l3-b",
+     "b1-l4-b",
+     "b1-l5-b"
+    ]
+   },
+   {
+    "module": "schreiben",
+    "title": "Schreiben",
+    "minutes": 60,
+    "sets": [
+     "b1-s1-b",
+     "b1-s2-b",
+     "b1-s3-b"
+    ]
+   }
+  ]
+ }
+]

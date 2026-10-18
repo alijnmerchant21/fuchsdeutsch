@@ -3077,5 +3077,2409 @@
    }
   ],
   "level": "b1"
+ },
+ "b1-h1-a": {
+  "id": "b1-h1-a",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Kurze Texte",
+  "instr": "Sie hören nun fünf kurze Texte. Sie hören jeden Text zweimal. Zu jedem Text lösen Sie zwei Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear five short texts. You hear each text twice. For each text you solve two tasks. Choose the correct answer for each task.",
+  "source": "own",
+  "speakers": {
+   "KAR": "Karin",
+   "FLU": "Ansage",
+   "VER": "Radio",
+   "BUE": "Ansage",
+   "WER": "Radio"
+  },
+  "genders": {
+   "KAR": "f",
+   "FLU": "f",
+   "VER": "m",
+   "BUE": "f",
+   "WER": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Nachricht auf der Mailbox",
+    "audio": "audio/b1/b1-h1-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KAR",
+      "Hallo Jonas, hier ist Karin aus der Buchhaltung. Ich wollte dir nur kurz sagen, dass ich morgen nicht mit dem Auto zur Arbeit fahren kann. Mein Wagen ist seit heute Mittag in der Werkstatt, die Bremsen müssen repariert werden. Das dauert wahrscheinlich bis Donnerstag. Kannst du vielleicht morgen und übermorgen fahren? Ich bezahle dir dann natürlich das Benzin. Wenn das nicht geht, ist es auch kein Problem, dann nehme ich einfach den Bus um sieben Uhr zehn. Schick mir bitte bis heute Abend eine kurze Nachricht. Danke dir!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Karins Auto muss repariert werden.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "die Bremsen müssen repariert werden",
+      "why": "Das Auto ist in der Werkstatt, die Bremsen werden repariert."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Karin bittet Jonas, …",
+      "opts": [
+       "ihr bis heute Abend zu antworten.",
+       "sie um 7.10 Uhr an der Bushaltestelle abzuholen.",
+       "ihr Auto am Donnerstag aus der Werkstatt zu holen."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Schick mir bitte bis heute Abend eine kurze Nachricht.",
+      "why": "Den Bus um 7.10 Uhr nimmt Karin selbst, wenn Jonas nicht fahren kann."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Durchsage am Flughafen",
+    "audio": "audio/b1/b1-h1-a-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "FLU",
+      "Achtung bitte, eine Information für alle Passagiere des Fluges LH zweihundertvierzehn nach Lissabon. Ihr Flug startet heute nicht von Gate B zwölf, sondern von Gate C drei. Bitte beachten Sie: Der Weg zu den C-Gates dauert ungefähr fünfzehn Minuten, und Sie müssen noch einmal durch die Passkontrolle. Das Boarding beginnt um zehn Uhr vierzig. Passagiere mit kleinen Kindern und Reisende, die Hilfe brauchen, dürfen zuerst einsteigen. Wir wünschen Ihnen einen angenehmen Flug."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Familien mit kleinen Kindern dürfen als Erste ins Flugzeug.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Passagiere mit kleinen Kindern und Reisende, die Hilfe brauchen, dürfen zuerst einsteigen.",
+      "why": "„zuerst einsteigen“ = als Erste ins Flugzeug."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Das Boarding beginnt …",
+      "opts": [
+       "in fünfzehn Minuten.",
+       "um 10.40 Uhr.",
+       "am Gate B12."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Das Boarding beginnt um zehn Uhr vierzig.",
+      "why": "Fünfzehn Minuten dauert nur der <b>Weg</b>. Gate B12 ist das alte Gate."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Verkehrsfunk im Radio",
+    "audio": "audio/b1/b1-h1-a-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "VER",
+      "Und nun die Verkehrsmeldungen. Auf der A sieben zwischen Kassel-Nord und Göttingen gibt es nach einem Unfall zehn Kilometer Stau. Die Polizei bittet alle Autofahrer, die Strecke großräumig zu umfahren. Gute Nachrichten dagegen von der A vier: Die Baustelle bei Erfurt ist seit heute Morgen beendet, dort fährt man wieder auf allen Spuren. Und eine Warnung für die B siebenundzwanzig: Dort liegen nach dem Sturm noch Äste auf der Straße. Bitte fahren Sie dort besonders vorsichtig. Die nächsten Meldungen gibt es um halb vier."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Auf der A4 bei Erfurt gibt es im Moment eine Baustelle.",
+      "a": "f",
+      "trap": "vorher",
+      "ev": "Die Baustelle bei Erfurt ist seit heute Morgen beendet",
+      "why": "Die Baustelle war bis heute Morgen. Jetzt ist sie <b>beendet</b>."
+     },
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Was sollen Autofahrer auf der B 27 tun?",
+      "opts": [
+       "Die Strecke umfahren.",
+       "Langsam und vorsichtig fahren.",
+       "Auf die nächste Meldung warten."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Bitte fahren Sie dort besonders vorsichtig.",
+      "why": "„Umfahren“ gilt für die A7, nicht für die B 27."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · Ansage des Bürgerbüros",
+    "audio": "audio/b1/b1-h1-a-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "BUE",
+      "Guten Tag, Sie sind verbunden mit dem Bürgerbüro der Stadt Wendlingen. Leider rufen Sie außerhalb unserer Sprechzeiten an. Wir sind montags bis freitags von acht bis zwölf Uhr und donnerstags zusätzlich von vierzehn bis achtzehn Uhr für Sie da. Bitte beachten Sie: Für einen neuen Personalausweis oder Reisepass brauchen Sie immer einen Termin. Diesen können Sie im Internet auf unserer Webseite buchen. Eine Wohnung anmelden können Sie dagegen auch ohne Termin. Bringen Sie dafür aber unbedingt die Bestätigung von Ihrem Vermieter mit. Vielen Dank für Ihren Anruf."
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "rf",
+      "q": "Das Bürgerbüro ist jeden Nachmittag geöffnet.",
+      "a": "f",
+      "trap": "teil",
+      "ev": "donnerstags zusätzlich von vierzehn bis achtzehn Uhr",
+      "why": "Nachmittags nur am <b>Donnerstag</b>, sonst nur bis zwölf Uhr."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Ohne Termin kann man …",
+      "opts": [
+       "einen neuen Reisepass beantragen.",
+       "einen neuen Personalausweis bekommen.",
+       "eine neue Wohnung anmelden."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Eine Wohnung anmelden können Sie dagegen auch ohne Termin.",
+      "why": "Für Ausweis und Pass braucht man <b>immer</b> einen Termin."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Werbung im Radio",
+    "audio": "audio/b1/b1-h1-a-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "WER",
+      "Der Sommer ist da, und mit ihm das Open-Air-Kino im Schlosshof! Vom ersten Juli bis zum fünfzehnten August zeigen wir jeden Abend einen Film. Los geht es immer, wenn es dunkel wird, also gegen halb zehn. Karten kosten neun Euro, mittwochs nur sechs. Bringen Sie gern eine Decke oder ein Kissen mit, Stühle gibt es aber natürlich auch. Essen und Getränke dürfen Sie leider nicht selbst mitbringen, an unserem Kiosk finden Sie aber alles, was Sie brauchen. Und wenn es regnet? Kein Problem: Dann zeigen wir den Film einfach in der Stadthalle nebenan."
+     ]
+    ],
+    "items": [
+     {
+      "n": 9,
+      "type": "rf",
+      "q": "Man darf eigene Getränke mitbringen.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "Essen und Getränke dürfen Sie leider nicht selbst mitbringen",
+      "why": "Decke und Kissen ja, Essen und Getränke <b>nicht</b>."
+     },
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Wenn es regnet, …",
+      "opts": [
+       "fällt der Film aus.",
+       "bekommt man sein Geld zurück.",
+       "sieht man den Film in einem anderen Gebäude."
+      ],
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Dann zeigen wir den Film einfach in der Stadthalle nebenan.",
+      "why": "Stadthalle nebenan = ein anderes Gebäude. Der Film fällt nicht aus."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-h2-a": {
+  "id": "b1-h2-a",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Betriebsführung",
+  "instr": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c. Sie nehmen an einer Führung durch eine Fahrradfabrik teil.",
+  "instr_en": "You hear a text once. You solve five tasks. Choose the correct answer a, b or c. You are taking part in a guided tour of a bicycle factory.",
+  "source": "own",
+  "speakers": {
+   "BRA": "Ilka Brandner"
+  },
+  "genders": {
+   "BRA": "f"
+  },
+  "groups": [
+   {
+    "title": "Führung bei Velowerk Hansen",
+    "audio": "audio/b1/b1-h2-a-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "BRA",
+      "Guten Morgen und herzlich willkommen bei Velowerk Hansen! Ich bin Ilka Brandner, ich arbeite hier in der Kundenberatung und führe Sie heute durch unsere Firma. Die Führung dauert etwa neunzig Minuten. Zuerst ein paar Worte zu uns: Die Firma wurde vor fünfunddreißig Jahren von Werner Hansen gegründet. Damals hat er in seiner Garage alte Fahrräder repariert. Neue Räder bauen wir erst seit ungefähr zwanzig Jahren. Heute arbeiten hier hundertzwanzig Menschen, und wir verkaufen unsere Räder in ganz Europa."
+     ],
+     [
+      "BRA",
+      "Wir beginnen gleich in der Halle, in der die Rahmen gemacht werden. Dort ist es ziemlich laut, deshalb bekommt jeder von Ihnen am Eingang einen Gehörschutz. Bitte tragen Sie ihn in dieser Halle die ganze Zeit. Fotos dürfen Sie übrigens überall machen, nur in der Halle für neue Modelle leider nicht, denn diese Räder sind noch geheim."
+     ],
+     [
+      "BRA",
+      "Danach sehen wir, wie die Räder zusammengebaut werden. Bei uns gibt es kein Fließband. Jedes Rad wird von einer einzigen Person komplett montiert. Das dauert etwa drei Stunden pro Rad. Am Ende kommt ein kleiner Aufkleber mit dem Namen dieser Person an den Rahmen. So weiß jeder Kunde, wer sein Rad gebaut hat."
+     ],
+     [
+      "BRA",
+      "Zum Schluss kommen wir in unsere Testabteilung. Dort dürfen Sie gern selbst eine Runde auf unserer Teststrecke fahren. Dafür brauchen Sie aber feste Schuhe. Wer heute Sandalen trägt, kann sich bei mir ein Paar Schuhe leihen, wir haben fast alle Größen."
+     ],
+     [
+      "BRA",
+      "Nach der Führung gibt es im Café im Erdgeschoss Kaffee und Kuchen für alle, das ist im Preis schon enthalten. Und falls Sie sich in ein Rad verliebt haben: Im Laden bekommen Besuchergruppen heute fünfzehn Prozent Rabatt auf Zubehör wie Helme und Taschen. Auf die Fahrräder selbst gibt es leider keinen Rabatt. So, und jetzt bitte alle mir nach!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Werner Hansen hat am Anfang …",
+      "opts": [
+       "neue Fahrräder gebaut.",
+       "in einer Garage Fahrräder repariert.",
+       "Fahrräder in ganz Europa verkauft."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Damals hat er in seiner Garage alte Fahrräder repariert.",
+      "why": "Neue Räder baut die Firma erst <b>seit zwanzig Jahren</b>. Am Anfang hat er repariert."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "In der Halle, in der die Rahmen gemacht werden, …",
+      "opts": [
+       "müssen die Besucher einen Gehörschutz tragen.",
+       "darf man keine Fotos machen.",
+       "muss man sehr leise sein."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Bitte tragen Sie ihn in dieser Halle die ganze Zeit.",
+      "why": "Es ist dort <b>laut</b>. Fotos sind nur in der Halle für neue Modelle verboten."
+     },
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Ein Fahrrad …",
+      "opts": [
+       "wird am Fließband gebaut.",
+       "ist nach drei Stunden beim Kunden.",
+       "wird von einer Person allein montiert."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Jedes Rad wird von einer einzigen Person komplett montiert.",
+      "why": "„kein Fließband“: Eine Person baut das ganze Rad."
+     },
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Wer auf der Teststrecke fahren möchte, …",
+      "opts": [
+       "muss vorher ein Rad kaufen.",
+       "braucht feste Schuhe.",
+       "muss eigene Schuhe mitbringen."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Dafür brauchen Sie aber feste Schuhe.",
+      "why": "Eigene Schuhe sind nicht nötig: Frau Brandner leiht Schuhe aus."
+     },
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Heute bekommen die Besucher im Laden …",
+      "opts": [
+       "Rabatt auf Helme und Taschen.",
+       "fünfzehn Prozent Rabatt auf alle Fahrräder.",
+       "einen kostenlosen Helm."
+      ],
+      "a": "a",
+      "trap": "teil",
+      "ev": "fünfzehn Prozent Rabatt auf Zubehör wie Helme und Taschen",
+      "why": "Rabatt nur auf Zubehör, <b>nicht</b> auf Fahrräder."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-h3-a": {
+  "id": "b1-h3-a",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Gespräch",
+  "instr": "Sie hören nun ein Gespräch. Sie hören das Gespräch einmal. Dazu lösen Sie sieben Aufgaben. Wählen Sie: Sind die Aussagen Richtig oder Falsch? Sie sitzen in der Straßenbahn und hören, wie sich Katja und Moritz unterhalten.",
+  "instr_en": "You hear a conversation once. You solve seven tasks. Decide: are the statements true or false? You are on a tram and hear Katja and Moritz talking.",
+  "source": "own",
+  "speakers": {
+   "KAT": "Katja",
+   "MOR": "Moritz"
+  },
+  "genders": {
+   "KAT": "f",
+   "MOR": "m"
+  },
+  "groups": [
+   {
+    "title": "Katja und Moritz in der Straßenbahn",
+    "audio": "audio/b1/b1-h3-a-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "KAT",
+      "Moritz? Hallo! Dich habe ich ja ewig nicht gesehen!"
+     ],
+     [
+      "MOR",
+      "Katja! Stimmt, bestimmt seit dem Sommerfest. Wie geht's dir?"
+     ],
+     [
+      "KAT",
+      "Gut, aber ich bin ziemlich müde. Ich komme gerade vom Tanzkurs. Mein Freund und ich lernen Salsa, weil wir im Mai heiraten."
+     ],
+     [
+      "MOR",
+      "Wirklich? Herzlichen Glückwunsch! Und, macht es Spaß?"
+     ],
+     [
+      "KAT",
+      "Mir schon. Lukas findet es eher anstrengend, aber er gibt sich Mühe. Wir haben noch acht Stunden, dann sollten wir es können. Und was machst du so? Arbeitest du noch im Hotel?"
+     ],
+     [
+      "MOR",
+      "Nein, seit März nicht mehr. Ich mache jetzt eine Ausbildung zum Erzieher. Ich wollte schon lange mit Kindern arbeiten."
+     ],
+     [
+      "KAT",
+      "Das passt zu dir. Ist das nicht schwierig, so ohne Gehalt?"
+     ],
+     [
+      "MOR",
+      "Ich bekomme zum Glück Geld vom Amt, aber nicht viel. Deshalb arbeite ich am Wochenende noch in einem Restaurant. Das ist manchmal ganz schön viel."
+     ],
+     [
+      "KAT",
+      "Kann ich mir vorstellen. Sag mal, du fotografierst doch so gut, oder? Wir suchen noch jemanden für die Hochzeit. Ein Profi ist uns einfach zu teuer."
+     ],
+     [
+      "MOR",
+      "Hm, ich fotografiere gern, aber auf einer Hochzeit? Da habe ich ein bisschen Angst, dass ich etwas falsch mache. Das mache ich lieber nicht. Aber mein Bruder Jannik, der macht das beruflich. Ich kann ihn fragen, ob er euch einen guten Preis macht."
+     ],
+     [
+      "KAT",
+      "Das wäre toll! Die Hochzeit ist am achtzehnten Mai, das ist ein Samstag."
+     ],
+     [
+      "MOR",
+      "Ich rufe ihn heute Abend an und schreibe dir dann. Oh, hier muss ich aussteigen. Grüß Lukas von mir!"
+     ],
+     [
+      "KAT",
+      "Mache ich. Tschüss!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 16,
+      "type": "rf",
+      "q": "Katja und Moritz haben sich lange nicht gesehen.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Dich habe ich ja ewig nicht gesehen!",
+      "why": "„ewig nicht gesehen“ = lange nicht gesehen."
+     },
+     {
+      "n": 17,
+      "type": "rf",
+      "q": "Lukas hat beim Tanzkurs viel Spaß.",
+      "a": "f",
+      "trap": "person",
+      "ev": "Lukas findet es eher anstrengend",
+      "why": "<b>Katja</b> hat Spaß. Lukas findet es anstrengend."
+     },
+     {
+      "n": 18,
+      "type": "rf",
+      "q": "Moritz arbeitet seit März nicht mehr im Hotel.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Nein, seit März nicht mehr.",
+      "why": "Direkt gesagt: seit März nicht mehr."
+     },
+     {
+      "n": 19,
+      "type": "rf",
+      "q": "Moritz bekommt während der Ausbildung kein Geld.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "Ich bekomme zum Glück Geld vom Amt, aber nicht viel.",
+      "why": "Er bekommt Geld vom Amt, nur nicht viel."
+     },
+     {
+      "n": 20,
+      "type": "rf",
+      "q": "Moritz arbeitet am Wochenende zusätzlich.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Deshalb arbeite ich am Wochenende noch in einem Restaurant.",
+      "why": "Am Wochenende arbeitet er noch im Restaurant."
+     },
+     {
+      "n": 21,
+      "type": "rf",
+      "q": "Moritz möchte auf der Hochzeit fotografieren.",
+      "a": "f",
+      "trap": "wort",
+      "ev": "Das mache ich lieber nicht.",
+      "why": "Er fotografiert gern, aber auf der Hochzeit möchte er es <b>nicht</b>."
+     },
+     {
+      "n": 22,
+      "type": "rf",
+      "q": "Moritz ruft Katja heute Abend an.",
+      "a": "f",
+      "trap": "person",
+      "ev": "Ich rufe ihn heute Abend an und schreibe dir dann.",
+      "why": "Er ruft seinen <b>Bruder</b> an. Katja bekommt eine Nachricht."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-h4-a": {
+  "id": "b1-h4-a",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Diskussion: Taschengeld",
+  "instr": "Sie hören nun eine Diskussion. Sie hören die Diskussion zweimal. Dazu lösen Sie acht Aufgaben. Ordnen Sie die Aussagen zu: Wer sagt was? Der Moderator der Radiosendung „Thema Familie“ diskutiert mit Sabine Roth, Schuldnerberaterin, und Kai Lehmann, Grundschullehrer, über das Thema „Taschengeld für Kinder“.",
+  "instr_en": "You hear a discussion twice. You solve eight tasks. Match the statements: who says what? The host of the radio show discusses pocket money for children with Sabine Roth, a debt counselor, and Kai Lehmann, a primary school teacher.",
+  "source": "own",
+  "who": [
+   "Moderator",
+   "Sabine Roth",
+   "Kai Lehmann"
+  ],
+  "speakers": {
+   "MOD": "Moderator",
+   "ROT": "Sabine Roth",
+   "LEH": "Kai Lehmann"
+  },
+  "genders": {
+   "MOD": "m",
+   "ROT": "f",
+   "LEH": "m"
+  },
+  "groups": [
+   {
+    "title": "Thema Familie: Taschengeld für Kinder",
+    "audio": "audio/b1/b1-h4-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "Guten Abend und willkommen bei „Thema Familie“. Heute geht es ums Taschengeld. Ab wann sollen Kinder eigenes Geld bekommen, und wie viel? Darüber spreche ich mit Sabine Roth. Sie arbeitet in einer Beratungsstelle für Menschen mit Schulden. Und mit Kai Lehmann, er ist Grundschullehrer und hat selbst zwei Söhne. Frau Roth, warum ist Taschengeld überhaupt so wichtig?"
+     ],
+     [
+      "ROT",
+      "Weil Kinder nur so lernen, mit Geld umzugehen. Zu mir kommen viele junge Erwachsene, die mit zwanzig schon Schulden haben. Fast alle erzählen mir, dass sie als Kinder nie selbst über Geld entscheiden durften. Die Eltern haben alles bezahlt, und plötzlich hatten sie ein eigenes Konto und keine Ahnung."
+     ],
+     [
+      "MOD",
+      "Herr Lehmann, ab welchem Alter sollte es losgehen?"
+     ],
+     [
+      "LEH",
+      "Ich finde, ab der ersten Klasse. Dann können Kinder ein bisschen rechnen und wissen, was eine Münze wert ist. In der Schule merke ich sofort, welche Kinder Taschengeld bekommen. Die wissen zum Beispiel genau, was ein Eis kostet."
+     ],
+     [
+      "MOD",
+      "Und wie viel ist richtig? Es gibt ja Tabellen im Internet."
+     ],
+     [
+      "LEH",
+      "Die Tabellen sind ein guter Anfang. Viel wichtiger ist aber, dass das Geld regelmäßig kommt, also immer am gleichen Tag. Bei kleinen Kindern am besten jede Woche, weil ein Monat für sie eine Ewigkeit ist."
+     ],
+     [
+      "ROT",
+      "Und ich möchte noch etwas ergänzen: Die Eltern sollten nicht kontrollieren, wofür das Kind sein Geld ausgibt. Wenn es alles für Süßigkeiten ausgibt und am Freitag nichts mehr hat, dann ist das eine wichtige Erfahrung."
+     ],
+     [
+      "MOD",
+      "Viele Eltern geben aber zusätzlich Geld, wenn das Kind im Haushalt hilft. Was halten Sie davon?"
+     ],
+     [
+      "ROT",
+      "Gar nichts. Den Tisch decken oder das Zimmer aufräumen gehört einfach zum Familienleben dazu. Dafür sollte niemand bezahlt werden."
+     ],
+     [
+      "LEH",
+      "Ich sehe das ein bisschen anders. Bei uns gibt es extra Geld, wenn die Jungs den Rasen mähen oder das Auto waschen. Das sind ja keine normalen Aufgaben. So lernen sie, dass man für Geld arbeiten muss."
+     ],
+     [
+      "MOD",
+      "Zum Schluss: Was ist mit Geld auf dem Handy, also mit Apps für Kinder?"
+     ],
+     [
+      "LEH",
+      "Davon halte ich bei kleinen Kindern wenig. Sie müssen das Geld in der Hand haben und sehen, wie es weniger wird."
+     ],
+     [
+      "ROT",
+      "Für Jugendliche finde ich solche Apps aber sinnvoll. Später bezahlen sie ja auch fast alles mit Karte oder Handy, und das muss man auch lernen."
+     ],
+     [
+      "MOD",
+      "Vielen Dank Ihnen beiden für das Gespräch."
+     ]
+    ],
+    "items": [
+     {
+      "n": 23,
+      "type": "who",
+      "q": "Viele Menschen mit Schulden durften als Kind nicht selbst über Geld entscheiden.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "dass sie als Kinder nie selbst über Geld entscheiden durften",
+      "why": "Frau Roth erzählt von den jungen Erwachsenen in ihrer Beratung."
+     },
+     {
+      "n": 24,
+      "type": "who",
+      "q": "Kinder sollten Taschengeld bekommen, sobald sie in die Schule kommen.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Ich finde, ab der ersten Klasse.",
+      "why": "Herr Lehmann: ab der ersten Klasse = ab Schulbeginn."
+     },
+     {
+      "n": 25,
+      "type": "who",
+      "q": "Kleine Kinder sollten ihr Geld jede Woche bekommen.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Bei kleinen Kindern am besten jede Woche",
+      "why": "Herr Lehmann: Ein Monat ist für kleine Kinder zu lang."
+     },
+     {
+      "n": 26,
+      "type": "who",
+      "q": "Eltern sollten nicht bestimmen, wofür das Kind sein Taschengeld ausgibt.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Die Eltern sollten nicht kontrollieren, wofür das Kind sein Geld ausgibt.",
+      "why": "Frau Roth: Fehler mit Süßigkeiten sind eine wichtige Erfahrung."
+     },
+     {
+      "n": 27,
+      "type": "who",
+      "q": "Viele Eltern geben ihren Kindern extra Geld, wenn sie zu Hause helfen.",
+      "a": "a",
+      "trap": "person",
+      "ev": "Viele Eltern geben aber zusätzlich Geld, wenn das Kind im Haushalt hilft.",
+      "why": "Das sagt der <b>Moderator</b> in seiner Frage."
+     },
+     {
+      "n": 28,
+      "type": "who",
+      "q": "Für normale Hilfe im Haushalt sollte es kein Geld geben.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Dafür sollte niemand bezahlt werden.",
+      "why": "Frau Roth: Tisch decken gehört zum Familienleben."
+     },
+     {
+      "n": 29,
+      "type": "who",
+      "q": "Für besondere Arbeiten zu Hause kann es zusätzliches Geld geben.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Bei uns gibt es extra Geld, wenn die Jungs den Rasen mähen oder das Auto waschen.",
+      "why": "Herr Lehmann: Rasen mähen und Auto waschen sind keine normalen Aufgaben."
+     },
+     {
+      "n": 30,
+      "type": "who",
+      "q": "Kleine Kinder sollten mit Bargeld lernen.",
+      "a": "c",
+      "trap": "person",
+      "ev": "Sie müssen das Geld in der Hand haben und sehen, wie es weniger wird.",
+      "why": "Frau Roth spricht über Apps für <b>Jugendliche</b>. Herr Lehmann will Bargeld für kleine Kinder."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-h1-b": {
+  "id": "b1-h1-b",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Kurze Texte",
+  "instr": "Sie hören nun fünf kurze Texte. Sie hören jeden Text zweimal. Zu jedem Text lösen Sie zwei Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear five short texts. You hear each text twice. For each text you solve two tasks. Choose the correct answer for each task.",
+  "source": "own",
+  "speakers": {
+   "KOW": "Ilona Kowalski",
+   "KAU": "Ansage",
+   "NAC": "Radio",
+   "HOT": "Ansage",
+   "TIP": "Radio"
+  },
+  "genders": {
+   "KOW": "f",
+   "KAU": "m",
+   "NAC": "f",
+   "HOT": "f",
+   "TIP": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Nachricht auf dem Anrufbeantworter",
+    "audio": "audio/b1/b1-h1-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KOW",
+      "Guten Tag, Herr Demir, hier ist Ilona Kowalski aus dem zweiten Stock. Bei mir liegt seit gestern ein Paket für Sie. Der Postbote hat es bei mir abgegeben, weil Sie nicht zu Hause waren. Es ist ziemlich groß und schwer. Ich bin heute bis siebzehn Uhr bei der Arbeit, danach können Sie es gern abholen. Morgen früh fahre ich allerdings für eine Woche zu meiner Tochter nach Österreich. Wenn es heute Abend bei Ihnen nicht klappt, gebe ich das Paket Herrn Albrecht im Erdgeschoss. Der ist eigentlich immer zu Hause. Bis dann!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Frau Kowalski hat ein Paket für Herrn Demir angenommen.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Bei mir liegt seit gestern ein Paket für Sie.",
+      "why": "Der Postbote hat das Paket bei ihr abgegeben."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Wenn Herr Demir heute Abend keine Zeit hat, …",
+      "opts": [
+       "bringt Frau Kowalski das Paket zur Post.",
+       "kann er es bei einem anderen Nachbarn abholen.",
+       "muss er eine Woche warten."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "gebe ich das Paket Herrn Albrecht im Erdgeschoss",
+      "why": "Österreich ist die Reise von Frau Kowalski. Das Paket bekommt Herr Albrecht."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Durchsage im Kaufhaus",
+    "audio": "audio/b1/b1-h1-b-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KAU",
+      "Liebe Kundinnen und Kunden, heute ist bei uns Familientag! In unserer Spielzeugabteilung im dritten Stock können Kinder von vierzehn bis siebzehn Uhr kostenlos basteln. Die Eltern können in dieser Zeit in Ruhe einkaufen. Bitte melden Sie Ihr Kind an der Kasse in der Spielzeugabteilung an. Außerdem bekommen Sie heute auf alle Kinderschuhe zwanzig Prozent Rabatt. Die Schuhabteilung finden Sie im Erdgeschoss direkt neben dem Haupteingang. Wir wünschen Ihnen einen schönen Einkauf."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Die Eltern müssen beim Basteln dabei sein.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Die Eltern können in dieser Zeit in Ruhe einkaufen.",
+      "why": "Die Eltern können einkaufen, während die Kinder basteln."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Wo gibt es heute günstigere Schuhe für Kinder?",
+      "opts": [
+       "Im dritten Stock.",
+       "An der Kasse in der Spielzeugabteilung.",
+       "Im Erdgeschoss."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Die Schuhabteilung finden Sie im Erdgeschoss",
+      "why": "Im dritten Stock ist das Basteln, nicht die Schuhe."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Nachrichten im Radio",
+    "audio": "audio/b1/b1-h1-b-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "NAC",
+      "Gute Nachrichten für alle, die gern schwimmen: Das Freibad am Mühlenteich öffnet in diesem Jahr früher als geplant. Eigentlich sollte die Saison erst am ersten Juni beginnen. Weil die Bauarbeiten am neuen Becken aber schneller fertig waren, geht es schon am kommenden Samstag los. Neu ist außerdem eine große Rutsche für Kinder. Die Preise bleiben gleich: Erwachsene zahlen vier Euro, Kinder zwei Euro. Wer oft kommt, sollte sich die Saisonkarte für sechzig Euro kaufen. Die gibt es allerdings nur online."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Das Freibad öffnet am ersten Juni.",
+      "a": "f",
+      "trap": "vorher",
+      "ev": "geht es schon am kommenden Samstag los",
+      "why": "Der erste Juni war nur der <b>Plan</b>. Jetzt öffnet es früher."
+     },
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Die Saisonkarte …",
+      "opts": [
+       "kostet vier Euro.",
+       "kann man nur im Internet kaufen.",
+       "ist in diesem Jahr neu."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Die gibt es allerdings nur online.",
+      "why": "„nur online“ = nur im Internet. Vier Euro kostet eine Karte für einen Tag."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · Telefonansage",
+    "audio": "audio/b1/b1-h1-b-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "HOT",
+      "Herzlich willkommen beim Kundenservice von Netzfunk. Im Moment sind alle Mitarbeiterinnen und Mitarbeiter im Gespräch. Die Wartezeit beträgt etwa zehn Minuten. Unser Tipp: Viele Fragen können Sie auch schnell in unserem Kundenportal im Internet klären, zum Beispiel wenn Sie Ihre Adresse ändern möchten. Wenn Ihr Internet nicht funktioniert, drücken Sie bitte die Eins. Für Fragen zu Ihrer Rechnung drücken Sie die Zwei. Möchten Sie Ihren Vertrag kündigen, drücken Sie die Drei. Oder bleiben Sie einfach in der Leitung."
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "rf",
+      "q": "Eine neue Adresse kann man auch im Internet angeben.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "zum Beispiel wenn Sie Ihre Adresse ändern möchten",
+      "why": "Adresse ändern geht im Kundenportal im Internet."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Sie haben eine Frage zu Ihrer Rechnung. Was tun Sie?",
+      "opts": [
+       "Sie drücken die Eins.",
+       "Sie drücken die Drei.",
+       "Sie drücken die Zwei."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Für Fragen zu Ihrer Rechnung drücken Sie die Zwei.",
+      "why": "Eins ist für Internet-Probleme, Drei für Kündigungen."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Veranstaltungstipp im Radio",
+    "audio": "audio/b1/b1-h1-b-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "TIP",
+      "Und hier noch unser Tipp für Sonntag: Die Freiwillige Feuerwehr in Altenhagen lädt zum Tag der offenen Tür ein. Von zehn bis sechzehn Uhr können Groß und Klein die Feuerwehrautos aus der Nähe ansehen. Kinder dürfen sogar einmal mit dem großen Wasserschlauch spritzen. Um elf und um vierzehn Uhr zeigen die Feuerwehrleute, was man bei einem Brand in der Küche tun sollte. Für Essen und Getränke sorgt der Sportverein. Der Eintritt ist frei, die Feuerwehr freut sich aber über eine kleine Spende für eine neue Leiter. Bitte kommen Sie mit dem Bus, denn Parkplätze gibt es dort kaum."
+     ]
+    ],
+    "items": [
+     {
+      "n": 9,
+      "type": "rf",
+      "q": "Für den Tag der offenen Tür muss man Eintritt bezahlen.",
+      "a": "f",
+      "trap": "wort",
+      "ev": "Der Eintritt ist frei",
+      "why": "Eine Spende ist freiwillig. Der Eintritt ist frei."
+     },
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Die Besucher sollen …",
+      "opts": [
+       "mit dem Bus kommen.",
+       "Essen mitbringen.",
+       "um elf Uhr da sein."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Bitte kommen Sie mit dem Bus",
+      "why": "Essen gibt es vom Sportverein. Elf Uhr ist nur eine der Vorführungen."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-h2-b": {
+  "id": "b1-h2-b",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Führung im Naturpark",
+  "instr": "Sie hören nun einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c. Sie machen eine Wanderung in einem Naturpark mit.",
+  "instr_en": "You hear a text once. You solve five tasks. Choose the correct answer a, b or c. You are joining a guided hike in a nature park.",
+  "source": "own",
+  "speakers": {
+   "MAT": "Rolf Matzke"
+  },
+  "genders": {
+   "MAT": "m"
+  },
+  "groups": [
+   {
+    "title": "Wanderung im Naturpark Hohes Moor",
+    "audio": "audio/b1/b1-h2-b-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MAT",
+      "Guten Tag zusammen und herzlich willkommen im Naturpark Hohes Moor! Mein Name ist Rolf Matzke, ich bin hier Ranger und begleite Sie heute auf unserer Wanderung. Wir laufen ungefähr acht Kilometer und sind gegen fünfzehn Uhr wieder hier am Besucherzentrum. Der Weg ist nicht schwer, aber an manchen Stellen ziemlich nass. Ich hoffe, Sie haben alle Wanderschuhe an. Wer seine Schuhe lieber nicht schmutzig machen möchte, kann sich im Besucherzentrum Gummistiefel ausleihen. Das kostet zwei Euro."
+     ],
+     [
+      "MAT",
+      "Bitte bleiben Sie immer auf den Holzwegen. Das Moor ist an vielen Stellen sehr weich, und außerdem wachsen hier seltene Pflanzen, die man leicht kaputt macht. Hunde müssen an der Leine bleiben, denn im Frühling brüten hier viele Vögel am Boden."
+     ],
+     [
+      "MAT",
+      "Unterwegs machen wir an einem alten Turm eine Pause. Von oben hat man einen tollen Blick über das ganze Moor. Leider gibt es dort keinen Kiosk, also nehmen Sie bitte etwas zu trinken mit. Wasser können Sie hier am Besucherzentrum kostenlos in Ihre Flaschen füllen."
+     ],
+     [
+      "MAT",
+      "Viele Besucher fragen mich, ob man hier Tiere füttern darf. Die Antwort ist nein. Auch wenn die Enten am Teich sehr hungrig aussehen: Brot macht sie krank. Wer Tiere beobachten möchte, sollte lieber ganz leise sein. Ich habe ein paar Ferngläser dabei, die gebe ich gern weiter."
+     ],
+     [
+      "MAT",
+      "Ach ja, noch eine Information für alle, die nach der Wanderung noch Zeit haben: Im Besucherzentrum gibt es eine kleine Ausstellung über das Moor. Normalerweise kostet sie drei Euro Eintritt, aber mit Ihrem Ticket für die Wanderung kommen Sie heute umsonst hinein. Sie ist bis achtzehn Uhr geöffnet. So, dann wollen wir mal!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Die Wanderung …",
+      "opts": [
+       "ist sehr anstrengend.",
+       "endet wieder am Besucherzentrum.",
+       "dauert bis siebzehn Uhr."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "sind gegen fünfzehn Uhr wieder hier am Besucherzentrum",
+      "why": "Die Gruppe ist gegen fünfzehn Uhr wieder am Besucherzentrum. Der Weg ist „nicht schwer“, also nicht sehr anstrengend."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Warum müssen Hunde an der Leine bleiben?",
+      "opts": [
+       "Weil der Boden sehr weich ist.",
+       "Wegen der seltenen Pflanzen.",
+       "Weil viele Vögel am Boden brüten."
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "denn im Frühling brüten hier viele Vögel am Boden",
+      "why": "Weicher Boden und Pflanzen sind Gründe für die Holzwege, nicht für die Leine."
+     },
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Am Turm …",
+      "opts": [
+       "hat man eine schöne Aussicht.",
+       "kann man Getränke kaufen.",
+       "bekommt man kostenlos Wasser."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Von oben hat man einen tollen Blick über das ganze Moor.",
+      "why": "Dort gibt es keinen Kiosk. Wasser bekommt man am Besucherzentrum."
+     },
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Was sagt der Ranger über die Tiere?",
+      "opts": [
+       "Man darf die Enten mit Brot füttern.",
+       "Die Enten am Teich sind krank.",
+       "Man kann bei ihm ein Fernglas bekommen."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Ich habe ein paar Ferngläser dabei, die gebe ich gern weiter.",
+      "why": "Füttern ist verboten. Die Enten sehen nur hungrig aus, Brot <b>würde</b> sie krank machen."
+     },
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Die Ausstellung …",
+      "opts": [
+       "ist für die Wandergruppe heute kostenlos.",
+       "kostet heute drei Euro.",
+       "schließt um fünfzehn Uhr."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "mit Ihrem Ticket für die Wanderung kommen Sie heute umsonst hinein",
+      "why": "„umsonst“ = kostenlos. Drei Euro kostet sie normalerweise."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-h3-b": {
+  "id": "b1-h3-b",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Gespräch",
+  "instr": "Sie hören nun ein Gespräch. Sie hören das Gespräch einmal. Dazu lösen Sie sieben Aufgaben. Wählen Sie: Sind die Aussagen Richtig oder Falsch? Sie sind auf einem Spielplatz und hören, wie sich Jana und Erik unterhalten.",
+  "instr_en": "You hear a conversation once. You solve seven tasks. Decide: are the statements true or false? You are at a playground and hear Jana and Erik talking.",
+  "source": "own",
+  "speakers": {
+   "JAN": "Jana",
+   "ERI": "Erik"
+  },
+  "genders": {
+   "JAN": "f",
+   "ERI": "m"
+  },
+  "groups": [
+   {
+    "title": "Jana und Erik auf dem Spielplatz",
+    "audio": "audio/b1/b1-h3-b-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "JAN",
+      "Hallo Erik! Na, wartest du auch auf deine Kleine?"
+     ],
+     [
+      "ERI",
+      "Hallo Jana! Ja, Paula spielt da drüben im Sand. Ich bin heute aber nur hier, weil meine Frau einen Termin hat. Normalerweise holt sie Paula vom Kindergarten ab."
+     ],
+     [
+      "JAN",
+      "Ach so. Und, wie läuft's bei dir? Du hast doch erzählt, dass du den Führerschein machst."
+     ],
+     [
+      "ERI",
+      "Ja, genau. Die Theorieprüfung habe ich letzte Woche bestanden. Beim ersten Mal hatte ich leider zu viele Fehler, aber jetzt hat es geklappt."
+     ],
+     [
+      "JAN",
+      "Glückwunsch! Und wann ist die praktische Prüfung?"
+     ],
+     [
+      "ERI",
+      "Ende des Monats. Ich habe ein bisschen Angst davor. Mit dreiundvierzig lernt man nicht mehr so schnell wie mit achtzehn. Mein Fahrlehrer ist aber sehr geduldig."
+     ],
+     [
+      "JAN",
+      "Das schaffst du schon. Warum machst du ihn eigentlich jetzt?"
+     ],
+     [
+      "ERI",
+      "Wir sind doch im Frühling aufs Land gezogen. Der Bus fährt dort nur zweimal am Tag, und meine Frau kann nicht immer fahren. Ohne Auto geht es da einfach nicht."
+     ],
+     [
+      "JAN",
+      "Verstehe. Bei uns ist es genau umgekehrt. Wir haben unser Auto letzten Monat verkauft."
+     ],
+     [
+      "ERI",
+      "Wirklich? Warum denn?"
+     ],
+     [
+      "JAN",
+      "Es stand eigentlich nur noch vor der Tür. Ich fahre sowieso jeden Tag mit dem Fahrrad zur Arbeit, und für den Urlaub mieten wir einfach eins. Das ist viel billiger."
+     ],
+     [
+      "ERI",
+      "Und wenn ihr einen großen Einkauf macht?"
+     ],
+     [
+      "JAN",
+      "Dann lassen wir uns die Sachen liefern. Das kostet nur ein paar Euro. Oh, da kommt Lotte. Wir müssen los, sie hat gleich Schwimmen."
+     ],
+     [
+      "ERI",
+      "Na dann, viel Spaß! Und drück mir die Daumen für die Prüfung!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 16,
+      "type": "rf",
+      "q": "Erik holt seine Tochter normalerweise vom Kindergarten ab.",
+      "a": "f",
+      "trap": "person",
+      "ev": "Normalerweise holt sie Paula vom Kindergarten ab.",
+      "why": "Normalerweise holt seine <b>Frau</b> Paula ab."
+     },
+     {
+      "n": 17,
+      "type": "rf",
+      "q": "Erik hat die Theorieprüfung beim ersten Versuch bestanden.",
+      "a": "f",
+      "trap": "vorher",
+      "ev": "Beim ersten Mal hatte ich leider zu viele Fehler",
+      "why": "Erst beim zweiten Mal hat es geklappt."
+     },
+     {
+      "n": 18,
+      "type": "rf",
+      "q": "Erik ist vor der praktischen Prüfung nervös.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Ich habe ein bisschen Angst davor.",
+      "why": "Angst vor der Prüfung = nervös."
+     },
+     {
+      "n": 19,
+      "type": "rf",
+      "q": "Eriks Familie wohnt seit dem Frühling auf dem Land.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Wir sind doch im Frühling aufs Land gezogen.",
+      "why": "Im Frühling aufs Land gezogen."
+     },
+     {
+      "n": 20,
+      "type": "rf",
+      "q": "Jana hat ihr Auto verkauft, weil es zu alt war.",
+      "a": "f",
+      "trap": "wort",
+      "ev": "Es stand eigentlich nur noch vor der Tür.",
+      "why": "Der Grund: Sie haben das Auto kaum noch benutzt."
+     },
+     {
+      "n": 21,
+      "type": "rf",
+      "q": "Für den Urlaub mietet Janas Familie ein Auto.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "für den Urlaub mieten wir einfach eins",
+      "why": "„eins“ = ein Auto."
+     },
+     {
+      "n": 22,
+      "type": "rf",
+      "q": "Große Einkäufe holt Jana mit dem Fahrrad.",
+      "a": "f",
+      "trap": "wort",
+      "ev": "Dann lassen wir uns die Sachen liefern.",
+      "why": "Mit dem Fahrrad fährt sie zur Arbeit. Große Einkäufe werden geliefert."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-h4-b": {
+  "id": "b1-h4-b",
+  "level": "b1",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Diskussion: Mehrgenerationenhaus",
+  "instr": "Sie hören nun eine Diskussion. Sie hören die Diskussion zweimal. Dazu lösen Sie acht Aufgaben. Ordnen Sie die Aussagen zu: Wer sagt was? Die Moderatorin der Radiosendung „Leben heute“ diskutiert mit Gerda Simon, Bewohnerin eines Mehrgenerationenhauses, und Bernd Kühn, Architekt, über das Thema „Jung und Alt unter einem Dach“.",
+  "instr_en": "You hear a discussion twice. You solve eight tasks. Match the statements: who says what? The host of the radio show discusses multi-generation housing with Gerda Simon, who lives in such a house, and Bernd Kühn, an architect.",
+  "source": "own",
+  "who": [
+   "Moderatorin",
+   "Gerda Simon",
+   "Bernd Kühn"
+  ],
+  "speakers": {
+   "MOD": "Moderatorin",
+   "SIM": "Gerda Simon",
+   "KUE": "Bernd Kühn"
+  },
+  "genders": {
+   "MOD": "f",
+   "SIM": "f",
+   "KUE": "m"
+  },
+  "groups": [
+   {
+    "title": "Leben heute: Jung und Alt unter einem Dach",
+    "audio": "audio/b1/b1-h4-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "Willkommen bei „Leben heute“. In vielen Städten entstehen Häuser, in denen junge Familien, Singles und ältere Menschen bewusst zusammen wohnen. Man nennt sie Mehrgenerationenhäuser. Bei mir im Studio sind Gerda Simon, sie wohnt seit sechs Jahren in so einem Haus, und Bernd Kühn, er ist Architekt und plant solche Projekte. Frau Simon, wie kam es dazu?"
+     ],
+     [
+      "SIM",
+      "Nach dem Tod meines Mannes war mir unsere große Wohnung einfach zu leer. Meine Kinder wohnen weit weg, in Hamburg und in Zürich. Ins Altenheim wollte ich auf keinen Fall. Dann habe ich in der Zeitung von dem Projekt gelesen und mich sofort beworben."
+     ],
+     [
+      "MOD",
+      "Herr Kühn, was ist an diesen Häusern anders als an einem normalen Mietshaus?"
+     ],
+     [
+      "KUE",
+      "Vor allem die Räume, die alle zusammen nutzen. Es gibt zum Beispiel eine große Küche, einen Garten und eine Werkstatt. Die Wohnungen selbst sind dafür oft etwas kleiner. Und wir bauen ohne Stufen, damit man auch mit dem Rollator oder dem Kinderwagen überall hinkommt."
+     ],
+     [
+      "MOD",
+      "Das klingt ideal. Aber gibt es nicht auch Streit?"
+     ],
+     [
+      "SIM",
+      "Natürlich! Am Anfang haben wir zum Beispiel lange über die Ruhezeiten diskutiert. Die Familien wollten, dass die Kinder auch mittags im Hof spielen dürfen, und einige Ältere wollten Mittagsruhe. Seitdem treffen wir uns einmal im Monat und besprechen Probleme, bevor sie groß werden."
+     ],
+     [
+      "KUE",
+      "Das zeigt etwas Wichtiges: Ein schönes Haus allein reicht nicht. Die Menschen müssen bereit sein, sich zu engagieren. Wer nur seine Ruhe haben will, ist in einem normalen Haus besser aufgehoben."
+     ],
+     [
+      "MOD",
+      "Frau Simon, was bringt Ihnen das Zusammenleben im Alltag?"
+     ],
+     [
+      "SIM",
+      "Sehr viel. Ich hole zweimal die Woche die Kinder meiner Nachbarn von der Schule ab, und dafür hilft mir die Familie, wenn mein Computer mal wieder nicht funktioniert. Ich fühle mich gebraucht, und das ist im Alter viel wert."
+     ],
+     [
+      "MOD",
+      "Warum gibt es dann nicht viel mehr solche Häuser?"
+     ],
+     [
+      "KUE",
+      "Weil es schwierig ist, ein passendes Grundstück zu finden. Die Städte verkaufen ihre Grundstücke meistens an den, der am meisten bezahlt. Ich wünsche mir, dass Städte solche Projekte stärker unterstützen."
+     ],
+     [
+      "SIM",
+      "Und viele Menschen wissen einfach nicht, dass es so etwas gibt. Ich habe ja auch nur zufällig davon erfahren."
+     ],
+     [
+      "MOD",
+      "Vielen Dank Ihnen beiden für das Gespräch."
+     ]
+    ],
+    "items": [
+     {
+      "n": 23,
+      "type": "who",
+      "q": "In vielen Städten werden Häuser gebaut, in denen Jung und Alt zusammen wohnen.",
+      "a": "a",
+      "trap": "person",
+      "ev": "In vielen Städten entstehen Häuser, in denen junge Familien, Singles und ältere Menschen bewusst zusammen wohnen.",
+      "why": "Das sagt die <b>Moderatorin</b> in der Einleitung."
+     },
+     {
+      "n": 24,
+      "type": "who",
+      "q": "Nach einem Todesfall in der Familie war die eigene Wohnung zu leer.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "war mir unsere große Wohnung einfach zu leer",
+      "why": "Frau Simon: Die Wohnung war zu leer, ins Altenheim wollte sie nicht."
+     },
+     {
+      "n": 25,
+      "type": "who",
+      "q": "In solchen Häusern sind die einzelnen Wohnungen oft nicht so groß.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Die Wohnungen selbst sind dafür oft etwas kleiner.",
+      "why": "Herr Kühn: Dafür gibt es Räume für alle."
+     },
+     {
+      "n": 26,
+      "type": "who",
+      "q": "Regelmäßige Treffen helfen, Probleme früh zu lösen.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Seitdem treffen wir uns einmal im Monat und besprechen Probleme, bevor sie groß werden.",
+      "why": "Frau Simon: einmal im Monat, bevor Probleme groß werden."
+     },
+     {
+      "n": 27,
+      "type": "who",
+      "q": "Nicht jeder Mensch passt in ein solches Haus.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Wer nur seine Ruhe haben will, ist in einem normalen Haus besser aufgehoben.",
+      "why": "Herr Kühn: Man muss sich engagieren wollen."
+     },
+     {
+      "n": 28,
+      "type": "who",
+      "q": "Es tut gut, wenn andere einen brauchen.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Ich fühle mich gebraucht, und das ist im Alter viel wert.",
+      "why": "Frau Simon über ihren Alltag."
+     },
+     {
+      "n": 29,
+      "type": "who",
+      "q": "Die Städte sollten mehr für solche Wohnprojekte tun.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Ich wünsche mir, dass Städte solche Projekte stärker unterstützen.",
+      "why": "Herr Kühn über die Grundstücke."
+     },
+     {
+      "n": 30,
+      "type": "who",
+      "q": "Viele Leute haben noch nie von solchen Häusern gehört.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Und viele Menschen wissen einfach nicht, dass es so etwas gibt.",
+      "why": "Frau Simon hat selbst nur zufällig davon erfahren."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l1-a": {
+  "id": "b1-l1-a",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Blog: Endlich Hund",
+  "instr": "Lesen Sie den Text und die Aufgaben 1 bis 6 dazu. Wählen Sie: Sind die Aussagen Richtig oder Falsch?",
+  "instr_en": "Read the text and tasks 1 to 6. Decide: are the statements true or false?",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Endlich Hund!",
+    "body": "Hallo ihr Lieben,\n\nlange war es ruhig auf meinem Blog, aber dafür gibt es einen guten Grund: Seit drei Wochen wohnt Bruno bei mir! Bruno ist ein fünf Jahre alter Mischlingshund aus dem Tierheim. Eigentlich wollte ich einen jungen Hund, weil ich dachte, dass man den besser erziehen kann. Aber die Mitarbeiterin im Tierheim hat mir erklärt, dass ältere Hunde für Anfänger oft besser sind, weil sie ruhiger sind. Und sie hatte recht.\n\nBevor ich Bruno mitnehmen durfte, musste ich ihn viermal im Tierheim besuchen. Wir sind zusammen spazieren gegangen, damit wir uns kennenlernen. Außerdem kam jemand vom Tierheim zu mir nach Hause und hat sich meine Wohnung angesehen. Das fand ich zuerst ein bisschen übertrieben, aber heute verstehe ich es.\n\nDas größte Problem war meine Arbeit. Ich arbeite in einem Reisebüro, und Hunde sind dort leider nicht erlaubt. Zum Glück wohnt meine Nachbarin Frau Petersen allein. Sie ist seit letztem Jahr in Rente und freut sich über Gesellschaft. Sie geht jetzt jeden Mittag mit Bruno in den Park. Dafür kaufe ich am Wochenende für sie ein.\n\nNatürlich ist nicht alles perfekt. Bruno hat Angst vor Fahrrädern und bellt jedes Mal, wenn eins an uns vorbeifährt. Deshalb gehen wir jetzt einmal pro Woche in eine Hundeschule. Die Trainerin sagt, dass das ein paar Monate dauern kann.\n\nIch bereue nichts. Seit Bruno da ist, bin ich jeden Tag mindestens zwei Stunden draußen, und ich habe so viele Leute im Viertel kennengelernt wie in fünf Jahren vorher nicht.\n\nBis bald,\neure Lea",
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Lea wollte zuerst einen jüngeren Hund haben.",
+      "a": "r",
+      "trap": "vorher",
+      "ev": "Eigentlich wollte ich einen jungen Hund",
+      "why": "„Eigentlich“: Das war ihr erster Wunsch."
+     },
+     {
+      "n": 2,
+      "type": "rf",
+      "q": "Lea durfte Bruno schon beim ersten Besuch mitnehmen.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "musste ich ihn viermal im Tierheim besuchen",
+      "why": "Sie musste ihn <b>viermal</b> besuchen."
+     },
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Lea fand den Besuch vom Tierheim in ihrer Wohnung von Anfang an gut.",
+      "a": "f",
+      "trap": "vorher",
+      "ev": "Das fand ich zuerst ein bisschen übertrieben",
+      "why": "<b>Zuerst</b> übertrieben, erst heute versteht sie es."
+     },
+     {
+      "n": 4,
+      "type": "rf",
+      "q": "Bruno darf mit Lea ins Büro kommen.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "Hunde sind dort leider nicht erlaubt",
+      "why": "Im Reisebüro sind Hunde nicht erlaubt."
+     },
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Lea hilft Frau Petersen, weil diese mit Bruno spazieren geht.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Dafür kaufe ich am Wochenende für sie ein.",
+      "why": "„Dafür“: Lea kauft ein, Frau Petersen geht mit Bruno raus."
+     },
+     {
+      "n": 6,
+      "type": "rf",
+      "q": "Durch Bruno hat Lea viele Menschen in ihrer Nähe kennengelernt.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "ich habe so viele Leute im Viertel kennengelernt",
+      "why": "im Viertel = in ihrer Nähe."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l2-a": {
+  "id": "b1-l2-a",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Zeitungstexte",
+  "instr": "Lesen Sie die Texte und die Aufgaben 7 bis 12 dazu. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the texts and tasks 7 to 12. Choose the correct answer a, b or c for each task.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Ein Dorf rettet sein Kino",
+    "body": "Fast zehn Jahre lang war das „Lichtspielhaus“ in Hollweiler geschlossen. Der letzte Besitzer hatte aufgegeben, weil immer weniger Menschen kamen und eine neue Technik für die Filme zu teuer war. Jetzt läuft dort wieder jeden Freitag und Samstag ein Film. Möglich gemacht haben das rund 300 Bürgerinnen und Bürger, die zusammen einen Verein gegründet haben.\n\n„Am Anfang haben uns viele ausgelacht“, erzählt Vereinsvorsitzender Thomas Reiter. „Sie meinten, heute schaut doch jeder Filme zu Hause.“ Doch der Verein sammelte in einem Jahr über 80.000 Euro, vor allem durch kleine Spenden. Den größten Teil der Arbeit, etwa das Streichen der Wände und die Reparatur der Sitze, haben die Mitglieder selbst gemacht. Nur für die neue Technik musste eine Firma kommen.\n\nIm Kino arbeiten heute ausschließlich Freiwillige, an der Kasse genauso wie beim Getränkeverkauf. Die Karten kosten sechs Euro, für Vereinsmitglieder vier. Gezeigt werden nicht nur neue Filme, sondern einmal im Monat auch ein alter Klassiker. Besonders beliebt ist der Kinderfilm am Samstagnachmittag: Er ist fast immer ausverkauft.",
+    "items": [
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Das Kino war geschlossen, weil …",
+      "opts": [
+       "der Besitzer zu wenig Besucher hatte.",
+       "der Besitzer in eine andere Stadt gezogen ist.",
+       "es keine neuen Filme mehr gab."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "weil immer weniger Menschen kamen",
+      "why": "Weniger Menschen kamen = zu wenig Besucher. Von einem Umzug steht nichts im Text."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Bei der Renovierung …",
+      "opts": [
+       "hat eine Firma die Sitze repariert.",
+       "haben die Vereinsmitglieder viel selbst gearbeitet.",
+       "hat die Stadt 80.000 Euro bezahlt."
+      ],
+      "a": "b",
+      "trap": "person",
+      "ev": "Den größten Teil der Arbeit, etwa das Streichen der Wände und die Reparatur der Sitze, haben die Mitglieder selbst gemacht.",
+      "why": "Die Firma kam nur für die Technik. Das Geld kam aus Spenden, nicht von der Stadt."
+     },
+     {
+      "n": 9,
+      "type": "abc",
+      "q": "Heute …",
+      "opts": [
+       "bekommen die Mitarbeiter an der Kasse ein kleines Gehalt.",
+       "laufen jeden Tag Filme.",
+       "zahlen Vereinsmitglieder weniger für eine Karte."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "für Vereinsmitglieder vier",
+      "why": "Mitglieder zahlen vier statt sechs Euro. Filme laufen nur freitags und samstags."
+     }
+    ]
+   },
+   {
+    "title": "Der Supermarkt kommt ins Dorf",
+    "body": "Im Kreis Ostermark gibt es in vielen Dörfern keinen einzigen Laden mehr. Wer kein Auto hat, muss oft über eine Stunde mit dem Bus zum nächsten Supermarkt fahren. Das betrifft vor allem ältere Menschen. Seit April fährt deshalb ein umgebauter Linienbus über die Dörfer. Statt Sitzen gibt es darin Regale mit Brot, Obst, Gemüse, Milchprodukten und Dingen für den Haushalt.\n\nDie Idee hatte die Kauffrau Sevgi Arslan, die früher selbst einen Laden in der Kreisstadt hatte. Der Bus hält in jedem Dorf einmal pro Woche für eine Stunde, meistens direkt vor der Kirche oder am Dorfplatz. Wann der Bus wo ist, steht im Gemeindeblatt und auf einer Internetseite. Wer möchte, kann seine Einkäufe auch vorher telefonisch bestellen. Dann packt Frau Arslan die Sachen schon in eine Tüte.\n\nDie Preise sind etwas höher als im Supermarkt, aber die meisten Kunden stört das nicht. „Für mich ist der Bus auch ein Treffpunkt“, sagt die 81-jährige Hildegard Moser. „Hier sehe ich jede Woche meine Nachbarn.“ Ab dem nächsten Jahr soll ein zweiter Bus dazukommen, damit die Dörfer zweimal in der Woche besucht werden können.",
+    "items": [
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Der Laden-Bus …",
+      "opts": [
+       "war früher ein normaler Bus.",
+       "bringt Kunden zum nächsten Supermarkt.",
+       "hält nur für ältere Menschen."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Seit April fährt deshalb ein umgebauter Linienbus über die Dörfer.",
+      "why": "Ein umgebauter Linienbus war früher ein normaler Bus."
+     },
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Die Kunden können …",
+      "opts": [
+       "jeden Tag im Bus einkaufen.",
+       "ihre Waren schon vorher bestellen.",
+       "im Internet bezahlen."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Wer möchte, kann seine Einkäufe auch vorher telefonisch bestellen.",
+      "why": "Der Bus kommt nur einmal pro Woche. Im Internet steht nur der Fahrplan."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Frau Moser …",
+      "opts": [
+       "findet die Preise zu hoch.",
+       "fährt einmal pro Woche in die Stadt.",
+       "trifft beim Bus andere Leute aus dem Dorf."
+      ],
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Hier sehe ich jede Woche meine Nachbarn.",
+      "why": "Der Bus ist für sie ein Treffpunkt. Die Preise stören die meisten nicht."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l3-a": {
+  "id": "b1-l3-a",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 3,
+  "title": "Anzeigen: Kurse und Freizeit",
+  "instr": "Lesen Sie die Situationen 13 bis 19 und die Anzeigen a bis j. Welche Anzeige passt zu welcher Situation? Sie können jede Anzeige nur einmal verwenden. Für eine Situation gibt es keine passende Anzeige. In diesem Fall wählen Sie 0.",
+  "instr_en": "Read situations 13 to 19 and ads a to j. Which ad fits which situation? You can use each ad only once. For one situation there is no fitting ad. In that case, choose 0.",
+  "source": "own",
+  "layout": "ads",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Schwimmkurs für Erwachsene",
+    "body": "Sie haben nie schwimmen gelernt? Kein Problem! Kleine Gruppen, nur Erwachsene. Dienstags 19 Uhr, Hallenbad Nord."
+   },
+   {
+    "k": "b",
+    "title": "Aqua-Fitness",
+    "body": "Fit im Wasser, schonend für die Gelenke. Ideal nach Verletzungen und Operationen. Montags und donnerstags, 10 Uhr."
+   },
+   {
+    "k": "c",
+    "title": "Fotokurs am Wochenende",
+    "body": "Lernen Sie, mit Ihrer Spiegelreflexkamera bessere Bilder zu machen. Samstag und Sonntag, 10–16 Uhr. Bitte eigene Kamera mitbringen."
+   },
+   {
+    "k": "d",
+    "title": "Handyfotos wie ein Profi",
+    "body": "Online-Kurs: Sie brauchen nur Ihr Smartphone. Vier Abende, je 90 Minuten, bequem von zu Hause."
+   },
+   {
+    "k": "e",
+    "title": "Gitarrenunterricht",
+    "body": "Erfahrener Lehrer gibt Einzelunterricht für Kinder ab 8 Jahren und Erwachsene. Auch Hausbesuche möglich."
+   },
+   {
+    "k": "f",
+    "title": "Chor „Notenfrei“",
+    "body": "Wir suchen neue Stimmen! Noten lesen ist nicht nötig. Proben jeden Mittwochabend im Gemeindehaus."
+   },
+   {
+    "k": "g",
+    "title": "Nähcafé",
+    "body": "Kleidung ändern, reparieren, selbst nähen: Nähmaschinen sind vorhanden. Jeden Samstag 14–18 Uhr, Teilnahme kostenlos."
+   },
+   {
+    "k": "h",
+    "title": "Schneiderei Yıldız",
+    "body": "Wir kürzen Hosen, ändern Kleider und nähen Reißverschlüsse ein. Schnell und günstig, meist in zwei Tagen fertig."
+   },
+   {
+    "k": "i",
+    "title": "Tanzen für Paare",
+    "body": "Walzer, Tango, Discofox: Kurs für Anfänger. Anmeldung nur zu zweit. Freitags, 20 Uhr."
+   },
+   {
+    "k": "j",
+    "title": "Babysitter-Kurs",
+    "body": "Jugendliche ab 14 lernen alles über Kinderbetreuung und Erste Hilfe. Mit Zertifikat. In den Herbstferien."
+   }
+  ],
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 13,
+      "type": "ad",
+      "q": "Ihre Freundin Doris hatte eine Knieoperation. Ihr Arzt hat ihr Sport im Wasser empfohlen.",
+      "a": "b",
+      "trap": "detail",
+      "why": "b: Fitness im Wasser, ideal nach Verletzungen. a ist ein Kurs zum Schwimmenlernen."
+     },
+     {
+      "n": 14,
+      "type": "ad",
+      "q": "Ihr Kollege möchte endlich schwimmen lernen. Er hat nur abends Zeit.",
+      "a": "a",
+      "trap": "detail",
+      "why": "a: Schwimmkurs für Erwachsene, dienstags 19 Uhr. b ist um 10 Uhr."
+     },
+     {
+      "n": 15,
+      "type": "ad",
+      "q": "Ihr Nachbar hat sich eine teure Kamera gekauft und möchte lernen, damit gute Fotos zu machen.",
+      "a": "c",
+      "trap": "detail",
+      "why": "c: Kurs für die eigene Kamera. d ist nur für Fotos mit dem Smartphone."
+     },
+     {
+      "n": 16,
+      "type": "ad",
+      "q": "Ihre Tochter ist 15 und möchte in den Ferien etwas lernen, damit sie als Babysitterin Geld verdienen kann.",
+      "a": "j",
+      "trap": "detail",
+      "why": "j: Babysitter-Kurs für Jugendliche ab 14, in den Herbstferien."
+     },
+     {
+      "n": 17,
+      "type": "ad",
+      "q": "Herr Kaiser singt gern, kann aber keine Noten lesen. Er sucht eine Gruppe.",
+      "a": "f",
+      "trap": "detail",
+      "why": "f: Chor, Noten lesen ist nicht nötig."
+     },
+     {
+      "n": 18,
+      "type": "ad",
+      "q": "Ihre Mutter hat eine neue Hose gekauft. Sie ist zu lang, und Ihre Mutter hat keine Zeit, sie selbst zu ändern.",
+      "a": "h",
+      "trap": "detail",
+      "why": "h: Die Schneiderei kürzt Hosen. Im Nähcafé g muss man selbst nähen."
+     },
+     {
+      "n": 19,
+      "type": "ad",
+      "q": "Ihr Freund Sven hat keine Partnerin, möchte aber gern tanzen lernen.",
+      "a": "0",
+      "trap": "detail",
+      "why": "i nimmt nur Paare: „Anmeldung nur zu zweit“. Keine Anzeige passt: <b>0</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l4-a": {
+  "id": "b1-l4-a",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Meinungen: Feuerwerk an Silvester",
+  "instr": "Lesen Sie die Texte 20 bis 26. Wählen Sie: Ist die Person für ein Verbot von privatem Feuerwerk an Silvester?",
+  "instr_en": "Read texts 20 to 26. Decide: is the person in favor of banning private fireworks on New Year's Eve?",
+  "source": "own",
+  "layout": "persons",
+  "topic": "Sie lesen in einer Zeitung Kommentare zu einem Artikel über ein Verbot von Feuerwerk an Silvester.",
+  "groups": [
+   {
+    "title": "Jens, 44, Hannover",
+    "body": "Ich arbeite seit fünfzehn Jahren als Rettungssanitäter. Jedes Jahr in der Silvesternacht sehen wir verletzte Hände und Augen, oft bei ganz jungen Leuten. Wer das einmal erlebt hat, findet Raketen nicht mehr lustig. Privates Feuerwerk sollte endlich verboten werden, bevor noch mehr passiert.",
+    "items": [
+     {
+      "n": 20,
+      "type": "jn",
+      "a": "ja",
+      "trap": "synonym",
+      "ev": "Privates Feuerwerk sollte endlich verboten werden",
+      "why": "Er sieht jedes Jahr Verletzte und will ein Verbot."
+     }
+    ]
+   },
+   {
+    "title": "Marlene, 29, Würzburg",
+    "body": "Viele sagen, Feuerwerk ist schlecht für die Umwelt. Das stimmt vielleicht, aber es ist nur eine Nacht im Jahr. Für mich und meine Freunde gehört das einfach zu Silvester dazu, seit wir Kinder sind. Ich möchte mir das nicht verbieten lassen.",
+    "items": [
+     {
+      "n": 21,
+      "type": "jn",
+      "a": "nein",
+      "trap": "meinung",
+      "ev": "Ich möchte mir das nicht verbieten lassen.",
+      "why": "„Viele sagen …“ ist die fremde Meinung. Sie selbst ist gegen ein Verbot."
+     }
+    ]
+   },
+   {
+    "title": "Theo, 61, Lübeck",
+    "body": "Unser Hund zittert schon Tage vorher, wenn die ersten Böller knallen. Trotzdem halte ich ein Verbot für falsch. Die Leute kaufen das Feuerwerk dann eben im Nachbarland, und niemand kann das kontrollieren.",
+    "items": [
+     {
+      "n": 22,
+      "type": "jn",
+      "a": "nein",
+      "trap": "vorher",
+      "ev": "Trotzdem halte ich ein Verbot für falsch.",
+      "why": "Der Hund ist ein Problem, aber „trotzdem“: Er ist gegen das Verbot."
+     }
+    ]
+   },
+   {
+    "title": "Ayşe, 35, Duisburg",
+    "body": "Als Kind fand ich Silvester toll. Heute denke ich anders. Am Neujahrsmorgen liegt in unserer Straße so viel Müll, dass man kaum gehen kann, und niemand räumt auf. Ein großes Feuerwerk der Stadt am Fluss wäre viel schöner. Privates Feuerwerk brauchen wir dann nicht mehr.",
+    "items": [
+     {
+      "n": 23,
+      "type": "jn",
+      "a": "ja",
+      "trap": "vorher",
+      "ev": "Privates Feuerwerk brauchen wir dann nicht mehr.",
+      "why": "<b>Als Kind</b> fand sie es toll, <b>heute</b> will sie nur noch das Feuerwerk der Stadt."
+     }
+    ]
+   },
+   {
+    "title": "Paul, 19, Jena",
+    "body": "Ich verstehe die Argumente, aber mir ist die Freiheit wichtiger. Wer kein Feuerwerk mag, muss ja nicht mitmachen. Man sollte nicht allen Menschen etwas wegnehmen, nur weil einige nicht vorsichtig sind.",
+    "items": [
+     {
+      "n": 24,
+      "type": "jn",
+      "a": "nein",
+      "trap": "meinung",
+      "ev": "Man sollte nicht allen Menschen etwas wegnehmen",
+      "why": "Er versteht die Argumente, aber die Freiheit ist ihm wichtiger."
+     }
+    ]
+   },
+   {
+    "title": "Karin, 53, Freiburg",
+    "body": "Ich habe einen kleinen Spielwarenladen, und an den Tagen vor Silvester verdiene ich mit Feuerwerk richtig gut. Trotzdem: Wenn ich sehe, wie viel Feinstaub in dieser einen Nacht in der Luft ist, kann ich nicht gegen ein Verbot sein. Gesundheit ist wichtiger als mein Umsatz.",
+    "items": [
+     {
+      "n": 25,
+      "type": "jn",
+      "a": "ja",
+      "trap": "negation",
+      "ev": "Gesundheit ist wichtiger als mein Umsatz.",
+      "why": "„nicht gegen ein Verbot“ = dafür. Sie verdient daran, ist aber trotzdem dafür."
+     }
+    ]
+   },
+   {
+    "title": "Dirk, 47, Gera",
+    "body": "In unserem Dorf trifft sich an Silvester das ganze Dorf auf dem Sportplatz, und jeder bringt ein paar Raketen mit. Das ist ein schönes Fest, und es passiert nie etwas. In großen Städten mag das anders sein, aber bei uns braucht niemand ein Verbot.",
+    "items": [
+     {
+      "n": 26,
+      "type": "jn",
+      "a": "nein",
+      "trap": "teil",
+      "ev": "bei uns braucht niemand ein Verbot",
+      "why": "Probleme in Großstädten gibt er zu, aber er ist gegen ein Verbot."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l5-a": {
+  "id": "b1-l5-a",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 5,
+  "title": "Regeln: Carsharing",
+  "instr": "Lesen Sie die Aufgaben 27 bis 30 und den Text dazu. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read tasks 27 to 30 and the text. Choose the correct answer a, b or c for each task.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie möchten Carsharing nutzen und lesen die Regeln.",
+  "groups": [
+   {
+    "title": "Nutzungsregeln · Carsharing StadtAuto",
+    "body": "Buchung\nSie können ein Auto rund um die Uhr über unsere App oder telefonisch buchen. Bitte buchen Sie lieber etwas mehr Zeit, als Sie brauchen. Wenn Sie das Auto zu spät zurückbringen, zahlen Sie 10 Euro für jede angefangene Viertelstunde.\n\nVor der Fahrt\nKontrollieren Sie das Auto vor jeder Fahrt. Wenn Sie einen Schaden entdecken, melden Sie ihn bitte sofort über die App, bevor Sie losfahren. Sonst müssen wir annehmen, dass der Schaden während Ihrer Fahrt passiert ist.\n\nTanken\nIst der Tank weniger als ein Viertel voll, tanken Sie bitte. Benutzen Sie dafür die Tankkarte im Handschuhfach. Sie müssen das Benzin also nicht selbst bezahlen. Als Dankeschön bekommen Sie 5 Euro auf Ihr Kundenkonto.\n\nSauberkeit und Tiere\nRauchen ist in allen Autos verboten. Tiere dürfen nur in einer Transportbox mitfahren. Wer das Auto stark verschmutzt zurückgibt, zahlt für die Reinigung 50 Euro.",
+    "items": [
+     {
+      "n": 27,
+      "type": "abc",
+      "q": "Wer das Auto zu spät zurückbringt, …",
+      "opts": [
+       "muss extra bezahlen.",
+       "darf es nicht mehr buchen.",
+       "muss vorher anrufen."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "zahlen Sie 10 Euro für jede angefangene Viertelstunde",
+      "why": "10 Euro pro Viertelstunde = eine extra Gebühr."
+     },
+     {
+      "n": 28,
+      "type": "abc",
+      "q": "Einen Schaden am Auto …",
+      "opts": [
+       "meldet man nach der Fahrt.",
+       "muss man selbst reparieren lassen.",
+       "meldet man, bevor man losfährt."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "melden Sie ihn bitte sofort über die App, bevor Sie losfahren",
+      "why": "Vor der Fahrt melden, sonst denkt die Firma, Sie waren es."
+     },
+     {
+      "n": 29,
+      "type": "abc",
+      "q": "Wer tankt, …",
+      "opts": [
+       "bezahlt mit seiner eigenen Karte.",
+       "bekommt eine kleine Belohnung.",
+       "muss den Tank immer ganz voll machen."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Als Dankeschön bekommen Sie 5 Euro auf Ihr Kundenkonto.",
+      "why": "Man bezahlt mit der Tankkarte, nicht mit der eigenen Karte. 5 Euro sind ein Dankeschön."
+     },
+     {
+      "n": 30,
+      "type": "abc",
+      "q": "Hunde …",
+      "opts": [
+       "dürfen nicht mitfahren.",
+       "kosten 50 Euro extra.",
+       "dürfen in einer Box mitfahren."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Tiere dürfen nur in einer Transportbox mitfahren.",
+      "why": "Tiere sind erlaubt, aber <b>nur</b> in einer Box. 50 Euro kostet die Reinigung."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l1-b": {
+  "id": "b1-l1-b",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Blog: Mein erstes Konzert",
+  "instr": "Lesen Sie den Text und die Aufgaben 1 bis 6 dazu. Wählen Sie: Sind die Aussagen Richtig oder Falsch?",
+  "instr_en": "Read the text and tasks 1 to 6. Decide: are the statements true or false?",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Mit 58 zum ersten Mal auf der Bühne",
+    "body": "Liebe Leserinnen und Leser,\n\nletzten Samstag habe ich etwas gemacht, wovon ich lange nur geträumt habe: Ich habe mit unserem Musikverein mein erstes Konzert gespielt. Und das mit 58 Jahren!\n\nAngefangen hat alles vor zwei Jahren. Meine Enkelin hat damals Trompete gelernt, und ich habe sie jede Woche zum Unterricht gefahren. Während ich gewartet habe, habe ich oft zugehört. Irgendwann hat ihr Lehrer gefragt, ob ich es nicht auch probieren möchte. Ich habe zuerst gelacht. Als Kind hatte ich zwar Klavierunterricht, aber den hatte ich mit zwölf aufgegeben.\n\nDie ersten Monate waren hart. Meine Lippen haben wehgetan, und die Töne klangen furchtbar. Meine Frau hat mich zum Üben in den Keller geschickt, damit die Nachbarn sich nicht beschweren. Aber ich habe nicht aufgehört. Jeden Tag habe ich eine halbe Stunde geübt, sogar im Urlaub.\n\nIm Frühling hat mich der Dirigent dann gefragt, ob ich im Verein mitspielen will. Im Verein sind Leute von 14 bis 80, und alle haben mich sofort freundlich aufgenommen. Wir proben jeden Dienstag, und danach sitzen wir meistens noch zusammen.\n\nVor dem Konzert war ich so nervös wie seit meiner Hochzeit nicht mehr. Ich habe auch zwei falsche Töne gespielt, aber das hat zum Glück fast niemand gemerkt. Das Schönste war, dass meine Enkelin neben mir saß, denn sie spielt jetzt auch im Verein.\n\nEuer Werner",
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Werner hat sich schon lange gewünscht, ein Konzert zu spielen.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "wovon ich lange nur geträumt habe",
+      "why": "lange davon geträumt = lange gewünscht."
+     },
+     {
+      "n": 2,
+      "type": "rf",
+      "q": "Werner hat als Kind Trompete gelernt.",
+      "a": "f",
+      "trap": "wort",
+      "ev": "Als Kind hatte ich zwar Klavierunterricht",
+      "why": "Als Kind hat er <b>Klavier</b> gelernt."
+     },
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Der Lehrer seiner Enkelin hat Werner gefragt, ob er auch spielen möchte.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Irgendwann hat ihr Lehrer gefragt, ob ich es nicht auch probieren möchte.",
+      "why": "„ihr Lehrer“ = der Lehrer der Enkelin."
+     },
+     {
+      "n": 4,
+      "type": "rf",
+      "q": "Werner hat im Keller geübt, weil sich die Nachbarn beschwert haben.",
+      "a": "f",
+      "trap": "vorher",
+      "ev": "damit die Nachbarn sich nicht beschweren",
+      "why": "Die Nachbarn haben sich nicht beschwert. Der Keller war, <b>damit</b> es nicht passiert."
+     },
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Im Musikverein spielen nur ältere Menschen.",
+      "a": "f",
+      "trap": "teil",
+      "ev": "Im Verein sind Leute von 14 bis 80",
+      "why": "Von 14 bis 80 Jahren, also nicht nur ältere."
+     },
+     {
+      "n": 6,
+      "type": "rf",
+      "q": "Werners Enkelin hat beim Konzert mitgespielt.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "dass meine Enkelin neben mir saß, denn sie spielt jetzt auch im Verein",
+      "why": "Sie saß neben ihm und spielt im Verein."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l2-b": {
+  "id": "b1-l2-b",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Zeitungstexte",
+  "instr": "Lesen Sie die Texte und die Aufgaben 7 bis 12 dazu. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the texts and tasks 7 to 12. Choose the correct answer a, b or c for each task.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Honig vom Rathausdach",
+    "body": "Seit diesem Sommer summt es auf dem Dach des Rathauses in Kellbach: Dort stehen vier Bienenkästen. Die Idee kam von der Umweltgruppe eines Gymnasiums. Die Schülerinnen und Schüler hatten im Unterricht gelernt, dass es immer weniger Bienen gibt, und wollten etwas dagegen tun. Der Bürgermeister war sofort einverstanden, nur der Hausmeister hatte am Anfang Bedenken, weil er Angst vor Stichen hatte.\n\nUm die Bienen kümmert sich ein erfahrener Imker aus dem Ort, Gerhard Funke. Er kommt einmal pro Woche und zeigt den Jugendlichen, was zu tun ist. „Die Schüler lernen hier mehr über Natur als in jedem Buch“, sagt er. In den Sommerferien haben die Eltern einiger Schüler die Arbeit übernommen.\n\nIm September gab es die erste Ernte: rund 60 Kilo Honig. Ein Teil wurde auf dem Herbstmarkt verkauft, der Rest geht an die Kantine des Rathauses. Mit dem Geld will die Schule im nächsten Jahr Blumen auf öffentlichen Plätzen pflanzen, damit die Bienen mehr Futter finden.",
+    "items": [
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Die Bienen auf dem Rathausdach …",
+      "opts": [
+       "waren ein Vorschlag von Jugendlichen.",
+       "gehören dem Bürgermeister.",
+       "waren eine Idee des Hausmeisters."
+      ],
+      "a": "a",
+      "trap": "person",
+      "ev": "Die Idee kam von der Umweltgruppe eines Gymnasiums.",
+      "why": "Der Bürgermeister war nur einverstanden. Die Idee hatten die Schüler."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "In den Sommerferien …",
+      "opts": [
+       "war Herr Funke allein für die Bienen da.",
+       "haben sich Eltern um die Bienen gekümmert.",
+       "haben die Schüler jeden Tag gearbeitet."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "In den Sommerferien haben die Eltern einiger Schüler die Arbeit übernommen.",
+      "why": "Herr Funke kommt nur einmal pro Woche. In den Ferien halfen Eltern."
+     },
+     {
+      "n": 9,
+      "type": "abc",
+      "q": "Mit dem Geld aus dem Honig …",
+      "opts": [
+       "bekommt die Kantine neue Möbel.",
+       "kauft die Schule neue Bienen.",
+       "sollen Blumen gepflanzt werden."
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "Mit dem Geld will die Schule im nächsten Jahr Blumen auf öffentlichen Plätzen pflanzen",
+      "why": "Die Kantine bekommt Honig, kein Geld."
+     }
+    ]
+   },
+   {
+    "title": "Ein freier Tag fürs Ehrenamt",
+    "body": "Die Versicherung Nordhaus in Bremen geht einen ungewöhnlichen Weg: Seit Jahresbeginn bekommen alle Beschäftigten zwei zusätzliche freie Tage pro Jahr, aber nur, wenn sie diese Zeit für ein Ehrenamt nutzen. Wo und wie sie helfen, dürfen die Beschäftigten selbst entscheiden. Einige lesen Kindern in Kindergärten vor, andere helfen im Tierheim oder in einem Seniorenheim.\n\n„Wir wollten nicht nur Geld spenden, sondern selbst etwas für die Stadt tun“, erklärt Personalchefin Anja Lüders. Die Firma arbeitet dafür mit einer Agentur zusammen, die passende Stellen vorschlägt. Kontrolliert wird nicht viel: Die Mitarbeiter müssen nur eine kurze Bestätigung der Organisation abgeben.\n\nIm ersten Jahr haben fast 70 Prozent der Beschäftigten mitgemacht. Viele berichten, dass sie dabei Kolleginnen und Kollegen aus anderen Abteilungen besser kennengelernt haben, weil sie oft in Gruppen helfen. Für einige ist aus dem freien Tag mehr geworden: Etwa jeder Zehnte engagiert sich inzwischen auch in seiner Freizeit regelmäßig.",
+    "items": [
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Die zusätzlichen freien Tage …",
+      "opts": [
+       "bekommen nur Mitarbeiter, die schon ein Ehrenamt haben.",
+       "sind für eine freiwillige Arbeit gedacht.",
+       "kann man frei für den Urlaub nutzen."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "aber nur, wenn sie diese Zeit für ein Ehrenamt nutzen",
+      "why": "„nur, wenn“: Die Tage sind nicht für Urlaub, sondern für ein Ehrenamt."
+     },
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Wo die Mitarbeiter helfen, …",
+      "opts": [
+       "bestimmt die Personalchefin.",
+       "entscheidet eine Agentur.",
+       "können sie selbst wählen."
+      ],
+      "a": "c",
+      "trap": "person",
+      "ev": "Wo und wie sie helfen, dürfen die Beschäftigten selbst entscheiden.",
+      "why": "Die Agentur macht nur Vorschläge. Entscheiden dürfen die Mitarbeiter."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Was steht im Text über das erste Jahr?",
+      "opts": [
+       "Viele Mitarbeiter haben Kollegen besser kennengelernt.",
+       "Die meisten Mitarbeiter haben nicht mitgemacht.",
+       "Jeder Zehnte hat danach die Firma gewechselt."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "dass sie dabei Kolleginnen und Kollegen aus anderen Abteilungen besser kennengelernt haben",
+      "why": "70 Prozent haben mitgemacht, also die meisten. Jeder Zehnte hilft jetzt auch in der Freizeit."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l3-b": {
+  "id": "b1-l3-b",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 3,
+  "title": "Anzeigen: Ausflüge und Reisen",
+  "instr": "Lesen Sie die Situationen 13 bis 19 und die Anzeigen a bis j. Welche Anzeige passt zu welcher Situation? Sie können jede Anzeige nur einmal verwenden. Für eine Situation gibt es keine passende Anzeige. In diesem Fall wählen Sie 0.",
+  "instr_en": "Read situations 13 to 19 and ads a to j. Which ad fits which situation? You can use each ad only once. For one situation there is no fitting ad. In that case, choose 0.",
+  "source": "own",
+  "layout": "ads",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Ferienhaus an der Ostsee",
+    "body": "Für bis zu 6 Personen, 200 m zum Strand. Hunde willkommen. Vermietung mindestens für eine Woche."
+   },
+   {
+    "k": "b",
+    "title": "Pension Seeblick",
+    "body": "Gemütliche Doppelzimmer mit Frühstück, auch für eine Nacht. Leider keine Haustiere."
+   },
+   {
+    "k": "c",
+    "title": "Radtouren mit Gepäckservice",
+    "body": "Sie fahren, wir bringen Ihre Koffer von Hotel zu Hotel. Fünf Tage entlang der Elbe. Leihräder möglich."
+   },
+   {
+    "k": "d",
+    "title": "Fahrradverleih am Bahnhof",
+    "body": "Stadträder und E-Bikes ab 12 Euro pro Tag. Direkt neben Gleis 1. Kindersitze kostenlos."
+   },
+   {
+    "k": "e",
+    "title": "Kochkurs: Italienisch für Anfänger",
+    "body": "Pasta selbst gemacht! Donnerstags, 18 Uhr. Alle Zutaten inklusive."
+   },
+   {
+    "k": "f",
+    "title": "Restaurant „Grüner Teller“",
+    "body": "Vegetarische und vegane Küche. Mittagsmenü 9,90 Euro. Montag Ruhetag."
+   },
+   {
+    "k": "g",
+    "title": "Busfahrt zum Weihnachtsmarkt",
+    "body": "Tagesfahrt nach Nürnberg am Samstag, 7. Dezember. Abfahrt 7 Uhr am Marktplatz, zurück gegen 22 Uhr. 39 Euro."
+   },
+   {
+    "k": "h",
+    "title": "Kanutour für Familien",
+    "body": "Geführte Halbtagestour auf dem Fluss, für Kinder ab 6 Jahren. Schwimmwesten inklusive."
+   },
+   {
+    "k": "i",
+    "title": "Kletterwald Tannenhöhe",
+    "body": "Spannende Parcours für Kinder ab 8 Jahren und Erwachsene. Bei Regen geschlossen."
+   },
+   {
+    "k": "j",
+    "title": "Sprachreisen nach Malta",
+    "body": "Englischkurs am Vormittag, Strand am Nachmittag. Für Erwachsene ab 18, Unterkunft in Gastfamilien."
+   }
+  ],
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 13,
+      "type": "ad",
+      "q": "Familie Brehm möchte zwei Wochen am Meer Urlaub machen und ihren Hund mitnehmen.",
+      "a": "a",
+      "trap": "detail",
+      "why": "a: Ferienhaus am Strand, Hunde willkommen. In b sind keine Haustiere erlaubt."
+     },
+     {
+      "n": 14,
+      "type": "ad",
+      "q": "Frau Ludwig möchte eine Fahrradtour über mehrere Tage machen, aber ihr Gepäck nicht selbst tragen.",
+      "a": "c",
+      "trap": "detail",
+      "why": "c: Radtour mit Gepäckservice. d verleiht nur Räder."
+     },
+     {
+      "n": 15,
+      "type": "ad",
+      "q": "Ihr Kollege und seine Frau essen kein Fleisch und suchen ein Restaurant für ein Mittagessen am Mittwoch.",
+      "a": "f",
+      "trap": "detail",
+      "why": "f: vegetarisch, Mittagsmenü, nur montags geschlossen."
+     },
+     {
+      "n": 16,
+      "type": "ad",
+      "q": "Herr Schulze kommt mit dem Zug in eine fremde Stadt und möchte sie mit dem Fahrrad ansehen.",
+      "a": "d",
+      "trap": "detail",
+      "why": "d: Fahrradverleih direkt am Bahnhof."
+     },
+     {
+      "n": 17,
+      "type": "ad",
+      "q": "Familie Roth mit zwei Kindern (7 und 9 Jahre) möchte am Wochenende einen Ausflug auf dem Wasser machen.",
+      "a": "h",
+      "trap": "detail",
+      "why": "h: Kanutour für Kinder ab 6. Der Kletterwald i ist erst ab 8 und nicht auf dem Wasser."
+     },
+     {
+      "n": 18,
+      "type": "ad",
+      "q": "Ihre Freundin ist 16 Jahre alt. Sie möchte ihr Englisch verbessern und dabei Urlaub am Meer machen.",
+      "a": "0",
+      "trap": "detail",
+      "why": "j ist nur für Erwachsene ab 18. Keine Anzeige passt: <b>0</b>."
+     },
+     {
+      "n": 19,
+      "type": "ad",
+      "q": "Ihre Eltern möchten im Dezember an einem Samstag einen Weihnachtsmarkt in einer anderen Stadt besuchen, aber nicht selbst Auto fahren.",
+      "a": "g",
+      "trap": "detail",
+      "why": "g: Busreise zum Weihnachtsmarkt am Samstag, 7. Dezember."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l4-b": {
+  "id": "b1-l4-b",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Meinungen: Du oder Sie im Büro",
+  "instr": "Lesen Sie die Texte 20 bis 26. Wählen Sie: Ist die Person dafür, dass sich Kolleginnen und Kollegen am Arbeitsplatz duzen?",
+  "instr_en": "Read texts 20 to 26. Decide: is the person in favor of colleagues using the informal „du“ with each other at work?",
+  "source": "own",
+  "layout": "persons",
+  "topic": "Sie lesen in einer Zeitschrift Kommentare zum Thema „Du oder Sie am Arbeitsplatz?“.",
+  "groups": [
+   {
+    "title": "Lukas, 27, Mannheim",
+    "body": "In meiner Firma duzen sich alle, vom Praktikanten bis zur Chefin. Ich finde, das macht vieles leichter. Man traut sich eher, eine Frage zu stellen oder einen Fehler zuzugeben. Das „Sie“ schafft nur unnötige Distanz.",
+    "items": [
+     {
+      "n": 20,
+      "type": "jn",
+      "a": "ja",
+      "trap": "synonym",
+      "ev": "Ich finde, das macht vieles leichter.",
+      "why": "Das „Du“ macht vieles leichter, das „Sie“ schafft Distanz."
+     }
+    ]
+   },
+   {
+    "title": "Brigitte, 58, Regensburg",
+    "body": "Junge Kollegen finden mich vielleicht altmodisch, aber ich bleibe beim „Sie“. Respekt zeigt man auch durch die Sprache. Wer mich duzen möchte, soll mich vorher fragen, und ich sage dann meistens nein.",
+    "items": [
+     {
+      "n": 21,
+      "type": "jn",
+      "a": "nein",
+      "trap": "meinung",
+      "ev": "aber ich bleibe beim „Sie“",
+      "why": "Andere finden sie altmodisch, aber sie bleibt beim „Sie“."
+     }
+    ]
+   },
+   {
+    "title": "Tarek, 34, Köln",
+    "body": "Am Anfang war es für mich komisch, meinen Chef mit dem Vornamen anzusprechen. In meiner alten Firma war das ganz anders. Inzwischen möchte ich es aber nicht mehr anders haben. Die Atmosphäre ist einfach entspannter.",
+    "items": [
+     {
+      "n": 22,
+      "type": "jn",
+      "a": "ja",
+      "trap": "vorher",
+      "ev": "Inzwischen möchte ich es aber nicht mehr anders haben.",
+      "why": "<b>Am Anfang</b> komisch, <b>inzwischen</b> ist er dafür."
+     }
+    ]
+   },
+   {
+    "title": "Renate, 45, Potsdam",
+    "body": "Viele meinen, mit dem „Du“ sind alle gleich. Das glaube ich nicht. Der Chef bleibt der Chef, auch wenn man ihn Michael nennt. Am Ende ist es sogar schwieriger, ehrlich Kritik zu üben, wenn man so tut, als wäre man befreundet.",
+    "items": [
+     {
+      "n": 23,
+      "type": "jn",
+      "a": "nein",
+      "trap": "meinung",
+      "ev": "Am Ende ist es sogar schwieriger, ehrlich Kritik zu üben",
+      "why": "„Viele meinen …“ ist die fremde Meinung. Sie sieht Nachteile."
+     }
+    ]
+   },
+   {
+    "title": "Malte, 23, Kiel",
+    "body": "Ich arbeite in einem Start-up, und bei uns hat noch nie jemand über das „Sie“ nachgedacht. Wenn mich ein neuer Kollege siezt, fühle ich mich sofort zwanzig Jahre älter. Das „Du“ passt einfach besser in unsere Zeit.",
+    "items": [
+     {
+      "n": 24,
+      "type": "jn",
+      "a": "ja",
+      "trap": "synonym",
+      "ev": "Das „Du“ passt einfach besser in unsere Zeit.",
+      "why": "Er findet das „Du“ moderner."
+     }
+    ]
+   },
+   {
+    "title": "Elke, 50, Augsburg",
+    "body": "Ich arbeite in einer Bank, und mit Kunden bleibt man natürlich beim „Sie“. Unter Kollegen ist das „Du“ bei uns aber schon lange normal, und ich sehe darin kein Problem. Im Gegenteil: Wir arbeiten dadurch besser im Team zusammen.",
+    "items": [
+     {
+      "n": 25,
+      "type": "jn",
+      "a": "ja",
+      "trap": "teil",
+      "ev": "Wir arbeiten dadurch besser im Team zusammen.",
+      "why": "Mit Kunden „Sie“, aber unter Kollegen ist sie für das „Du“."
+     }
+    ]
+   },
+   {
+    "title": "Holger, 62, Dresden",
+    "body": "Bei uns hat die Geschäftsleitung letztes Jahr einfach beschlossen, dass sich ab sofort alle duzen. Seitdem duze ich auch Leute, die ich kaum kenne. Ehrlich gesagt fühle ich mich dabei nicht wohl. So etwas sollte jeder selbst entscheiden dürfen.",
+    "items": [
+     {
+      "n": 26,
+      "type": "jn",
+      "a": "nein",
+      "trap": "negation",
+      "ev": "So etwas sollte jeder selbst entscheiden dürfen.",
+      "why": "Er fühlt sich „nicht wohl“ und will keine Regel für alle."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-l5-b": {
+  "id": "b1-l5-b",
+  "level": "b1",
+  "module": "lesen",
+  "teil": 5,
+  "title": "Regeln: Stadtlauf",
+  "instr": "Lesen Sie die Aufgaben 27 bis 30 und den Text dazu. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read tasks 27 to 30 and the text. Choose the correct answer a, b or c for each task.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie möchten bei einem Stadtlauf mitmachen und lesen die Teilnahmebedingungen.",
+  "groups": [
+   {
+    "title": "Teilnahmebedingungen · Stadtlauf Riedberg",
+    "body": "Anmeldung\nDie Anmeldung ist bis zum 30. April online möglich. Die Startgebühr beträgt 15 Euro, für Schülerinnen und Schüler 8 Euro. Nachmeldungen am Lauftag sind nur möglich, wenn noch Startplätze frei sind, und kosten 5 Euro mehr.\n\nStartnummer\nIhre Startnummer holen Sie bitte am Tag vor dem Lauf zwischen 14 und 19 Uhr in der Turnhalle der Gesamtschule ab. Bringen Sie dafür Ihren Ausweis mit. Wer sich am Lauftag nachmeldet, bekommt seine Nummer direkt bei der Anmeldung.\n\nAbsage\nWenn Sie nicht teilnehmen können, bekommen Sie die Startgebühr leider nicht zurück. Sie können Ihren Startplatz aber bis zum 10. Mai kostenlos an eine andere Person weitergeben.\n\nKinder\nKinder unter 12 Jahren dürfen nicht beim 10-Kilometer-Lauf starten. Für sie gibt es um 9 Uhr einen eigenen Lauf über zwei Kilometer. Kinder unter 8 Jahren laufen dort zusammen mit einem Erwachsenen.",
+    "items": [
+     {
+      "n": 27,
+      "type": "abc",
+      "q": "Wer sich erst am Lauftag anmeldet, …",
+      "opts": [
+       "zahlt mehr.",
+       "kann nicht mehr teilnehmen.",
+       "bekommt keine Startnummer."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Nachmeldungen am Lauftag sind nur möglich, wenn noch Startplätze frei sind, und kosten 5 Euro mehr.",
+      "why": "5 Euro mehr = man zahlt mehr. Die Nummer bekommt man direkt bei der Anmeldung."
+     },
+     {
+      "n": 28,
+      "type": "abc",
+      "q": "Die Startnummer …",
+      "opts": [
+       "bekommen alle am Lauftag am Start.",
+       "holt man mit einem Ausweis ab.",
+       "wird mit der Post geschickt."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Bringen Sie dafür Ihren Ausweis mit.",
+      "why": "Die Startnummer holt man am Tag <b>vor</b> dem Lauf ab und bringt dafür den Ausweis mit. Am Lauftag gibt es sie nur bei einer Nachmeldung."
+     },
+     {
+      "n": 29,
+      "type": "abc",
+      "q": "Wenn man nicht laufen kann, …",
+      "opts": [
+       "bekommt man das Geld zurück.",
+       "muss man 5 Euro zahlen.",
+       "kann eine andere Person den Platz bekommen."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Sie können Ihren Startplatz aber bis zum 10. Mai kostenlos an eine andere Person weitergeben.",
+      "why": "Das Geld kommt <b>nicht</b> zurück, aber jemand anderes kann laufen."
+     },
+     {
+      "n": 30,
+      "type": "abc",
+      "q": "Ein zehnjähriges Kind …",
+      "opts": [
+       "kann allein beim Zwei-Kilometer-Lauf mitlaufen.",
+       "kann mit einem Erwachsenen 10 Kilometer laufen.",
+       "darf nicht mitlaufen."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Für sie gibt es um 9 Uhr einen eigenen Lauf über zwei Kilometer.",
+      "why": "Unter 12: kein 10-km-Lauf. Mit einem Erwachsenen laufen nur Kinder unter 8."
+     }
+    ]
+   }
+  ]
+ },
+ "b1-s1-a": {
+  "id": "b1-s1-a",
+  "level": "b1",
+  "module": "schreiben",
+  "teil": 1,
+  "title": "E-Mail an einen Freund",
+  "instr": "Schreiben Sie eine E-Mail (circa 80 Wörter). Schreiben Sie etwas zu allen drei Punkten. Achten Sie auf den Textaufbau (Anrede, Einleitung, Reihenfolge der Inhaltspunkte und Schluss).",
+  "instr_en": "Write an email (about 80 words). Write something about all three points. Pay attention to the structure (greeting, introduction, order of the points and closing).",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b1-s1-a",
+    "aufgabe": 1,
+    "situation": "Sie haben vor einer Woche eine Fahrradreise an einem Fluss gemacht. Ihr Freund Jakob wollte mitkommen, war aber krank. Schreiben Sie an Jakob.",
+    "points": [
+     "Beschreiben Sie: Wie war die Reise?",
+     "Begründen Sie: Was war schön, was war schwierig?",
+     "Machen Sie einen Vorschlag für eine gemeinsame Tour."
+    ],
+    "words": 80,
+    "max": 40,
+    "minutes": 20
+   }
+  ]
+ },
+ "b1-s2-a": {
+  "id": "b1-s2-a",
+  "level": "b1",
+  "module": "schreiben",
+  "teil": 2,
+  "title": "Meinung im Gästebuch",
+  "instr": "Schreiben Sie nun Ihre Meinung (circa 80 Wörter).",
+  "instr_en": "Now write your opinion (about 80 words).",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b1-s2-a",
+    "aufgabe": 2,
+    "situation": "Sie haben im Fernsehen eine Diskussionssendung zum Thema „Gebrauchte Kleidung statt neuer Mode?“ gesehen. Im Online-Gästebuch der Sendung finden Sie folgende Meinung: „Ich kaufe nur noch Second-Hand. Das ist billiger und besser für die Umwelt. Neue Kleidung brauche ich nicht.“ (Melanie)",
+    "points": [
+     "Schreiben Sie Ihre Meinung zum Thema."
+    ],
+    "words": 80,
+    "max": 40,
+    "minutes": 25
+   }
+  ]
+ },
+ "b1-s3-a": {
+  "id": "b1-s3-a",
+  "level": "b1",
+  "module": "schreiben",
+  "teil": 3,
+  "title": "Nachricht an die Chefin",
+  "instr": "Schreiben Sie eine E-Mail (circa 40 Wörter). Vergessen Sie nicht die Anrede und den Gruß am Schluss.",
+  "instr_en": "Write an email (about 40 words). Do not forget the greeting and the closing.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b1-s3-a",
+    "aufgabe": 3,
+    "situation": "Ihre Chefin, Frau Albers, hat Sie gebeten, am Freitag eine Präsentation für Kunden zu halten. Sie haben an diesem Tag einen wichtigen Arzttermin, auf den Sie schon lange gewartet haben. Schreiben Sie an Frau Albers.",
+    "points": [
+     "Entschuldigen Sie sich höflich.",
+     "Erklären Sie, warum Sie am Freitag nicht können.",
+     "Machen Sie einen anderen Vorschlag."
+    ],
+    "words": 40,
+    "max": 20,
+    "minutes": 15
+   }
+  ]
+ },
+ "b1-s1-b": {
+  "id": "b1-s1-b",
+  "level": "b1",
+  "module": "schreiben",
+  "teil": 1,
+  "title": "E-Mail an eine Freundin",
+  "instr": "Schreiben Sie eine E-Mail (circa 80 Wörter). Schreiben Sie etwas zu allen drei Punkten. Achten Sie auf den Textaufbau (Anrede, Einleitung, Reihenfolge der Inhaltspunkte und Schluss).",
+  "instr_en": "Write an email (about 80 words). Write something about all three points. Pay attention to the structure (greeting, introduction, order of the points and closing).",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b1-s1-b",
+    "aufgabe": 1,
+    "situation": "Sie haben vor einem Monat eine neue Arbeitsstelle angefangen. Ihre Freundin Svenja möchte wissen, wie es Ihnen dort geht. Schreiben Sie an Svenja.",
+    "points": [
+     "Beschreiben Sie: Wie sind Ihre Kollegen und Ihre Aufgaben?",
+     "Begründen Sie: Warum haben Sie die Stelle gewechselt?",
+     "Machen Sie einen Vorschlag für ein gemeinsames Abendessen."
+    ],
+    "words": 80,
+    "max": 40,
+    "minutes": 20
+   }
+  ]
+ },
+ "b1-s2-b": {
+  "id": "b1-s2-b",
+  "level": "b1",
+  "module": "schreiben",
+  "teil": 2,
+  "title": "Meinung im Forum",
+  "instr": "Schreiben Sie nun Ihre Meinung (circa 80 Wörter).",
+  "instr_en": "Now write your opinion (about 80 words).",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b1-s2-b",
+    "aufgabe": 2,
+    "situation": "Sie haben im Radio eine Sendung zum Thema „Urlaub zu Hause statt Fernreisen?“ gehört. Im Online-Forum der Sendung finden Sie folgende Meinung: „Ich fliege nie mehr in den Urlaub. In der eigenen Region gibt es so viel zu entdecken, und man spart viel Geld.“ (Rüdiger)",
+    "points": [
+     "Schreiben Sie Ihre Meinung zum Thema."
+    ],
+    "words": 80,
+    "max": 40,
+    "minutes": 25
+   }
+  ]
+ },
+ "b1-s3-b": {
+  "id": "b1-s3-b",
+  "level": "b1",
+  "module": "schreiben",
+  "teil": 3,
+  "title": "Nachricht an den Trainer",
+  "instr": "Schreiben Sie eine E-Mail (circa 40 Wörter). Vergessen Sie nicht die Anrede und den Gruß am Schluss.",
+  "instr_en": "Write an email (about 40 words). Do not forget the greeting and the closing.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b1-s3-b",
+    "aufgabe": 3,
+    "situation": "Der Trainer Ihres Sportvereins, Herr Hoffmann, hat Sie gefragt, ob Sie beim Sommerfest des Vereins am Samstag am Kuchenstand helfen. Sie haben an diesem Tag schon etwas anderes vor. Schreiben Sie an Herrn Hoffmann.",
+    "points": [
+     "Bedanken Sie sich für die Anfrage.",
+     "Erklären Sie, warum Sie am Samstag nicht helfen können.",
+     "Bieten Sie eine andere Hilfe an."
+    ],
+    "words": 40,
+    "max": 20,
+    "minutes": 15
+   }
+  ]
  }
 }

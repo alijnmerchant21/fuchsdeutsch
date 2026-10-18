@@ -1,6 +1,7 @@
 import b1Bank from '@/content/b1/bank.json';
 import b1Diag from '@/content/b1/diagnose.json';
 import b1Tips from '@/content/b1/tips.json';
+import b1Mocks from '@/content/b1/mocks.json';
 import a1Bank from '@/content/a1/bank.json';
 import a1Diag from '@/content/a1/diagnose.json';
 import a1Tips from '@/content/a1/tips.json';
@@ -21,8 +22,8 @@ import type { Block, ExamSet, Module, Section, TestDef } from './types';
 /** All own sets of all levels, by id (ids are unique across levels). */
 export const bank = { ...b1Bank, ...a1Bank, ...a2Bank, ...b2Bank } as unknown as Record<string, ExamSet>;
 const DIAG: Record<Level, TestDef> = { a1: a1Diag, a2: a2Diag, b1: b1Diag, b2: b2Diag } as unknown as Record<Level, TestDef>;
-/** Own full mock tests (A1, A2, B2). B1 full mocks are the licensed Cornelsen ones. */
-const MOCKS: Record<Level, TestDef[]> = { a1: a1Mocks, a2: a2Mocks, b1: [], b2: b2Mocks } as unknown as Record<Level, TestDef[]>;
+/** Own full mock tests of every level (two per level, at real exam length). */
+const MOCKS: Record<Level, TestDef[]> = { a1: a1Mocks, a2: a2Mocks, b1: b1Mocks, b2: b2Mocks } as unknown as Record<Level, TestDef[]>;
 
 export interface TeilInfo { name: string; mins: number; items: number; how: string; how_en?: string; tips: string[]; tips_en?: string[]; plays?: number }
 type TipFile = Partial<Record<Module, Record<string, TeilInfo>>> & { traps?: Record<'hoeren' | 'lesen', Record<string, [string, string]>> };

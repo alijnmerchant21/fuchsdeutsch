@@ -10,7 +10,7 @@
 // Files land in public/images/<id>.webp (with ffmpeg) or .jpg, listed in public/images/manifest.json.
 // The site shows a picture as soon as it is in the manifest. Run it again tomorrow to continue.
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadContent } from './load-content.mjs';
@@ -69,10 +69,19 @@ for (const s of todo) {
   let file = `${s.id}.jpg`;
   if (ffmpeg) {
     const webp = join(out, `${s.id}.webp`);
+    const quiet = { stdio: 'ignore' };
     try {
-      execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', jpg, '-vf', `scale=${WIDTH[s.kind]}:-2`, '-quality', '78', webp]);
+      execFileSync('ffmpeg', ['-y', '-i', jpg, '-vf', `scale=${WIDTH[s.kind]}:-2`, '-quality', '78', webp], quiet);
       rmSync(jpg); file = `${s.id}.webp`;
-    } catch { /* keep the jpg */ }
+    } catch {
+      // This ffmpeg has no webp encoder: shrink the jpg instead.
+      rmSync(webp, { force: true });
+      const small = join(out, `${s.id}.small.jpg`);
+      try {
+        execFileSync('ffmpeg', ['-y', '-i', jpg, '-vf', `scale=${WIDTH[s.kind]}:-2`, '-q:v', '5', small], quiet);
+        renameSync(small, jpg);
+      } catch { rmSync(small, { force: true }); }
+    }
   }
   manifest[s.id] = file;
   save();

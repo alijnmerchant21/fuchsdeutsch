@@ -195,7 +195,7 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
                 const src = step.leads.map((b) => imageSrc(pics, sceneId(ch.id, b))).find(Boolean);
                 return src ? <figure className="v3-scene"><img src={src} alt="" /></figure> : null;
               })()}
-              {step.kind === 'intro' && course.id === 'a1' && ch.number === 1 && <CastStrip />}
+              {step.kind === 'intro' && (course.id === 'a1' || course.id === 'a2') && ch.number === 1 && <CastStrip />}
               <div className="v3-what"><span aria-hidden>i</span><div><b>Was jetzt?</b> {instr.de}{easy && <em> {instr.en}</em>}</div></div>
               {step.leads.map((b) => <BlockView key={b.id} b={b} />)}
             </div>

@@ -167,6 +167,17 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['umziehen', 'in eine neue Wohnung gehen', 'to move'], ['das Haustier', 'Tier in der Wohnung', 'pet'], ['stellen / stehen', 'wohin / wo', 'to put / to stand'],
       ['legen / liegen', 'wohin / wo', 'to lay / to lie'], ['als', 'einmal in der Vergangenheit', 'when (past, once)'], ['Das kommt nicht wieder vor.', 'Ich mache das nicht noch einmal.', 'It won’t happen again.'],
     ]),
+    phrases('w-x-phr', 'Im Haus', {
+      'Räume': ['das Dach', 'der Keller', 'die Treppe', 'der Flur', 'das Arbeitszimmer', 'die Terrasse'],
+      'aufräumen': ['Stell die Lampe auf den Tisch.', 'Leg die Bücher ins Regal.', 'Häng das Bild an die Wand.'],
+    }),
+    match('w-x-match', [['der Keller', 'ganz unten im Haus'], ['das Dach', 'ganz oben auf dem Haus'], ['die Treppe', 'von einem Stock zum anderen'], ['der Garten', 'draußen, mit Blumen'], ['die Garage', 'hier steht das Auto'], ['der Flur', 'zwischen den Zimmern']],
+      { task: 'Im Haus', taskEn: 'In the house. Match.' }),
+    gap('w-x-gap', ['Felix stellt das Sofa {{ins}} Wohnzimmer. (Wohin?)', 'Das Sofa steht jetzt {{im}} Wohnzimmer. (Wo?)', 'Nele legt das Buch {{auf den}} Tisch.', '{{Als}} Kenji klein war, wohnte er in Osaka.'],
+      { bank: ['ins', 'im', 'auf den', 'Als'], task: 'Ergänze.', taskEn: 'Fill in: where (dative) or where to (accusative), and als.' }),
+    mcq('w-x-q1', 'Das Bild ___ an der Wand.', ['hängt', 'legt', 'stellt'], 0, { task: 'Wo oder wohin?', taskEn: 'Position verb or direction verb?' }),
+    mcq('w-x-q2', '___ ich Zeit habe, besuche ich meine Oma.', ['Als', 'Wenn', 'Wann'], 1, { why: 'Immer wieder in der Gegenwart: wenn. Einmal in der Vergangenheit: als.' }),
+    order('w-x-order', ['Wir', 'räumen', 'heute Nachmittag', 'die Wohnung', 'auf.'], { task: 'Bau den Satz.', taskEn: 'Build the sentence. aufräumen is separable.' }),
     checklist('w-check', ['Ich kann um einen Gefallen bitten.', 'Ich kann mich höflich beschweren und entschuldigen.', 'Ich kenne stellen/stehen, legen/liegen, hängen.', 'Ich kann als und wenn richtig benutzen.', 'Ich kann über Haustiere sprechen.']),
   ]);
 

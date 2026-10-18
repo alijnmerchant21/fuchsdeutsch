@@ -181,6 +181,17 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['das Bürgeramt', 'Amt für Ausweis und Adresse', 'citizens’ office'], ['sich anmelden', 'die Adresse registrieren', 'to register'], ['der Ausweis', 'Dokument mit Foto', 'ID card'],
       ['das Formular', 'Papier zum Ausfüllen', 'form'], ['ausfüllen', 'die Felder schreiben', 'to fill in'], ['Könnten Sie …?', 'höfliche Bitte', 'Could you …?'],
     ]),
+    phrases('w-x-phr', 'Höflich bitten', {
+      'Bitten': ['Könntest du mir kurz helfen?', 'Könnten Sie das bitte ausdrucken?', 'Könnte ich mit Ihrem Telefon anrufen?'],
+      'im Vorstellungsgespräch': ['Wie sind die Arbeitszeiten?', 'Wann kann ich anfangen?', 'Darf ich fragen, wie es mit der Bezahlung ist?'],
+    }),
+    match('w-x-match', [['das Bürgeramt', 'einen Personalausweis beantragen'], ['die Bank', 'ein Konto eröffnen'], ['die Polizei', 'Hilfe holen'], ['die Müllabfuhr', 'den Müll abholen'], ['die Straßenbahn', 'in der Stadt fahren'], ['das Krankenhaus', 'kranke Menschen behandeln']],
+      { task: 'Wer macht was in der Stadt?', taskEn: 'What happens where in the city?' }),
+    gap('w-x-gap', ['Der {{neue}} Job gefällt Amara.', 'Kenji trinkt Kaffee {{ohne}} Zucker.', 'Felix fährt {{mit}} der Straßenbahn zur Arbeit.', '{{Könnten}} Sie bitte langsamer sprechen?'],
+      { bank: ['neue', 'ohne', 'mit', 'Könnten'], task: 'Ergänze.', taskEn: 'Fill in: adjective ending, ohne/mit, polite könnte.' }),
+    mcq('w-x-q1', 'Welche Bitte ist am höflichsten?', ['Gib mir dein Handy!', 'Kann ich dein Handy haben?', 'Könntest du mir vielleicht kurz dein Handy leihen?'], 2, { task: 'Höflich sein', taskEn: 'Which request is the most polite?' }),
+    mcq('w-x-q2', 'Am Parlament müssen wir ___.', ['umsteigen', 'abfahren', 'ankommen'], 0),
+    order('w-x-order', ['Könnten', 'Sie', 'mir', 'den Weg', 'zeigen?'], { task: 'Bau die Bitte.', taskEn: 'Build the polite request.' }),
     checklist('w-check', ['Ich verstehe ein einfaches Vorstellungsgespräch.', 'Ich kann bei Bank und Amt sagen, was ich brauche.', 'Ich kann mit könnte höflich bitten.', 'Ich kenne die Adjektivendungen nach der, das, die.', 'Ich kann ein paar Sehenswürdigkeiten in Wien nennen.']),
   ]);
 

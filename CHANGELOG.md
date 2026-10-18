@@ -6,6 +6,20 @@ Format: newest first. Branch commits: `fdd45e2` → `b308c64` → `9160179` → 
 
 ---
 
+## 2026-10-18 — A2 enrichment, stories, pictures and diagrams
+
+### A2 content
+- Mined the Netzwerk neu A2 answer keys (Kursbuch K1–6, Übungsbuch K1–12) for themes, phrases and exercise patterns, rewritten for the Fuchsbau-WG. Sources stay outside the repo.
+- Every A2 chapter's "Das kann ich jetzt" section gained 6–7 blocks: phrases (Redemittel), match, gap, sort or order, two mcqs. A2 now has 574 blocks (A1: 581).
+- Six optional A2 stories (`content/stories/a2.ts`): Das Klassentreffen, Ein Tag offline, Der erste Arbeitstag, Der falsche Zug, Das große Spiel, Ein Bild im Museum. Chapters point to them. `/geschichten` groups stories by level.
+
+### Pictures and diagrams
+- `content/a2/images.ts`: 64 A2 scenes and 79 vocabulary pictures. All courses are combined in `content/images.ts`. `npm run images -- --course a2` makes only A2. Without `--course`, A1 is finished first.
+- `content/a2/visuals.ts`: 15 A2 diagrams (weil/dass/wenn, clause order, adjective endings, indirect questions, deshalb/trotzdem, relative clauses, wo/wohin) plus a new route diagram (durch, über, vorbei, entlang, um … herum, gegenüber).
+- Cast cards also appear in A2 Kapitel 1 and on the A2 course page.
+
+---
+
 ## 2026-10-16 — Pictures and visual grammar for A1
 
 - `content/a1/images.ts`: fixed looks for the cast, 65 scene prompts (one per reading, listening and episode), 80 picture-vocabulary prompts. One shared pastel picture-book style.

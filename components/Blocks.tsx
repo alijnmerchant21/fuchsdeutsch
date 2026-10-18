@@ -10,7 +10,7 @@ import { speakWord } from '@/lib/audio';
 import { AudioPlayer } from './AudioPlayer';
 import { De, useHints } from './Hint';
 import { GrammarVisual } from './GrammarVisual';
-import { VISUALS } from '@/content/a1/visuals';
+import { VISUALS } from '@/content/visuals';
 import { imageSrc, useChapter, useImages, vocabImageId } from '@/lib/images';
 import { Inline, Rich, Task } from './Rich';
 

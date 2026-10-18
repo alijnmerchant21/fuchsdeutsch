@@ -126,7 +126,7 @@ function CoursePage() {
 
         </section>
 
-        {course.id === 'a1' && <section className="v3-card v3-castcard"><CastStrip /></section>}
+        {(course.id === 'a1' || course.id === 'a2') && <section className="v3-card v3-castcard"><CastStrip /></section>}
 
         {done.length > 0 && (
           <section className="v3-card v3-list">

@@ -171,6 +171,18 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['durchfallen', 'die Prüfung nicht schaffen', 'to fail'], ['die Präsentation', 'ein Vortrag mit Folien', 'presentation'], ['die Folie', 'eine Seite in der Präsentation', 'slide'],
       ['auswendig', 'ohne Text, aus dem Kopf', 'by heart'], ['freiwillig', 'man muss nicht', 'optional'], ['Daumen drücken', 'Glück wünschen', 'to keep one’s fingers crossed'],
     ]),
+    phrases('w-x-phr', 'Meinung sagen', {
+      'dafür': ['Ich bin für …, weil …', 'Ich meine, dass … wichtig ist.', 'Ich denke, das ist richtig.'],
+      'dagegen': ['Ich bin gegen …, weil …', 'Ich finde … keine gute Idee.', 'Für mich ist … nicht sinnvoll.'],
+      'Ratschläge': ['Du solltest jeden Tag ein bisschen üben.', 'Sie sollten früher anfangen.'],
+    }),
+    match('w-x-match', [['faul', 'fleißig'], ['nervös', 'ruhig'], ['schlecht', 'gut'], ['wenig', 'viel'], ['spät', 'früh'], ['neugierig', 'uninteressiert']],
+      { task: 'Gegenteile', taskEn: 'Opposites.' }),
+    gap('w-x-gap', ['Du {{solltest}} mehr schlafen. (sollen)', 'Ihr {{solltet}} die Wörter jeden Tag wiederholen. (sollen)', 'Was für {{ein}} Kurs ist das?', 'Hanna lernt segeln, {{weil}} sie das Wasser liebt.'],
+      { bank: ['solltest', 'solltet', 'ein', 'weil'], task: 'Ergänze.', taskEn: 'Fill in: advice with sollte, and „Was für ein …?“' }),
+    mcq('w-x-q1', '„Was für ___ Buch liest du?“', ['ein', 'einen', 'eine'], 0, { task: 'Was für ein …?', taskEn: 'Pick the right article.' }),
+    mcq('w-x-q2', 'Felix hat Angst vor der Prüfung. Was sagst du?', ['Du solltest dich gut vorbereiten.', 'Du sollst nicht lernen.', 'Du solltest nervös sein.'], 0),
+    order('w-x-order', ['Du', 'solltest', 'die Aussprache', 'mehr', 'üben.'], { task: 'Bau den Ratschlag.', taskEn: 'Build the piece of advice.' }),
     checklist('w-check', ['Ich kann Lernprobleme beschreiben.', 'Ich kann mit sollte Ratschläge geben.', 'Ich kann mit „Was für ein …?“ fragen.', 'Ich kann über Prüfungen sprechen.', 'Ich kann eine kurze Präsentation beginnen und beenden.']),
   ]);
 

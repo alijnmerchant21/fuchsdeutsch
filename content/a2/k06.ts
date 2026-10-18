@@ -173,6 +173,18 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['die Ankunft', 'der Zug kommt an', 'arrival'], ['einfach / hin und zurück', 'eine Richtung / beide', 'one way / return'], ['die Ermäßigung', 'billigerer Preis', 'discount'],
       ['ausrichten', 'eine Nachricht weitergeben', 'to pass on (a message)'], ['zurückrufen', 'noch einmal anrufen', 'to call back'], ['verschieben', 'auf eine andere Zeit legen', 'to postpone'],
     ]),
+    phrases('w-x-phr', 'werden', {
+      'Veränderungen': ['Ich werde nächste Woche 30.', 'Sie wurde arbeitslos.', 'Er ist Oberarzt geworden.', 'Ihr werdet immer besser!'],
+      'über Arbeit sprechen': ['Ich arbeite gern im Team.', 'Ich mag es nicht, Termine einzuhalten.', 'Ich will etwas für die Umwelt tun.'],
+    }),
+    match('w-x-match', [['die Architektin', 'plant Häuser'], ['der Lehrer', 'unterrichtet und korrigiert'], ['die Übersetzerin', 'übersetzt Texte'], ['der Oberarzt', 'leitet Ärzte im Krankenhaus'], ['die Köchin', 'kocht im Restaurant'], ['der Grafiker', 'gestaltet Bilder und Logos']],
+      { task: 'Berufe', taskEn: 'Jobs. Who does what?' }),
+    gap('w-x-gap', ['Felix {{wird}} bald Onkel.', 'Nele will Ingenieurin {{werden}}.', 'Kenji hat einen {{neuen}} Job.', 'Amara trägt eine {{weiße}} Jacke im Krankenhaus.'],
+      { bank: ['wird', 'werden', 'neuen', 'weiße'], task: 'Ergänze.', taskEn: 'Fill in: werden and adjective endings after ein.' }),
+    mcq('w-x-q1', 'Herr Brandt ___ früher Arzt. Jetzt verkauft er Bio-Lebensmittel.', ['wird', 'war', 'werdet'], 1, { task: 'Was passt?', taskEn: 'What fits?' }),
+    mcq('w-x-q2', 'Das ist ein ___ Kollege.', ['netter', 'netten', 'nette'], 0),
+    order('w-x-order', ['Nach dem Studium', 'ist', 'sie', 'Lehrerin', 'geworden.'], { task: 'Bau den Satz.', taskEn: 'Build the sentence.' }),
+    text('w-story-tip', 'Optional lesen: die Geschichte **Der erste Arbeitstag**. Du findest sie unter Geschichten.', { kicker: 'Extra', en: 'Optional reading: “Der erste Arbeitstag” (The First Day at Work), under Stories.' }),
     checklist('w-check', ['Ich kann Tätigkeiten in Berufen beschreiben.', 'Ich kann eine Fahrkarte kaufen.', 'Ich kann über meinen Traumberuf sprechen.', 'Ich kann am Telefon eine Nachricht aufnehmen.', 'Ich kenne die Adjektivendungen nach ein, kein, mein.']),
   ]);
 

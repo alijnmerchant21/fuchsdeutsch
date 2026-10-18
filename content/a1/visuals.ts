@@ -3,14 +3,15 @@
 
 export type Visual =
   | { kind: 'positions'; title: string; titleEn: string; rows: { label: string; labelEn: string; parts: string[]; verb: number[] }[] }
-  | { kind: 'articles'; examples: [string, string, string, string]; caseLabel?: string }
+  | { kind: 'articles'; examples: [string, string, string, string]; caseLabel?: string; title?: string; titleEn?: string }
   | { kind: 'clock' }
   | { kind: 'places' }
   | { kind: 'wowohin' }
   | { kind: 'seasons' }
-  | { kind: 'compass' };
+  | { kind: 'compass' }
+  | { kind: 'routes' };
 
-const v2 = (label: string, labelEn: string, parts: string[], verb: number[] = [1]) => ({ label, labelEn, parts, verb });
+export const v2 = (label: string, labelEn: string, parts: string[], verb: number[] = [1]) => ({ label, labelEn, parts, verb });
 
 export const VISUALS: Record<string, Visual> = {
   'a1-k1/g-2': {

@@ -1,11 +1,13 @@
 'use client';
-import type { Visual } from '@/content/a1/visuals';
+import type { Visual } from '@/content/visuals';
 import type { ReactNode } from 'react';
 import { De, En } from './Hint';
 
 const C = { sky: '#cfe6fb', mint: '#cdeedb', peach: '#ffd9c2', lilac: '#e2dbfa', butter: '#fdf0b5', rose: '#fbd5e0', ink: '#1c1d1f', line: '#d1d7dc', muted: '#5b5d63' };
 
 function Positions({ v }: { v: Extract<Visual, { kind: 'positions' }> }) {
+  // Number the slots only for simple verb-second sentences. Elsewhere only the verb is labelled.
+  const numbered = v.rows.every((r) => r.verb.length === 1 && r.verb[0] <= 1);
   return (
     <div className="gv gv-pos">
       <p className="gv-title"><De en={v.titleEn}>{v.title}</De></p>
@@ -17,7 +19,7 @@ function Positions({ v }: { v: Extract<Visual, { kind: 'positions' }> }) {
             <div className={`gv-parts ${bracket ? 'has-bracket' : ''}`}>
               {r.parts.map((p, i) => (
                 <span key={i} className={`gv-part ${r.verb.includes(i) ? 'is-verb' : ''}`}>
-                  <small>{r.verb.includes(i) ? 'Verb' : i === 0 ? '1' : i === r.parts.length - 1 && bracket ? 'Ende' : String(i + 1)}</small>
+                  <small>{r.verb.includes(i) ? 'Verb' : numbered ? String(i + 1) : '\u00a0'}</small>
                   {p}
                 </span>
               ))}
@@ -41,8 +43,8 @@ function Articles({ v }: { v: Extract<Visual, { kind: 'articles' }> }) {
   return (
     <div className="gv">
       <p className="gv-title">
-        <De en={v.caseLabel ? `Same colors, ${v.caseLabel === 'Dativ' ? 'dative' : 'accusative'} forms` : 'Every noun has a gender. Learn the color with the word.'}>
-          {v.caseLabel ? `Dieselben Farben im ${v.caseLabel}` : 'Jedes Nomen hat ein Genus. Lern die Farbe mit dem Wort.'}
+        <De en={v.titleEn || (v.caseLabel ? `Same colors, ${v.caseLabel === 'Dativ' ? 'dative' : 'accusative'} forms` : 'Every noun has a gender. Learn the color with the word.')}>
+          {v.title || (v.caseLabel ? `Dieselben Farben im ${v.caseLabel}` : 'Jedes Nomen hat ein Genus. Lern die Farbe mit dem Wort.')}
         </De>
       </p>
       <div className="gv-cards">
@@ -169,6 +171,34 @@ function Compass() {
   );
 }
 
+const ROUTES: { de: string; en: string; path: string; place: ReactNode }[] = [
+  { de: 'durch den Park', en: 'through the park', place: <><circle cx="60" cy="40" r="26" fill={C.mint} /><circle cx="48" cy="34" r="6" fill="#8fd1ad" /><circle cx="70" cy="46" r="7" fill="#8fd1ad" /></>, path: 'M8 40 L112 40' },
+  { de: 'über die Brücke', en: 'over the bridge', place: <><rect x="0" y="48" width="120" height="22" fill={C.sky} /><path d="M30 48 Q60 22 90 48" fill="none" stroke={C.ink} strokeWidth="2" /></>, path: 'M8 46 L30 46 Q60 20 90 46 L112 46' },
+  { de: 'an der Kirche vorbei', en: 'past the church', place: <><rect x="48" y="16" width="24" height="26" fill={C.lilac} stroke={C.ink} /><path d="M48 16 L60 4 L72 16 Z" fill={C.lilac} stroke={C.ink} /></>, path: 'M8 56 L112 56' },
+  { de: 'den Fluss entlang', en: 'along the river', place: <path d="M0 52 Q30 40 60 52 T120 52 L120 70 L0 70 Z" fill={C.sky} />, path: 'M8 38 Q34 28 60 38 T112 38' },
+  { de: 'um den Platz herum', en: 'around the square', place: <circle cx="60" cy="40" r="18" fill={C.butter} stroke={C.ink} />, path: 'M60 12 A28 28 0 1 1 59.9 12' },
+  { de: 'gegenüber vom Kino', en: 'opposite the cinema', place: <><rect x="10" y="50" width="40" height="20" fill={C.peach} stroke={C.ink} /><rect x="70" y="8" width="40" height="20" fill={C.lilac} stroke={C.ink} /></>, path: 'M30 46 L90 32' },
+];
+
+function Routes() {
+  return (
+    <div className="gv">
+      <p className="gv-title"><De en="Describing a route">Wege beschreiben</De></p>
+      <div className="gv-places">
+        {ROUTES.map((r) => (
+          <figure key={r.de} style={{ minWidth: 120 }}>
+            <svg viewBox="0 0 120 72" width="120" height="72" role="img" aria-label={r.de}>
+              {r.place}
+              <path d={r.path} fill="none" stroke={C.ink} strokeWidth="2.5" strokeDasharray="5 4" strokeLinecap="round" />
+            </svg>
+            <figcaption><b>{r.de}</b><En>{r.en}</En></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function GrammarVisual({ v }: { v: Visual }) {
   switch (v.kind) {
     case 'positions': return <Positions v={v} />;
@@ -178,5 +208,6 @@ export function GrammarVisual({ v }: { v: Visual }) {
     case 'wowohin': return <WoWohin />;
     case 'seasons': return <Seasons />;
     case 'compass': return <Compass />;
+    case 'routes': return <Routes />;
   }
 }

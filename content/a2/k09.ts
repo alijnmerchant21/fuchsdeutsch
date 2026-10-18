@@ -175,6 +175,19 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['das Ziel', 'das Ende vom Rennen', 'finish line'], ['der Muskelkater', 'Schmerzen nach dem Sport', 'sore muscles'], ['deshalb', 'aus diesem Grund', 'that’s why'],
       ['trotzdem', 'aber es passiert doch', 'anyway'], ['Wie wäre es mit …?', 'Vorschlag', 'How about …?'], ['leihen', 'für kurze Zeit geben', 'to lend'],
     ]),
+    phrases('w-x-phr', 'Vorschläge im Sport', {
+      'vorschlagen': ['Wollen wir nicht lieber eine Radtour machen?', 'Kannst du auch am Sonntag um 14 Uhr?'],
+      'reagieren': ['Super, das ist eine gute Idee.', 'Ja, da kann ich.', 'Leider geht es am Dienstag nicht.', 'Zum Reiten habe ich keine Lust.'],
+      'beim Spiel': ['Tor!', 'Wahnsinn!', 'Schade, knapp verloren.'],
+    }),
+    match('w-x-match', [['an einem Kurs', 'teilnehmen'], ['ein Spiel', 'gewinnen'], ['ein Tor', 'schießen'], ['Fußball', 'spielen'], ['auf dem See', 'segeln'], ['im Winter', 'langlaufen']],
+      { task: 'Sport-Verben', taskEn: 'Sport verbs. Match.' }),
+    gap('w-x-gap', ['Der Trainer erklärt {{den}} Spielern die Regeln.', 'Amara leiht {{ihrer}} Freundin den Helm.', 'Es regnet, {{trotzdem}} joggt Felix.', 'Kenji hat Rückenschmerzen, {{deshalb}} macht er Yoga.'],
+      { bank: ['den', 'ihrer', 'trotzdem', 'deshalb'], task: 'Ergänze.', taskEn: 'Fill in: dative + accusative, deshalb or trotzdem.' }),
+    mcq('w-x-q1', 'Nele ist müde, ___ geht sie ins Training.', ['trotzdem', 'deshalb', 'weil'], 0, { task: 'deshalb oder trotzdem?', taskEn: 'Pick: deshalb (that is why) or trotzdem (anyway).' }),
+    mcq('w-x-q2', 'Die Verkäuferin zeigt ___ die Schuhe.', ['die Kundin', 'der Kundin', 'den Kundin'], 1),
+    order('w-x-order', ['Kannst', 'du', 'mir', 'deinen Helm', 'leihen?'], { task: 'Bau die Frage.', taskEn: 'Build the question.' }),
+    text('w-story-tip', 'Optional lesen: die Geschichte **Das große Spiel**. Du findest sie unter Geschichten.', { kicker: 'Extra', en: 'Optional reading: “Das große Spiel” (The Big Game), under Stories.' }),
     checklist('w-check', ['Ich kann über Sport sprechen.', 'Ich kann Begeisterung, Hoffnung und Enttäuschung ausdrücken.', 'Ich kann deshalb und trotzdem benutzen.', 'Ich kann Vorschläge machen und reagieren.', 'Ich kenne Verben mit Dativ und Akkusativ.']),
   ]);
 

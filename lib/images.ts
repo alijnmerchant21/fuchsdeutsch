@@ -1,7 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { Block } from '@/content/types';
-import { CAST, SCENES, VOCAB, vocabId } from '@/content/a1/images';
+import { CAST, SCENES, VOCAB, vocabId } from '@/content/images';
 
 // Pictures live in public/images/<file> and are listed in public/images/manifest.json (made by `npm run images`).
 // A picture only shows once it is in the manifest, so the course works the same without them.

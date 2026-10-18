@@ -168,6 +168,19 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['über', 'auf die andere Seite', 'over, across'], ['entlang', 'neben etwas, immer weiter', 'along'], ['vorbei', 'neben etwas weiter', 'past'],
       ['gegenüber', 'auf der anderen Seite', 'opposite'], ['die Hälfte', '50 Prozent', 'half'], ['ob', 'Ja oder nein?', 'whether, if'],
     ]),
+    phrases('w-x-phr', 'Höflich fragen', {
+      'indirekte Fragen': ['Wissen Sie, wann der Zug aus Hamburg ankommt?', 'Können Sie mir sagen, wie lange wir nach München brauchen?', 'Ich möchte wissen, ob ich hier umsteigen muss.'],
+      'den Weg beschreiben': ['Gehen Sie durch den Park.', 'Dann am Bahnhof vorbei.', 'Das Café ist gegenüber vom Kino.'],
+    }),
+    sort('w-x-sort', ['Vorteil', 'Nachteil'], [['Mit dem Rad ist man schnell.', 0], ['Im Auto steht man oft im Stau.', 1], ['Die S-Bahn ist praktisch.', 0], ['Bei Regen ist das Rad nicht schön.', 1], ['Im Zug kann man lesen.', 0], ['In der S-Bahn gibt es oft keinen Sitzplatz.', 1]],
+      { task: 'Vorteil oder Nachteil?', taskEn: 'Advantage or disadvantage?' }),
+    match('w-x-match', [['die Tankstelle', 'hier kauft man Benzin'], ['das Kennzeichen', 'die Nummer am Auto'], ['die Monatskarte', 'ein Ticket für 30 Tage'], ['umsteigen', 'in einen anderen Zug gehen'], ['landen', 'das Flugzeug kommt an'], ['bremsen', 'langsamer werden']],
+      { task: 'Unterwegs', taskEn: 'On the road. Match.' }),
+    gap('w-x-gap', ['Weißt du, {{ob}} der Bus heute fährt?', 'Ich frage, {{wann}} der Zug kommt.', 'Die Apotheke ist {{gegenüber}} vom Supermarkt.', 'Fahren Sie {{bis}} zur Ampel.'],
+      { bank: ['ob', 'wann', 'gegenüber', 'bis'], task: 'Ergänze.', taskEn: 'Fill in: ob or a question word, and place words.' }),
+    mcq('w-x-q1', 'Können Sie mir sagen, wo ___?', ['ist der Bahnhof', 'der Bahnhof ist', 'der Bahnhof'], 1, { task: 'Indirekte Frage', taskEn: 'Indirect question: the verb goes to the end.' }),
+    order('w-x-order', ['Ich weiß nicht,', 'ob', 'man', 'hier', 'parken', 'darf.'], { task: 'Bau den Satz.', taskEn: 'Build the sentence.' }),
+    text('w-story-tip', 'Optional lesen: die Geschichte **Der falsche Zug**. Du findest sie unter Geschichten.', { kicker: 'Extra', en: 'Optional reading: “Der falsche Zug” (The Wrong Train), under Stories.' }),
     checklist('w-check', ['Ich kann mit indirekten Fragen höflich fragen.', 'Ich kann einen Weg beschreiben.', 'Ich kann Vor- und Nachteile von Verkehrsmitteln nennen.', 'Ich kann eine einfache Grafik beschreiben.']),
   ]);
 

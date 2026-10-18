@@ -180,6 +180,21 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['der Grund', 'warum etwas passiert', 'reason'], ['die Speisekarte', 'Liste im Restaurant', 'menu'], ['die Vorspeise', 'vor dem Hauptgericht', 'starter'],
       ['das Hauptgericht', 'das große Essen', 'main course'], ['der Nachtisch', 'süß, am Ende', 'dessert'], ['reservieren', 'einen Platz festmachen', 'to book'],
     ]),
+    phrases('w-x-phr', 'Sich verabreden', {
+      'etwas vorschlagen': ['Gehen wir am Sonntag zusammen brunchen?', 'Hast du am Samstag Zeit?', 'Ich möchte klettern gehen. Hast du auch Lust?'],
+      'zusagen': ['Das ist eine gute Idee.', 'Oh ja, gern!', 'Abgemacht!'],
+      'absagen': ['Schade, da geht es leider nicht.', 'Am Samstag kann ich leider nicht.'],
+      'nachfragen': ['Wann möchtest du los?', 'Geht es auch ein bisschen später?'],
+    }),
+    sort('w-x-sort', ['zusagen', 'absagen'], [['Oh ja, gern!', 0], ['Da geht es leider nicht.', 1], ['Abgemacht!', 0], ['Schade, ich habe keine Zeit.', 1], ['Das ist eine gute Idee.', 0], ['Am Sonntag kann ich leider nicht.', 1]],
+      { task: 'Ja oder nein?', taskEn: 'Is it a yes or a no to an invitation?' }),
+    match('w-x-match', [['umziehen', 'ist umgezogen'], ['kennenlernen', 'hat kennengelernt'], ['besuchen', 'hat besucht'], ['bekommen', 'hat bekommen'], ['anfangen', 'hat angefangen'], ['renovieren', 'hat renoviert']],
+      { task: 'Infinitiv und Perfekt', taskEn: 'Match the verb to its perfect tense form.' }),
+    gap('w-x-gap', ['Felix kommt nicht, {{weil}} er heute Abend spielt.', 'Amara ist müde, weil sie lange gearbeitet {{hat}}.', 'Kenji lädt alle ein, weil er ein neues Rezept testen {{will}}.', 'Nele bleibt zu Hause, weil ihr Vater krank {{ist}}.'],
+      { bank: ['weil', 'hat', 'will', 'ist'], task: 'Ergänze.', taskEn: 'Fill in. In a weil clause the verb goes to the end.' }),
+    mcq('w-x-q1', 'Welches Perfekt ist richtig?', ['Ich habe nach Wien umgezogen.', 'Ich bin nach Wien umgezogen.', 'Ich bin nach Wien umgezieht.'], 1, { task: 'Perfekt mit haben oder sein', taskEn: 'Perfect tense with haben or sein.', why: 'umziehen = Ortswechsel, also mit sein.' }),
+    mcq('w-x-q2', 'Wie heißt das Perfekt von „verstehen“?', ['hat geversteht', 'hat verstanden', 'ist verstanden'], 1, { why: 'Verben mit ver-, be-, er- bekommen kein ge-.' }),
+    order('w-x-order', ['Gehen', 'wir', 'am Sonntag', 'zusammen', 'brunchen?'], { task: 'Bau den Vorschlag.', taskEn: 'Build the suggestion.' }),
     checklist('w-check', ['Ich kann mich und andere ausführlich vorstellen.', 'Ich kann sagen, was ich am Wochenende gemacht habe.', 'Ich kann mich verabreden.', 'Ich kann mit weil einen Grund nennen.', 'Ich kann im Restaurant reservieren und bestellen.']),
   ]);
 

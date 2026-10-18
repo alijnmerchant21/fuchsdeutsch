@@ -162,6 +162,18 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['das Abitur', 'Abschluss für die Uni', 'high school diploma'], ['die Ausbildung', 'einen Beruf lernen', 'vocational training'], ['streng', 'mit vielen Regeln', 'strict'],
       ['die Nachhilfe', 'extra Unterricht', 'tutoring'], ['sich erinnern an', 'an früher denken', 'to remember'], ['der Mitschüler', 'aus derselben Klasse', 'classmate'],
     ]),
+    phrases('w-x-phr', 'Nach der Schule', {
+      'Wege': ['eine Ausbildung machen', 'an der Uni studieren', 'ein Freiwilliges Soziales Jahr (FSJ) machen', 'als Au-pair ins Ausland gehen', 'ein Jahr jobben und reisen'],
+      'Fragen über früher': ['Was musstest du in der Schule machen?', 'Durftest du am Computer lernen?', 'Wann konntest du Freunde treffen?'],
+    }),
+    match('w-x-match', [['eine Ausbildung', 'machen'], ['an der Uni', 'studieren'], ['Vorlesungen', 'besuchen'], ['in der Bibliothek', 'lernen'], ['Menschen', 'betreuen'], ['eine Prüfung', 'bestehen']],
+      { task: 'Was passt zusammen?', taskEn: 'Which words go together?' }),
+    gap('w-x-gap', ['Früher {{musste}} Amara jeden Tag um sechs Uhr aufstehen. (müssen)', 'Kenji {{durfte}} in der Schule kein Handy benutzen. (dürfen)', 'Als Kind {{wollte}} Felix Pilot werden. (wollen)', 'Nele {{konnte}} mit zehn schon gut schwimmen. (können)'],
+      { task: 'Modalverben im Präteritum', taskEn: 'Modal verbs in the simple past.' }),
+    mcq('w-x-q1', 'Nele hilft ___ Bruder bei den Hausaufgaben.', ['ihr', 'ihrem', 'ihren'], 1, { task: 'Possessivartikel im Dativ', taskEn: 'Possessive article in the dative.', why: 'helfen + Dativ: der Bruder → ihrem Bruder.' }),
+    mcq('w-x-q2', 'Was ist ein FSJ?', ['eine Prüfung an der Uni', 'ein Jahr freiwillige Arbeit, zum Beispiel im Altenheim', 'ein Schulfach'], 1),
+    order('w-x-order', ['Nach der Schule', 'wollte', 'ich', 'zuerst', 'reisen.'], { task: 'Bau den Satz.', taskEn: 'Build the sentence. Time first, verb second.' }),
+    text('w-story-tip', 'Optional lesen: die Geschichte **Das Klassentreffen**. Du findest sie unter Geschichten.', { kicker: 'Extra', en: 'Optional reading: “Das Klassentreffen” (The Class Reunion), under Stories.' }),
     checklist('w-check', ['Ich kann über meine Schulzeit sprechen.', 'Ich kenne die Modalverben im Präteritum.', 'Ich kann das deutsche Schulsystem kurz erklären.', 'Ich kann meine Meinung sagen und widersprechen.', 'Ich kenne die Possessivartikel im Dativ.']),
   ]);
 

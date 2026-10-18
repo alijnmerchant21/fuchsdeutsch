@@ -173,6 +173,19 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['vergleichen', 'zwei Dinge nebeneinander sehen', 'to compare'], ['besser', 'Komparativ von gut', 'better'], ['am liebsten', 'Superlativ von gern', 'most of all'],
       ['der Krimi', 'Film über ein Verbrechen', 'crime film'], ['die Komödie', 'lustiger Film', 'comedy'], ['handeln von', 'das Thema sein', 'to be about'],
     ]),
+    phrases('w-x-phr', 'Meinungen mit dass', {
+      'positiv': ['Ich finde es gut, dass man immer Kontakt hat.', 'Mir gefällt, dass ich Fotos sofort teilen kann.'],
+      'negativ': ['Ich mag es nicht, dass manche Leute alles posten.', 'Ich finde es schlecht, dass man ohne Erlaubnis Fotos postet.'],
+      'Wünsche': ['Ich möchte, dass meine Freunde mich anrufen.'],
+    }),
+    match('w-x-match', [['posten', 'etwas ins Internet stellen'], ['teilen', 'anderen zeigen'], ['das Like', 'ein „Gefällt mir“'], ['die Erlaubnis', 'ja sagen dürfen'], ['die Nachricht', 'ein kurzer Text auf dem Handy'], ['offline', 'ohne Internet']],
+      { task: 'Wörter und Erklärungen', taskEn: 'Match the word to its meaning.' }),
+    gap('w-x-gap', ['Kenji findet, {{dass}} Felix zu viel am Handy ist.', 'Nele sagt, dass ein Kollege seinen Job verloren {{hat}}.', 'Amara möchte, dass niemand Fotos von ihr {{postet}}.', 'Das Tablet ist {{teurer}} als das Handy. (teuer)'],
+      { bank: ['dass', 'hat', 'postet', 'teurer'], task: 'Ergänze.', taskEn: 'Fill in. After dass the verb goes to the end.' }),
+    mcq('w-x-q1', 'Mein Handy ist ___ alt wie deins.', ['so', 'als', 'wie'], 0, { task: 'als oder wie?', taskEn: 'Comparisons with als and wie.', why: 'gleich: so … wie. Unterschied: Komparativ + als.' }),
+    mcq('w-x-q2', 'Das ist das ___ Video von allen!', ['lustigste', 'lustiger', 'lustig'], 0),
+    order('w-x-order', ['Ich finde es gut,', 'dass', 'man', 'Fotos', 'teilen', 'kann.'], { task: 'Bau den Satz.', taskEn: 'Build the sentence. The verbs go to the end.' }),
+    text('w-story-tip', 'Optional lesen: die Geschichte **Ein Tag offline**. Du findest sie unter Geschichten.', { kicker: 'Extra', en: 'Optional reading: “Ein Tag offline” (A Day Offline), under Stories.' }),
     checklist('w-check', ['Ich kann Vor- und Nachteile von Medien nennen.', 'Ich kann Dinge mit als und wie vergleichen.', 'Ich kenne Komparativ und Superlativ.', 'Ich kann meine Meinung mit dass sagen.', 'Ich kann einen Film kurz beschreiben.']),
   ]);
 

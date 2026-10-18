@@ -181,6 +181,18 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['gratulieren', 'Glückwünsche sagen', 'to congratulate'], ['die Hochzeit', 'Fest beim Heiraten', 'wedding'], ['die Geburt', 'ein Baby kommt', 'birth'],
       ['der Brauch', 'Tradition an einem Fest', 'custom'], ['Schade!', 'Das ist nicht gut.', 'What a pity!'], ['sich wohlfühlen', 'sich gut und sicher fühlen', 'to feel at ease'],
     ]),
+    phrases('w-x-phr', 'Sich entschuldigen und reagieren', {
+      'sich entschuldigen': ['Das tut mir wirklich leid.', 'Entschuldige bitte, das wollte ich nicht.'],
+      'reagieren': ['Das macht nichts.', 'Keine Sorge, es geht schon wieder.', 'Es ist alles okay.'],
+      'gratulieren': ['Herzlichen Glückwunsch!', 'Ich freue mich für dich!'],
+    }),
+    match('w-x-match', [['die Hochzeit', 'zwei Menschen heiraten'], ['die Geburt', 'ein Baby kommt'], ['der erste Schultag', 'ein Kind kommt in die Schule'], ['die Führerscheinprüfung', 'man lernt Auto fahren'], ['der erste Platz', 'man gewinnt'], ['neu in der Firma', 'der erste Arbeitstag']],
+      { task: 'Große Momente', taskEn: 'Big moments in life. Match.' }),
+    gap('w-x-gap', ['Wenn ich müde {{bin}}, schlafe ich eine halbe Stunde.', 'Wenn Amara Kopfschmerzen hat, {{trinkt}} sie viel Wasser.', 'Felix ärgert {{sich}}, wenn der Bus zu spät kommt.', 'Wir freuen {{uns}} auf das Wochenende.'],
+      { bank: ['bin', 'trinkt', 'sich', 'uns'], task: 'Ergänze.', taskEn: 'Fill in: wenn clauses and reflexive pronouns.' }),
+    mcq('w-x-q1', '___ ich mein Handy nicht finde, werde ich nervös.', ['Wenn', 'Weil', 'Dass'], 0, { task: 'Welches Wort passt?', taskEn: 'Which word fits?', why: 'Bedingung oder Situation: wenn.' }),
+    mcq('w-x-q2', 'Kenji freut ___ über das Geschenk.', ['sich', 'ihn', 'ihm'], 0),
+    order('w-x-order', ['Wenn', 'Kenji', 'Zeit', 'hat,', 'kocht', 'er', 'gern.'], { task: 'Bau den Satz.', taskEn: 'Build the sentence. After the wenn clause the main verb comes first.' }),
     checklist('w-check', ['Ich kann über Gefühle sprechen.', 'Ich kann Sätze mit wenn bilden.', 'Ich kenne reflexive Verben.', 'Ich kann gratulieren und mich bedanken.', 'Ich kann einen Text mit zuerst, dann, danach strukturieren.']),
   ]);
 

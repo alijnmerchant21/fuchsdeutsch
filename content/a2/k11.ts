@@ -166,6 +166,18 @@ const wortschatz = section('wortschatz', 'wortschatz', 'Wortschatz und Check', '
       ['warten auf', 'bis jemand kommt', 'to wait for'], ['denken an', 'im Kopf haben', 'to think of'], ['träumen von', 'sich etwas wünschen', 'to dream of'],
       ['sich interessieren für', 'etwas spannend finden', 'to be interested in'], ['das Sprichwort', 'alter, weiser Satz', 'proverb'], ['gemeinsam', 'zusammen', 'together'],
     ]),
+    phrases('w-x-phr', 'Wünsche und Ratschläge', {
+      'Wünsche': ['Ich hätte gern mehr Zeit.', 'Ich würde gern öfter Sport machen.', 'Wir wären gern am Meer.'],
+      'Ratschläge': ['An deiner Stelle würde ich weniger arbeiten.', 'Du solltest dein Handy aufladen.'],
+      'Fragen': ['Worauf wartest du?', 'Mit wem hast du gesprochen?', 'Woran denkst du?'],
+    }),
+    match('w-x-match', [['warten', 'auf'], ['sich erinnern', 'an'], ['Angst haben', 'vor'], ['sprechen', 'mit'], ['sich kümmern', 'um'], ['sich ärgern', 'über']],
+      { task: 'Verben mit Präposition', taskEn: 'Verbs with a preposition. Match.' }),
+    gap('w-x-gap', ['Jan {{hätte}} gern mehr Geld. (haben)', 'Theresa {{würde}} gern mehr lesen.', 'Eva und Jana {{wären}} gern berühmt. (sein)', 'Ich freue mich {{auf}} den Urlaub.'],
+      { bank: ['hätte', 'würde', 'wären', 'auf'], task: 'Ergänze.', taskEn: 'Fill in: Konjunktiv II and verbs with a preposition.' }),
+    mcq('w-x-q1', '„Ich warte auf meine Prüfungsergebnisse.“ – Frage:', ['Wo wartest du?', 'Worauf wartest du?', 'Auf was wartest du nicht?'], 1, { task: 'Frag nach der Sache.', taskEn: 'Ask about the thing.' }),
+    mcq('w-x-q2', '„Ich denke an Felix.“ – Frage:', ['An wen denkst du?', 'Woran denkst du?', 'Wem denkst du?'], 0, { why: 'Person: An wen? Sache: Woran?' }),
+    order('w-x-order', ['An deiner Stelle', 'würde', 'ich', 'weniger', 'arbeiten.'], { task: 'Bau den Ratschlag.', taskEn: 'Build the piece of advice.' }),
     checklist('w-check', ['Ich kann über Zeitprobleme sprechen.', 'Ich kann mit würde, hätte, wäre Wünsche äußern.', 'Ich kann Ratschläge geben: An deiner Stelle würde ich …', 'Ich kenne wichtige Verben mit Präposition.', 'Ich kann mit Worauf? und Auf wen? fragen.']),
   ]);
 

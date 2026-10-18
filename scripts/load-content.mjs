@@ -30,8 +30,8 @@ export function loadContent() {
     speakers: require(join(out, 'speakers.js')).speakers,
     games: require(join(out, 'games.js')).games,
     taskEn: require(join(out, 'taskEn.js')).TASK_EN,
-    images: require(join(out, 'a1', 'images.js')),
-    visuals: require(join(out, 'a1', 'visuals.js')),
+    images: require(join(out, 'images.js')),
+    visuals: require(join(out, 'visuals.js')),
   };
   rmSync(out, { recursive: true, force: true });
   return data;

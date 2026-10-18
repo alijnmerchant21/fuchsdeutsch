@@ -23,8 +23,8 @@ export const CAST: Record<string, { name: string; look: string; role: string }> 
   herrLehmann: { name: 'Herr Lehmann', role: 'Nachbar', look: 'Herr Lehmann, an old man of 75 with a white mustache, flat cap and brown vest' },
 };
 
-const who = (...ids: string[]) => ids.map((i) => CAST[i].look).join('; ');
-const wg = who('nele', 'kenji', 'amara', 'felix');
+export const who = (...ids: string[]) => ids.map((i) => CAST[i].look).join('; ');
+export const wg = who('nele', 'kenji', 'amara', 'felix');
 
 export interface ImageSpec { id: string; prompt: string; kind: 'cast' | 'scene' | 'vocab' }
 
@@ -154,17 +154,3 @@ export const VOCAB: Record<string, string> = {
 /** File id for a vocabulary word: "vocab-der-apfel". */
 export const vocabId = (word: string) =>
   'vocab-' + word.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-
-/** Everything `npm run images` makes, with the full prompt. */
-export function allImageSpecs(): ImageSpec[] {
-  const out: ImageSpec[] = [];
-  for (const [id, c] of Object.entries(CAST)) out.push({ id: `cast-${id}`, kind: 'cast', prompt: `portrait from the waist up, facing the viewer, friendly expression: ${c.look}. ${STYLE}` });
-  const seen = new Set<string>();
-  for (const s of Object.values(SCENES)) {
-    if (!s.prompt || seen.has(s.id)) continue;
-    seen.add(s.id);
-    out.push({ id: s.id, kind: 'scene', prompt: `${s.prompt}. Wide scene, main subjects in the middle third, calm empty space at the top and bottom. ${STYLE}` });
-  }
-  for (const [word, what] of Object.entries(VOCAB)) out.push({ id: vocabId(word), kind: 'vocab', prompt: `${what}. ${ICON_STYLE}` });
-  return out;
-}

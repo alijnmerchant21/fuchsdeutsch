@@ -2,6 +2,7 @@
 // Usage:
 //   npm run images -- --dry                    list what would be made
 //   npm run images                             make up to 160 missing pictures (stays inside the free daily quota)
+//   npm run images -- --course a2              only one course (a1, a2)
 //   npm run images -- --kind cast              only the character cards (also: scene, vocab)
 //   npm run images -- --only a1-k1-folge --force   remake one picture
 //   npm run images -- --limit 40 --steps 8     fewer pictures, more detail each
@@ -32,7 +33,7 @@ const manifestPath = join(out, 'manifest.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
 
 const { images } = loadContent();
-let specs = images.allImageSpecs();
+let specs = images.allImageSpecs(opt('course'));
 const kind = opt('kind');
 if (kind) specs = specs.filter((s) => s.kind === kind);
 const only = opt('only');

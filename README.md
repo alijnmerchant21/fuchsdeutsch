@@ -20,7 +20,7 @@ Open http://localhost:3000. With no `.env.local` the app runs in **demo mode**: 
 3. **Keys**: copy `.env.example` to `.env.local` and fill in the two `NEXT_PUBLIC_SUPABASE_*` values (Supabase > Project Settings > API).
 4. **Admin**: sign in once, then run in SQL Editor: `update public.profiles set is_admin = true where email = 'you@example.com';`
 5. **GitHub + Vercel**: push this folder to a GitHub repo, import it in Vercel, add the same two env vars there.
-6. **Voices**: copy `scripts/voices.example.json` to `scripts/voices.json`, put in ElevenLabs voice ids, run `ELEVENLABS_API_KEY=... npm run audio`. Commit the MP3s in `public/audio/`. Until then the player uses the browser's German voice.
+6. **Voices** (more ElevenLabs keys: add `ELEVENLABS_API_KEY_1`, `_2`, … to `.env.local`; the script moves to the next key when one runs out, and `npm run audio -- --credits` shows what is left): copy `scripts/voices.example.json` to `scripts/voices.json`, put in ElevenLabs voice ids, run `ELEVENLABS_API_KEY=... npm run audio`. Commit the MP3s in `public/audio/`. Until then the player uses the browser's German voice.
 
 ## Pictures (A1)
 

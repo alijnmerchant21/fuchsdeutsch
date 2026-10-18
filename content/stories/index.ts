@@ -1,10 +1,11 @@
 import { storiesA1 } from './a1';
 import { storiesA2 } from './a2';
+import { storiesB1 } from './b1';
 import type { Story } from './types';
 
 export type { Story } from './types';
 
-export const stories: Story[] = [...storiesA1, ...storiesA2];
+export const stories: Story[] = [...storiesA1, ...storiesA2, ...storiesB1];
 
 export function storyById(id: string): Story | undefined {
   return stories.find((s) => s.id === id);

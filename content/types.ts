@@ -136,8 +136,10 @@ export interface Course {
   id: string;
   level: string;
   title: string;
-  /** Name of the official exam the final exam is modeled on. */
+  /** Name of the official exam the final exam is modeled on (or of the course test). */
   examName: string;
+  /** 'course': the final checks the course only; real exam mocks live in Fuchsdeutsch Prüfung. Default: exam format. */
+  finalStyle?: 'exam' | 'course';
   blurb: string;
   /** English one-liner for the landing page and course picker. */
   blurbEn: string;

@@ -6,6 +6,20 @@ Format: newest first. Branch commits: `fdd45e2` → `b308c64` → `9160179` → 
 
 ---
 
+## 2026-10-18 — B1 (Season 3), course test, more Cloudflare accounts
+
+### B1 course (draft, hidden on the live site)
+- 12 chapters in the order and grammar of Netzwerk neu B1, Season 3 of the Fuchsbau-WG: the house is sold, the tenants found a cooperative and buy it. Own texts only. Story bible in `content/b1/SEASON3.md`.
+- Every chapter: 8 sections, 12-item exam, Goethe B1 Prüfungstraining block, English hints, 2 diagrams, picture prompts. Plattform reviews after K3, K6, K9, K12. 6 B1 stories in `content/stories/b1.ts`.
+- New cast: Sofia, Lina, Herr Vogt (speakers, voices, portraits).
+- The course ends with an own "Abschlusstest B1" (`finalStyle: 'course'`: Lesen, Hören, Grammatik, Redemittel). Goethe B1 mock tests stay in Fuchsdeutsch Prüfung.
+- Shown in `npm run dev` and checks only. Set `NEXT_PUBLIC_SHOW_B1=1` on Vercel to open it.
+
+### Pictures
+- `npm run images` uses every Cloudflare account in `.env.local` (`CF_ACCOUNT_ID_<n>` + `CF_API_TOKEN_<n>`) and switches when one hits its daily quota.
+
+---
+
 ## 2026-10-18 — A2 enrichment, stories, pictures and diagrams
 
 ### A2 content

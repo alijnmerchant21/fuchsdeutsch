@@ -256,7 +256,7 @@ const wg = section('wg', 'kommunikation', 'Die Fuchsbau-WG', 'Folge 2: Das Repai
     audio('wg-audio', 'Folge 2: Das Repair Café', [
       ['herrLehmann', 'Nu guck mal, die jungen Leute aus dem Fuchsbau! Kommt rein, der Kaffee steht dort hinten.'],
       ['sofia', 'Danke, Herr Lehmann! Machen Sie das hier wirklich jeden Samstag?'],
-      ['herrLehmann', 'Jeden Samstag von zehn bis zwei, seit fünf Jahren schon. Ich war ja vierzig Jahre Elektriker. Was habt ihr denn mitgebracht?'],
+      ['herrLehmann', 'Jeden Samstag von zehn bis zwei, seit fünf Jahren schon. Ich war ja vierzig Jahre Schlosser in der Maschinenfabrik. Was habt ihr denn mitgebracht?'],
       ['sofia', 'Meinen Laptop. Er ist so langsam, dass ich fast verrückt werde. Und der Lüfter ist total laut.'],
       ['herrLehmann', 'Lass mal sehen … Ach, da ist ja überall Staub drin. Den machen wir mal richtig sauber, dann läuft er wieder wie neu.'],
       ['felix', 'Und mein Verstärker brummt seit Wochen. Deshalb kann ich mit der Band nicht proben. Ein neuer kostet fast sechshundert Euro.'],

@@ -65,7 +65,7 @@ function Dashboard() {
             {next.kind === 'final' && (
               <>
                 <span className="v3-eyebrow">Als Nächstes · {course.level}</span>
-                <h2>Abschlussprüfung: {course.examName}</h2>
+                <h2>{course.finalStyle === 'course' ? course.examName : `Abschlussprüfung: ${course.examName}`}</h2>
                 <div className="v3-row"><Link href={next.href} className="v3-btn">Prüfung öffnen</Link></div>
               </>
             )}

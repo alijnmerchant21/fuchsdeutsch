@@ -21,6 +21,8 @@ const modules = [
   { id: 'schreiben', name: 'Schreiben', tone: 'lilac', minutes: 20 },
   { id: 'sprechen', name: 'Sprechen', tone: 'rose', minutes: 10 },
 ] as const;
+// A course-style final (B1) checks grammar and phrases instead of free writing and speaking.
+const COURSE_NAMES: Partial<Record<string, string>> = { schreiben: 'Grammatik', sprechen: 'Redemittel' };
 type ModId = (typeof modules)[number]['id'];
 
 function Auto({ items, reveal, onPct }: { items: ExamItem[]; reveal: boolean; onPct: (p: number) => void }) {
@@ -66,11 +68,14 @@ function Final() {
     <main className="page lesson t-peach">
       <header className="lesson-head">
         <p className="lesson-label">{course.title}</p>
-        <h1>Abschlussprüfung {course.level}</h1>
+        <h1>{course.finalStyle === 'course' ? course.examName : `Abschlussprüfung ${course.level}`}</h1>
         <ul className="goals">
-          <li><De en={`Format: ${course.examName}. Four modules, 100 points each.`}>Im Format: {course.examName}. Vier Module, jedes Modul hat 100 Punkte.</De></li>
+          {course.finalStyle === 'course'
+            ? <li><De en="A test of everything in this course: reading, listening, grammar and phrases, 100 points each.">Ein Test über den ganzen Kurs: Lesen, Hören, Grammatik und Redemittel, jedes Modul hat 100 Punkte.</De></li>
+            : <li><De en={`Format: ${course.examName}. Four modules, 100 points each.`}>Im Format: {course.examName}. Vier Module, jedes Modul hat 100 Punkte.</De></li>}
           <li><De en={`You pass with at least ${PASS_MARK} points in every module.`}>Bestanden, wenn du in jedem Modul mindestens {PASS_MARK} Punkte hast.</De></li>
           <li><De en={`Covers all ${course.chapters.length} chapters. Everything is marked automatically.`}>Die Prüfung umfasst den Stoff aller {course.chapters.length} Kapitel. Alle Aufgaben werden automatisch ausgewertet.</De></li>
+          {course.finalStyle === 'course' && <li><De en={`Preparing for the real ${course.level} exam? Full mock tests in the official format are coming in Fuchsdeutsch Prüfung.`}>Du willst dich auf die echte {course.level}-Prüfung vorbereiten? Komplette Modelltests im Prüfungsformat gibt es bald in Fuchsdeutsch Prüfung.</De></li>}
         </ul>
       </header>
 
@@ -79,7 +84,7 @@ function Final() {
           <Fox size={96} mood={allPass ? 'proud' : 'sleepy'} />
           <div>
             <h2>{allPass ? <De en="Passed! Congratulations." inline>Bestanden! Herzlichen Glückwunsch.</De> : <De en="Not passed yet" inline>Noch nicht bestanden</De>}</h2>
-            <ul className="result-mods">{modules.map((m) => <li key={m.id} className={pct[m.id] >= PASS_MARK ? 'ok' : 'no'}>{m.name}: <b>{pct[m.id]}</b> / 100</li>)}</ul>
+            <ul className="result-mods">{modules.map((m) => <li key={m.id} className={pct[m.id] >= PASS_MARK ? 'ok' : 'no'}>{(course.finalStyle === 'course' && COURSE_NAMES[m.id]) || m.name}: <b>{pct[m.id]}</b> / 100</li>)}</ul>
             <Link href="/kurs" className="btn"><De en="Course overview" inline>Zur Kursübersicht</De></Link>
           </div>
         </div>
@@ -88,7 +93,7 @@ function Final() {
       <div className="tabs" role="tablist" aria-label="Module">
         {modules.map((m) => (
           <button key={m.id} type="button" role="tab" aria-selected={tab === m.id} className={`tab t-${m.tone}`} onClick={() => setTab(m.id)}>
-            <b>{m.name}</b><small>ca. {m.minutes} Min.</small>
+            <b>{(course.finalStyle === 'course' && COURSE_NAMES[m.id]) || m.name}</b><small>ca. {m.minutes} Min.</small>
           </button>
         ))}
       </div>

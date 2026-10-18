@@ -76,7 +76,15 @@ export interface GapBlock extends Base {
 export interface MatchBlock extends Base { t: 'match'; pairs: [string, string][] }
 export interface OrderBlock extends Base { t: 'order'; words: string[]; answers: string[]; hint?: string }
 export interface SortBlock extends Base { t: 'sort'; cats: string[]; items: { text: string; cat: number }[] }
-export interface WriteBlock extends Base { t: 'write'; prompt: Rich; minWords: number; hints?: string[]; sample: string }
+/** Free writing: the learner writes a text and hands it in; it is marked later (Claude, via the admin page). */
+export interface WriteBlock extends Base {
+  t: 'write'; prompt: Rich; promptEn?: string;
+  /** Content points the text must cover. */
+  points?: string[]; pointsEn?: string[];
+  minWords: number; maxWords?: number; hints?: string[];
+  /** Model answer, shown after the text is marked. */
+  sample?: string;
+}
 
 /**
  * Guided writing that can be checked: the learner builds a short text sentence by sentence.

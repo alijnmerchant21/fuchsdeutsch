@@ -71,7 +71,9 @@ function block(where, b, seen) {
       }
       break;
     case 'write':
-      err(w, 'free writing block found (not checkable)');
+      // Free writing is marked by Claude through the admin page (supabase/007_writing.sql).
+      if (!(b.minWords > 0) || (b.maxWords && b.maxWords < b.minWords)) err(w, 'write: minWords/maxWords wrong');
+      if (!b.points || b.points.length < 2) err(w, 'write: needs at least 2 content points');
       break;
     case 'audio':
       stats.audio++;

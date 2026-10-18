@@ -12,7 +12,8 @@ import { a2k10, gamesA2k10 } from './k10';
 import { a2k11, gamesA2k11 } from './k11';
 import { a2k12, gamesA2k12 } from './k12';
 import { finalA2 } from './final';
-import { scopeAudio } from '../helpers';
+import { scopeAudio, withWriting } from '../helpers';
+import { WRITING } from '../writing';
 
 // A2 follows the order and themes of a common A2 textbook (12 chapters). All content is original.
 export const a2: Course = {
@@ -24,7 +25,7 @@ export const a2: Course = {
   blurbEn: 'Build on A1. Twelve chapters, season two of the flat-share story, Goethe A2 style final exam.',
   weeks: 10,
   finalKey: 'a2-final',
-  chapters: [a2k1, a2k2, a2k3, a2k4, a2k5, a2k6, a2k7, a2k8, a2k9, a2k10, a2k11, a2k12].map(scopeAudio),
+  chapters: [a2k1, a2k2, a2k3, a2k4, a2k5, a2k6, a2k7, a2k8, a2k9, a2k10, a2k11, a2k12].map(scopeAudio).map(withWriting(WRITING)),
   final: finalA2,
 };
 

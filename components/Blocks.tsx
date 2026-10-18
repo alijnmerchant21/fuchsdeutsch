@@ -13,6 +13,8 @@ import { GrammarVisual } from './GrammarVisual';
 import { VISUALS } from '@/content/visuals';
 import { imageSrc, useChapter, useImages, vocabImageId } from '@/lib/images';
 import { Inline, Rich, Task } from './Rich';
+import { findChapter } from '@/content/course';
+import { countWords, myWriting, submitWriting, type WritingSubmission } from '@/lib/writing';
 
 /**
  * Every exercise reports a score from 0 to 1.
@@ -258,27 +260,105 @@ export function Sort({ b, onScore }: ExProps<SortBlock>) {
   );
 }
 
-/* ---------- Writing (self-checked now, AI feedback later) ---------- */
+/* ---------- Free writing: hand in a text, Claude marks it later ---------- */
 export function Write({ b, onScore }: ExProps<WriteBlock>) {
+  const hints = useHints();
+  const chapterId = useChapter();
+  const { user, progress, rewardWriting } = useStore();
+  const found = chapterId ? findChapter(chapterId) : null;
+  const [sub, setSub] = useState<WritingSubmission | null | undefined>(undefined);
   const [text, setText] = useState('');
-  const [done, setDone] = useState(false);
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const [again, setAgain] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const words = countWords(text);
+  const max = b.maxWords || b.minWords * 3;
   const pct = Math.min(100, Math.round((words / b.minWords) * 100));
-  return (
-    <div className="ex">
-      <Rich text={b.prompt} className="ex-q" />
-      {b.hints && <div className="bank">{b.hints.map((h) => <button key={h} type="button" className="chip" disabled={done} onClick={() => setText((t) => (t ? `${t} ${h}` : h))}>{h}</button>)}</div>}
-      <textarea className="write" rows={6} value={text} disabled={done} onChange={(e) => setText(e.target.value)} placeholder="Schreib hier …" aria-label="Dein Text" />
+
+  useEffect(() => {
+    let live = true;
+    if (!chapterId) { setSub(null); return; }
+    void myWriting(chapterId, b.id).then((r) => { if (live) { setSub(r); if (r) onScore(1); } });
+    return () => { live = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chapterId, b.id]);
+
+  // A marked text earns its points once.
+  useEffect(() => {
+    if (sub?.status === 'reviewed' && sub.score != null && progress.writing?.[sub.id] === undefined) rewardWriting(sub.id, Math.max(5, sub.score * 2));
+  }, [sub, progress.writing, rewardWriting]);
+
+  const send = async () => {
+    if (!found || busy) return;
+    setBusy(true); setErr(null);
+    const plainPrompt = [b.prompt, ...(b.points || []).map((p) => `- ${p}`)].join('\n');
+    const e = await submitWriting({ course: found.course.id, chapter: found.chapter.id, block: b.id, level: found.course.level, prompt: plainPrompt, body: text, name: progress.profile?.name || user?.name, email: user?.email });
+    setBusy(false);
+    if (e) { setErr(e); return; }
+    onScore(1); setAgain(false);
+    setSub(await myWriting(found.chapter.id, b.id));
+  };
+
+  const editor = (
+    <>
+      {b.hints && <div className="bank">{b.hints.map((h) => <button key={h} type="button" className="chip" onClick={() => setText((t) => (t ? `${t} ${h}` : h))}>{h}</button>)}</div>}
+      <textarea className="write" rows={8} value={text} onChange={(e) => setText(e.target.value.slice(0, 6000))} placeholder="Schreib hier …" aria-label="Dein Text" />
       <div className="ex-actions">
         <span className="meter" aria-hidden><i style={{ width: `${pct}%` }} /></span>
-        <span className="muted small">{words} / {b.minWords} <De en="words" inline>Wörter</De></span>
-        {!done && <button type="button" className="btn btn-sm" disabled={words < b.minWords} onClick={() => { setDone(true); onScore(1); }}><De en="Done" inline>Fertig</De></button>}
+        <span className={`muted small ${words > max ? 'v3-warn' : ''}`}>{words} / {b.minWords}–{max} <De en="words" inline>Wörter</De></span>
+        <button type="button" className="btn btn-sm" disabled={busy || words < b.minWords || words > max * 1.5} onClick={send}>
+          {busy ? '…' : <De en="Hand in" inline>Abgeben</De>}
+        </button>
       </div>
-      {done && (
-        <div className="sample">
-          <p className="sample-label"><De en="Sample text to compare">Beispieltext zum Vergleichen</De></p>
-          <p>{b.sample}</p>
-          <p className="muted small"><De en="Compare: did you use similar tenses and sentence starts?">Vergleiche: Hast du ähnliche Zeitformen und Satzanfänge benutzt?</De></p>
+      {err && <p className="v3-err" role="alert">{err}</p>}
+      <p className="muted small"><De en="Your text is saved and marked by our teacher AI. You will see points and corrections here, usually within a day.">Dein Text wird gespeichert und von unserer Lehrer-KI korrigiert. Punkte und Korrekturen siehst du dann hier, meistens innerhalb eines Tages.</De></p>
+    </>
+  );
+
+  const f = sub?.feedback;
+  return (
+    <div className="ex write-task">
+      <Rich text={b.prompt} className="ex-q" />
+      {hints && b.promptEn && <p className="v3-en-sub v3-en-block">{b.promptEn}</p>}
+      {b.points && (
+        <ul className="write-points">
+          {b.points.map((p, i) => <li key={p}>{p}{hints && b.pointsEn?.[i] && <small className="v3-en-sub">{b.pointsEn[i]}</small>}</li>)}
+        </ul>
+      )}
+      {sub === undefined && <p className="muted small">…</p>}
+      {(sub === null || again) && editor}
+      {sub && !again && (
+        <div className="write-result">
+          <p className="sample-label"><De en="Your text">Dein Text</De></p>
+          <p className="write-body">{sub.body}</p>
+          {sub.status === 'submitted' && (
+            <p className="write-wait" role="status"><span aria-hidden>⏳</span> <De en="Handed in. Your text is waiting to be marked.">Abgegeben. Dein Text wartet auf die Korrektur.</De></p>
+          )}
+          {sub.status === 'reviewed' && f && (
+            <div className="write-feedback">
+              <p className="write-score"><b>{sub.score} / {sub.max_score}</b> <De en="points" inline>Punkte</De></p>
+              <p>{f.summary}</p>
+              {hints && f.summaryEn && <p className="v3-en-sub v3-en-block">{f.summaryEn}</p>}
+              {f.criteria?.length > 0 && (
+                <ul className="write-criteria">
+                  {f.criteria.map((c) => (
+                    <li key={c.name}><span>{c.name}</span><span className="meter" aria-hidden><i style={{ width: `${c.max ? Math.round((c.points / c.max) * 100) : 0}%` }} /></span><b>{c.points}/{c.max}</b>{c.note && <small className="muted">{c.note}</small>}</li>
+                  ))}
+                </ul>
+              )}
+              {f.errors?.length > 0 && (
+                <>
+                  <p className="sample-label"><De en="What to fix">Das kannst du verbessern</De></p>
+                  <ul className="write-errors">
+                    {f.errors.map((e, i) => <li key={i}><s>{e.wrong}</s> → <b>{e.right}</b>{e.why && <small className="muted"> · {e.why}</small>}</li>)}
+                  </ul>
+                </>
+              )}
+              {f.corrected && (<><p className="sample-label"><De en="Corrected text">Korrigierter Text</De></p><p className="write-body">{f.corrected}</p></>)}
+              {b.sample && (<><p className="sample-label"><De en="Sample text">Beispieltext</De></p><p className="write-body muted">{b.sample}</p></>)}
+            </div>
+          )}
+          <button type="button" className="v3-textbtn" onClick={() => { setText(sub.body); setAgain(true); }}><De en="Write a new version" inline>Neue Version schreiben</De></button>
         </div>
       )}
     </div>

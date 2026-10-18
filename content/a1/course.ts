@@ -12,7 +12,8 @@ import { a1k10, gamesA1k10 } from './k10';
 import { a1k11, gamesA1k11 } from './k11';
 import { a1k12, gamesA1k12 } from './k12';
 import { finalA1 } from './final';
-import { scopeAudio } from '../helpers';
+import { scopeAudio, withWriting } from '../helpers';
+import { WRITING } from '../writing';
 
 // A1 follows the order and themes of a common A1 textbook (12 chapters). All content is original.
 export const a1: Course = {
@@ -24,7 +25,7 @@ export const a1: Course = {
   blurbEn: 'Start from zero. Twelve chapters, a flat-share story, Start Deutsch 1 style final exam.',
   weeks: 8,
   finalKey: 'a1-final',
-  chapters: [a1k1, a1k2, a1k3, a1k4, a1k5, a1k6, a1k7, a1k8, a1k9, a1k10, a1k11, a1k12].map(scopeAudio),
+  chapters: [a1k1, a1k2, a1k3, a1k4, a1k5, a1k6, a1k7, a1k8, a1k9, a1k10, a1k11, a1k12].map(scopeAudio).map(withWriting(WRITING)),
   final: finalA1,
 };
 

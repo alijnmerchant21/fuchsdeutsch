@@ -11,7 +11,8 @@ import { kapitel6 } from './kapitel6';
 import { kapitel7 } from './kapitel7';
 import { kapitel8 } from './kapitel8';
 import { finalB21 } from './final';
-import { scopeAudio } from './helpers';
+import { scopeAudio, withWriting } from './helpers';
+import { WRITING } from './writing';
 
 export const b21: Course = {
   id: 'b2-1',
@@ -22,7 +23,7 @@ export const b21: Course = {
   blurbEn: 'The bridge from B1 to B2. Eight chapters, Goethe-style final exam.',
   weeks: 8,
   finalKey: 'final',
-  chapters: [kapitel1, kapitel2, kapitel3, kapitel4, kapitel5, kapitel6, kapitel7, kapitel8].map(scopeAudio),
+  chapters: [kapitel1, kapitel2, kapitel3, kapitel4, kapitel5, kapitel6, kapitel7, kapitel8].map(scopeAudio).map(withWriting(WRITING)),
   final: finalB21,
 };
 

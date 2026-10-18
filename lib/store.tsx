@@ -18,6 +18,8 @@ export interface LearnerProfile {
   goal: number;
   /** Show first name and points on the leaderboard. */
   board: boolean;
+  /** Language the sign-up was done in. 'en' starts with English help on, 'de' with German only. */
+  uiLang?: 'de' | 'en';
 }
 export interface Streak { count: number; best: number; last: string | null; freezes: number }
 
@@ -37,6 +39,8 @@ export interface Progress {
   profile?: LearnerProfile;
   /** Course shown on the dashboard. */
   course?: string;
+  /** Marked writing tasks whose points were already added: submission id -> XP. */
+  writing?: Record<string, number>;
 }
 
 const emptyProgress = (): Progress => ({
@@ -95,6 +99,8 @@ interface Store {
   completeSection: (key: string, xp: number) => void;
   recordExam: (key: string, percent: number) => void;
   recordGame: (id: string, score: number, xp: number) => void;
+  /** Adds the XP for a marked text once. */
+  rewardWriting: (submissionId: string, xp: number) => void;
 }
 
 const Ctx = createContext<Store | null>(null);
@@ -112,8 +118,10 @@ function withAnswers(p: Progress, a: BetaAnswers, fallbackName: string): Progres
     nativeLanguage: String(a.nativeLanguage || '').slice(0, 40),
     goal: [25, 50, 100].includes(Number(a.goal)) ? Number(a.goal) : 50,
     board: a.board !== false,
+    uiLang: a.uiLang === 'de' ? 'de' : 'en',
   };
-  return { ...p, profile, course: a.course || p.course };
+  // English help follows the language of the sign-up: English sign-up = help on, German = German only.
+  return { ...p, profile, course: a.course || p.course, mode: profile.uiLang === 'de' ? 'advanced' : 'easy' };
 }
 const lsKey = (id: string) => `fd:progress:${id}`;
 
@@ -249,7 +257,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (error) return 'Something went wrong. Please try again in a moment.';
       return String(data);
     },
-    saveProfile: (profile) => { if (isAdmin) return; update((p) => ({ ...p, profile })); },
+    saveProfile: (profile) => {
+      if (isAdmin) return;
+      // First time only: English help follows the language the form was filled in.
+      update((p) => ({ ...p, profile, ...(!p.profile && profile.uiLang ? { mode: profile.uiLang === 'de' ? 'advanced' as const : 'easy' as const } : {}) }));
+    },
     setCourse: (course) => update((p) => ({ ...p, course })),
     signInDemo: (name, email) => {
       const u: User = { id: 'demo-' + email.toLowerCase().replace(/[^a-z0-9]/g, '-'), email, name };
@@ -293,6 +305,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (!DEMO_MODE) return; // real admins are set in the database
       setIsAdmin(on); setAdminViewState(on); writeLS(LS_ADMIN, { is: on, view: on });
     },
+    rewardWriting: (id, xp) => { if (isAdmin) return; update((p) => (p.writing?.[id] !== undefined ? p : earn({ ...p, writing: { ...(p.writing || {}), [id]: xp } }, xp))); },
     completeSection: (key, xp) => { if (isAdmin) return; update((p) => (p.done[key] ? p : earn({ ...p, done: { ...p.done, [key]: new Date().toISOString() } }, xp))); },
     recordExam: (key, percent) => {
       if (isAdmin) return;

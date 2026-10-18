@@ -8,6 +8,7 @@ import { isExercise } from '@/content/types';
 import { DEMO_MODE } from '@/lib/config';
 import { useStore } from '@/lib/store';
 import { supabase } from '@/lib/supabase';
+import { exportForClaude, listWriting, parseReviews, saveReview, type WritingSubmission } from '@/lib/writing';
 
 interface Beta { email: string; profile: { name?: string; course?: string; reasons?: string[]; nativeLanguage?: string; goal?: number } | null; approved: boolean; created_at: string }
 
@@ -70,6 +71,73 @@ function BetaList() {
   );
 }
 
+/** Free writing: export open texts for Claude, paste the marking back. */
+function WritingQueue() {
+  const [filter, setFilter] = useState<'submitted' | 'reviewed'>('submitted');
+  const [rows, setRows] = useState<WritingSubmission[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [paste, setPaste] = useState('');
+  const [msg, setMsg] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const load = (f = filter) => { setRows(null); void listWriting(f).then((r) => { setRows(r.rows); setError(r.error || null); }); };
+  useEffect(() => load(filter), [filter]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const copy = () => {
+    void navigator.clipboard?.writeText(exportForClaude(rows || [])).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2500); });
+  };
+  const save = async () => {
+    const open = rows || [];
+    const { ok, problems } = parseReviews(paste, open);
+    if (!ok.length) { setMsg(problems.join(' · ') || 'Nichts zum Speichern.'); return; }
+    setBusy(true);
+    const failed: string[] = [];
+    for (const r of ok) { const e = await saveReview(r.id, r); if (e) failed.push(`${r.id}: ${e}`); }
+    setBusy(false);
+    setMsg(`${ok.length - failed.length} Texte gespeichert.${problems.length ? ` Übersprungen: ${problems.join(' · ')}` : ''}${failed.length ? ` Fehler: ${failed.join(' · ')}` : ''}`);
+    if (!failed.length) setPaste('');
+    load();
+  };
+
+  if (error) return <p className="muted">Schreiben ist noch nicht eingerichtet oder nicht lesbar ({error}). Führe in Supabase die Datei supabase/007_writing.sql aus.</p>;
+  return (
+    <>
+      <div className="v3-row">
+        <div className="seg" role="group" aria-label="Filter">
+          <button type="button" aria-pressed={filter === 'submitted'} onClick={() => setFilter('submitted')}>Offen{filter === 'submitted' && rows ? ` (${rows.length})` : ''}</button>
+          <button type="button" aria-pressed={filter === 'reviewed'} onClick={() => setFilter('reviewed')}>Korrigiert</button>
+        </div>
+        {filter === 'submitted' && !!rows?.length && <button type="button" className="btn btn-sm" onClick={copy}>{copied ? 'Kopiert ✓' : 'Für Claude kopieren'}</button>}
+      </div>
+      <div className="card table-wrap">
+        <table>
+          <thead><tr><th>Wann</th><th>Wer</th><th>Kurs</th><th>Aufgabe</th><th>Wörter</th><th>Text</th>{filter === 'reviewed' && <th>Punkte</th>}</tr></thead>
+          <tbody>
+            {(rows || []).map((r) => (
+              <tr key={r.id}>
+                <td>{new Date(r.created_at).toLocaleDateString('de-DE')}</td><td>{r.name || r.email}</td><td>{r.level} · {r.chapter}</td>
+                <td><Link href={`/kurs/${r.chapter}/uebungen`}>{r.block}</Link></td><td>{r.words}</td>
+                <td><details><summary>{r.body.slice(0, 60)}{r.body.length > 60 ? '…' : ''}</summary><p className="write-body">{r.body}</p></details></td>
+                {filter === 'reviewed' && <td>{r.score} / {r.max_score}</td>}
+              </tr>
+            ))}
+            {rows && rows.length === 0 && <tr><td colSpan={7}>Keine Texte.</td></tr>}
+            {!rows && <tr><td colSpan={7}>Lade …</td></tr>}
+          </tbody>
+        </table>
+      </div>
+      {filter === 'submitted' && !!rows?.length && (
+        <div className="card form">
+          <p className="muted small">1. „Für Claude kopieren“ drücken und alles in Claude einfügen. 2. Claudes Antwort (das JSON-Array) hier einfügen. 3. Speichern: Die Lernenden sehen Punkte und Korrekturen sofort.</p>
+          <textarea className="write" rows={8} value={paste} onChange={(e) => setPaste(e.target.value)} placeholder='[{ "id": "…", "score": 14, "max_score": 20, "feedback": { … } }]' aria-label="Antwort von Claude" />
+          <button type="button" className="btn" disabled={busy || !paste.trim()} onClick={() => void save()}>{busy ? 'Speichere …' : 'Korrekturen speichern'}</button>
+          {msg && <p className="muted small" role="status">{msg}</p>}
+        </div>
+      )}
+    </>
+  );
+}
+
 interface Row { id: string; email: string; name: string; xp: number; streak: number; last_active: string | null; created_at: string; profile: { name?: string; gender?: string; reasons?: string[]; nativeLanguage?: string } | null }
 
 function Admin() {
@@ -114,6 +182,9 @@ function Admin() {
 
       <h2>Beta-Warteliste</h2>
       <BetaList />
+
+      <h2>Schreiben: Texte korrigieren</h2>
+      <WritingQueue />
 
       <h2>Kursinhalt</h2>
       {courses.map((course) => (

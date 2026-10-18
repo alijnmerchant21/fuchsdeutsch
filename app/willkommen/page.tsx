@@ -6,6 +6,7 @@ import { RequireUser } from '@/components/Guard';
 import { useStore } from '@/lib/store';
 import { ProfileForm } from '@/components/ProfileForm';
 import { DEMO_MODE } from '@/lib/config';
+import { useUiLang } from '@/lib/lang';
 
 function PasswordCard() {
   const { setPassword } = useStore();
@@ -40,6 +41,7 @@ function Form() {
   const { user, progress, saveProfile, setCourse } = useStore();
   const router = useRouter();
   const old = progress.profile;
+  const [uiLang] = useUiLang();
   // A login by email link only knows the address, so do not suggest "name@..." as a first name.
   const guess = user && !user.email.startsWith(user.name) ? user.name.split(' ')[0] : '';
 
@@ -53,6 +55,7 @@ function Form() {
         </div>
       </header>
       <ProfileForm
+        lang={old?.uiLang || uiLang}
         initial={old}
         initialName={guess}
         initialCourse={progress.course}

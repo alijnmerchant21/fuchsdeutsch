@@ -12,10 +12,11 @@ import { b1k10, gamesB1k10 } from './k10';
 import { b1k11, gamesB1k11 } from './k11';
 import { b1k12, gamesB1k12 } from './k12';
 import { finalB1 } from './final';
-import { scopeAudio } from '../helpers';
+import { scopeAudio, withWriting } from '../helpers';
+import { WRITING } from '../writing';
 
 // B1 follows the order and themes of Netzwerk neu B1 (12 chapters). Season 3 of the Fuchsbau-WG. All content is original.
-const chapters = [b1k1, b1k2, b1k3, b1k4, b1k5, b1k6, b1k7, b1k8, b1k9, b1k10, b1k11, b1k12].map(scopeAudio);
+const chapters = [b1k1, b1k2, b1k3, b1k4, b1k5, b1k6, b1k7, b1k8, b1k9, b1k10, b1k11, b1k12].map(scopeAudio).map(withWriting(WRITING));
 
 
 export const b1: Course = {

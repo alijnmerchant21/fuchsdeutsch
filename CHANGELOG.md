@@ -6,6 +6,21 @@ Format: newest first. Branch commits: `fdd45e2` → `b308c64` → `9160179` → 
 
 ---
 
+## 2026-10-18 — Homepage DE/EN, English help by choice, free writing
+
+### Homepage
+- DE | EN switch (remembered in the browser). The whole homepage, the beta card and the welcome questions follow it.
+- Hero buttons removed; the beta card (sign up, or "Log in" link) is the only entry. Levels show A1, A2, B1 and B2 (B1 shows "coming soon" until it is opened).
+
+### English help
+- English under instructions is now the learner's choice (the "English-Hilfe" switch), not forced on A1 to B1. It starts on after an English sign-up and off after a German one. Exercises themselves stay German.
+
+### Schreiben
+- Every chapter (A1, A2, B1, B2.1) ends Übungen with a free writing task (`content/writing.ts`).
+- Texts are stored in Supabase (`supabase/007_writing.sql`, run once). Admin page: "Für Claude kopieren" exports open texts with the marking rules, Claude's JSON answer is pasted back, learners see points, criteria, corrections, a corrected text and earn XP.
+
+---
+
 ## 2026-10-18 — B1 (Season 3), course test, more Cloudflare accounts
 
 ### B1 course (draft, hidden on the live site)

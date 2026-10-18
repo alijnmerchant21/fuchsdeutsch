@@ -1,8 +1,9 @@
 // Short builders so chapter files read like a script, not like JSON.
 import type {
   AudioBlock, CardsBlock, ChecklistBlock, ComposeBlock, ExamItem, GapBlock, GrammarBlock, MatchBlock, McqBlock,
-  OrderBlock, OverviewBlock, PhrasesBlock, PollBlock, SortBlock, TextBlock, TipBlock,
+  OrderBlock, OverviewBlock, PhrasesBlock, PollBlock, SortBlock, TextBlock, TipBlock, WriteBlock,
 } from './types';
+import type { WritingTask } from './writing';
 
 interface Task { task?: string; taskEn?: string }
 
@@ -80,4 +81,15 @@ export const scopeAudio = (ch: Chapter): Chapter => {
     sections: ch.sections.map((s) => ({ ...s, blocks: s.blocks.map(scope) })),
     exam: ch.exam.map((it) => (it.stimulus ? { ...it, stimulus: scope(it.stimulus) } : it)),
   };
+};
+
+/** Adds the chapter's free-writing task (content/writing.ts) at the end of its Übungen section. */
+export const withWriting = (tasks: Record<string, WritingTask>) => (ch: Chapter): Chapter => {
+  const w = tasks[ch.id];
+  if (!w) return ch;
+  const block: WriteBlock = {
+    t: 'write', id: 'u-schreiben', task: 'Schreib einen eigenen Text und gib ihn ab.', taskEn: 'Write your own text and hand it in. It will be marked.',
+    prompt: w.prompt, promptEn: w.promptEn, points: w.points, pointsEn: w.pointsEn, minWords: w.minWords, maxWords: w.maxWords, hints: w.hints, sample: w.sample,
+  };
+  return { ...ch, sections: ch.sections.map((s) => (s.id === 'uebungen' ? { ...s, blocks: [...s.blocks, block] } : s)) };
 };

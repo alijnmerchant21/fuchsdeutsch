@@ -1,0 +1,38 @@
+{
+ "id": "diagnose",
+ "title": "Mock Test 1 · Diagnose",
+ "en": "Free diagnostic, about 40 minutes: Hören, Lesen, Schreiben",
+ "sections": [
+  {
+   "module": "hoeren",
+   "title": "Hören",
+   "minutes": 20,
+   "sets": [
+    "diag-h1",
+    "diag-h2",
+    "diag-h3",
+    "diag-h4"
+   ]
+  },
+  {
+   "module": "lesen",
+   "title": "Lesen",
+   "minutes": 15,
+   "sets": [
+    "diag-l1",
+    "diag-l2",
+    "diag-l3",
+    "diag-l4",
+    "diag-l5"
+   ]
+  },
+  {
+   "module": "schreiben",
+   "title": "Schreiben",
+   "minutes": 8,
+   "sets": [
+    "diag-s3"
+   ]
+  }
+ ]
+}

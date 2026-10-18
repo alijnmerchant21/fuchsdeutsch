@@ -211,7 +211,7 @@ function Admin() {
           )}
         </details>
       ))}
-      <p><Link href={`/pruefung/${course.id}`} className="btn btn-sm">Abschlussprüfung {course.level} ansehen</Link></p>
+      <p><Link href={`/abschlusspruefung/${course.id}`} className="btn btn-sm">Abschlussprüfung {course.level} ansehen</Link></p>
       </section>
       ))}
 

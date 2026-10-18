@@ -1,0 +1,9 @@
+node_modules
+.next
+.env.local
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+# Cornelsen material: personal copy, never commit or deploy
+public/licensed/
+content/licensed/

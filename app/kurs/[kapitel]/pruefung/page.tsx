@@ -34,7 +34,7 @@ function Exam() {
         intro={<De en="Grammar, reading, listening and phrases from this chapter. Take about 20 minutes.">Grammatik, Lesen, Hören und Redemittel aus diesem Kapitel. Nimm dir etwa 20 Minuten Zeit.</De>}
         onFinish={(pct) => recordExam(ch.id, pct)}
         backHref="/kurs"
-        passHref={nextCh ? '/kurs' : `/pruefung/${course.id}`}
+        passHref={nextCh ? '/kurs' : `/abschlusspruefung/${course.id}`}
         passLabel={nextCh ? `Kapitel ${nextCh.number} ist jetzt offen` : 'Zur Abschlussprüfung'}
       />
     </main>

@@ -17,7 +17,7 @@ export function nextUp(course: Course, p: Progress): NextUp {
     if (si >= 0) return { kind: 'section', ch, ci, sec: ch.sections[si], si, href: `/kurs/${ch.id}/${ch.sections[si].id}` };
     if (!p.exams[ch.id]?.passed) return { kind: 'exam', ch, ci, href: `/kurs/${ch.id}/pruefung` };
   }
-  if (course.chapters.every((c) => p.exams[c.id]?.passed)) return { kind: 'final', href: `/pruefung/${course.id}` };
+  if (course.chapters.every((c) => p.exams[c.id]?.passed)) return { kind: 'final', href: `/abschlusspruefung/${course.id}` };
   return null;
 }
 

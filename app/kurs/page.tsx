@@ -150,7 +150,7 @@ function CoursePage() {
           <div className={`v3-listrow ${finalOpen(course, progress, isAdmin) ? '' : 'is-locked'}`}>
             <span className="v3-num">🎓</span>
             <span className="v3-grow"><b>Abschlussprüfung</b><small className="muted">{course.examName}. Öffnet nach allen Kapitelprüfungen.</small></span>
-            {finalOpen(course, progress, isAdmin) ? <Link href={`/pruefung/${course.id}`} className="v3-textbtn">Öffnen</Link> : <small className="muted">Gesperrt</small>}
+            {finalOpen(course, progress, isAdmin) ? <Link href={`/abschlusspruefung/${course.id}`} className="v3-textbtn">Öffnen</Link> : <small className="muted">Gesperrt</small>}
           </div>
         </section>
       </div>

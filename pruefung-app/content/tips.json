@@ -1,0 +1,186 @@
+{
+ "hoeren": {
+  "1": {
+   "name": "Teil 1 · Kurze Texte",
+   "mins": 10,
+   "items": 10,
+   "plays": 2,
+   "how": "Richtig/Falsch und a, b, c",
+   "tips": [
+    "Vor dem Hören: beide Aufgaben lesen und das Schlüsselwort markieren (Zeit, Ort, Zahl, Tag).",
+    "Beim ersten Hören antworten, beim zweiten Hören nur noch prüfen.",
+    "Oft hörst du <b>alle</b> Zahlen oder Orte aus den Antworten. Nur einer passt zur Frage.",
+    "Bei Durchsagen kommt die wichtige Änderung nach <b>„Bitte beachten Sie“</b> oder <b>„nicht … sondern“</b>."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Vortrag",
+   "mins": 8,
+   "items": 5,
+   "plays": 1,
+   "how": "a, b oder c",
+   "tips": [
+    "Du hörst den Text <b>nur einmal</b>. Lies alle 5 Aufgaben vorher.",
+    "Die Aufgaben kommen in derselben Reihenfolge wie im Text.",
+    "Verpasst? Sofort zur nächsten Aufgabe springen, nicht hängen bleiben.",
+    "Achtung bei <b>eigentlich, ursprünglich, aber, leider</b>: Hier ändert sich der Plan."
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · Gespräch",
+   "mins": 8,
+   "items": 7,
+   "plays": 1,
+   "how": "Richtig oder Falsch",
+   "tips": [
+    "Du hörst das Gespräch <b>nur einmal</b>. Lies alle 7 Aussagen vorher.",
+    "Achte auf den Namen in der Aussage: <b>Wer</b> hat das gesagt oder gemacht?",
+    "Falsch ist oft: Es geht um die andere Person, oder es ist nur ein Plan.",
+    "Richtig wird fast immer mit anderen Wörtern gesagt."
+   ]
+  },
+  "4": {
+   "name": "Teil 4 · Diskussion",
+   "mins": 12,
+   "items": 8,
+   "plays": 2,
+   "how": "Wer sagt was?",
+   "tips": [
+    "Vor dem Hören: Namen und Rollen der Gäste merken (Wer ist dafür? Wer ist skeptisch?).",
+    "Du hörst die Diskussion <b>zweimal</b>. Erstes Hören: antworten. Zweites Hören: prüfen.",
+    "Die Moderatorin oder der Moderator bekommt meistens nur 1 Aussage, oft eine Zahl oder Umfrage.",
+    "Die Aussagen sind <b>andere Wörter</b> für das Gesagte. Achte auf die Idee, nicht auf einzelne Wörter.",
+    "Die Aussagen kommen <b>nicht immer</b> in der Reihenfolge des Gesprächs. Wenn du eine verpasst: weiter, beim zweiten Hören ergänzen.",
+    "Wer nur zustimmt („Da haben Sie recht“, „Genau“), hat die Aussage <b>nicht</b> gemacht. Die Aussage gehört der Person, die sie zuerst sagt."
+   ]
+  }
+ },
+ "lesen": {
+  "1": {
+   "name": "Teil 1 · Blog",
+   "mins": 10,
+   "items": 6,
+   "how": "Richtig oder Falsch",
+   "tips": [
+    "Die Aussagen folgen der Reihenfolge im Text. Aussage lesen, dann die passende Stelle suchen.",
+    "Richtig steht fast nie mit denselben Wörtern im Text. <b>abschalten</b> = entspannen, <b>nicht teuer</b> = günstig.",
+    "Falsch heißt meistens: <b>ein</b> Detail ist anders. Wer? Wann? Wie viel? nicht/nie/noch nicht?",
+    "Achtung bei <b>früher / jetzt / bald</b>: Was war so, was ist so, was ist nur ein Plan?"
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Zeitungstexte",
+   "mins": 20,
+   "items": 6,
+   "how": "a, b oder c",
+   "tips": [
+    "Zuerst die Frage lesen (nicht die Antworten). Dann die Stelle im Text suchen.",
+    "Den ganzen Satz lesen, <b>und den Satz danach</b>. Oft kommt dort ein „aber“ oder „doch“.",
+    "Die Antwort mit genau denselben Wörtern wie im Text ist oft die Falle.",
+    "Bei „Was steht im Text?“: jede Antwort einzeln prüfen und zwei streichen."
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · Anzeigen",
+   "mins": 10,
+   "items": 7,
+   "how": "Anzeige a bis j oder 0",
+   "tips": [
+    "Zuerst nur die 7 Situationen lesen und in jeder <b>1–2 Muss-Punkte</b> markieren: wer, wann, was, wie viel.",
+    "Eine Anzeige passt nur, wenn <b>alle</b> Muss-Punkte passen. Ein falsches Detail = passt nicht.",
+    "Jede Anzeige gibt es nur einmal. Genau eine Situation bekommt <b>0</b>.",
+    "Gleiches Thema heißt noch nicht passend: Fotokurs ist nicht gleich Fotokurs."
+   ]
+  },
+  "4": {
+   "name": "Teil 4 · Meinungen",
+   "mins": 15,
+   "items": 7,
+   "how": "Ja oder Nein",
+   "tips": [
+    "Die Frage ist immer: <b>Ist die Person DAFÜR?</b> Nicht: Stimmt der Text?",
+    "Der erste Satz ist oft die Meinung von <b>anderen</b> („Viele sagen …“, „Mein Enkel meint …“).",
+    "Signalwörter für die Wende: <b>aber, trotzdem, doch, ich sehe das anders, inzwischen</b>.",
+    "Der letzte Satz zeigt fast immer die eigene Meinung. Lies ihn zweimal."
+   ]
+  },
+  "5": {
+   "name": "Teil 5 · Regeln und Infos",
+   "mins": 10,
+   "items": 4,
+   "how": "a, b oder c",
+   "tips": [
+    "Die Überschriften im Text zeigen dir, wo die Antwort steht.",
+    "Achte auf Bedingungen: <b>wenn, nur, erst, bis, spätestens, mindestens</b>.",
+    "Zahlen genau lesen: 10 Tage vor dem Kurs ist <b>nicht</b> 14 Tage vor dem Kurs.",
+    "Eine Antwort mit einem Wort aus dem Text kann trotzdem zu einer anderen Regel gehören."
+   ]
+  }
+ },
+ "traps": {
+  "hoeren": {
+   "wort": [
+    "Wortfalle",
+    "You hear the word, but it belongs to something else"
+   ],
+   "negation": [
+    "nicht / kein / sondern",
+    "A small word flips the meaning"
+   ],
+   "vorher": [
+    "Änderung",
+    "Plan changed, speaker corrects himself, before vs. now"
+   ],
+   "person": [
+    "falsche Person",
+    "Right statement, wrong speaker"
+   ],
+   "detail": [
+    "Zahl / Zeit / Ort",
+    "Several numbers or places are named, only one is right"
+   ],
+   "teil": [
+    "zu allgemein",
+    "Too absolute: alle, immer, nur"
+   ],
+   "synonym": [
+    "andere Wörter",
+    "The speaker says it with different words (correct answer!)"
+   ]
+  },
+  "lesen": {
+   "wort": [
+    "Wortfalle",
+    "Same words as the text, but a different meaning"
+   ],
+   "negation": [
+    "nicht / kein / nie / nur",
+    "A small word flips the meaning"
+   ],
+   "vorher": [
+    "früher ↔ jetzt",
+    "Before vs. now, plan vs. fact, expectation vs. reality"
+   ],
+   "person": [
+    "falsche Person",
+    "Right action, wrong person"
+   ],
+   "detail": [
+    "falsches Detail",
+    "One detail (time, price, place, age) does not fit"
+   ],
+   "teil": [
+    "zu allgemein",
+    "Too absolute: alle, immer, ganz, kein ... mehr"
+   ],
+   "meinung": [
+    "fremde Meinung",
+    "The person first quotes others, then gives their own view"
+   ],
+   "synonym": [
+    "andere Wörter",
+    "The text says the same thing with different words"
+   ]
+  }
+ }
+}

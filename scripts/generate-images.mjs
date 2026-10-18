@@ -54,7 +54,7 @@ for (const s of todo) {
   const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/ai/run/${MODEL}`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: s.prompt, steps, seed: [...s.id].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) }),
+    body: JSON.stringify({ prompt: s.prompt, steps }),
   });
   const text = await res.text();
   let data = null;

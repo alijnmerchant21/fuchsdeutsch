@@ -4,7 +4,9 @@ import { use, useCallback, useEffect, useState } from 'react';
 import { Guard } from '@/components/Guard';
 import { ResultView } from '@/components/ResultView';
 import { ClaimReview } from '@/components/ClaimReview';
-import { loadLicensed, MODULES, type Licensed } from '@/lib/content';
+import { BlockAudio, EmailCard } from '@/components/AdminTools';
+import { LIVE_MODULES, loadLicensed, MODULES, setCurrentLevel, type Licensed } from '@/lib/content';
+import { LEVELS, levelOfCandidate } from '@/lib/levels';
 import { daysBetween, fmt, today } from '@/lib/dates';
 import { db } from '@/lib/db';
 import { buildExport } from '@/lib/export';
@@ -24,6 +26,7 @@ function Detail({ uid }: { uid: string }) {
 
   const load = useCallback(async () => {
     const [cand, a, b, l, cl] = await Promise.all([db.candidate(uid), db.attempts(uid), db.blocks(uid), loadLicensed(), db.claims(uid)]);
+    setCurrentLevel(levelOfCandidate(cand));
     setC(cand); setAtt(a); setBl(b); setLic(l); setClaims(cl);
   }, [uid]);
   useEffect(() => { void load(); }, [load]);
@@ -57,7 +60,7 @@ function Detail({ uid }: { uid: string }) {
         const { starts_on, ends_on, ...content } = u.block;
         await db.saveBlock({ user_id: uid, seq: (sorted[sorted.length - 1]?.seq ?? 0) + 1, starts_on, ends_on, content });
         done.push(`Block ${(sorted[sorted.length - 1]?.seq ?? 0) + 1} gespeichert und für den Kandidaten sichtbar (${fmt(starts_on)} bis ${fmt(ends_on)}).`);
-        if (u.block.sets?.some((s) => s.module === 'hoeren')) done.push('Neue Hörtexte laufen mit der Browser-Stimme, bis die MP3s erzeugt sind.');
+        if (u.block.sets?.some((s) => s.module === 'hoeren')) done.push('Neue Hörtexte: unten bei „Blöcke“ auf „Audio erzeugen“ klicken. Bis dahin liest die Browser-Stimme.');
       }
       for (const [aid, fb] of Object.entries(u.feedback ?? {})) {
         const a = att.find((x) => x.id === aid);
@@ -74,7 +77,7 @@ function Detail({ uid }: { uid: string }) {
   };
 
   const title = (ref: string) => {
-    if (ref === 'diagnose') return 'Mock Test 1 · Diagnose';
+    if (ref.startsWith('diagnose')) return 'Mock Test 1 · Diagnose';
     const [bid, i] = ref.split(':'); const b = bl.find((x) => x.id === bid);
     return b ? `Block ${b.seq} · ${b.content.days[Number(i)]?.title ?? ''}` : ref;
   };
@@ -86,8 +89,11 @@ function Detail({ uid }: { uid: string }) {
         <h2>{c.name || c.email}</h2>
         <p className="tsub">{c.email} · Prüfung {fmt(c.exam_date)} ({daysBetween(t, c.exam_date)} Tage) · {c.minutes_per_day} Min. an {c.study_days.length} Tagen pro Woche</p>
         <div className="row">
+          <span className="pill on">{LEVELS[levelOfCandidate(c)].exam}</span>
           <span className="small dim">Freigeschaltet:</span>
-          {MODULES.filter((m) => m.live).map((m) => (
+          {!LEVELS[levelOfCandidate(c)].modular ? (
+            <button className="chip" aria-pressed={c.unlocked.length > 0} onClick={async () => { await db.setUnlocked(uid, c.unlocked.length ? [] : LIVE_MODULES); await load(); }}>Ganze Prüfung</button>
+          ) : MODULES.filter((m) => m.live).map((m) => (
             <button key={m.id} className="chip" aria-pressed={c.unlocked.includes(m.id)} onClick={() => void toggleUnlock(m.id)}>
               {m.name}{!c.modules.includes(m.id) && ' (nicht gewählt)'}
             </button>
@@ -96,6 +102,8 @@ function Detail({ uid }: { uid: string }) {
       </div>
 
       {[...claims].reverse().map((cl) => <ClaimReview key={cl.id} claim={cl} cand={c} attempts={att} blocks={bl} onDone={() => void load()} />)}
+
+      <EmailCard c={c} blocks={bl} attempts={att} />
 
       <div className="card adminsec">
         <h3>1 · Für Claude exportieren</h3>
@@ -119,7 +127,7 @@ function Detail({ uid }: { uid: string }) {
           const done = b.content.days.filter((_, i) => att.some((a) => a.ref === `${b.id}:${i}`)).length;
           return (
             <tr key={b.id}>
-              <td>#{b.seq}</td><td><b>{b.content.title}</b><br /><span className="small dim">{b.content.focus.join(', ')}</span></td>
+              <td>#{b.seq}</td><td><b>{b.content.title}</b><br /><span className="small dim">{b.content.focus.join(', ')}</span><br /><BlockAudio block={b} onDone={() => void load()} /></td>
               <td>{fmt(b.starts_on)} bis {fmt(b.ends_on)}{b.ends_on < t && <><br /><span className="small dim">geschlossen</span></>}</td>
               <td>{done}/{b.content.days.length} Tage</td>
               <td><button className="linkbtn dangerlink" onClick={async () => { if (window.confirm(`Block ${b.seq} löschen?`)) { await db.deleteBlock(b.id); await load(); } }}>löschen</button></td>

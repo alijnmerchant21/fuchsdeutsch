@@ -3,6 +3,8 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import { BASE, DEMO_MODE } from './config';
 import { db } from './db';
+import { setCurrentLevel } from './content';
+import { levelOfCandidate, type Level } from './levels';
 import { supabase } from './supabase';
 import type { Attempt, Block, Candidate, Claim } from './types';
 
@@ -13,6 +15,8 @@ interface Store {
   user: User | null;
   isAdmin: boolean;
   candidate: Candidate | null;
+  /** exam level of the candidate (b1 until the form is filled) */
+  level: Level;
   attempts: Attempt[];
   blocks: Block[];
   claims: Claim[];
@@ -44,6 +48,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const load = useCallback(async (u: User | null) => {
     if (!u) { setCandidate(null); setAttempts([]); setBlocks([]); setClaims([]); setAdmin(false); return; }
     const [c, a, b, cl, adm] = await Promise.all([db.candidate(u.id), db.attempts(u.id), db.blocks(u.id), db.claims(u.id), DEMO_MODE ? Promise.resolve(false) : db.isAdmin()]);
+    setCurrentLevel(levelOfCandidate(c));
     setCandidate(c); setAttempts(a); setBlocks(b); setClaims(cl);
     if (!DEMO_MODE) setAdmin(adm);
   }, []);
@@ -96,7 +101,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <Ctx.Provider value={{ ready, user, isAdmin, candidate, attempts, blocks, claims, reload, signInDemo, signInEmail, signInPassword, signInGoogle, signOut }}>
+    <Ctx.Provider value={{ ready, user, isAdmin, candidate, level: levelOfCandidate(candidate), attempts, blocks, claims, reload, signInDemo, signInEmail, signInPassword, signInGoogle, signOut }}>
       {children}
     </Ctx.Provider>
   );

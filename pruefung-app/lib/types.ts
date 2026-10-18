@@ -3,7 +3,8 @@
 export type Module = 'hoeren' | 'lesen' | 'schreiben' | 'sprechen';
 
 /** rf = Richtig/Falsch, abc = a/b/c, who = wer sagt was (a/b/c from set.who), ad = Anzeige a-j or 0, jn = Ja/Nein */
-export type ItemType = 'rf' | 'abc' | 'who' | 'ad' | 'jn';
+/** txt = short free answer (A1 form), a = "answer|alternative" */
+export type ItemType = 'rf' | 'abc' | 'who' | 'ad' | 'jn' | 'txt';
 
 export interface Item {
   n: number;
@@ -37,18 +38,30 @@ export interface Ad { k: string; title: string; body: string }
 export interface WritingTask {
   id: string;
   /** Goethe B1: Aufgabe 1 email to friend (~80 words), 2 forum opinion (~80), 3 polite message (~40) */
-  aufgabe: 1 | 2 | 3;
+  aufgabe: number;
   situation: string;
   points: string[];
   words: number;
   /** points the task is worth in the module (40, 40, 20) */
   max: number;
+  /** suggested exam minutes (A1, A2, B2) */
+  minutes?: number;
 }
 
 export interface ExamSet {
   id: string;
+  /** exam level, default b1 */
+  level?: 'a1' | 'a2' | 'b1' | 'b2';
   module: Module;
   teil: number;
+  /** English version of instr (English-Hilfe) */
+  instr_en?: string;
+  /** Lesen layout: text (default), ads (matching list), persons (one text per person) */
+  layout?: 'text' | 'ads' | 'persons';
+  /** matching without the "0 = nothing fits" option */
+  noZero?: boolean;
+  /** speaker code -> m/f, picks the voice when audio is generated */
+  genders?: Record<string, 'm' | 'f'>;
   title?: string;
   instr: string;
   topic?: string;
@@ -105,6 +118,8 @@ export interface Candidate {
   user_id: string;
   email: string;
   name: string;
+  /** exam level, default b1 */
+  level?: 'a1' | 'a2' | 'b1' | 'b2' | null;
   exam_date: string;
   /** weekdays 0 = Sunday … 6 = Saturday */
   study_days: number[];

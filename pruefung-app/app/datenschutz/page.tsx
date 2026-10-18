@@ -64,6 +64,8 @@ export default function Datenschutz() {
           {li('Vercel: Hosting der Website.', 'Vercel: website hosting.')}
           {li('Google: nur wenn du dich mit Google anmeldest.', 'Google: only if you sign in with Google.')}
           {li('Anthropic: KI für Übungsblöcke und Korrekturen (siehe Punkt 4).', 'Anthropic: AI for practice blocks and corrections (see point 4).')}
+          {li('Resend: Versand der E-Mails, die wir dir schicken (z. B. „Dein Block ist bereit“). Dafür übermitteln wir deine E-Mail-Adresse und deinen Vornamen.', 'Resend: sending the emails we write to you (for example "your block is ready"). For this we pass on your email address and first name.')}
+          {li('ElevenLabs: Sprachausgabe für unsere Hörtexte. Dabei werden keine Daten über dich übermittelt, nur die Übungstexte.', 'ElevenLabs: voice output for our listening texts. No data about you is sent, only the exercise texts.')}
         </ul>
         <p>{t('Einige Anbieter sitzen in den USA. Die Übermittlung erfolgt auf Grundlage des EU-US Data Privacy Framework oder der EU-Standardvertragsklauseln.', 'Some providers are based in the US. Transfers rely on the EU-US Data Privacy Framework or the EU Standard Contractual Clauses.')}</p>
       </Sec>

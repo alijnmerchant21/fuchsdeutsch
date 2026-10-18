@@ -13,8 +13,8 @@ export default function Garantie() {
       'You finished at least 90% of your practice days within each block’s deadline.'],
     ['Du hast alle Blocktests und den letzten vollständigen Mock Test vor der Prüfung gemacht und darin im betroffenen Modul mindestens 60 von 100 Punkten erreicht.',
       'You took every block test and the last full mock test before the exam, and scored at least 60 of 100 in the module concerned.'],
-    ['Du hast das Goethe-Zertifikat B1 an dem Termin abgelegt, den du in deinem Plan eingetragen hast (oder wir haben eine Änderung vorher bestätigt).',
-      'You took the Goethe-Zertifikat B1 on the date in your plan (or we confirmed a change beforehand).'],
+    ['Du hast das Goethe-Zertifikat (A1, A2, B1 oder B2) an dem Termin abgelegt, den du in deinem Plan eingetragen hast (oder wir haben eine Änderung vorher bestätigt).',
+      'You took the Goethe-Zertifikat (A1, A2, B1 or B2) on the date in your plan (or we confirmed a change beforehand).'],
     ['Du lädst dein offizielles Ergebnis von Goethe innerhalb von 30 Tagen nach Erhalt hoch.',
       'You upload your official Goethe result within 30 days of receiving it.'],
   ];

@@ -3,16 +3,17 @@
    verdict, most common traps, then every answer with the solution. */
 import { useEffect, useState } from 'react';
 import { PASS } from '@/lib/config';
-import { modName, tips, trapLabel } from '@/lib/content';
+import { currentLevel, modName, teilInfo, trapLabel } from '@/lib/content';
+import { LEVELS } from '@/lib/levels';
 import { resolveAttempt } from '@/lib/resolve';
-import { modulePoints, writingPoints } from '@/lib/score';
+import { isRight, modulePoints, writingPoints } from '@/lib/score';
 import type { Attempt, Block, ExamSet, TestDef } from '@/lib/types';
 import { SetCard } from './SetCard';
 import { En } from '@/lib/lang';
 
 const teilName = (k: string) => {
   const [m, t] = k.split('-');
-  return tips[m as 'hoeren' | 'lesen']?.[t]?.name ?? `Teil ${t}`;
+  return teilInfo(m, t)?.name ?? `Teil ${t}`;
 };
 
 export function ResultView({ attempt, blocks, showReview = true, children }: { attempt: Attempt; blocks: Block[]; showReview?: boolean; children?: React.ReactNode }) {
@@ -24,9 +25,9 @@ export function ResultView({ attempt, blocks, showReview = true, children }: { a
   const trapCount: Record<string, { n: number; module: string }> = {};
   let wrong = 0;
   if (ctx) for (const sec of ctx.test.sections) for (const id of sec.sets) {
-    const s = ctx.sets[id]; if (!s || s.module === 'schreiben') continue;
+    const s = ctx.sets[id]; if (!s || s.tasks?.length) continue;
     for (const g of s.groups) for (const it of g.items) {
-      const ok = attempt.answers[id]?.[String(it.n)] === it.a;
+      const ok = isRight(it, attempt.answers[id]?.[String(it.n)]);
       const c = attempt.conf?.[id]?.[String(it.n)];
       if (c === 's') ok ? m.ss++ : m.sw++; else if (c === 'g') ok ? m.gs++ : m.gw++; else m.x++;
       if (!ok) { wrong++; if (it.trap) { trapCount[it.trap] ??= { n: 0, module: s.module }; trapCount[it.trap].n++; } }
@@ -46,9 +47,9 @@ export function ResultView({ attempt, blocks, showReview = true, children }: { a
   return (
     <>
       <section className="card block">
-        <header className="bh"><span className="modchip">Dein Ergebnis</span><span className="mins">Bestehen ab {PASS} pro Modul</span></header>
-        <En as="p" block>Your result. You pass with {PASS} of 100 points in each module. Below every answer you see the solution and the sentence that proves it.</En>
-        {(['hoeren', 'lesen'] as const).map((mod) => {
+        <header className="bh"><span className="modchip">Dein Ergebnis</span><span className="mins">Bestehen ab {PASS} {LEVELS[currentLevel()].modular ? 'pro Modul' : 'von 100 insgesamt'}</span></header>
+        <En as="p" block>Your result. You pass with {PASS} of 100 points {LEVELS[currentLevel()].modular ? 'in each module' : 'over the whole exam'}. Below every answer you see the solution and the sentence that proves it.</En>
+        {(['hoeren', 'lesen', 'schreiben'] as const).map((mod) => {
           const pts = modulePoints(attempt.scores, mod);
           if (pts === null) return null;
           const rows = teile.filter(([k]) => k.startsWith(mod + '-'));
@@ -66,7 +67,7 @@ export function ResultView({ attempt, blocks, showReview = true, children }: { a
         })}
         {hasWriting && (
           <div>
-            <h4>Schreiben</h4>
+            <h4>{modulePoints(attempt.scores, 'schreiben') !== null ? 'Schreiben · Text' : 'Schreiben'}</h4>
             <div className={`bigscore ${wp === null ? '' : wp >= PASS ? 'ok' : 'low'}`} style={wp === null ? { background: 'var(--card2)' } : undefined}>
               <b>{wp ?? '…'}</b><span>{wp === null ? '' : '/ 100'}</span><small>{wp === null ? 'Wird von uns korrigiert' : 'korrigiert'}</small>
             </div>

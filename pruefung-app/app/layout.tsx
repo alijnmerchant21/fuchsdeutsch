@@ -12,8 +12,8 @@ import { LangProvider } from '@/lib/lang';
 import { Topbar } from '@/components/Topbar';
 
 export const metadata: Metadata = {
-  title: 'Fuchsdeutsch Prüfung · Goethe B1 Mock-Prüfungen',
-  description: 'Free diagnostic mock test for the Goethe-Zertifikat B1, then practice blocks aimed at your weak parts.',
+  title: 'Fuchsdeutsch Prüfung · Goethe A1 bis B2 Mock-Prüfungen',
+  description: 'Free diagnostic mock test for the Goethe-Zertifikat A1, A2, B1 and B2, then practice blocks aimed at your weak parts.',
 };
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <LangProvider><StoreProvider>
           <Topbar />
           <main>{children}</main>
-          <footer className="foot"><div className="footrow"><span className="small dim">Fuchsdeutsch Prüfung · Übungsmaterial im Format des Goethe-Zertifikats B1. Kein offizielles Angebot des Goethe-Instituts.</span><Link className="linkbtn" href="/garantie">Garantie-Bedingungen</Link><Link className="linkbtn" href="/datenschutz">Datenschutz</Link></div></footer>
+          <footer className="foot"><div className="footrow"><span className="small dim">Fuchsdeutsch Prüfung · Übungsmaterial im Format der Goethe-Zertifikate A1 bis B2. Kein offizielles Angebot des Goethe-Instituts.</span><Link className="linkbtn" href="/garantie">Garantie-Bedingungen</Link><Link className="linkbtn" href="/datenschutz">Datenschutz</Link></div></footer>
         </StoreProvider></LangProvider>
       </body>
     </html>

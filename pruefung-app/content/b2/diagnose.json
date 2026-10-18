@@ -1,0 +1,38 @@
+{
+ "id": "b2-diagnose",
+ "title": "B2 Diagnose",
+ "en": "Free diagnostic, about 40 minutes: Hören, Lesen, Schreiben",
+ "sections": [
+  {
+   "module": "hoeren",
+   "title": "Hören",
+   "minutes": 12,
+   "sets": [
+    "b2-diag-h1",
+    "b2-diag-h2",
+    "b2-diag-h3",
+    "b2-diag-h4"
+   ]
+  },
+  {
+   "module": "lesen",
+   "title": "Lesen",
+   "minutes": 13,
+   "sets": [
+    "b2-diag-l1",
+    "b2-diag-l2",
+    "b2-diag-l3",
+    "b2-diag-l4",
+    "b2-diag-l5"
+   ]
+  },
+  {
+   "module": "schreiben",
+   "title": "Schreiben",
+   "minutes": 15,
+   "sets": [
+    "b2-diag-s2"
+   ]
+  }
+ ]
+}

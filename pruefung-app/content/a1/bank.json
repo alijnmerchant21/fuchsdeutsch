@@ -1,0 +1,2355 @@
+{
+ "a1-h1-a": {
+  "id": "a1-h1-a",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 1,
+  "instr": "Was ist richtig? Kreuzen Sie an: a, b oder c. Sie hören jeden Text zweimal. Aufgaben 1 bis 6.",
+  "instr_en": "What is correct? Choose a, b or c. You hear each text twice.",
+  "source": "own",
+  "speakers": {
+   "PRX": "Praxis",
+   "KRA": "Herr Kranz",
+   "VKF": "Verkäuferin",
+   "KUN": "Kunde",
+   "FRA": "Kundin",
+   "MIT": "Mitarbeiter",
+   "MIA": "Mia",
+   "JAN": "Jan",
+   "GAS": "Frau Sandvik",
+   "REZ": "Rezeption",
+   "SAB": "Sabine",
+   "PAU": "Paul"
+  },
+  "genders": {
+   "PRX": "f",
+   "KRA": "m",
+   "VKF": "f",
+   "KUN": "m",
+   "FRA": "f",
+   "MIT": "m",
+   "MIA": "f",
+   "JAN": "m",
+   "GAS": "f",
+   "REZ": "m",
+   "SAB": "f",
+   "PAU": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Am Telefon",
+    "audio": "audio/a1/a1-h1-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "PRX",
+      "Praxis Doktor Hollmann, guten Tag."
+     ],
+     [
+      "KRA",
+      "Guten Tag, hier ist Kranz. Ich brauche bitte einen Termin. Geht es morgen?"
+     ],
+     [
+      "PRX",
+      "Morgen ist leider alles voll. Vielleicht am Donnerstag um zehn Uhr?"
+     ],
+     [
+      "KRA",
+      "Um zehn Uhr arbeite ich. Geht es auch am Nachmittag?"
+     ],
+     [
+      "PRX",
+      "Ja, am Donnerstag um Viertel nach drei."
+     ],
+     [
+      "KRA",
+      "Gut, das passt. Vielen Dank. Auf Wiederhören."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Wann hat Herr Kranz seinen Termin?",
+      "opts": [
+       "Morgen.",
+       "Am Donnerstag um 10 Uhr.",
+       "Am Donnerstag um 15.15 Uhr."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Ja, am Donnerstag um Viertel nach drei.",
+      "why": "Um zehn Uhr arbeitet er. Der Termin ist um <b>Viertel nach drei</b>, also um 15.15 Uhr."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Auf dem Markt",
+    "audio": "audio/a1/a1-h1-a-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KUN",
+      "Entschuldigung, was kosten die Äpfel?"
+     ],
+     [
+      "VKF",
+      "Ein Kilo kostet zwei Euro zwanzig."
+     ],
+     [
+      "KUN",
+      "Und die Bananen?"
+     ],
+     [
+      "VKF",
+      "Die Bananen sind heute im Angebot. Ein Kilo kostet nur einen Euro fünfzig."
+     ],
+     [
+      "KUN",
+      "Oh, das ist günstig. Dann nehme ich ein Kilo Bananen, bitte."
+     ]
+    ],
+    "items": [
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Wie viel kostet ein Kilo Bananen?",
+      "opts": [
+       "2,20 €.",
+       "1,50 €.",
+       "2,50 €."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Ein Kilo kostet nur einen Euro fünfzig.",
+      "why": "2,20 € kosten die <b>Äpfel</b>. Die Bananen kosten 1,50 €."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Im Kaufhaus",
+    "audio": "audio/a1/a1-h1-a-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "FRA",
+      "Entschuldigung, wo sind hier die Toiletten?"
+     ],
+     [
+      "MIT",
+      "Die Toiletten sind im ersten Stock, neben dem Café."
+     ],
+     [
+      "FRA",
+      "Im ersten Stock. Und wo ist die Treppe?"
+     ],
+     [
+      "MIT",
+      "Da hinten links. Oder Sie nehmen den Aufzug, der ist hier rechts."
+     ],
+     [
+      "FRA",
+      "Danke schön."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Wo sind die Toiletten?",
+      "opts": [
+       "Im ersten Stock neben dem Café.",
+       "Im Erdgeschoss rechts.",
+       "Im ersten Stock neben der Treppe."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Die Toiletten sind im ersten Stock, neben dem Café.",
+      "why": "Rechts ist der <b>Aufzug</b>, links die <b>Treppe</b>. Die Toiletten sind neben dem Café."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · Freizeit",
+    "audio": "audio/a1/a1-h1-a-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MIA",
+      "Jan, was machst du am Samstag? Gehen wir zusammen schwimmen?"
+     ],
+     [
+      "JAN",
+      "Am Samstag kann ich leider nicht. Da besuche ich meine Eltern. Aber am Sonntag habe ich Zeit."
+     ],
+     [
+      "MIA",
+      "Am Sonntag gehe ich mit Lea ins Kino. Komm doch mit!"
+     ],
+     [
+      "JAN",
+      "Ja, gern. Ich gehe gern ins Kino."
+     ]
+    ],
+    "items": [
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Was macht Jan am Sonntag?",
+      "opts": [
+       "Er geht schwimmen.",
+       "Er besucht seine Eltern.",
+       "Er geht ins Kino."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Ja, gern. Ich gehe gern ins Kino.",
+      "why": "Am Samstag besucht er seine Eltern. Am Sonntag geht er mit Mia und Lea <b>ins Kino</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Im Hotel",
+    "audio": "audio/a1/a1-h1-a-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "GAS",
+      "Guten Abend. Mein Name ist Sandvik. Ich habe ein Zimmer reserviert."
+     ],
+     [
+      "REZ",
+      "Guten Abend, Frau Sandvik. Ja, für zwei Nächte. Sie haben Zimmer zweihundertvierzehn im zweiten Stock."
+     ],
+     [
+      "GAS",
+      "Zweihundertvierzig?"
+     ],
+     [
+      "REZ",
+      "Nein, zweihundertvierzehn. Hier ist Ihr Schlüssel. Frühstück gibt es von sieben bis zehn Uhr."
+     ],
+     [
+      "GAS",
+      "Danke schön."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Welche Zimmernummer hat Frau Sandvik?",
+      "opts": [
+       "204.",
+       "214.",
+       "240."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Nein, zweihundertvierzehn.",
+      "why": "Sie versteht zuerst 240, aber der Mann sagt: <b>zweihundertvierzehn</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 6 · Bei der Arbeit",
+    "audio": "audio/a1/a1-h1-a-5.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "SAB",
+      "Hallo Paul! Kommst du heute nicht mit dem Fahrrad?"
+     ],
+     [
+      "PAU",
+      "Nein, es regnet so stark. Heute bin ich mit der U-Bahn gekommen."
+     ],
+     [
+      "SAB",
+      "Und warum nicht mit dem Auto?"
+     ],
+     [
+      "PAU",
+      "Ich habe kein Auto. Das ist zu teuer."
+     ]
+    ],
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Wie ist Paul heute zur Arbeit gekommen?",
+      "opts": [
+       "Mit dem Fahrrad.",
+       "Mit dem Auto.",
+       "Mit der U-Bahn."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Heute bin ich mit der U-Bahn gekommen.",
+      "why": "Fahrrad: <b>nein</b>, es regnet. Ein Auto hat er nicht."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-h1-b": {
+  "id": "a1-h1-b",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 1,
+  "instr": "Was ist richtig? Kreuzen Sie an: a, b oder c. Sie hören jeden Text zweimal. Aufgaben 1 bis 6.",
+  "instr_en": "What is correct? Choose a, b or c. You hear each text twice.",
+  "source": "own",
+  "speakers": {
+   "BAE": "Verkäufer",
+   "KDN": "Kundin",
+   "REI": "Reisender",
+   "SCH": "Mitarbeiterin",
+   "WEB": "Herr Weber",
+   "SEK": "Sekretärin",
+   "VKF": "Verkäuferin",
+   "KUN": "Kunde",
+   "TOM": "Tom",
+   "LIS": "Lisa",
+   "KEL": "Kellner",
+   "GST": "Frau"
+  },
+  "genders": {
+   "BAE": "m",
+   "KDN": "f",
+   "REI": "m",
+   "SCH": "f",
+   "WEB": "m",
+   "SEK": "f",
+   "VKF": "f",
+   "KUN": "m",
+   "TOM": "m",
+   "LIS": "f",
+   "KEL": "m",
+   "GST": "f"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · In der Bäckerei",
+    "audio": "audio/a1/a1-h1-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "BAE",
+      "Guten Morgen. Was möchten Sie?"
+     ],
+     [
+      "KDN",
+      "Guten Morgen. Ich hätte gern sechs Brötchen, bitte."
+     ],
+     [
+      "BAE",
+      "Sechs Brötchen. Sonst noch etwas?"
+     ],
+     [
+      "KDN",
+      "Ach nein, warten Sie. Mein Sohn ist heute nicht zu Hause. Dann nur vier, bitte. Und ein Brot."
+     ],
+     [
+      "BAE",
+      "Vier Brötchen und ein Brot. Das macht vier Euro achtzig."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Wie viele Brötchen kauft die Frau?",
+      "opts": [
+       "Vier.",
+       "Sechs.",
+       "Acht."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Dann nur vier, bitte.",
+      "why": "Zuerst sagt sie sechs, dann ändert sie: <b>nur vier</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Am Bahnhof",
+    "audio": "audio/a1/a1-h1-b-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "REI",
+      "Guten Tag. Wann fährt der nächste Zug nach Kiel?"
+     ],
+     [
+      "SCH",
+      "Der nächste Zug fährt um zehn Uhr fünf. Aber da müssen Sie in Hamburg umsteigen."
+     ],
+     [
+      "REI",
+      "Gibt es auch einen Zug ohne Umsteigen?"
+     ],
+     [
+      "SCH",
+      "Ja, um zehn Uhr fünfunddreißig. Der fährt direkt nach Kiel."
+     ],
+     [
+      "REI",
+      "Gut, dann nehme ich den Zug um zehn Uhr fünfunddreißig."
+     ]
+    ],
+    "items": [
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Mit welchem Zug fährt der Mann nach Kiel?",
+      "opts": [
+       "Um 10.05 Uhr.",
+       "Um 10.35 Uhr.",
+       "Um 10.25 Uhr."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "dann nehme ich den Zug um zehn Uhr fünfunddreißig",
+      "why": "Um 10.05 Uhr muss er umsteigen. Er nimmt den direkten Zug um <b>10.35 Uhr</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Im Büro",
+    "audio": "audio/a1/a1-h1-b-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "SEK",
+      "Firma Holzmann, guten Tag."
+     ],
+     [
+      "WEB",
+      "Guten Tag, hier ist Weber. Kann ich bitte Frau Demir sprechen?"
+     ],
+     [
+      "SEK",
+      "Frau Demir ist leider nicht im Büro. Sie ist heute in Leipzig, bei einem Kunden."
+     ],
+     [
+      "WEB",
+      "Ist sie morgen wieder da?"
+     ],
+     [
+      "SEK",
+      "Nein, morgen hat sie Urlaub. Am Mittwoch ist sie wieder hier."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Wo ist Frau Demir heute?",
+      "opts": [
+       "Im Büro.",
+       "Im Urlaub.",
+       "Bei einem Kunden."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Sie ist heute in Leipzig, bei einem Kunden.",
+      "why": "Sie ist <b>nicht</b> im Büro. Urlaub hat sie erst <b>morgen</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · Im Geschäft",
+    "audio": "audio/a1/a1-h1-b-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KUN",
+      "Entschuldigung, haben Sie diese Jacke auch in Größe zweiundfünfzig?"
+     ],
+     [
+      "VKF",
+      "In Schwarz leider nicht mehr. Aber in Blau und in Grau haben wir sie noch."
+     ],
+     [
+      "KUN",
+      "Blau gefällt mir nicht so. Ich nehme die graue Jacke."
+     ],
+     [
+      "VKF",
+      "Gern. Die Kasse ist dort vorne."
+     ]
+    ],
+    "items": [
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Welche Jacke kauft der Mann?",
+      "opts": [
+       "Die schwarze.",
+       "Die blaue.",
+       "Die graue."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Ich nehme die graue Jacke.",
+      "why": "Schwarz gibt es nicht mehr, Blau gefällt ihm nicht. Er nimmt <b>die graue</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Die neue Wohnung",
+    "audio": "audio/a1/a1-h1-b-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "TOM",
+      "Und, Lisa, wie ist deine neue Wohnung?"
+     ],
+     [
+      "LIS",
+      "Super! Sie hat drei Zimmer, eine Küche und einen Balkon."
+     ],
+     [
+      "TOM",
+      "Drei Zimmer? Deine alte Wohnung hatte doch nur zwei."
+     ],
+     [
+      "LIS",
+      "Ja, genau. Jetzt habe ich endlich ein Arbeitszimmer."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Wie viele Zimmer hat Lisas neue Wohnung?",
+      "opts": [
+       "Drei.",
+       "Zwei.",
+       "Vier."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Sie hat drei Zimmer, eine Küche und einen Balkon.",
+      "why": "Zwei Zimmer hatte die <b>alte</b> Wohnung."
+     }
+    ]
+   },
+   {
+    "title": "Text 6 · Im Restaurant",
+    "audio": "audio/a1/a1-h1-b-5.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KEL",
+      "Guten Abend. Was möchten Sie trinken?"
+     ],
+     [
+      "GST",
+      "Einen Orangensaft, bitte. Oder nein, lieber ein Mineralwasser. Und ein Glas Rotwein für meinen Mann."
+     ],
+     [
+      "KEL",
+      "Gern. Ein Mineralwasser und ein Rotwein."
+     ]
+    ],
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Was trinkt die Frau?",
+      "opts": [
+       "Orangensaft.",
+       "Mineralwasser.",
+       "Rotwein."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Oder nein, lieber ein Mineralwasser.",
+      "why": "Orangensaft will sie zuerst, dann <b>lieber Mineralwasser</b>. Der Rotwein ist für ihren Mann."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-h2-a": {
+  "id": "a1-h2-a",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 2,
+  "instr": "Kreuzen Sie an: Richtig oder Falsch. Sie hören jeden Text einmal. Aufgaben 7 bis 10.",
+  "instr_en": "Choose: true or false. You hear each text once.",
+  "source": "own",
+  "speakers": {
+   "ANS": "Ansage",
+   "ANM": "Ansage"
+  },
+  "genders": {
+   "ANS": "f",
+   "ANM": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 7 · Am Bahnhof",
+    "audio": "audio/a1/a1-h2-a-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANS",
+      "Achtung an Gleis drei. Der Regionalexpress nach Würzburg, Abfahrt elf Uhr zwanzig, fährt heute von Gleis fünf. Ich wiederhole: Der Regionalexpress nach Würzburg fährt heute von Gleis fünf."
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "rf",
+      "q": "Der Zug nach Würzburg fährt heute von Gleis 3.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Der Regionalexpress nach Würzburg fährt heute von Gleis fünf.",
+      "why": "Die Durchsage ist an Gleis 3, aber der Zug fährt heute von <b>Gleis 5</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 8 · Im Kaufhaus",
+    "audio": "audio/a1/a1-h2-a-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANM",
+      "Liebe Kundinnen und Kunden, heute sind in unserer Lebensmittelabteilung im Untergeschoss viele Sachen für das Frühstück im Angebot: Kaffee, Tee, Marmelade und Käse. Kommen Sie und probieren Sie auch unser frisches Brot! Die Angebote gibt es nur heute bis achtzehn Uhr."
+     ]
+    ],
+    "items": [
+     {
+      "n": 8,
+      "type": "rf",
+      "q": "Die Angebote gibt es die ganze Woche.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Die Angebote gibt es nur heute bis achtzehn Uhr.",
+      "why": "Die Angebote gibt es <b>nur heute</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 9 · Am Flughafen",
+    "audio": "audio/a1/a1-h2-a-2.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANS",
+      "Herr Arne Lindqvist, gebucht auf den Flug nach Oslo, bitte kommen Sie sofort zu Gate B zwölf. Herr Arne Lindqvist, bitte kommen Sie sofort zu Gate B zwölf."
+     ]
+    ],
+    "items": [
+     {
+      "n": 9,
+      "type": "rf",
+      "q": "Herr Lindqvist soll zu Gate B 12 kommen.",
+      "a": "r",
+      "ev": "bitte kommen Sie sofort zu Gate B zwölf",
+      "why": "Die Ansage sagt zweimal: <b>Gate B zwölf</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 10 · Im Schwimmbad",
+    "audio": "audio/a1/a1-h2-a-3.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANM",
+      "Liebe Badegäste, unser Hallenbad schließt heute schon um neunzehn Uhr. Bitte verlassen Sie das Wasser bis achtzehn Uhr fünfundvierzig. Morgen sind wir wieder ab sieben Uhr für Sie da."
+     ]
+    ],
+    "items": [
+     {
+      "n": 10,
+      "type": "rf",
+      "q": "Das Schwimmbad ist morgen ab 7 Uhr geöffnet.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Morgen sind wir wieder ab sieben Uhr für Sie da.",
+      "why": "„Wir sind ab sieben Uhr für Sie da“ = Das Schwimmbad ist <b>ab 7 Uhr geöffnet</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-h2-b": {
+  "id": "a1-h2-b",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 2,
+  "instr": "Kreuzen Sie an: Richtig oder Falsch. Sie hören jeden Text einmal. Aufgaben 7 bis 10.",
+  "instr_en": "Choose: true or false. You hear each text once.",
+  "source": "own",
+  "speakers": {
+   "ANS": "Ansage",
+   "ANM": "Ansage"
+  },
+  "genders": {
+   "ANS": "f",
+   "ANM": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 7 · Im Supermarkt",
+    "audio": "audio/a1/a1-h2-b-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANS",
+      "Liebe Kundinnen und Kunden, Kasse zwei ist ab sofort geschlossen. Kasse vier ist jetzt für Sie geöffnet. Bitte kommen Sie zu Kasse vier. Vielen Dank für Ihren Einkauf."
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "rf",
+      "q": "Kasse 2 ist jetzt zu.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Kasse zwei ist ab sofort geschlossen.",
+      "why": "Geschlossen = <b>zu</b>. Die Kunden sollen zu Kasse 4 gehen."
+     }
+    ]
+   },
+   {
+    "title": "Text 8 · Am Bahnhof",
+    "audio": "audio/a1/a1-h2-b-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANM",
+      "Information zu Gleis eins. Die S-Bahn zum Flughafen, Abfahrt neun Uhr zwölf, hat heute circa fünfzehn Minuten Verspätung. Wir bitten um Entschuldigung."
+     ]
+    ],
+    "items": [
+     {
+      "n": 8,
+      "type": "rf",
+      "q": "Die S-Bahn zum Flughafen fährt pünktlich.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "hat heute circa fünfzehn Minuten Verspätung",
+      "why": "Die S-Bahn hat <b>fünfzehn Minuten Verspätung</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 9 · Im Kaufhaus",
+    "audio": "audio/a1/a1-h2-b-2.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANS",
+      "Liebe Kunden, der kleine Moritz sucht seine Mama. Moritz ist vier Jahre alt und wartet an der Information im Erdgeschoss. Die Mutter von Moritz, bitte kommen Sie zur Information im Erdgeschoss."
+     ]
+    ],
+    "items": [
+     {
+      "n": 9,
+      "type": "rf",
+      "q": "Moritz wartet im Erdgeschoss auf seine Mutter.",
+      "a": "r",
+      "ev": "wartet an der Information im Erdgeschoss",
+      "why": "Moritz wartet <b>an der Information im Erdgeschoss</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 10 · Im Tierpark",
+    "audio": "audio/a1/a1-h2-b-3.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANM",
+      "Liebe Besucherinnen und Besucher des Tierparks, heute bekommen unsere Pinguine ihr Essen nicht um fünfzehn Uhr, sondern schon um vierzehn Uhr dreißig. Kommen Sie zum Pinguinhaus, gleich neben dem Eingang Nord."
+     ]
+    ],
+    "items": [
+     {
+      "n": 10,
+      "type": "rf",
+      "q": "Die Pinguine bekommen heute früher ihr Essen.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "nicht um fünfzehn Uhr, sondern schon um vierzehn Uhr dreißig",
+      "why": "„schon um vierzehn Uhr dreißig“ statt um 15 Uhr = <b>früher</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-h3-a": {
+  "id": "a1-h3-a",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 3,
+  "instr": "Was ist richtig? Kreuzen Sie an: a, b oder c. Sie hören jeden Text zweimal. Aufgaben 11 bis 15.",
+  "instr_en": "What is correct? Choose a, b or c. You hear each text twice.",
+  "source": "own",
+  "speakers": {
+   "TIM": "Tim",
+   "PRX": "Zahnarztpraxis",
+   "MAM": "Mama",
+   "ARN": "Herr Arnold",
+   "KRU": "Fahrrad Krüger"
+  },
+  "genders": {
+   "TIM": "m",
+   "PRX": "f",
+   "MAM": "f",
+   "ARN": "m",
+   "KRU": "f"
+  },
+  "groups": [
+   {
+    "title": "Text 11",
+    "audio": "audio/a1/a1-h3-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "TIM",
+      "Hallo Sara, hier ist Tim. Wir gehen doch heute Abend zusammen ins Restaurant. Ich kann leider nicht um sieben Uhr kommen, ich muss länger arbeiten. Geht es um acht? Ruf mich bitte an. Tschüss!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Wann möchte Tim ins Restaurant gehen?",
+      "opts": [
+       "Um 8 Uhr.",
+       "Um 7 Uhr.",
+       "Um halb acht."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Geht es um acht?",
+      "why": "Sieben Uhr war der alte Plan. Tim fragt: <b>Geht es um acht?</b>"
+     }
+    ]
+   },
+   {
+    "title": "Text 12",
+    "audio": "audio/a1/a1-h3-a-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "PRX",
+      "Guten Tag, Herr Yilmaz, hier ist die Zahnarztpraxis Doktor Sommer. Sie haben am Freitag um neun Uhr einen Termin. Leider ist Doktor Sommer am Freitag krank. Können Sie am Montag um neun Uhr kommen? Bitte rufen Sie uns zurück. Unsere Nummer ist null sechs neun, vier drei acht, zwei zwei eins. Vielen Dank."
+     ]
+    ],
+    "items": [
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Wann soll Herr Yilmaz zum Zahnarzt kommen?",
+      "opts": [
+       "Am Freitag um 9 Uhr.",
+       "Am Montag um 9 Uhr.",
+       "Am Montag um 8 Uhr."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Können Sie am Montag um neun Uhr kommen?",
+      "why": "Am Freitag ist der Arzt krank. Der neue Termin ist <b>am Montag um neun</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 13",
+    "audio": "audio/a1/a1-h3-a-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MAM",
+      "Hallo Jonas, hier ist Mama. Kannst du bitte nach der Schule einkaufen? Wir brauchen Milch, Eier und Tomaten. Brot habe ich schon gekauft. Das Geld liegt in der Küche. Danke, bis heute Abend!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Was soll Jonas kaufen?",
+      "opts": [
+       "Milch, Eier und Brot.",
+       "Brot und Tomaten.",
+       "Milch, Eier und Tomaten."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Wir brauchen Milch, Eier und Tomaten.",
+      "why": "Das Brot hat die Mutter <b>schon gekauft</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 14",
+    "audio": "audio/a1/a1-h3-a-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "ARN",
+      "Hallo Frau Brandt, hier ist Felix Arnold aus dem Büro. Unsere Besprechung morgen ist nicht in Raum zwölf. Wir sind in Raum zweiundzwanzig im zweiten Stock. Die Uhrzeit bleibt: zehn Uhr. Bis morgen!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Wo ist die Besprechung morgen?",
+      "opts": [
+       "In Raum 22.",
+       "In Raum 12.",
+       "In Raum 10."
+      ],
+      "a": "a",
+      "trap": "negation",
+      "ev": "Wir sind in Raum zweiundzwanzig im zweiten Stock.",
+      "why": "Raum 12: <b>nicht</b>. Zehn ist die Uhrzeit."
+     }
+    ]
+   },
+   {
+    "title": "Text 15",
+    "audio": "audio/a1/a1-h3-a-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KRU",
+      "Guten Tag, hier ist Fahrrad Krüger. Das ist eine Nachricht für Frau Lehmann. Ihr Fahrrad ist fertig. Sie können es ab morgen abholen. Wir haben von Montag bis Freitag von neun bis achtzehn Uhr geöffnet, am Samstag bis vierzehn Uhr. Die Reparatur kostet fünfunddreißig Euro."
+     ]
+    ],
+    "items": [
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Wie viel kostet die Reparatur?",
+      "opts": [
+       "14 Euro.",
+       "18 Euro.",
+       "35 Euro."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Die Reparatur kostet fünfunddreißig Euro.",
+      "why": "14 und 18 sind Uhrzeiten. Die Reparatur kostet <b>35 Euro</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-h3-b": {
+  "id": "a1-h3-b",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 3,
+  "instr": "Was ist richtig? Kreuzen Sie an: a, b oder c. Sie hören jeden Text zweimal. Aufgaben 11 bis 15.",
+  "instr_en": "What is correct? Choose a, b or c. You hear each text twice.",
+  "source": "own",
+  "speakers": {
+   "NIN": "Nina",
+   "LIN": "Sprachschule Lingua",
+   "ROT": "Frau Roth",
+   "POH": "Herr Pohl",
+   "KIN": "Kino Lichtspiel"
+  },
+  "genders": {
+   "NIN": "f",
+   "LIN": "m",
+   "ROT": "f",
+   "POH": "m",
+   "KIN": "f"
+  },
+  "groups": [
+   {
+    "title": "Text 11",
+    "audio": "audio/a1/a1-h3-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "NIN",
+      "Hallo Ben, hier ist Nina. Morgen ist doch mein Geburtstag, und ich mache eine kleine Party. Kommst du? Wir feiern bei mir zu Hause, nicht im Café. Die Party beginnt um halb acht. Bring bitte deine Gitarre mit! Bis morgen."
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Wo ist die Party?",
+      "opts": [
+       "Im Café.",
+       "Bei Nina zu Hause.",
+       "Bei Ben."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Wir feiern bei mir zu Hause, nicht im Café.",
+      "why": "Nina sagt: bei mir zu Hause, <b>nicht</b> im Café."
+     }
+    ]
+   },
+   {
+    "title": "Text 12",
+    "audio": "audio/a1/a1-h3-b-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "LIN",
+      "Guten Tag, hier ist die Sprachschule Lingua. Diese Nachricht ist für Frau Haddad. Ihr Deutschkurs beginnt nicht am ersten März, sondern erst am achten März. Der Kurs ist immer dienstags und donnerstags von achtzehn bis zwanzig Uhr. Bei Fragen rufen Sie uns bitte an."
+     ]
+    ],
+    "items": [
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Wann beginnt der Deutschkurs?",
+      "opts": [
+       "Am 1. März.",
+       "Am 18. März.",
+       "Am 8. März."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "sondern erst am achten März",
+      "why": "Nicht am ersten, <b>sondern erst am achten März</b>. 18 Uhr ist die Kurszeit."
+     }
+    ]
+   },
+   {
+    "title": "Text 13",
+    "audio": "audio/a1/a1-h3-b-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "ROT",
+      "Hallo Herr Petersen, hier ist Ulrike Roth. Ich bin heute leider krank und komme nicht ins Büro. Können Sie bitte um elf Uhr den Termin mit Herrn Kaya machen? Die Papiere liegen auf meinem Schreibtisch. Vielen Dank!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Was soll Herr Petersen machen?",
+      "opts": [
+       "Den Termin mit Herrn Kaya machen.",
+       "Frau Roth zu Hause besuchen.",
+       "Um elf Uhr Frau Roth anrufen."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Können Sie bitte um elf Uhr den Termin mit Herrn Kaya machen?",
+      "why": "Frau Roth ist krank. Herr Petersen soll <b>den Termin mit Herrn Kaya</b> machen."
+     }
+    ]
+   },
+   {
+    "title": "Text 14",
+    "audio": "audio/a1/a1-h3-b-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "POH",
+      "Guten Tag, Frau Novak, hier ist Gerd Pohl, Ihr Vermieter. Am Donnerstag kommt ein Techniker und repariert die Heizung. Er kommt zwischen acht und zehn Uhr. Sind Sie zu Hause? Wenn nicht, geben Sie bitte Ihren Schlüssel Ihrer Nachbarin, Frau Schulte. Danke und auf Wiederhören."
+     ]
+    ],
+    "items": [
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Was passiert am Donnerstag?",
+      "opts": [
+       "Frau Novak bekommt eine neue Heizung.",
+       "Ein Techniker repariert die Heizung.",
+       "Frau Schulte repariert die Heizung."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Am Donnerstag kommt ein Techniker und repariert die Heizung.",
+      "why": "Die Heizung ist nicht neu, sie wird <b>repariert</b>. Frau Schulte bekommt nur den Schlüssel."
+     }
+    ]
+   },
+   {
+    "title": "Text 15",
+    "audio": "audio/a1/a1-h3-b-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KIN",
+      "Hallo, hier ist das Kino Lichtspiel. Das ist eine Nachricht für Herrn Mertens. Sie haben zwei Karten für Samstag um zwanzig Uhr reserviert. Leider zeigen wir den Film am Samstag nicht. Sie können aber Karten für Sonntag bekommen, auch um zwanzig Uhr. Oder Sie bekommen Ihr Geld zurück. Bitte rufen Sie uns an."
+     ]
+    ],
+    "items": [
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Wann kann Herr Mertens den Film sehen?",
+      "opts": [
+       "Am Sonntag um 20 Uhr.",
+       "Am Samstag um 20 Uhr.",
+       "Am Sonntag um 18 Uhr."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Sie können aber Karten für Sonntag bekommen, auch um zwanzig Uhr.",
+      "why": "Am Samstag gibt es den Film <b>nicht</b>. Er kann am Sonntag um 20 Uhr gehen."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-l1-a": {
+  "id": "a1-l1-a",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 1,
+  "instr": "Lesen Sie die zwei Texte und die Aufgaben 1 bis 5. Sind die Aussagen richtig oder falsch? Kreuzen Sie an.",
+  "instr_en": "Read the two texts and tasks 1 to 5. Are the statements true or false? Choose.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Text 1 · E-Mail",
+    "body": "Liebe Svenja,\n\nwie geht es dir? Ich bin jetzt seit zwei Wochen in Hamburg. Meine Wohnung ist klein, aber sehr schön. Sie ist im vierten Stock und hat einen Balkon. Leider gibt es keinen Aufzug.\n\nMeine neue Arbeit gefällt mir gut. Ich fange morgens um acht Uhr an und bin um vier Uhr fertig. Die Kollegen sind sehr nett.\n\nAm Wochenende möchte ich die Stadt besser kennenlernen. Hast du Lust? Du kannst gern bei mir schlafen. Komm doch am Freitagabend!\n\nViele Grüße\nMarek",
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Marek wohnt seit zwei Monaten in Hamburg.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Ich bin jetzt seit zwei Wochen in Hamburg.",
+      "why": "Er wohnt seit zwei <b>Wochen</b> dort, nicht seit zwei Monaten."
+     },
+     {
+      "n": 2,
+      "type": "rf",
+      "q": "Das Haus hat einen Aufzug.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "Leider gibt es keinen Aufzug.",
+      "why": "Im Text steht: <b>keinen</b> Aufzug."
+     },
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Marek arbeitet bis 16 Uhr.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "bin um vier Uhr fertig",
+      "why": "Um vier Uhr fertig = er arbeitet <b>bis 16 Uhr</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Zettel an der Tür",
+    "body": "Hallo Frau Cornelius,\n\nich habe heute Nachmittag ein Paket für Sie bekommen. Der Postbote hat bei Ihnen geklingelt, aber Sie waren nicht zu Hause. Das Paket ist jetzt bei mir in der Wohnung (2. Stock links). Ich bin heute bis 18 Uhr im Büro. Ab 19 Uhr bin ich wieder da. Klingeln Sie einfach!\n\nViele Grüße\nIhr Nachbar Ralf Hennig",
+    "items": [
+     {
+      "n": 4,
+      "type": "rf",
+      "q": "Frau Cornelius war am Nachmittag nicht zu Hause.",
+      "a": "r",
+      "ev": "aber Sie waren nicht zu Hause",
+      "why": "Der Postbote hat geklingelt, aber sie war <b>nicht zu Hause</b>."
+     },
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Frau Cornelius kann das Paket um 18 Uhr abholen.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Ab 19 Uhr bin ich wieder da.",
+      "why": "Bis 18 Uhr ist Herr Hennig im Büro. Er ist erst <b>ab 19 Uhr</b> zu Hause."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-l1-b": {
+  "id": "a1-l1-b",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 1,
+  "instr": "Lesen Sie die zwei Texte und die Aufgaben 1 bis 5. Sind die Aussagen richtig oder falsch? Kreuzen Sie an.",
+  "instr_en": "Read the two texts and tasks 1 to 5. Are the statements true or false? Choose.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Text 1 · Nachricht an die Kursgruppe",
+    "body": "Hallo Leute,\n\nam Freitag machen wir nach dem Deutschkurs ein kleines Fest. Wir treffen uns um 19 Uhr in der Pizzeria Bella Napoli in der Gartenstraße. Die Pizzeria ist nicht weit von der Schule, nur fünf Minuten zu Fuß. Ihr braucht nicht viel Geld: Unsere Lehrerin, Frau Albers, bezahlt das Essen. Die Getränke müsst ihr aber selbst bezahlen.\n\nBis Freitag!\nAyumi",
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Die Pizzeria ist in der Nähe von der Schule.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "nur fünf Minuten zu Fuß",
+      "why": "Nur fünf Minuten zu Fuß = <b>in der Nähe</b>."
+     },
+     {
+      "n": 2,
+      "type": "rf",
+      "q": "Frau Albers bezahlt auch die Getränke.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Die Getränke müsst ihr aber selbst bezahlen.",
+      "why": "Frau Albers bezahlt nur das <b>Essen</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · E-Mail vom Hotel",
+    "body": "Sehr geehrter Herr Okafor,\n\nvielen Dank für Ihre Reservierung. Sie haben bei uns vom 12. bis 15. Juli ein Einzelzimmer mit Dusche. Das Frühstück ist im Preis inklusive. Unser Restaurant ist jeden Tag von 18 bis 22 Uhr geöffnet, nur am Montag ist es geschlossen. Sie kommen mit dem Auto? Parkplätze gibt es direkt hinter dem Hotel. Ein Parkplatz kostet 8 Euro pro Nacht.\n\nMit freundlichen Grüßen\nIhr Team vom Hotel Seeblick",
+    "items": [
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Herr Okafor bleibt drei Nächte im Hotel.",
+      "a": "r",
+      "ev": "vom 12. bis 15. Juli",
+      "why": "Vom 12. bis 15. Juli: Das sind <b>drei Nächte</b>."
+     },
+     {
+      "n": 4,
+      "type": "rf",
+      "q": "Herr Okafor muss das Frühstück extra bezahlen.",
+      "a": "f",
+      "trap": "synonym",
+      "ev": "Das Frühstück ist im Preis inklusive.",
+      "why": "„Inklusive“ heißt: Das Frühstück ist <b>schon im Preis</b>."
+     },
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Man kann am Hotel kostenlos parken.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Ein Parkplatz kostet 8 Euro pro Nacht.",
+      "why": "Es gibt Parkplätze, aber sie kosten <b>8 Euro pro Nacht</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-l2-a": {
+  "id": "a1-l2-a",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 2,
+  "instr": "Lesen Sie die Texte und die Aufgaben 6 bis 10. Wo finden Sie Informationen? Kreuzen Sie an: a oder b.",
+  "instr_en": "Read the texts and tasks 6 to 10. Where do you find the information? Choose a or b.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Aufgabe 6",
+    "body": "a\nwww.fernbus-express.de\nMit dem Bus quer durch Deutschland!\nKöln – Berlin: täglich 6 Fahrten, ab 19 €\nWLAN im Bus\n\nb\nwww.schiene-direkt.de\nZugverbindungen in ganz Deutschland\nFahrplan, Preise und Tickets: Hier finden Sie die besten Verbindungen. Sparpreise ab 21,90 €.",
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Sie wohnen in Köln und möchten am Samstag mit dem Zug nach Berlin fahren.",
+      "opts": [
+       "www.fernbus-express.de",
+       "www.schiene-direkt.de"
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Zugverbindungen in ganz Deutschland",
+      "why": "a fährt auch nach Berlin, aber mit dem <b>Bus</b>. Sie möchten mit dem Zug fahren."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 7",
+    "body": "a\nSprachschule Wortschatz\nDeutschkurse für Anfänger\nMontag bis Donnerstag, 18.00 – 20.15 Uhr\nKleine Gruppen: maximal 10 Personen\n\nb\nVolkshochschule Lindenberg\nDeutsch A1 kompakt\nSamstag und Sonntag, 9.00 – 13.00 Uhr\nKursbeginn: 4. Mai",
+    "items": [
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Sie möchten Deutsch lernen. Sie arbeiten von Montag bis Freitag und haben nur am Wochenende Zeit.",
+      "opts": [
+       "Sprachschule Wortschatz",
+       "Volkshochschule Lindenberg"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Samstag und Sonntag, 9.00 – 13.00 Uhr",
+      "why": "Der Kurs a ist abends, aber nur <b>von Montag bis Donnerstag</b>."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 8",
+    "body": "a\nKinderärztlicher Notdienst Lindenberg\nAm Wochenende und an Feiertagen im Klinikum\nSa und So 9 – 20 Uhr\nTelefon: 07541 22 90 0\n\nb\nPraxis Dr. Ines Wagner, Kinderärztin\nSprechzeiten: Mo – Fr 8 – 12 Uhr\nDi und Do auch 15 – 18 Uhr\nTermine nur nach Anruf",
+    "items": [
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Ihr Kind ist krank. Heute ist Sonntag. Sie brauchen einen Arzt.",
+      "opts": [
+       "Kinderärztlicher Notdienst Lindenberg",
+       "Praxis Dr. Ines Wagner, Kinderärztin"
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Sa und So 9 – 20 Uhr",
+      "why": "Die Praxis b ist nur <b>Montag bis Freitag</b> offen. Der Notdienst a ist auch am Sonntag da."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 9",
+    "body": "a\nSchöne 2-Zimmer-Wohnung im Zentrum\n55 m², Balkon, 3. Stock\nMiete: 580 € (warm)\nFrei ab 1. Juni\n\nb\nHelle 3-Zimmer-Wohnung im Zentrum\n78 m², großer Balkon und Garten\nMiete: 790 € (warm)\nFrei ab sofort",
+    "items": [
+     {
+      "n": 9,
+      "type": "abc",
+      "q": "Sie suchen eine Wohnung mit Balkon im Zentrum. Sie möchten nicht mehr als 600 Euro Miete bezahlen.",
+      "opts": [
+       "Schöne 2-Zimmer-Wohnung im Zentrum",
+       "Helle 3-Zimmer-Wohnung im Zentrum"
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Miete: 580 € (warm)",
+      "why": "Beide Wohnungen haben einen Balkon, aber b kostet <b>790 €</b>. Das ist zu teuer."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 10",
+    "body": "a\nFreibad Sonnenwiese\nÖffnungszeiten (Mai bis September):\nMontag geschlossen\nDi – So 9 – 20 Uhr\n\nb\nHallenbad am Stadtpark\nÖffnungszeiten:\nMo 14 – 22 Uhr\nDi – Fr 7 – 22 Uhr\nSa und So 9 – 18 Uhr",
+    "items": [
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Sie möchten am Montagabend schwimmen gehen.",
+      "opts": [
+       "Freibad Sonnenwiese",
+       "Hallenbad am Stadtpark"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Mo 14 – 22 Uhr",
+      "why": "Das Freibad ist am Montag <b>geschlossen</b>. Das Hallenbad ist montags bis 22 Uhr offen."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-l2-b": {
+  "id": "a1-l2-b",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 2,
+  "instr": "Lesen Sie die Texte und die Aufgaben 6 bis 10. Wo finden Sie Informationen? Kreuzen Sie an: a oder b.",
+  "instr_en": "Read the texts and tasks 6 to 10. Where do you find the information? Choose a or b.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Aufgabe 6",
+    "body": "a\nwww.talsee-schiff.de\nSchifffahrten auf dem Talsee\nTäglich ab 10 Uhr, Rundfahrt 2 Stunden, 18 €\nKinder bis 12 Jahre: 9 €\n\nb\nwww.talsee-radtouren.de\nMit dem Fahrrad um den Talsee\nTouren am Samstag und Sonntag, 40 km\nFahrräder können Sie bei uns mieten.",
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Sie möchten am Wochenende einen Ausflug mit dem Schiff machen.",
+      "opts": [
+       "www.talsee-schiff.de",
+       "www.talsee-radtouren.de"
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Schifffahrten auf dem Talsee",
+      "why": "b ist auch am Talsee und am Wochenende, aber mit dem <b>Fahrrad</b>."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 7",
+    "body": "a\nPizzeria Da Marco\nPizza, Pasta und Salate\nLieferservice: Mo – Fr 11 – 22 Uhr\nAm Wochenende nur im Restaurant!\n\nb\nAsia-Küche Lotus\nWir bringen das Essen zu Ihnen nach Hause!\nJeden Tag 12 – 23 Uhr\nBestellen Sie online oder am Telefon.",
+    "items": [
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Sie haben am Samstagabend Gäste. Sie möchten nicht kochen und Essen nach Hause bestellen.",
+      "opts": [
+       "Pizzeria Da Marco",
+       "Asia-Küche Lotus"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Jeden Tag 12 – 23 Uhr",
+      "why": "Die Pizzeria liefert <b>nur von Montag bis Freitag</b>. Lotus bringt das Essen jeden Tag."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 8",
+    "body": "a\nComputer-Treff 60 plus\nE-Mails schreiben, im Internet suchen, Fotos ansehen\nFür Anfänger ab 60 Jahren\nMittwochs 10 – 12 Uhr\n\nb\nComputerschule Nordstadt\nProgrammieren für Profis\nFür Leute mit viel Erfahrung am Computer\nAbends und am Wochenende",
+    "items": [
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Sie sind 68 Jahre alt und möchten einen Computerkurs machen. Sie haben noch nie mit einem Computer gearbeitet.",
+      "opts": [
+       "Computer-Treff 60 plus",
+       "Computerschule Nordstadt"
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Für Anfänger ab 60 Jahren",
+      "why": "b ist nur für Leute mit <b>viel Erfahrung</b>. a ist für Anfänger ab 60."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 9",
+    "body": "a\nMöbelhaus Wohnwelt\nNeue Sofas in vielen Farben\nJetzt 20 % billiger!\nLieferung kostenlos\n\nb\nFlohmarkt im Gemeindehaus\nGebrauchte Sofas, Tische, Lampen und Bücher\nSamstag 8 – 14 Uhr\nAlles sehr günstig!",
+    "items": [
+     {
+      "n": 9,
+      "type": "abc",
+      "q": "Sie möchten ein Sofa kaufen. Es muss nicht neu sein, aber es soll nicht viel kosten.",
+      "opts": [
+       "Möbelhaus Wohnwelt",
+       "Flohmarkt im Gemeindehaus"
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Gebrauchte Sofas, Tische, Lampen und Bücher",
+      "why": "Bei a sind die Sofas 20 % billiger, aber <b>neu</b> und trotzdem teuer. b hat gebrauchte Sofas, alles sehr günstig."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 10",
+    "body": "a\nwww.flughafen-lindenberg.de/parken\nMit dem Auto zum Flughafen\nParkhäuser P1 bis P4: Preise und Reservierung\n\nb\nwww.flughafen-lindenberg.de/weiter\nVom Flughafen in die Stadt\nS-Bahn alle 15 Minuten, Fahrzeit 20 Minuten\nTaxi und Bus: vor Halle B",
+    "items": [
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Sie kommen am Flughafen Lindenberg an. Sie möchten wissen: Wie komme ich vom Flughafen in die Stadt?",
+      "opts": [
+       "www.flughafen-lindenberg.de/parken",
+       "www.flughafen-lindenberg.de/weiter"
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Vom Flughafen in die Stadt",
+      "why": "a ist für Leute, die <b>zum</b> Flughafen fahren. Sie wollen vom Flughafen in die Stadt."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-l3-a": {
+  "id": "a1-l3-a",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 3,
+  "instr": "Lesen Sie die Texte und die Aufgaben 11 bis 15. Kreuzen Sie an: Richtig oder Falsch.",
+  "instr_en": "Read the texts and tasks 11 to 15. Choose: true or false.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "An der Tür einer Bäckerei",
+    "body": "Liebe Kundinnen und Kunden,\nvom 2. bis 16. August machen wir Urlaub.\nAb dem 17. August sind wir wieder für Sie da.\nIhre Bäckerei Hofmann",
+    "items": [
+     {
+      "n": 11,
+      "type": "rf",
+      "q": "Sie können am 10. August in der Bäckerei Hofmann Brot kaufen.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "vom 2. bis 16. August machen wir Urlaub.",
+      "why": "Der 10. August ist in der <b>Urlaubszeit</b>. Die Bäckerei ist geschlossen."
+     }
+    ]
+   },
+   {
+    "title": "Im Supermarkt",
+    "body": "Heute Sonderangebot!\nAlle Säfte: 2 Flaschen kaufen, nur 1 Flasche bezahlen.",
+    "items": [
+     {
+      "n": 12,
+      "type": "rf",
+      "q": "Die Säfte sind heute billiger.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "2 Flaschen kaufen, nur 1 Flasche bezahlen.",
+      "why": "Zwei Flaschen für den Preis von einer = <b>billiger</b>."
+     }
+    ]
+   },
+   {
+    "title": "An der Tür einer Arztpraxis",
+    "body": "Praxis Dr. Ahmadi\nSprechzeiten:\nMo, Di, Do 8 – 12 Uhr und 14 – 17 Uhr\nMi und Fr 8 – 12 Uhr\nBitte warten Sie im Wartezimmer.",
+    "items": [
+     {
+      "n": 13,
+      "type": "rf",
+      "q": "Am Mittwochnachmittag ist die Praxis geöffnet.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Mi und Fr 8 – 12 Uhr",
+      "why": "Am Mittwoch ist die Praxis <b>nur am Vormittag</b> offen."
+     }
+    ]
+   },
+   {
+    "title": "Im Bahnhof",
+    "body": "Fahrkarten bekommen Sie am Automaten oder im Reisezentrum.\nReisezentrum: täglich 6 – 21 Uhr\nIm Zug kann man keine Fahrkarten kaufen!",
+    "items": [
+     {
+      "n": 14,
+      "type": "rf",
+      "q": "Sie können um 20 Uhr im Reisezentrum eine Fahrkarte kaufen.",
+      "a": "r",
+      "trap": "detail",
+      "ev": "Reisezentrum: täglich 6 – 21 Uhr",
+      "why": "Das Reisezentrum ist <b>bis 21 Uhr</b> offen. 20 Uhr ist also möglich."
+     }
+    ]
+   },
+   {
+    "title": "In einer Sprachschule",
+    "body": "Achtung!\nDer Kurs Deutsch A1 (Frau Jansen) ist heute nicht in Raum 105, sondern in Raum 210 (2. Stock).",
+    "items": [
+     {
+      "n": 15,
+      "type": "rf",
+      "q": "Der Kurs von Frau Jansen ist heute im zweiten Stock.",
+      "a": "r",
+      "trap": "vorher",
+      "ev": "sondern in Raum 210 (2. Stock)",
+      "why": "Raum 105 ist der normale Raum. Heute ist der Kurs in Raum 210, <b>im 2. Stock</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-l3-b": {
+  "id": "a1-l3-b",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 3,
+  "instr": "Lesen Sie die Texte und die Aufgaben 11 bis 15. Kreuzen Sie an: Richtig oder Falsch.",
+  "instr_en": "Read the texts and tasks 11 to 15. Choose: true or false.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Am Eingang eines Schwimmbads",
+    "body": "Hallenbad Nord\nWegen Reparaturen bis zum 30. April geschlossen.\nBitte besuchen Sie das Hallenbad Süd (Bus 12, Haltestelle Sportplatz).",
+    "items": [
+     {
+      "n": 11,
+      "type": "rf",
+      "q": "Sie können im April im Hallenbad Nord schwimmen.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Wegen Reparaturen bis zum 30. April geschlossen.",
+      "why": "Das Hallenbad Nord ist <b>bis zum 30. April geschlossen</b>."
+     }
+    ]
+   },
+   {
+    "title": "In einem Kaufhaus",
+    "body": "Damenmode: 1. Stock\nHerrenmode: 2. Stock\nKinderkleidung und Spielwaren: 3. Stock\nRestaurant: 4. Stock",
+    "items": [
+     {
+      "n": 12,
+      "type": "rf",
+      "q": "Spielsachen für Kinder finden Sie im 3. Stock.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Kinderkleidung und Spielwaren: 3. Stock",
+      "why": "Spielwaren = <b>Spielsachen</b>. Sie sind im 3. Stock."
+     }
+    ]
+   },
+   {
+    "title": "An einer Haustür",
+    "body": "Liebe Hausbewohner,\nam Dienstag, 14. März, gibt es von 9 bis 12 Uhr kein Wasser.\nVielen Dank!\nIhre Hausverwaltung",
+    "items": [
+     {
+      "n": 13,
+      "type": "rf",
+      "q": "Am 14. März gibt es am Nachmittag kein Wasser.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "von 9 bis 12 Uhr kein Wasser",
+      "why": "Kein Wasser gibt es nur <b>am Vormittag</b>, von 9 bis 12 Uhr."
+     }
+    ]
+   },
+   {
+    "title": "In einem Restaurant",
+    "body": "Mittagsmenü\nMontag bis Freitag, 11.30 – 14.30 Uhr\nSuppe, Hauptgericht und ein Getränk: 11,90 €",
+    "items": [
+     {
+      "n": 14,
+      "type": "rf",
+      "q": "Am Wochenende gibt es kein Mittagsmenü.",
+      "a": "r",
+      "trap": "negation",
+      "ev": "Montag bis Freitag, 11.30 – 14.30 Uhr",
+      "why": "Das Menü gibt es nur <b>von Montag bis Freitag</b>."
+     }
+    ]
+   },
+   {
+    "title": "In der Post",
+    "body": "Dieser Schalter ist geschlossen.\nBitte gehen Sie zu Schalter 3.\nPakete: Schalter 4",
+    "items": [
+     {
+      "n": 15,
+      "type": "rf",
+      "q": "Sie möchten ein Paket schicken. Sie gehen zu Schalter 3.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Pakete: Schalter 4",
+      "why": "Für <b>Pakete</b> ist Schalter 4 da."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-s1-a": {
+  "id": "a1-s1-a",
+  "level": "a1",
+  "module": "schreiben",
+  "teil": 1,
+  "instr": "Ihr Freund Tomasz Wilk möchte mit seiner Frau einen Tanzkurs machen. Er meldet sich in der Tanzschule an. Im Formular fehlen fünf Informationen. Helfen Sie Ihrem Freund und schreiben Sie die fünf fehlenden Informationen in das Formular.",
+  "instr_en": "Read the text. Five pieces of information are missing in the form. Help your friend and write the five missing pieces of information into the form.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Anmeldung · Tanzschule Schwung",
+    "body": "Tomasz Wilk (34) und seine Frau Agnieszka (31) möchten zusammen tanzen lernen. Ihre Tochter Zofia ist fünf Jahre alt. Sie bleibt in dieser Zeit bei der Oma. Die Familie wohnt seit März in der Schillerstraße 27 in 79312 Lindenberg. Vorher haben sie in der Gartenstraße 3 gewohnt. Tomasz arbeitet von Montag bis Freitag bis 19 Uhr. Deshalb haben die beiden nur am Wochenende Zeit. Sie bezahlen den Kurs nicht bar, sondern mit Kreditkarte.",
+    "items": [
+     {
+      "n": 1,
+      "type": "txt",
+      "q": "Anzahl der Personen",
+      "a": "2|zwei|2 Personen|zwei Personen|2 Pers.|zwei Pers.|Tomasz und Agnieszka",
+      "trap": "person",
+      "ev": "Tomasz Wilk (34) und seine Frau Agnieszka (31) möchten zusammen tanzen lernen.",
+      "why": "Nur Tomasz und Agnieszka tanzen. Die Tochter bleibt <b>bei der Oma</b>."
+     },
+     {
+      "n": 2,
+      "type": "txt",
+      "q": "Straße, Hausnummer",
+      "a": "Schillerstraße 27|Schillerstr. 27|Schillerstrasse 27|Schillerstr 27|Schillerstraße, 27|Schillerstraße Nr. 27",
+      "trap": "vorher",
+      "ev": "Die Familie wohnt seit März in der Schillerstraße 27",
+      "why": "Die Gartenstraße 3 war die <b>alte</b> Adresse."
+     },
+     {
+      "n": 3,
+      "type": "txt",
+      "q": "Postleitzahl",
+      "a": "79312",
+      "ev": "in 79312 Lindenberg",
+      "why": "Die Postleitzahl hat fünf Zahlen: <b>79312</b>."
+     },
+     {
+      "n": 4,
+      "type": "txt",
+      "q": "Kurszeit (wochentags oder am Wochenende)",
+      "a": "am Wochenende|Wochenende|das Wochenende|nur am Wochenende|Samstag und Sonntag|Sa und So|Sa/So|Samstag/Sonntag|wochenends",
+      "trap": "detail",
+      "ev": "Deshalb haben die beiden nur am Wochenende Zeit.",
+      "why": "Tomasz arbeitet Montag bis Freitag. Sie haben nur <b>am Wochenende</b> Zeit."
+     },
+     {
+      "n": 5,
+      "type": "txt",
+      "q": "Zahlungsart (bar, Überweisung oder Kreditkarte)",
+      "a": "Kreditkarte|mit Kreditkarte|per Kreditkarte|mit der Kreditkarte|Karte|mit Karte",
+      "trap": "negation",
+      "ev": "nicht bar, sondern mit Kreditkarte",
+      "why": "Nicht bar, <b>sondern mit Kreditkarte</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-s1-b": {
+  "id": "a1-s1-b",
+  "level": "a1",
+  "module": "schreiben",
+  "teil": 1,
+  "instr": "Ihre Freundin Elena Rossi möchte ihren Sohn in der Musikschule anmelden. Im Formular fehlen fünf Informationen. Helfen Sie Ihrer Freundin und schreiben Sie die fünf fehlenden Informationen in das Formular.",
+  "instr_en": "Your friend Elena Rossi wants to register her son at the music school. Five pieces of information are missing in the form. Help your friend and write the five missing pieces of information in the form.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Anmeldung · Musikschule Klangraum",
+    "body": "Elena Rossi möchte ihren Sohn Luca in der Musikschule anmelden. Luca ist neun Jahre alt. Seine Schwester Giulia ist zwölf. Sie spielt schon Klavier, aber Luca möchte Gitarre lernen. Montags, mittwochs und donnerstags hat Luca am Nachmittag Fußball. Deshalb kann er nur am Dienstag kommen. Elenas Telefonnummer zu Hause ist 0561 23 45 67, aber sie ist selten zu Hause. Bitte rufen Sie sie auf dem Handy an: 0176 5523 908.",
+    "items": [
+     {
+      "n": 1,
+      "type": "txt",
+      "q": "Vorname des Kindes",
+      "a": "Luca|Luca Rossi",
+      "trap": "person",
+      "ev": "ihren Sohn Luca",
+      "why": "Giulia ist die <b>Schwester</b>. Angemeldet wird Luca."
+     },
+     {
+      "n": 2,
+      "type": "txt",
+      "q": "Alter",
+      "a": "9|neun|9 Jahre|neun Jahre|9 Jahre alt|neun Jahre alt|9 J.",
+      "trap": "person",
+      "ev": "Luca ist neun Jahre alt.",
+      "why": "Zwölf ist die <b>Schwester</b>. Luca ist neun."
+     },
+     {
+      "n": 3,
+      "type": "txt",
+      "q": "Instrument",
+      "a": "Gitarre|die Gitarre|E-Gitarre",
+      "trap": "person",
+      "ev": "aber Luca möchte Gitarre lernen",
+      "why": "Klavier spielt <b>Giulia</b>. Luca möchte Gitarre lernen."
+     },
+     {
+      "n": 4,
+      "type": "txt",
+      "q": "Wochentag",
+      "a": "Dienstag|am Dienstag|dienstags|Di|Di.",
+      "trap": "detail",
+      "ev": "Deshalb kann er nur am Dienstag kommen.",
+      "why": "Montag, Mittwoch und Donnerstag hat Luca Fußball. Er kann nur <b>am Dienstag</b>."
+     },
+     {
+      "n": 5,
+      "type": "txt",
+      "q": "Handynummer",
+      "a": "0176 5523 908|01765523908|0176 5523908|0176-5523908|0176/5523908|0176 552 3908|0176-5523 908|0176/5523 908",
+      "trap": "detail",
+      "ev": "Bitte rufen Sie sie auf dem Handy an: 0176 5523 908.",
+      "why": "0561 ist die Nummer <b>zu Hause</b>. Gefragt ist das Handy."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-s2-a": {
+  "id": "a1-s2-a",
+  "level": "a1",
+  "module": "schreiben",
+  "teil": 2,
+  "instr": "Schreiben Sie zu jedem Punkt ein bis zwei Sätze (circa 30 Wörter). Schreiben Sie auch eine Anrede und einen Gruß.",
+  "instr_en": "Write one or two sentences on each point (about 30 words). Also write a greeting and a closing.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "a1-s2-a",
+    "aufgabe": 2,
+    "situation": "Sie haben am Samstag Geburtstag und machen eine kleine Party. Schreiben Sie eine Nachricht an Ihre Freundin Carla.",
+    "points": [
+     "Wann ist die Party?",
+     "Wo feiern Sie?",
+     "Was soll Carla mitbringen?"
+    ],
+    "words": 30,
+    "max": 10,
+    "minutes": 12
+   }
+  ]
+ },
+ "a1-s2-b": {
+  "id": "a1-s2-b",
+  "level": "a1",
+  "module": "schreiben",
+  "teil": 2,
+  "instr": "Schreiben Sie zu jedem Punkt ein bis zwei Sätze (circa 30 Wörter). Schreiben Sie auch eine Anrede und einen Gruß.",
+  "instr_en": "Write one or two sentences on each point (about 30 words). Also write a greeting and a closing.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "a1-s2-b",
+    "aufgabe": 2,
+    "situation": "Sie haben am Donnerstag einen Termin bei Ihrem Arzt, Dr. Lorenz. Sie können nicht kommen. Schreiben Sie eine Nachricht an die Praxis.",
+    "points": [
+     "Entschuldigen Sie sich.",
+     "Warum können Sie nicht kommen?",
+     "Bitten Sie um einen neuen Termin."
+    ],
+    "words": 30,
+    "max": 10,
+    "minutes": 12
+   }
+  ]
+ },
+ "a1-diag-h1": {
+  "id": "a1-diag-h1",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 1,
+  "instr": "Was ist richtig? Kreuzen Sie an: a, b oder c. Sie hören jeden Text zweimal.",
+  "instr_en": "What is correct? Choose a, b or c. You hear each text twice.",
+  "source": "own",
+  "speakers": {
+   "GAS": "Gast",
+   "KEL": "Kellnerin",
+   "FRA": "Frau",
+   "MAN": "Mann",
+   "MAX": "Max",
+   "LEA": "Lea"
+  },
+  "genders": {
+   "GAS": "m",
+   "KEL": "f",
+   "FRA": "f",
+   "MAN": "m",
+   "MAX": "m",
+   "LEA": "f"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Im Café",
+    "audio": "audio/a1/a1-diag-h1-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "GAS",
+      "Entschuldigung, ich möchte bitte zahlen."
+     ],
+     [
+      "KEL",
+      "Gern. Ein Kaffee und ein Stück Kuchen, das macht sechs Euro vierzig."
+     ],
+     [
+      "GAS",
+      "Und nur der Kaffee? Den Kuchen bezahlt mein Kollege."
+     ],
+     [
+      "KEL",
+      "Der Kaffee kostet drei Euro zwanzig."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Wie viel bezahlt der Mann?",
+      "opts": [
+       "3,20 €.",
+       "6,40 €.",
+       "3,40 €."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Der Kaffee kostet drei Euro zwanzig.",
+      "why": "6,40 € kosten Kaffee <b>und</b> Kuchen. Den Kuchen bezahlt der Kollege."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Auf der Straße",
+    "audio": "audio/a1/a1-diag-h1-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "FRA",
+      "Entschuldigung, wo ist hier die Post?"
+     ],
+     [
+      "MAN",
+      "Die Post? Gehen Sie hier geradeaus bis zur Ampel. Dann links. Die Post ist neben der Apotheke."
+     ],
+     [
+      "FRA",
+      "Neben der Apotheke. Vielen Dank!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Wo ist die Post?",
+      "opts": [
+       "An der Ampel rechts.",
+       "Neben der Apotheke.",
+       "Gegenüber von der Apotheke."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Die Post ist neben der Apotheke.",
+      "why": "An der Ampel geht man <b>links</b>. Die Post ist <b>neben</b> der Apotheke."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Am Telefon",
+    "audio": "audio/a1/a1-diag-h1-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MAX",
+      "Lea, wann beginnt der Film heute Abend? Um acht?"
+     ],
+     [
+      "LEA",
+      "Nein, der Film beginnt um Viertel nach acht. Aber wir treffen uns schon um halb acht vor dem Kino."
+     ],
+     [
+      "MAX",
+      "Okay. Dann um halb acht vor dem Kino."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Wann beginnt der Film?",
+      "opts": [
+       "Um 19.30 Uhr.",
+       "Um 20.00 Uhr.",
+       "Um 20.15 Uhr."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "der Film beginnt um Viertel nach acht",
+      "why": "Um halb acht treffen sie sich. Der Film beginnt um <b>Viertel nach acht</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-diag-h2": {
+  "id": "a1-diag-h2",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 2,
+  "instr": "Kreuzen Sie an: Richtig oder Falsch. Sie hören jeden Text einmal.",
+  "instr_en": "Choose: true or false. You hear each text once.",
+  "source": "own",
+  "speakers": {
+   "ANS": "Ansage",
+   "ANM": "Ansage"
+  },
+  "genders": {
+   "ANS": "f",
+   "ANM": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 4 · In der Straßenbahn",
+    "audio": "audio/a1/a1-diag-h2-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANM",
+      "Liebe Fahrgäste, wegen Bauarbeiten fährt die Straßenbahn Linie sechs heute nur bis zum Hauptbahnhof. Bitte nehmen Sie ab dem Hauptbahnhof den Bus Linie sechzig."
+     ]
+    ],
+    "items": [
+     {
+      "n": 4,
+      "type": "rf",
+      "q": "Ab dem Hauptbahnhof fahren die Fahrgäste mit dem Bus weiter.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Bitte nehmen Sie ab dem Hauptbahnhof den Bus Linie sechzig.",
+      "why": "Die Straßenbahn fährt nur bis zum Hauptbahnhof. Dann geht es <b>mit dem Bus</b> weiter."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Im Kaufhaus",
+    "audio": "audio/a1/a1-diag-h2-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANS",
+      "Liebe Kundinnen und Kunden, unser Kaufhaus schließt in fünfzehn Minuten. Bitte gehen Sie jetzt zur Kasse. Morgen, am Samstag, sind wir von neun bis zwanzig Uhr für Sie da."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Das Kaufhaus ist am Samstag bis 18 Uhr geöffnet.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "von neun bis zwanzig Uhr",
+      "why": "Am Samstag ist das Kaufhaus <b>bis 20 Uhr</b> offen."
+     }
+    ]
+   },
+   {
+    "title": "Text 6 · Am Flughafen",
+    "audio": "audio/a1/a1-diag-h2-2.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANM",
+      "Information für die Passagiere des Fluges nach Wien: Ihr Flug geht heute nicht von Gate A sieben, sondern von Gate A neun. Bitte gehen Sie jetzt zu Gate A neun."
+     ]
+    ],
+    "items": [
+     {
+      "n": 6,
+      "type": "rf",
+      "q": "Der Flug nach Wien geht heute von Gate A 7.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "nicht von Gate A sieben, sondern von Gate A neun",
+      "why": "Nicht A 7, <b>sondern A 9</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-diag-h3": {
+  "id": "a1-diag-h3",
+  "level": "a1",
+  "module": "hoeren",
+  "teil": 3,
+  "instr": "Was ist richtig? Kreuzen Sie an: a, b oder c. Sie hören jeden Text zweimal.",
+  "instr_en": "What is correct? Choose a, b or c. You hear each text twice.",
+  "source": "own",
+  "speakers": {
+   "KAT": "Katrin",
+   "WER": "Autowerkstatt Brenner",
+   "OPA": "Opa"
+  },
+  "genders": {
+   "KAT": "f",
+   "WER": "m",
+   "OPA": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 7",
+    "audio": "audio/a1/a1-diag-h3-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KAT",
+      "Hallo Anna, hier ist Katrin. Wir wollen doch am Samstag zusammen einkaufen gehen. Am Vormittag habe ich leider keine Zeit, da muss ich arbeiten. Können wir am Nachmittag gehen, um zwei Uhr? Ich warte dann vor dem Kaufhaus Merkur. Bis Samstag!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Wann möchte Katrin einkaufen gehen?",
+      "opts": [
+       "Am Samstagvormittag.",
+       "Am Samstag um 14 Uhr.",
+       "Am Sonntag um 14 Uhr."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Können wir am Nachmittag gehen, um zwei Uhr?",
+      "why": "Am Vormittag arbeitet sie. Sie möchte <b>am Samstag um zwei Uhr</b> gehen."
+     }
+    ]
+   },
+   {
+    "title": "Text 8",
+    "audio": "audio/a1/a1-diag-h3-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "WER",
+      "Guten Tag, Herr Fischer, hier ist die Autowerkstatt Brenner. Ihr Auto ist leider noch nicht fertig. Wir brauchen noch ein Teil. Sie können das Auto am Mittwoch abholen. Bei Fragen rufen Sie uns bitte an. Auf Wiederhören."
+     ]
+    ],
+    "items": [
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Wann kann Herr Fischer sein Auto abholen?",
+      "opts": [
+       "Heute.",
+       "Morgen.",
+       "Am Mittwoch."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Sie können das Auto am Mittwoch abholen.",
+      "why": "Das Auto ist <b>noch nicht</b> fertig. Er kann es am Mittwoch abholen."
+     }
+    ]
+   },
+   {
+    "title": "Text 9",
+    "audio": "audio/a1/a1-diag-h3-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "OPA",
+      "Hallo Mia, hier ist Opa. Ich komme am Sonntag zu euch zum Mittagessen. Ich bringe einen Kuchen mit. Sag bitte Mama, ich komme mit dem Zug um zwölf Uhr an. Kann mich jemand am Bahnhof abholen? Danke, mein Schatz!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 9,
+      "type": "abc",
+      "q": "Was möchte der Opa?",
+      "opts": [
+       "Jemand soll ihn am Bahnhof abholen.",
+       "Mia soll einen Kuchen backen.",
+       "Mama soll ihn um zwölf Uhr anrufen."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Kann mich jemand am Bahnhof abholen?",
+      "why": "Den Kuchen bringt der Opa <b>selbst</b> mit. Er möchte, dass ihn jemand abholt."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-diag-l1": {
+  "id": "a1-diag-l1",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 1,
+  "instr": "Lesen Sie den Text und die Aufgaben 1 bis 3. Sind die Aussagen richtig oder falsch? Kreuzen Sie an.",
+  "instr_en": "Read the text and tasks 1 to 3. Are the statements true or false? Choose.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Text 1 · Nachricht an eine Freundin",
+    "body": "Hallo Paula,\n\nich bin heute nicht im Kurs, mein Sohn ist krank. Kannst du mir bitte die Hausaufgaben schicken? Am Donnerstag komme ich wieder. Hast du am Donnerstag nach dem Kurs Zeit? Dann trinken wir zusammen einen Kaffee. Ich bezahle!\n\nLiebe Grüße\nRania",
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Rania ist heute krank.",
+      "a": "f",
+      "trap": "person",
+      "ev": "mein Sohn ist krank",
+      "why": "Nicht Rania, <b>ihr Sohn</b> ist krank."
+     },
+     {
+      "n": 2,
+      "type": "rf",
+      "q": "Paula soll Rania die Hausaufgaben schicken.",
+      "a": "r",
+      "ev": "Kannst du mir bitte die Hausaufgaben schicken?",
+      "why": "Rania fragt Paula: <b>Kannst du mir die Hausaufgaben schicken?</b>"
+     },
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Rania möchte am Donnerstag mit Paula einen Kaffee trinken.",
+      "a": "r",
+      "ev": "Dann trinken wir zusammen einen Kaffee.",
+      "why": "Nach dem Kurs am Donnerstag möchte sie mit Paula <b>Kaffee trinken</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-diag-l2": {
+  "id": "a1-diag-l2",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 2,
+  "instr": "Lesen Sie die Texte und die Aufgaben 4 bis 6. Wo finden Sie Informationen? Kreuzen Sie an: a oder b.",
+  "instr_en": "Read the texts and tasks 4 to 6. Where do you find the information? Choose a or b.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "Aufgabe 4",
+    "body": "a\nCafé Morgenrot\nFrühstück: Mo – Sa 7 – 11 Uhr\nSonntag Ruhetag\n\nb\nCafé am Markt\nSonntagsfrühstück mit Buffet\nSo 9 – 13 Uhr, 14,50 € pro Person",
+    "items": [
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Sie möchten am Sonntag in einem Café frühstücken.",
+      "opts": [
+       "Café Morgenrot",
+       "Café am Markt"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Sonntagsfrühstück mit Buffet",
+      "why": "„Ruhetag“ heißt: Das Café Morgenrot ist am Sonntag <b>geschlossen</b>."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 5",
+    "body": "a\nwww.blumenbote-online.de\nBlumen bestellen und verschicken\nWir bringen Ihre Blumen in ganz Deutschland an die Tür, schon am nächsten Tag.\n\nb\nwww.garten-und-balkon.de\nBlumen im Garten\nWas pflanze ich wann? Tipps für Balkon und Garten",
+    "items": [
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Sie möchten Ihrem Freund zum Geburtstag Blumen schicken. Er wohnt in einer anderen Stadt.",
+      "opts": [
+       "www.blumenbote-online.de",
+       "www.garten-und-balkon.de"
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Wir bringen Ihre Blumen in ganz Deutschland an die Tür",
+      "why": "Auf b geht es auch um Blumen, aber <b>im Garten</b>. Verschicken kann man sie nur bei a."
+     }
+    ]
+   },
+   {
+    "title": "Aufgabe 6",
+    "body": "a\nBäckerei Krume sucht Verkäufer/in\nArbeitszeit: Mo – Fr 6 – 10 Uhr\nGerne auch Studenten\n\nb\nRestaurant Linde sucht Küchenhilfe\nArbeitszeit: Di – Sa 18 – 22 Uhr\nGerne auch Studenten",
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Sie suchen eine Arbeit am Abend, nach Ihrem Deutschkurs.",
+      "opts": [
+       "Bäckerei Krume sucht Verkäufer/in",
+       "Restaurant Linde sucht Küchenhilfe"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Arbeitszeit: Di – Sa 18 – 22 Uhr",
+      "why": "Die Bäckerei braucht Hilfe <b>am Morgen</b>. Das Restaurant sucht jemanden am Abend."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-diag-l3": {
+  "id": "a1-diag-l3",
+  "level": "a1",
+  "module": "lesen",
+  "teil": 3,
+  "instr": "Lesen Sie die Texte und die Aufgaben 7 bis 9. Kreuzen Sie an: Richtig oder Falsch.",
+  "instr_en": "Read the texts and tasks 7 to 9. Choose: true or false.",
+  "source": "own",
+  "layout": "text",
+  "groups": [
+   {
+    "title": "An der Tür eines Geschäfts",
+    "body": "Wir sind umgezogen!\nSie finden uns jetzt in der Bahnhofstraße 14,\nnur 200 Meter von hier.",
+    "items": [
+     {
+      "n": 7,
+      "type": "rf",
+      "q": "Das Geschäft ist jetzt in der Bahnhofstraße.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Sie finden uns jetzt in der Bahnhofstraße 14",
+      "why": "„Wir sind umgezogen“: Das Geschäft ist jetzt <b>in der Bahnhofstraße 14</b>."
+     }
+    ]
+   },
+   {
+    "title": "Im Park",
+    "body": "Hunde bitte an die Leine!\nSpielplatz: Für Hunde verboten.",
+    "items": [
+     {
+      "n": 8,
+      "type": "rf",
+      "q": "Hunde dürfen auf den Spielplatz.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "Spielplatz: Für Hunde verboten.",
+      "why": "Auf dem Spielplatz sind Hunde <b>verboten</b>."
+     }
+    ]
+   },
+   {
+    "title": "In der Bibliothek",
+    "body": "Öffnungszeiten\nDi – Fr 10 – 19 Uhr\nSa 10 – 14 Uhr\nSo und Mo geschlossen",
+    "items": [
+     {
+      "n": 9,
+      "type": "rf",
+      "q": "Sie können am Samstag um 15 Uhr Bücher ausleihen.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Sa 10 – 14 Uhr",
+      "why": "Am Samstag ist die Bibliothek nur <b>bis 14 Uhr</b> offen."
+     }
+    ]
+   }
+  ]
+ },
+ "a1-diag-s1": {
+  "id": "a1-diag-s1",
+  "level": "a1",
+  "module": "schreiben",
+  "teil": 1,
+  "instr": "Ihr Nachbar Ivan Petrov möchte einen Ausweis für die Stadtbibliothek. Im Formular fehlen fünf Informationen. Helfen Sie Ihrem Nachbarn und schreiben Sie die fünf fehlenden Informationen in das Formular.",
+  "instr_en": "Read the text. Five pieces of information are missing in the form. Help your neighbor and write the five missing pieces of information into the form.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Anmeldung · Stadtbibliothek Hollstadt",
+    "body": "Ivan Petrov kommt aus Bulgarien. Er ist am 14. Juni 1991 geboren. Seit dem 2. Januar wohnt er in Hollstadt, in der Lindenallee 12. Die Postleitzahl ist 70435. Ivan möchte Bücher auf Deutsch und auf Englisch lesen. Seine E-Mail-Adresse ist ivan.petrov@beispielpost.de.",
+    "items": [
+     {
+      "n": 1,
+      "type": "txt",
+      "q": "Herkunftsland",
+      "a": "Bulgarien|aus Bulgarien",
+      "ev": "Ivan Petrov kommt aus Bulgarien.",
+      "why": "Er kommt aus <b>Bulgarien</b>."
+     },
+     {
+      "n": 2,
+      "type": "txt",
+      "q": "Geburtsdatum",
+      "a": "14.06.1991|14.6.1991|14. Juni 1991|14.06.91|14.6.91|14. 6. 1991|14.Juni 1991|14. Juni 91|14.06. 1991",
+      "trap": "detail",
+      "ev": "Er ist am 14. Juni 1991 geboren.",
+      "why": "Der 2. Januar ist das Datum vom <b>Umzug</b>, nicht der Geburtstag."
+     },
+     {
+      "n": 3,
+      "type": "txt",
+      "q": "Straße, Hausnummer",
+      "a": "Lindenallee 12|Lindenallee, 12|Lindenallee Nr. 12",
+      "ev": "in der Lindenallee 12",
+      "why": "Er wohnt in der <b>Lindenallee 12</b>."
+     },
+     {
+      "n": 4,
+      "type": "txt",
+      "q": "Postleitzahl",
+      "a": "70435",
+      "ev": "Die Postleitzahl ist 70435.",
+      "why": "Die Postleitzahl ist <b>70435</b>."
+     },
+     {
+      "n": 5,
+      "type": "txt",
+      "q": "E-Mail",
+      "a": "ivan.petrov@beispielpost.de",
+      "ev": "ivan.petrov@beispielpost.de",
+      "why": "Die E-Mail-Adresse steht am Ende vom Text."
+     }
+    ]
+   }
+  ]
+ }
+}

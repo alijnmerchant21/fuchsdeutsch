@@ -1,7 +1,7 @@
 'use client';
 /* Timed test (diagnostic, block test, full mock): section by section like the real exam. */
 import { useCallback, useEffect, useState } from 'react';
-import { modName, tips } from '@/lib/content';
+import { modName, setLabel } from '@/lib/content';
 import type { Answers, Conf, ExamSet, TestDef } from '@/lib/types';
 import { LessonBar, LessonHead } from './Lesson';
 import { SetCard } from './SetCard';
@@ -10,7 +10,7 @@ import { En } from '@/lib/lang';
 
 export interface Finished { answers: Answers; conf: Conf; writing: Record<string, string>; started_at: string }
 
-const setName = (s?: ExamSet) => !s ? '' : s.module === 'schreiben' ? `Schreiben ${s.teil}` : (tips[s.module as 'hoeren' | 'lesen']?.[String(s.teil)]?.name ?? `Teil ${s.teil}`);
+const setName = (s?: ExamSet) => (s?.module === 'schreiben' ? `Teil ${s.teil}` : setLabel(s));
 
 export function TestRunner({ test, sets, onFinish, hue = 'lilac', label }: { test: TestDef; sets: Record<string, ExamSet>; onFinish: (r: Finished) => void; hue?: string; label?: string }) {
   const [started] = useState(() => new Date().toISOString());
@@ -65,7 +65,7 @@ export function TestRunner({ test, sets, onFinish, hue = 'lilac', label }: { tes
     <>
       <div className="examsticky">
         <b>{section.title}</b>
-        {section.module !== 'schreiben' && <span className="dim small">{answered} / {items} beantwortet</span>}
+        {items > 0 && <span className="dim small">{answered} / {items} beantwortet</span>}
         <span className="grow" />
         <Timer key={sec} minutes={section.minutes} onEnd={handIn} />
       </div>
@@ -77,7 +77,7 @@ export function TestRunner({ test, sets, onFinish, hue = 'lilac', label }: { tes
           writing={writing} onWrite={(t, text) => setWriting((w) => ({ ...w, [t]: text }))} />
       ))}
       <div className="donebar">
-        <span className="dim">{section.module === 'schreiben' ? 'Fertig geschrieben?' : `${answered} von ${items} Aufgaben beantwortet.`}</span>
+        <span className="dim">{items === 0 ? 'Fertig geschrieben?' : `${answered} von ${items} Aufgaben beantwortet.`}</span>
         <button className="btn big" disabled={busy} onClick={handIn}>{sec + 1 < test.sections.length ? 'Abgeben und weiter' : busy ? 'Speichern …' : 'Test abgeben'}</button>
       </div>
     </>

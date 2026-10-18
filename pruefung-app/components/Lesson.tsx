@@ -2,9 +2,9 @@
 /* Page frame from the B1-Trainer: back bar with pager, colored head card with step chips, strategy card. */
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { tips } from '@/lib/content';
+import { teilInfo } from '@/lib/content';
 import { safeHtml } from './Rich';
-import { En, TIPS_EN } from '@/lib/lang';
+import { En } from '@/lib/lang';
 
 export function LessonBar({ label, prev, next }: { label?: string; prev?: string | null; next?: string | null }) {
   return (
@@ -43,7 +43,7 @@ export function LessonHead({ hue = 'lilac', label, title, sub, en, done, steps, 
 }
 
 export function StratCard({ module, teil, extra, step, anchor }: { module: 'hoeren' | 'lesen'; teil: number; extra?: string[]; step?: number; anchor?: string }) {
-  const t = tips[module]?.[String(teil)];
+  const t = teilInfo(module, teil);
   if (!t) return null;
   return (
     <section className="card block stratcard" id={anchor} data-step={step}>
@@ -52,7 +52,7 @@ export function StratCard({ module, teil, extra, step, anchor }: { module: 'hoer
       <ol className="stratlist">
         {(extra ?? []).map((x, i) => <li key={'x' + i} dangerouslySetInnerHTML={{ __html: safeHtml(x) }} />)}
         {t.tips.map((x, i) => (
-          <li key={i}><span dangerouslySetInnerHTML={{ __html: x }} /><En block>{TIPS_EN[`${module}-${teil}`]?.[i]}</En></li>
+          <li key={i}><span dangerouslySetInnerHTML={{ __html: x }} /><En block>{t.tips_en?.[i]}</En></li>
         ))}
       </ol>
     </section>

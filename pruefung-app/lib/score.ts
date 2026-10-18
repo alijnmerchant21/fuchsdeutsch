@@ -1,4 +1,13 @@
-import type { Answers, Attempt, ExamSet, Feedback, Scores, TestDef } from './types';
+import { currentLevel, teilInfo } from './content';
+import type { Answers, Attempt, ExamSet, Feedback, Item, Scores, TestDef } from './types';
+
+const norm = (x: string) => x.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.,;:!]+$/, '');
+/** Is this answer right? Free text (txt) accepts any of the alternatives in a, case-insensitive. */
+export function isRight(it: Item, v?: string | null): boolean {
+  if (!v) return false;
+  if (it.type === 'txt') return it.a.split('|').some((x) => norm(x) === norm(v));
+  return v === it.a;
+}
 
 export const key = (module: string, teil: number) => `${module}-${teil}`;
 
@@ -6,12 +15,12 @@ export function scoreTest(test: TestDef, sets: Record<string, ExamSet>, answers:
   const out: Scores = {};
   for (const sec of test.sections) for (const id of sec.sets) {
     const s = sets[id];
-    if (!s || s.module === 'schreiben') continue;
+    if (!s || s.tasks?.length) continue;
     const k = key(s.module, s.teil);
     out[k] ??= { right: 0, total: 0 };
     for (const g of s.groups) for (const i of g.items) {
       out[k].total += 1;
-      if ((answers[id]?.[String(i.n)] ?? '') === i.a) out[k].right += 1;
+      if (isRight(i, answers[id]?.[String(i.n)])) out[k].right += 1;
     }
   }
   return out;
@@ -50,7 +59,7 @@ export function readiness(attempts: Attempt[]): Record<string, number | null> {
   const out: Record<string, number | null> = { hoeren: null, lesen: null, schreiben: null };
   for (const m of ['hoeren', 'lesen']) {
     let w = 0, sum = 0;
-    for (const [k, v] of Object.entries(per)) if (k.startsWith(m + '-')) { const wt = WEIGHT[k] ?? 5; w += wt; sum += wt * (v.right / v.total); }
+    for (const [k, v] of Object.entries(per)) if (k.startsWith(m + '-')) { const wt = (currentLevel() === 'b1' ? WEIGHT[k] : undefined) ?? teilInfo(m, k.split('-')[1])?.items ?? 5; w += wt; sum += wt * (v.right / v.total); }
     out[m] = w ? Math.round((100 * sum) / w) : null;
   }
   for (const a of [...attempts].sort((x, y) => x.finished_at.localeCompare(y.finished_at))) {

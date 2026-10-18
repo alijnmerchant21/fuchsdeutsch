@@ -2,11 +2,29 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Guard } from '@/components/Guard';
-import { modName } from '@/lib/content';
+import { allOwnMocks, diagnoseFor, loadLicensed, modName, type Licensed } from '@/lib/content';
+import { LEVEL_IDS } from '@/lib/levels';
 import { daysBetween, fmt, today } from '@/lib/dates';
 import { db } from '@/lib/db';
 import { readiness } from '@/lib/score';
 import type { Attempt, Block, Candidate, Claim } from '@/lib/types';
+
+function Mocks() {
+  const [lic, setLic] = useState<Licensed | null>(null);
+  useEffect(() => { void loadLicensed().then(setLic); }, []);
+  const own = allOwnMocks();
+  return (
+    <div className="card block">
+      <h3>Mock Tests</h3>
+      <p className="small dim">Vorschau für dich. Versteckte Tests sehen Kandidaten nicht, auch nicht im Export für Claude.</p>
+      <table className="table"><tbody>
+        {LEVEL_IDS.map((l) => <tr key={'d' + l}><td><b>{l.toUpperCase()}</b></td><td>Diagnose (Mock Test 1)</td><td>{diagnoseFor(l).sections.map((s) => `${s.title} ${s.minutes}`).join(' · ')} Min.</td><td><Link className="linkbtn" href={`/admin/mock/diag-${l}`}>ansehen</Link></td></tr>)}
+        {own.map((t) => <tr key={t.id}><td><b>{t.id.slice(0, 2).toUpperCase()}</b></td><td>{t.title}</td><td>{t.sections.map((s) => `${s.title} ${s.minutes}`).join(' · ')} Min.</td><td><Link className="linkbtn" href={`/admin/mock/${t.id}`}>ansehen</Link></td></tr>)}
+        {(lic?.tests ?? []).map((t) => <tr key={t.id}><td><b>B1</b></td><td>{t.title} {t.hidden && <span className="mtag">versteckt</span>}</td><td>{t.sections.map((s) => `${s.title} ${s.minutes}`).join(' · ')} Min.</td><td><Link className="linkbtn" href={`/admin/mock/${t.id}`}>ansehen</Link></td></tr>)}
+      </tbody></table>
+    </div>
+  );
+}
 
 function Admin() {
   const [data, setData] = useState<{ c: Candidate[]; a: Attempt[]; b: Block[]; cl: Claim[] } | null>(null);
@@ -41,7 +59,7 @@ function Admin() {
           <tbody>{rows.map(({ c, last, due, toCorrect, claim, r }) => (
             <tr key={c.user_id}>
               <td><Link className="linkbtn" href={`/admin/${c.user_id}`}>{c.name || c.email}</Link><br /><span className="small dim">{c.email}</span></td>
-              <td>{fmt(c.exam_date)}<br /><span className="small dim">{daysBetween(t, c.exam_date)} Tage</span></td>
+              <td><b>{(c.level ?? 'b1').toUpperCase()}</b> · {fmt(c.exam_date)}<br /><span className="small dim">{daysBetween(t, c.exam_date)} Tage</span></td>
               <td>{c.modules.map((m) => <span key={m} className={`pill ${c.unlocked.includes(m) ? 'on' : ''}`}>{modName(m)}</span>)}</td>
               <td>{r.hoeren ?? '–'}</td><td>{r.lesen ?? '–'}</td><td>{r.schreiben ?? '–'}</td>
               <td>{last ? <>#{last.seq} bis {fmt(last.ends_on)}</> : '–'}</td>
@@ -51,6 +69,7 @@ function Admin() {
         </table>
         {diagOnly.length > 0 && <p className="small dim">{diagOnly.length} Konto/Konten haben nur den Mock Test gemacht, ohne Plan.</p>}
       </div>
+      <Mocks />
     </>
   );
 }

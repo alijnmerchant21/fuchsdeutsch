@@ -1,0 +1,217 @@
+{
+ "hoeren": {
+  "1": {
+   "name": "Teil 1 · Gespräche und Äußerungen",
+   "mins": 8,
+   "items": 10,
+   "plays": 1,
+   "how": "Richtig/Falsch und a, b, c",
+   "how_en": "True/False and a, b, c",
+   "tips": [
+    "Du hörst jeden Text nur <b>einmal</b>. Lies vorher beide Aufgaben und markiere, worauf es ankommt: wer, was, wann.",
+    "Die Aufgaben folgen meistens der Reihenfolge im Text. Entscheide sofort und hör dann für die zweite Aufgabe weiter.",
+    "Achte auf Korrekturen wie <b>„nicht … sondern“</b>, „eigentlich“ oder „allerdings“. Danach kommt oft die Lösung.",
+    "Ein Wort aus der Antwort zu hören heißt noch nicht, dass sie richtig ist. Oft gehört das Wort zu etwas anderem."
+   ],
+   "tips_en": [
+    "You hear each text only <b>once</b>. Read both questions first and mark what matters: who, what, when.",
+    "The questions usually follow the order of the text. Decide right away, then keep listening for the second question.",
+    "Watch for corrections like <b>„nicht … sondern“</b>, „eigentlich“ or „allerdings“. The answer often comes right after.",
+    "Hearing a word from an option does not make it correct. Often the word belongs to something else."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Interview",
+   "mins": 9,
+   "items": 6,
+   "plays": 2,
+   "how": "a, b, c",
+   "how_en": "a, b, c",
+   "tips": [
+    "Nutze die 90 Sekunden Lesezeit: Lies alle sechs Aufgaben und unterstreiche die Schlüsselwörter.",
+    "Die Aufgaben folgen dem Gespräch. Jede neue Frage der Moderation zeigt dir, dass die nächste Aufgabe kommt.",
+    "Beim ersten Hören ankreuzen, beim zweiten Hören gezielt die unsicheren Aufgaben prüfen.",
+    "Die Lösung steht fast nie wörtlich im Text. Suche dieselbe <b>Bedeutung</b> mit anderen Wörtern."
+   ],
+   "tips_en": [
+    "Use the 90 seconds of reading time: read all six questions and underline the key words.",
+    "The questions follow the conversation. Each new question from the host tells you the next item is coming.",
+    "Mark your answers the first time, then use the second listening to check the items you were unsure about.",
+    "The answer is almost never word for word in the text. Look for the same <b>meaning</b> in other words."
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · Radiogespräch",
+   "mins": 8,
+   "items": 6,
+   "plays": 1,
+   "how": "Wer sagt das? Moderation oder Gast",
+   "how_en": "Who says it? Host or guest",
+   "tips": [
+    "Merke dir in der Lesezeit, wer wer ist: Wer ist dafür, wer dagegen? Das hilft dir beim Zuordnen.",
+    "Auch die Moderation kann die Lösung sein. Achte auf ihre eigenen Meinungen und Erfahrungen, nicht nur auf ihre Fragen.",
+    "Oft spricht eine Person ein Thema an und eine andere antwortet. Die Aussage gehört zu der Person, die <b>genau das</b> meint.",
+    "Du hörst den Text nur einmal. Verpasst du eine Aufgabe, rate und geh sofort zur nächsten."
+   ],
+   "tips_en": [
+    "Use the reading time to note who is who: who is for, who is against? This helps you match.",
+    "The host can be the answer too. Listen for the host’s own opinions and experiences, not only the questions.",
+    "Often one person raises a topic and another answers. The statement belongs to the person who means <b>exactly that</b>.",
+    "You hear the text only once. If you miss an item, guess and move straight on to the next one."
+   ]
+  },
+  "4": {
+   "name": "Teil 4 · Vortrag",
+   "mins": 10,
+   "items": 8,
+   "plays": 2,
+   "how": "a, b, c",
+   "how_en": "a, b, c",
+   "tips": [
+    "Ein Vortrag ist klar aufgebaut. Signalwörter wie <b>„zunächst“, „zweitens“, „zum Schluss“</b> zeigen dir, wo du bist.",
+    "Achte auf Einschränkungen wie „nicht nur“, „vor allem“ oder „der wichtigste Grund“. Sie entscheiden oft zwischen zwei Antworten.",
+    "Antworten mit <b>„nur“, „immer“, „alle“</b> sind oft zu absolut.",
+    "Beim zweiten Hören konzentrierst du dich auf die Aufgaben, bei denen du unsicher warst."
+   ],
+   "tips_en": [
+    "A lecture has a clear structure. Signal words like <b>„zunächst“, „zweitens“, „zum Schluss“</b> show you where you are.",
+    "Watch for qualifiers like „nicht nur“, „vor allem“ or „der wichtigste Grund“. They often decide between two options.",
+    "Options with <b>„nur“, „immer“, „alle“</b> are often too absolute.",
+    "During the second listening, focus on the items you were unsure about."
+   ]
+  }
+ },
+ "lesen": {
+  "1": {
+   "name": "Teil 1 · Meinungen im Forum",
+   "mins": 18,
+   "items": 9,
+   "how": "Person a, b, c oder d",
+   "how_en": "Person a, b, c or d",
+   "tips": [
+    "Lies zuerst die Aussagen, dann die Texte. Markiere in jeder Aussage das Kernwort, zum Beispiel <b>Geld, Gesundheit, früher</b>.",
+    "Eine Person kann mehrmals die Lösung sein.",
+    "Mehrere Personen sprechen oft über ähnliche Dinge. Prüfe genau, ob die Aussage <b>wirklich</b> zu dieser Person passt.",
+    "Hier hast du am meisten Zeit. Plane etwa 18 Minuten ein, nicht mehr."
+   ],
+   "tips_en": [
+    "Read the statements first, then the texts. Mark the key word in each statement, for example <b>money, health, in the past</b>.",
+    "A person can be the answer more than once.",
+    "Several people often talk about similar things. Check carefully that the statement <b>really</b> fits this person.",
+    "This part has the most time. Plan about 18 minutes, no more."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Lückentext",
+   "mins": 12,
+   "items": 6,
+   "how": "Satz a bis h für jede Lücke",
+   "how_en": "Sentence a to h for each gap",
+   "tips": [
+    "Lies den Satz vor und nach der Lücke. Wörter wie <b>„deshalb“, „aber“, „dort“, „beide“</b> verbinden den fehlenden Satz mit dem Text.",
+    "Zwei Sätze bleiben übrig. Sie passen oft zum Thema, aber nicht zur Logik der Stelle.",
+    "Jeder Satz passt nur einmal. Streiche benutzte Sätze durch.",
+    "Lies am Ende den Absatz mit deinem Satz noch einmal: Ist er logisch?"
+   ],
+   "tips_en": [
+    "Read the sentence before and after the gap. Words like <b>„deshalb“, „aber“, „dort“, „beide“</b> link the missing sentence to the text.",
+    "Two sentences are left over. They often fit the topic, but not the logic of that spot.",
+    "Each sentence fits only once. Cross out the ones you have used.",
+    "At the end, reread the paragraph with your sentence in it: does it make sense?"
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · Zeitungsartikel",
+   "mins": 12,
+   "items": 6,
+   "how": "a, b, c",
+   "how_en": "a, b, c",
+   "tips": [
+    "Die Aufgaben folgen dem Text. Lies eine Aufgabe, dann den passenden Abschnitt.",
+    "Falsche Antworten benutzen oft Wörter aus dem Text, aber in einem anderen Zusammenhang.",
+    "Achte auf Unterschiede zwischen <b>Plan und Wirklichkeit</b> und zwischen früher und heute."
+   ],
+   "tips_en": [
+    "The questions follow the text. Read one question, then the matching section.",
+    "Wrong options often use words from the text, but in a different context.",
+    "Watch for differences between <b>plan and reality</b> and between then and now."
+   ]
+  },
+  "4": {
+   "name": "Teil 4 · Meinungen und Überschriften",
+   "mins": 12,
+   "items": 6,
+   "how": "Äußerung a bis g",
+   "how_en": "Comment a to g",
+   "tips": [
+    "Lies zuerst alle Überschriften. Jede fasst die Hauptaussage von <b>einer</b> Äußerung zusammen.",
+    "Eine Äußerung passt zu keiner Überschrift. Sie bleibt am Ende übrig.",
+    "Entscheidend ist die Hauptaussage, nicht einzelne Wörter. Gleiche Wörter können in die Irre führen.",
+    "Beginne mit den sicheren Paaren. Dann bleiben weniger Möglichkeiten."
+   ],
+   "tips_en": [
+    "Read all the headings first. Each one sums up the main point of <b>one</b> comment.",
+    "One comment fits no heading. It is left over at the end.",
+    "What counts is the main point, not single words. Matching words can mislead you.",
+    "Start with the pairs you are sure of. That leaves fewer options."
+   ]
+  },
+  "5": {
+   "name": "Teil 5 · Paragrafen und Inhaltsverzeichnis",
+   "mins": 6,
+   "items": 3,
+   "how": "Überschrift a bis g",
+   "how_en": "Heading a to g",
+   "tips": [
+    "Nur 6 Minuten: Lies die Überschriften und dann den ersten Satz jedes Paragrafen.",
+    "Vier Überschriften bleiben übrig. Manche klingen ähnlich wie ein Paragraf, treffen aber nicht seinen Hauptinhalt.",
+    "Frag dich bei jedem Paragrafen: Worum geht es <b>in allen</b> Sätzen, nicht nur in einem?"
+   ],
+   "tips_en": [
+    "Only 6 minutes: read the headings, then the first sentence of each section.",
+    "Four headings are left over. Some sound like a section but do not match its main content.",
+    "For each section ask yourself: what are <b>all</b> the sentences about, not just one?"
+   ]
+  }
+ },
+ "schreiben": {
+  "1": {
+   "name": "Teil 1 · Forumsbeitrag",
+   "mins": 50,
+   "items": 1,
+   "how": "circa 150 Wörter, vier Inhaltspunkte, 60 Punkte",
+   "how_en": "about 150 words, four content points, 60 points",
+   "tips": [
+    "Behandle <b>alle vier</b> Punkte, am besten jeden in einem eigenen Absatz. Fehlt ein Punkt, verlierst du viele Punkte.",
+    "Plane etwa 10 Minuten für Notizen und 5 Minuten für die Korrektur am Ende.",
+    "Schreib eine kurze Einleitung und einen Schluss mit deiner Meinung.",
+    "Verbinde Sätze und Absätze: <b>außerdem, deshalb, trotzdem, einerseits … andererseits</b>."
+   ],
+   "tips_en": [
+    "Cover <b>all four</b> points, ideally each in its own paragraph. Missing a point costs a lot of marks.",
+    "Plan about 10 minutes for notes and 5 minutes for checking at the end.",
+    "Write a short introduction and a conclusion with your opinion.",
+    "Link sentences and paragraphs: <b>außerdem, deshalb, trotzdem, einerseits … andererseits</b>."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Formelle Nachricht",
+   "mins": 25,
+   "items": 1,
+   "how": "circa 100 Wörter, vier Inhaltspunkte, 40 Punkte",
+   "how_en": "about 100 words, four content points, 40 points",
+   "tips": [
+    "Anrede und Gruß sind Pflicht: <b>Sehr geehrte Frau …, / Mit freundlichen Grüßen</b>.",
+    "Bring die vier Punkte in eine sinnvolle Reihenfolge. Sie müssen nicht in der Reihenfolge der Aufgabe stehen.",
+    "Bleib höflich und formell: Sie-Form und Konjunktiv II, zum Beispiel <b>Könnten Sie …? Ich würde vorschlagen, …</b>",
+    "Etwa 100 Wörter reichen. Lieber kurz und vollständig als lang und fehlerhaft."
+   ],
+   "tips_en": [
+    "Greeting and closing are required: <b>Sehr geehrte Frau …, / Mit freundlichen Grüßen</b>.",
+    "Put the four points in a sensible order. They do not have to follow the order in the task.",
+    "Stay polite and formal: Sie form and Konjunktiv II, for example <b>Könnten Sie …? Ich würde vorschlagen, …</b>",
+    "About 100 words is enough. Better short and complete than long with mistakes."
+   ]
+  }
+ }
+}

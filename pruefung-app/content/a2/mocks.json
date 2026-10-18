@@ -1,0 +1,78 @@
+[
+ {
+  "id": "a2-mock-1",
+  "title": "Modelltest 1 · Goethe-Zertifikat A2",
+  "en": "Full A2 mock test 1: Hören 30 min, Lesen 30 min, Schreiben 30 min",
+  "sections": [
+   {
+    "module": "hoeren",
+    "title": "Hören",
+    "minutes": 30,
+    "sets": [
+     "a2-h1-a",
+     "a2-h2-a",
+     "a2-h3-a",
+     "a2-h4-a"
+    ]
+   },
+   {
+    "module": "lesen",
+    "title": "Lesen",
+    "minutes": 30,
+    "sets": [
+     "a2-l1-a",
+     "a2-l2-a",
+     "a2-l3-a",
+     "a2-l4-a"
+    ]
+   },
+   {
+    "module": "schreiben",
+    "title": "Schreiben",
+    "minutes": 30,
+    "sets": [
+     "a2-s1-a",
+     "a2-s2-a"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "a2-mock-2",
+  "title": "Modelltest 2 · Goethe-Zertifikat A2",
+  "en": "Full A2 mock test 2: Hören 30 min, Lesen 30 min, Schreiben 30 min",
+  "sections": [
+   {
+    "module": "hoeren",
+    "title": "Hören",
+    "minutes": 30,
+    "sets": [
+     "a2-h1-b",
+     "a2-h2-b",
+     "a2-h3-b",
+     "a2-h4-b"
+    ]
+   },
+   {
+    "module": "lesen",
+    "title": "Lesen",
+    "minutes": 30,
+    "sets": [
+     "a2-l1-b",
+     "a2-l2-b",
+     "a2-l3-b",
+     "a2-l4-b"
+    ]
+   },
+   {
+    "module": "schreiben",
+    "title": "Schreiben",
+    "minutes": 30,
+    "sets": [
+     "a2-s1-b",
+     "a2-s2-b"
+    ]
+   }
+  ]
+ }
+]

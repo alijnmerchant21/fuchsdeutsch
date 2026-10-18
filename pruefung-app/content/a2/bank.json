@@ -1,0 +1,2857 @@
+{
+ "a2-h1-a": {
+  "id": "a2-h1-a",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Kurze Texte: Praxis, Supermarkt, Verkehr, Party, Bahnhof",
+  "instr": "Sie hören fünf kurze Texte. Sie hören jeden Text zweimal. Wählen Sie für die Aufgaben 1 bis 5 die richtige Lösung a, b oder c.",
+  "instr_en": "You hear five short texts. You hear each text twice. For tasks 1 to 5, choose the correct answer a, b or c.",
+  "source": "own",
+  "speakers": {
+   "PRX": "Zahnarztpraxis",
+   "SUP": "Durchsage",
+   "RAD": "Radio",
+   "MIA": "Mia",
+   "ANS": "Ansage"
+  },
+  "genders": {
+   "PRX": "f",
+   "SUP": "m",
+   "RAD": "f",
+   "MIA": "f",
+   "ANS": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Nachricht auf dem Anrufbeantworter",
+    "audio": "audio/a2/a2-h1-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "PRX",
+      "Guten Tag, Frau Petrović, hier ist die Zahnarztpraxis Doktor Lindner. Sie haben am Dienstag um neun Uhr einen Termin bei uns. Leider ist Doktor Lindner an diesem Tag nicht in der Praxis. Können Sie vielleicht am Donnerstag um halb elf kommen? Am Mittwoch ist die Praxis leider geschlossen. Bitte rufen Sie uns kurz zurück. Vielen Dank und auf Wiederhören."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Wann soll Frau Petrović in die Praxis kommen?",
+      "opts": [
+       "Am Dienstag um 9 Uhr.",
+       "Am Mittwoch um 10.30 Uhr.",
+       "Am Donnerstag um 10.30 Uhr."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "Können Sie vielleicht am Donnerstag um halb elf kommen?",
+      "why": "Dienstag ist der <b>alte</b> Termin. Neu: Donnerstag, halb elf = 10.30 Uhr."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Durchsage im Supermarkt",
+    "audio": "audio/a2/a2-h1-a-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "SUP",
+      "Liebe Kundinnen und Kunden, heute ist bei uns Obsttag! Alle Äpfel und Birnen kosten heute nur die Hälfte. Bananen haben wir leider erst wieder ab morgen. Und an unserer Käsetheke können Sie bis vierzehn Uhr verschiedene Käsesorten aus der Schweiz probieren. Viel Spaß beim Einkaufen!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Was ist heute billiger?",
+      "opts": [
+       "Äpfel.",
+       "Bananen.",
+       "Käse."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Alle Äpfel und Birnen kosten heute nur die Hälfte.",
+      "why": "Käse kann man nur <b>probieren</b>. Bananen gibt es erst morgen."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Verkehrsmeldung im Radio",
+    "audio": "audio/a2/a2-h1-a-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "RAD",
+      "Und jetzt die Verkehrsmeldungen. Auf der Autobahn sieben zwischen Kassel und Göttingen gibt es nach einem Unfall einen langen Stau. Die Polizei bittet alle Autofahrer, die Autobahn bei Kassel-Nord zu verlassen und über die Bundesstraße drei zu fahren. Und in Kassel ist die Königsstraße wegen eines Stadtfestes noch bis Sonntag gesperrt."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Was sollen die Autofahrer machen?",
+      "opts": [
+       "Bei Kassel-Nord von der Autobahn fahren.",
+       "Auf der Autobahn warten.",
+       "Durch die Königsstraße fahren."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "die Autobahn bei Kassel-Nord zu verlassen",
+      "why": "„die Autobahn verlassen“ = von der Autobahn fahren. Die Königsstraße ist <b>gesperrt</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · Nachricht von einer Freundin",
+    "audio": "audio/a2/a2-h1-a-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MIA",
+      "Hallo Jonas, hier ist Mia. Schön, dass du am Samstag zu meiner Party kommst! Getränke musst du nicht mitbringen, die habe ich schon gekauft. Aber kannst du vielleicht einen Salat machen? Einen Kuchen bringt schon meine Schwester mit. Ach ja, und vergiss nicht: Meine neue Adresse ist Gartenweg zwölf. Bis Samstag!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Was soll Jonas mitbringen?",
+      "opts": [
+       "Getränke.",
+       "Einen Salat.",
+       "Einen Kuchen."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Aber kannst du vielleicht einen Salat machen?",
+      "why": "Getränke hat Mia <b>schon</b>. Den Kuchen bringt <b>die Schwester</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Durchsage am Bahnhof",
+    "audio": "audio/a2/a2-h1-a-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "ANS",
+      "Eine Information zu Gleis vier. Der Regionalexpress nach Nürnberg, Abfahrt zehn Uhr fünfzehn, hält heute nicht in Kitzingen. Reisende nach Kitzingen nehmen bitte den Bus vor dem Bahnhof. Der Bus fährt um zehn Uhr zwanzig ab. Wir bitten um Ihr Verständnis."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Wie kommen Reisende heute nach Kitzingen?",
+      "opts": [
+       "Mit dem Regionalexpress.",
+       "Mit dem Bus.",
+       "Mit einem Zug um 10.20 Uhr."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Reisende nach Kitzingen nehmen bitte den Bus vor dem Bahnhof.",
+      "why": "Der Zug hält heute <b>nicht</b> in Kitzingen. Um 10.20 Uhr fährt der Bus, kein Zug."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-h1-b": {
+  "id": "a2-h1-b",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Kurze Texte: Hallenbad, Werkstatt, Kinderfest, Kaufhaus, Kino",
+  "instr": "Sie hören fünf kurze Texte. Sie hören jeden Text zweimal. Wählen Sie für die Aufgaben 1 bis 5 die richtige Lösung a, b oder c.",
+  "instr_en": "You hear five short texts. You hear each text twice. For tasks 1 to 5, choose the correct answer a, b or c.",
+  "source": "own",
+  "speakers": {
+   "BAD": "Ansage",
+   "WER": "Autohaus",
+   "RAD": "Radio",
+   "KAU": "Durchsage",
+   "TIM": "Robert"
+  },
+  "genders": {
+   "BAD": "f",
+   "WER": "m",
+   "RAD": "m",
+   "KAU": "f",
+   "TIM": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Ansage im Hallenbad",
+    "audio": "audio/a2/a2-h1-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "BAD",
+      "Herzlich willkommen im Hallenbad Sonnenberg. Unsere Öffnungszeiten: Montag bis Freitag von sieben bis einundzwanzig Uhr, am Wochenende von neun bis achtzehn Uhr. Bitte beachten Sie: Am kommenden Mittwoch ist das Schwimmbad wegen Reparaturen den ganzen Tag geschlossen. Die Sauna ist an diesem Tag aber ab vierzehn Uhr geöffnet."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Was gilt am Mittwoch?",
+      "opts": [
+       "Das Schwimmbad öffnet um 14 Uhr.",
+       "Man kann nur in die Sauna gehen.",
+       "Das Schwimmbad ist bis 21 Uhr offen."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Die Sauna ist an diesem Tag aber ab vierzehn Uhr geöffnet.",
+      "why": "Das Schwimmbad ist den <b>ganzen Tag</b> zu. Ab 14 Uhr ist nur die Sauna offen."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Nachricht von der Autowerkstatt",
+    "audio": "audio/a2/a2-h1-b-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "WER",
+      "Guten Tag, Herr Brenner, hier ist das Autohaus Seidel. Ihr Auto ist fertig. Wir haben die Bremsen repariert. Die Reifen haben wir auch kontrolliert, die sind noch in Ordnung. Sie können das Auto heute bis achtzehn Uhr abholen. Morgen ist Feiertag, da haben wir geschlossen. Bezahlen können Sie bei der Abholung, gern auch mit Karte."
+     ]
+    ],
+    "items": [
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Was hat die Werkstatt repariert?",
+      "opts": [
+       "Die Bremsen.",
+       "Die Reifen.",
+       "Die Bremsen und die Reifen."
+      ],
+      "a": "a",
+      "trap": "teil",
+      "ev": "Wir haben die Bremsen repariert.",
+      "why": "Die Reifen wurden nur <b>kontrolliert</b>, sie sind noch in Ordnung."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Veranstaltungstipp im Radio",
+    "audio": "audio/a2/a2-h1-b-2.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "RAD",
+      "Unser Tipp für das Wochenende: Am Samstag ist im Stadtpark wieder das große Kinderfest. Von elf bis siebzehn Uhr gibt es Musik, Spiele und ein Puppentheater. Der Eintritt ist frei. Nur für das Kinderschminken zahlt man zwei Euro. Und wenn es regnet? Kein Problem, dann findet das Fest in der Stadthalle statt."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Wofür muss man auf dem Kinderfest bezahlen?",
+      "opts": [
+       "Für den Eintritt.",
+       "Für das Puppentheater.",
+       "Für das Kinderschminken."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Nur für das Kinderschminken zahlt man zwei Euro.",
+      "why": "Der Eintritt ist <b>frei</b>. Nur das Schminken kostet zwei Euro."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · Durchsage im Kaufhaus",
+    "audio": "audio/a2/a2-h1-b-3.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "KAU",
+      "Liebe Kundinnen und Kunden, ein kleiner Junge sucht seine Eltern. Er heißt Leon, ist vier Jahre alt und trägt eine rote Jacke und eine blaue Mütze. Die Eltern von Leon kommen bitte zur Information im Erdgeschoss, direkt neben dem Haupteingang. Leon wartet dort auf sie. Vielen Dank."
+     ]
+    ],
+    "items": [
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Wo wartet Leon?",
+      "opts": [
+       "An der Information.",
+       "Vor dem Haupteingang.",
+       "In der Kinderabteilung."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Die Eltern von Leon kommen bitte zur Information im Erdgeschoss",
+      "why": "Der Haupteingang kommt auch vor, aber Leon wartet an der Information, <b>neben</b> dem Eingang."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Nachricht von einem Freund",
+    "audio": "audio/a2/a2-h1-b-4.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "TIM",
+      "Hallo Selma, hier ist Robert. Wir wollten doch morgen Abend zusammen ins Kino gehen. Leider kommt morgen meine Tante zu Besuch. Können wir am Freitag gehen? Der Film läuft am Freitag um acht und um halb elf. Halb elf ist mir aber zu spät. Schreib mir einfach eine Nachricht. Tschüss!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Wann möchte Robert ins Kino gehen?",
+      "opts": [
+       "Morgen Abend.",
+       "Am Freitag um 20 Uhr.",
+       "Am Freitag um 22.30 Uhr."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Halb elf ist mir aber zu spät.",
+      "why": "Morgen kann er nicht. Am Freitag ist ihm halb elf zu spät, also <b>acht Uhr</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-h2-a": {
+  "id": "a2-h2-a",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Gespräch: Bens volle Woche",
+  "instr": "Sie hören ein Gespräch. Sie hören den Text einmal. Wählen Sie für die Aufgaben 6 bis 10 eine passende Lösung aus a bis i. Wählen Sie jeden Buchstaben nur einmal. Was macht Ben nächste Woche an welchem Tag?",
+  "instr_en": "You hear a conversation. You hear it once. For tasks 6 to 10, choose a matching answer from a to i. Use each letter only once. What is Ben doing on which day next week?",
+  "source": "own",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Zahnarzt",
+    "body": "beim Zahnarzt"
+   },
+   {
+    "k": "b",
+    "title": "Fußball",
+    "body": "Fußball spielen"
+   },
+   {
+    "k": "c",
+    "title": "Kino",
+    "body": "ins Kino gehen"
+   },
+   {
+    "k": "d",
+    "title": "Konzert",
+    "body": "ein Konzert besuchen"
+   },
+   {
+    "k": "e",
+    "title": "Schwimmen",
+    "body": "schwimmen gehen"
+   },
+   {
+    "k": "f",
+    "title": "Umzug",
+    "body": "Kisten packen und tragen"
+   },
+   {
+    "k": "g",
+    "title": "Englischkurs",
+    "body": "im Sprachkurs"
+   },
+   {
+    "k": "h",
+    "title": "Geburtstag",
+    "body": "eine Geburtstagsfeier"
+   },
+   {
+    "k": "i",
+    "title": "Büro",
+    "body": "länger im Büro arbeiten"
+   }
+  ],
+  "noZero": true,
+  "speakers": {
+   "PAU": "Paula",
+   "BEN": "Ben"
+  },
+  "genders": {
+   "PAU": "f",
+   "BEN": "m"
+  },
+  "groups": [
+   {
+    "title": "Paula und Ben planen einen Kinoabend",
+    "audio": "audio/a2/a2-h2-a-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "PAU",
+      "Hallo Ben! Wir haben uns ja lange nicht gesehen. Hast du nächste Woche mal Zeit? Ich möchte gern mit dir ins Kino gehen."
+     ],
+     [
+      "BEN",
+      "Hallo Paula! Ja, gern, aber nächste Woche ist ziemlich voll. Am Montag geht es leider nicht, da habe ich meinen Englischkurs. Der ist jetzt immer montags von sechs bis acht."
+     ],
+     [
+      "PAU",
+      "Schade. Und am Dienstag?"
+     ],
+     [
+      "BEN",
+      "Am Dienstag muss ich zum Zahnarzt. Der Termin ist erst um halb sieben, und danach habe ich bestimmt keine Lust mehr auf Kino."
+     ],
+     [
+      "PAU",
+      "Das verstehe ich. Und am Mittwoch? Gehst du da nicht immer schwimmen?"
+     ],
+     [
+      "BEN",
+      "Früher bin ich mittwochs schwimmen gegangen. Aber jetzt spiele ich mittwochs Fußball, zusammen mit ein paar Kollegen. Das macht mehr Spaß."
+     ],
+     [
+      "PAU",
+      "Und Donnerstag?"
+     ],
+     [
+      "BEN",
+      "Am Donnerstag hat meine Oma Geburtstag. Sie wird achtzig, und die ganze Familie feiert bei ihr."
+     ],
+     [
+      "PAU",
+      "Oh, wie schön! Dann bleibt ja nur noch der Freitag."
+     ],
+     [
+      "BEN",
+      "Am Freitag helfe ich meinem Bruder beim Umzug. Er zieht nach Leipzig, und wir packen den ganzen Tag Kisten."
+     ],
+     [
+      "PAU",
+      "Mensch, du hast wirklich viel zu tun. Und am Samstag?"
+     ],
+     [
+      "BEN",
+      "Samstag ist super, da habe ich noch nichts vor. Gehen wir am Samstag ins Kino?"
+     ],
+     [
+      "PAU",
+      "Abgemacht!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 6,
+      "type": "ad",
+      "q": "Montag",
+      "a": "g",
+      "trap": "detail",
+      "ev": "da habe ich meinen Englischkurs",
+      "why": "Montags ist der Englischkurs."
+     },
+     {
+      "n": 7,
+      "type": "ad",
+      "q": "Dienstag",
+      "a": "a",
+      "trap": "detail",
+      "ev": "Am Dienstag muss ich zum Zahnarzt.",
+      "why": "Dienstag: Zahnarzt um halb sieben."
+     },
+     {
+      "n": 8,
+      "type": "ad",
+      "q": "Mittwoch",
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Aber jetzt spiele ich mittwochs Fußball",
+      "why": "Schwimmen war <b>früher</b>. Jetzt: Fußball."
+     },
+     {
+      "n": 9,
+      "type": "ad",
+      "q": "Donnerstag",
+      "a": "h",
+      "trap": "detail",
+      "ev": "Am Donnerstag hat meine Oma Geburtstag.",
+      "why": "Die Familie feiert den 80. Geburtstag der Oma."
+     },
+     {
+      "n": 10,
+      "type": "ad",
+      "q": "Freitag",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Am Freitag helfe ich meinem Bruder beim Umzug.",
+      "why": "Umzug des Bruders. Kino ist erst am <b>Samstag</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-h2-b": {
+  "id": "a2-h2-b",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Gespräch: Das Sommerfest der Firma",
+  "instr": "Sie hören ein Gespräch. Sie hören den Text einmal. Wählen Sie für die Aufgaben 6 bis 10 eine passende Lösung aus a bis i. Wählen Sie jeden Buchstaben nur einmal. Wer bringt was zum Sommerfest mit?",
+  "instr_en": "You hear a conversation. You hear it once. For tasks 6 to 10, choose a matching answer from a to i. Use each letter only once. Who is bringing what to the summer party?",
+  "source": "own",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Brot",
+    "body": "frisches Brot"
+   },
+   {
+    "k": "b",
+    "title": "Getränke",
+    "body": "Kisten mit Wasser und Saft"
+   },
+   {
+    "k": "c",
+    "title": "Salat",
+    "body": "eine Schüssel Salat"
+   },
+   {
+    "k": "d",
+    "title": "Kuchen",
+    "body": "ein Apfelkuchen"
+   },
+   {
+    "k": "e",
+    "title": "Grill",
+    "body": "ein Grill"
+   },
+   {
+    "k": "f",
+    "title": "Musik",
+    "body": "Lautsprecher und Musik"
+   },
+   {
+    "k": "g",
+    "title": "Teller und Gläser",
+    "body": "Teller und Gläser"
+   },
+   {
+    "k": "h",
+    "title": "Würstchen",
+    "body": "Würstchen und Fleisch"
+   },
+   {
+    "k": "i",
+    "title": "Obst",
+    "body": "ein Korb mit Obst"
+   }
+  ],
+  "noZero": true,
+  "speakers": {
+   "KAT": "Katrin",
+   "MAR": "Markus"
+  },
+  "genders": {
+   "KAT": "f",
+   "MAR": "m"
+  },
+  "groups": [
+   {
+    "title": "Katrin und Markus planen das Sommerfest",
+    "audio": "audio/a2/a2-h2-b-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "KAT",
+      "Markus, hast du kurz Zeit? Ich mache gerade die Liste für unser Sommerfest am Freitag."
+     ],
+     [
+      "MAR",
+      "Klar. Wer bringt denn was mit?"
+     ],
+     [
+      "KAT",
+      "Also, Frau Berger backt wieder einen Kuchen. Ihr Apfelkuchen war letztes Jahr ja der Hit."
+     ],
+     [
+      "MAR",
+      "Stimmt, der war super. Und die Getränke? Die hat doch letztes Jahr Herr Wolf gekauft."
+     ],
+     [
+      "KAT",
+      "Ja, aber dieses Jahr bezahlt die Firma die Getränke. Herr Wolf bringt seinen Grill mit. Unser alter Grill ist nämlich kaputt."
+     ],
+     [
+      "MAR",
+      "Gut. Und Lisa aus der Buchhaltung?"
+     ],
+     [
+      "KAT",
+      "Lisa wollte zuerst einen Salat machen. Aber jetzt hat sie gesagt, sie bringt lieber Obst mit. Sie hat am Donnerstag keine Zeit zum Kochen."
+     ],
+     [
+      "MAR",
+      "Okay. Und Daniel? Der hat doch so große Lautsprecher."
+     ],
+     [
+      "KAT",
+      "Genau, Daniel kümmert sich um die Musik. Er hat sogar schon eine Playlist gemacht."
+     ],
+     [
+      "MAR",
+      "Und Herr Pohl? Der kommt doch auch, oder?"
+     ],
+     [
+      "KAT",
+      "Ja. Herr Pohl hat gefragt, was noch fehlt. Ich habe gesagt: Teller und Gläser. Die bringt er aus der Kantine mit."
+     ],
+     [
+      "MAR",
+      "Super. Und ich? Soll ich auch etwas mitbringen?"
+     ],
+     [
+      "KAT",
+      "Du kannst Brot kaufen. Das fehlt noch."
+     ],
+     [
+      "MAR",
+      "Mache ich."
+     ]
+    ],
+    "items": [
+     {
+      "n": 6,
+      "type": "ad",
+      "q": "Frau Berger",
+      "a": "d",
+      "trap": "detail",
+      "ev": "Also, Frau Berger backt wieder einen Kuchen.",
+      "why": "Frau Berger backt einen Apfelkuchen."
+     },
+     {
+      "n": 7,
+      "type": "ad",
+      "q": "Herr Wolf",
+      "a": "e",
+      "trap": "vorher",
+      "ev": "Herr Wolf bringt seinen Grill mit.",
+      "why": "Getränke hat er <b>letztes Jahr</b> gekauft. Dieses Jahr: den Grill."
+     },
+     {
+      "n": 8,
+      "type": "ad",
+      "q": "Lisa",
+      "a": "i",
+      "trap": "vorher",
+      "ev": "sie bringt lieber Obst mit",
+      "why": "Salat wollte sie nur <b>zuerst</b> machen. Jetzt bringt sie Obst."
+     },
+     {
+      "n": 9,
+      "type": "ad",
+      "q": "Daniel",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Daniel kümmert sich um die Musik.",
+      "why": "Daniel macht die Musik."
+     },
+     {
+      "n": 10,
+      "type": "ad",
+      "q": "Herr Pohl",
+      "a": "g",
+      "trap": "detail",
+      "ev": "Die bringt er aus der Kantine mit.",
+      "why": "Herr Pohl bringt Teller und Gläser. Brot kauft <b>Markus</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-h3-a": {
+  "id": "a2-h3-a",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Kurze Gespräche: Bäckerei, Treffpunkt, Arztpraxis, Schulweg, Kleidung",
+  "instr": "Sie hören fünf kurze Gespräche. Sie hören jeden Text einmal. Wählen Sie für die Aufgaben 11 bis 15 die richtige Lösung a, b oder c.",
+  "instr_en": "You hear five short conversations. You hear each text once. For tasks 11 to 15, choose the correct answer a, b or c.",
+  "source": "own",
+  "speakers": {
+   "VER": "Verkäufer",
+   "KUN": "Kundin",
+   "LEA": "Lea",
+   "JAN": "Jan",
+   "PRA": "Praxis",
+   "PAT": "Patient",
+   "MUT": "Mutter",
+   "MAX": "Max",
+   "VKF": "Verkäuferin",
+   "KND": "Kunde"
+  },
+  "genders": {
+   "VER": "m",
+   "KUN": "f",
+   "LEA": "f",
+   "JAN": "m",
+   "PRA": "f",
+   "PAT": "m",
+   "MUT": "f",
+   "MAX": "m",
+   "VKF": "f",
+   "KND": "m"
+  },
+  "groups": [
+   {
+    "title": "Gespräch 1 · In der Bäckerei",
+    "audio": "audio/a2/a2-h3-a-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "VER",
+      "Guten Morgen, was darf es sein?"
+     ],
+     [
+      "KUN",
+      "Ich hätte gern sechs Brötchen und ein Vollkornbrot."
+     ],
+     [
+      "VER",
+      "Das Vollkornbrot ist leider schon ausverkauft. Ich habe aber noch ein Roggenbrot."
+     ],
+     [
+      "KUN",
+      "Hm, nein, danke. Dann nehme ich nur die Brötchen. Und vielleicht noch zwei Stück Kuchen."
+     ],
+     [
+      "VER",
+      "Gern. Apfel oder Käse?"
+     ],
+     [
+      "KUN",
+      "Zweimal Apfel, bitte."
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Was kauft die Frau?",
+      "opts": [
+       "Brötchen und ein Vollkornbrot.",
+       "Brötchen und Apfelkuchen.",
+       "Ein Roggenbrot und Käsekuchen."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Zweimal Apfel, bitte.",
+      "why": "Vollkornbrot ist ausverkauft, Roggenbrot will sie <b>nicht</b>. Sie nimmt Brötchen und Apfelkuchen."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 2 · Am Telefon",
+    "audio": "audio/a2/a2-h3-a-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "LEA",
+      "Jan, wo treffen wir uns morgen? Wieder vor dem Kino?"
+     ],
+     [
+      "JAN",
+      "Vor dem Kino ist es immer so voll. Wie wäre es am Brunnen auf dem Marktplatz?"
+     ],
+     [
+      "LEA",
+      "Da ist im Moment eine Baustelle. Treffen wir uns doch gleich im Café neben dem Kino. Dann können wir vorher noch etwas trinken."
+     ],
+     [
+      "JAN",
+      "Gute Idee. Also um sieben im Café."
+     ]
+    ],
+    "items": [
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Wo treffen sich Lea und Jan?",
+      "opts": [
+       "Vor dem Kino.",
+       "Am Brunnen.",
+       "Im Café."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "Also um sieben im Café.",
+      "why": "Kino und Brunnen werden vorgeschlagen, aber am Ende: <b>im Café</b>."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 3 · In der Arztpraxis",
+    "audio": "audio/a2/a2-h3-a-2.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "PAT",
+      "Guten Tag, ich hätte gern einen Termin bei Doktor Hahn. Ich habe seit drei Tagen Rückenschmerzen."
+     ],
+     [
+      "PRA",
+      "Waren Sie schon einmal bei uns?"
+     ],
+     [
+      "PAT",
+      "Nein, ich bin neu in der Stadt."
+     ],
+     [
+      "PRA",
+      "Dann kommen Sie bitte morgen um acht. Bringen Sie bitte Ihre Versichertenkarte mit. Die Röntgenbilder von Ihrem alten Arzt brauchen wir nicht."
+     ],
+     [
+      "PAT",
+      "Muss ich auch etwas ausfüllen?"
+     ],
+     [
+      "PRA",
+      "Ja, ein Formular. Das bekommen Sie morgen hier bei uns."
+     ]
+    ],
+    "items": [
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Was soll der Mann mitbringen?",
+      "opts": [
+       "Seine Versichertenkarte.",
+       "Seine Röntgenbilder.",
+       "Ein Formular."
+      ],
+      "a": "a",
+      "trap": "negation",
+      "ev": "Bringen Sie bitte Ihre Versichertenkarte mit.",
+      "why": "Röntgenbilder braucht die Praxis <b>nicht</b>. Das Formular bekommt er dort."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 4 · Am Morgen zu Hause",
+    "audio": "audio/a2/a2-h3-a-3.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MUT",
+      "Max, es regnet total stark. Fährst du heute wirklich mit dem Fahrrad?"
+     ],
+     [
+      "MAX",
+      "Nein, bei dem Wetter nicht. Ich nehme den Bus."
+     ],
+     [
+      "MUT",
+      "Der Bus fährt heute aber nicht, die Busfahrer streiken. Komm, ich bringe dich mit dem Auto."
+     ],
+     [
+      "MAX",
+      "Super, danke, Mama!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Wie kommt Max heute zur Schule?",
+      "opts": [
+       "Mit dem Fahrrad.",
+       "Mit dem Bus.",
+       "Mit dem Auto."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "Komm, ich bringe dich mit dem Auto.",
+      "why": "Max will den Bus nehmen, aber der fährt heute <b>nicht</b>."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 5 · Im Kleidungsgeschäft",
+    "audio": "audio/a2/a2-h3-a-4.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "KND",
+      "Entschuldigung, was kostet diese Jacke hier?"
+     ],
+     [
+      "VKF",
+      "Die blaue? Normalerweise kostet sie neunundachtzig Euro, aber heute ist sie reduziert. Sie kostet nur noch neunundfünfzig Euro."
+     ],
+     [
+      "KND",
+      "Und die schwarze?"
+     ],
+     [
+      "VKF",
+      "Die schwarze ist leider nicht reduziert. Die kostet hundertzwanzig Euro."
+     ],
+     [
+      "KND",
+      "Dann nehme ich die blaue."
+     ]
+    ],
+    "items": [
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Wie viel bezahlt der Mann für die Jacke?",
+      "opts": [
+       "59 Euro.",
+       "89 Euro.",
+       "120 Euro."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Sie kostet nur noch neunundfünfzig Euro.",
+      "why": "Er nimmt die blaue Jacke. 89 Euro ist der <b>alte</b> Preis."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-h3-b": {
+  "id": "a2-h3-b",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Kurze Gespräche: Restaurant, Fahrkarte, Nachbarin, Hotel, Büro",
+  "instr": "Sie hören fünf kurze Gespräche. Sie hören jeden Text einmal. Wählen Sie für die Aufgaben 11 bis 15 die richtige Lösung a, b oder c.",
+  "instr_en": "You hear five short conversations. You hear each text once. For tasks 11 to 15, choose the correct answer a, b or c.",
+  "source": "own",
+  "speakers": {
+   "KEL": "Kellnerin",
+   "GAS": "Gast",
+   "REI": "Reisende",
+   "BAH": "Mitarbeiter",
+   "NAC": "Frau Kraus",
+   "SCH": "Herr Schulz",
+   "HOT": "Hotel",
+   "GST": "Anruferin",
+   "CHE": "Frau Roth",
+   "MIT": "Mitarbeiter"
+  },
+  "genders": {
+   "KEL": "f",
+   "GAS": "m",
+   "REI": "f",
+   "BAH": "m",
+   "NAC": "f",
+   "SCH": "m",
+   "HOT": "m",
+   "GST": "f",
+   "CHE": "f",
+   "MIT": "m"
+  },
+  "groups": [
+   {
+    "title": "Gespräch 1 · Im Restaurant",
+    "audio": "audio/a2/a2-h3-b-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "KEL",
+      "Haben Sie schon gewählt?"
+     ],
+     [
+      "GAS",
+      "Ja, ich hätte gern den Fisch mit Kartoffeln."
+     ],
+     [
+      "KEL",
+      "Oh, das tut mir leid, Fisch haben wir heute nicht mehr. Aber das Hähnchen mit Reis ist sehr gut."
+     ],
+     [
+      "GAS",
+      "Hm, Hähnchen esse ich nicht so gern. Dann nehme ich die Gemüsesuppe und einen Salat."
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Was isst der Mann?",
+      "opts": [
+       "Fisch mit Kartoffeln.",
+       "Hähnchen mit Reis.",
+       "Suppe und Salat."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "Dann nehme ich die Gemüsesuppe und einen Salat.",
+      "why": "Fisch gibt es nicht mehr, Hähnchen mag er nicht."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 2 · Am Fahrkartenschalter",
+    "audio": "audio/a2/a2-h3-b-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "REI",
+      "Guten Tag, ich möchte eine Fahrkarte nach Hamburg, für Freitag, bitte."
+     ],
+     [
+      "BAH",
+      "Am Freitag sind die Züge leider fast voll und ziemlich teuer. Am Samstag ist es viel billiger."
+     ],
+     [
+      "REI",
+      "Samstag geht nicht, da arbeite ich. Und am Donnerstagabend?"
+     ],
+     [
+      "BAH",
+      "Am Donnerstag um neunzehn Uhr gibt es noch günstige Plätze."
+     ],
+     [
+      "REI",
+      "Gut, dann nehme ich den Zug am Donnerstag."
+     ]
+    ],
+    "items": [
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Wann fährt die Frau nach Hamburg?",
+      "opts": [
+       "Am Donnerstag.",
+       "Am Freitag.",
+       "Am Samstag."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "dann nehme ich den Zug am Donnerstag",
+      "why": "Freitag wollte sie <b>zuerst</b>. Samstag arbeitet sie."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 3 · Im Treppenhaus",
+    "audio": "audio/a2/a2-h3-b-2.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "NAC",
+      "Hallo, Herr Schulz! Ich fahre morgen für zwei Wochen in Urlaub. Können Sie vielleicht meine Blumen gießen?"
+     ],
+     [
+      "SCH",
+      "Ja, natürlich. Soll ich auch die Post aus dem Briefkasten holen?"
+     ],
+     [
+      "NAC",
+      "Nein, das macht schon meine Tochter. Sie kommt jeden zweiten Tag vorbei. Aber die Blumen vergisst sie immer."
+     ],
+     [
+      "SCH",
+      "Kein Problem. Geben Sie mir einfach den Schlüssel."
+     ]
+    ],
+    "items": [
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Was soll Herr Schulz machen?",
+      "opts": [
+       "Die Blumen gießen.",
+       "Die Post holen.",
+       "Jeden zweiten Tag die Tochter anrufen."
+      ],
+      "a": "a",
+      "trap": "person",
+      "ev": "Können Sie vielleicht meine Blumen gießen?",
+      "why": "Die Post holt <b>die Tochter</b>, nicht Herr Schulz."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 4 · Anruf im Hotel",
+    "audio": "audio/a2/a2-h3-b-3.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "GST",
+      "Guten Tag, haben Sie vom zehnten bis zum zwölften Mai noch ein Doppelzimmer frei?"
+     ],
+     [
+      "HOT",
+      "Einen Moment, bitte ... Ein Doppelzimmer haben wir leider nicht mehr. Ich habe aber noch zwei Einzelzimmer oder ein Familienzimmer."
+     ],
+     [
+      "GST",
+      "Was kostet denn das Familienzimmer?"
+     ],
+     [
+      "HOT",
+      "Hundertvierzig Euro pro Nacht."
+     ],
+     [
+      "GST",
+      "Das ist mir zu teuer. Dann nehme ich die zwei Einzelzimmer."
+     ]
+    ],
+    "items": [
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Was bucht die Frau?",
+      "opts": [
+       "Ein Doppelzimmer.",
+       "Zwei Einzelzimmer.",
+       "Ein Familienzimmer."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Dann nehme ich die zwei Einzelzimmer.",
+      "why": "Doppelzimmer gibt es nicht mehr, das Familienzimmer ist ihr zu teuer."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 5 · Im Büro",
+    "audio": "audio/a2/a2-h3-b-4.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MIT",
+      "Frau Roth, ist die Besprechung morgen wieder um neun?"
+     ],
+     [
+      "CHE",
+      "Nein, morgen um neun bin ich bei einem Kunden. Wir machen die Besprechung um elf. Geht das bei Ihnen?"
+     ],
+     [
+      "MIT",
+      "Um elf habe ich leider schon einen Termin. Geht es vielleicht auch am Nachmittag?"
+     ],
+     [
+      "CHE",
+      "Ja, um zwei passt es mir auch. Also morgen um vierzehn Uhr."
+     ]
+    ],
+    "items": [
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Wann ist die Besprechung?",
+      "opts": [
+       "Um 9 Uhr.",
+       "Um 11 Uhr.",
+       "Um 14 Uhr."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "Also morgen um vierzehn Uhr.",
+      "why": "Um neun ist Frau Roth beim Kunden, um elf hat der Mitarbeiter einen Termin."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-h4-a": {
+  "id": "a2-h4-a",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Interview: Das Repair-Café",
+  "instr": "Sie hören ein Interview. Sie hören den Text zweimal. Wählen Sie für die Aufgaben 16 bis 20 Ja oder Nein. Lesen Sie zuerst die Aufgaben. Der Moderator der Radiosendung „Menschen in der Stadt“ spricht mit Anja Köhler. Sie hat ein Repair-Café gegründet.",
+  "instr_en": "You hear an interview. You hear it twice. For tasks 16 to 20, choose Ja (yes) or Nein (no). Read the statements first. The host of the radio show \"Menschen in der Stadt\" talks to Anja Köhler, who founded a repair café.",
+  "source": "own",
+  "speakers": {
+   "MOD": "Moderator",
+   "KOE": "Anja Köhler"
+  },
+  "genders": {
+   "MOD": "m",
+   "KOE": "f"
+  },
+  "groups": [
+   {
+    "title": "Menschen in der Stadt: Das Repair-Café",
+    "audio": "audio/a2/a2-h4-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "Herzlich willkommen bei „Menschen in der Stadt“. Heute ist Anja Köhler bei uns im Studio. Frau Köhler, Sie haben vor drei Jahren ein Repair-Café gegründet. Was ist das genau?"
+     ],
+     [
+      "KOE",
+      "In einem Repair-Café reparieren wir zusammen kaputte Sachen: Lampen, Radios, Kaffeemaschinen, aber auch Kleidung. Die Leute bringen ihre Sachen mit, und unsere Helfer zeigen ihnen, wie man sie repariert."
+     ],
+     [
+      "MOD",
+      "Und was kostet das?"
+     ],
+     [
+      "KOE",
+      "Die Reparatur kostet nichts. Wenn jemand neue Teile braucht, muss er die aber selbst bezahlen. Und natürlich freuen wir uns, wenn jemand etwas in unsere Kaffeekasse gibt."
+     ],
+     [
+      "MOD",
+      "Wer sind denn die Helfer?"
+     ],
+     [
+      "KOE",
+      "Das sind alles Leute aus dem Stadtteil, viele sind schon in Rente. Zum Beispiel Herr Brandl, er war vierzig Jahre lang Elektriker. Aber wir haben auch zwei Schülerinnen, die sich super mit Handys auskennen."
+     ],
+     [
+      "MOD",
+      "Wie sind Sie auf die Idee gekommen?"
+     ],
+     [
+      "KOE",
+      "Mein Toaster war kaputt, und im Geschäft hat man mir gesagt: Die Reparatur ist zu teuer, kaufen Sie lieber einen neuen. Das hat mich geärgert. Ich finde, wir werfen viel zu viel weg."
+     ],
+     [
+      "MOD",
+      "Wann und wo kann man zu Ihnen kommen?"
+     ],
+     [
+      "KOE",
+      "Wir treffen uns jeden ersten Samstag im Monat im Gemeindehaus in der Bergstraße, von zehn bis vierzehn Uhr. Man muss sich nicht anmelden, man kommt einfach vorbei."
+     ],
+     [
+      "MOD",
+      "Klappt denn jede Reparatur?"
+     ],
+     [
+      "KOE",
+      "Leider nicht. Ungefähr sieben von zehn Sachen können wir reparieren. Das ist aber schon ganz gut, finde ich."
+     ],
+     [
+      "MOD",
+      "Frau Köhler, vielen Dank für das Gespräch."
+     ]
+    ],
+    "items": [
+     {
+      "n": 16,
+      "type": "jn",
+      "q": "Im Repair-Café repariert man nur elektrische Geräte.",
+      "a": "nein",
+      "trap": "teil",
+      "ev": "Lampen, Radios, Kaffeemaschinen, aber auch Kleidung",
+      "why": "Auch <b>Kleidung</b> wird repariert."
+     },
+     {
+      "n": 17,
+      "type": "jn",
+      "q": "Neue Teile muss man selbst bezahlen.",
+      "a": "ja",
+      "trap": "detail",
+      "ev": "Wenn jemand neue Teile braucht, muss er die aber selbst bezahlen.",
+      "why": "Die Reparatur ist kostenlos, die Teile nicht."
+     },
+     {
+      "n": 18,
+      "type": "jn",
+      "q": "Alle Helfer sind Rentner.",
+      "a": "nein",
+      "trap": "teil",
+      "ev": "Aber wir haben auch zwei Schülerinnen",
+      "why": "<b>Viele</b> sind in Rente, aber nicht alle: Es gibt auch zwei Schülerinnen."
+     },
+     {
+      "n": 19,
+      "type": "jn",
+      "q": "Frau Köhler hatte die Idee wegen eines kaputten Geräts.",
+      "a": "ja",
+      "trap": "synonym",
+      "ev": "Mein Toaster war kaputt",
+      "why": "Ihr Toaster war kaputt, und die Reparatur im Geschäft war zu teuer."
+     },
+     {
+      "n": 20,
+      "type": "jn",
+      "q": "Man muss sich für das Repair-Café vorher anmelden.",
+      "a": "nein",
+      "trap": "negation",
+      "ev": "Man muss sich nicht anmelden, man kommt einfach vorbei.",
+      "why": "„nicht anmelden“: Man kommt einfach vorbei."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-h4-b": {
+  "id": "a2-h4-b",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Interview: Von Berlin aufs Land",
+  "instr": "Sie hören ein Interview. Sie hören den Text zweimal. Wählen Sie für die Aufgaben 16 bis 20 Ja oder Nein. Lesen Sie zuerst die Aufgaben. Die Moderatorin der Radiosendung „Neu hier“ spricht mit Sven Hartmann. Er ist mit seiner Familie aufs Land gezogen.",
+  "instr_en": "You hear an interview. You hear it twice. For tasks 16 to 20, choose Ja (yes) or Nein (no). Read the statements first. The host of the radio show \"Neu hier\" talks to Sven Hartmann, who moved to the countryside with his family.",
+  "source": "own",
+  "speakers": {
+   "MOD": "Moderatorin",
+   "HAR": "Sven Hartmann"
+  },
+  "genders": {
+   "MOD": "f",
+   "HAR": "m"
+  },
+  "groups": [
+   {
+    "title": "Neu hier: Leben auf dem Dorf",
+    "audio": "audio/a2/a2-h4-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "Guten Abend und willkommen bei „Neu hier“. Mein Gast heute ist Sven Hartmann. Herr Hartmann, Sie haben fünfzehn Jahre in Berlin gelebt und sind letztes Jahr in ein kleines Dorf in Brandenburg gezogen. Warum?"
+     ],
+     [
+      "HAR",
+      "Ganz einfach: Wir haben ein zweites Kind bekommen, und unsere Wohnung in Berlin war zu klein. Eine größere Wohnung war für uns zu teuer. Hier auf dem Land haben wir jetzt ein Haus mit Garten, und das kostet weniger als die alte Wohnung."
+     ],
+     [
+      "MOD",
+      "Und Ihre Arbeit? Sie arbeiten doch noch in Berlin, oder?"
+     ],
+     [
+      "HAR",
+      "Ja, ich bin Grafiker bei einer Agentur in Berlin. Aber ich arbeite meistens von zu Hause. Nur am Dienstag fahre ich ins Büro. Mit dem Zug dauert das ungefähr eine Stunde."
+     ],
+     [
+      "MOD",
+      "Was ist hier für Sie besser als in der Stadt?"
+     ],
+     [
+      "HAR",
+      "Die Ruhe! Und die Kinder können draußen spielen. Unser Sohn geht allein zu seinem Freund. In Berlin hatten wir dafür immer zu viel Angst."
+     ],
+     [
+      "MOD",
+      "Gibt es auch Nachteile?"
+     ],
+     [
+      "HAR",
+      "Ja, natürlich. Ohne Auto geht hier fast nichts. Der Bus fährt nur dreimal am Tag, und der nächste Supermarkt ist acht Kilometer weg. Kino und Theater vermisse ich auch ein bisschen."
+     ],
+     [
+      "MOD",
+      "Haben Sie im Dorf schon Freunde gefunden?"
+     ],
+     [
+      "HAR",
+      "Am Anfang war das nicht so leicht. Die Leute waren freundlich, aber ein bisschen distanziert. Dann bin ich in den Sportverein gegangen, und jetzt kenne ich fast das ganze Dorf."
+     ],
+     [
+      "MOD",
+      "Möchten Sie irgendwann zurück nach Berlin?"
+     ],
+     [
+      "HAR",
+      "Im Moment nicht. Vielleicht später, wenn die Kinder groß sind."
+     ],
+     [
+      "MOD",
+      "Herr Hartmann, vielen Dank für das Gespräch."
+     ]
+    ],
+    "items": [
+     {
+      "n": 16,
+      "type": "jn",
+      "q": "Die Wohnung in Berlin war für die Familie zu klein.",
+      "a": "ja",
+      "trap": "detail",
+      "ev": "unsere Wohnung in Berlin war zu klein",
+      "why": "Mit dem zweiten Kind war die Wohnung zu klein."
+     },
+     {
+      "n": 17,
+      "type": "jn",
+      "q": "Das Haus auf dem Land kostet mehr als die alte Wohnung.",
+      "a": "nein",
+      "trap": "detail",
+      "ev": "das kostet weniger als die alte Wohnung",
+      "why": "Das Haus kostet <b>weniger</b>."
+     },
+     {
+      "n": 18,
+      "type": "jn",
+      "q": "Herr Hartmann fährt jeden Tag nach Berlin ins Büro.",
+      "a": "nein",
+      "trap": "detail",
+      "ev": "Nur am Dienstag fahre ich ins Büro.",
+      "why": "Er arbeitet meistens zu Hause, <b>nur dienstags</b> im Büro."
+     },
+     {
+      "n": 19,
+      "type": "jn",
+      "q": "Im Dorf braucht man ein Auto.",
+      "a": "ja",
+      "trap": "synonym",
+      "ev": "Ohne Auto geht hier fast nichts.",
+      "why": "„Ohne Auto geht fast nichts“ = man braucht ein Auto."
+     },
+     {
+      "n": 20,
+      "type": "jn",
+      "q": "Im Sportverein hat Herr Hartmann viele Leute kennengelernt.",
+      "a": "ja",
+      "trap": "vorher",
+      "ev": "jetzt kenne ich fast das ganze Dorf",
+      "why": "<b>Am Anfang</b> war es schwer, durch den Sportverein kennt er jetzt fast alle."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-h1": {
+  "id": "a2-diag-h1",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Diagnose · Kurze Texte",
+  "instr": "Sie hören zwei kurze Texte. Sie hören jeden Text zweimal. Wählen Sie für die Aufgaben 1 und 2 die richtige Lösung a, b oder c.",
+  "instr_en": "You hear two short texts. You hear each text twice. For tasks 1 and 2, choose the correct answer a, b or c.",
+  "source": "own",
+  "speakers": {
+   "FIT": "Fitnessstudio",
+   "RAD": "Radio"
+  },
+  "genders": {
+   "FIT": "f",
+   "RAD": "m"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Nachricht vom Fitnessstudio",
+    "audio": "audio/a2/a2-diag-h1-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "FIT",
+      "Hallo Herr Demir, hier ist Laura vom Fitnessstudio Aktiv. Sie haben für morgen um achtzehn Uhr den Yogakurs gebucht. Leider ist die Kursleiterin krank, und der Kurs fällt aus. Sie können aber am Donnerstag um neunzehn Uhr kommen, da sind noch Plätze frei. Oder Sie machen morgen beim Pilateskurs um halb sieben mit. Bitte rufen Sie uns kurz an."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Was ist morgen?",
+      "opts": [
+       "Der Yogakurs findet nicht statt.",
+       "Der Yogakurs beginnt um 19 Uhr.",
+       "Herr Demir hat einen Pilateskurs."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "und der Kurs fällt aus",
+      "why": "„fällt aus“ = findet nicht statt. Um 19 Uhr ist ein Kurs am <b>Donnerstag</b>."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Wetter im Radio",
+    "audio": "audio/a2/a2-diag-h1-1.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "RAD",
+      "Und nun das Wetter für morgen, Sonntag. Am Vormittag ist es noch bewölkt, und im Norden kann es ein bisschen regnen. Am Nachmittag scheint dann überall die Sonne, und es wird bis zu zweiundzwanzig Grad warm. Ein schöner Tag für einen Ausflug, aber am besten erst nach dem Mittagessen."
+     ]
+    ],
+    "items": [
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Wie ist das Wetter am Sonntagnachmittag?",
+      "opts": [
+       "Im Norden regnet es.",
+       "Es ist sonnig.",
+       "Es ist bewölkt und kühl."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Am Nachmittag scheint dann überall die Sonne",
+      "why": "Wolken und Regen gibt es nur am <b>Vormittag</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-h2": {
+  "id": "a2-diag-h2",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Diagnose · Gespräch: Essen für die Woche",
+  "instr": "Sie hören ein Gespräch. Sie hören den Text einmal. Wählen Sie für die Aufgaben 3 bis 5 eine passende Lösung aus a bis g. Wählen Sie jeden Buchstaben nur einmal. Was gibt es an welchem Tag zu essen?",
+  "instr_en": "You hear a conversation. You hear it once. For tasks 3 to 5, choose a matching answer from a to g. Use each letter only once. What will the family eat on which day?",
+  "source": "own",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Pizza",
+    "body": "eine Pizza"
+   },
+   {
+    "k": "b",
+    "title": "Fisch",
+    "body": "Fisch mit Reis"
+   },
+   {
+    "k": "c",
+    "title": "Suppe",
+    "body": "ein Teller Suppe"
+   },
+   {
+    "k": "d",
+    "title": "Nudeln",
+    "body": "Nudeln mit Tomatensoße"
+   },
+   {
+    "k": "e",
+    "title": "Salat",
+    "body": "ein großer Salat"
+   },
+   {
+    "k": "f",
+    "title": "Hähnchen",
+    "body": "Hähnchen mit Kartoffeln"
+   },
+   {
+    "k": "g",
+    "title": "Pfannkuchen",
+    "body": "Pfannkuchen"
+   }
+  ],
+  "noZero": true,
+  "speakers": {
+   "JUL": "Julia",
+   "RAL": "Ralf"
+  },
+  "genders": {
+   "JUL": "f",
+   "RAL": "m"
+  },
+  "groups": [
+   {
+    "title": "Julia und Ralf planen das Essen",
+    "audio": "audio/a2/a2-diag-h2-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "JUL",
+      "Ralf, ich gehe gleich einkaufen. Lass uns schnell das Essen für die Woche planen."
+     ],
+     [
+      "RAL",
+      "Gute Idee. Am Montag komme ich spät nach Hause. Kannst du da etwas Schnelles machen? Vielleicht Nudeln?"
+     ],
+     [
+      "JUL",
+      "Nudeln hatten wir doch gestern. Ich mache am Montag lieber eine Suppe. Die kann ich schon am Sonntag kochen."
+     ],
+     [
+      "RAL",
+      "Auch gut. Und am Dienstag koche ich. Ich mache Fisch mit Reis, das wünschen sich die Kinder schon lange."
+     ],
+     [
+      "JUL",
+      "Prima. Am Mittwoch ist Lena bei ihrer Freundin, und Tom hat Fußball. Wir essen also erst spät."
+     ],
+     [
+      "RAL",
+      "Dann bestellen wir einfach eine Pizza, oder?"
+     ],
+     [
+      "JUL",
+      "Ach nein, das ist so teuer. Ich mache Pfannkuchen, die essen alle gern."
+     ],
+     [
+      "RAL",
+      "Okay, einverstanden."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "ad",
+      "q": "Montag",
+      "a": "c",
+      "trap": "vorher",
+      "ev": "Ich mache am Montag lieber eine Suppe.",
+      "why": "Ralf wünscht sich Nudeln, aber Julia macht <b>lieber</b> Suppe."
+     },
+     {
+      "n": 4,
+      "type": "ad",
+      "q": "Dienstag",
+      "a": "b",
+      "trap": "detail",
+      "ev": "Ich mache Fisch mit Reis",
+      "why": "Am Dienstag kocht Ralf Fisch."
+     },
+     {
+      "n": 5,
+      "type": "ad",
+      "q": "Mittwoch",
+      "a": "g",
+      "trap": "vorher",
+      "ev": "Ich mache Pfannkuchen, die essen alle gern.",
+      "why": "Pizza ist nur ein Vorschlag. Julia sagt: zu teuer."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-h3": {
+  "id": "a2-diag-h3",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Diagnose · Kurze Gespräche",
+  "instr": "Sie hören zwei kurze Gespräche. Sie hören jeden Text einmal. Wählen Sie für die Aufgaben 6 und 7 die richtige Lösung a, b oder c.",
+  "instr_en": "You hear two short conversations. You hear each text once. For tasks 6 and 7, choose the correct answer a, b or c.",
+  "source": "own",
+  "speakers": {
+   "KUN": "Kundin",
+   "VER": "Verkäufer",
+   "MAN": "Kollege",
+   "FRA": "Kollegin"
+  },
+  "genders": {
+   "KUN": "f",
+   "VER": "m",
+   "MAN": "m",
+   "FRA": "f"
+  },
+  "groups": [
+   {
+    "title": "Gespräch 1 · Im Kleidungsgeschäft",
+    "audio": "audio/a2/a2-diag-h3-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "KUN",
+      "Entschuldigung, haben Sie diese Hose auch in Größe achtunddreißig?"
+     ],
+     [
+      "VER",
+      "Achtunddreißig ist leider ausverkauft. Ich habe sie noch in sechsunddreißig und in vierzig."
+     ],
+     [
+      "KUN",
+      "Sechsunddreißig ist mir bestimmt zu klein. Ich probiere mal die vierzig."
+     ],
+     [
+      "VER",
+      "Gern, die Kabinen sind dort hinten."
+     ],
+     [
+      "KUN",
+      "So, die passt gut. Die nehme ich."
+     ]
+    ],
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Welche Größe kauft die Frau?",
+      "opts": [
+       "Größe 36.",
+       "Größe 38.",
+       "Größe 40."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Ich probiere mal die vierzig.",
+      "why": "38 ist ausverkauft, 36 ist zu klein. Die 40 passt."
+     }
+    ]
+   },
+   {
+    "title": "Gespräch 2 · In der Kaffeepause",
+    "audio": "audio/a2/a2-diag-h3-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MAN",
+      "Und, wohin fahrt ihr im Sommer? Wieder nach Italien?"
+     ],
+     [
+      "FRA",
+      "Nein, in Italien war es letztes Jahr viel zu heiß. Wir wollten zuerst nach Norwegen, aber das ist uns zu teuer. Jetzt fahren wir an die Ostsee."
+     ],
+     [
+      "MAN",
+      "Oh, da war ich auch schon mal. Sehr schön!"
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Wohin fährt die Frau im Sommer?",
+      "opts": [
+       "An die Ostsee.",
+       "Nach Italien.",
+       "Nach Norwegen."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Jetzt fahren wir an die Ostsee.",
+      "why": "Italien war <b>letztes Jahr</b>, Norwegen ist zu teuer."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-h4": {
+  "id": "a2-diag-h4",
+  "level": "a2",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Diagnose · Interview: Einkaufen mit dem Lastenrad",
+  "instr": "Sie hören ein Interview. Sie hören den Text zweimal. Wählen Sie für die Aufgaben 8 bis 10 Ja oder Nein. Lesen Sie zuerst die Aufgaben. Ein Radioreporter spricht mit Melanie Graf. Sie bringt Lebensmittel mit dem Lastenrad zu ihren Kunden.",
+  "instr_en": "You hear an interview. You hear it twice. For tasks 8 to 10, choose Ja (yes) or Nein (no). Read the statements first. A radio reporter talks to Melanie Graf, who delivers groceries by cargo bike.",
+  "source": "own",
+  "speakers": {
+   "MOD": "Reporter",
+   "GRA": "Melanie Graf"
+  },
+  "genders": {
+   "MOD": "m",
+   "GRA": "f"
+  },
+  "groups": [
+   {
+    "title": "Einkaufen mit dem Lastenrad",
+    "audio": "audio/a2/a2-diag-h4-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "Frau Graf, Sie bringen Lebensmittel mit dem Lastenrad zu Ihren Kunden. Wie funktioniert das?"
+     ],
+     [
+      "GRA",
+      "Die Kunden bestellen bis zehn Uhr morgens auf unserer Webseite. Am Nachmittag bringen wir die Sachen dann nach Hause. Das geht aber nur hier in der Innenstadt, weiter fahren wir nicht."
+     ],
+     [
+      "MOD",
+      "Wer sind Ihre Kunden?"
+     ],
+     [
+      "GRA",
+      "Viele denken, das sind nur junge Leute. Aber die meisten Kunden sind ältere Menschen, die nicht mehr so gut laufen können."
+     ],
+     [
+      "MOD",
+      "Und was kostet die Lieferung?"
+     ],
+     [
+      "GRA",
+      "Bei einem Einkauf bis dreißig Euro kostet sie drei Euro. Wenn man mehr kauft, ist die Lieferung kostenlos."
+     ],
+     [
+      "MOD",
+      "Vielen Dank, Frau Graf."
+     ]
+    ],
+    "items": [
+     {
+      "n": 8,
+      "type": "jn",
+      "q": "Man muss bis zehn Uhr morgens bestellen.",
+      "a": "ja",
+      "trap": "detail",
+      "ev": "Die Kunden bestellen bis zehn Uhr morgens auf unserer Webseite.",
+      "why": "Bestellung bis zehn Uhr, Lieferung am Nachmittag."
+     },
+     {
+      "n": 9,
+      "type": "jn",
+      "q": "Die meisten Kunden sind junge Leute.",
+      "a": "nein",
+      "trap": "wort",
+      "ev": "Aber die meisten Kunden sind ältere Menschen",
+      "why": "Das <b>denken</b> viele. In Wirklichkeit sind es meistens ältere Menschen."
+     },
+     {
+      "n": 10,
+      "type": "jn",
+      "q": "Die Lieferung ist immer kostenlos.",
+      "a": "nein",
+      "trap": "teil",
+      "ev": "Bei einem Einkauf bis dreißig Euro kostet sie drei Euro.",
+      "why": "Kostenlos nur ab mehr als dreißig Euro."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l1-a": {
+  "id": "a2-l1-a",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Zeitungsartikel: Werkzeug aus der Bibliothek",
+  "instr": "Lesen Sie den Text und die Aufgaben 1 bis 5. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the text and tasks 1 to 5. For each task, choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Bohrmaschine statt Buch: Bibliothek verleiht Werkzeug",
+    "body": "Wer in Wiesental eine Wand streichen oder ein Regal aufhängen möchte, muss dafür nicht mehr in den Baumarkt gehen. Seit März kann man in der Stadtbibliothek nicht nur Bücher und Filme ausleihen, sondern auch Werkzeug: zum Beispiel Bohrmaschinen, Leitern oder Nähmaschinen.\n\nDie Idee hatte die Bibliothekarin Renate Vogt. „Viele Leute kaufen eine Bohrmaschine, benutzen sie zweimal, und dann liegt sie jahrelang im Keller“, sagt sie. „Das ist schade um das Geld und auch schlecht für die Umwelt.“ Die ersten Geräte haben Bürgerinnen und Bürger der Bibliothek geschenkt, andere hat die Stadt gekauft.\n\nDas Ausleihen ist einfach: Man braucht nur einen Bibliotheksausweis. Er kostet für Erwachsene zehn Euro im Jahr, Kinder und Jugendliche bekommen ihn kostenlos. Das Werkzeug darf man eine Woche behalten. Bücher kann man dagegen vier Wochen ausleihen.\n\nDas Angebot ist sehr beliebt. Besonders die Leitern und der Hochdruckreiniger sind fast immer ausgeliehen. Frau Vogt empfiehlt deshalb, die Geräte vorher im Internet zu reservieren. Im Sommer möchte die Bibliothek auch Gartengeräte anbieten, zum Beispiel einen Rasenmäher.",
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "In der Stadtbibliothek Wiesental kann man jetzt …",
+      "opts": [
+       "Werkzeug kaufen.",
+       "Werkzeug ausleihen.",
+       "Regale bauen lassen."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "nicht nur Bücher und Filme ausleihen, sondern auch Werkzeug",
+      "why": "Man kauft nichts, man <b>leiht</b> das Werkzeug aus."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Frau Vogt meint, dass …",
+      "opts": [
+       "viele Leute zu wenig Werkzeug haben.",
+       "Bohrmaschinen zu teuer sind.",
+       "viele Leute ihr Werkzeug nur selten benutzen."
+      ],
+      "a": "c",
+      "trap": "synonym",
+      "ev": "benutzen sie zweimal, und dann liegt sie jahrelang im Keller",
+      "why": "Zweimal benutzen und dann jahrelang im Keller = selten benutzen."
+     },
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Die ersten Geräte …",
+      "opts": [
+       "waren Geschenke von Leuten aus der Stadt.",
+       "hat Frau Vogt selbst gekauft.",
+       "kommen aus einem Baumarkt."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Die ersten Geräte haben Bürgerinnen und Bürger der Bibliothek geschenkt",
+      "why": "Bürgerinnen und Bürger = Leute aus der Stadt. Gekauft hat die <b>Stadt</b> andere Geräte."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Werkzeug darf man …",
+      "opts": [
+       "eine Woche behalten.",
+       "vier Wochen behalten.",
+       "ein Jahr behalten."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Das Werkzeug darf man eine Woche behalten.",
+      "why": "Vier Wochen gelten nur für <b>Bücher</b>."
+     },
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Was empfiehlt Frau Vogt?",
+      "opts": [
+       "Einen Rasenmäher zu kaufen.",
+       "Die Geräte online zu reservieren.",
+       "Erst im Sommer in die Bibliothek zu kommen."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "die Geräte vorher im Internet zu reservieren",
+      "why": "Im Internet reservieren = online reservieren."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l1-b": {
+  "id": "a2-l1-b",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Zeitungsartikel: Schüler erklären das Handy",
+  "instr": "Lesen Sie den Text und die Aufgaben 1 bis 5. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the text and tasks 1 to 5. For each task, choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Jung hilft Alt: Schüler erklären das Smartphone",
+    "body": "Jeden Mittwochnachmittag ist im Café Sonnenschein in Kleinfeld viel los. Dann sitzen dort Schülerinnen und Schüler der Gesamtschule zusammen mit älteren Menschen an den Tischen. Die Jugendlichen erklären ihnen, wie man mit dem Smartphone Fotos verschickt, eine Fahrkarte kauft oder mit den Enkeln per Video telefoniert.\n\nDas Projekt gibt es seit einem Jahr. Die Idee hatte der Lehrer Michael Sander. „Meine Mutter hat mich jeden Abend angerufen, weil sie Probleme mit ihrem neuen Handy hatte“, erzählt er. „Da habe ich gedacht: Vielen anderen älteren Menschen geht es sicher genauso.“\n\nAm Anfang kamen nur fünf Seniorinnen und Senioren. Heute sind es jede Woche fast dreißig. Die Hilfe ist kostenlos, aber man muss sich vorher im Café anmelden, weil es nicht so viele Plätze gibt. Kaffee und Kuchen bezahlen die Gäste selbst.\n\nAuch die Schüler finden das Projekt gut. „Ich habe gelernt, langsam und einfach zu erklären“, sagt die 15-jährige Selin. „Und die Senioren erzählen oft spannende Geschichten von früher.“ Für ihre Hilfe bekommen die Jugendlichen kein Geld, aber eine Bescheinigung für ihre Bewerbungen.",
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Im Café Sonnenschein …",
+      "opts": [
+       "lernen Schüler, wie man Kuchen backt.",
+       "helfen Jugendliche älteren Menschen mit dem Handy.",
+       "telefonieren Senioren jeden Mittwoch mit ihren Enkeln."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Die Jugendlichen erklären ihnen, wie man mit dem Smartphone Fotos verschickt",
+      "why": "Enkel und Kuchen kommen im Text vor, aber das Thema ist die <b>Hilfe mit dem Smartphone</b>."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Herr Sander hatte die Idee, weil …",
+      "opts": [
+       "seine Mutter oft Hilfe mit dem Handy brauchte.",
+       "seine Schüler keine Smartphones hatten.",
+       "er ein Café eröffnen wollte."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "weil sie Probleme mit ihrem neuen Handy hatte",
+      "why": "Seine Mutter hatte Probleme und hat ihn jeden Abend angerufen."
+     },
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Heute kommen jede Woche …",
+      "opts": [
+       "fünf Senioren.",
+       "dreißig Schüler.",
+       "fast dreißig Senioren."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "Heute sind es jede Woche fast dreißig.",
+      "why": "Fünf waren es nur <b>am Anfang</b>."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Was müssen die Senioren tun?",
+      "opts": [
+       "Für die Hilfe bezahlen.",
+       "Sich vorher anmelden.",
+       "Kaffee und Kuchen mitbringen."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "aber man muss sich vorher im Café anmelden",
+      "why": "Die Hilfe ist kostenlos. Kaffee und Kuchen <b>bezahlt</b> man, man bringt ihn nicht mit."
+     },
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Für ihre Hilfe bekommen die Schüler …",
+      "opts": [
+       "Geld.",
+       "kostenlosen Kuchen.",
+       "eine Bescheinigung."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "aber eine Bescheinigung für ihre Bewerbungen",
+      "why": "„kein Geld, aber eine Bescheinigung“."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l2-a": {
+  "id": "a2-l2-a",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Wegweiser: Kaufhaus Brenner",
+  "instr": "Lesen Sie die Aufgaben 6 bis 10 und die Übersicht. Wohin gehen Sie? Wählen Sie die richtige Lösung a, b oder c.",
+  "instr_en": "Read tasks 6 to 10 and the directory. Where do you go? Choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Kaufhaus Brenner · Wegweiser",
+    "body": "5. Stock: Restaurant mit Dachterrasse · Kundentoiletten · Kundenservice (Umtausch und Reklamationen, Geschenkgutscheine)\n4. Stock: Möbel · Lampen · Teppiche · Betten und Bettwäsche\n3. Stock: Elektronik · Handys und Zubehör · Computer · Haushaltsgeräte · Fotoservice (auch Passfotos)\n2. Stock: Kinderabteilung (Kinderkleidung, Spielzeug) · Sportbekleidung · Fahrräder\n1. Stock: Damenmode · Herrenmode · Schuhe · Taschen\nErdgeschoss: Kosmetik und Parfüm · Uhren und Schmuck · Bücher und Zeitschriften · Schreibwaren · Information\nUntergeschoss: Lebensmittel · Getränke · Bäckerei · Haushaltswaren (Geschirr, Töpfe, Besteck) · Schlüsseldienst",
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Sie möchten neue Teller kaufen.",
+      "opts": [
+       "Untergeschoss",
+       "4. Stock",
+       "anderer Stock"
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Haushaltswaren (Geschirr, Töpfe, Besteck)",
+      "why": "Teller sind <b>Geschirr</b>: Haushaltswaren im Untergeschoss."
+     },
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Ihre neue Kaffeemaschine funktioniert nicht. Sie möchten sie zurückgeben.",
+      "opts": [
+       "3. Stock",
+       "Erdgeschoss",
+       "anderer Stock"
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "Kundenservice (Umtausch und Reklamationen, Geschenkgutscheine)",
+      "why": "Haushaltsgeräte gibt es im 3. Stock, aber Umtausch macht der <b>Kundenservice im 5. Stock</b>."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Sie suchen eine Regenjacke für Ihre Tochter (7 Jahre).",
+      "opts": [
+       "1. Stock",
+       "2. Stock",
+       "anderer Stock"
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Kinderabteilung (Kinderkleidung, Spielzeug)",
+      "why": "Damenmode im 1. Stock ist für Erwachsene. Kinderkleidung: 2. Stock."
+     },
+     {
+      "n": 9,
+      "type": "abc",
+      "q": "Sie brauchen Fotos für Ihren neuen Reisepass.",
+      "opts": [
+       "Erdgeschoss",
+       "3. Stock",
+       "anderer Stock"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Fotoservice (auch Passfotos)",
+      "why": "Passfotos macht der Fotoservice im 3. Stock."
+     },
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Sie möchten ein neues Kopfkissen kaufen.",
+      "opts": [
+       "Untergeschoss",
+       "1. Stock",
+       "anderer Stock"
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Betten und Bettwäsche",
+      "why": "Kopfkissen findet man bei Betten und Bettwäsche im <b>4. Stock</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l2-b": {
+  "id": "a2-l2-b",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Übersicht: Bürgerzentrum Am Markt",
+  "instr": "Lesen Sie die Aufgaben 6 bis 10 und die Übersicht. Wohin gehen Sie? Wählen Sie die richtige Lösung a, b oder c.",
+  "instr_en": "Read tasks 6 to 10 and the directory. Where do you go? Choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Bürgerzentrum Am Markt · Wer ist wo?",
+    "body": "3. Etage: Raum 301 Deutschkurse (A1 bis B1) · Raum 302 Computerkurse · Raum 310 Bibliothek mit Lesecafé\n2. Etage: Raum 201 Beratung für Eltern · Raum 205 Hilfe bei Formularen und Anträgen (Di und Do) · Raum 210 Nähwerkstatt\n1. Etage: Saal 101 Tanz und Gymnastik · Raum 120 Musikschule (Gitarre, Klavier) · Raum 130 Malkurse für Kinder\nErdgeschoss: Anmeldung und Kasse für alle Kurse · Café International · Fahrradwerkstatt (Eingang im Hof)\nUntergeschoss: Kleiderkammer (Kleidung gegen Spende) · Lager",
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Sie brauchen Hilfe bei einem Antrag für das Jobcenter.",
+      "opts": [
+       "Erdgeschoss",
+       "2. Etage",
+       "andere Etage"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Raum 205 Hilfe bei Formularen und Anträgen (Di und Do)",
+      "why": "Hilfe bei Anträgen gibt es in Raum 205, 2. Etage."
+     },
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Ihr Sohn ist acht und möchte malen lernen.",
+      "opts": [
+       "1. Etage",
+       "3. Etage",
+       "andere Etage"
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Raum 130 Malkurse für Kinder",
+      "why": "Malkurse für Kinder: Raum 130, 1. Etage."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Sie möchten sich für einen Deutschkurs anmelden und die Gebühr bezahlen.",
+      "opts": [
+       "Erdgeschoss",
+       "3. Etage",
+       "andere Etage"
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Anmeldung und Kasse für alle Kurse",
+      "why": "Die Kurse sind in der 3. Etage, aber anmelden und bezahlen: <b>Erdgeschoss</b>."
+     },
+     {
+      "n": 9,
+      "type": "abc",
+      "q": "Sie möchten ein Buch ausleihen und dabei einen Kaffee trinken.",
+      "opts": [
+       "Erdgeschoss",
+       "1. Etage",
+       "andere Etage"
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "Raum 310 Bibliothek mit Lesecafé",
+      "why": "Café International ist im Erdgeschoss, aber Bücher gibt es nur in der Bibliothek mit Lesecafé, <b>3. Etage</b>."
+     },
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Ihr Fahrrad ist kaputt. Sie möchten es reparieren.",
+      "opts": [
+       "Untergeschoss",
+       "2. Etage",
+       "andere Etage"
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Fahrradwerkstatt (Eingang im Hof)",
+      "why": "Die Fahrradwerkstatt ist im <b>Erdgeschoss</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l3-a": {
+  "id": "a2-l3-a",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 3,
+  "title": "E-Mail: Sophies neue Stelle",
+  "instr": "Lesen Sie die E-Mail und die Aufgaben 11 bis 15. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the email and tasks 11 to 15. For each task, choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "E-Mail von Sophie an Katja",
+    "body": "Liebe Katja,\n\nvielen Dank für deine lange E-Mail! Entschuldige, dass ich erst jetzt antworte. Die letzten Wochen waren wirklich stressig, denn ich habe eine neue Stelle. Seit dem ersten Juni arbeite ich nicht mehr im Hotel, sondern im Reisebüro „Weltweit“ in der Schillerstraße. Die Arbeit gefällt mir sehr gut. Ich berate Kunden und buche Reisen für sie. Am Wochenende muss ich jetzt nie arbeiten, das ist super!\n\nLeider ist der Weg zur Arbeit ziemlich lang. Mit dem Bus brauche ich fast eine Stunde. Ich möchte deshalb gern in die Nähe vom Reisebüro ziehen. Eine schöne Wohnung habe ich aber noch nicht gefunden.\n\nHast du am Samstag, dem 21. Juni, Zeit? Ich feiere meine neue Stelle mit ein paar Freunden. Wir grillen bei meinen Eltern im Garten, weil meine Wohnung zu klein ist. Es geht um 17 Uhr los. Du musst nichts mitbringen, aber wenn du möchtest, kannst du deine Gitarre mitnehmen. Dann können wir abends zusammen singen!\n\nBitte sag mir bis Mittwoch Bescheid, ob du kommst.\n\nViele Grüße\nSophie",
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Sophie arbeitet jetzt …",
+      "opts": [
+       "in einem Hotel.",
+       "in einem Reisebüro.",
+       "bei ihren Eltern."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "arbeite ich nicht mehr im Hotel, sondern im Reisebüro",
+      "why": "Im Hotel hat sie <b>früher</b> gearbeitet."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Was gefällt Sophie an der neuen Stelle?",
+      "opts": [
+       "Sie hat am Wochenende frei.",
+       "Sie kann selbst viel reisen.",
+       "Der Weg zur Arbeit ist kurz."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Am Wochenende muss ich jetzt nie arbeiten",
+      "why": "Nie am Wochenende arbeiten = am Wochenende frei. Der Weg ist <b>lang</b>."
+     },
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Sophie möchte …",
+      "opts": [
+       "in eine andere Wohnung ziehen.",
+       "jeden Tag mit dem Bus fahren.",
+       "wieder bei ihren Eltern wohnen."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Ich möchte deshalb gern in die Nähe vom Reisebüro ziehen.",
+      "why": "Sie sucht eine Wohnung in der Nähe vom Reisebüro."
+     },
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Die Feier ist …",
+      "opts": [
+       "in Sophies Wohnung.",
+       "im Reisebüro.",
+       "im Garten von Sophies Eltern."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Wir grillen bei meinen Eltern im Garten",
+      "why": "Ihre Wohnung ist zu klein, deshalb feiern sie bei den Eltern."
+     },
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Katja soll …",
+      "opts": [
+       "Essen mitbringen.",
+       "bis Mittwoch antworten.",
+       "am Samstag um 17 Uhr anrufen."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Bitte sag mir bis Mittwoch Bescheid, ob du kommst.",
+      "why": "Sie muss <b>nichts</b> mitbringen. Bescheid sagen = antworten."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l3-b": {
+  "id": "a2-l3-b",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 3,
+  "title": "E-Mail: Daniela in Wien",
+  "instr": "Lesen Sie die E-Mail und die Aufgaben 11 bis 15. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the email and tasks 11 to 15. For each task, choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "E-Mail von Daniela an Marco",
+    "body": "Hallo Marco,\n\nwie geht es dir? Ich bin seit drei Tagen in Wien, und es ist wunderschön hier! Eigentlich wollte ich mit meiner Schwester fahren, aber sie ist leider krank geworden. Jetzt bin ich allein hier, aber das ist nicht schlimm. Im Hostel habe ich schon nette Leute aus Spanien und Kanada kennengelernt.\n\nGestern war ich im Museum, und danach habe ich im Café Kaiserhof einen Apfelstrudel gegessen. Der war lecker, aber sehr teuer! Heute regnet es leider den ganzen Tag. Deshalb sitze ich im Hostel und schreibe E-Mails.\n\nIch habe eine Frage: Am Freitag komme ich um 15 Uhr mit dem Zug in München an. Kann ich bei dir übernachten? Am Samstagmorgen fahre ich dann weiter nach Hause. Du musst mich nicht vom Bahnhof abholen, ich nehme die U-Bahn. Schick mir einfach noch mal deine Adresse, ich habe sie leider nicht mehr.\n\nAch ja: Ich habe dir aus Wien etwas Süßes mitgebracht!\n\nLiebe Grüße\nDaniela",
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Daniela ist in Wien …",
+      "opts": [
+       "mit ihrer Schwester.",
+       "allein.",
+       "mit Freunden aus Spanien."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Jetzt bin ich allein hier",
+      "why": "<b>Eigentlich</b> wollte die Schwester mitkommen. Die Leute aus Spanien hat sie erst im Hostel kennengelernt."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Was hat Daniela gestern gemacht?",
+      "opts": [
+       "Sie war im Museum.",
+       "Sie hat im Hostel E-Mails geschrieben.",
+       "Sie hat einen Kuchen gebacken."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Gestern war ich im Museum",
+      "why": "E-Mails schreibt sie <b>heute</b>. Den Apfelstrudel hat sie gegessen, nicht gebacken."
+     },
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Heute …",
+      "opts": [
+       "ist das Wetter schön.",
+       "bleibt Daniela im Hostel.",
+       "fährt Daniela nach München."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Deshalb sitze ich im Hostel und schreibe E-Mails.",
+      "why": "Es regnet, deshalb bleibt sie im Hostel."
+     },
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Daniela möchte …",
+      "opts": [
+       "bei Marco schlafen.",
+       "bis Sonntag in München bleiben.",
+       "von Marco am Bahnhof abgeholt werden."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Kann ich bei dir übernachten?",
+      "why": "Übernachten = bei jemandem schlafen. Abholen muss Marco sie <b>nicht</b>."
+     },
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Marco soll …",
+      "opts": [
+       "zum Bahnhof kommen.",
+       "Daniela seine Adresse schicken.",
+       "etwas Süßes kaufen."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Schick mir einfach noch mal deine Adresse",
+      "why": "Sie nimmt die U-Bahn. Das Süße bringt <b>Daniela</b> mit."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l4-a": {
+  "id": "a2-l4-a",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Anzeigen: Freizeit und Alltag",
+  "instr": "Lesen Sie die Aufgaben 16 bis 20 und die Anzeigen a bis f. Welche Anzeige passt zu welcher Person? Sie können jede Anzeige nur einmal wählen. Die Anzeige aus dem Beispiel können Sie nicht mehr wählen. Für eine Aufgabe gibt es keine passende Anzeige. Wählen Sie dann 0.",
+  "instr_en": "Read tasks 16 to 20 and ads a to f. Which ad fits which person? You can use each ad only once. The ad from the example cannot be used again. For one task there is no matching ad. Then choose 0.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sechs Personen suchen im Internet nach Angeboten. Beispiel: 0 Mira möchte mit ihrer Tochter (6) am Wochenende schwimmen gehen. Lösung: a",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Schwimmschule Wellenreiter",
+    "body": "Eltern-Kind-Schwimmen für Kinder von 4 bis 7 Jahren. Jeden Samstag um 10 Uhr im Hallenbad Nord."
+   },
+   {
+    "k": "b",
+    "title": "Teilen statt kaufen",
+    "body": "Unser Nachbarschaftsportal: Leihen Sie Werkzeug, Leitern und Gartengeräte von Leuten aus Ihrer Straße. Kostenlos!"
+   },
+   {
+    "k": "c",
+    "title": "Kochschule Pfeffer",
+    "body": "Italienische Küche für Anfänger: Pasta, Pizza und Tiramisu. Samstags von 11 bis 15 Uhr."
+   },
+   {
+    "k": "d",
+    "title": "Restaurant Seeblick",
+    "body": "Romantisches Abendessen auf unserer Terrasse direkt am Wasser. Wir bitten um Reservierung."
+   },
+   {
+    "k": "e",
+    "title": "Computertreff 60 plus",
+    "body": "Wir erklären Smartphone und Tablet in kleinen Gruppen. Montags um 14 Uhr im Seniorenzentrum."
+   },
+   {
+    "k": "f",
+    "title": "Autovermietung Mobil",
+    "body": "Transporter und Kleinbusse ab 49 Euro pro Tag. Auch am Wochenende geöffnet."
+   }
+  ],
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 16,
+      "type": "ad",
+      "q": "Herr Gerber möchte sein Wohnzimmer selbst streichen. Er braucht dafür eine Leiter, möchte aber keine kaufen.",
+      "a": "b",
+      "trap": "detail",
+      "why": "b: Leitern von Nachbarn leihen, kostenlos."
+     },
+     {
+      "n": 17,
+      "type": "ad",
+      "q": "Yasmin arbeitet am Wochenende. Sie möchte abends italienisch kochen lernen.",
+      "a": "0",
+      "trap": "detail",
+      "why": "c ist italienisch, aber nur <b>samstags</b>. Keine Anzeige passt: <b>0</b>."
+     },
+     {
+      "n": 18,
+      "type": "ad",
+      "q": "Frank und Julia suchen für ihren Hochzeitstag ein Restaurant direkt am See.",
+      "a": "d",
+      "trap": "detail",
+      "why": "d: Terrasse direkt am Wasser."
+     },
+     {
+      "n": 19,
+      "type": "ad",
+      "q": "Hilde ist 78. Sie möchte lernen, wie sie mit ihrem Tablet Fotos an ihre Enkel schickt.",
+      "a": "e",
+      "trap": "detail",
+      "why": "e: Smartphone und Tablet für Menschen ab 60."
+     },
+     {
+      "n": 20,
+      "type": "ad",
+      "q": "Tarek zieht am Samstag um. Er möchte für einen Tag ein großes Auto mieten.",
+      "a": "f",
+      "trap": "detail",
+      "why": "f: Transporter, auch am Wochenende."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-l4-b": {
+  "id": "a2-l4-b",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Anzeigen: Wohnen, Arbeit, Urlaub",
+  "instr": "Lesen Sie die Aufgaben 16 bis 20 und die Anzeigen a bis f. Welche Anzeige passt zu welcher Person? Sie können jede Anzeige nur einmal wählen. Die Anzeige aus dem Beispiel können Sie nicht mehr wählen. Für eine Aufgabe gibt es keine passende Anzeige. Wählen Sie dann 0.",
+  "instr_en": "Read tasks 16 to 20 and ads a to f. Which ad fits which person? You can use each ad only once. The ad from the example cannot be used again. For one task there is no matching ad. Then choose 0.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sechs Personen suchen im Internet nach Angeboten. Beispiel: 0 Simon sucht ein gebrauchtes Fahrrad für den Weg zur Arbeit. Lösung: a",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Fahrradmarkt Speiche",
+    "body": "Gebrauchte Fahrräder, alle geprüft und mit Garantie. Schon ab 80 Euro."
+   },
+   {
+    "k": "b",
+    "title": "Ferienhaus Möwe an der Nordsee",
+    "body": "3 Zimmer für bis zu 5 Personen, Garten, nur 200 Meter zum Strand. Haustiere sind willkommen!"
+   },
+   {
+    "k": "c",
+    "title": "Café Milchbart",
+    "body": "Wir suchen eine Aushilfe für Samstag und Sonntag. Gern auch Studentinnen und Studenten!"
+   },
+   {
+    "k": "d",
+    "title": "Wohnung im Zentrum",
+    "body": "2 Zimmer, frisch renoviert, ohne Balkon, 4. Stock mit Aufzug. 950 Euro warm."
+   },
+   {
+    "k": "e",
+    "title": "Stadtmarkt online",
+    "body": "Möbel, Kleidung, Elektrogeräte: Hier verkaufen Sie alles schnell und kostenlos."
+   },
+   {
+    "k": "f",
+    "title": "Tierpension Waldblick",
+    "body": "Wir kümmern uns liebevoll um Ihren Hund oder Ihre Katze, für einen Tag oder für mehrere Wochen."
+   }
+  ],
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 16,
+      "type": "ad",
+      "q": "Familie Haas sucht für zwei Wochen im August eine Ferienwohnung am Meer. Sie haben zwei Kinder und einen Hund.",
+      "a": "b",
+      "trap": "detail",
+      "why": "b: am Strand, bis 5 Personen, Haustiere willkommen."
+     },
+     {
+      "n": 17,
+      "type": "ad",
+      "q": "Lara studiert. Sie möchte am Wochenende ein bisschen Geld verdienen.",
+      "a": "c",
+      "trap": "detail",
+      "why": "c: Aushilfe am Samstag und Sonntag, gern Studenten."
+     },
+     {
+      "n": 18,
+      "type": "ad",
+      "q": "Herr Okafor sucht eine günstige Wohnung in der Stadt. Er möchte unbedingt einen Balkon.",
+      "a": "0",
+      "trap": "detail",
+      "why": "d ist eine Wohnung in der Stadt, aber <b>ohne Balkon</b> und teuer. Keine Anzeige passt: <b>0</b>."
+     },
+     {
+      "n": 19,
+      "type": "ad",
+      "q": "Petra zieht um. Sie möchte ihren alten Kleiderschrank verkaufen.",
+      "a": "e",
+      "trap": "detail",
+      "why": "e: Möbel online verkaufen."
+     },
+     {
+      "n": 20,
+      "type": "ad",
+      "q": "Jens fährt oft auf Geschäftsreise. Er sucht jemanden, der sich dann um seinen Hund kümmert.",
+      "a": "f",
+      "trap": "detail",
+      "why": "f: Tierpension für Hunde, auch für mehrere Wochen."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-l1": {
+  "id": "a2-diag-l1",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Diagnose · Zeitungsartikel",
+  "instr": "Lesen Sie den Text und die Aufgaben 1 und 2. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the text and tasks 1 and 2. For each task, choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Neu in Bergheim: Frühstück für alle",
+    "body": "Jeden Sonntag gibt es im Stadtteilzentrum Bergheim jetzt ein großes Frühstück für alle Nachbarn. Die Idee kommt von einer Gruppe junger Eltern. „Viele Menschen in unserem Stadtteil kennen ihre Nachbarn gar nicht“, sagt die Organisatorin Katrin Moll. „Beim Frühstück kann man ganz einfach ins Gespräch kommen.“\n\nDas Frühstück beginnt um zehn Uhr und kostet für Erwachsene drei Euro, Kinder essen kostenlos. Wer möchte, kann auch selbst etwas mitbringen, zum Beispiel Marmelade oder Obst. Beim ersten Frühstück im Mai kamen nur zwölf Gäste. Inzwischen sind es jeden Sonntag über sechzig.",
+    "items": [
+     {
+      "n": 1,
+      "type": "abc",
+      "q": "Die Idee für das Frühstück hatten …",
+      "opts": [
+       "junge Eltern.",
+       "die Nachbarn von Frau Moll.",
+       "die Mitarbeiter des Stadtteilzentrums."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Die Idee kommt von einer Gruppe junger Eltern.",
+      "why": "Frau Moll organisiert, die Idee hatte eine Gruppe junger Eltern."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Beim Frühstück …",
+      "opts": [
+       "müssen alle Gäste etwas mitbringen.",
+       "zahlen Kinder nichts.",
+       "waren im Mai über sechzig Gäste."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Kinder essen kostenlos",
+      "why": "Mitbringen kann man, muss aber nicht. Im Mai waren es nur <b>zwölf</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-l2": {
+  "id": "a2-diag-l2",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Diagnose · Wegweiser: Sportzentrum",
+  "instr": "Lesen Sie die Aufgaben 3 bis 5 und den Wegweiser. Wohin gehen Sie? Wählen Sie die richtige Lösung a, b oder c.",
+  "instr_en": "Read tasks 3 to 5 and the directory. Where do you go? Choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "Sportzentrum Westpark · Wegweiser",
+    "body": "2. Obergeschoss: Fitnessraum · Yoga- und Gymnastikraum · Sauna\n1. Obergeschoss: Tennishalle · Tischtennis · Café\nErdgeschoss: Empfang und Kasse · Umkleiden · Schwimmbad · Sportgeschäft\nUntergeschoss: Kletterhalle · Fahrradkeller",
+    "items": [
+     {
+      "n": 3,
+      "type": "abc",
+      "q": "Sie möchten nach dem Training etwas trinken.",
+      "opts": [
+       "Erdgeschoss",
+       "1. Obergeschoss",
+       "anderes Stockwerk"
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Tischtennis · Café",
+      "why": "Das Café ist im 1. Obergeschoss."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Sie möchten eine Jahreskarte für das Fitnessstudio kaufen.",
+      "opts": [
+       "Erdgeschoss",
+       "2. Obergeschoss",
+       "anderes Stockwerk"
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "Empfang und Kasse",
+      "why": "Der Fitnessraum ist oben, aber Karten kauft man an der <b>Kasse im Erdgeschoss</b>."
+     },
+     {
+      "n": 5,
+      "type": "abc",
+      "q": "Sie möchten klettern.",
+      "opts": [
+       "1. Obergeschoss",
+       "2. Obergeschoss",
+       "anderes Stockwerk"
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Kletterhalle",
+      "why": "Die Kletterhalle ist im <b>Untergeschoss</b>."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-l3": {
+  "id": "a2-diag-l3",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 3,
+  "title": "Diagnose · E-Mail",
+  "instr": "Lesen Sie die E-Mail und die Aufgaben 6 und 7. Wählen Sie bei jeder Aufgabe die richtige Lösung a, b oder c.",
+  "instr_en": "Read the email and tasks 6 and 7. For each task, choose the correct answer a, b or c.",
+  "source": "own",
+  "groups": [
+   {
+    "title": "E-Mail von Jana an Tim",
+    "body": "Hallo Tim,\n\ndanke für deine Einladung zum Fußballspiel am Sonntag! Ich komme sehr gern mit. Leider kann ich dich nicht mit dem Auto abholen, weil mein Auto in der Werkstatt ist. Können wir uns direkt am Stadion treffen? Ich fahre mit der Straßenbahn und bin um halb drei da. Die Karten habe ich übrigens schon online gekauft. Du musst mir also nur zehn Euro geben.\n\nBis Sonntag!\nJana",
+    "items": [
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Jana fährt zum Stadion …",
+      "opts": [
+       "mit dem Auto.",
+       "zusammen mit Tim.",
+       "mit der Straßenbahn."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Ich fahre mit der Straßenbahn",
+      "why": "Ihr Auto ist in der Werkstatt. Sie treffen sich erst <b>am Stadion</b>."
+     },
+     {
+      "n": 7,
+      "type": "abc",
+      "q": "Tim soll …",
+      "opts": [
+       "die Karten kaufen.",
+       "Jana zehn Euro geben.",
+       "Jana um halb drei abholen."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Du musst mir also nur zehn Euro geben.",
+      "why": "Die Karten hat Jana schon gekauft."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-diag-l4": {
+  "id": "a2-diag-l4",
+  "level": "a2",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Diagnose · Anzeigen",
+  "instr": "Lesen Sie die Aufgaben 8 bis 10 und die Anzeigen a bis d. Welche Anzeige passt zu welcher Person? Sie können jede Anzeige nur einmal wählen. Für eine Aufgabe gibt es keine passende Anzeige. Wählen Sie dann 0.",
+  "instr_en": "Read tasks 8 to 10 and ads a to d. Which ad fits which person? You can use each ad only once. For one task there is no matching ad. Then choose 0.",
+  "source": "own",
+  "layout": "ads",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Gitarrenunterricht",
+    "body": "Für Anfänger, Erwachsene und Kinder ab 8 Jahren. Einzelstunden, auch abends."
+   },
+   {
+    "k": "b",
+    "title": "Salsa für Singles",
+    "body": "Tanzkurs freitags um 20 Uhr. Kommen Sie ohne Partner!"
+   },
+   {
+    "k": "c",
+    "title": "Nachhilfe online",
+    "body": "Mathe und Physik für Schülerinnen und Schüler der Klassen 5 bis 10."
+   },
+   {
+    "k": "d",
+    "title": "Lauftreff Stadtpark",
+    "body": "Jeden Sonntag um 9 Uhr. Kostenlos, für alle Niveaus."
+   }
+  ],
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 8,
+      "type": "ad",
+      "q": "Ihr Kollege möchte am Wochenende mit anderen Leuten zusammen laufen gehen.",
+      "a": "d",
+      "trap": "detail",
+      "why": "d: Lauftreff am Sonntag."
+     },
+     {
+      "n": 9,
+      "type": "ad",
+      "q": "Ihre Nachbarin sucht Nachhilfe in Englisch für ihre Tochter (14).",
+      "a": "0",
+      "trap": "detail",
+      "why": "c ist Nachhilfe, aber nur <b>Mathe und Physik</b>. Keine Anzeige passt: <b>0</b>."
+     },
+     {
+      "n": 10,
+      "type": "ad",
+      "q": "Herr Ruiz (45) möchte nach der Arbeit Gitarre spielen lernen.",
+      "a": "a",
+      "trap": "detail",
+      "why": "a: Gitarre für Erwachsene, auch abends."
+     }
+    ]
+   }
+  ]
+ },
+ "a2-s1-a": {
+  "id": "a2-s1-a",
+  "level": "a2",
+  "module": "schreiben",
+  "teil": 1,
+  "title": "SMS: Später ins Kino",
+  "instr": "Schreiben Sie eine SMS (20 bis 30 Wörter). Schreiben Sie zu allen drei Punkten.",
+  "instr_en": "Write a text message (20 to 30 words). Cover all three points.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "a2-s1-a",
+    "aufgabe": 1,
+    "situation": "Sie sind heute Abend mit Ihrer Freundin Lina im Kino verabredet. Sie kommen zu spät. Schreiben Sie Lina eine SMS.",
+    "points": [
+     "Entschuldigen Sie sich.",
+     "Warum kommen Sie später?",
+     "Wann sind Sie da?"
+    ],
+    "words": 30,
+    "max": 10,
+    "minutes": 12
+   }
+  ]
+ },
+ "a2-s1-b": {
+  "id": "a2-s1-b",
+  "level": "a2",
+  "module": "schreiben",
+  "teil": 1,
+  "title": "SMS: Krank vor dem Deutschkurs",
+  "instr": "Schreiben Sie eine SMS (20 bis 30 Wörter). Schreiben Sie zu allen drei Punkten.",
+  "instr_en": "Write a text message (20 to 30 words). Cover all three points.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "a2-s1-b",
+    "aufgabe": 1,
+    "situation": "Sie sind krank und können morgen nicht in den Deutschkurs kommen. Schreiben Sie Ihrem Freund Paul aus dem Kurs eine SMS.",
+    "points": [
+     "Sagen Sie, dass Sie morgen nicht kommen.",
+     "Was haben Sie?",
+     "Bitten Sie Paul um die Hausaufgaben."
+    ],
+    "words": 30,
+    "max": 10,
+    "minutes": 12
+   }
+  ]
+ },
+ "a2-s2-a": {
+  "id": "a2-s2-a",
+  "level": "a2",
+  "module": "schreiben",
+  "teil": 2,
+  "title": "E-Mail an die Vermieterin: Heizung kaputt",
+  "instr": "Schreiben Sie eine E-Mail (30 bis 40 Wörter). Schreiben Sie zu allen drei Punkten. Achten Sie auf Anrede und Gruß.",
+  "instr_en": "Write an email (30 to 40 words). Cover all three points. Pay attention to the greeting and closing.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "a2-s2-a",
+    "aufgabe": 2,
+    "situation": "In Ihrer Wohnung funktioniert die Heizung nicht. Schreiben Sie Ihrer Vermieterin, Frau Schubert, eine E-Mail.",
+    "points": [
+     "Beschreiben Sie das Problem.",
+     "Seit wann gibt es das Problem?",
+     "Bitten Sie um einen Termin für die Reparatur."
+    ],
+    "words": 40,
+    "max": 10,
+    "minutes": 18
+   }
+  ]
+ },
+ "a2-s2-b": {
+  "id": "a2-s2-b",
+  "level": "a2",
+  "module": "schreiben",
+  "teil": 2,
+  "title": "E-Mail an das Fitnessstudio: Probetraining",
+  "instr": "Schreiben Sie eine E-Mail (30 bis 40 Wörter). Schreiben Sie zu allen drei Punkten. Achten Sie auf Anrede und Gruß.",
+  "instr_en": "Write an email (30 to 40 words). Cover all three points. Pay attention to the greeting and closing.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "a2-s2-b",
+    "aufgabe": 2,
+    "situation": "Sie haben am Donnerstag ein Probetraining im Fitnessstudio „Vital“. Sie können nicht kommen. Schreiben Sie Herrn Krämer vom Fitnessstudio eine E-Mail.",
+    "points": [
+     "Entschuldigen Sie sich und nennen Sie den Grund.",
+     "Schlagen Sie einen neuen Termin vor.",
+     "Fragen Sie, was Sie mitbringen müssen."
+    ],
+    "words": 40,
+    "max": 10,
+    "minutes": 18
+   }
+  ]
+ },
+ "a2-diag-s1": {
+  "id": "a2-diag-s1",
+  "level": "a2",
+  "module": "schreiben",
+  "teil": 1,
+  "title": "Diagnose · SMS: Einladung zum Grillen",
+  "instr": "Schreiben Sie eine SMS (20 bis 30 Wörter). Schreiben Sie zu allen drei Punkten.",
+  "instr_en": "Write a text message (20 to 30 words). Cover all three points.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "a2-diag-s1",
+    "aufgabe": 1,
+    "situation": "Ihr Freund Ole hat Sie am Samstag zum Grillen eingeladen. Sie kommen gern. Schreiben Sie Ole eine SMS.",
+    "points": [
+     "Bedanken Sie sich für die Einladung.",
+     "Fragen Sie, was Sie mitbringen sollen.",
+     "Wann kommen Sie?"
+    ],
+    "words": 30,
+    "max": 10,
+    "minutes": 10
+   }
+  ]
+ }
+}

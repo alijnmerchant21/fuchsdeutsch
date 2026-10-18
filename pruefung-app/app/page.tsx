@@ -6,7 +6,8 @@ import { Landing } from '@/components/Landing';
 import { GuaranteeCard } from '@/components/GuaranteeCard';
 import { En, useT } from '@/lib/lang';
 import { PASS } from '@/lib/config';
-import { MODULES } from '@/lib/content';
+import { MODULES, diagRef, diagnoseFor, modName } from '@/lib/content';
+import { LEVELS } from '@/lib/levels';
 import { daysBetween, today } from '@/lib/dates';
 import { hueOf } from '@/components/Lesson';
 import { modulePoints, readiness } from '@/lib/score';
@@ -23,8 +24,11 @@ const range = (a: string, b: string) => {
 const dayDone = (attempts: Attempt[], b: Block, i: number) => attempts.some((a) => a.ref === `${b.id}:${i}`);
 
 function Dashboard() {
-  const { user, candidate, attempts, blocks } = useStore();
-  const diag = attempts.find((a) => a.kind === 'diagnose');
+  const { user, candidate, attempts, blocks, level } = useStore();
+  const diag = attempts.find((a) => a.kind === 'diagnose' && a.ref === diagRef(level));
+  const L = LEVELS[level];
+  const dsecs = diagnoseFor(level).sections;
+  const dmin = dsecs.reduce((x, s) => x + s.minutes, 0);
   const t = today();
   const ready = readiness(attempts);
   const name = candidate?.name || user!.name;
@@ -37,15 +41,15 @@ function Dashboard() {
     return (
       <section className="hero">
         <article className="card today hue-lilac">
-          <p className="tlabel">Hallo {name}! Dein nächster Schritt</p>
+          <p className="tlabel">Hallo {name}! Dein nächster Schritt · {L.exam}</p>
           <h2><span className="hl">Mock Test 1</span></h2>
-          <p className="tsub">Circa 40 Minuten: Hören, Lesen, Schreiben. Danach siehst du sofort, in welchen Teilen du Punkte verlierst. Kopfhörer auf, ruhiger Raum.</p>
-          <En as="p" block>About 40 minutes: listening, reading, writing. Right after, you see which parts cost you points. Use headphones and a quiet room.</En>
+          <p className="tsub">Circa {dmin} Minuten: {dsecs.map((s) => modName(s.module)).join(', ')}. Danach siehst du sofort, in welchen Teilen du Punkte verlierst. Kopfhörer auf, ruhiger Raum.</p>
+          <En as="p" block>About {dmin} minutes: listening, reading, writing. Right after, you see which parts cost you points. Use headphones and a quiet room.</En>
           <Link className="btn big" href="/diagnose">Mock Test starten</Link>
         </article>
         <div className="statcol">
           <article className={`card stat ${dl <= 7 ? 'warn' : ''}`}><b>{dl}</b><span>Tage bis zur Prüfung</span><small>{dLong(candidate.exam_date)} · <Link className="linkbtn" href="/setup">ändern</Link></small></article>
-          <article className="card stat"><b>60</b><span>Punkte zum Bestehen</span><small>pro Modul, wie bei Goethe</small></article>
+          <article className="card stat"><b>60</b><span>Punkte zum Bestehen</span><small>{L.modular ? 'pro Modul, wie bei Goethe' : 'von 100, die ganze Prüfung zusammen'}</small></article>
         </div>
       </section>
     );

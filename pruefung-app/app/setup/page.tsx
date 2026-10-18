@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Guard } from '@/components/Guard';
 import { LessonBar, LessonHead } from '@/components/Lesson';
-import { MODULES } from '@/lib/content';
+import { LIVE_MODULES, MODULES } from '@/lib/content';
+import { LEVELS, LEVEL_IDS, priceLine, type Level } from '@/lib/levels';
 import { addDays, daysBetween, today } from '@/lib/dates';
 import { db } from '@/lib/db';
 import { blockLength } from '@/lib/plan';
@@ -20,11 +21,13 @@ const TYPES: [NonNullable<Candidate['attempt_type']>, string, string][] = [
 ];
 
 function Setup() {
-  const { user, candidate, attempts, reload } = useStore();
+  const { user, candidate, attempts, reload, level: curLevel } = useStore();
   const { lang: ui, setHelp } = useLang();
   const t = useT();
   const router = useRouter();
   const isNew = !candidate;
+  const [level, setLevel] = useState<Level>(candidate ? curLevel : 'b1');
+  const L = LEVELS[level];
   const [name, setName] = useState(candidate?.name || (user!.name.includes('@') ? '' : user!.name));
   const [date, setDate] = useState(candidate?.exam_date || '');
   const [center, setCenter] = useState(candidate?.exam_center ?? '');
@@ -43,17 +46,17 @@ function Setup() {
     e.preventDefault();
     if (!name.trim()) { setErr(t('Bitte deinen Vornamen eintragen.', 'Please enter your first name.')); return; }
     if (!date || left < 1) { setErr(t('Bitte ein Prüfungsdatum in der Zukunft wählen. Noch nicht angemeldet? Nimm dein Wunschdatum.', 'Please pick an exam date in the future. Not booked yet? Use the date you are aiming for.')); return; }
-    if (!days.length || !mods.length) { setErr(t('Bitte mindestens einen Lerntag und ein Modul wählen.', 'Please pick at least one study day and one module.')); return; }
+    if (!days.length || (L.modular && !mods.length)) { setErr(t('Bitte mindestens einen Lerntag und ein Modul wählen.', 'Please pick at least one study day and one module.')); return; }
     setBusy(true);
     try {
       await db.saveCandidate({
-        user_id: user!.id, email: user!.email, name: name.trim(), exam_date: date, study_days: days, minutes_per_day: mins, modules: mods,
+        user_id: user!.id, email: user!.email, name: name.trim(), exam_date: date, study_days: days, minutes_per_day: mins, modules: L.modular ? mods : LIVE_MODULES, level,
         exam_center: center.trim() || null, first_language: lang || null, attempt_type: type,
       });
       // Chose English here? Then English help is on inside the exam (they can turn it off any time).
       if (isNew) setHelp(ui === 'en');
       await reload();
-      router.push(attempts.some((a) => a.kind === 'diagnose') ? '/' : '/diagnose');
+      router.push(attempts.some((a) => a.kind === 'diagnose' && a.ref === (level === 'b1' ? 'diagnose' : `diagnose-${level}`)) ? '/' : '/diagnose');
     } catch (e2) { setErr((e2 as Error).message); setBusy(false); }
   };
 
@@ -66,7 +69,15 @@ function Setup() {
           : t('Wenn du dein Datum änderst, passen wir deinen nächsten Block an.', 'If you change your date, we adjust your next block.')} />
       <form className="card formcard" onSubmit={save}>
         <label className="field">{t('Vorname', 'First name')}<input value={name} onChange={(e) => setName(e.target.value)} required autoComplete="given-name" /></label>
-        <div className="field">{t('Ist das deine erste B1-Prüfung?', 'Is this your first B1 exam?')}
+        <div className="field">{t('Welche Prüfung machst du?', 'Which exam are you taking?')}
+          <div className="chips levelpick">{LEVEL_IDS.map((l) => (
+            <button key={l} type="button" className="chip" aria-pressed={level === l} onClick={() => setLevel(l)}>
+              <b>{LEVELS[l].short}</b><small>{LEVELS[l].exam.replace('Goethe-Zertifikat ', 'Goethe ')}</small>
+            </button>
+          ))}</div>
+          {!isNew && level !== curLevel && <small>{t('Neue Stufe: Du startest dort mit einem eigenen kostenlosen Mock Test.', 'New level: you start there with its own free mock test.')}</small>}
+        </div>
+        <div className="field">{t(`Ist das deine erste ${L.short}-Prüfung?`, `Is this your first ${L.short} exam?`)}
           <div className="chips">{TYPES.map(([v, de, en]) => <button key={v} type="button" className="chip" aria-pressed={type === v} onClick={() => setType(v)}>{t(de, en)}</button>)}</div>
         </div>
         <label className="field">{type === 'offen' ? t('Wann möchtest du die Prüfung machen?', 'When do you want to take the exam?') : t('Wann ist deine Prüfung?', 'When is your exam?')}
@@ -82,14 +93,17 @@ function Setup() {
             {LANGS.map(([de, en]) => <option key={de} value={de}>{t(de, en)}</option>)}
           </select>
         </label>
-        <div className="field">{t('Welche Module möchtest du üben?', 'Which modules do you want to practice?')}
+        {!L.modular && <div className="field">{t('Module', 'Modules')}
+          <small>{t(`Die ${L.short}-Prüfung ist eine Gesamtprüfung: Hören, Lesen und Schreiben üben wir zusammen, Sprechen kommt bald. ${priceLine(level, false)}. In der Beta kostenlos.`, `The ${L.short} exam is scored as one exam: we practice listening, reading and writing together, speaking comes soon. ${priceLine(level, true)}. Free during the beta.`)}</small>
+        </div>}
+        {L.modular && <div className="field">{t('Welche Module möchtest du üben?', 'Which modules do you want to practice?')}
           <div className="chips">{MODULES.map((m) => (
             <button key={m.id} type="button" className="chip" disabled={!m.live} aria-pressed={mods.includes(m.id)} onClick={() => setMods(toggle(mods, m.id))}>
               {t(m.name, m.en.replace(', coming soon', ''))}{!m.live && t(' · bald', ' · soon')}
             </button>
           ))}</div>
-          <small>{type === 'wiederholung' ? t('Wähl nur die Module, die du wiederholst. ', 'Pick only the modules you are retaking. ') : ''}{t('Pro Modul $9, alle Module $21. In der Beta kostenlos.', '$9 per module, $21 for all. Free during the beta.')}</small>
-        </div>
+          <small>{type === 'wiederholung' ? t('Wähl nur die Module, die du wiederholst. ', 'Pick only the modules you are retaking. ') : ''}{t(`${priceLine(level, false)}. In der Beta kostenlos.`, `${priceLine(level, true)}. Free during the beta.`)}</small>
+        </div>}
         <div className="field">{t('An welchen Tagen übst du?', 'Which days do you practice?')}
           <div className="chips">{DAYS.map(([d, de, en]) => <button key={d} type="button" className="chip" aria-pressed={days.includes(d)} onClick={() => setDays(toggle(days, d))}>{t(de, en)}</button>)}</div>
         </div>

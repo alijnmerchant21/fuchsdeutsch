@@ -1,0 +1,1226 @@
+{
+ "tests": [
+  {
+   "id": "c-b1-mt2",
+   "title": "Modelltest 2 (Cornelsen)",
+   "en": "Full mock 2, licensed (Hören ready, Lesen and Schreiben to come)",
+   "hidden": true,
+   "sections": [
+    {
+     "module": "hoeren",
+     "title": "Hören",
+     "minutes": 40,
+     "sets": [
+      "c-mt2-h1",
+      "c-mt2-h2",
+      "c-mt2-h3",
+      "c-mt2-h4"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c-b1-mt1",
+   "title": "Modelltest 1 (Cornelsen)",
+   "en": "Full mock 1, licensed (Hören Teil 3 and 4 ready)",
+   "hidden": true,
+   "sections": [
+    {
+     "module": "hoeren",
+     "title": "Hören",
+     "minutes": 25,
+     "sets": [
+      "c-mt1-h3",
+      "c-mt1-h4"
+     ]
+    }
+   ]
+  }
+ ],
+ "sets": {
+  "c-mt1-h3": {
+   "id": "c-mt1-h3",
+   "level": "b1",
+   "module": "hoeren",
+   "teil": 3,
+   "instr": "Sie hören einen Text. Sie hören den Text einmal. Dazu lösen Sie sieben Aufgaben. Wählen Sie: Ist die Aussage Richtig oder Falsch? Sie sind in einem Café und hören, wie sich am Nebentisch zwei junge Leute unterhalten.",
+   "source": "licensed",
+   "speakers": {
+    "MAR": "Marion",
+    "OLI": "Oliver"
+   },
+   "groups": [
+    {
+     "title": "Marion und Oliver im Café",
+     "audio": "licensed/audio/mt1-t3.mp3",
+     "plays": 1,
+     "note": "Die Aufnahme ist wie in der Prüfung: mit Lesezeit, Pausen und Wiederholung. Einmal starten und durchlaufen lassen.",
+     "script": [
+      [
+       "MAR",
+       "Hey, Oliver."
+      ],
+      [
+       "OLI",
+       "Hallo, Marion. Setz dich her."
+      ],
+      [
+       "MAR",
+       "An der Uni alles okay?"
+      ],
+      [
+       "OLI",
+       "Geht so."
+      ],
+      [
+       "MAR",
+       "Wie siehst du denn aus? Gelbes Hemd, gelber Fahrradhelm, dicke gelbe Tasche. Und was steht da?"
+      ],
+      [
+       "OLI",
+       "Kurier. Ich jobbe gerade für einen Kurierdienst."
+      ],
+      [
+       "MAR",
+       "Als Fahrradkurier?"
+      ],
+      [
+       "OLI",
+       "Ja, ich mache das seit ein paar Monaten. Besser als so ein Bürojob oder an der Kasse von einem Supermarkt zu sitzen."
+      ],
+      [
+       "MAR",
+       "Sportlich warst du ja schon immer. Und jetzt bist du auch ständig in Bewegung und an der frischen Luft."
+      ],
+      [
+       "OLI",
+       "Du machst Witze. Durch den dicken Verkehr, zwischen den Autos voll die Abgase."
+      ],
+      [
+       "MAR",
+       "Nicht so gesund."
+      ],
+      [
+       "OLI",
+       "Na ja, ich trage einen Mundschutz, aber damit kann man nicht so frei atmen."
+      ],
+      [
+       "MAR",
+       "Was musst du denn da machen in diesem Job?"
+      ],
+      [
+       "OLI",
+       "Ich bin so eine Art mobiler Briefträger, bringe Briefe oder kleine Päckchen zu Kunden in der ganzen Stadt."
+      ],
+      [
+       "MAR",
+       "Und das muss schnell gehen."
+      ],
+      [
+       "OLI",
+       "Klar, aber mit dem Rad kommst du überall durch. Es gibt für mich praktisch keinen Stau, außer mal an einer roten Ampel."
+      ],
+      [
+       "MAR",
+       "Wie ich dich kenne, fährst du auch bei Rot über die Ampel."
+      ],
+      [
+       "OLI",
+       "Stimmt, aber da muss man aufpassen. Die Polizei schaut da immer schärfer hin. Man kann nach dem neuesten Gesetz eine Strafe von vierzig Euro kassieren."
+      ],
+      [
+       "MAR",
+       "Ungerecht. Gemein ist das."
+      ],
+      [
+       "OLI",
+       "Ja, schon, aber bis jetzt ist mir das noch nicht passiert."
+      ],
+      [
+       "MAR",
+       "Lohnt sich der Job? Verdienst du gut?"
+      ],
+      [
+       "OLI",
+       "Es könnte mehr sein. Diese Firma will immer, dass alles sofort erledigt wird. Nur mit dem Zahlen lassen die sich manchmal Zeit."
+      ],
+      [
+       "MAR",
+       "Und wenn mal etwas nicht klappt, kriegst du nichts?"
+      ],
+      [
+       "OLI",
+       "Doch, wenn ich nicht schuld bin, zum Beispiel wenn der Empfänger nicht da ist oder die Adresse nicht stimmt, kriege ich mein Geld. Aber dann gibt's immer Diskussionen."
+      ],
+      [
+       "MAR",
+       "Blöd ist das. Typisch."
+      ],
+      [
+       "OLI",
+       "Genau. Und krank werden darf man auch nicht. Wie neulich der Markus, der fuhr auch für die. Er ist mal eine Woche ausgefallen wegen einer Grippe."
+      ],
+      [
+       "MAR",
+       "Und dann?"
+      ],
+      [
+       "OLI",
+       "Dann haben sie ihn nicht mehr genommen. Einfach rausgeschmissen. Der Job war weg."
+      ],
+      [
+       "MAR",
+       "Das ist hart. Ach, was hast denn du hier am Arm? Eine Wunde?"
+      ],
+      [
+       "OLI",
+       "Nichts Schlimmes. Ein Laster hat mich beim Abbiegen nicht gesehen und ich bin gestürzt. Ich hatte Glück, nur eine kleine Verletzung und der Fahrer hat sich entschuldigt und hat mir etwas Geld gegeben."
+      ],
+      [
+       "MAR",
+       "Das kann aber immer wieder passieren. Willst du dir nicht einen anderen Job suchen?"
+      ],
+      [
+       "OLI",
+       "Du hast recht. Außerdem kommt jetzt der Winter. Radfahren ist dann eine ziemlich harte Sache."
+      ],
+      [
+       "MAR",
+       "Ich könnte diesen Job nicht machen. Besonders der Stress.  Was klingelt da?"
+      ],
+      [
+       "OLI",
+       "Mein Handy. Ich muss wieder los auf die nächste Tour."
+      ],
+      [
+       "MAR",
+       "Schade. Dann mach's gut. Pass auf dich auf und ruf mal an. Vielleicht dieses Wochenende?"
+      ],
+      [
+       "OLI",
+       "Sehr gern. Ich melde mich."
+      ],
+      [
+       "MAR",
+       "Bis dann."
+      ]
+     ],
+     "items": [
+      {
+       "n": 16,
+       "type": "rf",
+       "q": "Oliver ist fest bei der Post angestellt.",
+       "a": "f",
+       "trap": "wort",
+       "ev": "Ich jobbe gerade für einen Kurierdienst.",
+       "why": "Er jobbt bei einem Kurierdienst: keine feste Stelle, nicht die Post."
+      },
+      {
+       "n": 17,
+       "type": "rf",
+       "q": "Marion findet, dass er einen ungesunden Job hat.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "Nicht so gesund.",
+       "why": "Marion sagt: „Nicht so gesund.“"
+      },
+      {
+       "n": 18,
+       "type": "rf",
+       "q": "Oliver beachtet die Verkehrsregeln genau.",
+       "a": "f",
+       "trap": "synonym",
+       "ev": "Stimmt, aber da muss man aufpassen.",
+       "why": "Er fährt auch bei Rot über die Ampel."
+      },
+      {
+       "n": 19,
+       "type": "rf",
+       "q": "Oliver ist mit dem Lohn sehr zufrieden.",
+       "a": "f",
+       "trap": "teil",
+       "ev": "Es könnte mehr sein.",
+       "why": "„Es könnte mehr sein“ = nicht sehr zufrieden."
+      },
+      {
+       "n": 20,
+       "type": "rf",
+       "q": "Manchmal ist eine Lieferung nicht erfolgreich.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "wenn der Empfänger nicht da ist oder die Adresse nicht stimmt",
+       "why": "Er erzählt, was passiert, wenn etwas nicht klappt."
+      },
+      {
+       "n": 21,
+       "type": "rf",
+       "q": "Der Kollege Markus hat wegen Krankheit den Job verloren.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "Dann haben sie ihn nicht mehr genommen.",
+       "why": "Markus war krank, danach wurde er rausgeschmissen."
+      },
+      {
+       "n": 22,
+       "type": "rf",
+       "q": "Marion wird für Oliver eine neue Arbeit suchen.",
+       "a": "f",
+       "trap": "person",
+       "ev": "Willst du dir nicht einen anderen Job suchen?",
+       "why": "Marion schlägt vor, dass <b>Oliver</b> selbst sucht."
+      }
+     ]
+    }
+   ]
+  },
+  "c-mt1-h4": {
+   "id": "c-mt1-h4",
+   "level": "b1",
+   "module": "hoeren",
+   "teil": 4,
+   "instr": "Sie hören eine Diskussion im Radio. Sie hören den Text zweimal. Dazu lösen Sie acht Aufgaben. Wer sagt was? Die Moderatorin der Radiosendung „Diskussion am Sonntag“ spricht mit der Sportlerin Daniela Prinz und dem Sportler Steffen Brandeis über das Thema „Verbindet der Sport die Menschen?“",
+   "source": "licensed",
+   "speakers": {
+    "MOD": "Moderatorin",
+    "PRI": "Daniela Prinz",
+    "BRA": "Steffen Brandeis"
+   },
+   "groups": [
+    {
+     "title": "Verbindet der Sport die Menschen?",
+     "audio": "licensed/audio/mt1-t4.mp3",
+     "plays": 1,
+     "note": "Die Aufnahme ist wie in der Prüfung: mit Lesezeit, Pausen und Wiederholung. Einmal starten und durchlaufen lassen.",
+     "script": [
+      [
+       "MOD",
+       "Liebe Hörerinnen und Hörer, willkommen zur Sendung „Diskussion am Sonntag\". Unser Thema ist heute: Verbindet der Sport die Menschen? Dazu haben wir als Studiogäste die populäre Sportlerin Daniela Prinz und den nicht weniger bekannten Sportler Steffen Brandeis eingeladen. Beide haben ihre Profikarriere beendet und sind weiter in der Sportförderung aktiv. Frau Prinz, Olympia steht vor der Tür, die Vorbereitungen laufen. Sie selbst hatten in den letzten Spielen viel Erfolg mit Siegen und Medaillen. Wie stehen Sie heute zu Olympia?"
+      ],
+      [
+       "PRI",
+       "Weiterhin positiv, aber inzwischen etwas kritischer als früher. Mehr und mehr entwickelt sich Olympia zu einem Mega-Event, bei dem die ursprüngliche große Idee verschwindet, dass die Menschen verschiedener Nationen zusammenkommen, um friedlich sportliche Wettbewerbe auszutragen. Das ist ein bisschen schade."
+      ],
+      [
+       "MOD",
+       "Mhm. Und Sie, Herr Brandeis, ich glaube, Sie sehen die Olympiade eher kritisch."
+      ],
+      [
+       "BRA",
+       "Völlig. Olympia war schon immer eine riesige kommerzielle Veranstaltung, nur zu dem Zweck, dass sich einzelne Nationen und Stars erfolgreich präsentieren können. Beim Profisport geht es in erster Linie um Erfolg und Geld. Mit echtem Sport hat das nichts zu tun."
+      ],
+      [
+       "PRI",
+       "Warum so negativ? Sie waren doch selbst einmal ein Star unter den Radprofis. Da waren Sie ein echter Leistungssportler, auch bei solchen Großveranstaltungen. Sie haben dabei mitgemacht wie ich im Schwimmen."
+      ],
+      [
+       "BRA",
+       "Ich habe meine Meinung geändert."
+      ],
+      [
+       "MOD",
+       "Es gibt viele, die den Leistungssport negativ beurteilen. Frau Prinz, was würden Sie denn sagen? Was sind die positiven Wirkungen des Leistungssports?"
+      ],
+      [
+       "PRI",
+       "Bekannte Sportler können junge Menschen dazu bringen, Sport zu machen und sich in Sportvereinen zu engagieren. Sehen Sie, bei uns im Emsland kam Schwimmen als Sport praktisch nicht vor, bis meine Freundin Britta und ich internationale Erfolge heimbrachten. Sehr schnell entstanden Schwimmbäder auch für Schulen und Schwimmen wurde wichtiger Teil des Sportunterrichts."
+      ],
+      [
+       "MOD",
+       "Ein schöner Erfolg."
+      ],
+      [
+       "PRI",
+       "Ja, das finde ich toll. Wir hatten als Profis, als Stars Einfluss auf Kinder, Jugendliche, Eltern. Wir konnten ihnen zeigen, dass man etwas leisten kann, wenn man nur will. Jetzt bin ich Schwimmtrainerin in drei Sportvereinen und ich freue mich, wenn Jungen und Mädchen Sommer und Winter beim Schwimmen ihren Spaß haben, sich bewegen und nicht nur dauernd vor dem Computer oder Fernseher sitzen. Das ist doch total ungesund."
+      ],
+      [
+       "BRA",
+       "Ich bin auf dem gleichen Weg. Ein Erlebnis hat mich dazu gebracht, für den Leistungssport eine Alternative zu finden. Beim letzten Rennen, da war ich schon dreiunddreißig, fuhr neben mir Manuel, ein prima Kerl. Da wurde er auf einmal langsamer, fiel vorne über sein Rad und auf die Straße. Er war sofort tot. Herzschlag."
+      ],
+      [
+       "MOD",
+       "Ach, das tut mir leid. Wie kam das?"
+      ],
+      [
+       "BRA",
+       "Ich weiß nicht. Vielleicht hat er etwas eingenommen. Und dann die Hitze. Auf jeden Fall war das für mich ein Zeichen: Jetzt ist Schluss. Meine Frau und die Kinder sind mir jetzt noch dankbar dafür. Jetzt habe ich ein Fahrradgeschäft in Darmstadt und zufriedene Kunden. Außerdem hatte ich dann noch eine Idee."
+      ],
+      [
+       "PRI",
+       "Welche Idee?"
+      ],
+      [
+       "BRA",
+       "Angefangen hat es mit Fahrradkursen für Anfänger und Mountainbike-Kursen für Kinder. Dann organisierte ich Radtouren für Jugendliche in den Odenwald. Vor allem wollte ich, dass die jungen Leute merken, wie viel Spaß sportliche Bewegung macht. Außerdem war das auch eine gute Gelegenheit, junge Leute aus verschiedenen Nationen zusammenzubringen."
+      ],
+      [
+       "MOD",
+       "Es gibt ja verschiedene, sehr erfolgreiche Sportprojekte in der Integrationsarbeit."
+      ],
+      [
+       "BRA",
+       "Auf jeden Fall. Wir haben jetzt sogar ein spezielles Integrationsprojekt geplant, für das ich auch eine staatliche Förderung beantragt habe und die Chancen stehen recht gut."
+      ],
+      [
+       "PRI",
+       "Das ist aber interessant. Wir wollten nämlich europäische Schwimmtreffen mit anderen Ländern und Schulen organisieren, aber wir wissen nicht, wie wir das finanzieren können. Herr Brandeis, können Sie mir da einige Tipps geben?"
+      ],
+      [
+       "BRA",
+       "Sehr gern."
+      ],
+      [
+       "MOD",
+       "Ich komme zurück zu unserer Frage am Anfang: Verbindet der Sport die Menschen? Sagen Sie uns dazu noch ein Schlusswort."
+      ],
+      [
+       "PRI",
+       "Nach meiner Erfahrung sage ich Ja. Wenn Menschen miteinander trainieren und gemeinsam an Wettkämpfen teilnehmen, verbindet das sehr. Das gilt für den Freizeit- wie für den Leistungssport."
+      ],
+      [
+       "BRA",
+       "Ich denke, im Profisport herrscht vor allem Konkurrenzkampf. Das bringt die Menschen nicht so sehr zusammen. Aber beim Freizeitsport treffen sich oft verschiedene Menschen, die sonst keinen Kontakt zueinander hätten. Es können dabei sogar Freundschaften entstehen, anders als beim Profisport. Nur mit einer Ergänzung: Wenn ich mit Freunden am Samstag ins Stadion fahre zu unserem Lieblingsverein, dann verbindet uns das auch sehr stark."
+      ],
+      [
+       "MOD",
+       "Liebe Gäste, ich danke Ihnen, dass Sie bei uns im Studio waren und so lebendig zu unserem Thema beigetragen haben. Liebe Hörerinnen und Hörer, danke fürs Zuhören. Bis zu unserer nächsten Sendung in zwei Wochen."
+      ]
+     ],
+     "items": [
+      {
+       "n": 23,
+       "type": "who",
+       "q": "Geld und Politik bestimmen schon seit Langem die Olympiade.",
+       "a": "c",
+       "trap": "synonym",
+       "ev": "Olympia war schon immer eine riesige kommerzielle Veranstaltung",
+       "why": "Herr Brandeis: „schon immer“ kommerziell, Erfolg und Geld."
+      },
+      {
+       "n": 24,
+       "type": "who",
+       "q": "Viele Menschen finden Leistungssport nicht gut.",
+       "a": "a",
+       "trap": "person",
+       "ev": "Es gibt viele, die den Leistungssport negativ beurteilen.",
+       "why": "Die <b>Moderatorin</b> sagt das, bevor sie Frau Prinz fragt."
+      },
+      {
+       "n": 25,
+       "type": "who",
+       "q": "Erfolge im Profisport können den Sport beliebter machen.",
+       "a": "b",
+       "trap": "synonym",
+       "ev": "Bekannte Sportler können junge Menschen dazu bringen, Sport zu machen",
+       "why": "Frau Prinz: Nach ihren Erfolgen wurde Schwimmen im Emsland beliebt."
+      },
+      {
+       "n": 26,
+       "type": "who",
+       "q": "Sport kann verschiedene Nationalitäten gut miteinander in Kontakt bringen.",
+       "a": "c",
+       "trap": "synonym",
+       "ev": "junge Leute aus verschiedenen Nationen zusammenzubringen",
+       "why": "Herr Brandeis über seine Radtouren. Diese Aussage kommt <b>nach</b> Aufgabe 27 im Text."
+      },
+      {
+       "n": 27,
+       "type": "who",
+       "q": "Es ist besser, wenn Kinder Sport machen, statt nur fernzusehen.",
+       "a": "b",
+       "trap": "synonym",
+       "ev": "Das ist doch total ungesund.",
+       "why": "Frau Prinz: nicht nur vor dem Computer oder Fernseher sitzen."
+      },
+      {
+       "n": 28,
+       "type": "who",
+       "q": "Für die Finanzierung von internationalen Schülertreffen brauche ich Ideen.",
+       "a": "b",
+       "trap": "person",
+       "ev": "können Sie mir da einige Tipps geben?",
+       "why": "Frau Prinz fragt Herrn Brandeis nach Tipps."
+      },
+      {
+       "n": 29,
+       "type": "who",
+       "q": "Der Kampf im Profisport bringt die Menschen nicht zusammen.",
+       "a": "c",
+       "trap": "synonym",
+       "ev": "im Profisport herrscht vor allem Konkurrenzkampf",
+       "why": "Herr Brandeis im Schlusswort."
+      },
+      {
+       "n": 30,
+       "type": "who",
+       "q": "Beim Sport kann man auch Freunde finden.",
+       "a": "c",
+       "trap": "synonym",
+       "ev": "Freundschaften",
+       "why": "Herr Brandeis: Beim Freizeitsport können sogar Freundschaften entstehen."
+      }
+     ]
+    }
+   ],
+   "who": [
+    "Moderatorin",
+    "Daniela Prinz",
+    "Steffen Brandeis"
+   ]
+  },
+  "c-mt2-h1": {
+   "id": "c-mt2-h1",
+   "level": "b1",
+   "module": "hoeren",
+   "teil": 1,
+   "instr": "Sie hören nun fünf kurze Texte. Sie hören jeden Text zweimal. Zu jedem Text lösen Sie zwei Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung. Das Beispiel am Anfang zählt nicht.",
+   "source": "licensed",
+   "speakers": {
+    "B0": "Beispiel",
+    "T1": "Text 1",
+    "T2": "Text 2",
+    "T3": "Text 3",
+    "T4": "Text 4",
+    "T5": "Text 5"
+   },
+   "groups": [
+    {
+     "title": "Fünf kurze Texte",
+     "audio": "licensed/audio/mt2-t1.mp3",
+     "plays": 1,
+     "note": "Die Aufnahme ist wie in der Prüfung: mit Lesezeit, Pausen und Wiederholung. Einmal starten und durchlaufen lassen.",
+     "script": [
+      [
+       "B0",
+       "Sie hören eine Nachricht auf dem Anrufbeantworter. Hallo Claudia, hier ist Peter. Du, am Samstagabend 20 Uhr gibt es eine interessante Theatervorstellung: Sie spielen „Wilhelm Tell“ von Schiller. Das Stück soll wirklich gut sein. Ruf mich bitte an und sag mir Bescheid, ob du Lust und Zeit hast. Ich würde dann die Karten besorgen. Wir könnten natürlich auch ins Kino oder in einen Club gehen, aber das Theater interessiert mich mehr. Außerdem können wir ja auch danach noch tanzen gehen, die Vorstellung geht nur bis ca. 22.30 Uhr. Also dann, bis später. Ciao."
+      ],
+      [
+       "T1",
+       "Sie hören eine Information im Radio. Am Ende unserer Sendung nun noch ein Tipp für Radsportfans: Kommenden Sonntag findet das Radrennen „Rund um den Finanzplatz Eschborn-Frankfurt“ statt. Start der Profis ist um neun Uhr in Eschborn. Das Ziel vor der Frankfurter Oper wird gegen 12.45 Uhr erreicht. Die Freizeitsportler und Nachwuchsfahrer starten ab 13 Uhr. Leider sind heute keine Teilnehmeranmeldungen mehr möglich, Interessierte sind jedoch herzlich als Zuschauer eingeladen. Über die Rennstrecke und das Programm können Sie sich auf unserer Internetseite informieren."
+      ],
+      [
+       "T2",
+       "Sie hören einen Hinweis im Radio. Hallo, liebe Hörerinnen und Hörer, in unserer Sendung letzte Woche haben wir über Kleidung berichtet, die giftige Stoffe enthält und dadurch für die Gesundheit schädlich ist oder sogar krank macht. Dazu haben wir viele Anrufe und E-Mails erhalten. Deshalb noch einmal der Hinweis: Sie können sich die Sendung auf unserer Internetseite noch einmal anhören oder Sie können unsere Broschüre bestellen. Die Adresse finden Sie auf unserer Internetseite."
+      ],
+      [
+       "T3",
+       "Sie hören am Hamburger Passagierhafen eine Durchsage. Sehr geehrte Fahrgäste, gebucht für das Schiff „Möwe“ zur Insel Helgoland. Leider muss die Fahrt heute abgesagt werden, da die Wettervorhersage schwere Stürme für die Nordsee gemeldet hat. Bitte informieren Sie sich ab morgen über einen Ersatztermin beim Veranstaltungsbüro „Nordsee-Tours“, Telefon und Internet-Adresse finden Sie in Ihren Reiseunterlagen. Gelöste Karten bleiben gültig oder können zurückgegeben werden. Wir bitten um Ihr Verständnis und würden uns freuen, Sie unter besseren Wetterbedingungen bald wieder bei uns zu begrüßen. Vielen Dank!"
+      ],
+      [
+       "T4",
+       "Sie hören eine Nachricht auf dem Anrufbeantworter. Grüß Gott, Herr Kleff, hier ist Birgit Burg von der Firma CONCEPT. Wir hatten Sie morgen um 11 Uhr bei Frau Bergmann zu einem Vorstellungsgespräch eingeladen. Leider müssen wir den Termin verschieben, und zwar auf Donnerstag, 14.30 Uhr. Wenn Sie damit einverstanden sind, müssen Sie sich nicht mehr melden. Falls dieser Termin für Sie ungünstig ist, rufen Sie mich bitte an. Wir finden dann eine andere Möglichkeit, vielleicht nächste Woche. Vielen Dank, auf Wiederhören!"
+      ],
+      [
+       "T5",
+       "Sie hören eine Werbung im Radio. Hallo Tierfreunde, hallo liebe Kinder, wir haben eine schöne Nachricht für euch! Im Zoo Hellabrunn haben kleine und große Tiere Nachwuchs bekommen. Bei uns könnt ihr sehen, wie Löwenbabys miteinander spielen, wie ein kleiner Elefant laufen lernt oder wie eine Affenmutter ihr Junges füttert. Ihr werdet begeistert sein. Der Zoo ist täglich von 9 Uhr bis 18 Uhr geöffnet. Für Familien gibt es besonders günstige Eintrittspreise. Und übrigens: Wenn ihr Fragen habt: Unsere Tierpfleger beantworten sie gern."
+      ]
+     ],
+     "items": [
+      {
+       "n": 1,
+       "type": "rf",
+       "q": "Text 1: In Frankfurt findet am Sonntag eine Sportveranstaltung statt.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "Kommenden Sonntag findet das Radrennen",
+       "why": "Radrennen = Sportveranstaltung, Ziel in Frankfurt."
+      },
+      {
+       "n": 2,
+       "type": "abc",
+       "q": "Text 1: Beim Rennen kann mitfahren, wer …",
+       "a": "c",
+       "trap": "wort",
+       "opts": [
+        "heute um neun am Start steht.",
+        "ein Profisportler ist.",
+        "bereits angemeldet ist."
+       ],
+       "ev": "Leider sind heute keine Teilnehmeranmeldungen mehr möglich",
+       "why": "Neue Anmeldungen gehen nicht mehr. Neun Uhr ist nur der Start der Profis."
+      },
+      {
+       "n": 3,
+       "type": "rf",
+       "q": "Text 2: Im Internet findet man ein neues Gesundheitsbuch.",
+       "a": "f",
+       "trap": "wort",
+       "ev": "Sie können unsere Broschüre bestellen",
+       "why": "Im Internet kann man die Sendung hören. Bestellen kann man eine Broschüre, kein Buch."
+      },
+      {
+       "n": 4,
+       "type": "abc",
+       "q": "Text 2: In der Sendung letzte Woche ging es um …",
+       "a": "c",
+       "trap": "synonym",
+       "opts": [
+        "Kleidung aus dem Internet.",
+        "alte, gebrauchte Kleidung.",
+        "ungesunde Kleidung."
+       ],
+       "ev": "Kleidung berichtet, die giftige Stoffe enthält",
+       "why": "giftig, schädlich für die Gesundheit = ungesund."
+      },
+      {
+       "n": 5,
+       "type": "rf",
+       "q": "Text 3: Wegen stürmischen Wetters gibt es eine Fahrplanänderung.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "da die Wettervorhersage schwere Stürme für die Nordsee gemeldet hat",
+       "why": "Wegen Sturm fällt die Fahrt aus, also ändert sich der Fahrplan."
+      },
+      {
+       "n": 6,
+       "type": "abc",
+       "q": "Text 3: Die Fahrt nach Helgoland …",
+       "a": "a",
+       "trap": "detail",
+       "opts": [
+        "kann heute nicht stattfinden.",
+        "startet etwas später.",
+        "wird auf morgen verschoben."
+       ],
+       "ev": "Leider muss die Fahrt heute abgesagt werden",
+       "why": "Abgesagt. „Ab morgen“ soll man sich nur über einen neuen Termin informieren."
+      },
+      {
+       "n": 7,
+       "type": "rf",
+       "q": "Text 4: Herr Kleff hat sich bei der Firma Concept beworben.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "zu einem Vorstellungsgespräch eingeladen",
+       "why": "Ein Vorstellungsgespräch bekommt man nur nach einer Bewerbung."
+      },
+      {
+       "n": 8,
+       "type": "abc",
+       "q": "Text 4: Das Gespräch mit Frau Bergmann …",
+       "a": "b",
+       "trap": "vorher",
+       "opts": [
+        "ist ganz abgesagt.",
+        "findet zu einem anderen Termin statt.",
+        "ist auch telefonisch möglich."
+       ],
+       "ev": "Leider müssen wir den Termin verschieben",
+       "why": "Verschoben auf Donnerstag, 14.30 Uhr. Anrufen soll er nur, wenn der Termin nicht passt."
+      },
+      {
+       "n": 9,
+       "type": "rf",
+       "q": "Text 5: Ein Zoo mit Kleintieren wird neu eröffnet.",
+       "a": "f",
+       "trap": "wort",
+       "ev": "Im Zoo Hellabrunn haben kleine und große Tiere Nachwuchs bekommen.",
+       "why": "Nichts wird eröffnet. Die Tiere haben Babys bekommen."
+      },
+      {
+       "n": 10,
+       "type": "abc",
+       "q": "Text 5: Was gibt es Interessantes zu sehen?",
+       "a": "b",
+       "trap": "synonym",
+       "opts": [
+        "Die Geburt von Tierbabys.",
+        "Das Verhalten von Tierkindern.",
+        "Die Arbeit von Tierpflegern."
+       ],
+       "ev": "wie Löwenbabys miteinander spielen",
+       "why": "spielen, laufen lernen, gefüttert werden = Verhalten. Die Tierpfleger beantworten nur Fragen."
+      }
+     ]
+    }
+   ]
+  },
+  "c-mt2-h2": {
+   "id": "c-mt2-h2",
+   "level": "b1",
+   "module": "hoeren",
+   "teil": 2,
+   "instr": "Sie hören einen Text. Sie hören den Text einmal. Dazu lösen Sie fünf Aufgaben. Sie sind in München im „Deutschen Museum“. Vor dem Rundgang hören Sie von der Museumsführerin einen Vortrag zur Einführung.",
+   "source": "licensed",
+   "speakers": {
+    "GUI": "Museumsführerin"
+   },
+   "groups": [
+    {
+     "title": "Im Deutschen Museum",
+     "audio": "licensed/audio/mt2-t2.mp3",
+     "plays": 1,
+     "note": "Die Aufnahme ist wie in der Prüfung: mit Lesezeit, Pausen und Wiederholung. Einmal starten und durchlaufen lassen.",
+     "script": [
+      [
+       "GUI",
+       "Ich freue mich, Sie hier im Deutschen Museum zu begrüßen, und möchte Ihnen zuerst einige Vorausinformationen geben."
+      ],
+      [
+       "GUI",
+       "Wie Sie im Prospekt zum Museum lesen können, wurde das Deutsche Museum 1903 nach einer Idee von Oskar von Miller, einem Münchner Bauingenieur, gegründet. Das Museumsgebäude hier auf der Isarinsel wurde 1929 eröffnet und im Laufe der Zeit durch Anbauten ergänzt. 1944, also im Zweiten Weltkrieg, wurden große Teile des Museums zerstört. Das Gebäude wurde jedoch wieder aufgebaut und schon bald wurde es ein beliebtes Ziel für Einheimische und Touristen aus aller Welt. Mit circa 1,5 Millionen Besuchern jährlich ist das Deutsche Museum heute das meistbesuchte Museum in ganz Deutschland."
+      ],
+      [
+       "GUI",
+       "Der Name „Deutsches Museum“ könnte missverstanden werden, denn es ist kein Museum über Deutschland, die Deutschen und die deutsche Kultur. Sondern es ist ein Museum, in dem gezeigt wird, wie sich die Naturwissenschaften und die Technik von früheren Zeiten bis heute entwickelt haben."
+      ],
+      [
+       "GUI",
+       "In den Abteilungen des Museums werden lebendig und realistisch Informationen, Modelle und Originale aus verschiedenen naturwissenschaftlichen und technischen Bereichen präsentiert – zu etwa 50 Themenbereichen wie Astronomie, Physik und Chemie oder auch Agrar- und Lebensmitteltechnik, Bergbau, Energietechnik, Foto & Film, Musikinstrumente, Luft- und Raumfahrt und Schifffahrt. Interessant ist auch die Abteilung, in der gezeigt wird, wie verschiedene Materialien, zum Beispiel Glas oder Papier, hergestellt und verarbeitet werden. Besonders beliebt bei Jung und Alt sind die zahlreichen Fahrzeuge wie Autos, Schiffe, Flugzeuge oder Züge, die man nicht nur anschauen, sondern in die man auch einsteigen kann. Das Besondere an diesem Museum ist, dass die Besucher hier selbst beteiligt sind, das heißt, dass sie viel probieren und selbst Versuche machen können. So können sie Naturgesetze oder Techniken besser verstehen."
+      ],
+      [
+       "GUI",
+       "Auf unserer gemeinsamen zweistündigen Runde durch das Museum müssen wir uns natürlich auf einige Teile des Museums beschränken. Ich werde mit Ihnen vier der beliebtesten Abteilungen besuchen: das Bergwerk, die Luft- und Raumfahrtabteilung, die Abteilung Schifffahrt und zum Schluss den Elektro-Saal. Dort werden Sie erleben, wie in der Natur Blitze entstehen. Bitte beachten Sie, dass es bei dieser Präsentation sehr laut wird. Wer von Ihnen Hörprobleme hat, sollte unbedingt seine Ohren schützen."
+      ],
+      [
+       "GUI",
+       "Nach meiner Führung haben Sie dann noch bis zur Schließung des Museums Zeit, in die Abteilungen zu gehen, die wir aus Zeitgründen nicht sehen konnten und für die Sie sich besonders interessieren. Bitte beachten Sie dabei, dass die Abteilungen Informatik und Energietechnik zurzeit wegen Bauarbeiten geschlossen sind. So, gehen wir jetzt, hier entlang bitte …"
+      ]
+     ],
+     "items": [
+      {
+       "n": 11,
+       "type": "abc",
+       "q": "Was will das Deutsche Museum zeigen?",
+       "a": "b",
+       "trap": "wort",
+       "opts": [
+        "Deutsche Technik und Kultur.",
+        "Die Entwicklung der Technik.",
+        "Die Geschichte der Isarinsel."
+       ],
+       "ev": "wie sich die Naturwissenschaften und die Technik von früheren Zeiten bis heute entwickelt haben",
+       "why": "Der Name klingt nach deutscher Kultur, aber genau das ist es <b>nicht</b>."
+      },
+      {
+       "n": 12,
+       "type": "abc",
+       "q": "Man kann im Museum …",
+       "a": "a",
+       "trap": "wort",
+       "opts": [
+        "eigene Versuche machen.",
+        "mit den Autos herumfahren.",
+        "Papier selbst herstellen."
+       ],
+       "ev": "dass sie viel probieren und selbst Versuche machen können",
+       "why": "In die Autos kann man nur einsteigen. Wie Papier hergestellt wird, wird nur gezeigt."
+      },
+      {
+       "n": 13,
+       "type": "abc",
+       "q": "Werden die Besucher in alle Abteilungen geführt?",
+       "a": "c",
+       "trap": "teil",
+       "opts": [
+        "Ja, wenn genug Zeit ist.",
+        "Ja, in alle.",
+        "Nein, nicht in alle."
+       ],
+       "ev": "Ich werde mit Ihnen vier der beliebtesten Abteilungen besuchen",
+       "why": "Nur vier von etwa 50 Bereichen."
+      },
+      {
+       "n": 14,
+       "type": "abc",
+       "q": "Was sehen die Besucher am Ende der Führung?",
+       "a": "b",
+       "trap": "detail",
+       "opts": [
+        "Neueste Energietechniken.",
+        "Die Entstehung von Blitzen.",
+        "Ein Bergwerk."
+       ],
+       "ev": "Dort werden Sie erleben, wie in der Natur Blitze entstehen.",
+       "why": "Zum Schluss der Elektro-Saal mit Blitzen. Das Bergwerk kommt zuerst."
+      },
+      {
+       "n": 15,
+       "type": "abc",
+       "q": "Die Besucher können nach der Führung …",
+       "a": "a",
+       "trap": "negation",
+       "note": "Im Buch sind die Antworten zu Aufgabe 15 falsch gedruckt (Kopie von 14). Diese drei Antworten sind rekonstruiert, die Lösung a stammt aus dem Lösungsteil.",
+       "opts": [
+        "allein weitere Abteilungen besuchen.",
+        "die Abteilung Energietechnik besichtigen.",
+        "noch einmal ins Bergwerk fahren."
+       ],
+       "ev": "Nach meiner Führung haben Sie dann noch bis zur Schließung des Museums Zeit, in die Abteilungen zu gehen",
+       "why": "Energietechnik ist wegen Bauarbeiten geschlossen."
+      }
+     ]
+    }
+   ]
+  },
+  "c-mt2-h3": {
+   "id": "c-mt2-h3",
+   "level": "b1",
+   "module": "hoeren",
+   "teil": 3,
+   "instr": "Sie hören nun ein Gespräch. Sie hören das Gespräch einmal. Dazu lösen Sie sieben Aufgaben. Wählen Sie: Sind die Aussagen Richtig oder Falsch? Sie sitzen im Stadtpark und hören, wie sich ein Mann und eine Frau über ihren Urlaub unterhalten.",
+   "source": "licensed",
+   "speakers": {
+    "ELK": "Elke",
+    "RAI": "Rainer"
+   },
+   "groups": [
+    {
+     "title": "Elke und Rainer im Stadtpark",
+     "audio": "licensed/audio/mt2-t3.mp3",
+     "plays": 1,
+     "note": "Die Aufnahme ist wie in der Prüfung: mit Lesezeit, Pausen und Wiederholung. Einmal starten und durchlaufen lassen.",
+     "script": [
+      [
+       "ELK",
+       "Rainer, endlich bist du da!"
+      ],
+      [
+       "RAI",
+       "Entschuldige!"
+      ],
+      [
+       "ELK",
+       "Ein Glück, dass schönes Wetter ist, aber Warten macht trotzdem keinen Spaß! Was war denn los?"
+      ],
+      [
+       "RAI",
+       "Elke, du kennst das doch auch: Ich bin gerade dabei, aus dem Büro rauszugehen, da klingelt das Telefon und ich dummer Mensch gehe ran. Das war natürlich was „Wichtiges“. Ich musste einem Kunden etwas erklären, dann kam auch noch die Chefin rein usw. usw."
+      ],
+      [
+       "ELK",
+       "Ja, gut, ich verstehe."
+      ],
+      [
+       "RAI",
+       "Aber du hast etwas zu lesen dabei. Zeig mal."
+      ],
+      [
+       "ELK",
+       "Das ist ein schöner Mittelmeer-Katalog aus dem Reisebüro."
+      ],
+      [
+       "RAI",
+       "Du warst in einem Reisebüro?"
+      ],
+      [
+       "ELK",
+       "Ja, wegen unserer Urlaubsreise."
+      ],
+      [
+       "RAI",
+       "Unserer Reise?"
+      ],
+      [
+       "ELK",
+       "Rainer, überleg mal: Wir müssen uns langsam entscheiden, wo wir unseren Urlaub verbringen wollen."
+      ],
+      [
+       "RAI",
+       "Stimmt, aber …"
+      ],
+      [
+       "ELK",
+       "Aber was? Was machst du denn für ein Gesicht? Stimmt etwas nicht?"
+      ],
+      [
+       "RAI",
+       "Elke, ich habe mir eigentlich auch schon Gedanken über den Urlaub gemacht."
+      ],
+      [
+       "ELK",
+       "Prima, dann können wir ja planen."
+      ],
+      [
+       "RAI",
+       "Moment mal, so einfach ist das nicht. Du weißt doch, wo ich gerne hinfahren will."
+      ],
+      [
+       "ELK",
+       "Weiß ich schon: hoch in den Norden, nach Island, Grönland, zum Nordpol …"
+      ],
+      [
+       "RAI",
+       "Nun übertreib nicht!"
+      ],
+      [
+       "ELK",
+       "Entschuldige, aber auf jeden Fall in den Norden. Und du weißt, wohin ich will."
+      ],
+      [
+       "RAI",
+       "Ja, in den Süden, ans Mittelmeer, dahin wo’s warm ist. Und da ist auch der Jannis in Athen …"
+      ],
+      [
+       "ELK",
+       "Pass auf, was du sagst!"
+      ],
+      [
+       "RAI",
+       "Tut mir leid, aber …"
+      ],
+      [
+       "ELK",
+       "Wir haben eben nicht den gleichen Geschmack."
+      ],
+      [
+       "RAI",
+       "Du, im Ernst, mir ist es dort einfach zu heiß im Sommer, ständig diese Sonne …"
+      ],
+      [
+       "ELK",
+       "Und mir ist es im Norden zu kalt. Letztes Mal habe ich so gefroren."
+      ],
+      [
+       "RAI",
+       "Aber die Natur war fantastisch: die riesigen Berge, das klare Wasser. Das hat dir doch auch gefallen!"
+      ],
+      [
+       "ELK",
+       "Ja, schon."
+      ],
+      [
+       "RAI",
+       "Siehst du. Warum nicht wieder nach Norwegen?"
+      ],
+      [
+       "ELK",
+       "Du, wir haben doch eine Vereinbarung!"
+      ],
+      [
+       "RAI",
+       "Jetzt redest du wie eine Geschäftsfrau oder Politikerin. Ja, ich weiß, was wir ausgemacht haben: ein Jahr in den Norden, das nächste Jahr in den Süden."
+      ],
+      [
+       "ELK",
+       "Und dieses Jahr bin ich an der Reihe: Diesmal geht es in den Süden!"
+      ],
+      [
+       "RAI",
+       "Leider."
+      ],
+      [
+       "ELK",
+       "Weißt du was, dann fahren wir einfach getrennt in den Urlaub, dann hat jeder, was er unbedingt braucht! Meine Kollegin und ihr Mann machen das öfter – ohne Probleme."
+      ],
+      [
+       "RAI",
+       "Das ist keine gute Idee. Das kommt nicht infrage! Bitte nicht!"
+      ],
+      [
+       "ELK",
+       "Nun reg dich nicht auf. Vielleicht wäre das die Lösung: Wir fliegen in den Süden, auf eine Insel, zum Beispiel nach Rhodos und zwar Anfang Oktober. Dann hast du keine Hitze, frischen Wind, manchmal regnet es sogar – und es gibt eine interessante Kultur. Außerdem sind die vielen Touristen weg."
+      ],
+      [
+       "RAI",
+       "Das klingt nicht schlecht. Überredet."
+      ],
+      [
+       "ELK",
+       "Super – du bist ein Schatz!"
+      ],
+      [
+       "RAI",
+       "Übrigens, du solltest in der Werbung arbeiten. Das hast du gut gemacht."
+      ],
+      [
+       "ELK",
+       "Danke. Jetzt müssen wir in der Arbeit den Urlaub beantragen. Hoffentlich bekommen wir beide frei. Bei mir könnte es eventuell schwierig werden, denn im Herbst gibt es immer viel zu tun."
+      ],
+      [
+       "RAI",
+       "Es wird schon klappen. Und dann geht’s ab ins Reisebüro!"
+      ],
+      [
+       "ELK",
+       "Ich freue mich schon."
+      ]
+     ],
+     "items": [
+      {
+       "n": 16,
+       "type": "rf",
+       "q": "Rainer war gerade bei einem Kunden.",
+       "a": "f",
+       "trap": "wort",
+       "ev": "Ich musste einem Kunden etwas erklären",
+       "why": "Er war im Büro und hat mit einem Kunden telefoniert."
+      },
+      {
+       "n": 17,
+       "type": "rf",
+       "q": "Elke hat im Reisebüro schon eine Reise gebucht.",
+       "a": "f",
+       "trap": "vorher",
+       "note": "Diese Aussage fehlt im Buch (Druckfehler). Sie ist rekonstruiert, die Lösung „falsch“ stammt aus dem Lösungsteil.",
+       "ev": "Das ist ein schöner Mittelmeer-Katalog aus dem Reisebüro.",
+       "why": "Sie hat nur einen Katalog geholt. Entscheiden müssen sie noch."
+      },
+      {
+       "n": 18,
+       "type": "rf",
+       "q": "Rainer ist mit Elkes Plänen zuerst nicht einverstanden.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "Moment mal, so einfach ist das nicht.",
+       "why": "Er will in den Norden, sie in den Süden."
+      },
+      {
+       "n": 19,
+       "type": "rf",
+       "q": "Beide haben vereinbart: ein Jahr Urlaub im Norden, das andere Jahr im Süden.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "ein Jahr in den Norden, das nächste Jahr in den Süden",
+       "why": "„was wir ausgemacht haben“ = vereinbart."
+      },
+      {
+       "n": 20,
+       "type": "rf",
+       "q": "Rainer hat die Idee, allein Urlaub zu machen.",
+       "a": "f",
+       "trap": "person",
+       "ev": "dann fahren wir einfach getrennt in den Urlaub",
+       "why": "Das ist <b>Elkes</b> Idee. Rainer sagt: „Das kommt nicht infrage!“"
+      },
+      {
+       "n": 21,
+       "type": "rf",
+       "q": "Rainer stimmt am Ende zu, in den Süden zu reisen.",
+       "a": "r",
+       "trap": "synonym",
+       "ev": "Das klingt nicht schlecht. Überredet.",
+       "why": "„Überredet“ = er ist einverstanden: Rhodos im Oktober."
+      },
+      {
+       "n": 22,
+       "type": "rf",
+       "q": "Der Urlaub für die beiden ist schon genehmigt.",
+       "a": "f",
+       "trap": "vorher",
+       "ev": "Hoffentlich bekommen wir beide frei.",
+       "why": "Sie müssen den Urlaub erst beantragen."
+      }
+     ]
+    }
+   ]
+  },
+  "c-mt2-h4": {
+   "id": "c-mt2-h4",
+   "level": "b1",
+   "module": "hoeren",
+   "teil": 4,
+   "instr": "Sie hören nun ein Gespräch im Radio. Sie hören das Gespräch zweimal. Dazu lösen Sie acht Aufgaben. Wer sagt was? In der Sendereihe „Die Zukunft unserer Städte“ spricht der Moderator mit dem Stadtplaner Christian Reuter und der Stadträtin Theresa Adam über das Thema „Stadtentwicklung“.",
+   "source": "licensed",
+   "speakers": {
+    "MOD": "Moderator",
+    "ADA": "Theresa Adam",
+    "REU": "Christian Reuter"
+   },
+   "groups": [
+    {
+     "title": "Die Zukunft unserer Städte",
+     "audio": "licensed/audio/mt2-t4.mp3",
+     "plays": 1,
+     "note": "Die Aufnahme ist wie in der Prüfung: mit Lesezeit, Pausen und Wiederholung. Einmal starten und durchlaufen lassen.",
+     "script": [
+      [
+       "MOD",
+       "Willkommen bei unserer Sendereihe „Die Zukunft unserer Städte“. Als Gäste im Studio begrüßen wir heute Frau Theresa Adam, die in der Stadtverwaltung Schlüsselburg für Stadtentwicklung zuständig ist, und den Stadtplaner Herrn Christian Reuter, von der Firma „Pro-Team“. Er hat die Stadt Schlüsselburg in den letzten Monaten bei der Stadtentwicklungsplanung beraten. Frau Adam, wie kam es dazu, dass Herr Reuter als Berater nach Schlüsselburg geholt wurde?"
+      ],
+      [
+       "ADA",
+       "Also, die Situation in Schlüsselburg war zunächst folgende: In den letzten Jahren ist in unserer Stadt nicht viel passiert. Viele dachten, dass es nicht nötig ist, etwas zu verändern, denn auf den ersten Blick bietet Schüsselburg den Einwohnern viele Vorteile: Ruhe, Sicherheit, Arbeitsplätze, günstige Wohnmöglichkeiten, Schulen und Kindergärten und eine sehr schöne Umgebung."
+      ],
+      [
+       "REU",
+       "Das kann ich alles bestätigen."
+      ],
+      [
+       "MOD",
+       "Aber dann?"
+      ],
+      [
+       "ADA",
+       "Als im letzten Jahr der neue Bürgermeister gewählt war, hat er sich die Situation in unserer Stadt genauer angesehen. Und da sind ihm Dinge aufgefallen, die wir in den langen Jahren davor nicht bemerkt haben oder vielleicht „nicht sehen wollten“."
+      ],
+      [
+       "MOD",
+       "Und das war?"
+      ],
+      [
+       "ADA",
+       "Junge Leute verlassen nach der Schule die Stadt und kommen nicht wieder. Jüngere Familien ziehen weg, Firmen haben mittlerweile Probleme, Auszubildende zu finden."
+      ],
+      [
+       "MOD",
+       "Ein Problem, das viele Kleinstädte haben …"
+      ],
+      [
+       "REU",
+       "Ja, genau. Die Stadt ist für junge Leute nicht mehr so attraktiv. Es fehlen vor allem Freizeitangebote und öffentliche Räume für junge Leute."
+      ],
+      [
+       "ADA",
+       "Wir haben uns also zusammengesetzt und beschlossen, dass sich etwas ändern muss. Unser Bürgermeister hat den Vorschlag gemacht, dass wir uns von unabhängigen Fachleuten beraten lassen. Das kostet uns etwas, aber unsere Nachbarstadt hat vor einigen Jahren damit sehr gute Erfahrungen gemacht, auch mit der Firma „ProTeam“."
+      ],
+      [
+       "MOD",
+       "Waren von dieser Idee denn alle sofort überzeugt? Vermutlich nicht, oder?"
+      ],
+      [
+       "ADA",
+       "Es gab im Rathaus natürlich auch einige, die gesagt haben: „Was soll das? Ist doch alles gut gegangen, bis jetzt. Wozu was Neues?“ Wir sind dem Bürgermeister sehr dankbar, dass er nach einigen Diskussionen am Ende fast alle überzeugt hat."
+      ],
+      [
+       "REU",
+       "Ja, das muss man wirklich sagen: Der Bürgermeister hat viel positive Energie und neue Ideen. Ganz im Unterschied zu einigen Älteren im Rathaus …"
+      ],
+      [
+       "MOD",
+       "Und seit Oktober haben Sie nun das Projekt „Unsere Stadt macht mobil“ gestartet."
+      ],
+      [
+       "REU",
+       "Genau. Am Anfang standen die Fragen: Wie ist die aktuelle Situation? Was wollen wir verändern? Wie können wir das erreichen? Dann habe ich gemeinsam mit Frau Adam eine Liste mit Projektvorschlägen zusammengestellt, was in der nächsten Zeit am dringendsten wäre und am schnellsten realisiert werden könnte."
+      ],
+      [
+       "ADA",
+       "Das war sehr viel Arbeit, denn wir waren nicht immer einer Meinung und mussten dann eben Kompromisse finden."
+      ],
+      [
+       "REU",
+       "Richtig, aber am Ende hatten wir eine Liste erarbeitet, die wir dann mit dem Bürgermeister und dem Gemeinderat angesehen haben. Nach einigen Diskussionen haben wir schließlich gemeinsam entschieden, was wann und wie gemacht werden sollte."
+      ],
+      [
+       "MOD",
+       "Ich kann mir vorstellen, dass Sie eine Menge neuer Ideen hatten, dass aber nicht alle sofort realisiert werden können. Bei solchen Plänen ist ja meistens die Finanzierung das Hauptproblem. In Ihrem Fall auch?"
+      ],
+      [
+       "ADA",
+       "Richtig. Einige Projekte müssen sicher noch einige Jahre warten. Zum Beispiel die Modernisierung der Stadthalle. Das ist einfach zu teuer und die Stadt will auf keinen Fall neue Schulden machen. Außerdem ist das auch nicht ganz so wichtig."
+      ],
+      [
+       "REU",
+       "Na, wir werden noch sehen. Die Stadthalle muss moderner und schöner werden. Die alten Sitze im Saal müssen raus und neue rein und eine moderne Technik ist nötig, damit bekannte Künstler in die Stadt kommen. Ich denke, wir sollten bei der Finanzierung etwas ausprobieren: In der Stadt gibt es ja einige Firmen, die gut verdienen und sich wünschen, dass die Stadt für ihre jungen Arbeitnehmer attraktiver wird. Vielleicht unterstützen sie ja das Projekt?"
+      ],
+      [
+       "ADA",
+       "Ja, darüber müssen wir noch reden."
+      ],
+      [
+       "MOD",
+       "Können Sie auch ein Beispiel dafür nennen, was auf jeden Fall gemacht werden wird?"
+      ],
+      [
+       "ADA",
+       "Ja, ein Projekt hat sogar schon begonnen: Wir bauen zurzeit einen Spazierweg rund um den Stadtsee, mit Bänken und einem Spielplatz. Und in der Innenstadt wird bald Tempo 20 gelten, damit man als Fußgänger einen gemütlichen Stadtbummel machen kann."
+      ],
+      [
+       "REU",
+       "Das ist leider nur ein Kompromiss. Ich hatte eigentlich eine Fußgängerzone vorgeschlagen."
+      ],
+      [
+       "ADA",
+       "Aber da haben die Geschäftsleute sehr widersprochen, da sie der Meinung sind, dass die Verkaufszahlen sinken, wenn die Kunden mit dem Wagen nicht vor das Geschäft fahren können."
+      ],
+      [
+       "REU",
+       "Und auch das neue Jugendzentrum wird schon geplant. Wir wollen das alte Gasthaus „zum Löwen“ dafür nutzen, einen Treffpunkt für junge Leute zu schaffen."
+      ],
+      [
+       "MOD",
+       "Lieber Herr Reuter, liebe Frau Adam, leider muss ich Sie hier unterbrechen, unsere Sendezeit ist um. Vielen Dank, dass Sie da waren. Wir würden uns freuen, wenn Sie uns vielleicht in ein, zwei Jahren noch einmal besuchen und berichten, wie sich Schlüsselburg entwickelt hat."
+      ],
+      [
+       "ADA",
+       "Sehr gerne."
+      ],
+      [
+       "REU",
+       "Gerne. Bis dann."
+      ]
+     ],
+     "items": [
+      {
+       "n": 23,
+       "type": "who",
+       "q": "In Schlüsselburg dachte man bisher, dass es in der Stadt keine Probleme gibt.",
+       "a": "b",
+       "trap": "synonym",
+       "ev": "Viele dachten, dass es nicht nötig ist, etwas zu verändern",
+       "why": "Frau Adam über die Zeit vor dem neuen Bürgermeister."
+      },
+      {
+       "n": 24,
+       "type": "who",
+       "q": "Viele junge Leute wollen nicht mehr in Schlüsselburg bleiben.",
+       "a": "b",
+       "trap": "synonym",
+       "ev": "Junge Leute verlassen nach der Schule die Stadt und kommen nicht wieder.",
+       "why": "Frau Adam. Herr Reuter sagt danach nur „Ja, genau“."
+      },
+      {
+       "n": 25,
+       "type": "who",
+       "q": "Die Stadt bietet zu wenig Freizeitangebote für junge Leute.",
+       "a": "c",
+       "trap": "person",
+       "ev": "Es fehlen vor allem Freizeitangebote und öffentliche Räume für junge Leute.",
+       "why": "Herr Reuter."
+      },
+      {
+       "n": 26,
+       "type": "who",
+       "q": "Für das neue Projekt haben wir eine Liste mit Vorschlägen entwickelt.",
+       "a": "c",
+       "trap": "person",
+       "ev": "Dann habe ich gemeinsam mit Frau Adam eine Liste mit Projektvorschlägen zusammengestellt",
+       "why": "Herr Reuter sagt „ich … mit Frau Adam“. Frau Adam spricht nur über die viele Arbeit."
+      },
+      {
+       "n": 27,
+       "type": "who",
+       "q": "Geld ist bei neuen Projekten oft das größte Problem.",
+       "a": "a",
+       "trap": "person",
+       "ev": "Bei solchen Plänen ist ja meistens die Finanzierung das Hauptproblem.",
+       "why": "Der <b>Moderator</b> fragt das. Frau Adam antwortet nur „Richtig“."
+      },
+      {
+       "n": 28,
+       "type": "who",
+       "q": "Die Stadt braucht unbedingt einen moderneren Saal für Kulturveranstaltungen.",
+       "a": "c",
+       "trap": "person",
+       "ev": "Die Stadthalle muss moderner und schöner werden.",
+       "why": "Herr Reuter. Frau Adam findet die Stadthalle nicht so wichtig."
+      },
+      {
+       "n": 29,
+       "type": "who",
+       "q": "Das Projekt „Stadthalle“ kann die Stadt momentan nicht finanzieren.",
+       "a": "b",
+       "trap": "synonym",
+       "ev": "Das ist einfach zu teuer und die Stadt will auf keinen Fall neue Schulden machen.",
+       "why": "Frau Adam: zu teuer, keine neuen Schulden."
+      },
+      {
+       "n": 30,
+       "type": "who",
+       "q": "Die Geschäftsleute waren gegen eine Fußgängerzone.",
+       "a": "b",
+       "trap": "person",
+       "ev": "Aber da haben die Geschäftsleute sehr widersprochen",
+       "why": "Frau Adam. Herr Reuter hatte die Fußgängerzone vorgeschlagen."
+      }
+     ]
+    }
+   ],
+   "who": [
+    "Moderator",
+    "Theresa Adam",
+    "Christian Reuter"
+   ]
+  }
+ }
+}

@@ -1,0 +1,3331 @@
+{
+ "b2-h1-a": {
+  "id": "b2-h1-a",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Fünf Gespräche und Äußerungen",
+  "instr": "Sie hören fünf Gespräche und Äußerungen. Sie hören jeden Text einmal. Zu jedem Text lösen Sie zwei Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear five conversations and statements. You hear each text once. For each text you answer two questions. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "MAL": "Malte",
+   "JAN": "Jana",
+   "VER": "Radio",
+   "PET": "Frau Petersen",
+   "PRA": "Praxis",
+   "HAR": "Herr Hartmann",
+   "KUL": "Radio"
+  },
+  "genders": {
+   "MAL": "m",
+   "JAN": "f",
+   "VER": "m",
+   "PET": "f",
+   "PRA": "f",
+   "HAR": "m",
+   "KUL": "f"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Zwei Kollegen im Büro",
+    "audio": "audio/b2/b2-h1-a-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MAL",
+      "Jana, hast du schon gehört? Die Bahn wird ab Mittwoch bestreikt. Genau dann wollten wir doch zur Messe nach Leipzig."
+     ],
+     [
+      "JAN",
+      "Ja, ich hab’s heute Morgen in den Nachrichten gehört und gleich mit Frau Albrecht gesprochen. Fliegen kommt für sie nicht in Frage, das ist ihr für die kurze Strecke zu teuer und zu umständlich."
+     ],
+     [
+      "MAL",
+      "Und jetzt? Sollen wir die Reise absagen? Den Stand haben wir ja schon bezahlt."
+     ],
+     [
+      "JAN",
+      "Nein, nein. Sie hat vorgeschlagen, dass wir einen Wagen aus dem Firmenpool nehmen. Ich würde hinfahren, und du übernimmst die Rückfahrt, wenn du magst."
+     ],
+     [
+      "MAL",
+      "Klar, gerne. Aber dann müssen wir früher los. Mit dem Auto brauchen wir bestimmt fünf Stunden, und um vier ist schon der Aufbau."
+     ],
+     [
+      "JAN",
+      "Deshalb dachte ich an halb neun ab Firma. Und das Hotel habe ich vorhin schon umgebucht. Wir wohnen jetzt etwas weiter draußen, dafür gibt es dort einen Parkplatz."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Frau Albrecht möchte, dass die beiden nach Leipzig fliegen.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "Fliegen kommt für sie nicht in Frage",
+      "why": "„kommt nicht in Frage“: Fliegen ist für Frau Albrecht <b>keine</b> Option."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Was hat Jana schon erledigt?",
+      "opts": [
+       "Sie hat die Bahntickets storniert.",
+       "Sie hat eine andere Unterkunft gebucht.",
+       "Sie hat einen Wagen aus dem Firmenpool reserviert."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "das Hotel habe ich vorhin schon umgebucht",
+      "why": "Umgebucht = eine andere Unterkunft. Den Firmenwagen hat Frau Albrecht nur <b>vorgeschlagen</b>, von Bahntickets ist keine Rede."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Verbrauchertipp im Radio",
+    "audio": "audio/b2/b2-h1-a-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "VER",
+      "Und jetzt unser Verbrauchertipp. Viele von Ihnen kennen das: Im Januar schließt man voller Motivation einen Vertrag im Fitnessstudio ab, und im März geht man schon nicht mehr hin. Die gute Nachricht: Verträge, die sich automatisch verlängern, dürfen nach der ersten Laufzeit jederzeit mit einer Frist von einem Monat gekündigt werden. Früher war man oft ein weiteres Jahr gebunden. Wichtig ist allerdings: Die erste Laufzeit, meistens zwölf oder vierundzwanzig Monate, gilt weiterhin. Wer früher raus möchte, braucht einen wichtigen Grund, zum Beispiel eine Krankheit, die Sport dauerhaft unmöglich macht. Ein Umzug in eine andere Stadt reicht dagegen nicht immer, vor allem wenn die Kette dort ebenfalls ein Studio hat. Und noch ein Tipp: Viele Studios haben auf ihrer Webseite inzwischen einen Kündigungsbutton. Wenn Sie online kündigen, machen Sie von der Bestätigung einen Screenshot, dann haben Sie einen Beweis."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Nach der ersten Vertragslaufzeit kann man mit einer kurzen Frist kündigen.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "nach der ersten Laufzeit jederzeit mit einer Frist von einem Monat gekündigt werden",
+      "why": "Ein Monat Frist = kurze Frist, aber erst <b>nach</b> der ersten Laufzeit."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Was rät der Sprecher?",
+      "opts": [
+       "Bei einem Umzug sofort zu kündigen.",
+       "Die Kündigung im Internet zu dokumentieren.",
+       "Nur Verträge mit kurzer Laufzeit abzuschließen."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "machen Sie von der Bestätigung einen Screenshot, dann haben Sie einen Beweis",
+      "why": "Screenshot der Bestätigung = dokumentieren. Ein Umzug reicht <b>nicht immer</b> als Grund."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Nachricht auf der Mailbox",
+    "audio": "audio/b2/b2-h1-a-2.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "PET",
+      "Guten Tag, Herr Okonkwo, hier spricht Petersen von der Hausverwaltung Lindner. Es geht um die Ablesung der Heizkostenzähler in Ihrer Wohnung. Der Techniker war ja am Dienstag da, aber leider hat er Sie nicht angetroffen. Wir haben jetzt einen zweiten Termin für Sie: nächsten Donnerstag zwischen acht und zwölf Uhr. Wenn Sie da arbeiten müssen, können Sie auch einem Nachbarn den Schlüssel geben, das ist kein Problem. Falls Ihnen der Termin gar nicht passt, melden Sie sich bitte bis Montag bei mir. Sonst müssen wir Ihren Verbrauch schätzen, und das ist für Sie meistens teurer. Meine Durchwahl ist die zwei-vier-sieben. Vielen Dank und einen schönen Tag noch."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Herr Okonkwo war beim ersten Termin nicht zu Hause.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "aber leider hat er Sie nicht angetroffen",
+      "why": "„nicht angetroffen“ = er war nicht da."
+     },
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Was kann Herr Okonkwo tun, wenn er am Donnerstag arbeiten muss?",
+      "opts": [
+       "Einem Nachbarn den Schlüssel überlassen.",
+       "Den Zähler selbst ablesen.",
+       "Den Verbrauch schätzen lassen."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "können Sie auch einem Nachbarn den Schlüssel geben",
+      "why": "Schätzen ist die <b>Folge</b>, wenn er sich nicht meldet, und meistens teurer."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · Anruf in einer Arztpraxis",
+    "audio": "audio/b2/b2-h1-a-3.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "PRA",
+      "Praxis Doktor Yilmaz, Sie sprechen mit Frau Berger."
+     ],
+     [
+      "HAR",
+      "Guten Morgen, Hartmann mein Name. Ich bräuchte dringend einen Termin. Ich habe seit drei Tagen starke Halsschmerzen und inzwischen auch Fieber."
+     ],
+     [
+      "PRA",
+      "Oh, das tut mir leid. Heute sind wir leider komplett ausgebucht. Aber Frau Doktor Yilmaz bietet um vierzehn Uhr eine Videosprechstunde an, da wäre noch etwas frei."
+     ],
+     [
+      "HAR",
+      "Per Video? Kann sie mir da überhaupt in den Hals schauen?"
+     ],
+     [
+      "PRA",
+      "Natürlich nicht so gut wie hier in der Praxis. Aber sie kann entscheiden, ob Sie vorbeikommen müssen oder ob ein Rezept reicht. Das Rezept schicken wir dann direkt an die Apotheke Ihrer Wahl."
+     ],
+     [
+      "HAR",
+      "Na gut, dann probiere ich das. Brauche ich dafür eine bestimmte App?"
+     ],
+     [
+      "PRA",
+      "Nein, Sie bekommen gleich eine SMS mit einem Link. Halten Sie bitte Ihre Versichertenkarte bereit, die müssen Sie kurz in die Kamera halten."
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "rf",
+      "q": "Herr Hartmann bekommt heute noch einen Termin in der Praxis.",
+      "a": "f",
+      "trap": "negation",
+      "ev": "Heute sind wir leider komplett ausgebucht.",
+      "why": "In der Praxis ist heute nichts frei, er bekommt nur eine <b>Videosprechstunde</b>."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Was muss Herr Hartmann für die Videosprechstunde bereithalten?",
+      "opts": [
+       "Seine Versichertenkarte.",
+       "Eine spezielle App.",
+       "Ein Rezept aus der Apotheke."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Halten Sie bitte Ihre Versichertenkarte bereit",
+      "why": "Eine App braucht er <b>nicht</b>, der Link kommt per SMS."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Kulturtipp im Radio",
+    "audio": "audio/b2/b2-h1-a-4.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "KUL",
+      "Zum Schluss noch ein Tipp fürs Wochenende: Das Stadtmuseum zeigt ab Samstag die Ausstellung „Unter der Stadt“. Es geht um alles, was man normalerweise nicht sieht: alte Kanäle, Keller aus dem Mittelalter und den Bunker unter dem Marktplatz. Den Bunker kann man übrigens zum ersten Mal auch selbst besichtigen, allerdings nur mit einer Führung, und die Plätze sind begrenzt. Die Kuratorin hat mir erzählt, dass die Idee eigentlich von Schülern kam, die bei einem Projekt im Stadtarchiv alte Pläne gefunden haben. Die Ausstellung selbst ist kostenlos, für die Führungen zahlt man fünf Euro. Anmelden kann man sich nur telefonisch oder direkt an der Museumskasse."
+     ]
+    ],
+    "items": [
+     {
+      "n": 9,
+      "type": "rf",
+      "q": "Der Bunker war schon früher für Besucher geöffnet.",
+      "a": "f",
+      "trap": "vorher",
+      "ev": "Den Bunker kann man übrigens zum ersten Mal auch selbst besichtigen",
+      "why": "„zum ersten Mal“: Vorher war er nicht zugänglich."
+     },
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Für die Führung durch den Bunker …",
+      "opts": [
+       "muss man sich online anmelden.",
+       "zahlt man keinen Eintritt.",
+       "gibt es nur eine begrenzte Zahl an Plätzen."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "und die Plätze sind begrenzt",
+      "why": "Kostenlos ist nur die <b>Ausstellung</b>. Anmelden geht telefonisch oder an der Kasse."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-h1-b": {
+  "id": "b2-h1-b",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Fünf Gespräche und Äußerungen",
+  "instr": "Sie hören fünf Gespräche und Äußerungen. Sie hören jeden Text einmal. Zu jedem Text lösen Sie zwei Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear five conversations and statements. You hear each text once. For each text you answer two questions. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "LOR": "Frau Lorenz",
+   "SAN": "Herr Sander",
+   "VKB": "Radio",
+   "ZAH": "Zahnarztpraxis",
+   "STU": "Student",
+   "BIB": "Bibliothekarin",
+   "KAT": "Hörerin"
+  },
+  "genders": {
+   "LOR": "f",
+   "SAN": "m",
+   "VKB": "m",
+   "ZAH": "f",
+   "STU": "m",
+   "BIB": "f",
+   "KAT": "f"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Zwei Nachbarn im Treppenhaus",
+    "audio": "audio/b2/b2-h1-b-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "LOR",
+      "Herr Sander, gut, dass ich Sie treffe. Haben Sie den Zettel im Treppenhaus gesehen? Ab nächstem Monat dürfen im Hof keine Fahrräder mehr stehen."
+     ],
+     [
+      "SAN",
+      "Ja, habe ich gelesen. Ehrlich gesagt finde ich das übertrieben. Wo sollen wir die denn sonst hinstellen? Der Keller ist doch viel zu eng."
+     ],
+     [
+      "LOR",
+      "Das habe ich mich auch gefragt. Aber ich habe gestern mit dem Hausmeister gesprochen. Die Verwaltung will hinten beim Müllplatz einen überdachten Fahrradständer bauen lassen. Das Problem im Hof ist, dass die Feuerwehr nicht durchkommt, wenn überall Räder herumstehen."
+     ],
+     [
+      "SAN",
+      "Ach so, das ist natürlich etwas anderes. Wenn es einen Ständer gibt, habe ich nichts dagegen. Wissen Sie, wann der fertig sein soll?"
+     ],
+     [
+      "LOR",
+      "Angeblich bis Ende Oktober. Bis dahin dürfen die Räder noch im Hof bleiben, aber bitte nur rechts an der Wand, damit der Weg frei bleibt."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Die Fahrräder sollen in Zukunft im Keller abgestellt werden.",
+      "a": "f",
+      "trap": "wort",
+      "ev": "einen überdachten Fahrradständer bauen lassen",
+      "why": "Der Keller ist <b>zu eng</b>. Geplant ist ein Ständer beim Müllplatz."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Warum dürfen im Hof keine Fahrräder mehr stehen?",
+      "opts": [
+       "Weil Rettungsfahrzeuge durchfahren können müssen.",
+       "Weil der Hof neu gestaltet wird.",
+       "Weil sich Nachbarn beschwert haben."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "dass die Feuerwehr nicht durchkommt, wenn überall Räder herumstehen",
+      "why": "Feuerwehr = Rettungsfahrzeug."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Verkehrshinweise im Radio",
+    "audio": "audio/b2/b2-h1-b-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "VKB",
+      "Und nun Hinweise für alle, die in den nächsten Wochen mit Bus und Bahn unterwegs sind. Wegen Bauarbeiten an der Brücke am Hauptbahnhof fährt die Straßenbahnlinie vier ab Montag nur noch bis zur Haltestelle Stadttheater. Zwischen Stadttheater und Hauptbahnhof sind Ersatzbusse im Einsatz. Die Verkehrsbetriebe empfehlen allerdings, für diese kurze Strecke lieber zu Fuß zu gehen, weil die Busse im Berufsverkehr oft im Stau stehen. Der Weg dauert etwa zehn Minuten und ist ausgeschildert. Die Bauarbeiten sollen bis zum zwanzigsten Dezember abgeschlossen sein. Danach gilt wieder der normale Fahrplan, allerdings mit einer Ausnahme: Die Haltestelle Marktstraße wird dauerhaft verlegt, und zwar etwa hundert Meter in Richtung Rathaus."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Die Linie 4 fährt ab Montag nicht mehr bis zum Hauptbahnhof.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "fährt die Straßenbahnlinie vier ab Montag nur noch bis zur Haltestelle Stadttheater",
+      "why": "„nur noch bis Stadttheater“ = nicht mehr bis zum Hauptbahnhof."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Was empfehlen die Verkehrsbetriebe?",
+      "opts": [
+       "Das letzte Stück zu Fuß zu gehen.",
+       "Den Ersatzbus zu nehmen.",
+       "Außerhalb des Berufsverkehrs zu fahren."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "für diese kurze Strecke lieber zu Fuß zu gehen",
+      "why": "Ersatzbusse gibt es, aber sie stehen oft im Stau. Empfohlen wird der Fußweg."
+     }
+    ]
+   },
+   {
+    "title": "Text 3 · Nachricht auf der Mailbox",
+    "audio": "audio/b2/b2-h1-b-2.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ZAH",
+      "Guten Tag, Frau Demir, hier ist die Zahnarztpraxis Doktor Lange. Wir müssen leider Ihren Termin am Mittwoch absagen, weil Doktor Lange krank geworden ist. Wir haben Ihnen aber schon einen neuen Termin reserviert, und zwar am Freitag, dem vierzehnten, um halb neun. Falls Sie da nicht können, rufen Sie uns bitte zurück. Die Kontrolle können Sie übrigens auch bei Doktor Fuchs machen, unserer neuen Kollegin, die hätte schon morgen Nachmittag Zeit. Und noch etwas: Ihr Kostenvoranschlag für die Krone ist von der Krankenkasse zurückgekommen. Die Kasse übernimmt etwas mehr als die Hälfte. Den Brief können Sie bei Ihrem nächsten Besuch mitnehmen."
+     ]
+    ],
+    "items": [
+     {
+      "n": 5,
+      "type": "rf",
+      "q": "Die Praxis hat für Frau Demir bereits einen Ersatztermin eingeplant.",
+      "a": "r",
+      "trap": "synonym",
+      "ev": "Wir haben Ihnen aber schon einen neuen Termin reserviert",
+      "why": "Reserviert = eingeplant. Sie muss nur anrufen, wenn er nicht passt."
+     },
+     {
+      "n": 6,
+      "type": "abc",
+      "q": "Was erfährt Frau Demir über die Krone?",
+      "opts": [
+       "Die Krankenkasse übernimmt die Kosten vollständig.",
+       "Die Krankenkasse übernimmt einen Teil der Kosten.",
+       "Die Krankenkasse hat noch nicht geantwortet."
+      ],
+      "a": "b",
+      "trap": "teil",
+      "ev": "Die Kasse übernimmt etwas mehr als die Hälfte.",
+      "why": "Etwas mehr als die Hälfte = ein Teil, nicht alles."
+     }
+    ]
+   },
+   {
+    "title": "Text 4 · In der Universitätsbibliothek",
+    "audio": "audio/b2/b2-h1-b-3.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "STU",
+      "Entschuldigung, ich suche ein Buch für meine Hausarbeit, aber im Katalog steht, dass es hier nicht vorhanden ist."
+     ],
+     [
+      "BIB",
+      "Zeigen Sie mal. Ah ja, das haben wir tatsächlich nicht. Sie können es aber per Fernleihe aus einer anderen Bibliothek bestellen. Das kostet einen Euro fünfzig."
+     ],
+     [
+      "STU",
+      "Und wie lange dauert das? Ich muss die Arbeit in drei Wochen abgeben."
+     ],
+     [
+      "BIB",
+      "Meistens ist das Buch nach etwa zehn Tagen da. Aber schauen Sie mal hier: Es gibt eine neuere Auflage als E-Book, und die hat unsere Universität lizenziert. Die können Sie sofort online lesen, auch von zu Hause, wenn Sie sich mit Ihrem Uni-Konto anmelden."
+     ],
+     [
+      "STU",
+      "Ach, wirklich? Das wäre natürlich viel praktischer. Kann ich daraus auch Seiten ausdrucken?"
+     ],
+     [
+      "BIB",
+      "Einzelne Kapitel ja, aber nicht das ganze Buch. Und denken Sie bitte daran: In Ihrer Arbeit müssen Sie dann auch die neue Auflage zitieren."
+     ]
+    ],
+    "items": [
+     {
+      "n": 7,
+      "type": "rf",
+      "q": "Die Fernleihe ist für Studierende kostenlos.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Das kostet einen Euro fünfzig.",
+      "why": "Die Fernleihe kostet 1,50 Euro."
+     },
+     {
+      "n": 8,
+      "type": "abc",
+      "q": "Was empfiehlt die Bibliothekarin dem Studenten?",
+      "opts": [
+       "Das Buch per Fernleihe zu bestellen.",
+       "Eine digitale Ausgabe zu benutzen.",
+       "Das ganze Buch auszudrucken."
+      ],
+      "a": "b",
+      "trap": "vorher",
+      "ev": "Es gibt eine neuere Auflage als E-Book",
+      "why": "Zuerst nennt sie die Fernleihe, <b>aber</b> dann zeigt sie ihm das E-Book. Ausdrucken darf er nur einzelne Kapitel."
+     }
+    ]
+   },
+   {
+    "title": "Text 5 · Eine Hörerin ruft im Radio an",
+    "audio": "audio/b2/b2-h1-b-4.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "KAT",
+      "Ja, hallo, mein Name ist Katrin, ich rufe aus Wolfsburg an. Ich möchte etwas zu dem Thema von vorhin sagen, also dass immer weniger Kinder im Sportverein sind. Viele sagen ja, die Kinder sitzen eben lieber vor dem Bildschirm. Das mag bei manchen stimmen, aber bei uns ist das Problem ein ganz anderes. Mein Sohn will unbedingt Fußball spielen, aber der Verein hier im Ort hat eine Warteliste von über einem Jahr, weil es nicht genug Trainer gibt. Die machen das ja alle ehrenamtlich, neben ihrem Beruf. Ich habe mich jetzt selbst gemeldet und mache im Frühjahr einen Trainerschein. Ich kann zwar nicht besonders gut Fußball spielen, aber für die Kleinen reicht es hoffentlich."
+     ]
+    ],
+    "items": [
+     {
+      "n": 9,
+      "type": "rf",
+      "q": "Katrin meint, dass Kinder vor allem wegen digitaler Medien keinen Vereinssport machen.",
+      "a": "f",
+      "trap": "wort",
+      "ev": "aber bei uns ist das Problem ein ganz anderes",
+      "why": "Das mit dem Bildschirm sagen <b>andere</b>. Bei ihr fehlen Trainer."
+     },
+     {
+      "n": 10,
+      "type": "abc",
+      "q": "Was hat Katrin vor?",
+      "opts": [
+       "Sie will ihren Sohn in einem anderen Verein anmelden.",
+       "Sie will selbst wieder Fußball spielen.",
+       "Sie möchte sich zur Trainerin ausbilden lassen."
+      ],
+      "a": "c",
+      "trap": "synonym",
+      "ev": "mache im Frühjahr einen Trainerschein",
+      "why": "Trainerschein = Ausbildung zur Trainerin."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-h2-a": {
+  "id": "b2-h2-a",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Interview mit einem Schlafforscher",
+  "instr": "Sie hören im Radio ein Interview mit dem Schlafforscher Tobias Rendel. Sie hören den Text zweimal. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear a radio interview. You hear the text twice. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "MOD": "Moderatorin",
+   "REN": "Tobias Rendel"
+  },
+  "genders": {
+   "MOD": "f",
+   "REN": "m"
+  },
+  "groups": [
+   {
+    "title": "Wissen am Mittag: Wie gut schlafen wir?",
+    "audio": "audio/b2/b2-h2-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "Herzlich willkommen zu „Wissen am Mittag“. Mein Gast heute ist der Schlafforscher Doktor Tobias Rendel vom Zentrum für Schlafmedizin in Kassel. Herr Rendel, wie sind Sie eigentlich zur Schlafforschung gekommen?"
+     ],
+     [
+      "REN",
+      "Ehrlich gesagt durch Zufall. Ich wollte ursprünglich Kinderarzt werden. Während des Studiums habe ich aber nachts in einem Schlaflabor gejobbt, um mein Studium zu finanzieren. Dort habe ich gemerkt, wie wenig wir eigentlich über den Schlaf wissen, obwohl wir ein Drittel unseres Lebens damit verbringen. Das hat mich nicht mehr losgelassen."
+     ],
+     [
+      "MOD",
+      "Viele Menschen klagen heute, dass sie schlecht schlafen. Schlafen wir wirklich schlechter als früher?"
+     ],
+     [
+      "REN",
+      "Das ist eine beliebte These, aber die Daten geben das so nicht her. Die durchschnittliche Schlafdauer hat sich in den letzten Jahrzehnten kaum verändert. Was sich verändert hat, ist unsere Wahrnehmung. Wir tragen Uhren und benutzen Apps, die uns jeden Morgen eine Note für unsere Nacht geben. Und wer liest, dass er nur „befriedigend“ geschlafen hat, fühlt sich schon deshalb müder. In der Fachwelt spricht man inzwischen sogar von einer Art Schlafperfektionismus."
+     ],
+     [
+      "MOD",
+      "Sie meinen also, die Schlaf-Apps schaden mehr, als sie nützen?"
+     ],
+     [
+      "REN",
+      "So pauschal würde ich das nicht sagen. Für Menschen, die einfach neugierig sind, sind sie harmlos. Problematisch wird es, wenn jemand ohnehin zu Sorgen neigt und abends im Bett schon darüber nachdenkt, welche Werte er morgen bekommt. Dann wird die App selbst zum Grund für die schlechte Nacht. Solchen Patienten rate ich, das Gerät für ein paar Wochen in die Schublade zu legen und stattdessen ein ganz einfaches Schlaftagebuch auf Papier zu führen."
+     ],
+     [
+      "MOD",
+      "Ein großes Thema ist auch der Schlaf von Jugendlichen. Viele Eltern beschweren sich, dass ihre Kinder abends nicht ins Bett gehen und morgens nicht aus dem Bett kommen. Ist das einfach Faulheit?"
+     ],
+     [
+      "REN",
+      "Nein, und das ist mir wirklich wichtig. In der Pubertät verschiebt sich die innere Uhr biologisch nach hinten, um bis zu zwei Stunden. Ein Sechzehnjähriger, der um zehn Uhr abends ins Bett geht, liegt oft einfach wach. Natürlich verstärken Smartphones das Problem, aber sie sind nicht die Ursache. Wir haben deshalb an zwei Schulen hier in der Region ausprobiert, den Unterricht erst um neun Uhr beginnen zu lassen. Die Schüler haben im Schnitt fast eine Stunde länger geschlafen, und die Zahl der Fehltage ist gesunken."
+     ],
+     [
+      "MOD",
+      "Zum Schluss: Haben Sie einen Tipp für unsere Hörerinnen und Hörer, die nachts wach liegen?"
+     ],
+     [
+      "REN",
+      "Der wichtigste Tipp klingt paradox: Wer nicht schlafen kann, sollte aufstehen. Wenn man sich eine halbe Stunde lang im Bett hin und her wälzt, lernt das Gehirn, dass das Bett ein Ort zum Grübeln ist. Besser ist es, in einem anderen Zimmer bei gedämpftem Licht etwas Ruhiges zu tun, zum Beispiel zu lesen, und erst wieder ins Bett zu gehen, wenn man müde ist. Schlaftabletten dagegen sollten wirklich die Ausnahme bleiben."
+     ],
+     [
+      "MOD",
+      "Herr Rendel, vielen Dank für das Gespräch."
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Herr Rendel kam zur Schlafforschung, weil er …",
+      "opts": [
+       "als Kinderarzt viele Kinder mit Schlafproblemen behandelt hat.",
+       "selbst lange Zeit schlecht geschlafen hat.",
+       "als Student in einem Schlaflabor gearbeitet hat."
+      ],
+      "a": "c",
+      "trap": "vorher",
+      "ev": "habe ich aber nachts in einem Schlaflabor gejobbt",
+      "why": "Kinderarzt wollte er nur <b>ursprünglich</b> werden. Gejobbt = gearbeitet."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Was sagt Herr Rendel über die Schlafdauer?",
+      "opts": [
+       "Sie ist in den letzten Jahrzehnten deutlich gesunken.",
+       "Sie ist ungefähr gleich geblieben.",
+       "Sie wird von Apps meistens falsch gemessen."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Die durchschnittliche Schlafdauer hat sich in den letzten Jahrzehnten kaum verändert.",
+      "why": "„kaum verändert“ = ungefähr gleich. Verändert hat sich nur die Wahrnehmung."
+     },
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Was rät Herr Rendel Patienten, die sich wegen ihrer Schlafwerte Sorgen machen?",
+      "opts": [
+       "Eine Zeit lang auf die App zu verzichten.",
+       "Eine genauere App zu benutzen.",
+       "Ihre Werte jeden Abend zu kontrollieren."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "das Gerät für ein paar Wochen in die Schublade zu legen",
+      "why": "Gerät in die Schublade = eine Zeit lang verzichten."
+     },
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Warum gehen viele Jugendliche abends spät ins Bett?",
+      "opts": [
+       "Weil sie zu viel Zeit am Smartphone verbringen.",
+       "Weil sich ihr Schlafrhythmus biologisch verändert.",
+       "Weil sie morgens zu früh Unterricht haben."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "In der Pubertät verschiebt sich die innere Uhr biologisch nach hinten",
+      "why": "Smartphones <b>verstärken</b> das Problem, sind aber nicht die Ursache."
+     },
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Was war ein Ergebnis des Schulversuchs?",
+      "opts": [
+       "Die Schüler fehlten seltener.",
+       "Die Schüler hatten bessere Noten.",
+       "Die Schüler gingen früher ins Bett."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "die Zahl der Fehltage ist gesunken",
+      "why": "Weniger Fehltage = seltener gefehlt. Von Noten spricht er nicht."
+     },
+     {
+      "n": 16,
+      "type": "abc",
+      "q": "Was empfiehlt Herr Rendel Menschen, die nachts nicht schlafen können?",
+      "opts": [
+       "Im Bett zu bleiben und sich zu entspannen.",
+       "Für kurze Zeit ein Schlafmittel zu nehmen.",
+       "Aufzustehen und etwas Ruhiges zu tun."
+      ],
+      "a": "c",
+      "trap": "detail",
+      "ev": "Wer nicht schlafen kann, sollte aufstehen.",
+      "why": "Im Bett wälzen ist gerade falsch. Schlaftabletten nur als Ausnahme."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-h2-b": {
+  "id": "b2-h2-b",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Interview mit einer Sprachwissenschaftlerin",
+  "instr": "Sie hören im Radio ein Interview mit der Sprachwissenschaftlerin Annette Vogelsang. Sie hören den Text zweimal. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear a radio interview. You hear the text twice. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "MOD": "Moderator",
+   "VOG": "Annette Vogelsang"
+  },
+  "genders": {
+   "MOD": "m",
+   "VOG": "f"
+  },
+  "groups": [
+   {
+    "title": "Forschung im Gespräch: Mit mehreren Sprachen aufwachsen",
+    "audio": "audio/b2/b2-h2-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "In unserer Reihe „Forschung im Gespräch“ begrüße ich heute die Sprachwissenschaftlerin Annette Vogelsang. Sie untersucht seit über zwanzig Jahren, wie Kinder mit mehreren Sprachen aufwachsen. Frau Vogelsang, Sie sind selbst zweisprachig aufgewachsen, oder?"
+     ],
+     [
+      "VOG",
+      "Nicht ganz. Meine Eltern haben beide nur Deutsch mit mir gesprochen. Aber als ich sechs war, haben wir für vier Jahre in Portugal gelebt, und ich bin dort ganz normal zur Schule gegangen. Ich habe die Sprache also nicht von Geburt an gelernt, sondern auf dem Schulhof. Vielleicht interessiert mich deshalb so sehr die Frage, ob es einen Unterschied macht, wann man eine Sprache lernt."
+     ],
+     [
+      "MOD",
+      "Viele Eltern haben ja Angst, dass ihr Kind durcheinanderkommt, wenn es zwei Sprachen gleichzeitig lernt. Ist diese Angst berechtigt?"
+     ],
+     [
+      "VOG",
+      "Diese Sorge höre ich ständig, aber sie ist unbegründet. Es stimmt, dass mehrsprachige Kinder manchmal Wörter aus beiden Sprachen in einem Satz mischen. Früher hat man das als Zeichen von Verwirrung gesehen. Heute wissen wir: Das ist ganz normal und zeigt sogar, dass das Kind beide Systeme kreativ nutzt. Erwachsene, die zwei Sprachen sprechen, machen das übrigens auch ständig, nur fällt es da weniger auf."
+     ],
+     [
+      "MOD",
+      "Es gibt die bekannte Regel „eine Person, eine Sprache“. Also: Die Mutter spricht nur Türkisch, der Vater nur Deutsch. Ist das der beste Weg?"
+     ],
+     [
+      "VOG",
+      "Das ist ein Modell, das gut funktionieren kann. Aber es ist kein Gesetz. Viel wichtiger als jede Regel ist, dass das Kind beide Sprachen oft genug und in echten Situationen hört. Wenn der Vater nur abends eine halbe Stunde Zeit hat, wird es mit seiner Sprache schwierig, egal wie konsequent er ist. Und noch etwas: Eltern sollten die Sprache sprechen, in der sie sich wohlfühlen. Wer seinem Kind Gute-Nacht-Geschichten in einer Sprache vorliest, die er selbst nicht richtig beherrscht, tut ihm keinen Gefallen."
+     ],
+     [
+      "MOD",
+      "Bei uns wird oft darüber diskutiert, ob Kinder mit einer anderen Familiensprache im Kindergarten nur Deutsch sprechen sollen. Was halten Sie davon?"
+     ],
+     [
+      "VOG",
+      "Ich halte ein Verbot der Familiensprache für einen Fehler. Kinder, die in ihrer ersten Sprache gut sind, lernen auch die zweite leichter, weil sie vieles übertragen können. Und wer einem Kind signalisiert, dass seine Sprache im Kindergarten nicht erwünscht ist, sagt ihm indirekt auch: Deine Familie ist hier nicht willkommen. Das heißt natürlich nicht, dass Deutsch unwichtig ist. Im Gegenteil, die Kinder brauchen viel gute Sprachförderung, aber eben zusätzlich, nicht stattdessen."
+     ],
+     [
+      "MOD",
+      "Ab welchem Alter wird es denn schwieriger, eine neue Sprache zu lernen? Man hört ja oft, dass nach der Pubertät alles vorbei ist."
+     ],
+     [
+      "VOG",
+      "Das ist zumindest teilweise ein Mythos. Bei der Aussprache haben jüngere Kinder tatsächlich einen Vorteil. Wer erst als Erwachsener eine Sprache lernt, behält meistens einen leichten Akzent. Aber beim Wortschatz und bei der Grammatik sind ältere Lernende anfangs sogar schneller, weil sie bewusster lernen und Regeln verstehen. Ich habe Studierende, die mit dreißig angefangen haben, Deutsch zu lernen, und heute wissenschaftliche Texte schreiben."
+     ],
+     [
+      "MOD",
+      "Zum Schluss: Woran arbeiten Sie gerade?"
+     ],
+     [
+      "VOG",
+      "Wir begleiten zurzeit zweihundert Familien über fünf Jahre. Uns interessiert, warum manche Kinder ihre Familiensprache als Jugendliche plötzlich nicht mehr sprechen wollen. Erste Ergebnisse zeigen, dass das weniger mit den Eltern zu tun hat als mit den Freunden. Wenn es im Freundeskreis niemanden gibt, der die Sprache auch spricht, verliert sie für die Jugendlichen an Wert."
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Frau Vogelsang hat Portugiesisch …",
+      "opts": [
+       "als Kind im Alltag in Portugal gelernt.",
+       "von ihren Eltern gelernt.",
+       "erst während ihres Studiums gelernt."
+      ],
+      "a": "a",
+      "trap": "negation",
+      "ev": "Ich habe die Sprache also nicht von Geburt an gelernt, sondern auf dem Schulhof.",
+      "why": "„Nicht ganz“: Die Eltern sprachen nur Deutsch. Gelernt hat sie es in der Schule in Portugal."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Wenn Kinder zwei Sprachen in einem Satz mischen, ist das laut Frau Vogelsang …",
+      "opts": [
+       "ein normaler Teil der Entwicklung.",
+       "ein Zeichen dafür, dass sie verwirrt sind.",
+       "ein Grund, zu Hause nur eine Sprache zu sprechen."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Das ist ganz normal und zeigt sogar, dass das Kind beide Systeme kreativ nutzt.",
+      "why": "Verwirrung war die Meinung von <b>früher</b>. Heute gilt es als normal."
+     },
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Was ist laut Frau Vogelsang am wichtigsten?",
+      "opts": [
+       "Dass jedes Elternteil nur eine Sprache spricht.",
+       "Dass die Eltern abends vorlesen.",
+       "Dass das Kind viel Kontakt zu beiden Sprachen hat."
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "dass das Kind beide Sprachen oft genug und in echten Situationen hört",
+      "why": "„Eine Person, eine Sprache“ kann funktionieren, ist aber „kein Gesetz“."
+     },
+     {
+      "n": 14,
+      "type": "abc",
+      "q": "Frau Vogelsang lehnt ein Verbot der Familiensprache im Kindergarten unter anderem ab, weil …",
+      "opts": [
+       "Deutsch für diese Kinder nicht so wichtig ist.",
+       "sich die Kinder dann nicht akzeptiert fühlen können.",
+       "die Erzieherinnen die Sprachen nicht verstehen."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Deine Familie ist hier nicht willkommen.",
+      "why": "Nicht willkommen = nicht akzeptiert. Deutsch ist ausdrücklich <b>nicht</b> unwichtig."
+     },
+     {
+      "n": 15,
+      "type": "abc",
+      "q": "Was sagt Frau Vogelsang über Erwachsene, die eine Sprache lernen?",
+      "opts": [
+       "Sie können eine Sprache nicht mehr wirklich gut lernen.",
+       "Sie lernen Grammatik am Anfang oft schneller.",
+       "Sie haben bei der Aussprache einen Vorteil."
+      ],
+      "a": "b",
+      "trap": "person",
+      "ev": "sind ältere Lernende anfangs sogar schneller",
+      "why": "Den Vorteil bei der Aussprache haben die <b>Kinder</b>."
+     },
+     {
+      "n": 16,
+      "type": "abc",
+      "q": "Warum wollen manche Jugendliche ihre Familiensprache nicht mehr sprechen?",
+      "opts": [
+       "Weil ihre Eltern sie nicht mehr motivieren.",
+       "Weil es in der Schule keinen Unterricht in dieser Sprache gibt.",
+       "Weil die Sprache in ihrem Freundeskreis keine Rolle spielt."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Wenn es im Freundeskreis niemanden gibt, der die Sprache auch spricht",
+      "why": "Es hat „weniger mit den Eltern“ zu tun als mit den Freunden."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-h3-a": {
+  "id": "b2-h3-a",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Radiogespräch: Soziales Pflichtjahr",
+  "instr": "Sie hören im Radio ein Gespräch mit mehreren Personen. Die Personen sprechen über ein soziales Pflichtjahr für junge Menschen. Sie hören den Text einmal. Wählen Sie bei jeder Aufgabe: Wer sagt das?",
+  "instr_en": "You hear a radio discussion with several people. You hear the text once. For each statement decide: who says this?",
+  "source": "own",
+  "who": [
+   "Moderator",
+   "Ruth Kessler",
+   "Daniel Ahmadi"
+  ],
+  "speakers": {
+   "MOD": "Moderator",
+   "KES": "Ruth Kessler",
+   "AHM": "Daniel Ahmadi"
+  },
+  "genders": {
+   "MOD": "m",
+   "KES": "f",
+   "AHM": "m"
+  },
+  "groups": [
+   {
+    "title": "Streitfrage: Ein Pflichtjahr für alle?",
+    "audio": "audio/b2/b2-h3-a-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MOD",
+      "Guten Abend und willkommen bei „Streitfrage“. Heute geht es um eine Idee, die immer wieder diskutiert wird: Sollen alle jungen Menschen nach der Schule ein Jahr lang einen sozialen Dienst leisten, zum Beispiel im Krankenhaus, im Kindergarten oder im Naturschutz? Bei mir im Studio sind Ruth Kessler, sie leitet ein Seniorenheim in Bremen, und Daniel Ahmadi vom Landesjugendring. Frau Kessler, Sie sind für ein solches Pflichtjahr. Warum?"
+     ],
+     [
+      "KES",
+      "Weil ich jeden Tag sehe, was junge Leute bewirken können. Wir haben bei uns seit Jahren Freiwillige, und die Bewohner blühen richtig auf, wenn jemand Junges mit ihnen spazieren geht oder Karten spielt. Das kann keine Pflegekraft leisten, dafür fehlt einfach die Zeit. Und die Freiwilligen selbst erzählen mir oft, dass sie in diesem Jahr mehr über sich gelernt haben als in der ganzen Schulzeit."
+     ],
+     [
+      "MOD",
+      "Herr Ahmadi, das klingt doch überzeugend."
+     ],
+     [
+      "AHM",
+      "Dass ein soziales Jahr wertvoll sein kann, bestreite ich gar nicht. Ich habe selbst eins gemacht. Aber der entscheidende Punkt ist doch die Freiwilligkeit. Wer sich bewusst dafür entscheidet, bringt Motivation mit. Wenn man junge Menschen zwingt, bekommen die Einrichtungen auch Leute, die gar keine Lust haben. Und ehrlich gesagt: Ein Seniorenheim ist der letzte Ort, an dem ich unmotivierte Helfer haben möchte."
+     ],
+     [
+      "KES",
+      "Das sehe ich anders. Viele wissen mit achtzehn doch noch gar nicht, was in ihnen steckt. Wir hatten letztes Jahr einen jungen Mann, der nur gekommen ist, weil er keinen Studienplatz bekommen hatte. Heute macht er bei uns eine Ausbildung zum Pfleger."
+     ],
+     [
+      "MOD",
+      "Ein Argument, das oft genannt wird, ist ja auch der Personalmangel in der Pflege. Ich habe gelesen, dass manche Politiker sich vom Pflichtjahr auch eine Entlastung der Fachkräfte erhoffen."
+     ],
+     [
+      "AHM",
+      "Genau das macht mir Sorgen. Junge Menschen ohne Ausbildung dürfen keine Fachkräfte ersetzen. Das wäre unfair gegenüber den Jugendlichen und gefährlich für die Menschen, die gepflegt werden. Wenn wir zu wenig Pflegekräfte haben, müssen wir die Berufe attraktiver machen, also bessere Bezahlung und vernünftige Arbeitszeiten."
+     ],
+     [
+      "KES",
+      "Da bin ich ganz bei Ihnen. Bei uns arbeiten Freiwillige nie in der Pflege selbst. Sie sind eine Ergänzung, kein Ersatz."
+     ],
+     [
+      "MOD",
+      "Wie sieht es eigentlich mit dem Geld aus? Was bekommen Freiwillige heute für ihre Arbeit?"
+     ],
+     [
+      "AHM",
+      "Das ist für mich der zweite große Punkt. Heute bekommen Freiwillige ein Taschengeld von ein paar hundert Euro. Davon kann man in einer Großstadt kein Zimmer bezahlen. Bevor wir über eine Pflicht reden, sollten wir die freiwilligen Dienste so ausstatten, dass sie für alle möglich sind, nicht nur für junge Leute, deren Eltern sie unterstützen können."
+     ],
+     [
+      "KES",
+      "Mehr Geld für Freiwillige wäre gut, keine Frage. Trotzdem glaube ich, dass eine Pflicht ein wichtiges Signal wäre: Die Gesellschaft braucht euch. Das würde vielleicht auch den Zusammenhalt zwischen Jung und Alt stärken."
+     ],
+     [
+      "MOD",
+      "Zum Schluss eine Frage, die mich persönlich interessiert: Ich habe damals Zivildienst gemacht, in einer Werkstatt für Menschen mit Behinderung, und denke heute noch gern daran zurück. Hätte ich das freiwillig gemacht? Wahrscheinlich nicht. Ist das nicht ein Argument für die Pflicht?"
+     ],
+     [
+      "AHM",
+      "Vielleicht für Sie. Aber eine gute Erfahrung von einigen rechtfertigt noch keinen Zwang für alle."
+     ],
+     [
+      "MOD",
+      "Vielen Dank, Frau Kessler und Herr Ahmadi, für diese lebhafte Diskussion."
+     ]
+    ],
+    "items": [
+     {
+      "n": 17,
+      "type": "who",
+      "q": "Freiwillige haben mehr Zeit für die Bewohner als das Fachpersonal.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Das kann keine Pflegekraft leisten, dafür fehlt einfach die Zeit.",
+      "why": "Frau Kessler über ihre Freiwilligen im Seniorenheim."
+     },
+     {
+      "n": 18,
+      "type": "who",
+      "q": "Wer zu einem Dienst gezwungen wird, ist oft wenig engagiert.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Wenn man junge Menschen zwingt, bekommen die Einrichtungen auch Leute, die gar keine Lust haben.",
+      "why": "Herr Ahmadi: keine Lust = wenig engagiert."
+     },
+     {
+      "n": 19,
+      "type": "who",
+      "q": "Ein sozialer Dienst kann jungen Menschen helfen, ihren Beruf zu finden.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Heute macht er bei uns eine Ausbildung zum Pfleger.",
+      "why": "Frau Kesslers Beispiel: Der junge Mann hat seinen Beruf gefunden."
+     },
+     {
+      "n": 20,
+      "type": "who",
+      "q": "In der eigenen Einrichtung übernehmen Freiwillige keine pflegerischen Aufgaben.",
+      "a": "b",
+      "trap": "person",
+      "ev": "Bei uns arbeiten Freiwillige nie in der Pflege selbst.",
+      "why": "Herr Ahmadi sagt nur, was nicht passieren <b>darf</b>. Frau Kessler beschreibt ihre Einrichtung."
+     },
+     {
+      "n": 21,
+      "type": "who",
+      "q": "Bisher können sich nicht alle jungen Menschen einen Freiwilligendienst leisten.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Davon kann man in einer Großstadt kein Zimmer bezahlen.",
+      "why": "Herr Ahmadi: Das Taschengeld reicht nicht, möglich ist es nur mit Hilfe der Eltern."
+     },
+     {
+      "n": 22,
+      "type": "who",
+      "q": "Die eigene Erfahrung mit einem Pflichtdienst war positiv.",
+      "a": "a",
+      "trap": "person",
+      "ev": "und denke heute noch gern daran zurück",
+      "why": "Der Moderator hat Zivildienst gemacht und denkt gern daran zurück. Herr Ahmadi hat sein soziales Jahr <b>freiwillig</b> gemacht."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-h3-b": {
+  "id": "b2-h3-b",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Radiogespräch: Handys an Schulen",
+  "instr": "Sie hören im Radio ein Gespräch mit mehreren Personen. Die Personen sprechen über Smartphones an Schulen. Sie hören den Text einmal. Wählen Sie bei jeder Aufgabe: Wer sagt das?",
+  "instr_en": "You hear a radio discussion with several people. You hear the text once. For each statement decide: who says this?",
+  "source": "own",
+  "who": [
+   "Moderatorin",
+   "Jens Brückner",
+   "Carla Sommerfeld"
+  ],
+  "speakers": {
+   "MOD": "Moderatorin",
+   "BRU": "Jens Brückner",
+   "SOM": "Carla Sommerfeld"
+  },
+  "genders": {
+   "MOD": "f",
+   "BRU": "m",
+   "SOM": "f"
+  },
+  "groups": [
+   {
+    "title": "Thema am Abend: Handyverbot an Schulen?",
+    "audio": "audio/b2/b2-h3-b-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MOD",
+      "Willkommen bei „Thema am Abend“. In immer mehr Ländern sind Smartphones an Schulen verboten, und auch bei uns fordern viele Eltern ein solches Verbot. Darüber spreche ich heute mit Jens Brückner, Leiter einer Gesamtschule in Dortmund, und mit der Medienpädagogin Carla Sommerfeld. Herr Brückner, an Ihrer Schule gilt seit einem Jahr ein striktes Handyverbot. Wie kam es dazu?"
+     ],
+     [
+      "BRU",
+      "Der Auslöser war ehrlich gesagt kein pädagogisches Konzept, sondern ein ganz konkreter Fall. Ein Schüler wurde in einer Klassenchatgruppe wochenlang fertiggemacht, mit Fotos, die heimlich in der Umkleide gemacht worden waren. Danach haben wir in der Schulkonferenz, also zusammen mit Eltern und Schülern, beschlossen: Die Geräte bleiben von acht bis eins im Spind."
+     ],
+     [
+      "MOD",
+      "Und, hat es etwas gebracht?"
+     ],
+     [
+      "BRU",
+      "Ich würde sagen, ja. Am auffälligsten ist es in der Pause. Früher saßen die Kinder nebeneinander auf der Bank und haben auf ihre Bildschirme gestarrt. Heute wird wieder Tischtennis gespielt, und es wird geredet, manchmal auch gestritten, aber eben direkt. Die Lehrkräfte berichten außerdem, dass die Schüler im Unterricht konzentrierter sind. Wissenschaftlich gemessen haben wir das allerdings nicht."
+     ],
+     [
+      "MOD",
+      "Frau Sommerfeld, das klingt nach einem Erfolg."
+     ],
+     [
+      "SOM",
+      "Ich freue mich für die Schule, wirklich. Aber ich warne davor, daraus eine allgemeine Lösung zu machen. Mobbing hört ja nicht auf, nur weil das Handy im Spind liegt. Es findet dann eben nachmittags statt, und die Schule bekommt es noch weniger mit. Die Kinder müssen lernen, mit diesen Geräten verantwortungsvoll umzugehen, und das lernt man nicht, indem man sie wegsperrt."
+     ],
+     [
+      "BRU",
+      "Das widerspricht sich doch gar nicht. Wir haben in der siebten Klasse jetzt ein eigenes Fach Medienbildung. Da geht es genau um solche Fragen."
+     ],
+     [
+      "SOM",
+      "Das ist gut. Aber wenn man über das Handy nur redet und es nie benutzen darf, bleibt es Theorie. Ich würde mir wünschen, dass Smartphones im Unterricht gezielt eingesetzt werden, zum Beispiel um zu recherchieren und zu prüfen, ob eine Nachricht stimmt. Genau das brauchen Jugendliche heute dringend."
+     ],
+     [
+      "MOD",
+      "Viele Eltern sagen allerdings auch: Ich möchte mein Kind erreichen können, falls etwas passiert. Was sagen Sie diesen Eltern, Herr Brückner?"
+     ],
+     [
+      "BRU",
+      "Das war bei uns tatsächlich die größte Sorge. Aber im Notfall ruft man im Sekretariat an, so wie früher auch. In einem Jahr hatten wir genau zwei solche Anrufe. Und die Kinder dürfen jederzeit fragen, ob sie kurz zu Hause anrufen dürfen."
+     ],
+     [
+      "SOM",
+      "Mich überrascht ehrlich gesagt, wie selten die Schüler selbst in dieser Debatte gefragt werden. In einer Umfrage, die wir mit Jugendlichen gemacht haben, war übrigens ein großer Teil für handyfreie Pausen, aber gegen ein Verbot im Unterricht."
+     ],
+     [
+      "MOD",
+      "Interessant, die Jugendlichen sind also strenger, als manche Erwachsene denken. Ich muss gestehen, als Mutter von zwei Teenagern bin ich selbst hin- und hergerissen. Vielen Dank Ihnen beiden."
+     ]
+    ],
+    "items": [
+     {
+      "n": 17,
+      "type": "who",
+      "q": "Ein Vorfall mit heimlich gemachten Bildern hat zu der neuen Regel geführt.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "mit Fotos, die heimlich in der Umkleide gemacht worden waren",
+      "why": "Herr Brückner nennt den Auslöser für das Verbot an seiner Schule."
+     },
+     {
+      "n": 18,
+      "type": "who",
+      "q": "Ein Verbot verschiebt Konflikte nur in die Freizeit.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Es findet dann eben nachmittags statt",
+      "why": "Frau Sommerfeld: Das Mobbing geht nachmittags weiter."
+     },
+     {
+      "n": 19,
+      "type": "who",
+      "q": "Die bessere Konzentration ist nicht wissenschaftlich belegt.",
+      "a": "b",
+      "trap": "negation",
+      "ev": "Wissenschaftlich gemessen haben wir das allerdings nicht.",
+      "why": "Herr Brückner schränkt seine eigene Aussage ein."
+     },
+     {
+      "n": 20,
+      "type": "who",
+      "q": "Jugendliche sollten im Unterricht lernen, Informationen kritisch zu prüfen.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "zu prüfen, ob eine Nachricht stimmt",
+      "why": "Frau Sommerfeld will das Handy gezielt im Unterricht einsetzen."
+     },
+     {
+      "n": 21,
+      "type": "who",
+      "q": "Eltern können ihre Kinder im Notfall weiterhin über die Schule erreichen.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "im Notfall ruft man im Sekretariat an",
+      "why": "Die Eltern-Sorge nennt die Moderatorin, die Antwort gibt Herr Brückner."
+     },
+     {
+      "n": 22,
+      "type": "who",
+      "q": "Die eigene Meinung zu einem Verbot ist nicht eindeutig.",
+      "a": "a",
+      "trap": "person",
+      "ev": "bin ich selbst hin- und hergerissen",
+      "why": "Hin- und hergerissen = keine klare Meinung. Das sagt die Moderatorin über sich."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-h4-a": {
+  "id": "b2-h4-a",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Vortrag: Bäume in der Stadt",
+  "instr": "Sie hören einen kurzen Vortrag. Sie hören den Text zweimal. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear a short lecture. You hear the text twice. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "HOF": "Dr. Lena Hofstetter"
+  },
+  "genders": {
+   "HOF": "f"
+  },
+  "groups": [
+   {
+    "title": "Vortrag an der Volkshochschule: Warum unsere Städte Bäume brauchen",
+    "audio": "audio/b2/b2-h4-a-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "HOF",
+      "Guten Abend, meine Damen und Herren, und vielen Dank, dass Sie trotz des Regens so zahlreich gekommen sind. Ich möchte heute über etwas sprechen, an dem wir alle täglich vorbeigehen, ohne es wirklich wahrzunehmen: über die Bäume in unseren Städten."
+     ],
+     [
+      "HOF",
+      "Lassen Sie mich mit einer Zahl beginnen. An einem heißen Sommertag kann es in einer Straße ohne Bäume bis zu zehn Grad wärmer sein als in einer Straße mit dichten Baumkronen. Das liegt nicht nur am Schatten. Ein großer Baum verdunstet an einem solchen Tag mehrere hundert Liter Wasser und kühlt damit seine Umgebung, ähnlich wie eine Klimaanlage, nur ohne Strom."
+     ],
+     [
+      "HOF",
+      "Trotzdem haben es Stadtbäume schwer. Ein Baum im Wald kann zweihundert Jahre alt werden, ein Straßenbaum wird im Durchschnitt nur sechzig. Dafür gibt es mehrere Gründe. Die Wurzeln finden zwischen Asphalt und Leitungen kaum Platz, und im Winter schadet ihnen das Streusalz. Der wichtigste Grund ist aber inzwischen die Trockenheit. In den letzten heißen Sommern haben viele Städte mehr Bäume verloren als in den zwanzig Jahren davor."
+     ],
+     [
+      "HOF",
+      "Was kann man tun? Die erste Idee, die viele haben, ist: einfach mehr gießen. Das hilft kurzfristig, ist aber teuer und in Zeiten von Wassermangel auch schwer zu rechtfertigen. Viel spannender finde ich das sogenannte Schwammstadt-Prinzip. Dabei wird Regenwasser nicht mehr sofort in die Kanalisation geleitet, sondern unter der Straße in großen Schichten aus Kies und Erde gespeichert. Die Bäume können sich dann über Wochen daraus versorgen. In Kopenhagen und Stockholm hat man damit sehr gute Erfahrungen gemacht."
+     ],
+     [
+      "HOF",
+      "Die zweite Frage ist: Welche Bäume pflanzen wir? Lange Zeit hat man in deutschen Städten vor allem Linden und Kastanien gesetzt. Viele davon kommen mit Hitze schlecht zurecht. Heute testen die Stadtgärtnereien Arten aus Südeuropa oder Nordamerika, die längere Trockenzeiten gewohnt sind. Ganz ohne Risiko ist das allerdings nicht. Wir wissen noch wenig darüber, wie diese Bäume mit unseren heimischen Insekten zusammenleben. Ich plädiere deshalb für eine Mischung: keine Straße mehr mit nur einer einzigen Art."
+     ],
+     [
+      "HOF",
+      "Und dann gibt es noch einen Faktor, über den selten gesprochen wird: die Menschen, die in der Straße wohnen. Wir im Umweltamt haben vor drei Jahren ein Projekt gestartet, bei dem Anwohner die Patenschaft für einen Baum übernehmen können. Sie gießen ihn im Sommer und melden der Stadt, wenn ihnen etwas auffällt, zum Beispiel ein abgebrochener Ast. Wir hatten mit vielleicht hundert Paten gerechnet. Heute sind es über achthundert. Und was uns besonders überrascht hat: Die Bäume mit Paten sind nachweislich gesünder, nicht nur wegen des Wassers, sondern weil Schäden früher entdeckt werden."
+     ],
+     [
+      "HOF",
+      "Zum Schluss möchte ich noch auf einen Konflikt eingehen, den es in fast jeder Stadt gibt. Bäume brauchen Platz, und dieser Platz wird oft für Parkplätze genutzt. Jedes Mal, wenn für einen neuen Baum ein Parkplatz wegfallen soll, gibt es Proteste. Ich verstehe das. Aber ich lade Sie ein, im nächsten Sommer einmal bewusst darauf zu achten, wo Sie Ihr Fahrrad abstellen oder auf den Bus warten. Ich vermute, Sie werden den Schatten suchen."
+     ],
+     [
+      "HOF",
+      "Noch ein praktischer Hinweis: Wenn Sie sich für eine Patenschaft interessieren, liegen hinten am Ausgang Formulare für Sie bereit. Die Anmeldung ist aber auch online möglich. Und jetzt freue ich mich auf Ihre Fragen."
+     ]
+    ],
+    "items": [
+     {
+      "n": 23,
+      "type": "abc",
+      "q": "Nach Aussage der Referentin kühlen Bäume ihre Umgebung …",
+      "opts": [
+       "nur durch ihren Schatten.",
+       "vor allem in der Nacht.",
+       "auch durch die Verdunstung von Wasser."
+      ],
+      "a": "c",
+      "trap": "teil",
+      "ev": "Ein großer Baum verdunstet an einem solchen Tag mehrere hundert Liter Wasser",
+      "why": "„nicht nur am Schatten“: Die Verdunstung kühlt zusätzlich."
+     },
+     {
+      "n": 24,
+      "type": "abc",
+      "q": "Was ist heute das größte Problem für Stadtbäume?",
+      "opts": [
+       "Zu wenig Platz für die Wurzeln.",
+       "Lange Phasen ohne Regen.",
+       "Das Streusalz im Winter."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "Der wichtigste Grund ist aber inzwischen die Trockenheit.",
+      "why": "Platz und Salz sind auch Gründe, aber der <b>wichtigste</b> ist die Trockenheit."
+     },
+     {
+      "n": 25,
+      "type": "abc",
+      "q": "Beim Schwammstadt-Prinzip wird Regenwasser …",
+      "opts": [
+       "schneller in die Kanalisation geleitet.",
+       "unter der Erde gespeichert.",
+       "in Tanks gesammelt und zum Gießen verwendet."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "unter der Straße in großen Schichten aus Kies und Erde gespeichert",
+      "why": "Gerade <b>nicht mehr</b> sofort in die Kanalisation."
+     },
+     {
+      "n": 26,
+      "type": "abc",
+      "q": "Was empfiehlt die Referentin bei der Auswahl neuer Bäume?",
+      "opts": [
+       "Verschiedene Baumarten zu kombinieren.",
+       "Nur noch Arten aus Südeuropa zu pflanzen.",
+       "Bei Linden und Kastanien zu bleiben."
+      ],
+      "a": "a",
+      "trap": "teil",
+      "ev": "Ich plädiere deshalb für eine Mischung",
+      "why": "Neue Arten haben auch Risiken. „Nur noch“ ist zu absolut."
+     },
+     {
+      "n": 27,
+      "type": "abc",
+      "q": "Das Projekt mit den Baumpatenschaften …",
+      "opts": [
+       "war erfolgreicher als geplant.",
+       "hatte weniger Teilnehmer als erwartet.",
+       "wurde von Anwohnern gegründet."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Heute sind es über achthundert.",
+      "why": "Erwartet waren etwa hundert Paten, heute sind es über achthundert. Gestartet hat das Projekt die Stadt, nicht die Anwohner."
+     },
+     {
+      "n": 28,
+      "type": "abc",
+      "q": "Warum sind Bäume mit Paten gesünder?",
+      "opts": [
+       "Weil Probleme schneller bemerkt werden.",
+       "Weil sie häufiger gedüngt werden.",
+       "Weil sie an besseren Standorten stehen."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "weil Schäden früher entdeckt werden",
+      "why": "Schäden früher entdecken = Probleme schneller bemerken."
+     },
+     {
+      "n": 29,
+      "type": "abc",
+      "q": "Wie steht die Referentin zu den Protesten wegen wegfallender Parkplätze?",
+      "opts": [
+       "Sie möchte alle Parkplätze abschaffen.",
+       "Sie kann die Proteste nachvollziehen.",
+       "Sie hält Parkplätze für wichtiger als Bäume."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Ich verstehe das.",
+      "why": "„Ich verstehe das“ = sie kann es nachvollziehen, wirbt aber trotzdem für Bäume."
+     },
+     {
+      "n": 30,
+      "type": "abc",
+      "q": "Wer eine Patenschaft übernehmen möchte, …",
+      "opts": [
+       "muss sich online anmelden.",
+       "muss die Referentin persönlich ansprechen.",
+       "kann sich am Ausgang ein Formular nehmen."
+      ],
+      "a": "c",
+      "trap": "teil",
+      "ev": "liegen hinten am Ausgang Formulare für Sie bereit",
+      "why": "Online geht es <b>auch</b>, ist aber kein Muss."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-h4-b": {
+  "id": "b2-h4-b",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Vortrag: Warum wir Dinge aufschieben",
+  "instr": "Sie hören einen kurzen Vortrag. Sie hören den Text zweimal. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear a short lecture. You hear the text twice. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "AMB": "Dr. Felix Amberg"
+  },
+  "genders": {
+   "AMB": "m"
+  },
+  "groups": [
+   {
+    "title": "Studium generale: Die Psychologie des Aufschiebens",
+    "audio": "audio/b2/b2-h4-b-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "AMB",
+      "Liebe Studierende, schön, dass Sie da sind, obwohl einige von Ihnen, wie ich vermute, gerade eigentlich an einer Hausarbeit schreiben sollten. Genau darum geht es heute: um das Aufschieben, in der Fachsprache Prokrastination."
+     ],
+     [
+      "AMB",
+      "Zunächst möchte ich mit einem verbreiteten Irrtum aufräumen. Aufschieben hat nur wenig mit Faulheit oder schlechtem Zeitmanagement zu tun. Wer prokrastiniert, ist oft sehr beschäftigt: Er räumt die Küche auf, beantwortet E-Mails oder sortiert seine Bücher. Er tut also durchaus etwas, nur eben nicht das, was er eigentlich tun sollte. Die Forschung zeigt: Aufschieben ist vor allem eine Strategie, unangenehme Gefühle zu vermeiden. Die Aufgabe macht uns Angst, sie langweilt uns, oder wir zweifeln, ob wir ihr gewachsen sind. Und das Aufschieben bringt kurzfristig Erleichterung."
+     ],
+     [
+      "AMB",
+      "Das Problem ist natürlich, dass diese Erleichterung nicht lange anhält. Die Aufgabe ist ja noch da, und je näher die Frist rückt, desto größer wird der Druck. In einer Studie mit Studierenden in den USA hat man festgestellt, dass Studierende, die stark prokrastinieren, am Ende des Semesters nicht nur schlechtere Noten hatten, sondern auch häufiger krank waren. Am Anfang des Semesters dagegen ging es ihnen sogar besser als den anderen."
+     ],
+     [
+      "AMB",
+      "Was kann man also tun? Ein Ratschlag, den Sie sicher kennen, lautet: Teilen Sie große Aufgaben in kleine Schritte. Das ist richtig, aber oft machen wir die Schritte immer noch zu groß. „Einleitung schreiben“ ist kein kleiner Schritt. „Drei Sätze darüber aufschreiben, worum es in meiner Arbeit geht“, das ist einer. Der erste Schritt sollte so klein sein, dass er fast lächerlich wirkt. Denn das Schwierigste ist meistens das Anfangen. Wer erst einmal angefangen hat, macht häufig weiter."
+     ],
+     [
+      "AMB",
+      "Eine zweite Methode betrifft die Umgebung. Unser Smartphone ist der perfekte Partner für das Aufschieben, denn es bietet in jeder Sekunde eine angenehmere Alternative. Willenskraft allein hilft hier wenig. In einem Experiment an unserem Institut sollten Versuchspersonen eine langweilige Aufgabe lösen. Die eine Gruppe hatte das Handy ausgeschaltet vor sich auf dem Tisch liegen, die andere Gruppe hatte es in einem anderen Raum gelassen. Die zweite Gruppe war deutlich schneller fertig. Allein die Anwesenheit des Geräts lenkt uns also schon ab."
+     ],
+     [
+      "AMB",
+      "Drittens, und das überrascht viele: Seien Sie nachsichtig mit sich selbst. Man könnte denken, dass Selbstkritik motiviert. Das Gegenteil ist der Fall. Studierende, die sich selbst verziehen hatten, dass sie zu spät mit dem Lernen begonnen hatten, schoben bei der nächsten Prüfung weniger auf als diejenigen, die sich heftig kritisierten. Wer sich selbst fertigmacht, verbindet die Aufgabe mit noch mehr schlechten Gefühlen, und wir wissen ja schon, wohin das führt."
+     ],
+     [
+      "AMB",
+      "Ich will Ihnen nicht verschweigen, dass es auch Menschen gibt, bei denen das Aufschieben so stark ist, dass es das Studium oder den Beruf gefährdet. Hier reichen Tipps aus einem Vortrag nicht aus. Die psychologische Beratungsstelle unserer Hochschule bietet dafür ein Gruppentraining über acht Wochen an. Die Teilnahme ist kostenlos, allerdings ist die Nachfrage groß, Sie sollten sich also rechtzeitig anmelden."
+     ],
+     [
+      "AMB",
+      "Zum Schluss noch ein Gedanke. Nicht jedes Aufschieben ist schlecht. Manchmal schieben wir eine Entscheidung auf, weil uns noch Informationen fehlen, und das ist klug. Die Frage, die Sie sich stellen sollten, lautet also: Warte ich gerade, weil es sinnvoll ist, oder weil ich mich vor etwas drücke? Wenn Sie diese Frage ehrlich beantworten, sind Sie schon einen großen Schritt weiter. Die Folien zum Vortrag finden Sie ab morgen auf der Seite des Studium generale. Und jetzt beantworte ich gern Ihre Fragen."
+     ]
+    ],
+    "items": [
+     {
+      "n": 23,
+      "type": "abc",
+      "q": "Laut dem Referenten ist Aufschieben vor allem …",
+      "opts": [
+       "eine Folge von schlechter Zeitplanung.",
+       "ein Zeichen von Faulheit.",
+       "ein Weg, negativen Gefühlen auszuweichen."
+      ],
+      "a": "c",
+      "trap": "negation",
+      "ev": "Aufschieben ist vor allem eine Strategie, unangenehme Gefühle zu vermeiden.",
+      "why": "Faulheit und Zeitmanagement nennt er als <b>Irrtum</b>."
+     },
+     {
+      "n": 24,
+      "type": "abc",
+      "q": "Was hat die Studie aus den USA gezeigt?",
+      "opts": [
+       "Wer stark aufschiebt, fühlt sich zu Beginn des Semesters besser.",
+       "Wer stark aufschiebt, fühlt sich das ganze Semester über schlechter.",
+       "Wer stark aufschiebt, bekommt trotzdem gute Noten."
+      ],
+      "a": "a",
+      "trap": "teil",
+      "ev": "Am Anfang des Semesters dagegen ging es ihnen sogar besser als den anderen.",
+      "why": "Schlechter geht es ihnen erst am <b>Ende</b>, nicht das ganze Semester."
+     },
+     {
+      "n": 25,
+      "type": "abc",
+      "q": "Was sagt der Referent über die Methode der kleinen Schritte?",
+      "opts": [
+       "Sie hilft nur bei kurzen Aufgaben.",
+       "Die Schritte sind meistens nicht klein genug.",
+       "Sie macht die Arbeit oft langsamer."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "aber oft machen wir die Schritte immer noch zu groß",
+      "why": "Zu groß = nicht klein genug."
+     },
+     {
+      "n": 26,
+      "type": "abc",
+      "q": "Was zeigte das Experiment mit dem Smartphone?",
+      "opts": [
+       "Ein ausgeschaltetes Handy stört nicht.",
+       "Schon ein Handy in der Nähe kann ablenken.",
+       "Mit Willenskraft kann man das Handy gut ignorieren."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Allein die Anwesenheit des Geräts lenkt uns also schon ab.",
+      "why": "Auch <b>ausgeschaltet</b> auf dem Tisch hat das Handy gestört."
+     },
+     {
+      "n": 27,
+      "type": "abc",
+      "q": "Welche Wirkung hat starke Selbstkritik?",
+      "opts": [
+       "Sie motiviert, beim nächsten Mal früher anzufangen.",
+       "Sie hat keinen messbaren Effekt.",
+       "Sie führt eher dazu, dass man wieder aufschiebt."
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "schoben bei der nächsten Prüfung weniger auf als diejenigen, die sich heftig kritisierten",
+      "why": "„Man könnte denken, dass Selbstkritik motiviert. Das Gegenteil ist der Fall.“"
+     },
+     {
+      "n": 28,
+      "type": "abc",
+      "q": "Das Gruppentraining der Beratungsstelle …",
+      "opts": [
+       "ist sehr gefragt.",
+       "kostet eine kleine Gebühr.",
+       "dauert ein ganzes Semester."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "allerdings ist die Nachfrage groß",
+      "why": "Es ist kostenlos und dauert acht Wochen."
+     },
+     {
+      "n": 29,
+      "type": "abc",
+      "q": "Was sagt der Referent zum Schluss über das Aufschieben?",
+      "opts": [
+       "Man sollte es in jedem Fall vermeiden.",
+       "Es kann manchmal sinnvoll sein.",
+       "Es betrifft vor allem wichtige Entscheidungen."
+      ],
+      "a": "b",
+      "trap": "teil",
+      "ev": "Nicht jedes Aufschieben ist schlecht.",
+      "why": "Wenn Informationen fehlen, ist Warten klug."
+     },
+     {
+      "n": 30,
+      "type": "abc",
+      "q": "Die Folien zum Vortrag …",
+      "opts": [
+       "sind ab dem nächsten Tag online verfügbar.",
+       "werden im Anschluss verteilt.",
+       "bekommt man per E-Mail."
+      ],
+      "a": "a",
+      "trap": "detail",
+      "ev": "Die Folien zum Vortrag finden Sie ab morgen auf der Seite des Studium generale.",
+      "why": "Ab morgen auf der Webseite = ab dem nächsten Tag online."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-h1": {
+  "id": "b2-diag-h1",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 1,
+  "title": "Gespräche und Äußerungen (kurz)",
+  "instr": "Sie hören zwei Gespräche und Äußerungen. Sie hören jeden Text einmal. Zu jedem Text lösen Sie zwei Aufgaben. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear two conversations and statements. You hear each text once. For each text you answer two questions. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "ANN": "Anna",
+   "FEL": "Felix",
+   "STR": "Radio"
+  },
+  "genders": {
+   "ANN": "f",
+   "FEL": "m",
+   "STR": "f"
+  },
+  "groups": [
+   {
+    "title": "Text 1 · Zwei Kollegen in der Kantine",
+    "audio": "audio/b2/b2-diag-h1-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "ANN",
+      "Sag mal, Felix, kommst du eigentlich mit zum Betriebsausflug nächsten Freitag?"
+     ],
+     [
+      "FEL",
+      "Ich weiß noch nicht. Eigentlich hatte ich mich schon angemeldet, aber jetzt soll es ja eine Kanutour werden statt der Stadtführung. Ich kann nicht besonders gut schwimmen, das ist mir ehrlich gesagt nicht ganz geheuer."
+     ],
+     [
+      "ANN",
+      "Da musst du dir keine Sorgen machen. Alle bekommen Schwimmwesten, und der Fluss ist an der Stelle ganz ruhig. Außerdem sitzt man immer zu zweit im Boot. Wir können doch zusammen fahren."
+     ],
+     [
+      "FEL",
+      "Na gut, wenn du hinten sitzt und lenkst, bin ich dabei. Muss ich mich noch mal neu anmelden?"
+     ],
+     [
+      "ANN",
+      "Nein, die Liste gilt weiter. Du musst nur bis Mittwoch Bescheid geben, welche Schuhgröße du hast, wegen der Neoprenschuhe."
+     ]
+    ],
+    "items": [
+     {
+      "n": 1,
+      "type": "rf",
+      "q": "Für den Ausflug war ursprünglich eine Stadtführung geplant.",
+      "a": "r",
+      "trap": "vorher",
+      "ev": "jetzt soll es ja eine Kanutour werden statt der Stadtführung",
+      "why": "„jetzt … statt der Stadtführung“: Vorher war die Stadtführung geplant."
+     },
+     {
+      "n": 2,
+      "type": "abc",
+      "q": "Was muss Felix noch tun?",
+      "opts": [
+       "Sich neu anmelden.",
+       "Seine Schuhgröße mitteilen.",
+       "Eine Schwimmweste besorgen."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "Du musst nur bis Mittwoch Bescheid geben, welche Schuhgröße du hast",
+      "why": "Die Anmeldung gilt weiter, Schwimmwesten bekommen alle."
+     }
+    ]
+   },
+   {
+    "title": "Text 2 · Information im Radio",
+    "audio": "audio/b2/b2-diag-h1-1.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "STR",
+      "Eine Information der Stadtreinigung: Ab dem ersten Januar bekommen alle Haushalte in der Stadt eine Biotonne. Bisher war die braune Tonne freiwillig, jetzt wird sie zur Pflicht. Wer seine Küchenabfälle bereits im eigenen Garten kompostiert, kann sich allerdings von der Pflicht befreien lassen. Dafür reicht ein kurzer Antrag auf der Webseite der Stadtreinigung. Die Kosten für die Biotonne sind übrigens in der normalen Müllgebühr schon enthalten. Und ganz wichtig: Plastiktüten gehören nicht in die Biotonne, auch nicht die, auf denen „kompostierbar“ steht."
+     ]
+    ],
+    "items": [
+     {
+      "n": 3,
+      "type": "rf",
+      "q": "Für die Biotonne muss man ab Januar extra bezahlen.",
+      "a": "f",
+      "trap": "detail",
+      "ev": "Die Kosten für die Biotonne sind übrigens in der normalen Müllgebühr schon enthalten.",
+      "why": "Schon in der Müllgebühr enthalten = keine Extrakosten."
+     },
+     {
+      "n": 4,
+      "type": "abc",
+      "q": "Wer kann sich von der Pflicht befreien lassen?",
+      "opts": [
+       "Wer seine Küchenabfälle selbst kompostiert.",
+       "Wer schon eine braune Tonne hat.",
+       "Wer kompostierbare Tüten benutzt."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Wer seine Küchenabfälle bereits im eigenen Garten kompostiert, kann sich allerdings von der Pflicht befreien lassen.",
+      "why": "Kompostierbare Tüten sind sogar verboten."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-h2": {
+  "id": "b2-diag-h2",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 2,
+  "title": "Interview (kurz)",
+  "instr": "Sie hören im Radio ein Interview mit der Bienenforscherin Svenja Mattern. Sie hören den Text zweimal. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear a radio interview. You hear the text twice. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "MOD": "Moderator",
+   "MAT": "Svenja Mattern"
+  },
+  "genders": {
+   "MOD": "m",
+   "MAT": "f"
+  },
+  "groups": [
+   {
+    "title": "Bienen in der Stadt",
+    "audio": "audio/b2/b2-diag-h2-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "MOD",
+      "Frau Mattern, in vielen Städten stehen inzwischen Bienenstöcke auf den Dächern, sogar auf Rathäusern. Ist das gut für die Bienen?"
+     ],
+     [
+      "MAT",
+      "Für die Honigbiene auf jeden Fall. In der Stadt blüht von März bis Oktober fast immer irgendwo etwas, in Parks, auf Balkonen, an Straßenbäumen. Auf dem Land gibt es dagegen oft riesige Felder mit nur einer Pflanze, und wenn die verblüht ist, finden die Bienen wochenlang kaum Nahrung. Deshalb schmeckt Stadthonig manchmal sogar vielfältiger."
+     ],
+     [
+      "MOD",
+      "Das klingt ja, als sollte jeder einen Bienenstock aufstellen."
+     ],
+     [
+      "MAT",
+      "Bitte nicht! Genau da liegt das Problem. Honigbienen sind Nutztiere, so ähnlich wie Hühner. Bedroht sind vor allem die Wildbienen, und die konkurrieren mit den Honigbienen um dieselben Blüten. In manchen Stadtteilen gibt es inzwischen so viele Bienenvölker, dass für die Wildbienen nicht mehr genug übrig bleibt."
+     ],
+     [
+      "MOD",
+      "Was kann man als Stadtbewohner denn tun, wenn man den Bienen helfen will?"
+     ],
+     [
+      "MAT",
+      "Am meisten hilft man mit heimischen Pflanzen auf dem Balkon, zum Beispiel mit Kräutern wie Thymian oder Salbei. Und man sollte nicht alles perfekt aufräumen. Viele Wildbienen leben in alten Pflanzenstängeln oder in offenen, sandigen Stellen im Boden. Ein bisschen Unordnung im Garten ist also echter Naturschutz."
+     ]
+    ],
+    "items": [
+     {
+      "n": 11,
+      "type": "abc",
+      "q": "Warum finden Honigbienen in der Stadt gute Bedingungen?",
+      "opts": [
+       "Weil dort weniger Pflanzenschutzmittel eingesetzt werden.",
+       "Weil dort über viele Monate etwas blüht.",
+       "Weil es dort wärmer ist als auf dem Land."
+      ],
+      "a": "b",
+      "trap": "wort",
+      "ev": "In der Stadt blüht von März bis Oktober fast immer irgendwo etwas",
+      "why": "Von Pflanzenschutzmitteln und Temperatur ist keine Rede. Der Grund ist die lange Blütezeit."
+     },
+     {
+      "n": 12,
+      "type": "abc",
+      "q": "Was sieht Frau Mattern kritisch?",
+      "opts": [
+       "Dass Städte Honig verkaufen.",
+       "Dass Wildbienen die Honigbienen verdrängen.",
+       "Dass zu viele Menschen Honigbienen halten."
+      ],
+      "a": "c",
+      "trap": "person",
+      "ev": "gibt es inzwischen so viele Bienenvölker, dass für die Wildbienen nicht mehr genug übrig bleibt",
+      "why": "Umgekehrt: Die Honigbienen nehmen den <b>Wildbienen</b> die Nahrung weg."
+     },
+     {
+      "n": 13,
+      "type": "abc",
+      "q": "Was empfiehlt Frau Mattern Stadtbewohnern?",
+      "opts": [
+       "Den Garten nicht zu ordentlich zu halten.",
+       "Einen eigenen Bienenstock aufzustellen.",
+       "Möglichst exotische Blumen zu pflanzen."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Ein bisschen Unordnung im Garten ist also echter Naturschutz.",
+      "why": "Unordnung = nicht zu ordentlich. Einen Bienenstock soll man gerade <b>nicht</b> aufstellen."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-h3": {
+  "id": "b2-diag-h3",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 3,
+  "title": "Radiogespräch (kurz)",
+  "instr": "Sie hören im Radio ein Gespräch mit mehreren Personen. Die Personen sprechen über eine autofreie Altstadt. Sie hören den Text einmal. Wählen Sie bei jeder Aufgabe: Wer sagt das?",
+  "instr_en": "You hear a radio discussion with several people. You hear the text once. For each statement decide: who says this?",
+  "source": "own",
+  "who": [
+   "Moderator",
+   "Sabine Hartwig",
+   "Martin Olbrich"
+  ],
+  "speakers": {
+   "MOD": "Moderator",
+   "HAR": "Sabine Hartwig",
+   "OLB": "Martin Olbrich"
+  },
+  "genders": {
+   "MOD": "m",
+   "HAR": "f",
+   "OLB": "m"
+  },
+  "groups": [
+   {
+    "title": "Stadtgespräch: Die Altstadt ohne Autos",
+    "audio": "audio/b2/b2-diag-h3-0.mp3",
+    "plays": 1,
+    "script": [
+     [
+      "MOD",
+      "Unsere Stadt plant, die Altstadt ab nächstem Jahr für Autos zu sperren. Darüber diskutiere ich mit Sabine Hartwig, sie hat ein Schuhgeschäft in der Altstadt, und mit dem Verkehrsplaner Martin Olbrich. Frau Hartwig, Sie haben Angst um Ihre Kundschaft?"
+     ],
+     [
+      "HAR",
+      "Ja, natürlich. Viele meiner Kundinnen sind ältere Damen, die nicht mehr so gut zu Fuß sind. Die kommen mit dem Auto, parken kurz vor der Tür und fahren wieder. Wenn das nicht mehr geht, fahren sie ins Einkaufszentrum am Stadtrand, da gibt es Parkplätze ohne Ende."
+     ],
+     [
+      "OLB",
+      "Ich verstehe die Sorge, aber die Erfahrungen aus anderen Städten sind ziemlich eindeutig. Nach einer Sperrung kommen meistens mehr Menschen in die Innenstadt, nicht weniger. Sie bleiben länger, weil es ruhiger und angenehmer ist. Wer zu Fuß unterwegs ist, geht auch mal in einen Laden, an dem er sonst vorbeigefahren wäre."
+     ],
+     [
+      "HAR",
+      "Mag sein, dass mehr Leute kommen. Aber die kaufen dann ein Eis und keine Schuhe."
+     ],
+     [
+      "MOD",
+      "Und was ist mit den Lieferungen? Die Geschäfte brauchen ja auch Ware."
+     ],
+     [
+      "OLB",
+      "Das ist ein wichtiger Punkt. Lieferverkehr soll morgens bis elf Uhr weiterhin erlaubt sein. Und für Menschen, die schlecht gehen können, wird es einen kostenlosen Shuttlebus von den Parkhäusern geben."
+     ],
+     [
+      "HAR",
+      "Wenn der Bus wirklich regelmäßig fährt, wäre das schon mal ein Anfang. Ich bin ja nicht grundsätzlich dagegen. Ich möchte nur, dass man uns Geschäftsleute vorher fragt."
+     ]
+    ],
+    "items": [
+     {
+      "n": 17,
+      "type": "who",
+      "q": "Fußgänger entdecken eher Geschäfte, die sie sonst nicht beachten würden.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Wer zu Fuß unterwegs ist, geht auch mal in einen Laden, an dem er sonst vorbeigefahren wäre.",
+      "why": "Herr Olbrich, der Verkehrsplaner."
+     },
+     {
+      "n": 18,
+      "type": "who",
+      "q": "Mehr Besucher bedeuten nicht unbedingt mehr Umsatz.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Aber die kaufen dann ein Eis und keine Schuhe.",
+      "why": "Frau Hartwig: Die Leute kommen, aber kaufen nicht bei ihr."
+     },
+     {
+      "n": 19,
+      "type": "who",
+      "q": "Die Belieferung der Geschäfte bleibt zu bestimmten Zeiten möglich.",
+      "a": "c",
+      "trap": "person",
+      "ev": "Lieferverkehr soll morgens bis elf Uhr weiterhin erlaubt sein.",
+      "why": "Die Frage stellt der Moderator, die Antwort gibt Herr Olbrich."
+     },
+     {
+      "n": 20,
+      "type": "who",
+      "q": "Man ist nicht prinzipiell gegen die Sperrung.",
+      "a": "b",
+      "trap": "negation",
+      "ev": "Ich bin ja nicht grundsätzlich dagegen.",
+      "why": "Frau Hartwig am Ende: nicht grundsätzlich dagegen."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-h4": {
+  "id": "b2-diag-h4",
+  "level": "b2",
+  "module": "hoeren",
+  "teil": 4,
+  "title": "Vortrag (kurz)",
+  "instr": "Sie hören einen kurzen Vortrag. Sie hören den Text zweimal. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "You hear a short lecture. You hear the text twice. Choose the correct answer for each question.",
+  "source": "own",
+  "speakers": {
+   "REF": "Referentin"
+  },
+  "genders": {
+   "REF": "f"
+  },
+  "groups": [
+   {
+    "title": "Vortrag: Lebensmittel im Müll",
+    "audio": "audio/b2/b2-diag-h4-0.mp3",
+    "plays": 2,
+    "script": [
+     [
+      "REF",
+      "Meine Damen und Herren, in Deutschland landen jedes Jahr etwa elf Millionen Tonnen Lebensmittel im Müll. Viele denken, daran seien vor allem Supermärkte und Restaurants schuld. Tatsächlich entsteht aber mehr als die Hälfte dieser Abfälle in privaten Haushalten, also bei uns allen zu Hause."
+     ],
+     [
+      "REF",
+      "Warum werfen wir so viel weg? Ein Hauptgrund ist das Mindesthaltbarkeitsdatum. Viele verwechseln es mit einem Verfallsdatum. Das Mindesthaltbarkeitsdatum sagt aber nur, bis wann der Hersteller garantiert, dass ein Produkt seinen Geschmack und seine Qualität behält. Joghurt oder Nudeln sind oft noch Wochen danach völlig in Ordnung. Anders ist es beim Verbrauchsdatum, das man zum Beispiel auf frischem Hackfleisch findet. Das sollte man wirklich ernst nehmen."
+     ],
+     [
+      "REF",
+      "Ein zweiter Grund ist unser Einkaufsverhalten. Wer hungrig und ohne Liste einkauft, kauft nachweislich mehr, als er braucht. Mein Rat ist deshalb ganz einfach: Schauen Sie vor dem Einkaufen in den Kühlschrank und machen Sie ein Foto davon. Das dauert zehn Sekunden und spart Ihnen im Jahr leicht ein paar hundert Euro."
+     ]
+    ],
+    "items": [
+     {
+      "n": 23,
+      "type": "abc",
+      "q": "Wo entstehen die meisten Lebensmittelabfälle?",
+      "opts": [
+       "In privaten Haushalten.",
+       "In Supermärkten.",
+       "In Restaurants."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "mehr als die Hälfte dieser Abfälle in privaten Haushalten",
+      "why": "Supermärkte und Restaurants: Das <b>denken</b> viele, es stimmt aber nicht."
+     },
+     {
+      "n": 24,
+      "type": "abc",
+      "q": "Was sagt die Referentin über das Mindesthaltbarkeitsdatum?",
+      "opts": [
+       "Danach darf man Produkte nicht mehr essen.",
+       "Es steht vor allem auf frischem Fleisch.",
+       "Viele Produkte kann man danach noch gut essen."
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "Joghurt oder Nudeln sind oft noch Wochen danach völlig in Ordnung.",
+      "why": "Auf frischem Hackfleisch steht das <b>Verbrauchsdatum</b>."
+     },
+     {
+      "n": 25,
+      "type": "abc",
+      "q": "Was empfiehlt die Referentin?",
+      "opts": [
+       "Nur einmal pro Woche einzukaufen.",
+       "Vor dem Einkauf ein Foto vom Kühlschrank zu machen.",
+       "Größere Packungen zu kaufen."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "machen Sie ein Foto davon",
+      "why": "Foto vom Inhalt des Kühlschranks vor dem Einkaufen."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l1-a": {
+  "id": "b2-l1-a",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Leben ohne eigenes Auto",
+  "instr": "Lesen Sie die Texte und die Aussagen 1 bis 9. Auf welche der vier Personen treffen die einzelnen Aussagen zu? Die Personen können mehrmals gewählt werden.",
+  "instr_en": "Read the texts and the statements. Which of the four people does each statement apply to? You can choose a person more than once.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie lesen in einem Forum, wie Menschen über ein Leben ohne eigenes Auto denken.",
+  "who": [
+   "Henrik",
+   "Mira",
+   "Jakob",
+   "Selin"
+  ],
+  "groups": [
+   {
+    "title": "Forum: Leben ohne eigenes Auto",
+    "body": "Henrik\nVor drei Jahren habe ich mein Auto verkauft, eigentlich nur, weil die Reparatur teurer gewesen wäre als der Wagen selbst. Ich dachte, ich kaufe mir bald ein neues. Daraus ist nichts geworden. In der Stadt fahre ich alles mit dem Fahrrad, auch im Winter, und für den Großeinkauf leihe ich mir ein Lastenrad beim Verleih in unserem Stadtteil. Was ich wirklich unterschätzt hatte, ist, wie viel Geld ich spare: Versicherung, Steuer, Parkplatz, das waren locker zweihundert Euro im Monat. Davon gönne ich mir heute zweimal im Jahr eine schöne Reise. Ehrlich gesagt vermisse ich das Auto nur, wenn ich meine Eltern besuche. Die wohnen in einem Dorf, wo am Wochenende kein Bus fährt.\n\nMira\nIch lese in diesem Forum immer, wie toll das Leben ohne Auto ist. Für Singles in der Großstadt mag das stimmen. Ich habe zwei kleine Kinder und arbeite als Pflegerin im Schichtdienst. Wenn meine Frühschicht um sechs beginnt, fährt noch keine Straßenbahn. Wir haben es ein halbes Jahr ohne Auto versucht, weil wir sparen wollten, und es war der stressigste Sommer meines Lebens. Inzwischen haben wir wieder einen gebrauchten Kleinwagen. Trotzdem nutzen wir ihn bewusster als früher: Zum Kindergarten gehen wir zu Fuß, und am Wochenende bleibt er oft stehen. Ich finde, man sollte niemandem ein schlechtes Gewissen machen, der auf sein Auto angewiesen ist.\n\nJakob\nBei mir war es eine bewusste Entscheidung für die Umwelt. Ich arbeite als Energieberater und wollte nicht Wasser predigen und Wein trinken. Seit fünf Jahren bin ich Mitglied in einem Carsharing-Verein. Ich buche ein Auto per App, meistens steht es zwei Straßen weiter. Das funktioniert erstaunlich gut, allerdings muss man ein bisschen planen: An Feiertagen oder in den Ferien sind die Wagen schnell ausgebucht. Was mich wirklich stört, ist etwas anderes. In meinem Viertel sind ganze Straßen mit Autos zugeparkt, die die meiste Zeit nur herumstehen. Ich wünsche mir, dass die Stadt diese Flächen für Bäume und Spielplätze nutzt.\n\nSelin\nIch habe nie einen Führerschein gemacht. Als ich achtzehn war, war mir das zu teuer, und später habe ich es einfach nicht vermisst. Ich wohne in einer Kleinstadt, und das geht besser, als viele denken. Zur Arbeit fahre ich mit dem Zug, eine halbe Stunde, in der ich lese oder schon E-Mails beantworte. Manchmal werde ich schon komisch angeschaut, wenn ich sage, dass ich nicht Auto fahren kann. Manche halten das für einen Mangel, so als könnte ich nicht schwimmen. Ein bisschen abhängig bin ich natürlich schon: Wenn Freunde etwas auf dem Land unternehmen, muss ich fragen, ob mich jemand mitnimmt. Das ist mir manchmal unangenehm.",
+    "items": [
+     {
+      "n": 1,
+      "type": "who",
+      "q": "Diese Person hatte vor, sich wieder ein Auto zu kaufen, hat es dann aber nicht getan.",
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Ich dachte, ich kaufe mir bald ein neues. Daraus ist nichts geworden.",
+      "why": "Henrik: Der Plan war ein neues Auto, daraus wurde nichts. Mira hat wirklich wieder eins gekauft."
+     },
+     {
+      "n": 2,
+      "type": "who",
+      "q": "Diese Person nutzt die Zeit unterwegs für andere Tätigkeiten.",
+      "a": "d",
+      "trap": "synonym",
+      "ev": "eine halbe Stunde, in der ich lese oder schon E-Mails beantworte",
+      "why": "Selin liest oder arbeitet im Zug."
+     },
+     {
+      "n": 3,
+      "type": "who",
+      "q": "Diese Person braucht wegen ihrer Arbeitszeiten ein Auto.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Wenn meine Frühschicht um sechs beginnt, fährt noch keine Straßenbahn.",
+      "why": "Mira: Frühschicht ohne Straßenbahn."
+     },
+     {
+      "n": 4,
+      "type": "who",
+      "q": "Diese Person hat ihr Verhalten an ihre Überzeugungen angepasst.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "wollte nicht Wasser predigen und Wein trinken",
+      "why": "Jakob lebt so, wie er es als Energieberater anderen empfiehlt."
+     },
+     {
+      "n": 5,
+      "type": "who",
+      "q": "Diese Person ärgert sich darüber, wie öffentlicher Raum genutzt wird.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "In meinem Viertel sind ganze Straßen mit Autos zugeparkt, die die meiste Zeit nur herumstehen.",
+      "why": "Jakob will die Flächen lieber für Bäume und Spielplätze."
+     },
+     {
+      "n": 6,
+      "type": "who",
+      "q": "Diese Person hat die finanziellen Vorteile anfangs nicht richtig eingeschätzt.",
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Was ich wirklich unterschätzt hatte, ist, wie viel Geld ich spare",
+      "why": "Unterschätzt = nicht richtig eingeschätzt. Mira wollte sparen, das ist etwas anderes."
+     },
+     {
+      "n": 7,
+      "type": "who",
+      "q": "Diese Person erlebt, dass andere ihre Situation merkwürdig finden.",
+      "a": "d",
+      "trap": "synonym",
+      "ev": "Manchmal werde ich schon komisch angeschaut",
+      "why": "Selin wird wegen des fehlenden Führerscheins komisch angeschaut."
+     },
+     {
+      "n": 8,
+      "type": "who",
+      "q": "Diese Person findet, man sollte Autofahrer nicht verurteilen.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "man sollte niemandem ein schlechtes Gewissen machen, der auf sein Auto angewiesen ist",
+      "why": "Mira verteidigt Menschen, die ein Auto brauchen."
+     },
+     {
+      "n": 9,
+      "type": "who",
+      "q": "Für diese Person ist ein Auto nur mit etwas Vorausplanung verfügbar.",
+      "a": "c",
+      "trap": "detail",
+      "ev": "allerdings muss man ein bisschen planen",
+      "why": "Jakob: Carsharing-Autos sind an Feiertagen schnell ausgebucht."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l1-b": {
+  "id": "b2-l1-b",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Erreichbar nach Feierabend?",
+  "instr": "Lesen Sie die Texte und die Aussagen 1 bis 9. Auf welche der vier Personen treffen die einzelnen Aussagen zu? Die Personen können mehrmals gewählt werden.",
+  "instr_en": "Read the texts and the statements. Which of the four people does each statement apply to? You can choose a person more than once.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie lesen in einem Forum, wie Menschen darüber denken, nach Feierabend für die Arbeit erreichbar zu sein.",
+  "who": [
+   "Tamara",
+   "Konstantin",
+   "Ines",
+   "Philipp"
+  ],
+  "groups": [
+   {
+    "title": "Forum: Erreichbar nach Feierabend?",
+    "body": "Tamara\nIch arbeite in der Personalabteilung eines mittelgroßen Unternehmens, und das Thema beschäftigt uns gerade sehr. Viele jüngere Bewerberinnen und Bewerber fragen im Vorstellungsgespräch inzwischen ganz direkt, ob sie abends E-Mails beantworten müssen. Vor zehn Jahren hätte sich das niemand getraut. Wir haben deshalb eine Regel eingeführt: Nach 19 Uhr werden keine internen Mails mehr zugestellt, der Server hält sie bis zum nächsten Morgen zurück. Am Anfang gab es Widerstand, vor allem von Führungskräften. Heute will kaum jemand zurück.\n\nKonstantin\nIch bin selbstständig und habe einen kleinen Handwerksbetrieb mit vier Angestellten. Wenn bei einem Kunden am Sonntag die Heizung ausfällt, ruft er mich an, und ich gehe ran. So ist das eben, wenn man sein eigener Chef ist. Von meinen Mitarbeitern erwarte ich das aber nicht. Die haben feste Zeiten, und wer Bereitschaftsdienst macht, bekommt dafür einen Zuschlag. Was ich nicht mag, sind Diskussionen, in denen so getan wird, als wäre jede Nachricht nach Feierabend ein Angriff auf die Gesundheit. Manchmal ist ein kurzer Anruf einfach die schnellste Lösung.\n\nInes\nLange habe ich gedacht, ich müsste immer erreichbar sein, um zu zeigen, wie engagiert ich bin. Ich habe sogar im Urlaub am Strand meine Mails gelesen. Vor zwei Jahren hatte ich dann einen Burn-out und war vier Monate krankgeschrieben. In der Therapie habe ich gelernt, dass mir niemand diese ständige Erreichbarkeit vorgeschrieben hatte. Ich selbst hatte sie mir auferlegt. Heute liegt mein Diensthandy ab sechs Uhr abends in einer Schublade. Und das Erstaunliche ist: Die Firma funktioniert trotzdem.\n\nPhilipp\nIch arbeite in einem internationalen Team, meine Kolleginnen und Kollegen sitzen in Kalifornien und in Singapur. Feste Feierabendzeiten sind bei uns gar nicht möglich, irgendwo ist immer Arbeitszeit. Für mich ist das in Ordnung, weil ich mir dafür tagsüber freinehmen kann, wenn ich zum Beispiel meine Kinder von der Schule abhole. Ich finde, man sollte nicht starre Regeln für alle machen. Entscheidend ist, dass jeder selbst bestimmen kann, wann er arbeitet.",
+    "items": [
+     {
+      "n": 1,
+      "type": "who",
+      "q": "Diese Person hat sich selbst unter Druck gesetzt.",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Ich selbst hatte sie mir auferlegt.",
+      "why": "Ines: Niemand hat es verlangt, sie selbst wollte immer erreichbar sein."
+     },
+     {
+      "n": 2,
+      "type": "who",
+      "q": "In dieser Firma hilft eine technische Lösung, die Freizeit zu schützen.",
+      "a": "a",
+      "trap": "synonym",
+      "ev": "der Server hält sie bis zum nächsten Morgen zurück",
+      "why": "Tamara: Der Server stellt abends keine Mails zu."
+     },
+     {
+      "n": 3,
+      "type": "who",
+      "q": "Diese Person stellt an sich selbst andere Ansprüche als an ihr Personal.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Von meinen Mitarbeitern erwarte ich das aber nicht.",
+      "why": "Konstantin geht selbst ans Telefon, seine Leute müssen das nicht."
+     },
+     {
+      "n": 4,
+      "type": "who",
+      "q": "Diese Person schätzt die Freiheit, ihre Arbeitszeit selbst einzuteilen.",
+      "a": "d",
+      "trap": "synonym",
+      "ev": "weil ich mir dafür tagsüber freinehmen kann",
+      "why": "Philipp arbeitet flexibel und holt dafür seine Kinder ab."
+     },
+     {
+      "n": 5,
+      "type": "who",
+      "q": "Diese Person stellt fest, dass sich die Erwartungen von Berufseinsteigern verändert haben.",
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Vor zehn Jahren hätte sich das niemand getraut.",
+      "why": "Tamara vergleicht heute mit früher."
+     },
+     {
+      "n": 6,
+      "type": "who",
+      "q": "Diese Person hält die Debatte teilweise für übertrieben.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "als wäre jede Nachricht nach Feierabend ein Angriff auf die Gesundheit",
+      "why": "Konstantin mag diese Diskussionen nicht."
+     },
+     {
+      "n": 7,
+      "type": "who",
+      "q": "Diese Person hat gesundheitliche Folgen ihrer Erreichbarkeit erlebt.",
+      "a": "c",
+      "trap": "detail",
+      "ev": "Vor zwei Jahren hatte ich dann einen Burn-out",
+      "why": "Ines war vier Monate krankgeschrieben."
+     },
+     {
+      "n": 8,
+      "type": "who",
+      "q": "Diese Person lehnt einheitliche Vorschriften ab.",
+      "a": "d",
+      "trap": "synonym",
+      "ev": "man sollte nicht starre Regeln für alle machen",
+      "why": "Philipp will, dass jeder selbst entscheidet. Tamaras Firma hat gerade eine feste Regel."
+     },
+     {
+      "n": 9,
+      "type": "who",
+      "q": "Bei dieser Person bekommen Mitarbeiter Geld dafür, dass sie erreichbar sind.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "wer Bereitschaftsdienst macht, bekommt dafür einen Zuschlag",
+      "why": "Zuschlag = zusätzliches Geld."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l2-a": {
+  "id": "b2-l2-a",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Die Rückkehr der Nachtzüge",
+  "instr": "Lesen Sie den Text. Welche Sätze passen in die Lücken 10 bis 15? Zwei Sätze passen nicht.",
+  "instr_en": "Read the text. Which sentences fit the gaps? Two sentences do not fit.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie lesen in einer Zeitschrift einen Artikel über Nachtzüge in Europa.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Wer damals schnell und günstig reisen wollte, nahm ohnehin das Flugzeug.",
+    "body": ""
+   },
+   {
+    "k": "b",
+    "title": "Schlafwagen werden nur noch von sehr wenigen Herstellern gebaut.",
+    "body": ""
+   },
+   {
+    "k": "c",
+    "title": "Viele Wagen sind über dreißig Jahre alt, die Betten sind schmal und die Klimaanlage fällt häufig aus.",
+    "body": ""
+   },
+   {
+    "k": "d",
+    "title": "Deshalb sind die Fahrkarten in den letzten Jahren deutlich günstiger geworden.",
+    "body": ""
+   },
+   {
+    "k": "e",
+    "title": "Die Bahn hat im Wettbewerb also einen klaren Nachteil.",
+    "body": ""
+   },
+   {
+    "k": "f",
+    "title": "Denn hier wird die Reise selbst zu einem Teil des Erlebnisses.",
+    "body": ""
+   },
+   {
+    "k": "g",
+    "title": "Die meisten Fahrgäste sind allerdings beruflich unterwegs.",
+    "body": ""
+   },
+   {
+    "k": "h",
+    "title": "Gleichzeitig wollen sie aber keinen ganzen Urlaubstag im Zug verbringen.",
+    "body": ""
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "title": "Die Rückkehr der Nachtzüge",
+    "body": "Noch vor zehn Jahren schien das Ende der Nachtzüge in Europa besiegelt. Die großen Bahngesellschaften strichen eine Verbindung nach der anderen, weil sie sich angeblich nicht mehr lohnten. (10) …… Heute sieht das ganz anders aus: Neue Linien verbinden wieder Städte wie Amsterdam, Wien, Paris und Berlin über Nacht miteinander.\n\nDer Grund für das Comeback ist vor allem ein verändertes Bewusstsein. Immer mehr Menschen möchten auf Kurzstreckenflüge verzichten, weil sie dem Klima schaden. (11) …… Wer abends um neun in den Zug steigt, wacht am nächsten Morgen ausgeruht im Stadtzentrum auf, ohne Sicherheitskontrolle und ohne lange Fahrt vom Flughafen in die Stadt.\n\nGanz so romantisch, wie es die Werbung verspricht, ist das Reisen im Nachtzug allerdings nicht immer. (12) …… Wer Pech hat, teilt sich außerdem ein enges Abteil mit fünf Fremden, von denen einer laut schnarcht. Duschen gibt es meistens nur in der teuersten Kategorie.\n\nEin weiteres Problem sind die Preise. Ein Bett im Schlafwagen kostet schnell mehr als ein Flugticket für dieselbe Strecke. Das liegt unter anderem daran, dass Züge in vielen Ländern für jeden Kilometer Schiene eine Gebühr zahlen müssen, während Kerosin für Flugzeuge in der Regel nicht besteuert wird. (13) …… Umweltverbände fordern deshalb seit Langem, diese Ungleichheit zu beenden.\n\nTrotz allem sind viele Verbindungen in der Hauptsaison schon Monate im Voraus ausgebucht. Die Betreiber würden gern mehr Züge fahren lassen, doch es fehlt an Fahrzeugen. (14) …… Wer heute einen neuen Wagen bestellt, muss deshalb oft fünf Jahre oder länger auf die Lieferung warten.\n\nFür Reisende, die es nicht eilig haben, ist der Nachtzug dennoch schon heute eine echte Alternative. (15) …… Eine Familie aus Hamburg, mit der wir im Zug nach Wien gesprochen haben, sieht das genauso: „Für uns beginnt der Urlaub, sobald wir einsteigen.“",
+    "items": [
+     {
+      "n": 10,
+      "type": "ad",
+      "q": "Lücke 10",
+      "a": "a",
+      "trap": "vorher",
+      "ev": "weil sie sich angeblich nicht mehr lohnten",
+      "why": "a erklärt mit „damals“, warum sich die Züge nicht lohnten. Danach kommt der Kontrast „Heute“."
+     },
+     {
+      "n": 11,
+      "type": "ad",
+      "q": "Lücke 11",
+      "a": "h",
+      "trap": "synonym",
+      "ev": "wacht am nächsten Morgen ausgeruht im Stadtzentrum auf",
+      "why": "h: Man will nicht fliegen, aber auch keinen Urlaubstag im Zug verlieren. Der Nachtzug löst beides."
+     },
+     {
+      "n": 12,
+      "type": "ad",
+      "q": "Lücke 12",
+      "a": "c",
+      "trap": "detail",
+      "ev": "Wer Pech hat, teilt sich außerdem ein enges Abteil",
+      "why": "c nennt den ersten Nachteil (alte Wagen), „außerdem“ den zweiten."
+     },
+     {
+      "n": 13,
+      "type": "ad",
+      "q": "Lücke 13",
+      "a": "e",
+      "trap": "synonym",
+      "ev": "Umweltverbände fordern deshalb seit Langem, diese Ungleichheit zu beenden.",
+      "why": "Gebühr für Züge, keine Steuer für Kerosin: e fasst den Nachteil zusammen, „diese Ungleichheit“ greift ihn auf."
+     },
+     {
+      "n": 14,
+      "type": "ad",
+      "q": "Lücke 14",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "muss deshalb oft fünf Jahre oder länger auf die Lieferung warten",
+      "why": "„deshalb“ braucht einen Grund: Es gibt nur wenige Hersteller."
+     },
+     {
+      "n": 15,
+      "type": "ad",
+      "q": "Lücke 15",
+      "a": "f",
+      "trap": "synonym",
+      "ev": "sieht das genauso",
+      "why": "„sieht das genauso“ verweist auf f: Die Reise ist Teil des Erlebnisses."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l2-b": {
+  "id": "b2-l2-b",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Reparieren statt wegwerfen",
+  "instr": "Lesen Sie den Text. Welche Sätze passen in die Lücken 10 bis 15? Zwei Sätze passen nicht.",
+  "instr_en": "Read the text. Which sentences fit the gaps? Two sentences do not fit.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie lesen in einer Zeitschrift einen Artikel über Repair-Cafés.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Sie sollen mithelfen und dabei verstehen, wie ihr Gerät funktioniert.",
+    "body": ""
+   },
+   {
+    "k": "b",
+    "title": "Deshalb verlangen die Helfer für jede Reparatur einen kleinen Betrag.",
+    "body": ""
+   },
+   {
+    "k": "c",
+    "title": "Inzwischen hat sich das Konzept in vielen Ländern verbreitet.",
+    "body": ""
+   },
+   {
+    "k": "d",
+    "title": "Für die Repair-Cafés ist das ein großer Erfolg, denn sie haben jahrelang dafür gekämpft.",
+    "body": ""
+   },
+   {
+    "k": "e",
+    "title": "Das Repair-Café ist für ihn vor allem ein Ort der Begegnung.",
+    "body": ""
+   },
+   {
+    "k": "f",
+    "title": "Beide haben eins gemeinsam: Sie wollen ihre Sachen nicht einfach wegwerfen.",
+    "body": ""
+   },
+   {
+    "k": "g",
+    "title": "Die meisten Helfer haben früher selbst in einer Werkstatt gearbeitet.",
+    "body": ""
+   },
+   {
+    "k": "h",
+    "title": "Das liegt oft nicht an fehlendem Können, sondern an der Bauweise moderner Produkte.",
+    "body": ""
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "title": "Reparieren statt wegwerfen",
+    "body": "Es ist Samstagnachmittag im Gemeindezentrum von Linden-Süd, und an den langen Tischen wird geschraubt, gelötet und genäht. Ein älterer Herr beugt sich über einen Toaster, daneben versucht eine junge Frau, den Reißverschluss ihrer Winterjacke zu retten. (10) …… Einmal im Monat öffnet hier das Repair-Café, und wer etwas Kaputtes mitbringt, bekommt Hilfe von ehrenamtlichen Tüftlerinnen und Tüftlern.\n\nDie Idee stammt aus den Niederlanden, wo eine Journalistin 2009 das erste Repair-Café organisierte. (11) …… Allein in Deutschland gibt es heute mehr als tausend solcher Treffpunkte.\n\nDas Prinzip ist einfach: Die Reparatur ist kostenlos, nur Ersatzteile muss man selbst bezahlen. Eine Spende für Kaffee und Kuchen ist willkommen. Wichtig ist den Organisatoren aber, dass die Besucher nicht nur zuschauen. (12) …… „Wer einmal selbst eine Lampe repariert hat, traut sich beim nächsten Mal mehr zu“, sagt Werner Hohlfeld, ein pensionierter Elektriker, der seit Jahren dabei ist.\n\nNicht jede Reparatur gelingt. Etwa ein Drittel der mitgebrachten Gegenstände kann nicht mehr gerettet werden. (13) …… Viele Hersteller verkleben ihre Geräte so, dass man sie kaum öffnen kann, oder sie bieten keine Ersatzteile an.\n\nGenau das soll sich nun ändern. Die Europäische Union hat ein Recht auf Reparatur beschlossen, nach dem Hersteller bestimmte Geräte länger reparierbar halten und Ersatzteile anbieten müssen. (14) …… Ob das neue Gesetz im Alltag wirklich etwas verändert, muss sich allerdings erst noch zeigen.\n\nFür Werner Hohlfeld geht es ohnehin um mehr als um Technik. (15) …… „Hier sitzen Studenten neben Rentnern, Einheimische neben Zugezogenen, und alle reden miteinander. Das gibt es sonst kaum noch.“",
+    "items": [
+     {
+      "n": 10,
+      "type": "ad",
+      "q": "Lücke 10",
+      "a": "f",
+      "trap": "synonym",
+      "ev": "den Reißverschluss ihrer Winterjacke zu retten",
+      "why": "„Beide“ in f meint den Herrn mit dem Toaster und die Frau mit der Jacke."
+     },
+     {
+      "n": 11,
+      "type": "ad",
+      "q": "Lücke 11",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Allein in Deutschland gibt es heute mehr als tausend solcher Treffpunkte.",
+      "why": "Erst die Verbreitung in vielen Ländern, dann „allein in Deutschland“."
+     },
+     {
+      "n": 12,
+      "type": "ad",
+      "q": "Lücke 12",
+      "a": "a",
+      "trap": "synonym",
+      "ev": "traut sich beim nächsten Mal mehr zu",
+      "why": "„nicht nur zuschauen“ → a: selbst mithelfen und lernen."
+     },
+     {
+      "n": 13,
+      "type": "ad",
+      "q": "Lücke 13",
+      "a": "h",
+      "trap": "synonym",
+      "ev": "Viele Hersteller verkleben ihre Geräte so, dass man sie kaum öffnen kann",
+      "why": "h nennt den Grund allgemein, der nächste Satz gibt Beispiele für die Bauweise."
+     },
+     {
+      "n": 14,
+      "type": "ad",
+      "q": "Lücke 14",
+      "a": "d",
+      "trap": "synonym",
+      "ev": "Die Europäische Union hat ein Recht auf Reparatur beschlossen",
+      "why": "d bewertet das neue Gesetz aus Sicht der Repair-Cafés. „allerdings“ schränkt danach ein."
+     },
+     {
+      "n": 15,
+      "type": "ad",
+      "q": "Lücke 15",
+      "a": "e",
+      "trap": "synonym",
+      "ev": "und alle reden miteinander",
+      "why": "„mehr als Technik“ → e: ein Ort der Begegnung."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l3-a": {
+  "id": "b2-l3-a",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 3,
+  "title": "Ein Dorf rettet seinen Laden",
+  "instr": "Lesen Sie den Text und die Aufgaben 16 bis 21. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "Read the text and the questions. Choose the correct answer for each question.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie lesen in einer Zeitung einen Artikel über einen Dorfladen.",
+  "groups": [
+   {
+    "title": "Wenn das Dorf den Laden selbst betreibt",
+    "body": "Als vor vier Jahren der letzte Lebensmittelladen in Hollerbach schloss, schien das Schicksal des Dorfes mit seinen 900 Einwohnern besiegelt. Wer kein Auto hatte, musste mit dem Bus in die zwölf Kilometer entfernte Kreisstadt fahren, und der fuhr nur dreimal am Tag. „Vor allem für die Älteren war das eine Katastrophe“, erinnert sich Gerda Mahlmann, die damals im Gemeinderat saß.\n\nHeute steht Mahlmann hinter der Theke eines kleinen, hell eingerichteten Geschäfts in der ehemaligen Sparkassenfiliale. Der „Hollerbacher Dorfladen“ gehört den Bewohnern selbst: 214 Menschen haben sich als Mitglieder einer Genossenschaft mit mindestens 250 Euro beteiligt. Das Geld reichte für den Umbau und die erste Einrichtung. Die Gemeinde stellt die Räume zu einer symbolischen Miete zur Verfügung.\n\nDass das Projekt zustande kam, war keineswegs selbstverständlich. Zur ersten Informationsveranstaltung kamen gerade einmal dreißig Leute, und viele von ihnen waren skeptisch. „Die meisten dachten, wir wollen einen Supermarkt nachbauen. Das hätte nie funktioniert“, sagt Mahlmann. Stattdessen setzte man auf ein kleines Sortiment und vor allem auf Produkte aus der Region: Eier, Milch und Käse kommen von Höfen aus der Umgebung, das Brot aus einer Bäckerei im Nachbarort.\n\nDie Preise liegen etwas über denen im Discounter, das geben die Betreiber offen zu. Trotzdem kaufen viele Hollerbacher inzwischen einen großen Teil ihres Bedarfs im Dorf. Denn der Laden ist längst mehr als ein Geschäft. In einer Ecke stehen drei Tische, an denen man Kaffee trinken kann, und zweimal in der Woche kommt eine Mitarbeiterin der Gemeindeverwaltung, um Fragen zu Formularen und Anträgen zu beantworten. „Manche kommen nur zum Reden her“, sagt eine Kundin. „Das ist für viele hier genauso wichtig wie die Milch.“\n\nWirtschaftlich steht der Laden noch nicht auf sicheren Beinen. Zwei Teilzeitkräfte sind fest angestellt, den Rest der Öffnungszeiten übernehmen rund zwanzig Ehrenamtliche. Ohne sie wäre der Betrieb nicht zu bezahlen. Genau hier sieht Mahlmann auch das größte Risiko: „Unsere Freiwilligen sind im Schnitt über sechzig. Wir müssen dringend Jüngere gewinnen.“ Ein erster Versuch mit Schülerpraktika sei vielversprechend gewesen.\n\nInzwischen bekommt Hollerbach Besuch aus ganz Deutschland. Vertreter anderer Gemeinden wollen wissen, wie man einen Dorfladen gründet. Mahlmanns wichtigster Rat überrascht viele: „Fangen Sie nicht mit dem Geld an, sondern mit der Frage, was die Leute wirklich brauchen.“",
+    "items": [
+     {
+      "n": 16,
+      "type": "abc",
+      "q": "Nach der Schließung des alten Ladens …",
+      "opts": [
+       "fuhr kein Bus mehr in die Kreisstadt.",
+       "hatten besonders ältere Menschen Probleme beim Einkaufen.",
+       "zogen viele Bewohner aus dem Dorf weg."
+      ],
+      "a": "b",
+      "trap": "detail",
+      "ev": "„Vor allem für die Älteren war das eine Katastrophe“",
+      "why": "Der Bus fuhr noch, aber nur dreimal am Tag."
+     },
+     {
+      "n": 17,
+      "type": "abc",
+      "q": "Der Dorfladen …",
+      "opts": [
+       "wird von der Gemeinde finanziert.",
+       "befindet sich in einer früheren Bäckerei.",
+       "gehört einer Gruppe von Dorfbewohnern."
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "Der „Hollerbacher Dorfladen“ gehört den Bewohnern selbst",
+      "why": "Die Gemeinde stellt nur die Räume. Der Laden ist in der alten <b>Sparkasse</b>."
+     },
+     {
+      "n": 18,
+      "type": "abc",
+      "q": "Bei der Planung des Ladens …",
+      "opts": [
+       "entschied man sich bewusst für ein kleines Angebot.",
+       "waren die meisten Bewohner von Anfang an begeistert.",
+       "nahm man sich große Supermärkte zum Vorbild."
+      ],
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Stattdessen setzte man auf ein kleines Sortiment",
+      "why": "Einen Supermarkt nachbauen: Das <b>dachten</b> die Skeptiker. Kleines Sortiment = kleines Angebot."
+     },
+     {
+      "n": 19,
+      "type": "abc",
+      "q": "Viele Bewohner kaufen im Dorfladen ein, obwohl …",
+      "opts": [
+       "die Öffnungszeiten sehr kurz sind.",
+       "die Waren dort etwas teurer sind.",
+       "es dort keine regionalen Produkte gibt."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Die Preise liegen etwas über denen im Discounter",
+      "why": "Etwas über dem Discounter = etwas teurer."
+     },
+     {
+      "n": 20,
+      "type": "abc",
+      "q": "Der Laden ist für viele Bewohner wichtig, weil …",
+      "opts": [
+       "man dort auch Bankgeschäfte erledigen kann.",
+       "dort regelmäßig Feste gefeiert werden.",
+       "er ein Treffpunkt im Dorf geworden ist."
+      ],
+      "a": "c",
+      "trap": "wort",
+      "ev": "„Manche kommen nur zum Reden her“",
+      "why": "Die Sparkasse gibt es nicht mehr. Die Hilfe bei Formularen kommt von der Gemeindeverwaltung."
+     },
+     {
+      "n": 21,
+      "type": "abc",
+      "q": "Welches Problem sieht Gerda Mahlmann für die Zukunft?",
+      "opts": [
+       "Es gibt zu wenige junge Helfer.",
+       "Die Miete könnte steigen.",
+       "Die Teilzeitkräfte sind zu teuer."
+      ],
+      "a": "a",
+      "trap": "synonym",
+      "ev": "Wir müssen dringend Jüngere gewinnen.",
+      "why": "Die Ehrenamtlichen sind im Schnitt über sechzig."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l3-b": {
+  "id": "b2-l3-b",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 3,
+  "title": "Wohnen auf Probe",
+  "instr": "Lesen Sie den Text und die Aufgaben 16 bis 21. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "Read the text and the questions. Choose the correct answer for each question.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie lesen in einer Zeitung einen Artikel über ein Projekt in einer Kleinstadt.",
+  "groups": [
+   {
+    "title": "Wohnen auf Probe: Wie eine Kleinstadt um neue Bewohner wirbt",
+    "body": "Leere Läden, eine Schule, der die Kinder ausgehen, und ein Durchschnittsalter von fast fünfzig Jahren: Die Situation in Weidenau war lange typisch für viele Kleinstädte abseits der großen Ballungsräume. Doch seit einem Jahr kommen regelmäßig Gäste, die hier nicht Urlaub machen, sondern arbeiten. Die Stadt bietet Menschen, die überlegen, aufs Land zu ziehen, an, vier Wochen lang kostenlos in einer möblierten Wohnung zu leben und einen Platz im neuen Gemeinschaftsbüro am Marktplatz zu nutzen.\n\nDie Idee hatte Bürgermeisterin Katja Rohloff, nachdem sie ein ähnliches Projekt in Finnland besucht hatte. „Viele Menschen in der Großstadt träumen vom Leben auf dem Land, trauen sich aber nicht, weil sie Angst haben, sich zu langweilen oder keinen Anschluss zu finden“, sagt sie. „Wir wollten ihnen die Möglichkeit geben, es einfach auszuprobieren, ohne gleich ein Haus kaufen zu müssen.“\n\nDas Interesse war deutlich größer als erwartet. Auf die ersten acht Plätze bewarben sich über 600 Menschen, die meisten aus Stuttgart, München und Frankfurt. Ausgewählt wurden nicht unbedingt diejenigen mit dem überzeugendsten Motivationsschreiben, sondern Bewerberinnen und Bewerber, die ortsunabhängig arbeiten können und Kinder im Schulalter haben. „Wir brauchen Familien“, sagt Rohloff offen.\n\nEiner von ihnen ist der Softwareentwickler Jonas Aydın. Er verbrachte mit seiner Frau und den beiden Töchtern den vergangenen Mai in Weidenau. Überzeugt hat ihn nicht die Landschaft, die kannte er von Wanderurlauben, sondern etwas anderes: „Wir wurden vom ersten Tag an eingeladen, zum Grillen, zum Chor, zum Fußballtraining der Kinder. In Stuttgart kennen wir nach acht Jahren kaum unsere Nachbarn.“ Im September ist die Familie endgültig umgezogen.\n\nNicht alle Teilnehmenden sind geblieben. Von den bisher 24 Probewohnern haben sich neun für einen Umzug entschieden. Als Gründe dagegen nennen die anderen vor allem die schlechte Busverbindung und die fehlende Kinderbetreuung am Nachmittag. Rohloff nimmt das ernst: Ab dem nächsten Schuljahr soll es an der Grundschule eine Ganztagsbetreuung geben.\n\nKritik kommt allerdings auch aus der Stadt selbst. Einige Bewohner fragen, warum Geld für Fremde ausgegeben wird, während für die Sanierung des Hallenbads angeblich keines da ist. Die Bürgermeisterin hält dagegen, dass das Projekt zum großen Teil aus einem Förderprogramm des Landes finanziert wird und dass neue Familien langfristig auch das Hallenbad retten könnten. „Jeder, der hier Steuern zahlt, hilft uns“, sagt sie.",
+    "items": [
+     {
+      "n": 16,
+      "type": "abc",
+      "q": "Die Teilnehmer des Projekts …",
+      "opts": [
+       "können eine Zeit lang kostenlos in der Stadt wohnen und arbeiten.",
+       "machen in Weidenau vier Wochen Urlaub.",
+       "bekommen ein Haus zu einem günstigen Preis."
+      ],
+      "a": "a",
+      "trap": "negation",
+      "ev": "vier Wochen lang kostenlos in einer möblierten Wohnung zu leben",
+      "why": "Sie machen gerade <b>nicht</b> Urlaub, sondern arbeiten. Ein Haus muss man nicht kaufen."
+     },
+     {
+      "n": 17,
+      "type": "abc",
+      "q": "Nach Meinung der Bürgermeisterin zögern viele Städter, aufs Land zu ziehen, weil …",
+      "opts": [
+       "die Häuser dort zu teuer sind.",
+       "sie dort keine Arbeit finden.",
+       "sie fürchten, dort einsam zu sein."
+      ],
+      "a": "c",
+      "trap": "synonym",
+      "ev": "weil sie Angst haben, sich zu langweilen oder keinen Anschluss zu finden",
+      "why": "Keinen Anschluss finden = einsam sein."
+     },
+     {
+      "n": 18,
+      "type": "abc",
+      "q": "Bei der Auswahl der Teilnehmer …",
+      "opts": [
+       "zählte vor allem das beste Motivationsschreiben.",
+       "wurden Familien mit Kindern bevorzugt.",
+       "kamen nur Bewerber aus Großstädten in Frage."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Kinder im Schulalter haben",
+      "why": "„nicht unbedingt … Motivationsschreiben, sondern“ Familien."
+     },
+     {
+      "n": 19,
+      "type": "abc",
+      "q": "Jonas Aydın hat sich für Weidenau entschieden, weil …",
+      "opts": [
+       "ihm die Landschaft so gut gefallen hat.",
+       "seine Familie dort schnell Kontakte gefunden hat.",
+       "er dort eine neue Stelle bekommen hat."
+      ],
+      "a": "b",
+      "trap": "negation",
+      "ev": "Wir wurden vom ersten Tag an eingeladen",
+      "why": "„nicht die Landschaft …, sondern etwas anderes“: die vielen Einladungen."
+     },
+     {
+      "n": 20,
+      "type": "abc",
+      "q": "Was erfährt man über die Teilnehmer, die nicht umgezogen sind?",
+      "opts": [
+       "Sie fanden die Stadt zu ruhig.",
+       "Sie haben keine passende Wohnung gefunden.",
+       "Ihnen fehlten Verkehrsverbindungen und Kinderbetreuung."
+      ],
+      "a": "c",
+      "trap": "synonym",
+      "ev": "vor allem die schlechte Busverbindung und die fehlende Kinderbetreuung am Nachmittag",
+      "why": "Bus = Verkehrsverbindung."
+     },
+     {
+      "n": 21,
+      "type": "abc",
+      "q": "Wie reagiert die Bürgermeisterin auf die Kritik einiger Bewohner?",
+      "opts": [
+       "Sie weist darauf hin, dass das Land einen großen Teil bezahlt.",
+       "Sie verspricht, das Hallenbad bald zu sanieren.",
+       "Sie gibt zu, dass das Projekt zu teuer ist."
+      ],
+      "a": "a",
+      "trap": "wort",
+      "ev": "zum großen Teil aus einem Förderprogramm des Landes finanziert wird",
+      "why": "Das Hallenbad <b>könnte</b> langfristig gerettet werden, versprochen wird nichts."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l4-a": {
+  "id": "b2-l4-a",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Lernen ein Leben lang",
+  "instr": "Lesen Sie die Überschriften 22 bis 27 und die Äußerungen a bis g. Welche Äußerung passt zu welcher Überschrift? Eine Äußerung passt nicht. Sie können jede Äußerung nur einmal wählen.",
+  "instr_en": "Read the headings and the comments. Which comment fits which heading? One comment does not fit. You can use each comment only once.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie lesen in einer Zeitschrift Meinungsäußerungen zum Thema „Lernen ein Leben lang“.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Bernd, 54",
+    "body": "In meiner Branche ändert sich die Software fast jedes Jahr. Kollegen, die gesagt haben, das brauche ich so kurz vor der Rente nicht mehr, sitzen heute auf Stellen, die es bald nicht mehr geben wird. So will ich nicht enden. Deshalb mache ich jedes Jahr mindestens einen Kurs, auch wenn es manchmal mühsam ist."
+   },
+   {
+    "k": "b",
+    "title": "Yvonne, 38",
+    "body": "Ich habe zwei Jahre lang abends und am Wochenende für meinen Abschluss als Fachwirtin gelernt. Beruflich hat es sich gelohnt, ich habe jetzt eine Leitungsstelle. Aber ehrlich gesagt: Meine Tochter war in dieser Zeit in der Grundschule, und ich habe viel von ihr verpasst. Das kann man nicht nachholen."
+   },
+   {
+    "k": "c",
+    "title": "Ömer, 29",
+    "body": "Mein Chef hat mir den Englischkurs nicht nur bezahlt, ich durfte auch zwei Stunden pro Woche während der Arbeitszeit lernen. Allein hätte ich mir das nie leisten können, weder finanziell noch zeitlich. Ich verstehe nicht, warum nicht mehr Firmen so etwas anbieten. Am Ende profitieren sie doch selbst davon."
+   },
+   {
+    "k": "d",
+    "title": "Renate, 67",
+    "body": "Seit ich in Rente bin, besuche ich an der Universität Vorlesungen in Geschichte. Ich lerne nur noch, was mich wirklich interessiert, das ist herrlich. Mein Arzt sagt, das sei das Beste, was ich für mein Gedächtnis tun kann, und ich merke es selbst: Ich bin wacher und neugieriger als vor zehn Jahren."
+   },
+   {
+    "k": "e",
+    "title": "Lukas, 33",
+    "body": "Die wichtigsten Dinge für meinen Job habe ich nicht in Seminaren gelernt, sondern von einer erfahrenen Kollegin, die mir in den ersten Monaten über die Schulter geschaut hat. In unserer Firma zählt aber nur, was auf einem Zertifikat steht. Ich finde, auch das Lernen im Arbeitsalltag sollte endlich anerkannt werden."
+   },
+   {
+    "k": "f",
+    "title": "Daniela, 45",
+    "body": "Letztes Jahr habe ich drei Online-Seminare gemacht. Praktisch war das schon, ich konnte mir die Videos ansehen, wann ich wollte. Aber ich habe aus diesen Kursen keinen einzigen Kontakt behalten. In einem richtigen Kurs lernt man die anderen kennen, man diskutiert in der Pause, und genau daraus entstehen oft die besten Ideen."
+   },
+   {
+    "k": "g",
+    "title": "Frank, 41",
+    "body": "In unserem Bundesland hat jeder Arbeitnehmer Anspruch auf fünf Tage Bildungsurlaub im Jahr. Trotzdem nutzen ihn die wenigsten, weil sie gar nicht davon wissen. Ich habe letztes Jahr einen Fotokurs gemacht. Der hatte mit meinem Beruf als Buchhalter nichts zu tun, war aber großartig."
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 22,
+      "type": "ad",
+      "q": "Ohne Unterstützung des Arbeitgebers geht es kaum",
+      "a": "c",
+      "trap": "synonym",
+      "why": "c: Der Chef hat bezahlt und Lernzeit gegeben. Allein hätte Ömer es sich nicht leisten können."
+     },
+     {
+      "n": 23,
+      "type": "ad",
+      "q": "Online-Kurse ersetzen keinen echten Austausch",
+      "a": "f",
+      "trap": "synonym",
+      "why": "f: Aus den Online-Seminaren ist kein einziger Kontakt geblieben."
+     },
+     {
+      "n": 24,
+      "type": "ad",
+      "q": "Neues lernen hält geistig fit",
+      "a": "d",
+      "trap": "synonym",
+      "why": "d: gut für das Gedächtnis, „wacher und neugieriger“."
+     },
+     {
+      "n": 25,
+      "type": "ad",
+      "q": "Auch Lernen ohne Kurs sollte zählen",
+      "a": "e",
+      "trap": "synonym",
+      "why": "e: Gelernt von einer Kollegin, das soll anerkannt werden."
+     },
+     {
+      "n": 26,
+      "type": "ad",
+      "q": "Wer nicht dazulernt, riskiert seinen Arbeitsplatz",
+      "a": "a",
+      "trap": "synonym",
+      "why": "a: Kollegen ohne Weiterbildung sitzen auf Stellen, die bald niemand mehr braucht."
+     },
+     {
+      "n": 27,
+      "type": "ad",
+      "q": "Die Familie kommt dabei zu kurz",
+      "a": "b",
+      "trap": "synonym",
+      "why": "b: Yvonne hat viel von ihrer Tochter verpasst. g passt zu keiner Überschrift."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l4-b": {
+  "id": "b2-l4-b",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Bezahlen ohne Bargeld",
+  "instr": "Lesen Sie die Überschriften 22 bis 27 und die Äußerungen a bis g. Welche Äußerung passt zu welcher Überschrift? Eine Äußerung passt nicht. Sie können jede Äußerung nur einmal wählen.",
+  "instr_en": "Read the headings and the comments. Which comment fits which heading? One comment does not fit. You can use each comment only once.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie lesen in einer Zeitschrift Meinungsäußerungen zum Thema „Bezahlen ohne Bargeld“.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Herbert, 58",
+    "body": "Jede Kartenzahlung hinterlässt eine Spur. Banken und Zahlungsdienste wissen dann genau, wann ich wo was gekauft habe. Ich habe nichts zu verbergen, aber ich finde, es geht niemanden etwas an, ob ich mir abends noch eine Flasche Wein kaufe. Für mich ist Bargeld ein Stück Freiheit."
+   },
+   {
+    "k": "b",
+    "title": "Laura, 24",
+    "body": "Ich hatte seit Monaten kein Bargeld mehr in der Hand. Ich zahle alles mit dem Handy, sogar auf dem Flohmarkt. Das Beste daran: In meiner Banking-App sehe ich sofort, wofür ich wie viel ausgegeben habe. Seitdem spare ich sogar mehr als früher."
+   },
+   {
+    "k": "c",
+    "title": "Svenja, 41",
+    "body": "Letzten Winter ist bei uns in der Region für mehrere Stunden der Strom ausgefallen. Kein Kartenterminal funktionierte, die Geldautomaten auch nicht. Wer kein Bargeld zu Hause hatte, konnte nicht einmal Brot kaufen. Seitdem habe ich immer ein paar Scheine in der Schublade."
+   },
+   {
+    "k": "d",
+    "title": "Malik, 35",
+    "body": "Als Inhaber eines kleinen Cafés wäre mir Bargeld eigentlich lieber, weil ich bei Kartenzahlungen Gebühren zahle. Aber die Gäste wollen es anders. Seit ich Karten akzeptiere, kommen deutlich mehr junge Leute, und der Umsatz ist gestiegen. Da nehme ich die Gebühren eben in Kauf."
+   },
+   {
+    "k": "e",
+    "title": "Ingrid, 49",
+    "body": "Ich arbeite als Kassiererin im Supermarkt. Mir ist es eigentlich egal, wie die Kunden bezahlen. Nervig wird es nur, wenn jemand an der Kasse erst minutenlang sein Handy entsperrt und die richtige App sucht. Dann wird die Schlange hinter ihm ganz schön lang."
+   },
+   {
+    "k": "f",
+    "title": "Gisela, 72",
+    "body": "Ich bezahle alles bar, auch beim Arzt. Mit Karten würde ich den Überblick verlieren. Wenn mein Portemonnaie leer ist, weiß ich: Jetzt ist Schluss für diesen Monat. Meine Enkelin lacht darüber, aber ihr fehlt am Monatsende auch immer Geld."
+   },
+   {
+    "k": "g",
+    "title": "Tobias, 30",
+    "body": "Viele glauben, Bargeld sei kostenlos. Das stimmt nicht. Es muss gedruckt, transportiert, gezählt und bewacht werden. Diese Kosten bezahlen am Ende wir alle über höhere Preise. Ich verstehe deshalb nicht, warum manche Länder so stark am Bargeld festhalten."
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 22,
+      "type": "ad",
+      "q": "Wer bar zahlt, schützt seine Privatsphäre",
+      "a": "a",
+      "trap": "synonym",
+      "why": "a: Bei Kartenzahlung wissen Banken, wann man wo was kauft."
+     },
+     {
+      "n": 23,
+      "type": "ad",
+      "q": "Ein Geschäft muss sich nach seinen Kunden richten",
+      "a": "d",
+      "trap": "synonym",
+      "why": "d: Malik akzeptiert Karten, weil die Gäste es wollen, trotz Gebühren."
+     },
+     {
+      "n": 24,
+      "type": "ad",
+      "q": "Mit Scheinen im Portemonnaie behält man den Überblick",
+      "a": "f",
+      "trap": "synonym",
+      "why": "f: Ist das Portemonnaie leer, ist Schluss für den Monat."
+     },
+     {
+      "n": 25,
+      "type": "ad",
+      "q": "Für den Notfall vorgesorgt",
+      "a": "c",
+      "trap": "synonym",
+      "why": "c: Seit dem Stromausfall liegt immer etwas Bargeld in der Schublade."
+     },
+     {
+      "n": 26,
+      "type": "ad",
+      "q": "Auch Bargeld verursacht Kosten",
+      "a": "g",
+      "trap": "synonym",
+      "why": "g: Drucken, transportieren, zählen, bewachen: Das zahlen alle über die Preise."
+     },
+     {
+      "n": 27,
+      "type": "ad",
+      "q": "Die App zeigt, wohin das Geld fließt",
+      "a": "b",
+      "trap": "wort",
+      "why": "b: Laura sieht in der App sofort ihre Ausgaben. e passt zu keiner Überschrift."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l5-a": {
+  "id": "b2-l5-a",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 5,
+  "title": "Hausordnung Studentenwohnheim",
+  "instr": "Lesen Sie die Überschriften a bis g und die Paragrafen. Welche der Überschriften aus dem Inhaltsverzeichnis passen zu den Paragrafen? Vier Überschriften werden nicht gebraucht.",
+  "instr_en": "Read the headings and the sections. Which headings from the table of contents fit the sections? Four headings are not needed.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie ziehen in ein Studentenwohnheim und lesen die Hausordnung.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Kündigung und Auszug",
+    "body": ""
+   },
+   {
+    "k": "b",
+    "title": "Kochen und Lebensmittel",
+    "body": ""
+   },
+   {
+    "k": "c",
+    "title": "Reinigung der Zimmer",
+    "body": ""
+   },
+   {
+    "k": "d",
+    "title": "Weitervermietung des Zimmers",
+    "body": ""
+   },
+   {
+    "k": "e",
+    "title": "Lärm und Feiern",
+    "body": ""
+   },
+   {
+    "k": "f",
+    "title": "Fahrräder und Kellerräume",
+    "body": ""
+   },
+   {
+    "k": "g",
+    "title": "Besuch und Übernachtung",
+    "body": ""
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "title": "Hausordnung des Studentenwohnheims Am Lindenhof",
+    "body": "§ 1 Geltungsbereich (Beispiel)\nDiese Hausordnung gilt für alle Bewohnerinnen und Bewohner des Wohnheims Am Lindenhof sowie für ihre Gäste. Mit dem Einzug erkennen die Bewohnerinnen und Bewohner die Hausordnung an.\n\n§ 2\nVon 22 bis 7 Uhr sowie an Sonn- und Feiertagen ganztägig ist besonders auf Ruhe zu achten. Musik und Fernseher sind in dieser Zeit auf Zimmerlautstärke einzustellen. Feiern in den Gemeinschaftsräumen müssen mindestens drei Tage vorher bei der Hausverwaltung angemeldet werden und enden spätestens um 24 Uhr.\n\n§ 3\nJede Etage verfügt über eine Küche, die alle Bewohnerinnen und Bewohner der Etage gemeinsam nutzen. Geschirr ist nach der Benutzung sofort zu spülen und wegzuräumen. Lebensmittel dürfen nur in dem Kühlschrankfach aufbewahrt werden, das dem eigenen Zimmer zugeordnet ist. Einmal im Monat wird der Kühlschrank geleert und gereinigt. Lebensmittel ohne Namen werden dabei entsorgt.\n\n§ 4\nBesucherinnen und Besucher dürfen sich jederzeit im Wohnheim aufhalten. Übernachtungen von Gästen sind bis zu drei Nächte pro Monat erlaubt. Längere Aufenthalte bedürfen der schriftlichen Genehmigung der Wohnheimverwaltung. Für das Verhalten ihrer Gäste sind die Bewohnerinnen und Bewohner verantwortlich.",
+    "items": [
+     {
+      "n": 28,
+      "type": "ad",
+      "q": "§ 2",
+      "a": "e",
+      "trap": "synonym",
+      "ev": "ist besonders auf Ruhe zu achten",
+      "why": "Ruhezeiten und Feiern = Lärm und Feste."
+     },
+     {
+      "n": 29,
+      "type": "ad",
+      "q": "§ 3",
+      "a": "b",
+      "trap": "wort",
+      "ev": "Lebensmittel dürfen nur in dem Kühlschrankfach aufbewahrt werden",
+      "why": "Es geht um die Küche. Gereinigt wird nur der Kühlschrank, nicht die Zimmer (c)."
+     },
+     {
+      "n": 30,
+      "type": "ad",
+      "q": "§ 4",
+      "a": "g",
+      "trap": "wort",
+      "ev": "Übernachtungen von Gästen sind bis zu drei Nächte pro Monat erlaubt.",
+      "why": "Gäste und Übernachtungen. Weitervermieten (d) ist etwas anderes."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-l5-b": {
+  "id": "b2-l5-b",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 5,
+  "title": "Nutzungsbedingungen Carsharing",
+  "instr": "Lesen Sie die Überschriften a bis g und die Paragrafen. Welche der Überschriften aus dem Inhaltsverzeichnis passen zu den Paragrafen? Vier Überschriften werden nicht gebraucht.",
+  "instr_en": "Read the headings and the sections. Which headings from the table of contents fit the sections? Four headings are not needed.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie möchten Mitglied bei einem Carsharing-Verein werden und lesen die Nutzungsbedingungen.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Rückgabe des Fahrzeugs",
+    "body": ""
+   },
+   {
+    "k": "b",
+    "title": "Kosten pro Kilometer",
+    "body": ""
+   },
+   {
+    "k": "c",
+    "title": "Reservierung und Absage",
+    "body": ""
+   },
+   {
+    "k": "d",
+    "title": "Versicherungsschutz",
+    "body": ""
+   },
+   {
+    "k": "e",
+    "title": "Mitgliedsbeitrag und Kündigung",
+    "body": ""
+   },
+   {
+    "k": "f",
+    "title": "Schäden und Unfälle",
+    "body": ""
+   },
+   {
+    "k": "g",
+    "title": "Fahrten ins Ausland",
+    "body": ""
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "title": "Nutzungsbedingungen TeilAuto Nordstadt",
+    "body": "§ 1 Geltungsbereich (Beispiel)\nDiese Bedingungen gelten für alle Mitglieder von TeilAuto Nordstadt, die ein Fahrzeug des Vereins nutzen. Mit der ersten Buchung erkennen die Mitglieder die Bedingungen an.\n\n§ 2\nFahrzeuge können bis zu 30 Tage im Voraus über die App oder telefonisch gebucht werden. Eine Buchung kann bis eine Stunde vor Fahrtbeginn kostenlos storniert werden. Bei einer späteren Stornierung werden 50 Prozent der gebuchten Zeit berechnet. Wird das Fahrzeug nicht abgeholt, wird die gesamte gebuchte Zeit berechnet.\n\n§ 3\nVor Fahrtbeginn ist das Fahrzeug auf sichtbare Schäden zu prüfen. Neue Schäden sind vor der Abfahrt mit einem Foto über die App zu melden. Unfälle müssen sofort der Polizei und unserer Servicezentrale gemeldet werden, auch wenn kein anderes Fahrzeug beteiligt ist. Bei selbst verursachten Schäden beträgt die Selbstbeteiligung 500 Euro.\n\n§ 4\nDas Fahrzeug ist am Ende der Buchungszeit auf seinem festen Stellplatz abzustellen. Der Tank muss mindestens zu einem Viertel gefüllt sein, dafür kann die Tankkarte im Handschuhfach kostenlos genutzt werden. Wer das Fahrzeug zu spät zurückbringt und dadurch die nächste Buchung behindert, zahlt 15 Euro für jede angefangene halbe Stunde.",
+    "items": [
+     {
+      "n": 28,
+      "type": "ad",
+      "q": "§ 2",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Eine Buchung kann bis eine Stunde vor Fahrtbeginn kostenlos storniert werden.",
+      "why": "Buchen und stornieren = reservieren und absagen."
+     },
+     {
+      "n": 29,
+      "type": "ad",
+      "q": "§ 3",
+      "a": "f",
+      "trap": "wort",
+      "ev": "Unfälle müssen sofort der Polizei und unserer Servicezentrale gemeldet werden",
+      "why": "Die Selbstbeteiligung ist nur ein Detail. Es geht um Schäden und Unfälle, nicht um die Versicherung (d)."
+     },
+     {
+      "n": 30,
+      "type": "ad",
+      "q": "§ 4",
+      "a": "a",
+      "trap": "wort",
+      "ev": "Das Fahrzeug ist am Ende der Buchungszeit auf seinem festen Stellplatz abzustellen.",
+      "why": "Stellplatz, Tank, Verspätung: alles zur Rückgabe. Kosten pro Kilometer (b) kommen nicht vor."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-l1": {
+  "id": "b2-diag-l1",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 1,
+  "title": "Gebrauchte Kleidung",
+  "instr": "Lesen Sie die Texte und die Aussagen 1 bis 4. Auf welche der vier Personen treffen die einzelnen Aussagen zu? Die Personen können mehrmals gewählt werden.",
+  "instr_en": "Read the texts and the statements. Which of the four people does each statement apply to? You can choose a person more than once.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie lesen in einem Forum, wie Menschen über Kleidung aus zweiter Hand denken.",
+  "who": [
+   "Nora",
+   "Emil",
+   "Pia",
+   "Ralf"
+  ],
+  "groups": [
+   {
+    "title": "Forum: Kleidung aus zweiter Hand",
+    "body": "Nora\nIch kaufe seit Jahren fast nur gebrauchte Kleidung, vor allem im Internet. Anfangs hatte ich Bedenken wegen der Hygiene, aber das war unbegründet: Man wäscht ja alles. Mir geht es vor allem um die Umwelt. Für ein einziges T-Shirt braucht man Tausende Liter Wasser.\n\nEmil\nEhrlich gesagt kaufe ich Secondhand nur, weil mein Budget als Student knapp ist. Wenn ich mehr Geld hätte, würde ich lieber neue Sachen kaufen. Ich mag es, wenn etwas genau so ist, wie ich es mir vorstelle, in meiner Größe und in meiner Lieblingsfarbe.\n\nPia\nIch verkaufe auf Flohmärkten, was meine Kinder nicht mehr tragen. Kinder wachsen so schnell, dass viele Sachen fast neu sind. Selbst kaufe ich allerdings selten gebraucht, weil ich keine Zeit habe, lange zu suchen.\n\nRalf\nFür mich ist Vintage-Mode ein Hobby. Ich sammle Lederjacken aus den Siebzigern. Die Qualität ist viel besser als heute, die halten noch einmal fünfzig Jahre. Natürlich sind solche Stücke nicht billig, für eine gute Jacke zahle ich schnell dreihundert Euro.",
+    "items": [
+     {
+      "n": 1,
+      "type": "who",
+      "q": "Diese Person kauft gebrauchte Kleidung vor allem aus finanziellen Gründen.",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "nur, weil mein Budget als Student knapp ist",
+      "why": "Emil würde mit mehr Geld lieber neu kaufen."
+     },
+     {
+      "n": 2,
+      "type": "who",
+      "q": "Diese Person hatte zunächst Zweifel, die sich nicht bestätigt haben.",
+      "a": "a",
+      "trap": "vorher",
+      "ev": "Anfangs hatte ich Bedenken wegen der Hygiene, aber das war unbegründet",
+      "why": "Nora: Bedenken am Anfang, dann unbegründet."
+     },
+     {
+      "n": 3,
+      "type": "who",
+      "q": "Für diese Person ist gebrauchte Kleidung nicht unbedingt günstig.",
+      "a": "d",
+      "trap": "synonym",
+      "ev": "Natürlich sind solche Stücke nicht billig",
+      "why": "Ralf zahlt für eine Jacke schnell 300 Euro."
+     },
+     {
+      "n": 4,
+      "type": "who",
+      "q": "Diese Person gibt mehr gebrauchte Kleidung weiter, als sie selbst kauft.",
+      "a": "c",
+      "trap": "detail",
+      "ev": "Selbst kaufe ich allerdings selten gebraucht",
+      "why": "Pia verkauft Kindersachen, kauft aber selbst selten gebraucht."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-l2": {
+  "id": "b2-diag-l2",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 2,
+  "title": "Kurz schlafen, besser arbeiten?",
+  "instr": "Lesen Sie den Text. Welche Sätze passen in die Lücken 10 bis 12? Zwei Sätze passen nicht.",
+  "instr_en": "Read the text. Which sentences fit the gaps? Two sentences do not fit.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie lesen in einer Zeitschrift einen Artikel über den Mittagsschlaf am Arbeitsplatz.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Deshalb ist der Mittagsschlaf in vielen deutschen Firmen inzwischen Pflicht.",
+    "body": ""
+   },
+   {
+    "k": "b",
+    "title": "Manche können tagsüber einfach nicht abschalten, egal wie ruhig der Raum ist.",
+    "body": ""
+   },
+   {
+    "k": "c",
+    "title": "Dort gilt es sogar als Beweis dafür, dass jemand besonders hart arbeitet.",
+    "body": ""
+   },
+   {
+    "k": "d",
+    "title": "In Japan schlafen die Menschen nachts allerdings länger als in Europa.",
+    "body": ""
+   },
+   {
+    "k": "e",
+    "title": "Schon zwanzig Minuten Schlaf am Mittag verbessern nachweislich Konzentration und Stimmung.",
+    "body": ""
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "title": "Kurz schlafen, besser arbeiten?",
+    "body": "In Japan ist es ganz normal, dass Angestellte am Schreibtisch kurz einnicken. (10) …… Hierzulande galt ein Nickerchen bei der Arbeit dagegen lange als Zeichen von Faulheit. Doch das ändert sich langsam: Einige Unternehmen haben inzwischen Ruheräume mit bequemen Liegen eingerichtet.\n\nSchlafforscher begrüßen diese Entwicklung. (11) …… Wichtig sei aber, nicht zu lange zu schlafen. Wer länger als eine halbe Stunde schläft, gerät in den Tiefschlaf und wacht danach oft benommen auf.\n\nNicht alle Beschäftigten sind begeistert. (12) …… Andere befürchten, dass Kollegen oder Vorgesetzte schlecht über sie denken könnten, wenn sie sich mitten am Tag hinlegen.",
+    "items": [
+     {
+      "n": 10,
+      "type": "ad",
+      "q": "Lücke 10",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "galt ein Nickerchen bei der Arbeit dagegen lange als Zeichen von Faulheit",
+      "why": "„Dort“ = Japan. „dagegen“ im nächsten Satz zeigt den Kontrast: fleißig ↔ faul."
+     },
+     {
+      "n": 11,
+      "type": "ad",
+      "q": "Lücke 11",
+      "a": "e",
+      "trap": "synonym",
+      "ev": "Wichtig sei aber, nicht zu lange zu schlafen.",
+      "why": "Erst der Nutzen (e), dann mit „aber“ die Einschränkung."
+     },
+     {
+      "n": 12,
+      "type": "ad",
+      "q": "Lücke 12",
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Andere befürchten",
+      "why": "„Manche … Andere …“: b nennt die erste Gruppe."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-l3": {
+  "id": "b2-diag-l3",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 3,
+  "title": "Bibliothek der Dinge",
+  "instr": "Lesen Sie den Text und die Aufgaben 16 bis 18. Wählen Sie bei jeder Aufgabe die richtige Lösung.",
+  "instr_en": "Read the text and the questions. Choose the correct answer for each question.",
+  "source": "own",
+  "layout": "text",
+  "topic": "Sie lesen in einer Zeitung einen Artikel über ein neues Angebot einer Bibliothek.",
+  "groups": [
+   {
+    "title": "Bohrmaschine statt Roman: Bibliothek verleiht Alltagsgegenstände",
+    "body": "In der Stadtbibliothek Nordheim kann man seit dem Frühjahr nicht nur Bücher ausleihen, sondern auch eine Bohrmaschine, ein Zelt oder eine Nähmaschine. Rund 150 Gegenstände umfasst die sogenannte „Bibliothek der Dinge“ inzwischen. Die Idee dahinter: Viele Geräte werden im Haushalt nur wenige Male im Jahr benutzt. Eine Bohrmaschine etwa läuft im Durchschnitt gerade einmal 13 Minuten in ihrem ganzen Leben.\n\nDie Ausleihe funktioniert wie bei Büchern: Mit dem Bibliotheksausweis kann man einen Gegenstand für zwei Wochen mitnehmen. Eine Gebühr gibt es nicht, allerdings müssen Nutzer bei teuren Geräten wie dem Beamer eine Kaution von 50 Euro hinterlegen. Viele der Gegenstände wurden von Bürgerinnen und Bürgern gespendet, den Rest hat die Bibliothek mit Geld aus einem Umweltprogramm gekauft.\n\nBesonders beliebt sind bisher überraschenderweise nicht die Werkzeuge, sondern Spiele und Musikinstrumente. „Viele Eltern wollen erst einmal testen, ob ihr Kind wirklich Ukulele lernen möchte, bevor sie ein Instrument kaufen“, erzählt Bibliothekarin Hanne Koch.",
+    "items": [
+     {
+      "n": 16,
+      "type": "abc",
+      "q": "Die „Bibliothek der Dinge“ …",
+      "opts": [
+       "verleiht Gegenstände gegen eine kleine Gebühr.",
+       "bietet Geräte an, die man nur selten braucht.",
+       "gibt es in Nordheim schon seit vielen Jahren."
+      ],
+      "a": "b",
+      "trap": "synonym",
+      "ev": "Viele Geräte werden im Haushalt nur wenige Male im Jahr benutzt.",
+      "why": "Eine Gebühr gibt es <b>nicht</b>, und das Angebot gibt es erst seit dem Frühjahr."
+     },
+     {
+      "n": 17,
+      "type": "abc",
+      "q": "Die Gegenstände in der Bibliothek …",
+      "opts": [
+       "wurden alle mit Geld aus einem Umweltprogramm gekauft.",
+       "darf man einen Monat lang behalten.",
+       "stammen zum Teil aus Spenden."
+      ],
+      "a": "c",
+      "trap": "teil",
+      "ev": "Viele der Gegenstände wurden von Bürgerinnen und Bürgern gespendet",
+      "why": "Nur der <b>Rest</b> wurde gekauft. Ausleihen kann man für zwei Wochen."
+     },
+     {
+      "n": 18,
+      "type": "abc",
+      "q": "Am häufigsten werden …",
+      "opts": [
+       "Spiele und Instrumente ausgeliehen.",
+       "Werkzeuge ausgeliehen.",
+       "Beamer ausgeliehen."
+      ],
+      "a": "a",
+      "trap": "negation",
+      "ev": "nicht die Werkzeuge, sondern Spiele und Musikinstrumente",
+      "why": "„nicht … sondern“: Werkzeuge sind gerade nicht am beliebtesten."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-l4": {
+  "id": "b2-diag-l4",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 4,
+  "title": "Arbeiten im Homeoffice",
+  "instr": "Lesen Sie die Überschriften 22 bis 24 und die Äußerungen a bis d. Welche Äußerung passt zu welcher Überschrift? Eine Äußerung passt nicht. Sie können jede Äußerung nur einmal wählen.",
+  "instr_en": "Read the headings and the comments. Which comment fits which heading? One comment does not fit. You can use each comment only once.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie lesen in einer Zeitschrift Meinungsäußerungen zum Thema „Arbeiten im Homeoffice“.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Kerstin, 36",
+    "body": "Seit ich zu Hause arbeite, fehlt mir der Weg ins Büro. Das klingt seltsam, aber auf dem Fahrrad konnte ich morgens den Kopf frei bekommen und abends abschalten. Heute sitze ich nach dem letzten Meeting sofort auf dem Sofa und denke immer noch an die Arbeit."
+   },
+   {
+    "k": "b",
+    "title": "Marco, 42",
+    "body": "Ich habe zwei Kinder im Grundschulalter. Dass ich sie mittags von der Schule abholen und danach weiterarbeiten kann, ist für unsere Familie ein großes Geschenk. Ohne Homeoffice müsste meine Frau ihre Stunden reduzieren."
+   },
+   {
+    "k": "c",
+    "title": "Hatice, 31",
+    "body": "Unser Team trifft sich seit zwei Jahren nur noch am Bildschirm. Fachlich funktioniert das gut. Aber neue Kolleginnen kennt man kaum, und den kleinen Austausch in der Kaffeeküche, bei dem man oft nebenbei wichtige Dinge erfährt, gibt es nicht mehr."
+   },
+   {
+    "k": "d",
+    "title": "Jörg, 55",
+    "body": "Unsere Firma hat die Hälfte ihrer Büroflächen gekündigt und spart dadurch viel Miete. Wer ins Büro kommt, muss sich jetzt morgens einen freien Schreibtisch suchen. Das hat mich am Anfang gestört, inzwischen habe ich mich daran gewöhnt."
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "items": [
+     {
+      "n": 22,
+      "type": "ad",
+      "q": "Der informelle Kontakt fehlt",
+      "a": "c",
+      "trap": "synonym",
+      "why": "c: Der kleine Austausch in der Kaffeeküche fehlt."
+     },
+     {
+      "n": 23,
+      "type": "ad",
+      "q": "Familie und Beruf lassen sich besser verbinden",
+      "a": "b",
+      "trap": "synonym",
+      "why": "b: Kinder abholen und danach weiterarbeiten."
+     },
+     {
+      "n": 24,
+      "type": "ad",
+      "q": "Die Grenze zwischen Job und Freizeit verschwimmt",
+      "a": "a",
+      "trap": "synonym",
+      "why": "a: Nach dem letzten Meeting denkt Kerstin auf dem Sofa noch an die Arbeit. d passt zu keiner Überschrift."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-diag-l5": {
+  "id": "b2-diag-l5",
+  "level": "b2",
+  "module": "lesen",
+  "teil": 5,
+  "title": "Gartenordnung",
+  "instr": "Lesen Sie die Überschriften a bis e und die Paragrafen. Welche der Überschriften aus dem Inhaltsverzeichnis passen zu den Paragrafen? Drei Überschriften werden nicht gebraucht.",
+  "instr_en": "Read the headings and the sections. Which headings from the table of contents fit the sections? Three headings are not needed.",
+  "source": "own",
+  "layout": "ads",
+  "topic": "Sie werden Mitglied in einem Gemeinschaftsgarten und lesen die Gartenordnung.",
+  "ads": [
+   {
+    "k": "a",
+    "title": "Gemeinsame Geräte",
+    "body": ""
+   },
+   {
+    "k": "b",
+    "title": "Mitgliedsbeiträge",
+    "body": ""
+   },
+   {
+    "k": "c",
+    "title": "Vergabe und Pflege der Beete",
+    "body": ""
+   },
+   {
+    "k": "d",
+    "title": "Einsatz von Pflanzenschutzmitteln",
+    "body": ""
+   },
+   {
+    "k": "e",
+    "title": "Ernte und Verkauf",
+    "body": ""
+   }
+  ],
+  "noZero": true,
+  "groups": [
+   {
+    "title": "Gartenordnung Gemeinschaftsgarten „Grünes Eck“",
+    "body": "§ 1 Zweck (Beispiel)\nDer Gemeinschaftsgarten „Grünes Eck“ bietet allen Mitgliedern die Möglichkeit, gemeinsam Obst, Gemüse und Blumen anzubauen.\n\n§ 2\nJedes Mitglied erhält ein Beet von etwa zehn Quadratmetern. Das Beet muss regelmäßig gepflegt werden. Wird es länger als acht Wochen nicht bearbeitet, kann der Vorstand es an eine Person auf der Warteliste weitergeben.\n\n§ 3\nWerkzeuge, Gießkannen und Schläuche befinden sich im Geräteschuppen und stehen allen Mitgliedern zur Verfügung. Nach der Benutzung sind sie sauber an ihren Platz zurückzubringen. Beschädigte Geräte sind dem Vorstand zu melden.",
+    "items": [
+     {
+      "n": 28,
+      "type": "ad",
+      "q": "§ 2",
+      "a": "c",
+      "trap": "synonym",
+      "ev": "Jedes Mitglied erhält ein Beet von etwa zehn Quadratmetern.",
+      "why": "Wer ein Beet bekommt und wie man es pflegen muss."
+     },
+     {
+      "n": 29,
+      "type": "ad",
+      "q": "§ 3",
+      "a": "a",
+      "trap": "synonym",
+      "ev": "stehen allen Mitgliedern zur Verfügung",
+      "why": "Werkzeuge im Schuppen = gemeinsame Geräte."
+     }
+    ]
+   }
+  ]
+ },
+ "b2-s1-a": {
+  "id": "b2-s1-a",
+  "level": "b2",
+  "module": "schreiben",
+  "teil": 1,
+  "title": "Forumsbeitrag",
+  "instr": "Sie schreiben einen Forumsbeitrag. Behandeln Sie alle vier Punkte. Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie circa 150 Wörter.",
+  "instr_en": "You write a forum post. Cover all four points. Remember an introduction and a conclusion. You are marked on how fully you cover the points, how correct the text is and how well sentences and paragraphs are linked. Write about 150 words.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b2-s1-a",
+    "aufgabe": 1,
+    "situation": "Sie schreiben einen Forumsbeitrag zum Thema Tourismus. In vielen beliebten Städten beschweren sich die Bewohnerinnen und Bewohner über zu viele Touristen, und einige Städte wollen die Zahl der Besucher begrenzen.",
+    "points": [
+     "Äußern Sie Ihre Meinung dazu, dass Städte die Zahl der Touristen begrenzen.",
+     "Nennen Sie Gründe, warum bestimmte Orte so viele Besucher anziehen.",
+     "Beschreiben Sie, welche Folgen der Massentourismus für die Bewohner haben kann.",
+     "Nennen Sie Möglichkeiten, wie man rücksichtsvoller reisen kann."
+    ],
+    "words": 150,
+    "max": 60,
+    "minutes": 50
+   }
+  ]
+ },
+ "b2-s1-b": {
+  "id": "b2-s1-b",
+  "level": "b2",
+  "module": "schreiben",
+  "teil": 1,
+  "title": "Forumsbeitrag",
+  "instr": "Sie schreiben einen Forumsbeitrag. Behandeln Sie alle vier Punkte. Denken Sie an eine Einleitung und einen Schluss. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Schreiben Sie circa 150 Wörter.",
+  "instr_en": "You write a forum post. Cover all four points. Remember an introduction and a conclusion. You are marked on how fully you cover the points, how correct the text is and how well sentences and paragraphs are linked. Write about 150 words.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b2-s1-b",
+    "aufgabe": 1,
+    "situation": "Sie schreiben einen Forumsbeitrag zum Thema Schule und Digitalisierung. An immer mehr Schulen arbeiten die Schülerinnen und Schüler mit Tablets statt mit gedruckten Schulbüchern.",
+    "points": [
+     "Äußern Sie Ihre Meinung dazu, dass Schulbücher durch Tablets ersetzt werden.",
+     "Nennen Sie Gründe, warum viele Schulen auf digitale Geräte setzen.",
+     "Nennen Sie mögliche Nachteile für die Schülerinnen und Schüler.",
+     "Machen Sie Vorschläge, wie man digitale und klassische Lernmittel sinnvoll verbinden kann."
+    ],
+    "words": 150,
+    "max": 60,
+    "minutes": 50
+   }
+  ]
+ },
+ "b2-s2-a": {
+  "id": "b2-s2-a",
+  "level": "b2",
+  "module": "schreiben",
+  "teil": 2,
+  "title": "Formelle Nachricht",
+  "instr": "Schreiben Sie eine Nachricht. Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie circa 100 Wörter.",
+  "instr_en": "Write a message. Choose a sensible order for the content points. You are marked on how fully you cover the points, how correct the text is and how well sentences and paragraphs are linked. Do not forget the greeting and the closing. Write about 100 words.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b2-s2-a",
+    "aufgabe": 2,
+    "situation": "Sie sind Mitglied in einem Sportverein und leiten dort ehrenamtlich eine Laufgruppe. Am kommenden Samstag soll Ihre Gruppe beim Stadtlauf einen Getränkestand betreuen. Wegen eines beruflichen Termins können Sie an diesem Tag nicht dabei sein. Schreiben Sie eine Nachricht an die Vorsitzende des Vereins, Frau Hagedorn.",
+    "points": [
+     "Entschuldigen Sie sich und erklären Sie Ihre Situation.",
+     "Beschreiben Sie, was für den Stand schon organisiert ist.",
+     "Schlagen Sie vor, wer Sie vertreten könnte.",
+     "Bieten Sie an, bei einer anderen Gelegenheit mehr zu helfen."
+    ],
+    "words": 100,
+    "max": 40,
+    "minutes": 25
+   }
+  ]
+ },
+ "b2-s2-b": {
+  "id": "b2-s2-b",
+  "level": "b2",
+  "module": "schreiben",
+  "teil": 2,
+  "title": "Formelle Nachricht",
+  "instr": "Schreiben Sie eine Nachricht. Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie circa 100 Wörter.",
+  "instr_en": "Write a message. Choose a sensible order for the content points. You are marked on how fully you cover the points, how correct the text is and how well sentences and paragraphs are linked. Do not forget the greeting and the closing. Write about 100 words.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b2-s2-b",
+    "aufgabe": 2,
+    "situation": "Sie arbeiten in einer Werbeagentur und sollen bis Freitag eine Präsentation für einen wichtigen Kunden fertigstellen. Ein Kollege, der Ihnen die aktuellen Zahlen liefern sollte, ist für zwei Wochen krankgeschrieben. Schreiben Sie eine Nachricht an Ihre Teamleiterin, Frau Kowalczyk.",
+    "points": [
+     "Beschreiben Sie, wie weit die Präsentation ist.",
+     "Erklären Sie, warum es Probleme mit dem Termin gibt.",
+     "Bitten Sie um Unterstützung.",
+     "Machen Sie einen Vorschlag, wie es weitergehen kann."
+    ],
+    "words": 100,
+    "max": 40,
+    "minutes": 25
+   }
+  ]
+ },
+ "b2-diag-s2": {
+  "id": "b2-diag-s2",
+  "level": "b2",
+  "module": "schreiben",
+  "teil": 2,
+  "title": "Formelle Nachricht",
+  "instr": "Schreiben Sie eine Nachricht. Überlegen Sie sich eine passende Reihenfolge für die Inhaltspunkte. Bei der Bewertung wird darauf geachtet, wie genau die Inhaltspunkte bearbeitet sind, wie korrekt der Text ist und wie gut die Sätze und Abschnitte sprachlich miteinander verknüpft sind. Vergessen Sie nicht Anrede und Gruß. Schreiben Sie circa 100 Wörter.",
+  "instr_en": "Write a message. Choose a sensible order for the content points. You are marked on how fully you cover the points, how correct the text is and how well sentences and paragraphs are linked. Do not forget the greeting and the closing. Write about 100 words.",
+  "source": "own",
+  "groups": [],
+  "tasks": [
+   {
+    "id": "b2-diag-s2",
+    "aufgabe": 2,
+    "situation": "Sie wohnen in einem großen Mehrfamilienhaus. Seit drei Wochen funktioniert der Aufzug nicht, und eine ältere Nachbarin aus dem fünften Stock kann ihre Wohnung kaum noch verlassen. Schreiben Sie eine Nachricht an die Hausverwaltung, Herrn Brenninger.",
+    "points": [
+     "Beschreiben Sie das Problem.",
+     "Erklären Sie, welche Folgen es für die Bewohner hat.",
+     "Bitten Sie um eine schnelle Lösung.",
+     "Machen Sie einen Vorschlag für die Zeit bis zur Reparatur."
+    ],
+    "words": 100,
+    "max": 40,
+    "minutes": 15
+   }
+  ]
+ }
+}

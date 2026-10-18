@@ -1,4 +1,4 @@
-import { bank, type Licensed } from './content';
+import { bank, findMock, type Licensed } from './content';
 import type { BlockContent, ExamSet, Feedback } from './types';
 
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
@@ -10,7 +10,7 @@ export function checkSet(s: ExamSet): string[] {
   if (!s.id) e.push('Set without id');
   if (!['hoeren', 'lesen', 'schreiben'].includes(s.module)) e.push(`${at}: module must be hoeren, lesen or schreiben`);
   if (!s.instr) e.push(`${at}: instr missing`);
-  if (s.module === 'schreiben') {
+  if (s.module === 'schreiben' && !s.groups?.length) {
     if (!s.tasks?.length) e.push(`${at}: tasks missing`);
     for (const t of s.tasks ?? []) if (!t.id || !t.situation || !t.points?.length || !t.words || !t.max) e.push(`${at}: writing task needs id, situation, points, words, max`);
     return e;
@@ -19,16 +19,17 @@ export function checkSet(s: ExamSet): string[] {
   const seen = new Set<number>();
   for (const g of s.groups) {
     if (s.module === 'hoeren' && !g.script?.length && !g.audio) e.push(`${at}: Hören group needs a script (audio is made from it)`);
-    if (s.module === 'lesen' && s.teil !== 3 && !g.body) e.push(`${at}: Lesen group needs body text`);
+    if (s.module === 'lesen' && s.layout !== 'ads' && !(s.teil === 3 && !s.layout && (s.level ?? 'b1') === 'b1') && !g.body) e.push(`${at}: Lesen group needs body text`);
     for (const i of g.items ?? []) {
       if (seen.has(i.n)) e.push(`${at}: item number ${i.n} used twice`);
       seen.add(i.n);
       const ok =
         i.type === 'rf' ? ['r', 'f'].includes(i.a)
           : i.type === 'jn' ? ['ja', 'nein'].includes(i.a)
-            : i.type === 'abc' ? (i.opts?.length === 3 && ['a', 'b', 'c'].includes(i.a))
-              : i.type === 'who' ? (s.who?.length === 3 && ['a', 'b', 'c'].includes(i.a))
-                : i.type === 'ad' ? (i.a === '0' || !!s.ads?.some((x) => x.k === i.a))
+            : i.type === 'abc' ? ((i.opts?.length ?? 0) >= 2 && 'abcdef'.slice(0, i.opts!.length).includes(i.a) && i.a.length === 1)
+              : i.type === 'who' ? ((s.who?.length ?? 0) >= 2 && 'abcdef'.slice(0, s.who!.length).includes(i.a) && i.a.length === 1)
+                : i.type === 'txt' ? !!i.a.trim()
+                : i.type === 'ad' ? ((i.a === '0' && !s.noZero) || !!s.ads?.some((x) => x.k === i.a))
                   : false;
       if (!ok) e.push(`${at}, item ${i.n}: answer "${i.a}" does not fit type ${i.type}`);
       if (i.type !== 'jn' && !i.q) e.push(`${at}, item ${i.n}: question text q missing`);
@@ -55,7 +56,7 @@ export function checkUpload(u: Upload, lic: Licensed): string[] {
       if (!ISO.test(d.date) || d.date < b.starts_on || d.date > b.ends_on) e.push(`Day "${d.title}": date ${d.date} outside the block`);
       if (!d.sets?.length) e.push(`Day "${d.title}": no sets`);
       for (const id of d.sets ?? []) {
-        if (id.startsWith('mock:')) { if (!lic.tests.some((t) => t.id === id.slice(5))) e.push(`Day "${d.title}": mock ${id} not found (licensed mocks loaded: ${lic.tests.map((t) => t.id).join(', ') || 'none'})`); }
+        if (id.startsWith('mock:')) { if (!findMock(id.slice(5), lic)) e.push(`Day "${d.title}": mock ${id} not found (licensed mocks loaded: ${lic.tests.map((t) => t.id).join(', ') || 'none'})`); }
         else if (!own.has(id) && !bank[id] && !lic.sets[id]) e.push(`Day "${d.title}": set ${id} not found`);
       }
     }

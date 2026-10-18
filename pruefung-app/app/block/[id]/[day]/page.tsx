@@ -7,7 +7,7 @@ import { LessonBar, LessonHead, StratCard, hueOf } from '@/components/Lesson';
 import { ResultView } from '@/components/ResultView';
 import { SetCard } from '@/components/SetCard';
 import { TestRunner, type Finished } from '@/components/TestRunner';
-import { modName, tips } from '@/lib/content';
+import { modName, teilInfoOf } from '@/lib/content';
 import { fmt, today } from '@/lib/dates';
 import { db } from '@/lib/db';
 import { emptyDraft, loadDraft, loadNotes, saveDraft, saveNote, type Draft } from '@/lib/local';
@@ -59,7 +59,7 @@ function Day({ id, idx }: { id: string; idx: number }) {
   const stepName = (b: (typeof blocksList)[number]) => {
     if (b.kind === 'strat') return 'Strategie';
     const s = ctx?.sets[b.id]; if (!s) return '';
-    return s.module === 'schreiben' ? `Schreiben ${s.teil}` : `${modName(s.module)} ${tips[s.module as 'hoeren' | 'lesen']?.[String(s.teil)]?.name.split(' · ')[0] ?? ''}`;
+    return s.module === 'schreiben' ? `Schreiben ${s.teil}` : `${modName(s.module)} ${teilInfoOf(s)?.name.split(' · ')[0] ?? ''}`;
   };
 
   const head = (

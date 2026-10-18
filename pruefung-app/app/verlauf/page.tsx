@@ -9,7 +9,7 @@ function History() {
   const { attempts, blocks } = useStore();
   const rows = [...attempts].sort((a, b) => b.finished_at.localeCompare(a.finished_at));
   const title = (ref: string) => {
-    if (ref === 'diagnose') return 'Mock Test 1 · Diagnose';
+    if (ref.startsWith('diagnose')) return 'Mock Test 1 · Diagnose';
     const [bid, i] = ref.split(':'); const b = blocks.find((x) => x.id === bid);
     return b ? `Block ${b.seq} · ${b.content.days[Number(i)]?.title ?? ''}` : ref;
   };

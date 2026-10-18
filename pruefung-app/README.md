@@ -30,15 +30,26 @@ A block closes on its end date even if unfinished. The next block then shows the
 
 ## Content
 
+Four levels: A1, A2, B1, B2 (Goethe only). The candidate picks the level in the welcome form. A1 and A2 are scored as one exam, B1 and B2 per module (`lib/levels.ts`).
+
 | What | Where |
 | --- | --- |
-| Own items (Hören, Lesen, Schreiben) | `content/bank.json` |
-| Free diagnostic | `content/diagnose.json` |
-| Own audio (ElevenLabs) | `public/audio/own/` |
-| Cornelsen full mocks (personal copy) | `public/licensed/` — gitignored, never commit or deploy |
+| Own items per level (Hören, Lesen, Schreiben) | `content/<level>/bank.json` |
+| Free diagnostic per level | `content/<level>/diagnose.json` |
+| Own full mock tests (A1, A2, B2) | `content/<level>/mocks.json` |
+| Teil names, timings, exam tips | `content/<level>/tips.json` |
+| Own audio | `public/audio/own/` (B1), `public/audio/<level>/` |
+| Cornelsen B1 mocks (licensed) | `public/licensed/` (hidden until Lesen and Schreiben are added) |
 
-`content/bank.json` is built from the B1-Trainer with `npm run import-trainer -- "<path to B1-Trainer>"` (only original sets, book sets are skipped).
-Hören sets without an MP3 are read by the browser's German voice until audio is generated.
+Audio for the bank: `node tools/make-audio.mjs ../.env.local a1 a2 b2` (needs ffmpeg and ElevenLabs keys, skips files that exist).
+Audio for new Hören texts in a practice block: admin > candidate > Blöcke > **Audio erzeugen** (needs `ELEVENLABS_API_KEYS` in Vercel).
+Until an MP3 exists, the browser's German voice reads the script.
+
+Admin > **Mock Tests** shows every diagnostic and full mock as a preview, also hidden ones.
+
+## Emails (manual)
+
+Admin > candidate > **E-Mail senden**: pick a template (block ready, reminder, correction ready, own text), edit, send. Goes through Resend and is logged in `exam_emails`. Nothing is sent automatically.
 
 ## Go live at www.fuchsdeutsch.de/pruefung
 
@@ -50,3 +61,12 @@ This folder lives in the Fuchsdeutsch repo as `pruefung-app/` and is deployed as
 4. Vercel > Add New > Project > the same `fuchsdeutsch` repo > Root Directory `pruefung-app`. Env vars: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (same as Fuchsdeutsch). Deploy. Check `https://<project>.vercel.app/pruefung`.
 5. Vercel, Fuchsdeutsch project > Settings > Environment Variables: `PRUEFUNG_ORIGIN=https://<project>.vercel.app`. Redeploy.
 6. Open `https://www.fuchsdeutsch.de/pruefung`, sign in, fill the form, do Mock Test 1, then check Admin.
+
+## Update 2 (levels, audio button, emails)
+
+1. Supabase SQL Editor: run `supabase/exam_v2.sql`.
+2. Vercel project of the exam app, Environment Variables:
+   - `ELEVENLABS_API_KEYS` = keys separated by commas
+   - `RESEND_API_KEY` = from resend.com (domain fuchsdeutsch.de verified)
+   - `RESEND_FROM` = `Fuchsdeutsch Prüfung <pruefung@fuchsdeutsch.de>` (optional, this is the default)
+3. Redeploy.

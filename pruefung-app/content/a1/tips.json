@@ -1,0 +1,163 @@
+{
+ "hoeren": {
+  "1": {
+   "name": "Teil 1 · Kurze Gespräche",
+   "mins": 8,
+   "items": 6,
+   "plays": 2,
+   "how": "a, b oder c",
+   "how_en": "a, b or c",
+   "tips": [
+    "Lies vor dem Hören die Frage und die drei Antworten. Was ist wichtig: <b>Uhrzeit, Preis, Ort</b>?",
+    "Im Gespräch hörst du oft <b>alle drei</b> Zahlen oder Orte. Nur eine Antwort passt zur Frage.",
+    "Achtung bei <b>„Oder nein …“, „lieber“, „dann nur“</b>: Die Person ändert ihre Meinung. Die letzte Information zählt.",
+    "Erstes Hören: antworten. Zweites Hören: prüfen."
+   ],
+   "tips_en": [
+    "Before listening, read the question and the three answers. What matters: <b>time, price, place</b>?",
+    "You often hear <b>all three</b> numbers or places in the dialog. Only one answer fits the question.",
+    "Watch out for <b>\"Oder nein …\", \"lieber\", \"dann nur\"</b>: the person changes their mind. The last information counts.",
+    "First listening: answer. Second listening: check."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Durchsagen",
+   "mins": 4,
+   "items": 4,
+   "plays": 1,
+   "how": "Richtig oder Falsch",
+   "how_en": "True or false",
+   "tips": [
+    "Du hörst jede Durchsage <b>nur einmal</b>. Lies die Aussage vorher genau.",
+    "Markiere in der Aussage das Schlüsselwort: <b>Gleis, Uhrzeit, Stock, Kasse</b>.",
+    "Die wichtige Information kommt oft nach <b>„nicht …, sondern …“</b> oder wird am Ende wiederholt.",
+    "Nicht verstanden? Kreuze trotzdem an und konzentriere dich auf die nächste Durchsage."
+   ],
+   "tips_en": [
+    "You hear each announcement <b>only once</b>. Read the statement carefully beforehand.",
+    "Mark the key word in the statement: <b>platform, time, floor, checkout</b>.",
+    "The important information often comes after <b>\"nicht …, sondern …\"</b> or is repeated at the end.",
+    "Did not understand? Mark an answer anyway and focus on the next announcement."
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · Nachrichten am Telefon",
+   "mins": 8,
+   "items": 5,
+   "plays": 2,
+   "how": "a, b oder c",
+   "how_en": "a, b or c",
+   "tips": [
+    "Lies die Frage zuerst: <b>Wann? Wo? Was? Wie viel?</b> Darauf hörst du.",
+    "In der Nachricht gibt es oft einen <b>alten Plan</b> und einen <b>neuen Plan</b>. Die Frage meint fast immer den neuen.",
+    "Zahlen hörst du oft mehrmals (Uhrzeit, Telefonnummer, Preis). Prüfe: Welche Zahl passt zur Frage?",
+    "Beim zweiten Hören kontrollierst du deine Antwort."
+   ],
+   "tips_en": [
+    "Read the question first: <b>When? Where? What? How much?</b> Listen for that.",
+    "A message often has an <b>old plan</b> and a <b>new plan</b>. The question almost always means the new one.",
+    "You often hear several numbers (time, phone number, price). Check which number fits the question.",
+    "Use the second listening to check your answer."
+   ]
+  }
+ },
+ "lesen": {
+  "1": {
+   "name": "Teil 1 · Kurze Texte",
+   "mins": 8,
+   "items": 5,
+   "how": "Richtig oder Falsch",
+   "how_en": "True or false",
+   "tips": [
+    "Lies zuerst die Aussagen, dann den Text. So weißt du, was du suchst.",
+    "Achte auf kleine Wörter: <b>nicht, kein, nur, schon, erst</b>. Sie machen eine Aussage oft falsch.",
+    "Richtig ist oft mit <b>anderen Wörtern</b> gesagt, zum Beispiel „um vier fertig“ = „bis 16 Uhr“.",
+    "Die Aufgaben kommen in der Reihenfolge des Textes."
+   ],
+   "tips_en": [
+    "Read the statements first, then the text. That way you know what to look for.",
+    "Watch the small words: <b>nicht, kein, nur, schon, erst</b>. They often make a statement false.",
+    "True statements often use <b>other words</b>, for example \"um vier fertig\" = \"bis 16 Uhr\".",
+    "The tasks follow the order of the text."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Anzeigen und Internetseiten",
+   "mins": 9,
+   "items": 5,
+   "how": "a oder b",
+   "how_en": "a or b",
+   "tips": [
+    "Lies die Situation genau. Markiere die <b>wichtige Bedingung</b>: Tag, Uhrzeit, Preis, neu oder gebraucht.",
+    "Oft passen <b>beide</b> Texte zum Thema. Nur einer passt zur Bedingung.",
+    "Achte auf Wörter wie <b>geschlossen, Ruhetag, nur, ab</b>.",
+    "Du musst nicht jedes Wort verstehen. Suche nur die Information für die Situation."
+   ],
+   "tips_en": [
+    "Read the situation carefully. Mark the <b>key condition</b>: day, time, price, new or used.",
+    "Often <b>both</b> texts fit the topic. Only one fits the condition.",
+    "Watch for words like <b>geschlossen, Ruhetag, nur, ab</b>.",
+    "You do not need to understand every word. Only look for the information the situation needs."
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · Schilder und Aushänge",
+   "mins": 8,
+   "items": 5,
+   "how": "Richtig oder Falsch",
+   "how_en": "True or false",
+   "tips": [
+    "Lies zuerst, <b>wo</b> das Schild hängt. Das hilft dir beim Verstehen.",
+    "Bei Öffnungszeiten: Prüfe <b>Tag und Uhrzeit</b> aus der Aussage genau.",
+    "Achtung bei Änderungen: <b>„heute nicht …, sondern …“</b>. Die neue Information zählt.",
+    "Die Schilder sind kurz. Nimm dir Zeit für jedes Wort in der Aussage."
+   ],
+   "tips_en": [
+    "First read <b>where</b> the sign is. That helps you understand it.",
+    "With opening hours, check the <b>day and time</b> in the statement carefully.",
+    "Watch for changes: <b>\"heute nicht …, sondern …\"</b>. The new information counts.",
+    "The signs are short. Take time for every word in the statement."
+   ]
+  }
+ },
+ "schreiben": {
+  "1": {
+   "name": "Teil 1 · Formular",
+   "mins": 8,
+   "items": 1,
+   "how": "Fünf Informationen in ein Formular schreiben",
+   "how_en": "Write five pieces of information into a form",
+   "tips": [
+    "Lies zuerst die Felder im Formular, dann den Text. Markiere im Text die passenden Informationen.",
+    "Im Text gibt es oft <b>falsche Fährten</b>: eine alte Adresse, eine zweite Telefonnummer, eine Person, die nicht mitkommt.",
+    "Schreib nur die Information, <b>keine ganzen Sätze</b>.",
+    "Schreib Namen, Zahlen und Adressen <b>genau ab</b>. Kontrolliere am Ende jede Zahl."
+   ],
+   "tips_en": [
+    "First read the fields in the form, then the text. Mark the matching information in the text.",
+    "The text often has <b>false leads</b>: an old address, a second phone number, a person who is not coming.",
+    "Write only the information, <b>no full sentences</b>.",
+    "<b>Copy</b> names, numbers and addresses exactly. Check every number at the end."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Kurze Nachricht",
+   "mins": 12,
+   "items": 1,
+   "how": "Nachricht mit circa 30 Wörtern zu drei Punkten",
+   "how_en": "Message of about 30 words covering three points",
+   "tips": [
+    "Schreib zu <b>jedem der drei Punkte</b> ein bis zwei Sätze. Ein fehlender Punkt kostet viele Punkte.",
+    "Anrede und Gruß nicht vergessen: <b>Liebe Carla, … Viele Grüße</b> oder <b>Sehr geehrte Damen und Herren, … Mit freundlichen Grüßen</b>.",
+    "Schreib einfache, kurze Sätze. Lieber richtig als lang.",
+    "Plane 2 Minuten am Ende ein: Lies die Nachricht noch einmal. Sind <b>alle drei Punkte</b> drin?"
+   ],
+   "tips_en": [
+    "Write one or two sentences for <b>each of the three points</b>. A missing point costs many marks.",
+    "Do not forget greeting and closing: <b>Liebe Carla, … Viele Grüße</b> or <b>Sehr geehrte Damen und Herren, … Mit freundlichen Grüßen</b>.",
+    "Write simple, short sentences. Better correct than long.",
+    "Keep 2 minutes at the end: read your message again. Are <b>all three points</b> in it?"
+   ]
+  }
+ }
+}

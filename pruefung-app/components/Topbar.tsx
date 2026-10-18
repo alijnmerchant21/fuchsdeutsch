@@ -29,7 +29,7 @@ export function Topbar() {
     <header className="topbar">
       <Link className="brand" href="/"><Fox size={34} /><span className="bname">Fuchsdeutsch</span><span className="ptag">Prüfung</span></Link>
       {user ? (
-        <span className="topsub">{candidate?.exam_date ? `Goethe-Zertifikat B1 · Prüfung am ${new Date(candidate.exam_date + 'T12:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long' })}` : 'Goethe-Zertifikat B1'}</span>
+        <span className="topsub">{candidate?.exam_date ? `Goethe-Zertifikat ${(candidate.level ?? 'b1').toUpperCase()} · Prüfung am ${new Date(candidate.exam_date + 'T12:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long' })}` : 'Goethe-Zertifikat A1 bis B2'}</span>
       ) : (
         <nav className="navlinks" aria-label="Seite">
           <button type="button" onClick={() => go('how')}>{t('So funktioniert es', 'How it works')}</button>

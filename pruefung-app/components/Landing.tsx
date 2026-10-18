@@ -68,7 +68,7 @@ export function Landing() {
       {/* ---------- hero ---------- */}
       <section className="lp-hero">
         <div className="lp-hero-text">
-          <p className="lp-eyebrow rise" style={{ animationDelay: '0ms' }}>{t('Goethe-Zertifikat B1 · Mock-Prüfungszentrum', 'Goethe-Zertifikat B1 · Mock exam center')}</p>
+          <p className="lp-eyebrow rise" style={{ animationDelay: '0ms' }}>{t('Goethe-Zertifikat A1 bis B2 · Mock-Prüfungszentrum', 'Goethe-Zertifikat A1 to B2 · Mock exam center')}</p>
           <h1 className="lp-h1">
             {words.map((w, k) => <span key={k} className="rise word" style={{ animationDelay: `${80 + k * 90}ms` }}>{w}</span>)}<br />
             <span className="lp-soft">{words2.map((w, k) => <span key={k} className="rise word" style={{ animationDelay: `${260 + k * 90}ms` }}>{w}</span>)}</span>
@@ -178,18 +178,18 @@ export function Landing() {
             <p className="dim">{t('Einmal pro Konto', 'Once per account')}</p>
           </Reveal>
           <Reveal as="article" className="lp-price" delay={120}>
-            <p className="lp-pname">{t('Ein Modul', 'One module')}</p>
-            <p className="lp-amount">$9</p>
-            <p className="dim">{t('Alle Blöcke bis zur Prüfung, z. B. nur Hören', 'All blocks until your exam, e.g. listening only')}</p>
+            <p className="lp-pname">{t('A1 oder A2', 'A1 or A2')}</p>
+            <p className="lp-amount">$15</p>
+            <p className="dim">{t('Die ganze Prüfung, alle Blöcke bis zum Termin', 'The whole exam, all blocks until your date')}</p>
           </Reveal>
           <Reveal as="article" className="lp-price best" delay={240}>
             <span className="lp-badge">{t('Beliebt', 'Popular')}</span>
-            <p className="lp-pname">{t('Alle Module', 'All modules')}</p>
-            <p className="lp-amount">$21</p>
-            <p className="dim">{t('Hören, Lesen, Schreiben. Sprechen kommt bald.', 'Listening, reading, writing. Speaking coming soon.')}</p>
+            <p className="lp-pname">{t('B1 oder B2', 'B1 or B2')}</p>
+            <p className="lp-amount">$9<small className="dim"> / {t('Modul', 'module')}</small></p>
+            <p className="dim">{t('Alle Module $21: Hören, Lesen, Schreiben. Sprechen kommt bald.', 'All modules $21: listening, reading, writing. Speaking coming soon.')}</p>
           </Reveal>
         </div>
-        <p className="dim small lp-center">{t('Bei $9 und $21: kostenlos weiter, bis du bestehst.* Fuchsdeutsch-Absolventen zahlen die Hälfte. In der Beta ist alles kostenlos.', 'With $9 and $21: free until you pass.* Fuchsdeutsch graduates pay half. Everything is free during the beta.')} <Link className="linkbtn" href="/garantie">{t('Bedingungen', 'Terms')}</Link></p>
+        <p className="dim small lp-center">{t('Bei jedem bezahlten Plan: kostenlos weiter, bis du bestehst.* Fuchsdeutsch-Absolventen zahlen die Hälfte. In der Beta ist alles kostenlos.', 'With every paid plan: free until you pass.* Fuchsdeutsch graduates pay half. Everything is free during the beta.')} <Link className="linkbtn" href="/garantie">{t('Bedingungen', 'Terms')}</Link></p>
       </section>
 
       {/* ---------- start ---------- */}

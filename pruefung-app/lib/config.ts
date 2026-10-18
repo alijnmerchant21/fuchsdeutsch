@@ -6,4 +6,4 @@ export const DEMO_MODE = !SUPABASE_URL || !SUPABASE_ANON_KEY;
 export const PASS = 60;
 /** URL prefix of the app (Next adds it to <Link>, but not to raw src/fetch/redirect URLs). */
 export const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '/pruefung';
-export const asset = (p: string) => `${BASE}/${p.replace(/^\//, '')}`;
+export const asset = (p: string) => (/^https?:\/\//.test(p) ? p : `${BASE}/${p.replace(/^\//, '')}`);

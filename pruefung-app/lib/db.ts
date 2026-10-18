@@ -32,6 +32,7 @@ export const db = {
       user_id: c.user_id, email: c.email, name: c.name, exam_date: c.exam_date,
       study_days: c.study_days, minutes_per_day: c.minutes_per_day, modules: c.modules,
       exam_center: c.exam_center ?? null, first_language: c.first_language ?? null, attempt_type: c.attempt_type ?? null,
+      level: c.level ?? 'b1',
     });
     fail(error);
   },

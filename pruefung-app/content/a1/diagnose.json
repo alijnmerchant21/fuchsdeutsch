@@ -1,0 +1,35 @@
+{
+ "id": "diagnose-a1",
+ "title": "Diagnose · Start Deutsch 1",
+ "en": "Free A1 diagnostic, about 40 minutes: Hören, Lesen, Schreiben",
+ "sections": [
+  {
+   "module": "hoeren",
+   "title": "Hören",
+   "minutes": 12,
+   "sets": [
+    "a1-diag-h1",
+    "a1-diag-h2",
+    "a1-diag-h3"
+   ]
+  },
+  {
+   "module": "lesen",
+   "title": "Lesen",
+   "minutes": 18,
+   "sets": [
+    "a1-diag-l1",
+    "a1-diag-l2",
+    "a1-diag-l3"
+   ]
+  },
+  {
+   "module": "schreiben",
+   "title": "Schreiben",
+   "minutes": 10,
+   "sets": [
+    "a1-diag-s1"
+   ]
+  }
+ ]
+}

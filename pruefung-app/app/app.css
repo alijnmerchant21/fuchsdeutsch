@@ -262,3 +262,12 @@ button.lp-ribbon.rise{display:flex}
 .drop.has{border-style:solid;border-color:var(--mint);background:var(--mint-soft)}
 .covered{padding:12px 14px;border-radius:12px;background:var(--lilac-soft);margin:6px 0 14px}
 .consent{margin:14px 0 0;line-height:1.5}
+.txtans{width:100%;max-width:360px;margin-top:8px;font:17px/1.4 "Atkinson Hyperlegible",sans-serif;color:var(--txt);background:var(--card2);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+.txtans:focus{outline:3px solid var(--lilac);outline-offset:1px}
+.levelpick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.levelpick .chip{display:flex;flex-direction:column;align-items:flex-start;padding:12px 14px;border-radius:14px;text-align:left}
+.levelpick .chip b{font-size:22px}
+.levelpick .chip small{font-size:12px;opacity:.75}
+@media(max-width:560px){.levelpick{grid-template-columns:repeat(2,1fr)}}
+.ads.adlist{grid-template-columns:1fr}
+.ads.adlist .ad b{font-weight:500}

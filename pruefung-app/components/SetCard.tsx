@@ -1,8 +1,8 @@
 'use client';
 /* One exam set as a card, built like the B1-Trainer: answer, mark sure/guessed, check, then see
    the solution with the marked sentence and the transcript. */
-import { tips, trapLabel } from '@/lib/content';
-import { countWords } from '@/lib/score';
+import { levelOf, teilInfoOf, trapLabel } from '@/lib/content';
+import { countWords, isRight } from '@/lib/score';
 import type { ExamSet, Item } from '@/lib/types';
 import { ExamAudio } from './ExamAudio';
 import { Reading, Rich, safeHtml } from './Rich';
@@ -32,10 +32,11 @@ interface Props {
 const optsOf = (set: ExamSet, it: Item): [string, string][] =>
   it.type === 'rf' ? [['r', 'Richtig'], ['f', 'Falsch']]
     : it.type === 'jn' ? [['ja', 'Ja'], ['nein', 'Nein']]
-      : ((it.type === 'who' ? set.who : it.opts) ?? []).map((o, i) => ['abc'[i], o] as [string, string]);
+      : ((it.type === 'who' ? set.who : it.opts) ?? []).map((o, i) => ['abcdef'[i], o] as [string, string]);
 
 const labelOf = (set: ExamSet, it: Item, v?: string) => {
   if (!v) return '–';
+  if (it.type === 'txt') return it.a.split('|')[0];
   if (it.type === 'ad') return v === '0' ? '0 (keine Anzeige)' : `${v}) ${set.ads?.find((a) => a.k === v)?.title ?? ''}`;
   const o = optsOf(set, it).find((x) => x[0] === v);
   if (!o) return v;
@@ -48,17 +49,20 @@ function ItemRow({ set, it, mode, state, checked, onAnswer, onConf, bare }: {
 }) {
   const v = state.ans[String(it.n)];
   const c = state.conf[String(it.n)];
-  const ok = v === it.a;
+  const ok = isRight(it, v);
   const col = it.type === 'abc' || it.type === 'who';
   const trap = trapLabel(set.module, it.trap);
   return (
     <div className={`item ${checked ? (ok ? 'is-ok' : 'is-no') : ''}`}>
       {!bare && <div className="q"><span className="num">{it.n}</span><Rich text={it.q} /></div>}
-      {it.type === 'ad' ? (
-        <select value={v ?? ''} disabled={checked} onChange={(e) => onAnswer?.(it.n, e.target.value)} aria-label={`Anzeige für ${it.n}`}>
-          <option value="">Anzeige wählen …</option>
-          {(set.ads ?? []).map((a) => <option key={a.k} value={a.k}>{a.k}) {a.title}</option>)}
-          <option value="0">0: keine Anzeige passt</option>
+      {it.type === 'txt' ? (
+        <input className="txtans" value={v ?? ''} disabled={checked} onChange={(e) => onAnswer?.(it.n, e.target.value)} aria-label={it.q ?? `Feld ${it.n}`}
+          spellCheck={false} autoCorrect="off" autoCapitalize="off" autoComplete="off" />
+      ) : it.type === 'ad' ? (
+        <select value={v ?? ''} disabled={checked} onChange={(e) => onAnswer?.(it.n, e.target.value)} aria-label={`Lösung für ${it.n}`}>
+          <option value="">{set.noZero ? 'Bitte wählen …' : 'Anzeige wählen …'}</option>
+          {(set.ads ?? []).map((a) => <option key={a.k} value={a.k}>{a.k}) {a.title.length > 70 ? a.title.slice(0, 68) + ' …' : a.title}</option>)}
+          {!set.noZero && <option value="0">0: keine Anzeige passt</option>}
         </select>
       ) : (
         <div className={`opts ${col ? 'abc' : ''}`}>
@@ -68,7 +72,7 @@ function ItemRow({ set, it, mode, state, checked, onAnswer, onConf, bare }: {
           })}
         </div>
       )}
-      {mode !== 'review' || c ? (
+      {it.type !== 'txt' && (mode !== 'review' || c) ? (
         <div className="conf"><span>Wie sicher? <En>(sure or guessed?)</En></span>
           <button type="button" className={`cbtn ${c === 's' ? 'on' : ''}`} disabled={checked} onClick={() => onConf?.(it.n, 's')}>sicher</button>
           <button type="button" className={`cbtn ${c === 'g' ? 'on' : ''}`} disabled={checked} onClick={() => onConf?.(it.n, 'g')}>geraten</button>
@@ -100,22 +104,26 @@ export function SetCard(p: Props) {
   const { set, mode, state, step, anchor } = p;
   const checked = mode === 'review' || !!p.checked;
   const items = set.groups.flatMap((g) => g.items);
-  const marks = (its: Item[]) => (checked ? its.filter((i) => i.ev).map((i) => ({ ev: i.ev!, ok: state.ans[String(i.n)] === i.a, n: i.n })) : []);
+  const marks = (its: Item[]) => (checked ? its.filter((i) => i.ev).map((i) => ({ ev: i.ev!, ok: isRight(i, state.ans[String(i.n)]), n: i.n })) : []);
   const row = (it: Item, bare?: boolean) => <ItemRow key={it.n} set={set} it={it} mode={mode} state={state} checked={checked} onAnswer={p.onAnswer} onConf={p.onConf} bare={bare} />;
-  const info = set.module === 'schreiben' ? null : tips[set.module as 'hoeren' | 'lesen']?.[String(set.teil)];
-  const name = set.module === 'schreiben' ? `Schreiben · Aufgabe ${set.teil}` : info?.name ? `${set.module === 'hoeren' ? 'Hören' : 'Lesen'} ${info.name}` : `Teil ${set.teil}`;
+  const lvl = levelOf(set);
+  const info = set.module === 'schreiben' ? null : teilInfoOf(set);
+  const name = set.module === 'schreiben' ? `Schreiben · ${lvl === 'b1' ? 'Aufgabe' : 'Teil'} ${set.teil}` : info?.name ? `${set.module === 'hoeren' ? 'Hören' : 'Lesen'} ${info.name}` : `Teil ${set.teil}`;
+  const instrEn = set.instr_en ?? (lvl === 'b1' ? INSTR_EN[`${set.module}-${set.teil}`] : undefined);
+  const layout = set.layout ?? (lvl === 'b1' && set.module === 'lesen' ? (set.teil === 3 ? 'ads' : set.teil === 4 ? 'persons' : 'text') : 'text');
+  const writes = set.module === 'schreiben' && !!set.tasks?.length;
 
   const open = items.filter((i) => !state.ans[String(i.n)]).length;
   const noConf = items.filter((i) => state.ans[String(i.n)] && !state.conf[String(i.n)]).length;
-  const right = items.filter((i) => state.ans[String(i.n)] === i.a).length;
-  const sureWrong = items.filter((i) => state.ans[String(i.n)] !== i.a && state.conf[String(i.n)] === 's').length;
+  const right = items.filter((i) => isRight(i, state.ans[String(i.n)])).length;
+  const sureWrong = items.filter((i) => !isRight(i, state.ans[String(i.n)]) && state.conf[String(i.n)] === 's').length;
 
   const sub = set.module === 'hoeren'
     ? (set.source === 'licensed' ? 'Originalaufnahme wie in der Prüfung' : (set.groups[0]?.plays ?? 1) > 1 ? 'Du hörst jeden Text zweimal' : 'Du hörst den Text nur einmal')
     : set.module === 'lesen' && info ? `${info.mins} Minuten in der Prüfung` : null;
 
   let body: React.ReactNode;
-  if (set.module === 'schreiben') {
+  if (writes) {
     body = (set.tasks ?? []).map((t) => {
       const text = p.writing?.[t.id] ?? '';
       const w = countWords(text);
@@ -123,7 +131,7 @@ export function SetCard(p: Props) {
       return (
         <div key={t.id}>
           <p className="intro">{set.instr}</p>
-          <En as="p" block>{INSTR_EN[`${set.module}-${set.teil}`]}</En>
+          <En as="p" block>{instrEn}</En>
           <p className="task">{t.situation}</p>
           <ul className="stratlist">{t.points.map((x) => <li key={x}>{x}</li>)}</ul>
           <textarea className="writebox" value={text} readOnly={checked} onChange={(e) => p.onWrite?.(t.id, e.target.value)}
@@ -139,8 +147,8 @@ export function SetCard(p: Props) {
     body = (
       <>
         <p className="task">{set.instr}</p>
-        <En as="p" block>{INSTR_EN[`${set.module}-${set.teil}`]}</En>
-        {set.who && <p className="whokey">{set.who.map((w, i) => <span key={w}><b>{'abc'[i]}</b> {w}</span>)}</p>}
+        <En as="p" block>{instrEn}</En>
+        {set.who && <p className="whokey">{set.who.map((w, i) => <span key={w}><b>{'abcdef'[i]}</b> {w}</span>)}</p>}
         {set.groups.map((g, gi) => (
           <div className="hgroup" key={gi}>
             {(set.groups.length > 1 || set.teil !== 4) && g.title && <h4>{g.title}</h4>}
@@ -157,16 +165,18 @@ export function SetCard(p: Props) {
         ))}
       </>
     );
-  } else if (set.teil === 3) {
+  } else if (layout === 'ads') {
     const used = new Map<string, number>();
     for (const i of items) { const v = state.ans[String(i.n)]; if (v && v !== '0') used.set(v, (used.get(v) ?? 0) + 1); }
     body = (
       <>
         <p className="task">{set.instr}</p>
-        <En as="p" block>{INSTR_EN[`${set.module}-${set.teil}`]}</En>
+        <En as="p" block>{instrEn}</En>
+        {set.topic && <p className="intro">{set.topic}</p>}
+        {set.groups.filter((g) => g.body).map((g, gi) => <div key={gi}>{g.title && <h4>{g.title}</h4>}<Reading body={g.body!} marks={marks(g.items)} /></div>)}
         <div className="split t3">
           <div className="items">{items.map((i) => row(i))}</div>
-          <div className="ads">{(set.ads ?? []).map((a) => {
+          <div className={`ads ${(set.ads ?? []).every((x) => !x.body?.trim()) ? 'adlist' : ''}`}>{(set.ads ?? []).map((a) => {
             const forN = checked ? items.filter((i) => i.a === a.k).map((i) => i.n) : [];
             return (
               <div key={a.k} className={`ad ${checked && forN.length ? 'adok' : ''} ${!checked && (used.get(a.k) ?? 0) > 1 ? 'addup' : ''}`}>
@@ -178,11 +188,11 @@ export function SetCard(p: Props) {
         </div>
       </>
     );
-  } else if (set.teil === 4) {
+  } else if (layout === 'persons') {
     body = (
       <>
         <p className="task">{set.instr}</p>
-        <En as="p" block>{INSTR_EN[`${set.module}-${set.teil}`]}</En>
+        <En as="p" block>{instrEn}</En>
         {set.topic && <p className="intro">{set.topic}</p>}
         {set.groups.map((g, gi) => (
           <div className="person" key={gi}>
@@ -197,7 +207,7 @@ export function SetCard(p: Props) {
     body = (
       <>
         <p className="task">{set.instr}</p>
-        <En as="p" block>{INSTR_EN[`${set.module}-${set.teil}`]}</En>
+        <En as="p" block>{instrEn}</En>
         {set.topic && <p className="intro">{set.topic}</p>}
         {set.groups.map((g, gi) => (
           <div key={gi}>
@@ -222,7 +232,7 @@ export function SetCard(p: Props) {
         </span>
       </header>
       {body}
-      {checked && set.module !== 'schreiben' && (
+      {checked && !writes && (
         <div className={`result ${right / Math.max(1, items.length) >= 0.6 ? 'ok' : 'low'}`}>
           <b>{right} von {items.length} richtig</b>
           <En>{right} of {items.length} correct{sureWrong ? `, ${sureWrong}× sure but wrong: read the marked sentence again` : ''}</En>
@@ -232,9 +242,9 @@ export function SetCard(p: Props) {
       {mode === 'practice' && (
         <div className="actions">
           {checked
-            ? p.onReset && set.module !== 'schreiben' && <button type="button" className="btn ghostbtn" onClick={p.onReset}>Nochmal versuchen</button>
-            : <button type="button" className="btn" onClick={p.onCheck}>{set.module === 'schreiben' ? 'Abgeben' : 'Auswerten'}</button>}
-          {!checked && set.module !== 'schreiben' && <span className="left">{open ? `${open} offen` : 'Alles beantwortet'}{noConf ? `, ${noConf}× sicher/geraten fehlt` : ''}</span>}
+            ? p.onReset && !writes && <button type="button" className="btn ghostbtn" onClick={p.onReset}>Nochmal versuchen</button>
+            : <button type="button" className="btn" onClick={p.onCheck}>{writes ? 'Abgeben' : 'Auswerten'}</button>}
+          {!checked && !writes && <span className="left">{open ? `${open} offen` : 'Alles beantwortet'}{noConf ? `, ${noConf}× sicher/geraten fehlt` : ''}</span>}
         </div>
       )}
     </section>

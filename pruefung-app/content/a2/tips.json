@@ -1,0 +1,202 @@
+{
+ "hoeren": {
+  "1": {
+   "name": "Teil 1 · Kurze Texte",
+   "mins": 8,
+   "items": 5,
+   "plays": 2,
+   "how": "a, b oder c",
+   "how_en": "a, b or c",
+   "tips": [
+    "Vor dem Hören: Frage lesen und das Schlüsselwort markieren (<b>wann, wo, was, wie viel</b>).",
+    "Oft hörst du <b>alle drei</b> Antworten im Text. Nur eine passt genau zur Frage.",
+    "Beim ersten Hören antworten, beim zweiten Hören nur noch prüfen.",
+    "Achtung bei <b>leider, aber, nicht … sondern</b>: Danach kommt die wichtige Information."
+   ],
+   "tips_en": [
+    "Before listening: read the question and mark the key word (when, where, what, how much).",
+    "You often hear all three answers in the text. Only one fits the question exactly.",
+    "Answer on the first listening, only check on the second.",
+    "Watch out for leider, aber, nicht … sondern: the important information comes right after."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Gespräch zuordnen",
+   "mins": 7,
+   "items": 5,
+   "plays": 1,
+   "how": "Zuordnen: a bis i",
+   "how_en": "Matching: a to i",
+   "tips": [
+    "Du hörst das Gespräch <b>nur einmal</b>. Lies vorher alle Lösungen a bis i.",
+    "Die Aufgaben kommen in der Reihenfolge des Gesprächs (z. B. Montag, Dienstag, …).",
+    "Es gibt mehr Lösungen als Aufgaben. Manche Dinge werden genannt, passen aber zu keinem Tag oder keiner Person.",
+    "Achtung bei <b>früher, zuerst, eigentlich</b>: Das ist meistens nicht die Lösung."
+   ],
+   "tips_en": [
+    "You hear the conversation only once. Read all answers a to i beforehand.",
+    "The tasks follow the order of the conversation (e.g. Monday, Tuesday, …).",
+    "There are more answers than tasks. Some things are mentioned but do not fit any day or person.",
+    "Watch out for früher, zuerst, eigentlich: that is usually not the answer."
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · Kurze Gespräche",
+   "mins": 7,
+   "items": 5,
+   "plays": 1,
+   "how": "a, b oder c",
+   "how_en": "a, b or c",
+   "tips": [
+    "Jedes Gespräch hörst du <b>nur einmal</b>. Lies die Frage, bevor das Gespräch beginnt.",
+    "Die Personen ändern oft ihre Meinung. Wichtig ist, was <b>am Ende</b> entschieden wird.",
+    "Achte auf <b>wer</b>: Was macht die eine Person, was die andere?",
+    "Verpasst? Sofort raten und zum nächsten Gespräch gehen."
+   ],
+   "tips_en": [
+    "You hear each conversation only once. Read the question before it starts.",
+    "People often change their minds. What matters is what is decided at the end.",
+    "Pay attention to who: what does one person do, what does the other do?",
+    "Missed it? Guess immediately and move on to the next conversation."
+   ]
+  },
+  "4": {
+   "name": "Teil 4 · Interview",
+   "mins": 8,
+   "items": 5,
+   "plays": 2,
+   "how": "Ja oder Nein",
+   "how_en": "Yes or no",
+   "tips": [
+    "Lies vor dem Hören alle fünf Aussagen. Die Aussagen kommen in der Reihenfolge des Interviews.",
+    "Die Aussagen benutzen oft <b>andere Wörter</b> als das Interview. Achte auf die Bedeutung.",
+    "Kleine Wörter entscheiden: <b>alle, nur, immer, nicht, kein</b>.",
+    "Beim zweiten Hören die unsicheren Aufgaben prüfen."
+   ],
+   "tips_en": [
+    "Read all five statements before listening. They follow the order of the interview.",
+    "The statements often use different words from the interview. Focus on the meaning.",
+    "Small words decide: alle, nur, immer, nicht, kein.",
+    "Use the second listening to check the tasks you are unsure about."
+   ]
+  }
+ },
+ "lesen": {
+  "1": {
+   "name": "Teil 1 · Zeitungsartikel",
+   "mins": 8,
+   "items": 5,
+   "how": "a, b oder c",
+   "how_en": "a, b or c",
+   "tips": [
+    "Lies zuerst die Überschrift und die Aufgaben. Dann weißt du, was du suchen musst.",
+    "Die Aufgaben folgen der Reihenfolge im Text.",
+    "Die richtige Lösung steht fast nie mit denselben Wörtern im Text: <b>übernachten</b> = bei jemandem schlafen.",
+    "Falsche Lösungen benutzen oft Wörter aus dem Text, aber mit einem falschen Detail."
+   ],
+   "tips_en": [
+    "Read the headline and the tasks first. Then you know what to look for.",
+    "The tasks follow the order of the text.",
+    "The correct answer almost never uses the same words as the text: übernachten = to sleep at someone's place.",
+    "Wrong answers often use words from the text, but with one wrong detail."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · Wegweiser",
+   "mins": 6,
+   "items": 5,
+   "how": "a, b oder c",
+   "how_en": "a, b or c",
+   "tips": [
+    "Lies den ganzen Wegweiser nicht genau. Suche nur das passende Wort für jede Aufgabe.",
+    "Denke an andere Wörter: Teller = <b>Geschirr</b>, Kopfkissen = <b>Bettwäsche</b>.",
+    "Achtung: Anmelden, bezahlen oder umtauschen macht man oft an einem <b>anderen</b> Ort als das Angebot selbst.",
+    "Lösung c („anderer Stock“) ist genauso oft richtig wie a oder b."
+   ],
+   "tips_en": [
+    "Do not read the whole directory closely. Just scan for the matching word for each task.",
+    "Think of other words: Teller = Geschirr, Kopfkissen = Bettwäsche.",
+    "Careful: registering, paying or returning things often happens somewhere else than the offer itself.",
+    "Answer c (\"other floor\") is just as often correct as a or b."
+   ]
+  },
+  "3": {
+   "name": "Teil 3 · E-Mail",
+   "mins": 8,
+   "items": 5,
+   "how": "a, b oder c",
+   "how_en": "a, b or c",
+   "tips": [
+    "Lies die Aufgaben zuerst, dann die E-Mail. Die Aufgaben folgen der Reihenfolge im Text.",
+    "Achte auf die Zeit: Was war <b>früher</b>, was ist <b>jetzt</b>, was ist nur ein Plan?",
+    "Achtung bei <b>nicht, nichts, kein</b>: „Du musst nichts mitbringen“ ist keine Aufgabe für den Leser.",
+    "Prüfe bei jeder Lösung: Wer macht das? Der Schreiber oder der Leser?"
+   ],
+   "tips_en": [
+    "Read the tasks first, then the email. The tasks follow the order of the text.",
+    "Pay attention to time: what was before, what is now, what is only a plan?",
+    "Watch out for nicht, nichts, kein: \"Du musst nichts mitbringen\" is not a task for the reader.",
+    "Check each answer: who does it, the writer or the reader?"
+   ]
+  },
+  "4": {
+   "name": "Teil 4 · Anzeigen",
+   "mins": 8,
+   "items": 5,
+   "how": "Zuordnen: a bis f oder 0",
+   "how_en": "Matching: a to f or 0",
+   "tips": [
+    "Markiere bei jeder Person die <b>zwei wichtigsten Wünsche</b> (z. B. was + wann).",
+    "Eine Anzeige passt nur, wenn <b>alle</b> Wünsche passen. Das Thema allein reicht nicht.",
+    "Für eine Person gibt es keine Anzeige: dann <b>0</b>. Meistens gibt es eine Anzeige mit dem richtigen Thema, aber falscher Zeit oder falschem Detail.",
+    "Die Anzeige aus dem Beispiel ist schon benutzt."
+   ],
+   "tips_en": [
+    "For each person, mark the two most important wishes (e.g. what + when).",
+    "An ad only fits if all wishes fit. The topic alone is not enough.",
+    "One person has no matching ad: then 0. Usually there is an ad with the right topic but the wrong time or detail.",
+    "The ad from the example is already used."
+   ]
+  }
+ },
+ "schreiben": {
+  "1": {
+   "name": "Teil 1 · SMS",
+   "mins": 12,
+   "items": 1,
+   "how": "SMS, 20 bis 30 Wörter, 3 Punkte",
+   "how_en": "Text message, 20 to 30 words, 3 points",
+   "tips": [
+    "Schreibe zu <b>jedem</b> der drei Punkte mindestens einen Satz. Fehlt ein Punkt, verlierst du viele Punkte.",
+    "Anrede und Gruß nicht vergessen: <b>Hallo Lina, … Liebe Grüße</b>.",
+    "Kurze, einfache Sätze sind besser als lange Sätze mit Fehlern.",
+    "Am Ende: Wörter zählen und Verben prüfen (Position 2, richtige Endung)."
+   ],
+   "tips_en": [
+    "Write at least one sentence for each of the three points. A missing point costs a lot.",
+    "Do not forget greeting and closing: Hallo Lina, … Liebe Grüße.",
+    "Short, simple sentences are better than long sentences with mistakes.",
+    "At the end: count the words and check the verbs (position 2, correct ending)."
+   ]
+  },
+  "2": {
+   "name": "Teil 2 · E-Mail",
+   "mins": 18,
+   "items": 1,
+   "how": "E-Mail, 30 bis 40 Wörter, 3 Punkte",
+   "how_en": "Email, 30 to 40 words, 3 points",
+   "tips": [
+    "Diese E-Mail ist meistens <b>formell</b>: <b>Sie</b>, „Sehr geehrte Frau …“ oder „Liebe Frau …“, am Ende „Mit freundlichen Grüßen“.",
+    "Schreibe zu jedem Punkt ein bis zwei Sätze, in der Reihenfolge der Aufgabe.",
+    "Für Bitten: <b>Können Sie bitte …?</b> oder <b>Ich möchte gern …</b>",
+    "Nicht zwischen du und Sie wechseln. Prüfe am Ende alle Verben und Pronomen."
+   ],
+   "tips_en": [
+    "This email is usually formal: Sie, \"Sehr geehrte Frau …\" or \"Liebe Frau …\", and \"Mit freundlichen Grüßen\" at the end.",
+    "Write one or two sentences for each point, in the order of the task.",
+    "For requests: Können Sie bitte …? or Ich möchte gern …",
+    "Do not switch between du and Sie. At the end, check all verbs and pronouns."
+   ]
+  }
+ }
+}

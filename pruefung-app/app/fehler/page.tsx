@@ -4,6 +4,7 @@ import { Guard } from '@/components/Guard';
 import { LessonBar, LessonHead } from '@/components/Lesson';
 import { SetCard, type SetState } from '@/components/SetCard';
 import { resolveAttempt } from '@/lib/resolve';
+import { isRight } from '@/lib/score';
 import { useStore } from '@/lib/store';
 import type { ExamSet } from '@/lib/types';
 
@@ -19,8 +20,8 @@ function Fehler() {
       for (const a of attempts) {
         const ctx = await resolveAttempt(a, blocks); if (!ctx) continue;
         for (const id of ctx.test.sections.flatMap((s) => s.sets)) {
-          const s = ctx.sets[id]; if (!s || s.module === 'schreiben' || out.some((x) => x.id === id)) continue;
-          const groups = s.groups.map((g) => ({ ...g, items: g.items.filter((i) => a.answers[id]?.[String(i.n)] !== i.a) })).filter((g) => g.items.length);
+          const s = ctx.sets[id]; if (!s || s.tasks?.length || out.some((x) => x.id === id)) continue;
+          const groups = s.groups.map((g) => ({ ...g, items: g.items.filter((i) => !isRight(i, a.answers[id]?.[String(i.n)])) })).filter((g) => g.items.length);
           if (groups.length) out.push({ ...s, groups });
         }
       }

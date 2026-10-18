@@ -51,7 +51,8 @@ create policy "read own enrollment or admin" on public.enrollments for select us
 -- the is_admin column is not in the list of columns they can insert or update.
 revoke insert, update on public.profiles from anon, authenticated;
 grant insert (id, email, name, progress, xp, streak, last_active, updated_at) on public.profiles to authenticated;
-grant update (email, name, progress, xp, streak, last_active, updated_at) on public.profiles to authenticated;
+-- id is in the update list because the app saves with an upsert; RLS still limits it to the own row.
+grant update (id, email, name, progress, xp, streak, last_active, updated_at) on public.profiles to authenticated;
 grant select on public.profiles, public.enrollments to authenticated;
 
 -- Make yourself admin after your first sign-in:

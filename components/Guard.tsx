@@ -8,6 +8,7 @@ import { Fox } from './Fox';
 /** Shown to a signed-in account that is not approved for the closed beta yet. */
 export function BetaPending() {
   const { user, signOut, joinBeta } = useStore();
+  const router = useRouter();
   // Someone who came in with Google straight from the login page is not on the list yet: add them now.
   const [needsAnswers, setNeedsAnswers] = useState(false);
   useEffect(() => {
@@ -26,7 +27,7 @@ export function BetaPending() {
       <p className="muted small">Signed up with a different email? Log out and use that one.</p>
       <div className="v3-row v3-center">
         <Link href="/" className="v3-btn ghost">Back to the homepage</Link>
-        <button type="button" className="v3-btn" onClick={() => void signOut()}>Log out</button>
+        <button type="button" className="v3-btn" onClick={() => void signOut().then(() => router.push('/'))}>Log out</button>
       </div>
     </main>
   );

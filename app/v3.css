@@ -312,3 +312,8 @@ a.v3-secrow:hover b { text-decoration: underline; }
 .write-criteria li small { grid-column: 1 / -1; }
 .write-errors s { color: #b3261e; }
 .v3-warn { color: #b3261e; }
+
+/* Beta sign-up: e-mail or Google, side by side */
+.v3-beta-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.v3-beta-choice .btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+@media (max-width: 520px) { .v3-beta-choice { grid-template-columns: 1fr; } }

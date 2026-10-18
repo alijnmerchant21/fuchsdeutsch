@@ -1,12 +1,15 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useUiLang } from '@/lib/lang';
 import { BRAND } from '@/lib/config';
 import { streakAlive, useStore } from '@/lib/store';
 import { Fox } from './Fox';
 
 export function Nav() {
   const { user, progress, isAdmin, adminView, signOut, ready } = useStore();
+  const router = useRouter();
+  const [lang] = useUiLang();
   const path = usePathname();
   const here = (href: string) => path === href || (href !== '/' && path.startsWith(href));
   const link = (href: string, label: string, also?: string) => (
@@ -39,8 +42,8 @@ export function Nav() {
             </>
           )}
           {user && isAdmin && <span className="v3-chip t-lilac">Admin</span>}
-          {user && <button type="button" className="v3-textbtn" onClick={() => void signOut()}>Abmelden</button>}
-          {ready && !user && <Link href="/login" className="v3-btn small">Anmelden</Link>}
+          {user && <button type="button" className="v3-textbtn" onClick={() => void signOut().then(() => router.push('/'))}>{lang === 'en' ? 'Log out' : 'Abmelden'}</button>}
+          {ready && !user && <Link href="/login" className="v3-btn small">{lang === 'en' ? 'Log in' : 'Anmelden'}</Link>}
         </div>
       </div>
       {isAdmin && adminView && <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div>}

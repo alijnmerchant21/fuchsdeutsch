@@ -36,3 +36,14 @@ chapter id `b1-kN`, exports `b1kN`, `gamesB1kN`, `glossaryB1kN`; game ids `b1kN-
 - K2: Herr Lehmann runs a repair café on Saturdays and hears a rumor that the owner wants to sell. Kenji's oven service company: Gastrotechnik Krüger.
 - K3: Elbstein Immobilien GmbH bought the house as of 1 November 2026; letter dated 3 November 2026, signed "i. A. Vogt". Herr Lehmann was a Schlosser in the Maschinenfabrik; his late wife was Erika. House built 1904; Kenji's restaurant is in the old Konsum.
 - Frau Klein uses du in B1.
+
+## Timeline K4 to K12 (follow it so chapters fit together)
+- K4 Arbeitswelt (December 2026): a hospital in Hamburg offers Amara a job as Pflegedienstleitung (more money, bigger team). She has a video interview. She must decide by the end of March.
+- K5 Umweltfreundlich? (January 2027): Sofia and Nele plan a courtyard garden for spring and a foodsharing shelf with leftovers from Kenji's restaurant. Winter weather. Herr Vogt says the courtyard will become parking spaces after the renovation.
+- K6 Blick nach vorn (February 2027): plans and resolutions. Felix's band gets an offer to play at a summer festival. Amara still undecided. Nele founds the tenant group "Fuchsbau bleibt!" with Herr Lehmann.
+- K7 Zwischenmenschliches (March 2027): Nele and Felix argue: Felix missed two tenant meetings because of band rehearsals. They talk it out. Lina and Sofia mediate. Amara asks Hamburg for more time.
+- K8 Rund um Körper und Geist (April 2027): Kenji overworks, collapses in the restaurant kitchen, two days in hospital (Amara's hospital). Rules in the hospital. He learns to take breaks and hires a sous-chef.
+- K9 Kunststücke (May 2027): Felix writes the song "Unser Haus" about the Fuchsbau; the video goes viral. Theater evening: Lina's school class plays a piece about the neighborhood.
+- K10 Miteinander (June 2027): the tenants organize: Mieterverein, a neighborhood meeting, a plan. Lots of passive voice: what is being done, what was decided.
+- K11 Stadt, Land, Fluss (July 2027): life in Leipzig, a petition to the city council, a hearing in the Neues Rathaus. Sofia writes to different recipients (city, press, friends).
+- K12 Geld regiert die Welt? (August 2027): bank talks; the tenants found a housing cooperative (Wohnungsgenossenschaft "Fuchsbau eG") with a loan and shares; Elbstein sells to the cooperative. Amara turns down Hamburg and stays (she is offered the Leipzig ward management plus training). Summer party in the courtyard, one year after Sofia arrived.

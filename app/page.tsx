@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { courses, roadmapLevels } from '@/content/course';
-import { DEPOSIT_USD } from '@/lib/config';
+import { DEMO_MODE, DEPOSIT_USD } from '@/lib/config';
 import { useStore } from '@/lib/store';
 import { ProfileForm } from '@/components/ProfileForm';
 import { LangToggle, useUiLang, type UiLang } from '@/lib/lang';
@@ -39,6 +39,7 @@ const T = {
     tag: 'Closed beta · limited spots', title: 'Join the free beta', intro: 'We are looking for a small group of learners to test Fuchsdeutsch. Free, no deposit.',
     email: 'Email', emailPh: 'you@example.com', agree: 'I agree that Fuchsdeutsch stores my details to contact me about the beta. I can withdraw this at any time.', privacy: 'Privacy',
     busy: 'One moment …', next: 'Continue', step1: 'Step 1 of 2 · Already a tester?', login: 'Log in',
+    google: 'Continue with Google', or: 'or with your email', agreeFirst: 'Please tick the box first.',
     step2: 'Step 2 of 2', quick: 'A few quick questions', quickSub: 'So the course fits you. You will not be asked again when you log in.', finish: 'Finish sign-up',
     done: 'You’re on the list!', already: 'You’re already on the list.',
     doneText: (e: string) => <>We let testers in step by step and will email <b>{e}</b> when your spot is ready. Log in with this email and you can start right away.</>,
@@ -61,6 +62,7 @@ const T = {
     tag: 'Geschlossene Beta · begrenzte Plätze', title: 'Mach bei der kostenlosen Beta mit', intro: 'Wir suchen eine kleine Gruppe von Lernenden, die Fuchsdeutsch testen. Kostenlos, ohne Kaution.',
     email: 'E-Mail', emailPh: 'du@beispiel.de', agree: 'Ich bin einverstanden, dass Fuchsdeutsch meine Daten speichert, um mich zur Beta zu kontaktieren. Ich kann das jederzeit widerrufen.', privacy: 'Datenschutz',
     busy: 'Einen Moment …', next: 'Weiter', step1: 'Schritt 1 von 2 · Schon dabei?', login: 'Anmelden',
+    google: 'Weiter mit Google', or: 'oder mit deiner E-Mail', agreeFirst: 'Bitte setz zuerst das Häkchen.',
     step2: 'Schritt 2 von 2', quick: 'Ein paar kurze Fragen', quickSub: 'Damit der Kurs zu dir passt. Beim Anmelden fragen wir nicht noch einmal.', finish: 'Anmeldung abschließen',
     done: 'Du bist auf der Liste!', already: 'Du bist schon auf der Liste.',
     doneText: (e: string) => <>Wir lassen Tester nach und nach rein und schreiben an <b>{e}</b>, sobald dein Platz frei ist. Melde dich mit dieser E-Mail an, dann kannst du sofort loslegen.</>,
@@ -77,13 +79,30 @@ const LEVELS: { level: string; course: string; icon: string; tone: string }[] = 
 
 function BetaForm({ lang }: { lang: UiLang }) {
   const t = T[lang];
-  const { joinBeta, saveBetaProfile } = useStore();
+  const { user, joinBeta, saveBetaProfile, signInGoogle } = useStore();
   const [email, setEmail] = useState('');
   const [agree, setAgree] = useState(false);
   const [trap, setTrap] = useState('');
   const [step, setStep] = useState<'email' | 'profile' | 'done' | 'exists'>('email');
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+
+  // Back from Google (signed in, not approved yet): put that email on the list and ask the questions.
+  useEffect(() => {
+    if (!user?.email || step !== 'email') return;
+    setEmail(user.email); setBusy(true);
+    void joinBeta(user.email).then((res) => {
+      setBusy(false);
+      if (res === 'ok') setStep('profile'); else if (res === 'exists') setStep('exists'); else setErr(res);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.email]);
+
+  const google = () => {
+    if (!agree) { setErr(t.agreeFirst); return; }
+    setErr(null);
+    void signInGoogle('/#beta');
+  };
 
   const submitEmail = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -139,12 +158,21 @@ function BetaForm({ lang }: { lang: UiLang }) {
         <h2>{t.title}</h2>
         <p className="muted">{t.intro}</p>
       </div>
-      <label>{t.email}<input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.emailPh} autoComplete="email" maxLength={254} /></label>
-      <label className="v3-hp" aria-hidden>Website<input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
       <label className="v3-check">
         <input type="checkbox" required checked={agree} onChange={(e) => setAgree(e.target.checked)} />
         <span>{t.agree} <Link href="/privacy">{t.privacy}</Link></span>
       </label>
+      {!DEMO_MODE && (
+        <>
+          <button type="button" className="btn btn-lg btn-google" onClick={google} disabled={busy}>
+            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.2 5.6c4.2-3.9 7.1-9.7 7.1-16.9z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.8-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.6 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>
+            {t.google}
+          </button>
+          <p className="or"><span>{t.or}</span></p>
+        </>
+      )}
+      <label>{t.email}<input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.emailPh} autoComplete="email" maxLength={254} /></label>
+      <label className="v3-hp" aria-hidden>Website<input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
       {err && <p className="v3-err" role="alert">{err}</p>}
       <button type="submit" className="v3-btn" disabled={busy}>{busy ? t.busy : t.next}</button>
       <p className="muted small">{t.step1} <Link href="/login">{t.login}</Link></p>
@@ -153,7 +181,7 @@ function BetaForm({ lang }: { lang: UiLang }) {
 }
 
 export default function Landing() {
-  const { user, ready } = useStore();
+  const { user, ready, access } = useStore();
   const [lang, setLang] = useUiLang();
   const t = T[lang];
   const [say, setSay] = useState(0);
@@ -169,7 +197,7 @@ export default function Landing() {
         <div className="lp-hero-copy">
           <h1>{t.h1}</h1>
           <p className="lead">{t.lead}</p>
-          {ready && user && <div className="hero-cta"><Link href="/lernen" className="btn btn-lg">{t.cont}</Link></div>}
+          {ready && user && access !== false && <div className="hero-cta"><Link href="/lernen" className="btn btn-lg">{t.cont}</Link></div>}
         </div>
         <div className="lp-hero-art" aria-hidden>
           <div className="lp-blob" />
@@ -181,7 +209,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {ready && !user && <section aria-label="Beta sign-up"><BetaForm lang={lang} /></section>}
+      {ready && (!user || access === false) && <section aria-label="Beta sign-up"><BetaForm lang={lang} /></section>}
 
       <section aria-labelledby="courses-h">
         <h2 id="courses-h" className="lp-h2">{t.levels}</h2>

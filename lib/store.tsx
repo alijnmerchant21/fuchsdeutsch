@@ -84,7 +84,8 @@ interface Store {
   adminView: boolean;
   progress: Progress;
   signInDemo: (name: string, email: string) => void;
-  signInGoogle: () => Promise<void>;
+  /** Google login. `next` is where the browser lands afterwards (default: the course). */
+  signInGoogle: (next?: string) => Promise<void>;
   signInEmail: (email: string) => Promise<string | null>;
   /** Email + password. Sends no email, so no rate limit. Accounts are created in the Supabase dashboard. */
   signInPassword: (email: string, password: string) => Promise<string | null>;
@@ -271,9 +272,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       const next = answers && !cur.profile ? withAnswers(cur, answers, name) : cur;
       writeLS(lsKey(u.id), next); setProgress(next);
     },
-    signInGoogle: async () => {
+    signInGoogle: async (next) => {
       const sb = supabase();
-      if (sb) await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: authCallbackUrl('/lernen') } });
+      if (sb) await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: authCallbackUrl(next || '/lernen') } });
     },
     signInEmail: async (email) => {
       const sb = supabase();

@@ -1,13 +1,20 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useStore } from '@/lib/store';
 import { Fox } from './Fox';
 
 /** Shown to a signed-in account that is not approved for the closed beta yet. */
 export function BetaPending() {
-  const { user, signOut } = useStore();
+  const { user, signOut, joinBeta } = useStore();
+  // Someone who came in with Google straight from the login page is not on the list yet: add them now.
+  const [needsAnswers, setNeedsAnswers] = useState(false);
+  useEffect(() => {
+    if (!user?.email) return;
+    void joinBeta(user.email).then((r) => setNeedsAnswers(r === 'ok'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.email]);
   return (
     <main className="v3-page v3-center-page v3-fade">
       <Fox size={96} mood="happy" className="bob" />
@@ -15,6 +22,7 @@ export function BetaPending() {
       <p className="v3-sub" style={{ maxWidth: '46ch' }}>
         Fuchsdeutsch is in a closed beta. We let testers in step by step and will email <b>{user?.email}</b> as soon as your spot is ready.
       </p>
+      {needsAnswers && <p><Link href="/#beta" className="v3-btn">Answer 4 quick questions</Link></p>}
       <p className="muted small">Signed up with a different email? Log out and use that one.</p>
       <div className="v3-row v3-center">
         <Link href="/" className="v3-btn ghost">Back to the homepage</Link>

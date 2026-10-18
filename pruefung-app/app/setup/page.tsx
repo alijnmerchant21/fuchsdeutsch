@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Guard } from '@/components/Guard';
 import { LessonBar, LessonHead } from '@/components/Lesson';
-import { LIVE_MODULES, MODULES } from '@/lib/content';
+import { isParked, LIVE_MODULES, MODULES } from '@/lib/content';
 import { LEVELS, LEVEL_IDS, priceLine, type Level } from '@/lib/levels';
 import { addDays, daysBetween, today } from '@/lib/dates';
 import { db } from '@/lib/db';
@@ -46,11 +46,11 @@ function Setup() {
     e.preventDefault();
     if (!name.trim()) { setErr(t('Bitte deinen Vornamen eintragen.', 'Please enter your first name.')); return; }
     if (!date || left < 1) { setErr(t('Bitte ein Prüfungsdatum in der Zukunft wählen. Noch nicht angemeldet? Nimm dein Wunschdatum.', 'Please pick an exam date in the future. Not booked yet? Use the date you are aiming for.')); return; }
-    if (!days.length || (L.modular && !mods.length)) { setErr(t('Bitte mindestens einen Lerntag und ein Modul wählen.', 'Please pick at least one study day and one module.')); return; }
+    if (!days.length || (L.modular && !mods.filter((m) => !isParked(level, m)).length)) { setErr(t('Bitte mindestens einen Lerntag und ein Modul wählen.', 'Please pick at least one study day and one module.')); return; }
     setBusy(true);
     try {
       await db.saveCandidate({
-        user_id: user!.id, email: user!.email, name: name.trim(), exam_date: date, study_days: days, minutes_per_day: mins, modules: L.modular ? mods : LIVE_MODULES, level,
+        user_id: user!.id, email: user!.email, name: name.trim(), exam_date: date, study_days: days, minutes_per_day: mins, modules: (L.modular ? mods : LIVE_MODULES).filter((m) => !isParked(level, m)), level,
         exam_center: center.trim() || null, first_language: lang || null, attempt_type: type,
       });
       // Chose English here? Then English help is on inside the exam (they can turn it off any time).
@@ -98,8 +98,8 @@ function Setup() {
         </div>}
         {L.modular && <div className="field">{t('Welche Module möchtest du üben?', 'Which modules do you want to practice?')}
           <div className="chips">{MODULES.map((m) => (
-            <button key={m.id} type="button" className="chip" disabled={!m.live} aria-pressed={mods.includes(m.id)} onClick={() => setMods(toggle(mods, m.id))}>
-              {t(m.name, m.en.replace(', coming soon', ''))}{!m.live && t(' · bald', ' · soon')}
+            <button key={m.id} type="button" className="chip" disabled={!m.live || isParked(level, m.id)} aria-pressed={mods.includes(m.id) && !isParked(level, m.id)} onClick={() => setMods(toggle(mods, m.id))}>
+              {t(m.name, m.en.replace(', coming soon', ''))}{(!m.live || isParked(level, m.id)) && t(' · bald', ' · soon')}
             </button>
           ))}</div>
           <small>{type === 'wiederholung' ? t('Wähl nur die Module, die du wiederholst. ', 'Pick only the modules you are retaking. ') : ''}{t(`${priceLine(level, false)}. In der Beta kostenlos.`, `${priceLine(level, true)}. Free during the beta.`)}</small>

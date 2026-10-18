@@ -21,9 +21,15 @@ import type { Block, ExamSet, Module, Section, TestDef } from './types';
 
 /** All own sets of all levels, by id (ids are unique across levels). */
 export const bank = { ...b1Bank, ...a1Bank, ...a2Bank, ...b2Bank } as unknown as Record<string, ExamSet>;
-const DIAG: Record<Level, TestDef> = { a1: a1Diag, a2: a2Diag, b1: b1Diag, b2: b2Diag } as unknown as Record<Level, TestDef>;
+/** Modules switched off per level (parked: B2 Hören until its audio exists). Removed from tests and the welcome form. */
+export const PARKED: Partial<Record<Level, Module[]>> = { b2: ['hoeren'] };
+export const isParked = (l: Level, m: Module) => !!PARKED[l]?.includes(m);
+const strip = (l: Level, t: TestDef): TestDef => ({ ...t, sections: t.sections.filter((s) => !isParked(l, s.module)) });
+const DIAG_RAW: Record<Level, TestDef> = { a1: a1Diag, a2: a2Diag, b1: b1Diag, b2: b2Diag } as unknown as Record<Level, TestDef>;
+const DIAG = Object.fromEntries(Object.entries(DIAG_RAW).map(([l, t]) => [l, strip(l as Level, t)])) as Record<Level, TestDef>;
 /** Own full mock tests of every level (two per level, at real exam length). */
-const MOCKS: Record<Level, TestDef[]> = { a1: a1Mocks, a2: a2Mocks, b1: b1Mocks, b2: b2Mocks } as unknown as Record<Level, TestDef[]>;
+const MOCKS_RAW: Record<Level, TestDef[]> = { a1: a1Mocks, a2: a2Mocks, b1: b1Mocks, b2: b2Mocks } as unknown as Record<Level, TestDef[]>;
+const MOCKS = Object.fromEntries(Object.entries(MOCKS_RAW).map(([l, ts]) => [l, ts.map((t) => strip(l as Level, t))])) as Record<Level, TestDef[]>;
 
 export interface TeilInfo { name: string; mins: number; items: number; how: string; how_en?: string; tips: string[]; tips_en?: string[]; plays?: number }
 type TipFile = Partial<Record<Module, Record<string, TeilInfo>>> & { traps?: Record<'hoeren' | 'lesen', Record<string, [string, string]>> };

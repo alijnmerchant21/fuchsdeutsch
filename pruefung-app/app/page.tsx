@@ -6,7 +6,7 @@ import { Landing } from '@/components/Landing';
 import { GuaranteeCard } from '@/components/GuaranteeCard';
 import { En, useT } from '@/lib/lang';
 import { PASS } from '@/lib/config';
-import { MODULES, diagRef, diagnoseFor, modName } from '@/lib/content';
+import { MODULES as ALL_MODULES, diagRef, diagnoseFor, isParked, modName } from '@/lib/content';
 import { LEVELS } from '@/lib/levels';
 import { daysBetween, today } from '@/lib/dates';
 import { hueOf } from '@/components/Lesson';
@@ -126,7 +126,7 @@ function Dashboard() {
       </section>
 
       <section className="readygrid">
-        {MODULES.map((m) => {
+        {ALL_MODULES.map((x) => ({ ...x, live: x.live && !isParked(level, x.id) })).map((m) => {
           const p = ready[m.id];
           const on = candidate.modules.includes(m.id);
           return (

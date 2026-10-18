@@ -53,8 +53,8 @@ function Diagnose() {
       <>
         <LessonBar />
         <LessonHead hue="lilac" label={`${L.short} · Kostenlos · circa ${secs.reduce((x, d) => x + d.minutes, 0)} Minuten`} title="Mock Test 1: Diagnose"
-          sub={<>Drei Teile wie in der Prüfung: {secs.map((d, i) => <span key={d.module}>{i ? (i === secs.length - 1 ? ' und ' : ', ') : ''}<b>{modName(d.module)}</b> ({d.minutes} Min.)</span>)}. Jeder Teil der echten Prüfung kommt vor, nur kürzer.</>}
-          en={`Three parts like the real ${L.exam}: ${secs.map((d) => `${EN_MOD[d.module] ?? d.module} (${d.minutes} min)`).join(', ')}. Every part of the real exam appears, just shorter.`}
+          sub={<>{['', 'Ein Teil', 'Zwei Teile', 'Drei Teile'][secs.length] ?? `${secs.length} Teile`} wie in der Prüfung: {secs.map((d, i) => <span key={d.module}>{i ? (i === secs.length - 1 ? ' und ' : ', ') : ''}<b>{modName(d.module)}</b> ({d.minutes} Min.)</span>)}. Jeder Teil der echten Prüfung kommt vor, nur kürzer.</>}
+          en={`${['', 'One part', 'Two parts', 'Three parts'][secs.length] ?? `${secs.length} parts`} like the real ${L.exam}: ${secs.map((d) => `${EN_MOD[d.module] ?? d.module} (${d.minutes} min)`).join(', ')}. Every part of the real exam appears, just shorter.`}
           steps={['Hören', 'Lesen', 'Schreiben']}>
           <p className="weekintro">Kopfhörer auf, ruhiger Raum. Die Hörtexte laufen so oft wie in der Prüfung, ohne Pause. Wenn die Zeit um ist, wird automatisch abgegeben. Bitte die Seite während des Tests nicht neu laden.<En block>Headphones on, quiet room. Recordings play as often as in the exam, with no pause. When time is up the part is handed in. Do not reload the page. Free, once per account, result right after.</En></p>
           <div className="actions"><button className="btn big" onClick={() => setGo(true)}>Test starten</button></div>

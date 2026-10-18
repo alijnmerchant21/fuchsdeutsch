@@ -279,3 +279,10 @@ button.lp-ribbon.rise{display:flex}
 .signform{margin-top:6px}
 .switchline{margin:16px 0 0}
 @media(max-width:520px){.signbtns{grid-template-columns:1fr}}
+.sitenav{display:flex;align-items:center;gap:14px;font-size:14px;font-weight:700}
+.sitenav a{color:var(--dim);text-decoration:none}
+.sitenav a:hover{color:var(--txt)}
+.sitenav .soon{color:var(--dim);opacity:.55;cursor:default;white-space:nowrap}
+.sitenav .soon small{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:1px 6px;margin-left:2px}
+@media (max-width:1180px){.sitenav .soon{display:none}}
+@media (max-width:600px){.sitenav{display:none}}

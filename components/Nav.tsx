@@ -22,17 +22,17 @@ export function Nav() {
         <Link href={user ? (isAdmin ? '/admin' : '/lernen') : '/'} className="v3-brand" aria-label={`${BRAND} Startseite`}>
           <Fox size={34} /><span>{BRAND}</span>
         </Link>
-        {user && (
-          <nav className="v3-navlinks" aria-label="Hauptnavigation">
-            {!isAdmin && link('/lernen', 'Start')}
-            {!isAdmin && link('/kurs', 'Mein Kurs')}
-            {!isAdmin && link('/geschichten', 'Geschichten')}
-            {!isAdmin && link('/bestenliste', 'Bestenliste')}
-            {/* Fuchsdeutsch Prüfung is its own app under /pruefung, so a full page load, not a client link. */}
-            <a href="/pruefung" className={`v3-navlink ${path.startsWith('/pruefung') ? 'is-here' : ''}`}>Prüfung</a>
-            {isAdmin && link('/admin', 'Admin')}
-          </nav>
-        )}
+        <nav className="v3-navlinks" aria-label="Hauptnavigation">
+          {user && !isAdmin && link('/lernen', 'Start')}
+          {user && !isAdmin && link('/kurs', 'Mein Kurs')}
+          {user && !isAdmin && link('/geschichten', 'Geschichten')}
+          {user && !isAdmin && link('/bestenliste', 'Bestenliste')}
+          {/* Fuchsdeutsch Prüfung is its own app under /pruefung, so a full page load, not a client link. */}
+          <a href="/pruefung" className={`v3-navlink ${path.startsWith('/pruefung') ? 'is-here' : ''}`}>Prüfung</a>
+          <span className="v3-navlink is-soon" aria-disabled="true" title={lang === 'en' ? 'Coming soon' : 'Kommt bald'}>{lang === 'en' ? 'Games' : 'Spiele'} <small>{lang === 'en' ? 'soon' : 'bald'}</small></span>
+          <span className="v3-navlink is-soon" aria-disabled="true" title={lang === 'en' ? 'Coming soon' : 'Kommt bald'}>Tausend <small>{lang === 'en' ? 'soon' : 'bald'}</small></span>
+          {user && isAdmin && link('/admin', 'Admin')}
+        </nav>
         <div className="v3-nav-right">
           {user && !isAdmin && (
             <>

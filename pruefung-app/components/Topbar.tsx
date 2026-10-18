@@ -7,6 +7,9 @@ import { useLang, useT } from '@/lib/lang';
 import { useStore } from '@/lib/store';
 import { Fox } from './Fox';
 
+/** Fuchsdeutsch home page (same domain in production, absolute so it also works on the Vercel preview URL). */
+const SITE = process.env.NEXT_PUBLIC_SITE_ROOT ?? 'https://www.fuchsdeutsch.de/';
+
 export function Topbar() {
   const { user, isAdmin, signOut, candidate, ready } = useStore();
   const { lang, setLang, help, setHelp } = useLang();
@@ -28,6 +31,11 @@ export function Topbar() {
   return (
     <header className="topbar">
       <Link className="brand" href="/"><Fox size={34} /><span className="bname">Fuchsdeutsch</span><span className="ptag">Prüfung</span></Link>
+      <nav className="sitenav" aria-label="Fuchsdeutsch">
+        <a href={SITE}>{t('← Zu Fuchsdeutsch', '← To Fuchsdeutsch')}</a>
+        <span className="soon" aria-disabled="true" title={t('Kommt bald', 'Coming soon')}>{t('Spiele', 'Games')} <small>{t('bald', 'soon')}</small></span>
+        <span className="soon" aria-disabled="true" title={t('Kommt bald', 'Coming soon')}>Tausend <small>{t('bald', 'soon')}</small></span>
+      </nav>
       {user ? (
         <span className="topsub">{candidate?.exam_date ? `Goethe-Zertifikat ${(candidate.level ?? 'b1').toUpperCase()} · Prüfung am ${new Date(candidate.exam_date + 'T12:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long' })}` : 'Goethe-Zertifikat A1 bis B2'}</span>
       ) : (

@@ -14,12 +14,13 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [help, setH] = useState(true);
   useEffect(() => {
     try {
-      const l = localStorage.getItem('fdp:lang'); if (l === 'en' || l === 'de') setL(l);
+      // fd:lang is the language of the whole site (course, Prüfung, Spiele); fdp:lang is the older Prüfung key.
+      const l = localStorage.getItem('fd:lang') || localStorage.getItem('fdp:lang'); if (l === 'en' || l === 'de') setL(l);
       const h = localStorage.getItem('fdp:help'); if (h === '0') setH(false);
     } catch { /* ignore */ }
   }, []);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
-  const setLang = (l: Lang) => { setL(l); try { localStorage.setItem('fdp:lang', l); } catch { /* ignore */ } };
+  const setLang = (l: Lang) => { setL(l); try { localStorage.setItem('fdp:lang', l); localStorage.setItem('fd:lang', l); } catch { /* ignore */ } };
   const setHelp = (h: boolean) => { setH(h); try { localStorage.setItem('fdp:help', h ? '1' : '0'); } catch { /* ignore */ } };
   return <Ctx.Provider value={{ lang, setLang, help, setHelp }}>{children}</Ctx.Provider>;
 }

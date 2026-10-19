@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schlüssel, bitte!</title>
+<style>
+:root{
+  --bg:#f7f3e8; --paper:#fffdf7; --ink:#4a453f; --soft:#8b847a; --line:#e6dfcf;
+  --coral:#f6b9a4; --coral-d:#e58f74; --teal:#a9d6d0; --teal-d:#6fb3ab; --yellow:#f3e2a0; --yellow-d:#d9c165;
+  --lilac:#d7c9ec; --mint:#c5e6c8; --sky:#bcd9f2; --pink:#f5c6d6;
+  --shadow:0 6px 20px rgba(90,80,60,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Avenir Next","Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.45}
+h1,h2,h3,.slab{font-family:"Rockwell","Roboto Slab","Courier New",Georgia,serif;font-weight:500;letter-spacing:.03em}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible{outline:3px solid var(--teal-d);outline-offset:2px}
+
+/* layout */
+.app{display:grid;grid-template-columns:1fr 310px;gap:20px;max-width:1500px;margin:0 auto;padding:18px;min-height:100%}
+header.top{grid-column:1/-1;display:flex;align-items:center;gap:16px}
+.chip3{background:var(--teal);color:#fff;width:54px;height:54px;border-radius:12px;display:grid;place-items:center;font-size:34px;font-family:"Rockwell",Georgia,serif}
+header h1{margin:0;font-size:clamp(22px,3vw,34px);text-transform:uppercase}
+header .sub{color:var(--soft);font-size:14px}
+header .sp{flex:1}
+.ghost{padding:9px 14px;border-radius:999px;background:var(--paper);border:1.5px solid var(--line);font-size:14px}
+.ghost:hover{background:#fff;border-color:var(--coral)}
+.boardWrap{background:var(--paper);border-radius:24px;box-shadow:var(--shadow);padding:10px;border:1.5px solid var(--line);align-self:start}
+svg#board{display:block;width:100%;height:auto;border-radius:16px}
+aside{display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
+.panel h3{margin:0 0 10px;font-size:14px;text-transform:uppercase;color:var(--soft)}
+
+/* players */
+.pl{display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;border:2px solid transparent;transition:.25s}
+.pl.on{background:#fff;border-color:var(--c);transform:translateX(4px)}
+.pl .dot{width:30px;height:30px;border-radius:50%;background:var(--c);display:grid;place-items:center;font-weight:700;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--ink)}
+.pl .nm{font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl .ps{font-size:13px;color:var(--soft)}
+.bar{height:6px;border-radius:3px;background:var(--line);margin:2px 10px 8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c);border-radius:3px;transition:width .4s}
+
+/* dice */
+.diceBox{text-align:center}
+.scene{width:84px;height:84px;margin:18px auto 22px;perspective:500px}
+.cube{width:84px;height:84px;position:relative;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.2,.9,.3,1.1)}
+.face{position:absolute;inset:0;background:#fff;border:2.5px solid var(--ink);border-radius:16px;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:11px;gap:2px}
+.face b{border-radius:50%;margin:3px}
+.face b.p{background:var(--coral-d)}
+.f1{transform:translateZ(42px)}.f6{transform:rotateY(180deg) translateZ(42px)}
+.f2{transform:rotateY(90deg) translateZ(42px)}.f5{transform:rotateY(-90deg) translateZ(42px)}
+.f3{transform:rotateX(90deg) translateZ(42px)}.f4{transform:rotateX(-90deg) translateZ(42px)}
+.scene.shake{animation:hop .9s}
+@keyframes hop{0%,100%{transform:translateY(0)}30%{transform:translateY(-22px)}60%{transform:translateY(0)}75%{transform:translateY(-8px)}}
+.big{width:100%;padding:14px;border-radius:16px;background:var(--coral);font-weight:700;font-size:17px;box-shadow:0 4px 0 var(--coral-d);transition:.12s}
+.big:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 var(--coral-d)}
+.big:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--coral-d)}
+.big:disabled{opacity:.45;cursor:default}
+.status{min-height:44px;margin-top:12px;font-size:14px;color:var(--soft)}
+.status strong{color:var(--ink)}
+.legend div{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:7px 0}
+.legend i{flex:0 0 16px;height:16px;border-radius:5px;margin-top:2px}
+
+/* board svg */
+.node{cursor:pointer;transition:transform .2s;transform-box:fill-box;transform-origin:center}
+.node:hover{transform:scale(1.07)}
+.node.here rect.sq{stroke:var(--ink);stroke-width:3}
+.tok{transition:transform .26s cubic-bezier(.4,1.6,.5,1)}
+.tok.cur .ring{animation:pulse 1.2s infinite}
+@keyframes pulse{0%{r:15;opacity:.9}100%{r:25;opacity:0}}
+.ill{pointer-events:none}
+
+/* overlays */
+.ov{position:fixed;inset:0;background:rgba(247,243,232,.82);backdrop-filter:blur(5px);display:none;place-items:center;padding:18px;z-index:10;overflow:auto}
+.ov.show{display:grid}
+.card{background:var(--paper);border-radius:28px;box-shadow:0 20px 60px rgba(90,80,60,.25);border:1.5px solid var(--line);width:min(560px,100%);padding:26px;animation:pop .35s cubic-bezier(.3,1.5,.5,1);position:relative}
+@keyframes pop{from{transform:scale(.8) translateY(20px);opacity:0}}
+.card .hero{width:124px;height:124px;border-radius:50%;margin:-70px auto 8px;display:grid;place-items:center;border:5px solid var(--paper);box-shadow:var(--shadow)}
+.card .hero svg{width:96px;height:96px}
+.tag{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.card h2{font-size:22px;line-height:1.35;margin:12px 0 6px;font-family:inherit;font-weight:600;letter-spacing:0}
+.en{color:var(--soft);font-size:14px;font-style:italic;display:none;margin:4px 0}
+.en.show{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chips button{padding:8px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:15px;transition:.15s}
+.chips button:hover{border-color:var(--coral)}
+.chips button.sel{background:var(--yellow);border-color:var(--yellow-d);transform:scale(1.05)}
+.adnote{background:#fff;border:2px solid var(--ink);padding:10px 16px;display:inline-block;transform:rotate(-2deg);font-family:"Courier New",monospace;font-weight:700;margin:10px 0;box-shadow:3px 3px 0 var(--line)}
+.tools{display:flex;gap:8px;margin:12px 0 4px}
+.tools button{font-size:13px;padding:7px 12px;border-radius:999px;background:var(--bg);border:1.5px solid var(--line)}
+.tools button:hover{background:#fff}
+.hint{display:none;background:var(--bg);border-radius:14px;padding:10px 16px;font-size:14px;margin-top:8px}
+.hint.show{display:block}
+.hint li{margin:3px 0}
+.judge{font-size:13px;color:var(--soft);margin:16px 0 8px;text-align:center}
+.row{display:flex;gap:12px}
+.row button{flex:1;padding:14px;border-radius:16px;font-weight:700;transition:.12s}
+.ok{background:var(--mint);box-shadow:0 4px 0 #94c79a}
+.no{background:var(--pink);box-shadow:0 4px 0 #e09bb3}
+.go{background:var(--yellow);box-shadow:0 4px 0 var(--yellow-d)}
+.row button:hover{transform:translateY(-2px)}
+.row button:active{transform:translateY(3px);box-shadow:none}
+.x{position:absolute;top:14px;right:16px;font-size:22px;color:var(--soft);width:34px;height:34px;border-radius:50%}
+.x:hover{background:var(--bg)}
+
+/* setup */
+.setup{text-align:center}
+.setup h1{font-size:32px;margin:6px 0 2px;text-transform:uppercase}
+.setup p{color:var(--soft);margin:4px 0 16px}
+.seg{display:inline-flex;background:var(--bg);border-radius:999px;padding:4px;margin-bottom:14px}
+.seg button{padding:8px 20px;border-radius:999px;font-weight:600}
+.seg button.sel{background:#fff;box-shadow:var(--shadow)}
+.names{display:grid;gap:10px;margin-bottom:16px}
+.names label{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 12px}
+.names i{width:26px;height:26px;border-radius:50%;border:2px solid var(--ink)}
+.names input{border:0;font:inherit;color:inherit;flex:1;background:none;min-width:0}
+.rules{text-align:left;font-size:14px;background:var(--bg);border-radius:16px;padding:12px 16px;margin-bottom:18px}
+.rules div{display:flex;gap:10px;margin:6px 0}
+.rules i{flex:0 0 14px;height:14px;border-radius:4px;margin-top:4px}
+.conf{position:fixed;top:-20px;width:10px;height:16px;border-radius:3px;z-index:20;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(max-width:900px){.app{grid-template-columns:1fr}aside{flex-direction:row;flex-wrap:wrap}aside .panel{flex:1 1 240px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.e{display:none;color:var(--soft);font-size:.8em;font-style:italic;font-weight:400;line-height:1.3;margin-top:2px}
+body.en-on .e{display:block}
+.ctx{background:var(--bg);border-radius:14px;padding:10px 14px;font-size:14px;margin-top:14px}
+.opts{display:grid;gap:10px;margin-top:14px}
+.opts.tf{grid-template-columns:1fr 1fr}
+.opt{padding:13px 16px;border-radius:14px;background:#fff;border:2px solid var(--line);text-align:left;font-size:16px;transition:.15s}
+.opts.tf .opt{text-align:center;font-weight:700}
+.opt:hover:not(:disabled){border-color:var(--coral);transform:translateY(-1px)}
+.opt.right{background:var(--mint);border-color:#94c79a}
+.opt.wrong{background:var(--pink);border-color:#e09bb3}
+.opt:disabled{cursor:default}
+.line{min-height:56px;border-bottom:2.5px dashed var(--line);margin-top:14px;padding:6px 0}
+.pool{min-height:50px;margin-top:10px}
+.line,.pool{display:flex;flex-wrap:wrap;gap:8px}
+.line button,.pool button{padding:8px 13px;border-radius:12px;background:#fff;border:2px solid var(--line);font-size:16px;box-shadow:0 2px 0 var(--line)}
+.line button{background:var(--yellow);border-color:var(--yellow-d);box-shadow:0 2px 0 var(--yellow-d)}
+.inp{width:100%;margin-top:14px;padding:13px 16px;border-radius:14px;border:2px solid var(--line);font:inherit;color:inherit;background:#fff}
+.fb{border-radius:14px;padding:12px 16px;margin-top:14px;animation:pop .3s}
+.fb.good{background:var(--mint)}.fb.bad{background:var(--pink)}
+.fb .e,.fb .xp{color:var(--ink)}
+.sol{margin-top:8px;font-weight:600}
+.xp{font-size:14px;margin-top:8px}
+.think{text-align:center;margin-top:12px;font-size:14px;color:var(--soft)}
+.go:disabled{opacity:.45;cursor:default}
+.setup .seg{flex-wrap:wrap;justify-content:center}
+
+/* ===== 3D board, pawns, dice, effects ===== */
+.boardWrap{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#fffdf7,#efe8d8)}
+.stage{perspective:2200px;perspective-origin:50% 0%;padding:26px 6px 4px}
+.plane{position:relative;transform:rotateX(24deg);transform-origin:50% 60%;transform-style:preserve-3d;will-change:transform}
+.plane>svg{position:relative;box-shadow:0 30px 40px -20px rgba(90,70,40,.45),0 0 0 6px #e8dcc2,0 10px 0 6px #d6c6a4;border-radius:18px}
+#pawns{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}
+.pawn{position:absolute;width:0;height:0;transform-style:preserve-3d;transition:left .28s cubic-bezier(.45,.05,.55,.95),top .28s cubic-bezier(.45,.05,.55,.95)}
+.pshadow{position:absolute;left:-17px;top:-6px;width:34px;height:12px;border-radius:50%;background:rgba(60,45,25,.32);filter:blur(1.5px)}
+.pawn.cur .pshadow{box-shadow:0 0 0 4px rgba(255,255,255,.7),0 0 18px 6px rgba(246,185,164,.9);animation:glow 1.3s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 6px rgba(255,255,255,.4),0 0 26px 10px rgba(246,185,164,.6)}}
+.phop{position:absolute;transform-style:preserve-3d}
+.pbody{position:absolute;left:-20px;bottom:0;width:40px;height:64px;transform-origin:50% 100%;transform:rotateX(-24deg)}
+.pbody svg{display:block;filter:drop-shadow(0 2px 1px rgba(0,0,0,.2))}
+.parrow{position:absolute;left:50%;top:-24px;translate:-50% 0;font-size:16px;color:var(--coral-d);opacity:0;text-shadow:0 1px 0 #fff}
+.pawn.cur .parrow{opacity:1;animation:arrow 1s ease-in-out infinite}
+@keyframes arrow{50%{transform:translateY(-6px)}}
+.puff{position:absolute;width:0;height:0}
+.puff::before{content:"";position:absolute;left:-30px;top:-14px;width:60px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.95);animation:puff .55s ease-out forwards}
+@keyframes puff{from{transform:scale(.3);opacity:1}to{transform:scale(1.4);opacity:0}}
+.fxs{position:absolute;left:50%;top:10px;pointer-events:none;font-weight:800;white-space:nowrap}
+.ftext{position:absolute;left:50%;top:-30px;translate:-50% 0;font:800 20px/1 system-ui,sans-serif;color:#2f7a52;text-shadow:0 2px 0 #fff,0 0 8px #fff;white-space:nowrap;pointer-events:none}
+.cloud{position:absolute;width:420px;height:200px;border-radius:50%;background:radial-gradient(closest-side,rgba(80,65,40,.13),transparent);filter:blur(6px);pointer-events:none;animation:drift 38s linear infinite}
+.cloud.c2{width:300px;height:150px;top:55%;animation-duration:52s;animation-delay:-26s}
+.cloud.c1{top:5%}
+@keyframes drift{from{left:-35%}to{left:105%}}
+.goal{position:absolute;width:0;height:0;transform-style:preserve-3d}
+.goal .pbody{width:70px;left:-10px;height:110px}
+.flag{transform-origin:0 50%;animation:wave 1.6s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:skewY(0) scaleX(1)}50%{transform:skewY(-6deg) scaleX(.92)}}
+.node.land{animation:landfx .45s ease-out}
+@keyframes landfx{30%{transform:translateY(7px) scale(.95)}65%{transform:translateY(-4px) scale(1.04)}}
+
+/* dice: shaded faces, big throw over the board */
+.cube{--s:84px;width:var(--s);height:var(--s)}
+.face{background:radial-gradient(circle at 30% 25%,#fff 0,#faf6ee 45%,#e9e0cf 100%);border:2px solid rgba(74,69,63,.55);border-radius:14%;box-shadow:inset 0 0 10px rgba(120,100,70,.18)}
+.face b.p{background:radial-gradient(circle at 35% 30%,#ffb9a3,#d9684b 60%,#a8452e);box-shadow:inset 0 -1px 2px rgba(0,0,0,.25)}
+.f1{transform:translateZ(calc(var(--s)/2))}.f6{transform:rotateY(180deg) translateZ(calc(var(--s)/2))}
+.f2{transform:rotateY(90deg) translateZ(calc(var(--s)/2))}.f5{transform:rotateY(-90deg) translateZ(calc(var(--s)/2))}
+.f3{transform:rotateX(90deg) translateZ(calc(var(--s)/2))}.f4{transform:rotateX(-90deg) translateZ(calc(var(--s)/2))}
+.core{position:absolute;inset:6%;background:#e3d8c4;transform-style:preserve-3d}
+.core i{position:absolute;inset:0;background:#e3d8c4}
+.core i:nth-child(1){transform:rotateY(90deg)}.core i:nth-child(2){transform:rotateX(90deg)}
+#dstage{position:absolute;inset:0;display:grid;place-items:center;perspective:900px;pointer-events:none;opacity:0;transition:opacity .25s;z-index:4;background:radial-gradient(circle at 50% 50%,rgba(255,253,247,.55),transparent 60%)}
+#dstage.show{opacity:1}
+.dthrow{position:relative;transform-style:preserve-3d}
+#dstage .cube{--s:116px}
+#dstage .face{border-width:3px}
+.dshadow{position:absolute;width:130px;height:34px;border-radius:50%;background:rgba(60,45,25,.3);filter:blur(5px);margin-top:150px}
+.dlabel{position:absolute;margin-top:270px;font:800 44px/1 "Rockwell",Georgia,serif;color:var(--ink);text-shadow:0 3px 0 #fff;opacity:0}
+.dlabel.pop{animation:lpop .6s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes lpop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+.cube.landed .face{box-shadow:inset 0 0 10px rgba(120,100,70,.18),0 0 24px rgba(246,185,164,.9)}
+#rollBtn:not(:disabled){animation:nudge 2.4s ease-in-out infinite}
+@keyframes nudge{0%,80%,100%{transform:none}85%{transform:rotate(-2deg) scale(1.03)}90%{transform:rotate(2deg) scale(1.03)}95%{transform:rotate(-1deg)}}
+
+/* cards flip in, react to answers */
+.card{animation:flipin .6s cubic-bezier(.2,.9,.3,1.12)}
+@keyframes flipin{from{transform:perspective(1400px) rotateY(-75deg) translateY(30px) scale(.85);opacity:0}}
+.card .hero{animation:heroin .7s .15s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes heroin{from{transform:scale(0) rotate(-30deg)}}
+.card.yay .hero{animation:yay .8s cubic-bezier(.2,1.4,.4,1)}
+@keyframes yay{40%{transform:scale(1.18) rotate(12deg)}70%{transform:scale(.95) rotate(-6deg)}}
+.card.nay{animation:nay .45s}
+@keyframes nay{20%{transform:translateX(-12px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+.opt{animation:optin .4s both}
+.opt:nth-child(2){animation-delay:.07s}.opt:nth-child(3){animation-delay:.14s}
+@keyframes optin{from{opacity:0;transform:translateY(10px)}}
+.spark{position:absolute;left:50%;top:20px;width:10px;height:10px;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.cloud,.flag,#rollBtn{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+        <div><h1>Schlüssel, bitte!</h1><div class="sub">Das Wohnungsspiel · The apartment-hunt German game</div></div>
+    <div class="sp"></div>
+    <button class="ghost" id="enBtn" title="Show or hide English hints">🇬🇧 English an</button>
+    <button class="ghost" id="sndBtn" title="Sound on/off">🔔 Ton an</button>
+    <button class="ghost" id="newBtn">↺ Neues Spiel</button>
+  </header>
+
+  <div class="boardWrap"><div class="stage"><div class="plane" id="plane"><svg id="board" viewBox="0 0 1200 830" role="img" aria-label="Spielbrett"></svg><div id="pawns"></div></div></div><div id="dstage" aria-hidden="true"><div class="dthrow"><div class="cube" id="dcube"></div></div><i class="dshadow"></i><div class="dlabel" id="dlabel"></div></div></div>
+
+  <aside>
+    <div class="panel"><h3>Spieler · Players</h3><div id="players"></div></div>
+    <div class="panel diceBox">
+      <h3>Würfel · Dice</h3>
+      <div class="scene" id="scene"><div class="cube" id="cube"></div></div>
+      <button class="big" id="rollBtn">🎲 Würfeln<span class="e">Roll the dice</span></button>
+      <div class="status" id="status"></div>
+    </div>
+    <div class="panel legend">
+      <h3>Spielfelder · Fields</h3>
+      <div><i style="background:var(--coral)"></i><span><b>Aufgabe.</b> Richtig = bleiben, falsch = 1 Feld zurück.<span class="e">Task. Correct = stay, wrong = back 1 field.</span></span></div>
+      <div><i style="background:var(--yellow)"></i><span><b>Glück.</b> 1 Feld weitergehen.<span class="e">Lucky. Move forward 1 field.</span></span></div>
+      <div><i style="background:var(--teal)"></i><span><b>Ereignis.</b> 👍 2 Felder vor, 👎 2 Felder zurück.<span class="e">Event. 👍 2 forward, 👎 2 back.</span></span></div>
+      <div style="color:var(--soft)"><span>Tipp: Klick auf ein Feld zeigt die Aufgabe. Leertaste würfelt.<span class="e">Tip: click a field to preview it. Space bar rolls.</span></span></div>
+    </div>
+  </aside>
+</div>
+
+<div class="ov" id="cardOv"><div class="card" id="card"></div></div>
+<div class="ov" id="setupOv"><div class="card setup" id="setup"></div></div>
+
+<script>
+/* ---------- illustration kit (original drawings) ---------- */
+const INK='#5a544c';
+const S=`stroke="${INK}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"`;
+const L=S+' fill="none"';
+const BOX='#f2cfa6';
+const person=(x,y,body,skin='#f1c9a5',hair='#6b5244')=>
+ `<rect x="${x-9}" y="${y}" width="18" height="28" rx="8" fill="${body}" ${S}/><circle cx="${x}" cy="${y-9}" r="9" fill="${skin}" ${S}/><path d="M${x-9} ${y-11}a9 9 0 0 1 18 0Z" fill="${hair}" ${S}/>`;
+const paper=(extra='')=>`<g transform="rotate(6 50 50)"><rect x="28" y="16" width="44" height="62" rx="3" fill="#fff" ${S}/>${extra}</g>`;
+const IC={
+ start:`<path d="M30 84V18" ${L}/><path d="M30 20H74L64 34 74 48H30Z" fill="#f6b9a4" ${S}/>`,
+ house:`<path d="M20 56 48 30 76 56V82H20Z" fill="#fbe3d6" ${S}/><rect x="41" y="62" width="14" height="20" fill="#a9d6d0" ${S}/><circle cx="72" cy="32" r="12" fill="#fff" ${S}/><path d="M81 41 91 52" ${L}/>`,
+ ad:`<g transform="rotate(-6 50 50)"><rect x="14" y="28" width="72" height="46" rx="3" fill="#fff" ${S}/><text x="50" y="47" text-anchor="middle" font-size="13" font-weight="700" font-family="Courier New,monospace" fill="${INK}">4ZKB</text><path d="M24 56H76M24 65H60" ${L}/></g>`,
+ key:`<circle cx="32" cy="50" r="15" fill="#f3e2a0" ${S}/><circle cx="27" cy="50" r="4" fill="#fff" ${S}/><path d="M47 50H86M72 50V61M81 50V58" ${L}/>`,
+ balcony:`<rect x="36" y="14" width="28" height="48" fill="#bcd9f2" ${S}/><path d="M50 14V62" ${L}/><path d="M24 62V42H76V62M34 42V62M44 42V62M56 42V62M66 42V62" ${L}/><rect x="20" y="62" width="60" height="7" rx="2" fill="#fff" ${S}/><path d="M28 69l6 12h32l6-12" fill="#eee6d6" ${S}/><circle cx="24" cy="40" r="8" fill="#c5e6c8" ${S}/><circle cx="76" cy="40" r="8" fill="#c5e6c8" ${S}/>`,
+ contract:paper(`<path d="M36 30H64M36 40H64M36 50H54" ${L}/>`)+`<circle cx="70" cy="70" r="15" fill="#c5e6c8" ${S}/><path d="M62 70l6 6 10-11" ${L}/>`,
+ para:paper(`<text x="50" y="60" text-anchor="middle" font-size="36" font-family="Georgia,serif" fill="${INK}">§</text>`),
+ paint:`<path d="M16 84 28 20M40 84 28 20M20 64H36M23 46H33" ${L}/><path d="M52 56H86L82 84H56Z" fill="#fff" ${S}/><path d="M54 64q7 8 14 0t16 0" fill="none" stroke="#e9c46a" stroke-width="3" stroke-linecap="round"/><rect x="50" y="22" width="28" height="11" rx="5.5" fill="#f3e2a0" ${S}/><path d="M78 27h9v12H66v9" ${L}/>`,
+ smile:`<circle cx="50" cy="50" r="30" fill="#f3e2a0" ${S}/><circle cx="40" cy="43" r="3" fill="${INK}"/><circle cx="60" cy="43" r="3" fill="${INK}"/><path d="M36 56q14 14 28 0" ${L}/>`,
+ boxes:`<rect x="16" y="52" width="32" height="30" fill="${BOX}" ${S}/><rect x="50" y="52" width="32" height="30" fill="${BOX}" ${S}/><rect x="33" y="22" width="32" height="30" fill="${BOX}" ${S}/><path d="M32 52v9M66 52v9M49 22v9" ${L}/><path d="M72 72v-8m-3 3 3-3 3 3" ${L}/>`,
+ truck:`<rect x="12" y="34" width="46" height="34" rx="3" fill="#bcd9f2" ${S}/><path d="M58 44H76L88 56V68H58Z" fill="#fff" ${S}/><circle cx="28" cy="72" r="8" fill="#fff" ${S}/><circle cx="72" cy="72" r="8" fill="#fff" ${S}/>`,
+ clock:`<circle cx="46" cy="56" r="25" fill="#fff" ${S}/><path d="M46 42V56L57 62" ${L}/><path d="M22 36 32 26M70 36 60 26M32 80 28 87M60 80 64 87" ${L}/><text x="74" y="26" font-size="16" font-weight="700" fill="${INK}">z</text><text x="85" y="15" font-size="11" font-weight="700" fill="${INK}">z</text>`,
+ broken:`<rect x="10" y="28" width="58" height="40" rx="3" fill="#bcd9f2" ${S}/><path d="M40 28 35 42 46 48 38 68M46 48 60 42" ${L}/><path d="M39 68V78M26 80H52" ${L}/><rect x="78" y="16" width="9" height="44" rx="4.5" fill="#fff" ${S}/><circle cx="82.5" cy="68" r="9" fill="#f6b9a4" ${S}/>`,
+ friends:person(26,44,'#f3e2a0','#c98f6b','#3d322c')+person(74,44,'#bcd9f2','#f1c9a5','#6b5244')+person(50,36,'#f5c6d6','#e2b08a','#b5713c')+`<rect x="36" y="62" width="28" height="22" fill="${BOX}" ${S}/><path d="M50 62v8" ${L}/>`,
+ hello:`<rect x="50" y="16" width="34" height="68" fill="#c5e6c8" ${S}/><circle cx="77" cy="52" r="2.5" fill="${INK}"/>`+person(30,50,'#d7c9ec')+`<path d="M39 58 48 40" ${L}/><path d="M50 30q4-3 2-8M56 34q5-2 5-8" ${L}/>`,
+ office:`<path d="M14 40 50 16 86 40Z" fill="#f3e2a0" ${S}/><rect x="18" y="40" width="64" height="7" fill="#fff" ${S}/><path d="M28 47V74M42 47V74M58 47V74M72 47V74" ${L}/><rect x="14" y="74" width="72" height="9" rx="2" fill="#fff" ${S}/>`,
+ oldman:person(40,42,'#d7c9ec','#f1c9a5','#e8e4dc')+`<path d="M18 60h14l2 22H16Z" fill="#f6b9a4" ${S}/><path d="M21 60q4-8 8 0" ${L}/><path d="M48 60h14l2 22H46Z" fill="#f6b9a4" ${S}/><path d="M51 60q4-8 8 0" ${L}/><path d="M66 86h8V74h8V62h8" ${L}/>`,
+ pharm:`<path d="M40 20H60V40H80V60H60V80H40V60H20V40H40Z" fill="#c5e6c8" ${S}/>`,
+ tools:`<path d="M18 82 46 48" stroke="#c9a37a" stroke-width="7" stroke-linecap="round"/><path d="M18 82 46 48" ${L} stroke-width="1"/><rect x="36" y="26" width="30" height="14" rx="3" transform="rotate(40 51 33)" fill="#cfcac2" ${S}/><ellipse cx="66" cy="70" rx="10" ry="13" fill="#fff" ${S}/><ellipse cx="84" cy="74" rx="8" ry="11" fill="#fbe3d6" ${S}/>`,
+ chaos:`<rect x="14" y="50" width="32" height="30" fill="${BOX}" ${S} transform="rotate(-10 30 65)"/><rect x="52" y="54" width="30" height="28" fill="${BOX}" ${S} transform="rotate(9 67 68)"/><path d="M22 44 18 30M34 42 38 26M62 48 68 32" ${L}/><circle cx="76" cy="30" r="7" fill="#f5c6d6" ${S}/><rect x="42" y="18" width="12" height="12" fill="#bcd9f2" ${S} transform="rotate(20 48 24)"/><path d="M84 46l6-6" ${L}/>`,
+ grill:`<path d="M24 50H76A26 26 0 0 1 24 50Z" fill="#9a958e" ${S}/><path d="M36 72 28 90M64 72 72 90M50 76V90" ${L}/><path d="M36 38q-6-8 0-14M50 38q-6-8 0-14M64 38q-6-8 0-14" ${L}/><rect x="34" y="42" width="32" height="7" rx="3.5" fill="#f6b9a4" ${S}/>`,
+ party:`<path d="M20 84 38 40 64 66Z" fill="#f3e2a0" ${S}/><circle cx="60" cy="26" r="5" fill="#f5c6d6" ${S}/><circle cx="80" cy="46" r="4" fill="#bcd9f2" ${S}/><path d="M46 28q4-8-2-12M70 58q10-2 14 4M56 44 72 30" ${L}/><rect x="74" y="16" width="8" height="8" fill="#c5e6c8" ${S} transform="rotate(20 78 20)"/>`
+};
+/* Realistic pictures (backlog): map an icon key to an image URL, e.g. IMG.oldman='img/oldman.webp'. Falls back to the drawing. */
+const IMG={};
+const svgIcon=k=>IMG[k]?`<img src="${IMG[k]}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:`<svg viewBox="0 0 100 100">${IC[k]}</svg>`;
+
+/* ---------- game data ---------- */
+const TINT={task:'#fbe3d6',yellow:'#faf1c8',pos:'#d6ece9',neg:'#d6ece9'};
+const F=[null,
+ {t:'task',ic:'house',de:'Wie suchen Sie eine neue Wohnung? Wählen Sie aus und begründen Sie.',en:'How do you look for a new apartment? Pick one and give a reason.',chips:['über Freunde','im Internet','in der Zeitung','mit Makler'],hint:['Ich suche am liebsten …, weil …','Das ist praktisch / schnell / günstig.','Ein Makler kostet viel, deshalb …']},
+ {t:'task',ic:'ad',de:'Stellen Sie zwei Fragen zur Anzeige.',en:'Ask two questions about the ad.',ad:'4ZKB, in ruh. Lage, ab 01.06., 1050 Euro inkl. NK, gerne an Familie',hint:['Wie groß ist die Wohnung?','Gibt es einen Balkon / einen Aufzug?','Wann kann ich die Wohnung besichtigen?','4ZKB = 4 Zimmer, Küche, Bad · NK = Nebenkosten']},
+ {t:'task',ic:'key',de:'Bilden Sie drei Wörter mit -miet-, zum Beispiel: die Mietwohnung.',en:'Form three words containing -miet-, for example: die Mietwohnung.',hint:['die Miete, der Mieter / die Mieterin','vermieten, der Vermieter','der Mietvertrag, die Kaltmiete']},
+ {t:'task',ic:'balcony',de:'Was ist für Sie beim Wohnen wichtig? Nennen und begründen Sie zwei Aspekte.',en:'What matters to you in a home? Name two aspects and give reasons.',hint:['Für mich ist … wichtig, weil …','Ich brauche unbedingt …, denn …','die Lage, die Größe, die Nachbarn, der Balkon, die Miete']},
+ {t:'pos',ic:'contract',de:'Hurra! Sie haben die neue Wohnung bekommen!',en:'Hooray! You got the new apartment!'},
+ {t:'task',ic:'para',de:'Der Mietvertrag: Wählen Sie einen Begriff aus und erklären Sie ihn.',en:'The lease: pick a term and explain it.',chips:['die Kaution','die Renovierung','die Hausordnung','die Kaltmiete'],hint:['… ist Geld, das man …','Das bedeutet, dass …','In der Hausordnung steht, was man (nicht) darf.']},
+ {t:'task',ic:'paint',de:'Sie müssen die neue Wohnung vor dem Einzug renovieren. Was brauchen Sie? Nennen Sie zwei Dinge.',en:'You have to renovate before moving in. What do you need? Name two things.',hint:['Ich brauche …','die Farbe, der Pinsel, die Leiter','die Tapete, der Eimer, die Farbrolle']},
+ {t:'yellow',ic:'smile',de:'Glück gehabt! Gehen Sie ein Feld weiter.',en:'Lucky you! Move forward one field.'},
+ {t:'task',ic:'boxes',de:'Sie ziehen bald um. Was müssen Sie vor dem Umzug tun? Beschreiben Sie zwei Aktivitäten.',en:'You are moving soon. What do you have to do before the move? Describe two activities.',hint:['Zuerst muss ich …, dann …','Kisten packen, einen Transporter mieten','die alte Wohnung kündigen, Freunde um Hilfe bitten']},
+ {t:'neg',ic:'clock',de:'Mist, Sie haben am Umzugstag verschlafen. Und alle warten auf Sie.',en:'Darn, you overslept on moving day. And everyone is waiting for you.'},
+ {t:'task',ic:'broken',de:'Wie ärgerlich! Nach dem Umzug ist nicht alles okay. Beschreiben Sie eine Situation.',en:'How annoying! Not everything is fine after the move. Describe a situation.',chips:['Heizung kalt','Bildschirm kaputt','kein Netz'],hint:['Die Heizung funktioniert nicht.','Mein Bildschirm ist beim Umzug kaputtgegangen.','Ich habe kein Netz und kann niemanden anrufen.']},
+ {t:'yellow',ic:'smile',de:'Glück gehabt! Gehen Sie ein Feld weiter.',en:'Lucky you! Move forward one field.'},
+ {t:'task',ic:'friends',de:'Ihre Freunde haben beim Umzug geholfen. Wie bedanken Sie sich? Erzählen Sie.',en:'Your friends helped with the move. How do you thank them? Tell us.',chips:['Essen','Feier','Einladung'],hint:['Ich lade alle zum Essen ein.','Als Dankeschön koche ich …','Ich mache eine Einweihungsparty.']},
+ {t:'task',ic:'hello',de:'Neu im Haus! Stellen Sie sich bei Ihrer Nachbarschaft vor.',en:'New in the building! Introduce yourself to your neighbors.',hint:['Guten Tag, ich bin … Ich bin gerade im dritten Stock eingezogen.','Ich komme aus … und arbeite als …','Schön, Sie kennenzulernen!']},
+ {t:'task',ic:'office',de:'Wer braucht Ihre neue Adresse? Nennen Sie drei Ämter oder Institutionen.',en:'Who needs your new address? Name three offices or institutions.',hint:['das Einwohnermeldeamt / das Bürgeramt','die Bank, die Krankenkasse','der Arbeitgeber, die Post, das Finanzamt']},
+ {t:'pos',ic:'oldman',de:'Das war nett! Sie haben dem alten Herrn den Einkauf in den vierten Stock getragen.',en:'That was kind! You carried the old gentleman\'s groceries up to the fourth floor.'},
+ {t:'task',ic:'pharm',de:'Sie kennen den Weg zur nächsten Apotheke noch nicht. Fragen Sie einen Nachbarn / eine Nachbarin.',en:'You don\'t know the way to the nearest pharmacy yet. Ask a neighbor.',hint:['Entschuldigung, können Sie mir helfen?','Wo ist hier die nächste Apotheke?','Wie komme ich am besten zur Apotheke?']},
+ {t:'task',ic:'tools',de:'Etwas fehlt. Wählen Sie einen Gegenstand. Wer kann ihn Ihnen leihen? Fragen Sie in der Nachbarschaft.',en:'Something is missing. Pick an object. Who can lend it to you? Ask around the neighborhood.',chips:['🥚 Eier','🔨 Hammer','🧹 Staubsauger'],hint:['Entschuldigung, könnten Sie mir … leihen?','Haben Sie vielleicht …?','Ich bringe ihn gleich wieder zurück.']},
+ {t:'yellow',ic:'smile',de:'Glück gehabt! Gehen Sie ein Feld weiter.',en:'Lucky you! Move forward one field.'},
+ {t:'neg',ic:'chaos',de:'Alle Kisten sind nur halb ausgepackt. So ein Chaos! Sie müssen endlich Ordnung machen!',en:'All the boxes are only half unpacked. What a mess! Time to finally tidy up!'},
+ {t:'task',ic:'grill',de:'Die Nachbarn laden Sie zum Grillfest ein. Sagen Sie zu und bieten Sie Ihre Hilfe an.',en:'The neighbors invite you to a barbecue. Accept and offer your help.',hint:['Vielen Dank für die Einladung, ich komme gern!','Kann ich etwas mitbringen?','Soll ich einen Salat machen?']}
+];
+const END=22, COLORS=['#d7c9ec','#c5e6c8','#bcd9f2'];
+const PTS=[]; // 0=start … 22=ziel
+[[130,0,6,1],[330,6,6,-1],[530,12,6,1],[730,18,5,-1]].forEach(([y,s,n,dir])=>{for(let i=0;i<n;i++)PTS[s+i]={x:dir>0?100+200*i:1100-200*i,y}});
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let st={players:[],cur:0,busy:true}, sound=true, actx;
+function beep(f=520,d=.08,type='sine',v=.06){ if(!sound)return; try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.type=type;o.frequency.value=f;g.gain.value=v;g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+d);o.connect(g).connect(actx.destination);o.start();o.stop(actx.currentTime+d);}catch(e){} }
+const jingle=a=>a.forEach((f,i)=>setTimeout(()=>beep(f,.16,'triangle'),i*120));
+
+/* ---------- board ---------- */
+function drawBoard(){
+  let d=`M${PTS[0].x} ${PTS[0].y}`;
+  for(let i=1;i<=END;i++){const a=PTS[i-1],b=PTS[i]; if(a.y===b.y)d+=`L${b.x} ${b.y}`; else{const cx=b.x>600?b.x+95:b.x-95; d+=`C${cx} ${a.y},${cx} ${b.y},${b.x} ${b.y}`}}
+  let h=`<defs><pattern id="map" width="160" height="140" patternUnits="userSpaceOnUse" patternTransform="rotate(12)">
+    <rect width="160" height="140" fill="#eeeade"/><path d="M0 30H160M0 95H160M40 0V140M118 0V140M0 62H40M118 120H160M75 30V95" stroke="#f8f5ec" stroke-width="7" fill="none"/><path d="M40 95 118 30" stroke="#f8f5ec" stroke-width="4"/></pattern></defs>
+    <rect width="1200" height="830" fill="url(#map)"/>
+    <path d="${d}" fill="none" stroke="#fffdf7" stroke-width="16" stroke-linecap="round"/>
+    <path d="${d}" fill="none" stroke="#e58f74" stroke-width="5" stroke-dasharray="16 12" stroke-linecap="round"/>`;
+  // scenery
+  h+=`<g class="ill" transform="translate(1028,640) scale(.8)" opacity=".95"><circle cx="50" cy="50" r="50" fill="#fffdf7"/>${IC.truck}</g>`;
+  h+=`<g class="ill" transform="translate(150,640) scale(1.05)"><circle cx="50" cy="50" r="50" fill="#faf1c8"/>${IC.party}</g>`;
+  for(let i=0;i<=END;i++){
+    const p=PTS[i], f=F[i];
+    if(f&&f.t!=='yellow'){const cx=p.x+(p.x>1000?-64:64), cy=p.y-64;
+      h+=`<g class="ill"><circle cx="${cx}" cy="${cy+5}" r="39" fill="rgba(90,70,40,.18)"/><circle cx="${cx}" cy="${cy}" r="39" fill="${TINT[f.t]}" stroke="#fffdf7" stroke-width="4"/>${IMG[f.ic]?`<clipPath id="cp${i}"><circle cx="${cx}" cy="${cy}" r="36"/></clipPath><image href="${IMG[f.ic]}" x="${cx-36}" y="${cy-36}" width="72" height="72" clip-path="url(#cp${i})" preserveAspectRatio="xMidYMid slice"/>`:`<g transform="translate(${cx-31},${cy-31}) scale(.62)">${IC[f.ic]}</g>`}</g>`}
+    if(i===0||i===END){
+      h+=`<g class="node" data-i="${i}"><rect x="${p.x-56}" y="${p.y-31}" width="112" height="80" rx="14" fill="#e3b9a6"/><rect class="sq" x="${p.x-56}" y="${p.y-40}" width="112" height="80" rx="14" fill="#fffdf7" stroke="#e58f74" stroke-width="3"/><text x="${p.x}" y="${p.y+8}" text-anchor="middle" font-size="24" font-family="Rockwell,Georgia,serif" fill="#e58f74" letter-spacing="2">${i?'ZIEL':'START'}</text></g>`;
+    }else{
+      const col=f.t==='task'?'#f6b9a4':f.t==='yellow'?'#f3e2a0':'#a9d6d0';
+      const side=f.t==='task'?'#dd8f74':f.t==='yellow'?'#d2b955':'#78b3aa';
+      const mark=f.t==='yellow'?`<g transform="translate(${p.x-17},${p.y-8}) scale(.34)">${IC.smile.replace('fill="#f3e2a0"','fill="#fffdf7"')}</g>`
+        :f.t==='pos'?`<text x="${p.x}" y="${p.y+26}" text-anchor="middle" font-size="24">👍</text>`
+        :f.t==='neg'?`<text x="${p.x}" y="${p.y+26}" text-anchor="middle" font-size="24">👎</text>`
+        :`<path d="M${p.x-14} ${p.y+6}h28a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5h-16l-8 7v-7h-4a5 5 0 0 1-5-5v-8a5 5 0 0 1 5-5Z" fill="#fffdf7" opacity=".85"/>`;
+      h+=`<g class="node" data-i="${i}"><rect x="${p.x-44}" y="${p.y-35}" width="88" height="88" rx="16" fill="${side}"/><rect class="sq" x="${p.x-44}" y="${p.y-44}" width="88" height="88" rx="16" fill="${col}" stroke="#fffdf7" stroke-width="3"/><circle cx="${p.x}" cy="${p.y-20}" r="15" fill="#fffdf7"/><text x="${p.x}" y="${p.y-14}" text-anchor="middle" font-size="17" font-weight="700" fill="${INK}">${i}</text>${mark}</g>`;
+    }
+  }
+  $('#board').innerHTML=h;
+  $('#pawns').innerHTML='';
+  document.querySelectorAll('.node').forEach(n=>n.onclick=()=>{const i=+n.dataset.i; if(!st.busy&&!st.players[st.cur].bot&&F[i])showCard(i,true)});
+}
+const TILT=24;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const shade=(hex,f)=>{const n=parseInt(hex.slice(1),16),c=[n>>16,(n>>8)&255,n&255].map(v=>Math.max(0,Math.min(255,Math.round(f<0?v*(1+f):v+(255-v)*f))));return '#'+c.map(v=>v.toString(16).padStart(2,'0')).join('')};
+const pct=(x,y)=>({left:(x/12)+'%',top:(y/8.3)+'%'});
+function pawnSVG(p,i){
+  const c=p.c,g='pg'+i,d=shade(c,-.38);
+  return `<svg viewBox="0 0 40 64" width="40" height="64"><defs><radialGradient id="${g}" cx="32%" cy="28%" r="80%"><stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="${shade(c,.25)}"/><stop offset=".75" stop-color="${c}"/><stop offset="1" stop-color="${d}"/></radialGradient></defs>
+  <ellipse cx="20" cy="58" rx="16" ry="5.5" fill="${d}" stroke="${INK}" stroke-width="1.4"/>
+  <path d="M5 57c0-7 5-9 9-11l2.5-13h7l2.5 13c4 2 9 4 9 11z" fill="url(#${g})" stroke="${INK}" stroke-width="1.6"/>
+  <ellipse cx="20" cy="33" rx="10.5" ry="3.4" fill="url(#${g})" stroke="${INK}" stroke-width="1.6"/>
+  <circle cx="20" cy="19" r="11.5" fill="url(#${g})" stroke="${INK}" stroke-width="1.6"/>
+  ${p.bot?`<path d="M20 7.5V2.5" stroke="${INK}" stroke-width="1.6"/><circle cx="20" cy="2.5" r="2.3" fill="#f6b9a4" stroke="${INK}" stroke-width="1.2"/>`:''}
+  <text x="20" y="24" text-anchor="middle" font-size="12.5" font-weight="800" fill="${INK}" font-family="system-ui,sans-serif">${esc(p.name[0].toUpperCase())}</text></svg>`;
+}
+function goalFlag(){
+  const g=document.createElement('div'); g.className='goal'; Object.assign(g.style,pct(PTS[END].x+38,PTS[END].y-22));
+  g.innerHTML=`<i class="pshadow" style="left:-6px;width:20px"></i><div class="pbody"><svg viewBox="0 0 70 110" width="70" height="110"><path d="M8 108V8" stroke="${INK}" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="7" r="4" fill="#f3e2a0" stroke="${INK}" stroke-width="2"/><g class="flag"><path d="M10 12h50l-8 13 8 13H10z" fill="#f6b9a4" stroke="${INK}" stroke-width="2"/><path d="M10 25h46" stroke="#fffdf7" stroke-width="4"/></g></svg></div>`;
+  return g;
+}
+function drawTokens(){
+  const L=$('#pawns');
+  if(L.querySelectorAll('.pawn').length!==st.players.length){
+    L.innerHTML='<i class="cloud c1"></i><i class="cloud c2"></i>'+st.players.map((p,i)=>`<div class="pawn" id="pawn${i}"><i class="pshadow"></i><div class="phop"><div class="pbody">${pawnSVG(p,i)}<span class="parrow">▼</span></div></div></div>`).join('');
+    L.appendChild(goalFlag());
+  }
+  st.players.forEach((p,i)=>{
+    const same=st.players.filter(q=>q.pos===p.pos), k=same.indexOf(p), pt=PTS[p.pos];
+    const x=pt.x+(k-(same.length-1)/2)*30, y=pt.y+(p.pos===0||p.pos===END?22:24);
+    const el=$('#pawn'+i); Object.assign(el.style,pct(x,y)); el.dataset.x=x; el.dataset.y=y;
+    el.classList.toggle('cur',i===st.cur);
+  });
+  document.querySelectorAll('.node').forEach(n=>n.classList.toggle('here',+n.dataset.i===st.players[st.cur].pos));
+}
+function hopFx(i,big){
+  const el=$('#pawn'+i); if(!el||reduced)return;
+  const h=big?120:46;
+  el.querySelector('.phop').animate([{transform:'translateZ(0)'},{transform:`translateZ(${h}px)`,easing:'ease-in'},{transform:'translateZ(0)'}],{duration:big?520:280,easing:'ease-out'});
+  el.querySelector('.pbody').animate([{transform:`rotateX(-${TILT}deg) scale(1,1)`},{transform:`rotateX(-${TILT}deg) scale(.9,1.12)`,offset:.3},{transform:`rotateX(-${TILT}deg) scale(1,1)`,offset:.8},{transform:`rotateX(-${TILT}deg) scale(1.18,.8)`,offset:.92},{transform:`rotateX(-${TILT}deg) scale(1,1)`}],{duration:big?560:320});
+  el.querySelector('.pshadow').animate([{transform:'scale(1)',opacity:1},{transform:'scale(.55)',opacity:.5},{transform:'scale(1)',opacity:1}],{duration:big?520:280});
+}
+function landFx(i){
+  const el=$('#pawn'+i), p=st.players[i]; if(!el)return;
+  const pf=document.createElement('i'); pf.className='puff'; Object.assign(pf.style,{left:el.style.left,top:el.style.top});
+  $('#pawns').appendChild(pf); setTimeout(()=>pf.remove(),600);
+  const n=document.querySelector(`.node[data-i="${p.pos}"]`); if(n){n.classList.remove('land');void n.getBoundingClientRect();n.classList.add('land')}
+}
+function floatText(i,text,color){
+  const b=$('#pawn'+i)?.querySelector('.pbody'); if(!b)return;
+  const t=document.createElement('span'); t.className='ftext'; t.textContent=text; if(color)t.style.color=color; b.appendChild(t);
+  t.animate([{transform:'translateY(0) scale(.6)',opacity:0},{transform:'translateY(-18px) scale(1.1)',opacity:1,offset:.25},{transform:'translateY(-60px) scale(1)',opacity:0}],{duration:1400,easing:'ease-out'}).onfinish=()=>t.remove();
+}
+function sparkle(i,chars='✨⭐🌟'){
+  const b=$('#pawn'+i)?.querySelector('.pbody'); if(!b||reduced)return;
+  for(let k=0;k<12;k++){const s=document.createElement('span');s.className='spark';s.textContent=[...chars][k%[...chars].length];b.appendChild(s);
+    const a=k/12*Math.PI*2, r=50+Math.random()*30;
+    s.animate([{transform:'translate(-50%,0) scale(.3)',opacity:1},{transform:`translate(calc(-50% + ${Math.cos(a)*r}px),${Math.sin(a)*r-30}px) scale(1)`,opacity:0}],{duration:900+Math.random()*300,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=()=>s.remove()}
+}
+function shakeBoard(){
+  if(reduced)return;
+  $('#plane').animate([0,-12,10,-8,6,-3,0].map(x=>({transform:`rotateX(${TILT}deg) translateX(${x}px)`})),{duration:520});
+}
+function introFx(){
+  if(reduced)return;
+  $('#plane').animate([{transform:'rotateX(62deg) scale(.8) translateY(-60px)',opacity:.3},{transform:`rotateX(${TILT}deg)`,opacity:1}],{duration:1300,easing:'cubic-bezier(.2,.8,.2,1)'});
+  st.players.forEach((_,i)=>{const el=$('#pawn'+i); if(el)el.querySelector('.phop').animate([{transform:'translateZ(420px)',opacity:0},{transform:'translateZ(0)',opacity:1,offset:.7},{transform:'translateZ(30px)',offset:.85},{transform:'translateZ(0)'}],{duration:1100,delay:700+i*220,easing:'ease-in',fill:'backwards'})});
+}
+/* XP for the signed-in player (player 1, not the computer). The app around the game saves it. */
+const embedded=window.parent!==window;
+const isMe=p=>p===st.players[0]&&!p.bot;
+function giveXp(amount,i){
+  floatText(i,`+${amount} XP`);
+  if(embedded)window.parent.postMessage({source:'fds-game',type:'xp',amount},'*');
+}
+function drawPlayers(){
+  $('#players').innerHTML=st.players.map((p,i)=>`<div class="pl ${i===st.cur?'on':''}" style="--c:${p.c}"><span class="dot">${esc(p.name[0].toUpperCase())}</span><span class="nm">${esc(p.name)}</span><span class="ps">${p.pos===0?'Start':p.pos===END?'Ziel 🎉':'Feld '+p.pos}</span></div><div class="bar" style="--c:${p.c}"><i style="width:${p.pos/END*100}%"></i></div>`).join('');
+}
+const say=(de,en)=>$('#status').innerHTML=de+(en?`<span class="e">${en}</span>`:'');
+const nameOf=p=>`<strong>${esc(p.name)}</strong>`;
+
+/* ---------- dice ---------- */
+const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+const ROT={1:[0,0],2:[0,-90],3:[-90,0],4:[90,0],5:[0,90],6:[0,180]};
+$('#cube').innerHTML=[1,2,3,4,5,6].map(n=>`<div class="face f${n}">${[...Array(9)].map((_,i)=>`<b class="${PIPS[n].includes(i)?'p':''}"></b>`).join('')}</div>`).join('');
+$('#dcube').innerHTML=$('#cube').innerHTML;
+let spin=0;
+async function rollDice(){
+  const n=1+Math.floor(Math.random()*6); spin++;
+  const [rx,ry]=ROT[n];
+  $('#cube').style.transform=`rotateX(${rx+360*spin}deg) rotateY(${ry+360*spin}deg)`;
+  const sc=$('#scene'); sc.classList.remove('shake'); void sc.offsetWidth; sc.classList.add('shake');
+  const stg=$('#dstage'), th=stg.querySelector('.dthrow'), cb=$('#dcube'), sh=stg.querySelector('.dshadow'), lb=$('#dlabel');
+  lb.className='dlabel'; lb.textContent='';
+  stg.classList.add('show');
+  const dur=reduced?300:1300, R=()=>Math.round((Math.random()*2-1)*540), fx=rx+720, fy=ry+720;
+  const path=[[340,200,.5,0],[140,-170,.9,.3],[0,0,1,.55],[-16,-70,1,.7],[-22,0,1,.84],[-25,-16,1,.92],[-26,0,1,1]];
+  th.animate(path.map(([x,y,s,o])=>({transform:`translate(${x}px,${y}px) scale(${s})`,offset:o})),{duration:dur,fill:'forwards'});
+  sh.animate(path.map(([x,y,s,o])=>({transform:`translateX(${x}px) scale(${s*(1+y/260)})`,opacity:.35+.65*(1+y/260),offset:o})),{duration:dur,fill:'forwards'});
+  cb.animate([
+    {transform:`rotateX(${R()}deg) rotateY(${R()}deg) rotateZ(${R()}deg)`},
+    {transform:`rotateX(${fx-230}deg) rotateY(${fy+170}deg) rotateZ(50deg)`,offset:.55},
+    {transform:`rotateX(${fx-35}deg) rotateY(${fy+25}deg) rotateZ(8deg)`,offset:.84},
+    {transform:`rotateX(${fx}deg) rotateY(${fy}deg) rotateZ(0deg)`}],{duration:dur,easing:'cubic-bezier(.25,.6,.35,1)',fill:'forwards'});
+  for(let i=0;i<5;i++)setTimeout(()=>beep(300+Math.random()*200,.04,'square',.03),i*90);
+  [.55,.84,1].forEach((o,k)=>setTimeout(()=>beep(150-k*20,.09,'triangle',.09-k*.025),dur*o));
+  await sleep(dur);
+  cb.classList.add('landed'); lb.textContent=n; lb.classList.add('pop');
+  await sleep(750);
+  stg.classList.remove('show'); setTimeout(()=>cb.classList.remove('landed'),250);
+  return n;
+}
+
+/* ---------- exercises (auto-checked) ---------- */
+const EX={
+ 1:[{k:'mc',q:'Wer hilft gegen Geld bei der Wohnungssuche?',e:'Who helps you find an apartment for a fee?',o:['der Makler','der Mieter','der Nachbar'],x:'A Makler is a real estate agent. Mieter = tenant, Nachbar = neighbor.'},
+    {k:'order',q:'Bilden Sie den Satz.',e:'Put the words in order.',s:'Ich suche meine Wohnung im Internet',se:'I look for my apartment online.'},
+    {k:'tf',q:'Eine Wohnungsanzeige findet man in der Zeitung oder im Internet.',e:'You can find an apartment ad in the newspaper or online.',a:true,x:'die Anzeige = the ad.'}],
+ 2:[{k:'mc',q:'Was bedeutet „inkl. NK“?',e:'What does "inkl. NK" mean?',o:['inklusive Nebenkosten','inklusive neuer Küche','inklusive Nachbarn'],x:'Nebenkosten are additional costs such as water, heating and trash collection.'},
+    {k:'mc',q:'Was bedeutet „4ZKB“?',e:'What does "4ZKB" mean?',o:['4 Zimmer, Küche, Bad','4 Zimmer, keine Küche','4 Zimmer, kein Bad'],x:'Z = Zimmer (rooms), K = Küche (kitchen), B = Bad (bathroom).'},
+    {k:'tf',q:'Die Wohnung liegt an einer lauten Straße.',e:'The apartment is on a noisy street.',a:false,x:'"in ruh. Lage" = in ruhiger Lage, a quiet location.'},
+    {k:'order',q:'Stellen Sie eine Frage zur Anzeige.',e:'Ask a question about the ad. Put the words in order.',s:'Wann kann ich die Wohnung besichtigen?',se:'When can I view the apartment?'}],
+ 3:[{k:'type',q:'Schreiben Sie drei Wörter mit -miet-.',e:'Type three words that contain -miet-, separated by commas.',n:3,rx:/miet/,acc:['die Miete','der Mieter','vermieten','der Vermieter','der Mietvertrag','die Kaltmiete','die Warmmiete','mieten','die Mieterin'],x:'mieten = to rent, vermieten = to rent out.'},
+    {k:'mc',q:'Wer bezahlt die Miete?',e:'Who pays the rent?',o:['der Mieter','der Vermieter','der Makler'],x:'The Mieter (tenant) pays. The Vermieter (landlord) receives the rent.'}],
+ 4:[{k:'order',q:'Bilden Sie den Satz.',e:'Put the words in order.',s:'Für mich ist ein Balkon wichtig',se:'A balcony is important to me.'},
+    {k:'mc',q:'Ich brauche eine ruhige Lage, ___ ich zu Hause arbeite.',e:'I need a quiet location ___ I work from home.',o:['weil','deshalb','aber'],x:'weil = because. It sends the verb to the end of the clause.'},
+    {k:'tf',q:'„Die Lage“ bedeutet: wo die Wohnung ist.',e:'"Die Lage" means where the apartment is.',a:true,x:'die Lage = the location.'}],
+ 6:[{k:'mc',q:'Was ist die Kaution?',e:'What is the Kaution?',o:['Geld als Sicherheit für den Vermieter','die Miete für den ersten Monat','Geld für den Makler'],x:'The Kaution is a security deposit. You get it back when you move out.'},
+    {k:'tf',q:'Die Kaltmiete ist die Miete inklusive Heizung.',e:'The Kaltmiete is the rent including heating.',a:false,x:'Kaltmiete = rent without heating and utilities. With them it is the Warmmiete.'},
+    {k:'mc',q:'Was steht in der Hausordnung?',e:'What is in the Hausordnung?',o:['Regeln für alle im Haus','der Preis der Wohnung','die Namen der Nachbarn'],x:'The Hausordnung is the set of house rules, for example quiet hours.'}],
+ 7:[{k:'type',q:'Nennen Sie zwei Dinge, die Sie zum Renovieren brauchen.',e:'Type two things you need for renovating, separated by commas.',n:2,acc:['die Farbe','der Pinsel','die Leiter','die Tapete','der Eimer','die Farbrolle','Rolle','Hammer','Bohrer','Bohrmaschine','Kleister','Schraubenzieher','Nagel','Nägel','Schrauben','Werkzeug','Folie','Abdeckfolie','Klebeband','Malerrolle','Zange','Säge','Spachtel','Handschuhe','Lack','Wandfarbe'],x:'Farbe = paint, Pinsel = brush, Leiter = ladder, Tapete = wallpaper.'},
+    {k:'mc',q:'Womit streicht man die Wand?',e:'What do you paint the wall with?',o:['mit Farbe und Pinsel','mit Kisten','mit dem Staubsauger'],x:'streichen = to paint (walls).'},
+    {k:'mc',q:'Worauf steht man, wenn man die Decke streicht?',e:'What do you stand on to paint the ceiling?',o:['auf der Leiter','auf der Tapete','auf dem Eimer'],x:'die Leiter = the ladder, die Decke = the ceiling.'}],
+ 9:[{k:'order',q:'Bilden Sie den Satz.',e:'Put the words in order.',s:'Ich muss zuerst die Kisten packen',alt:['Ich muss die Kisten zuerst packen'],se:'First I have to pack the boxes.'},
+    {k:'mc',q:'Was macht man vor dem Umzug?',e:'What do you do before the move?',o:['die alte Wohnung kündigen','die Kisten auspacken','die neuen Nachbarn einladen'],x:'kündigen = to give notice. auspacken = to unpack (after the move).'},
+    {k:'tf',q:'Für den Umzug kann man einen Transporter mieten.',e:'You can rent a van for the move.',a:true,x:'der Transporter = the van.'}],
+ 11:[{k:'mc',q:'Die Heizung ist kalt. Was sagen Sie dem Vermieter?',e:'The heating is cold. What do you tell the landlord?',o:['„Die Heizung funktioniert nicht.“','„Die Heizung ist zu teuer.“','„Ich mag die Heizung nicht.“'],x:'funktioniert nicht = does not work.'},
+    {k:'order',q:'Bilden Sie den Satz.',e:'Put the words in order.',s:'Mein Bildschirm ist beim Umzug kaputtgegangen',se:'My screen broke during the move.'},
+    {k:'mc',q:'Was bedeutet „Ich habe kein Netz“?',e:'What does "Ich habe kein Netz" mean?',o:['Mein Handy hat keinen Empfang.','Ich habe kein Handy.','Mein Handy ist neu.'],x:'kein Netz = no signal.'}],
+ 13:[{k:'order',q:'Bilden Sie den Satz.',e:'Put the words in order.',s:'Ich lade euch alle zum Essen ein',se:'I am inviting you all to dinner.'},
+    {k:'mc',q:'Wie bedanken Sie sich bei Ihren Freunden?',e:'How do you thank your friends?',o:['„Vielen Dank für eure Hilfe!“','„Keine Ursache!“','„Gute Besserung!“'],x:'Keine Ursache = you\'re welcome. Gute Besserung = get well soon.'},
+    {k:'tf',q:'Eine Einweihungsparty feiert man in der neuen Wohnung.',e:'You celebrate an Einweihungsparty in your new apartment.',a:true,x:'die Einweihungsparty = the housewarming party.'}],
+ 14:[{k:'order',q:'Stellen Sie sich vor. Bilden Sie den Satz.',e:'Introduce yourself. Put the words in order.',s:'Ich bin gerade im dritten Stock eingezogen',se:'I just moved in on the third floor.'},
+    {k:'mc',q:'Was sagen Sie zu einer neuen Nachbarin?',e:'What do you say to a new neighbor?',o:['„Schön, Sie kennenzulernen!“','„Bis gleich im Büro!“','„Die Rechnung, bitte!“'],x:'Schön, Sie kennenzulernen = nice to meet you.'},
+    {k:'mc',q:'Guten Tag, ich bin Ihr neuer ___.',e:'Hello, I am your new ___.',o:['Nachbar','Makler','Vermieter'],x:'der Nachbar / die Nachbarin = the neighbor.'}],
+ 15:[{k:'type',q:'Nennen Sie drei Ämter oder Institutionen, die Ihre neue Adresse brauchen.',e:'Type three offices or institutions that need your new address, separated by commas.',n:3,acc:['das Einwohnermeldeamt','die Bank','die Krankenkasse','der Arbeitgeber','die Post','das Finanzamt','Bürgeramt','Meldeamt','Versicherung','Schule','Universität','Uni','Arzt','Ausländerbehörde','Arbeitsagentur','Agentur für Arbeit','Jobcenter','Stromanbieter','Kindergarten','Kita','Rathaus','Firma','Telefonanbieter','Internetanbieter','Sparkasse','Zulassungsstelle','Vermieter','Bürgerbüro','Stadtwerke','Rentenversicherung','Familienkasse','Rundfunkbeitrag'],x:'Amt = government office. Krankenkasse = health insurance.'},
+    {k:'mc',q:'Wo meldet man die neue Adresse an?',e:'Where do you register your new address?',o:['beim Einwohnermeldeamt','in der Apotheke','beim Makler'],x:'In Germany you register at the Einwohnermeldeamt or Bürgeramt.'},
+    {k:'tf',q:'Nach dem Umzug muss man sich in Deutschland ummelden.',e:'After moving you have to re-register in Germany.',a:true,x:'sich ummelden = to register your new address.'}],
+ 17:[{k:'order',q:'Fragen Sie nach dem Weg.',e:'Ask for directions. Put the words in order.',s:'Wo ist hier die nächste Apotheke?',alt:['Wo ist die nächste Apotheke hier?'],se:'Where is the nearest pharmacy around here?'},
+    {k:'order',q:'Fragen Sie nach dem Weg.',e:'Ask for directions. Put the words in order.',s:'Wie komme ich am besten zur Apotheke?',alt:['Wie komme ich zur Apotheke am besten?'],se:'What is the best way to get to the pharmacy?'},
+    {k:'mc',q:'Gehen Sie hier ___ und dann links.',e:'Go ___ here and then left.',o:['geradeaus','gestern','gern'],x:'geradeaus = straight ahead.'}],
+ 18:[{k:'order',q:'Bitten Sie höflich um einen Hammer.',e:'Ask politely for a hammer. Put the words in order.',s:'Könnten Sie mir einen Hammer leihen?',se:'Could you lend me a hammer?'},
+    {k:'mc',q:'Sie brauchen Eier. Was fragen Sie?',e:'You need eggs. What do you ask?',o:['„Hätten Sie vielleicht zwei Eier für mich?“','„Wo sind meine Eier?“','„Möchten Sie Eier kaufen?“'],x:'Hätten Sie vielleicht …? = Would you maybe have …? A polite request.'},
+    {k:'mc',q:'Was bedeutet „leihen“?',e:'What does "leihen" mean?',o:['etwas für kurze Zeit geben','etwas kaufen','etwas wegwerfen'],x:'leihen = to lend or borrow.'}],
+ 21:[{k:'order',q:'Bedanken Sie sich. Bilden Sie den Satz.',e:'Say thank you. Put the words in order.',s:'Vielen Dank für die Einladung',se:'Thank you very much for the invitation.'},
+    {k:'mc',q:'Wie sagen Sie zu?',e:'How do you accept?',o:['„Ja, ich komme gern!“','„Leider habe ich keine Zeit.“','„Vielleicht nächstes Jahr.“'],x:'zusagen = to accept an invitation.'},
+    {k:'mc',q:'Wie bieten Sie Ihre Hilfe an?',e:'How do you offer your help?',o:['„Soll ich einen Salat mitbringen?“','„Wer bringt mir einen Salat?“','„Ich esse keinen Salat.“'],x:'Soll ich …? = Shall I …? A common way to offer help.'}]
+};
+const norm=s=>s.toLowerCase().trim().replace(/^(der|die|das|ein|eine|einen)\s+/,'').replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[.!?"„“]/g,'').trim();
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const BOTP={easy:.5,medium:.7,hard:.9};
+const E=t=>`<span class="e">${t}</span>`;
+let gid=0, lastEx={};
+
+/* ---------- turn flow ---------- */
+async function moveBy(p,n){
+  const dir=Math.sign(n);
+  for(let i=0;i<Math.abs(n);i++){
+    const np=p.pos+dir; if(np<0||np>END)break;
+    p.pos=np; drawTokens(); drawPlayers(); hopFx(st.players.indexOf(p)); beep(dir>0?520+i*40:360-i*30,.07); setTimeout(()=>landFx(st.players.indexOf(p)),270);
+    await sleep(300);
+  }
+}
+async function resolve(p){
+  for(let guard=0;guard<8;guard++){
+    if(p.pos>=END)return true;
+    if(p.pos===0)return false;
+    const f=F[p.pos], res=await showCard(p.pos,false);
+    const pi=st.players.indexOf(p);
+    if(f.t==='yellow'){sparkle(pi,'⭐✨');hopFx(pi,true);await sleep(450);await moveBy(p,1);continue}
+    if(f.t==='pos'){sparkle(pi,'💛✨👍');hopFx(pi,true);await sleep(450);await moveBy(p,2);continue}
+    if(f.t==='neg'){shakeBoard();floatText(pi,'Oh nein!','#c4553a');await sleep(500);await moveBy(p,-2);continue}
+    if(res){sparkle(pi);if(isMe(p))giveXp(10,pi);}
+    if(res)say(`${nameOf(p)} bleibt auf Feld ${p.pos}. Sehr gut!`,`${esc(p.name)} stays on field ${p.pos}. Well done!`);
+    else{await moveBy(p,-1);say(`${nameOf(p)} geht ein Feld zurück.`,`${esc(p.name)} goes back one field.`)}
+    return false;
+  }
+  return false;
+}
+async function turn(){
+  if(st.busy)return; st.busy=true; $('#rollBtn').disabled=true;
+  const g=gid, p=st.players[st.cur];
+  say(`${nameOf(p)} würfelt …`,`${esc(p.name)} is rolling …`);
+  const n=await rollDice(); if(g!==gid)return;
+  say(`${nameOf(p)} würfelt eine <strong>${n}</strong>.`,`${esc(p.name)} rolled a ${n}.`);
+  await moveBy(p,n); await sleep(250); if(g!==gid)return;
+  const won=await resolve(p); if(g!==gid)return;
+  if(won||p.pos>=END){win(p);return}
+  await sleep(600); if(g!==gid)return;
+  st.cur=(st.cur+1)%st.players.length; drawTokens(); drawPlayers(); ready();
+}
+function ready(){
+  const q=st.players[st.cur]; st.busy=false;
+  if(q.bot){say(`${nameOf(q)} ist dran.`,`The computer's turn.`);$('#rollBtn').disabled=true;const g=gid;setTimeout(()=>{if(g===gid)turn()},1200)}
+  else{say(`${nameOf(q)} ist dran. Bitte würfeln!`,`${esc(q.name)}'s turn. Roll the dice!`);$('#rollBtn').disabled=false}
+}
+
+/* ---------- cards ---------- */
+function showCard(i,preview){
+  return new Promise(done=>{
+    const f=F[i], p=st.players[st.cur], bot=!preview&&p.bot, g=gid;
+    const card=$('#card'); card.style.marginTop='60px';
+    let closed=false;
+    const close=r=>{if(closed||g!==gid)return;closed=true;$('#cardOv').classList.remove('show');done(r)};
+    const label={task:['Aufgabe · Task','var(--coral)'],yellow:['Glücksfeld · Lucky field','var(--yellow)'],pos:['Ereignis 👍 · Event','var(--teal)'],neg:['Ereignis 👎 · Event','var(--teal)']}[f.t];
+    let h=`<div class="hero" style="background:${TINT[f.t]}">${svgIcon(f.ic)}</div>
+      ${preview?'<button class="x" id="xBtn" aria-label="Schließen">×</button>':''}
+      <div style="text-align:center"><span class="tag" style="background:${label[1]}">Feld ${i} · ${label[0]}</span>${preview?'':`<div style="font-size:13px;color:var(--soft);margin-top:8px">${bot?'🤖 ':''}${esc(p.name)} ist dran${E(esc(p.name)+"'s turn")}</div>`}</div>`;
+    const ad=f.ad?`<div style="text-align:center"><div class="adnote">${f.ad}</div></div>`:'';
+    const phrases=f.hint?`<div class="hint show"><b>💡 Redemittel</b>${E('Useful phrases')}<ul style="margin:4px 0 0;padding-left:18px">${f.hint.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:'';
+
+    /* preview or event card */
+    if(preview||f.t!=='task'){
+      const eff={yellow:['1 Feld weiter →','Move forward 1 field'],pos:['2 Felder weiter →→','Move forward 2 fields'],neg:['←← 2 Felder zurück','Go back 2 fields']}[f.t];
+      h+=`<h2>${f.de}</h2>${E(f.en)}${ad}${preview?phrases:''}<div class="row" style="margin-top:18px"><button class="go" id="goBtn">${preview?'Schließen'+E('Close'):eff[0]+E(eff[1])}</button></div>`;
+      card.innerHTML=h; $('#cardOv').classList.add('show');
+      $('#goBtn').onclick=()=>close(true); if(preview)$('#xBtn').onclick=()=>close(true);
+      $('#goBtn').focus();
+      if(!preview){ if(f.t==='neg')jingle([392,294]); else jingle([523,784]); if(bot)setTimeout(()=>close(true),2400); }
+      return;
+    }
+
+    /* exercise card */
+    const pool=EX[i].filter(x=>EX[i].length<2||x!==lastEx[i]), ex=pool[Math.floor(Math.random()*pool.length)]; lastEx[i]=ex;
+    h+=`<div class="ctx">${f.de}${E(f.en)}</div>${ad}<h2>${ex.q}</h2>${E(ex.e)}<div id="work"></div><div id="fb"></div><div class="row" id="act" style="margin-top:14px"></div>`;
+    card.innerHTML=h; $('#cardOv').classList.add('show'); beep(660,.1,'triangle');
+    const work=$('#work'), fb=$('#fb'), act=$('#act'); let lock=false, botPlay;
+    const finish=(ok,sol)=>{
+      lock=true; work.querySelectorAll('button,input').forEach(b=>b.disabled=true);
+      if(ok)jingle([523,659,784]); else beep(200,.25,'sawtooth',.04); card.classList.remove('yay','nay'); void card.offsetWidth; card.classList.add(ok?'yay':'nay');
+      fb.innerHTML=`<div class="fb ${ok?'good':'bad'}"><b>${ok?'✓ Richtig!':'✗ Leider falsch.'}</b>${E(ok?'Correct. Stay on this field.':'Not quite. Go back one field.')}${sol||''}${ex.x?`<div class="xp">🇬🇧 ${ex.x}</div>`:''}</div>${phrases}`;
+      act.innerHTML=`<button class="go" id="nx">Weiter${E('Continue')}</button>`; $('#nx').onclick=()=>close(ok); $('#nx').focus();
+    };
+    if(ex.k==='mc'||ex.k==='tf'){
+      const opts=ex.k==='mc'?shuffle(ex.o.map((t,k)=>({t,ok:k===0}))):[{t:'✓ Richtig'+E('True'),ok:ex.a},{t:'✗ Falsch'+E('False'),ok:!ex.a}];
+      work.innerHTML=`<div class="opts ${ex.k}">${opts.map(o=>`<button class="opt" data-ok="${o.ok?1:0}">${o.t}</button>`).join('')}</div>`;
+      const btns=[...work.querySelectorAll('.opt')];
+      const choose=b=>{if(lock)return;const ok=b.dataset.ok==='1';b.classList.add(ok?'right':'wrong');btns.find(x=>x.dataset.ok==='1').classList.add('right');finish(ok)};
+      btns.forEach(b=>b.onclick=()=>{if(!bot)choose(b)});
+      botPlay=ok=>{const c=btns.filter(b=>(b.dataset.ok==='1')===ok);choose(c[Math.floor(Math.random()*c.length)])};
+    }else if(ex.k==='order'){
+      const words=ex.s.split(' '); let mix=shuffle(words); if(mix.join(' ')===ex.s)mix.reverse();
+      work.innerHTML=`<div class="line" id="line"></div><div class="pool" id="pool"></div>`;
+      const line=$('#line'), pl=$('#pool');
+      act.innerHTML=`<button class="go" id="chk" disabled>Prüfen${E('Check')}</button>`;
+      const chk=$('#chk'), sol=`<div class="sol">${ex.s}${E(ex.se)}</div>`;
+      mix.forEach(w=>{const b=document.createElement('button');b.textContent=w;b.onclick=()=>{if(lock||bot)return;(b.parentNode===pl?line:pl).appendChild(b);beep(600,.04);chk.disabled=pl.children.length>0};pl.appendChild(b)});
+      chk.onclick=()=>{const a=[...line.children].map(b=>b.textContent).join(' ');finish(a===ex.s||(ex.alt||[]).includes(a),sol)};
+      botPlay=ok=>{const order=ok?words:mix;order.forEach(w=>{const b=[...pl.children].find(x=>x.textContent===w);if(b)line.appendChild(b)});finish(ok,sol)};
+    }else{
+      work.innerHTML=`<input id="inp" class="inp" autocomplete="off" spellcheck="false" placeholder="Wort 1, Wort 2, …">${E('Separate your answers with commas. Articles and umlauts (ae, oe, ue) are optional.')}`;
+      act.innerHTML=`<button class="go" id="chk">Prüfen${E('Check')}</button>`;
+      const inp=$('#inp'), set=new Set(ex.acc.map(norm)), sol=`<div class="sol">Zum Beispiel: ${ex.acc.slice(0,6).join(', ')}${E('Example answers')}</div>`;
+      const check=()=>{const got=new Set(inp.value.split(/[,;\n]+/).map(norm).filter(w=>w&&(set.has(w)||(ex.rx&&w.length>4&&ex.rx.test(w)))));finish(got.size>=ex.n,sol)};
+      $('#chk').onclick=check; inp.onkeydown=e=>{if(e.key==='Enter'&&!lock)check()};
+      if(!bot)inp.focus(); else {inp.disabled=true;$('#chk').disabled=true}
+      botPlay=ok=>{inp.value=ex.acc.slice(0,ok?ex.n:ex.n-1).join(', ');finish(ok,sol)};
+    }
+    if(bot){work.insertAdjacentHTML('beforebegin',`<div class="think" id="think">🤖 Der Computer überlegt …${E('The computer is thinking …')}</div>`);
+      setTimeout(()=>{if(g!==gid||closed)return;const t=$('#think');if(t)t.remove();botPlay(Math.random()<BOTP[st.level||'medium'])},1700)}
+  });
+}
+function win(p){
+  drawPlayers();
+  {const wi=st.players.indexOf(p); [0,600,1200,1800].forEach(t=>setTimeout(()=>{hopFx(wi,true);sparkle(wi,'🎉✨⭐')},t)); const me=st.players[0]; if(!me.bot)giveXp(p===me?50:15,0);} say(`${nameOf(p)} feiert mit den neuen Nachbarn!`,`${esc(p.name)} is celebrating with the new neighbors!`);
+  jingle([523,659,784,1047,784,1047]);
+  const cols=['#f6b9a4','#a9d6d0','#f3e2a0','#d7c9ec','#c5e6c8','#bcd9f2','#f5c6d6'];
+  for(let i=0;i<90;i++){const c=document.createElement('i');c.className='conf';c.style.cssText=`left:${Math.random()*100}vw;background:${cols[i%7]};animation-duration:${2+Math.random()*2.5}s;animation-delay:${Math.random()*1.2}s`;document.body.appendChild(c);setTimeout(()=>c.remove(),6000)}
+  const card=$('#card'); card.style.marginTop='60px';
+  card.innerHTML=`<div class="hero" style="background:#faf1c8">${svgIcon('grill')}</div>
+    <div style="text-align:center"><span class="tag" style="background:var(--coral)">Ziel · Finish</span>
+    <h2 style="font-size:26px">${p.bot?'Der Computer hat gewonnen!':'Sie haben es geschafft.<br>Herzlichen Glückwunsch, '+esc(p.name)+'!'}</h2>
+    ${E(p.bot?'The computer won. Try again!':'You made it. Congratulations!')}
+    <p style="color:var(--soft)">${p.bot?'Der Computer feiert':'Sie feiern'} schon mit den neuen Nachbarn. 🎉${E('Already celebrating with the new neighbors.')}</p></div>
+    <div class="row" style="margin-top:14px"><button class="go" id="again">↺ Noch einmal spielen${E('Play again')}</button></div>`;
+  $('#cardOv').classList.add('show');
+  $('#again').onclick=()=>{$('#cardOv').classList.remove('show');setup()};
+}
+
+/* ---------- setup ---------- */
+let mode='cpu', level='medium', names=['Spieler 1','Spieler 2','Spieler 3'];
+{const q=new URLSearchParams(location.search).get('name'); if(q)names[0]=q.slice(0,14);}
+function setup(){
+  gid++; st.busy=true; $('#rollBtn').disabled=true;
+  const count=()=>mode==='cpu'?1:mode;
+  const save=()=>$('#setup').querySelectorAll('input').forEach(i=>names[+i.dataset.i]=i.value.trim()||('Spieler '+(+i.dataset.i+1)));
+  const render=()=>{
+    $('#setup').style.marginTop='60px';
+    $('#setup').innerHTML=`<div class="hero" style="background:#faf1c8">${svgIcon('key')}</div>
+      <h1>Schlüssel, bitte!</h1><p>Finden Sie eine Wohnung, ziehen Sie um und feiern Sie mit den Nachbarn.${E('Find an apartment, move in and celebrate with the neighbors. First to the finish wins.')}</p>
+      <div class="seg">${[['cpu','🤖 Gegen Computer'],[2,'2 Personen'],[3,'3 Personen']].map(([m,t])=>`<button data-m="${m}" class="${m===mode?'sel':''}">${t}</button>`).join('')}</div>
+      ${mode==='cpu'?`<div><div class="seg">${[['easy','Leicht'],['medium','Mittel'],['hard','Schwer']].map(([l,t])=>`<button data-l="${l}" class="${l===level?'sel':''}">${t}</button>`).join('')}</div>${E('Computer level: easy, medium or hard')}</div>`:''}
+      <div class="names" style="margin-top:12px">${[...Array(count())].map((_,i)=>`<label><i style="background:${COLORS[i]}"></i><input maxlength="14" data-i="${i}" value="${esc(names[i])}" aria-label="Name ${i+1}"></label>`).join('')}</div>
+      <div class="rules">
+        <div><i style="background:var(--coral)"></i><span>Aufgabe lösen. Richtig = bleiben, falsch = ein Feld zurück.${E('Solve the task. Correct = stay, wrong = back one field. Answers are checked automatically.')}</span></div>
+        <div><i style="background:var(--yellow)"></i><span>Sie dürfen ein Feld weitergehen.${E('Move forward one field.')}</span></div>
+        <div><i style="background:var(--teal)"></i><span>Ereignis: 👍 zwei Felder weiter, 👎 zwei Felder zurück.${E('Event: 👍 two fields forward, 👎 two fields back.')}</span></div>
+      </div>
+      <button class="big" id="go">Spiel starten${E('Start game')}</button>`;
+    $('#setup').querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{save();mode=b.dataset.m==='cpu'?'cpu':+b.dataset.m;render()});
+    $('#setup').querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{save();level=b.dataset.l;render()});
+    $('#go').onclick=()=>{save();start()};
+  };
+  render(); $('#setupOv').classList.add('show');
+}
+function start(){
+  gid++;
+  const ps=names.slice(0,mode==='cpu'?1:mode).map((name,i)=>({name,c:COLORS[i],pos:0}));
+  if(mode==='cpu')ps.push({name:'Computer',c:COLORS[1],pos:0,bot:true});
+  st={players:ps,cur:0,busy:false,level};
+  $('#setupOv').classList.remove('show'); $('#pawns').innerHTML='';
+  drawTokens(); drawPlayers(); introFx(); jingle([523,659]); setTimeout(ready,reduced?0:1500);
+}
+
+/* ---------- wiring ---------- */
+document.body.classList.add('en-on');
+$('#rollBtn').onclick=turn;
+$('#newBtn').onclick=()=>{$('#cardOv').classList.remove('show');setup()};
+$('#sndBtn').onclick=e=>{sound=!sound;e.target.textContent=sound?'🔔 Ton an':'🔕 Ton aus'};
+/* inside Fuchsdeutsch Spiele the app's English-Hilfe switch drives this */
+if(embedded){$('#enBtn').style.display='none';}
+window.addEventListener('message',e=>{const m=e.data; if(m&&m.source==='fds-app'&&m.type==='en'){document.body.classList.toggle('en-on',!!m.on)}});
+$('#enBtn').onclick=e=>{const on=document.body.classList.toggle('en-on');e.target.textContent=on?'🇬🇧 English an':'🇬🇧 English aus'};
+document.addEventListener('keydown',e=>{if(e.code==='Space'&&!st.busy&&!st.players[st.cur].bot&&!document.querySelector('.ov.show')&&e.target.tagName!=='INPUT'){e.preventDefault();turn()}});
+drawBoard(); setup();
+</script>
+</body>
+</html>

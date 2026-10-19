@@ -1,0 +1,49 @@
+/* Fuchsdeutsch look for Prüfung and Spiele: the same colors, font, lines and buttons as the course.
+   Loaded after the app's own CSS, so it only has to swap the tokens. Source of truth: shared/shell/fd-match.css. */
+:root, :root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #fafafa; --bg-dot: #fafafa;
+  --card: #ffffff; --card2: #f6f6f8; --line: #e4e4e7; --line-soft: #efeff1;
+  --txt: #1c1d1f; --dim: #5b5d63; --dim2: #8b8d93;
+  --lilac: #e2dbfa; --lilac-soft: #f3effd;
+  --sky: #cfe6fb; --sky-soft: #ebf5fd;
+  --mint: #cdeedb; --mint-soft: #e9f7ef;
+  --peach: #ffd9c2; --peach-soft: #fef0e7;
+  --rose: #fbd5e0; --rose-soft: #fdedf2;
+  --butter: #fdf0b5; --butter-soft: #fdf7dc;
+  --btn: #1c1d1f; --btn-ink: #ffffff;
+  --shadow: none;
+  --shadow-hi: 0 14px 30px -20px rgba(20, 24, 40, 0.28);
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #16181d; --bg-dot: #16181d;
+  --card: #21242b; --card2: #1c1f25; --line: #343944; --line-soft: #2a2e36;
+  --txt: #e8eaf0; --dim: #a9aebb; --dim2: #7c8291;
+  --lilac: #3a3166; --lilac-soft: #2f2950;
+  --sky: #233c5a; --sky-soft: #1d3047;
+  --mint: #24493a; --mint-soft: #1d3a2d;
+  --peach: #523424; --peach-soft: #40291c;
+  --rose: #50293a; --rose-soft: #40222e;
+  --butter: #4a4124; --butter-soft: #3b3420;
+  --btn: #e8eaf0; --btn-ink: #16181d;
+  --shadow: none;
+  --shadow-hi: 0 14px 30px -18px rgba(0, 0, 0, 0.6);
+}
+body { background-image: none; font-family: var(--fx-font); }
+h1, h2, h3, h4 { font-family: var(--fx-font); letter-spacing: -0.02em; }
+.btn { border-radius: 10px; }
+.btn.big { border-radius: 12px; }
+.card { box-shadow: none; }
+/* the old two-row top bar is replaced by the shared header */
+.topbar { display: none; }
+.fx-head .mtag { flex: none; }
+.fx-head .linkbtn { color: var(--dim); font-weight: 700; }
+.fx-head .linkbtn:hover { color: var(--txt); }
+@media (max-width: 760px) { .fx-head .helpsw .lbl, .fx-head .mtag { display: none; } }
+/* hero buttons: the same shape as the course */
+.btn.big.lp-pill, .btn.big.lp-pill2 { border-radius: 10px; box-shadow: none; padding: 13px 24px; }
+/* text links: ink like the course, not violet */
+.linkbtn { color: var(--txt); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.linkbtn:hover { text-decoration-thickness: 2px; }
+.fx-head .linkbtn { text-decoration: none; }

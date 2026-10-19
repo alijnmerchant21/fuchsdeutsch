@@ -13,12 +13,19 @@ const nextConfig = {
   // Exam Edition (pruefung-app/, own Vercel project with basePath /pruefung) is shown under this domain.
   // Set PRUEFUNG_ORIGIN in Vercel, e.g. https://fuchsdeutsch-pruefung.vercel.app
   async rewrites() {
+    const out = [];
     const origin = process.env.PRUEFUNG_ORIGIN;
-    if (!origin) return [];
-    return [
+    if (origin) out.push(
       { source: '/pruefung', destination: `${origin}/pruefung` },
       { source: '/pruefung/:path*', destination: `${origin}/pruefung/:path*` },
-    ];
+    );
+    // Fuchsdeutsch Spiele (spiele-app/, own Vercel project with basePath /spiele). Set SPIELE_ORIGIN in Vercel.
+    const spiele = process.env.SPIELE_ORIGIN;
+    if (spiele) out.push(
+      { source: '/spiele', destination: `${spiele}/spiele` },
+      { source: '/spiele/:path*', destination: `${spiele}/spiele/:path*` },
+    );
+    return out;
   },
 };
 export default nextConfig;

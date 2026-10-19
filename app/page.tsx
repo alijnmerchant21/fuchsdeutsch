@@ -1,13 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { courses, roadmapLevels } from '@/content/course';
 import { DEMO_MODE, DEPOSIT_USD } from '@/lib/config';
 import { useStore } from '@/lib/store';
 import { ProfileForm } from '@/components/ProfileForm';
-import { LangToggle, useUiLang, type UiLang } from '@/lib/lang';
+import { useUiLang, type UiLang } from '@/lib/lang';
 
 // Words that float around the fox in the hero.
 const bubbles = [
@@ -79,6 +79,67 @@ const LEVELS: { level: string; course: string; icon: string; tone: string }[] = 
   { level: 'B1', course: 'b1', icon: '🌳', tone: 'butter' },
   { level: 'B2', course: 'b2-1', icon: '🏔️', tone: 'lilac' },
 ];
+
+// What each level is about, shown when a level card opens.
+type LevelInfo = { learn: string[]; can: string; de: string; en: string };
+const LEVEL_INFO: Record<UiLang, Record<string, LevelInfo>> = {
+  en: {
+    A1: { learn: ['Greetings, numbers, times and dates', 'You, your family, your home', 'Shopping, ordering food, asking the way'], can: 'Introduce yourself, get through simple everyday situations and fill in a form.', de: 'Ich heiße Mia und wohne in Leipzig.', en: 'My name is Mia and I live in Leipzig.' },
+    A2: { learn: ['Daily routine, work, health and travel', 'Say what happened (Perfekt)', 'Plans, comparisons, reasons with weil'], can: 'Talk about your day and your past, write short messages and follow clear announcements.', de: 'Gestern bin ich mit dem Zug nach Berlin gefahren.', en: 'Yesterday I took the train to Berlin.' },
+    B1: { learn: ['Opinions, plans and wishes', 'Work, environment, health and culture', 'Subordinate clauses, passive, Konjunktiv II'], can: 'Manage most situations in daily life, give your opinion and write a clear email. Goethe B1 level.', de: 'Ich würde gern im Ausland arbeiten, weil ich Neues lernen möchte.', en: 'I would like to work abroad because I want to learn new things.' },
+    B2: { learn: ['Discuss, argue and present', 'News, science and society', 'Formal style, connectors, long sentences'], can: 'Follow discussions, read longer texts and speak fluently with native speakers.', de: 'Obwohl die Mieten steigen, ziehen immer mehr Menschen in die Stadt.', en: 'Although rents are rising, more and more people move to the city.' },
+  },
+  de: {
+    A1: { learn: ['Begrüßen, Zahlen, Uhrzeit und Datum', 'Du, deine Familie, deine Wohnung', 'Einkaufen, bestellen, nach dem Weg fragen'], can: 'Dich vorstellen, einfache Alltagssituationen meistern und ein Formular ausfüllen.', de: 'Ich heiße Mia und wohne in Leipzig.', en: 'My name is Mia and I live in Leipzig.' },
+    A2: { learn: ['Tagesablauf, Arbeit, Gesundheit und Reisen', 'Erzählen, was passiert ist (Perfekt)', 'Pläne, Vergleiche, Gründe mit weil'], can: 'Über deinen Tag und deine Vergangenheit sprechen, kurze Nachrichten schreiben, klare Durchsagen verstehen.', de: 'Gestern bin ich mit dem Zug nach Berlin gefahren.', en: 'Yesterday I took the train to Berlin.' },
+    B1: { learn: ['Meinungen, Pläne und Wünsche', 'Arbeit, Umwelt, Gesundheit und Kultur', 'Nebensätze, Passiv, Konjunktiv II'], can: 'Die meisten Situationen im Alltag meistern, deine Meinung sagen und eine klare E-Mail schreiben. Niveau Goethe B1.', de: 'Ich würde gern im Ausland arbeiten, weil ich Neues lernen möchte.', en: 'I would like to work abroad because I want to learn new things.' },
+    B2: { learn: ['Diskutieren, argumentieren, präsentieren', 'Nachrichten, Wissenschaft und Gesellschaft', 'Formeller Stil, Konnektoren, lange Sätze'], can: 'Diskussionen folgen, längere Texte lesen und flüssig mit Muttersprachlern sprechen.', de: 'Obwohl die Mieten steigen, ziehen immer mehr Menschen in die Stadt.', en: 'Although rents are rising, more and more people move to the city.' },
+  },
+};
+const LEVEL_UI = {
+  en: { learn: 'What you learn', can: 'After this level you can', start: (l: string) => `Start ${l}`, close: 'Close', more: 'More' },
+  de: { learn: 'Das lernst du', can: 'Danach kannst du', start: (l: string) => `${l} starten`, close: 'Schließen', more: 'Mehr' },
+};
+
+/** A level card. Points open it with a mouse; a tap opens and closes it on a phone. */
+function LevelCard({ l, lang, meta, sub, href, soon }: { l: (typeof LEVELS)[number]; lang: UiLang; meta: string; sub: string; href: string; soon: boolean }) {
+  const [open, setOpen] = useState(false);
+  const touch = useRef(false);
+  const info = LEVEL_INFO[lang][l.level];
+  const ui = LEVEL_UI[lang];
+  const go = href.startsWith('#')
+    ? <a href={href} className="btn lp-more-go" onClick={() => setOpen(false)}>{ui.start(l.level)} →</a>
+    : <Link href={href} className="btn lp-more-go">{ui.start(l.level)} →</Link>;
+  return (
+    <div
+      className={`lp-course lp-level t-${l.tone} ${soon ? 'is-soon' : ''} ${open ? 'is-open' : ''}`}
+      tabIndex={0} role="button" aria-expanded={open} aria-label={`${l.level}: ${sub}`}
+      onPointerDown={(e) => { touch.current = e.pointerType !== 'mouse'; }}
+      onPointerEnter={(e) => { if (e.pointerType === 'mouse') setOpen(true); }}
+      onPointerLeave={(e) => { if (e.pointerType === 'mouse') setOpen(false); }}
+      onClick={(e) => { if ((e.target as HTMLElement).closest('a')) return; if (touch.current || e.detail === 0) setOpen((o) => !o); }}
+      onKeyDown={(e) => { if (e.key === 'Escape') setOpen(false); if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); setOpen((o) => !o); } }}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false); }}
+    >
+      <span className="lp-course-icon" aria-hidden>{l.icon}</span>
+      <b className="lp-course-level">{l.level}</b>
+      <span className="lp-course-sub">{sub}</span>
+      <span className="lp-course-meta">{meta}</span>
+      <span className="lp-level-hint" aria-hidden>{ui.more} <i>↓</i></span>
+      <div className="lp-more" aria-hidden={!open}>
+        <div className="lp-more-in">
+          <div className="lp-more-head"><span aria-hidden>{l.icon}</span><b>{l.level}</b><span>{sub}</span></div>
+          <p className="lp-more-label">{ui.learn}</p>
+          <ul>{info.learn.map((x) => <li key={x}>{x}</li>)}</ul>
+          <p className="lp-more-label">{ui.can}</p>
+          <p className="lp-more-can">{info.can}</p>
+          <p className="lp-more-ex"><b lang="de">{info.de}</b><span>{info.en}</span></p>
+          {!soon && go}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function BetaForm({ lang }: { lang: UiLang }) {
   const t = T[lang];
@@ -195,7 +256,7 @@ function BetaForm({ lang }: { lang: UiLang }) {
 export default function Landing() {
   const { user, ready, access } = useStore();
   const router = useRouter();
-  const [lang, setLang] = useUiLang();
+  const [lang] = useUiLang();
   const t = T[lang];
   // Back from Google with an account that is already in: go straight to the course.
   useEffect(() => {
@@ -209,13 +270,12 @@ export default function Landing() {
 
   return (
     <main className="landing lp" lang={lang}>
-      <div className="lp-langbar"><LangToggle lang={lang} onChange={setLang} /></div>
       <section className="lp-hero">
         <div className="lp-hero-copy">
           <h1>{t.h1}</h1>
           <p className="lead">{t.lead}</p>
           {ready && user && access !== false && <div className="hero-cta"><Link href="/lernen" className="btn btn-lg">{t.cont}</Link></div>}
-          {ready && !user && <div className="hero-cta"><a href="#beta" className="btn btn-lg">{t.startFree}</a><Link href="/login" className="btn btn-lg btn-ghost">{t.login}</Link></div>}
+          {ready && !user && <div className="hero-cta"><a href="#beta" className="btn btn-lg lp-go">{t.startFree} <span aria-hidden>→</span></a><Link href="/login" className="btn btn-lg btn-ghost">{t.login}</Link></div>}
         </div>
         <div className="lp-hero-art" aria-hidden>
           <div className="lp-blob" />
@@ -232,14 +292,9 @@ export default function Landing() {
         <div className="lp-courses lp-courses-4">
           {LEVELS.map((l) => {
             const c = courses.find((x) => x.id === l.course);
-            return (
-              <div key={l.level} className={`lp-course t-${l.tone} ${c ? '' : 'is-soon'}`}>
-                <span className="lp-course-icon" aria-hidden>{l.icon}</span>
-                <b className="lp-course-level">{l.level}</b>
-                <span className="lp-course-sub">{t.levelSub[l.level]}</span>
-                <span className="lp-course-meta">{c ? `${c.chapters.length} ${t.chapters}${l.level === 'B2' ? ` · ${t.b2note}` : ''}` : t.soon}</span>
-              </div>
-            );
+            const meta = c ? `${c.chapters.length} ${t.chapters}${l.level === 'B2' ? ` · ${t.b2note}` : ''}` : t.soon;
+            const href = ready && user && access !== false ? '/kurs' : '#beta';
+            return <LevelCard key={l.level} l={l} lang={lang} meta={meta} sub={t.levelSub[l.level]} href={href} soon={!c} />;
           })}
         </div>
       </section>

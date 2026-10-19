@@ -1,0 +1,104 @@
+/* Copy of shared/shell/shell.css. Edit the original, then run: npm run shell */
+/* Fuchsdeutsch shell: header, DE/EN switch, theme switch. Shared by the course, Prüfung and Spiele.
+   Source of truth: shared/shell/shell.css (`npm run shell` copies it into each app). */
+:root {
+  --fx-bg: #ffffff;
+  --fx-ink: #1c1d1f;
+  --fx-ink-2: #5b5d63;
+  --fx-ink-3: #a3a6ad;
+  --fx-line: #e4e4e7;
+  --fx-soft: #f1f1f3;
+  --fx-mint: #d4f1e1;
+  --fx-peach: #fddcc6;
+  --fx-sky: #d3e9fb;
+  --fx-butter: #faedb8;
+  --fx-lilac: #e6defc;
+  --fx-rose: #fad6e1;
+  --fx-thumb: #1c1d1f;
+  --fx-thumb-ink: #ffffff;
+  --fx-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --fx-font: 'Figtree Variable', 'Figtree', -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+:root[data-theme='dark'] {
+  --fx-bg: #1b1e24;
+  --fx-ink: #e8eaf0;
+  --fx-ink-2: #a9aebb;
+  --fx-ink-3: #6b7080;
+  --fx-line: #30343e;
+  --fx-soft: #262a32;
+  --fx-mint: #24493a;
+  --fx-peach: #523424;
+  --fx-sky: #233c5a;
+  --fx-butter: #4a4124;
+  --fx-lilac: #3a3166;
+  --fx-rose: #50293a;
+  --fx-thumb: #e8eaf0;
+  --fx-thumb-ink: #16181d;
+}
+
+.fx-head { position: sticky; top: 0; z-index: 40; font-family: var(--fx-font); color: var(--fx-ink); background: color-mix(in srgb, var(--fx-bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--fx-line); }
+.fx-top { max-width: 1180px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 18px; min-height: 62px; }
+
+/* brand: the fox tilts its head when you point at it */
+.fx-brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fx-ink); flex: none; }
+.fx-name { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; }
+.fx-fox { display: inline-grid; width: 34px; height: 34px; transform-origin: 50% 80%; transition: rotate 0.35s var(--fx-spring), scale 0.35s var(--fx-spring); }
+.fx-fox img { width: 34px; height: 34px; display: block; }
+.fx-brand:hover .fx-fox, .fx-brand:focus-visible .fx-fox { rotate: -12deg; scale: 1.08; }
+.fx-fox.is-wiggle img { animation: fx-wiggle 0.6s ease-in-out; }
+@keyframes fx-wiggle { 0%, 100% { rotate: 0deg; } 25% { rotate: 9deg; } 50% { rotate: -6deg; } 75% { rotate: 3deg; } }
+
+/* link rows with the gliding pastel pill */
+.fx-scroll { min-width: 0; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.fx-scroll::-webkit-scrollbar { display: none; }
+.fx-row { position: relative; display: flex; align-items: center; gap: 2px; width: max-content; }
+.fx-row.is-center { margin: 0 auto; }
+.fx-pill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; opacity: 0; scale: 0.85; transition: translate 0.45s var(--fx-spring), width 0.45s var(--fx-spring), background-color 0.3s ease, opacity 0.2s ease, scale 0.3s var(--fx-spring); pointer-events: none; }
+.fx-pill.is-on { opacity: 1; scale: 1; }
+.fx-link { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; padding: 9px 15px; border: 0; background: none; border-radius: 999px; font: inherit; font-weight: 650; font-size: 0.95rem; color: var(--fx-ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: color 0.2s ease; }
+.fx-link:hover, .fx-link:focus-visible, .fx-link.is-here { color: var(--fx-ink); }
+.fx-link:focus-visible { outline: 2px solid var(--fx-ink); outline-offset: 2px; }
+.fx-link:active:not(.is-soon) { scale: 0.96; }
+.fx-link.is-soon { color: var(--fx-ink-3); cursor: default; }
+.fx-link small { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; background: var(--fx-soft); color: var(--fx-ink-3); border-radius: 999px; padding: 2px 7px; }
+.fx-apps-wrap { flex: 1; }
+
+/* right side */
+.fx-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex: none; }
+
+/* DE | EN: a thumb that glides over with a small bounce and a squish */
+.fx-lang { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; padding: 3px; border: 1px solid var(--fx-line); border-radius: 999px; background: var(--fx-bg); }
+.fx-lang-thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px; background: var(--fx-thumb); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18); translate: 0 0; transition: translate 0.5s var(--fx-spring), scale 0.22s ease; }
+.fx-lang[data-lang='en'] .fx-lang-thumb { translate: 100% 0; }
+.fx-lang.is-moving .fx-lang-thumb { scale: 1.22 0.86; }
+.fx-lang button { position: relative; z-index: 1; border: 0; background: none; padding: 6px 13px; min-width: 42px; font: inherit; font-weight: 800; font-size: 0.82rem; letter-spacing: 0.04em; color: var(--fx-ink-2); cursor: pointer; border-radius: 999px; transition: color 0.3s ease 0.08s; }
+.fx-lang button[aria-pressed='true'] { color: var(--fx-thumb-ink); }
+.fx-lang button[aria-pressed='false']:hover { color: var(--fx-ink); }
+.fx-lang button:focus-visible { outline: 2px solid var(--fx-ink); outline-offset: 1px; }
+
+/* light or dark */
+.fx-theme { width: 38px; height: 38px; flex: none; border-radius: 999px; border: 1px solid var(--fx-line); background: var(--fx-bg); color: var(--fx-ink); display: inline-grid; place-items: center; font-size: 1rem; cursor: pointer; padding: 0; transition: border-color 0.2s, scale 0.2s var(--fx-spring); }
+.fx-theme:hover { border-color: var(--fx-ink); scale: 1.06; }
+.fx-theme .is-spin { display: inline-block; animation: fx-spin 0.55s var(--fx-spring); }
+@keyframes fx-spin { from { rotate: -200deg; scale: 0.4; opacity: 0; } to { rotate: 0deg; scale: 1; opacity: 1; } }
+
+/* row 2: parts of this page, centered */
+.fx-sub { border-top: 1px solid var(--fx-line); }
+.fx-sub .fx-scroll { max-width: 1180px; margin: 0 auto; padding: 5px 20px; }
+.fx-sections .fx-link { padding: 7px 15px; font-size: 0.9rem; }
+
+/* phones: the app row scrolls sideways under the brand */
+@media (max-width: 760px) {
+  .fx-top { flex-wrap: wrap; gap: 8px 12px; padding: 8px 14px; }
+  .fx-apps-wrap { order: 3; flex-basis: 100%; margin: 0 -14px; padding: 0 10px; }
+  .fx-name { font-size: 1.05rem; }
+  .fx-link { padding: 8px 12px; font-size: 0.9rem; }
+  .fx-sub .fx-scroll { padding: 4px 10px; }
+  .fx-lang button { padding: 5px 10px; min-width: 36px; }
+}
+@media (max-width: 350px) { .fx-name { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .fx-pill, .fx-lang-thumb, .fx-fox, .fx-theme { transition: none; }
+  .fx-fox.is-wiggle img, .fx-theme .is-spin { animation: none; }
+}
+html { scroll-padding-top: 130px; }

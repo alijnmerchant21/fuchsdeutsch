@@ -1,76 +1,84 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { SiteHeader, type ShellItem } from '@/shared/shell/SiteHeader';
+import { findChapter } from '@/content/course';
 import { useUiLang } from '@/lib/lang';
-import { BRAND } from '@/lib/config';
 import { streakAlive, useStore } from '@/lib/store';
-import { Fox } from './Fox';
+import { chapterOpen, sectionOpen } from '@/lib/unlock';
+
+/** Spiele is linked once its Vercel project is live (set NEXT_PUBLIC_SPIELE_LIVE=1). Until then it shows "soon". */
+const SPIELE_LIVE = process.env.NEXT_PUBLIC_SPIELE_LIVE === '1';
 
 export function Nav() {
-  const { user, progress, isAdmin, adminView, signOut, ready } = useStore();
+  const { user, progress, isAdmin, adminView, signOut, ready, access } = useStore();
   const router = useRouter();
-  const [lang] = useUiLang();
+  const [lang, setLang] = useUiLang();
   const path = usePathname();
-  const here = (href: string) => path === href || (href !== '/' && path.startsWith(href));
-  const link = (href: string, label: string, also?: string) => (
-    <Link href={href} className={`v3-navlink ${here(href) || (also && here(also)) ? 'is-here' : ''}`}>{label}</Link>
-  );
-  const alive = streakAlive(progress.streak);
   const en = lang === 'en';
-  // Light or dark. layout.tsx sets it before paint; FDPTHEME is shared with Fuchsdeutsch Prüfung.
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  useEffect(() => { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'); }, []);
-  const flip = () => {
-    const n = theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', n);
-    try { localStorage.setItem('FDPTHEME', n); } catch { /* storage unavailable */ }
-    setTheme(n);
-  };
-  // Second row on the homepage for visitors: jump to a part of the page.
-  const sections = path === '/' && ready && !user
-    ? [{ id: 'levels', label: en ? 'Levels' : 'Niveaus' }, { id: 'exam', label: en ? 'Exam prep' : 'Prüfungstraining' }, { id: 'features', label: en ? 'What you get' : 'Was du bekommst' }, { id: 'beta', label: en ? 'Free beta' : 'Kostenlose Beta' }]
-    : [];
-  return (
-    <header className="v3-nav">
-      <div className="v3-nav-in">
-        <Link href={user ? (isAdmin ? '/admin' : '/lernen') : '/'} className="v3-brand" aria-label={`${BRAND} Startseite`}>
-          <Fox size={34} /><span>{BRAND}</span>
-        </Link>
-        <nav className="v3-navlinks" aria-label="Hauptnavigation">
-          {user && !isAdmin && link('/lernen', 'Start')}
-          {user && !isAdmin && link('/kurs', 'Mein Kurs')}
-          {user && !isAdmin && link('/geschichten', 'Geschichten')}
-          {user && !isAdmin && link('/bestenliste', 'Bestenliste')}
-          {/* Fuchsdeutsch Prüfung is its own app under /pruefung, so a full page load, not a client link. */}
-          <a href="/pruefung" className={`v3-navlink ${path.startsWith('/pruefung') ? 'is-here' : ''}`}>Prüfung</a>
-          <span className="v3-navlink is-soon" aria-disabled="true" title={lang === 'en' ? 'Coming soon' : 'Kommt bald'}>{lang === 'en' ? 'Games' : 'Spiele'} <small>{lang === 'en' ? 'soon' : 'bald'}</small></span>
-          <span className="v3-navlink is-soon" aria-disabled="true" title={lang === 'en' ? 'Coming soon' : 'Kommt bald'}>Tausend <small>{lang === 'en' ? 'soon' : 'bald'}</small></span>
-          {user && isAdmin && link('/admin', 'Admin')}
-        </nav>
-        <div className="v3-nav-right">
-          {user && !isAdmin && (
-            <>
-              <span className={`v3-chip t-butter ${alive ? '' : 'is-off'}`} title={alive ? 'Deine Serie läuft' : 'Lerne heute, um eine Serie zu starten'}>
-                <span aria-hidden>🔥</span> {alive ? progress.streak.count : 0}<span className="sr-only"> Tage Serie</span>
-              </span>
-              <span className="v3-chip t-lilac" title="Erfahrungspunkte">{progress.xp} XP</span>
-              <Link href="/willkommen" className="v3-avatar" title={`${user.name}: Profil bearbeiten`} aria-label="Profil bearbeiten">{user.name.slice(0, 1).toUpperCase()}</Link>
-            </>
-          )}
-          {user && isAdmin && <span className="v3-chip t-lilac">Admin</span>}
-          {user && <button type="button" className="v3-textbtn" onClick={() => void signOut().then(() => router.push('/'))}>{lang === 'en' ? 'Log out' : 'Abmelden'}</button>}
-          <button type="button" className="v3-theme" onClick={flip} title={en ? 'Light or dark' : 'Hell oder dunkel'} aria-label={en ? 'Light or dark' : 'Hell oder dunkel'}>{theme === 'dark' ? '☀' : '☾'}</button>
-        </div>
-      </div>
-      {sections.length > 0 && (
-        <nav className="v3-subnav" aria-label={en ? 'On this page' : 'Auf dieser Seite'}>
-          <div className="v3-subnav-in">
-            {sections.map((x) => <a key={x.id} href={`#${x.id}`} className="v3-navlink">{x.label}</a>)}
-          </div>
-        </nav>
+  const here = (href: string) => path === href || path.startsWith(href + '/');
+
+  // Row 2: the parts of the page you are on.
+  const homeParts = (prefix: string): ShellItem[] => [
+    { key: 'levels', label: en ? 'Levels' : 'Niveaus', href: `${prefix}#levels` },
+    { key: 'exam', label: en ? 'Exam prep' : 'Prüfungstraining', href: `${prefix}#exam` },
+    { key: 'features', label: en ? 'What you get' : 'Was du bekommst', href: `${prefix}#features` },
+    ...(!user || access === false ? [{ key: 'beta', label: en ? 'Free beta' : 'Kostenlose Beta', href: `${prefix}#beta` }] : []),
+  ];
+  let sections: ShellItem[] = [];
+  const chapterMatch = path.match(/^\/kurs\/([^/]+)\/([^/]+)/);
+  const found = chapterMatch ? findChapter(chapterMatch[1]) : null;
+  if (!ready) sections = [];
+  else if (path === '/') sections = homeParts('');
+  else if (found && user) {
+    // A chapter: its sections, then the chapter test. Closed sections are greyed out.
+    const { chapter: ch, course, index } = found;
+    const open = chapterOpen(course, index, progress, isAdmin);
+    sections = [
+      { key: 'back', label: '←', href: '/kurs', internal: true },
+      ...ch.sections.map((s, i): ShellItem => ({
+        key: s.id, label: s.label, href: `/kurs/${ch.id}/${s.id}`, internal: true,
+        active: chapterMatch![2] === s.id, locked: !(open && sectionOpen(ch, i, progress, isAdmin)),
+      })),
+      { key: 'test', label: en ? 'Chapter test' : 'Kapiteltest', href: `/kurs/${ch.id}/pruefung`, internal: true, active: chapterMatch![2] === 'pruefung' },
+    ];
+  } else if (user && isAdmin) {
+    sections = [
+      { key: 'admin', label: 'Admin', href: '/admin', internal: true, active: here('/admin') },
+      { key: 'kurs', label: 'Kurse', href: '/kurs', internal: true, active: here('/kurs') },
+      { key: 'geschichten', label: 'Geschichten', href: '/geschichten', internal: true, active: here('/geschichten') },
+    ];
+  } else if (user) {
+    sections = [
+      { key: 'start', label: 'Start', href: '/lernen', internal: true, active: here('/lernen') },
+      { key: 'kurs', label: en ? 'My course' : 'Mein Kurs', href: '/kurs', internal: true, active: here('/kurs') },
+      { key: 'geschichten', label: en ? 'Stories' : 'Geschichten', href: '/geschichten', internal: true, active: here('/geschichten') },
+      { key: 'bestenliste', label: en ? 'Leaderboard' : 'Bestenliste', href: '/bestenliste', internal: true, active: here('/bestenliste') },
+      { key: 'final', label: en ? 'Final exam' : 'Abschlussprüfung', href: '/abschlusspruefung', internal: true, active: here('/abschlusspruefung') },
+    ];
+  } else sections = homeParts('/');
+
+  const alive = streakAlive(progress.streak);
+  const right = (
+    <>
+      {user && !isAdmin && (
+        <>
+          <span className={`v3-chip t-butter fx-hide-sm ${alive ? '' : 'is-off'}`} title={alive ? 'Deine Serie läuft' : 'Lerne heute, um eine Serie zu starten'}>
+            <span aria-hidden>🔥</span> {alive ? progress.streak.count : 0}<span className="sr-only"> Tage Serie</span>
+          </span>
+          <span className="v3-chip t-lilac fx-hide-sm" title="Erfahrungspunkte">{progress.xp} XP</span>
+          <Link href="/willkommen" className="v3-avatar" title={`${user.name}: Profil bearbeiten`} aria-label="Profil bearbeiten">{user.name.slice(0, 1).toUpperCase()}</Link>
+        </>
       )}
-      {isAdmin && adminView && <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div>}
-    </header>
+      {user && <button type="button" className="v3-textbtn" onClick={() => void signOut().then(() => router.push('/'))}>{en ? 'Log out' : 'Abmelden'}</button>}
+    </>
+  );
+  return (
+    <SiteHeader
+      app="kurs" root="" foxSrc="/fox-logo.png" lang={lang} onLang={setLang}
+      kursHref={user ? (isAdmin ? '/admin' : '/lernen') : '/'} spieleLive={SPIELE_LIVE}
+      sections={sections} right={right}
+      below={isAdmin && adminView ? <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div> : undefined}
+    />
   );
 }

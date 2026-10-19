@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import '@fontsource-variable/bricolage-grotesque';
-import '@fontsource/atkinson-hyperlegible/400.css';
-import '@fontsource/atkinson-hyperlegible/700.css';
-import '@fontsource/atkinson-hyperlegible/400-italic.css';
+import '@fontsource-variable/figtree';
 import './trainer.css';
 import './app.css';
+import './shell.css';
+import './fd-match.css';
 import { StoreProvider } from '@/lib/store';
 import { LangProvider } from '@/lib/lang';
 import { Topbar } from '@/components/Topbar';

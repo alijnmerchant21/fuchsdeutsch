@@ -41,8 +41,8 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{background:var(--bg);background-image:radial-gradient(var(--bg-dot) 1px,transparent 1px);background-size:22px 22px;
-  color:var(--txt);font:16.5px/1.6 "Atkinson Hyperlegible",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:"Bricolage Grotesque Variable","Bricolage Grotesque","Atkinson Hyperlegible",sans-serif;margin:0 0 .3em;line-height:1.15;letter-spacing:-.01em}
+  color:var(--txt);font:16.5px/1.6 "Figtree Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Figtree Variable","Figtree","Figtree Variable",sans-serif;margin:0 0 .3em;line-height:1.15;letter-spacing:-.01em}
 h2{font-size:clamp(28px,4.4vw,40px);font-weight:800} h3{font-size:21px;font-weight:700} h4{font-size:18px;font-weight:700}
 p{margin:0 0 .7em}
 button{font-family:inherit;font-size:15px;cursor:pointer;border:none;color:inherit}
@@ -58,8 +58,8 @@ select,input{font-family:inherit;font-size:15.5px;color:var(--txt);background:va
 .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:10px 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--txt)}
-.logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font:800 15px "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif;background:var(--lilac);color:var(--lilac-ink);transform:rotate(-4deg)}
-.bname{font:800 19px "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif}
+.logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font:800 15px "Figtree Variable","Figtree",sans-serif;background:var(--lilac);color:var(--lilac-ink);transform:rotate(-4deg)}
+.bname{font:800 19px "Figtree Variable","Figtree",sans-serif}
 .topsub{flex:1;color:var(--dim);font-size:14px}
 .ghost{background:var(--card);border:1px solid var(--line);width:36px;height:36px;border-radius:50%;font-size:16px}
 main{max-width:1100px;margin:0 auto;padding:26px 20px 30px}
@@ -85,7 +85,7 @@ main{max-width:1100px;margin:0 auto;padding:26px 20px 30px}
 .today .btn{margin-top:10px}
 .statcol{display:grid;gap:16px}
 .stat{padding:18px 22px;display:flex;flex-direction:column;justify-content:center}
-.stat b{font:800 44px/1 "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif;margin-bottom:6px}
+.stat b{font:800 44px/1 "Figtree Variable","Figtree",sans-serif;margin-bottom:6px}
 .stat span{font-weight:700} .stat small{color:var(--dim);font-size:13.5px}
 .stat.good{background:var(--mint-soft);border-color:var(--mint)} .stat.good b{color:var(--mint-ink)}
 .stat.warn{background:var(--peach-soft);border-color:var(--peach)} .stat.warn b{color:var(--peach-ink)}
@@ -123,7 +123,7 @@ main{max-width:1100px;margin:0 auto;padding:26px 20px 30px}
 .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .tool{text-align:left;padding:18px 20px;border-left:6px solid var(--hf);display:flex;flex-direction:column;gap:4px;transition:box-shadow .15s}
 .tool:hover{box-shadow:var(--shadow-hi)}
-.tool b{font:700 18px "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif} .tool span{color:var(--dim);font-size:14px}
+.tool b{font:700 18px "Figtree Variable","Figtree",sans-serif} .tool span{color:var(--dim);font-size:14px}
 
 /* lesson */
 .lessonbar{display:flex;align-items:center;gap:14px;margin-bottom:14px}
@@ -133,7 +133,7 @@ main{max-width:1100px;margin:0 auto;padding:26px 20px 30px}
 .pg{width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--line);font-size:22px;line-height:1}
 .pg:disabled{opacity:.35;cursor:default}
 .lessonhead{padding:26px 30px;border-radius:22px;background:var(--hs);border-color:var(--hf);border-width:1.5px;margin-bottom:16px}
-.donebadge{font:700 13px "Atkinson Hyperlegible",sans-serif;vertical-align:middle;background:var(--mint);color:var(--mint-ink);padding:3px 10px;border-radius:99px}
+.donebadge{font:700 13px "Figtree Variable",sans-serif;vertical-align:middle;background:var(--mint);color:var(--mint-ink);padding:3px 10px;border-radius:99px}
 .weekintro{background:var(--card);border-radius:12px;padding:12px 16px;font-size:15px;margin:10px 0 4px;max-width:75ch}
 .steps{list-style:none;padding:0;margin:14px 0 0;display:flex;gap:8px;flex-wrap:wrap;counter-reset:s}
 .steps li{counter-increment:s}
@@ -141,7 +141,7 @@ main{max-width:1100px;margin:0 auto;padding:26px 20px 30px}
 .steps a::before{content:counter(s);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--hf);color:var(--hi);font-size:13px}
 
 .block{padding:22px 24px;margin:0 0 16px;position:relative;scroll-margin-top:72px}
-.block[data-step]::before{content:attr(data-step);position:absolute;left:-14px;top:20px;width:28px;height:28px;border-radius:50%;background:var(--txt);color:var(--bg);display:grid;place-items:center;font:800 14px "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif}
+.block[data-step]::before{content:attr(data-step);position:absolute;left:-14px;top:20px;width:28px;height:28px;border-radius:50%;background:var(--txt);color:var(--bg);display:grid;place-items:center;font:800 14px "Figtree Variable","Figtree",sans-serif}
 .bh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap}
 .modchip{font-weight:700;font-size:14px;padding:4px 12px;border-radius:99px;background:var(--sky-soft);color:var(--sky-ink);border:1px solid var(--sky)}
 .stratcard{background:var(--butter-soft);border-color:var(--butter)}
@@ -151,7 +151,7 @@ main{max-width:1100px;margin:0 auto;padding:26px 20px 30px}
 .task{font-size:17px;font-weight:700;margin:4px 0 10px;max-width:80ch}
 .intro{font-style:italic;color:var(--dim)}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap} .row.tight{margin:0}
-.clock{font:800 22px "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif;font-variant-numeric:tabular-nums;min-width:62px}
+.clock{font:800 22px "Figtree Variable","Figtree",sans-serif;font-variant-numeric:tabular-nums;min-width:62px}
 .clock.over{color:var(--rose-ink)}
 .btn.live{background:var(--rose);color:var(--rose-ink)}
 
@@ -205,13 +205,13 @@ mark.ev sup{font-size:11px;font-weight:800;margin-right:3px;color:var(--dim)}
 .result{margin:16px 0 4px;padding:14px 18px;border-radius:14px;display:flex;flex-direction:column;gap:2px}
 .result.ok{background:var(--mint-soft);color:var(--mint-ink);border:1.5px solid var(--mint)}
 .result.low{background:var(--peach-soft);color:var(--peach-ink);border:1.5px solid var(--peach)}
-.result b{font:800 19px "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif}
+.result b{font:800 19px "Figtree Variable","Figtree",sans-serif}
 .actions{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
 .left{font-size:14px;color:var(--dim)}
 
 /* results */
 .bigscore{display:flex;align-items:baseline;gap:8px;padding:16px 20px;border-radius:16px;margin:6px 0 14px}
-.bigscore b{font:800 56px/1 "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif}
+.bigscore b{font:800 56px/1 "Figtree Variable","Figtree",sans-serif}
 .bigscore small{margin-left:auto;font-size:14px}
 .bigscore.ok{background:var(--mint-soft);color:var(--mint-ink)} .bigscore.low{background:var(--peach-soft);color:var(--peach-ink)}
 .bars{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
@@ -222,7 +222,7 @@ mark.ev sup{font-size:11px;font-weight:800;margin-right:3px;color:var(--dim)}
 .bar b{text-align:right}
 .matrix{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .mx{padding:12px 16px;border-radius:12px;background:var(--card2);font-size:14px;color:var(--dim)}
-.mx b{display:block;font:800 28px "Bricolage Grotesque Variable","Bricolage Grotesque",sans-serif;color:var(--txt)}
+.mx b{display:block;font:800 28px "Figtree Variable","Figtree",sans-serif;color:var(--txt)}
 .mx.ok{background:var(--mint-soft)} .mx.bad{background:var(--rose-soft)} .mx.bad b{color:var(--rose-ink)}
 .verdict{background:var(--lilac-soft);padding:12px 16px;border-radius:12px;margin:12px 0}
 .trapcount{list-style:none;padding:0} .trapcount li{margin:6px 0}

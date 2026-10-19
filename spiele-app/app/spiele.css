@@ -1,0 +1,155 @@
+/* =========================================================
+   Fuchsdeutsch Spiele: game library, cards, level filter, game frame.
+   Builds on trainer.css + app.css (same tokens as Fuchsdeutsch Prüfung).
+   ========================================================= */
+
+/* ---------- landing additions ---------- */
+.lp-steps.three{grid-template-columns:repeat(3,1fr)}
+.lp-steps.three .lp-step{min-height:250px}
+.hd-card{display:flex;align-items:center;gap:14px;width:250px}
+.hd-die{flex:none;width:52px;height:52px;border-radius:12px;border:2px solid var(--txt);background:var(--card);display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:7px;gap:1px;animation:roll .55s cubic-bezier(.2,.9,.3,1.2)}
+.hd-die i{border-radius:50%;margin:2px}
+.hd-die i.p{background:var(--peach-ink)}
+.hd-card small{display:block;font-weight:700;letter-spacing:.08em}
+.hd-word{display:block;font:800 18px/1.2 "Figtree Variable","Figtree",sans-serif;animation:wordin .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes roll{0%{transform:rotate(-200deg) scale(.6)}100%{transform:none}}
+@keyframes wordin{from{opacity:0;transform:translateY(8px)}}
+
+/* ---------- library head ---------- */
+.lib-head{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 0 6px}
+.lib-h1{font-size:clamp(32px,4.6vw,48px);font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:0 0 12px}
+.lib-lead{font-size:17.5px;color:var(--dim);max-width:56ch;margin:0}
+.lib-fox{animation:bob 3.2s ease-in-out infinite}
+
+/* ---------- level filter ---------- */
+.lvlbar{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:26px 0 12px}
+.lvl{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;padding:12px 16px;border-radius:16px;background:var(--card);border:1.5px solid var(--line);box-shadow:var(--shadow);transition:transform .15s,border-color .15s,background .15s}
+.lvl:hover{transform:translateY(-2px);border-color:var(--dim2)}
+.lvl b{font:800 22px/1.1 "Figtree Variable","Figtree",sans-serif}
+.lvl span{font-size:13px;color:var(--dim)}
+.lvl i{position:absolute;top:10px;right:12px;font-style:normal;font-size:12px;font-weight:800;min-width:22px;height:22px;border-radius:99px;display:grid;place-items:center;background:var(--card2);color:var(--dim)}
+.lvl[aria-selected="true"]{background:var(--txt);border-color:var(--txt);color:var(--bg)}
+.lvl[aria-selected="true"] span{color:color-mix(in srgb,var(--bg) 70%,transparent)}
+.lvl[aria-selected="true"] i{background:var(--butter);color:var(--butter-ink)}
+.lib-count{margin:0 0 16px}
+
+/* ---------- game cards ---------- */
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:22px}
+.lib .ggrid{margin-top:0}
+.game{position:relative;display:flex;flex-direction:column;overflow:hidden;border-radius:22px;text-decoration:none;color:var(--txt);
+  animation:cardin .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 55ms);transition:transform .2s,box-shadow .2s}
+@keyframes cardin{from{opacity:0;transform:translateY(14px)}}
+.g-top{position:relative;height:150px;display:grid;place-items:center;background:var(--hs);border-bottom:1px solid var(--line-soft)}
+.g-art{width:148px;height:114px;color:var(--txt);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.g-level{position:absolute;top:12px;left:12px;font:800 13px/1 "Figtree Variable","Figtree",sans-serif;padding:6px 10px;border-radius:99px;background:var(--card);border:1px solid var(--line)}
+.g-new{position:absolute;top:12px;right:12px;font-size:12px;font-weight:800;padding:4px 10px;border-radius:99px;background:var(--txt);color:var(--bg)}
+.g-soon{position:absolute;top:12px;right:12px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--card);color:var(--dim);border:1px solid var(--line)}
+.g-body{display:flex;flex-direction:column;flex:1;padding:16px 18px 18px}
+.g-body h3{font-size:21px;font-weight:800;margin:0 0 6px;letter-spacing:-.015em}
+.g-line{font-size:15px;line-height:1.5;color:var(--dim);margin:0 0 4px}
+.g-body .en.help.line{font-size:13.5px;margin:0 0 4px}
+.g-skills{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.g-skills span{font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--hs);color:var(--hi)}
+.g-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px;color:var(--dim);margin-top:auto}
+.g-meta span{display:inline-flex;align-items:center;gap:5px}
+.g-meta svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.g-play{margin-top:14px;display:flex;justify-content:center;gap:8px;border-radius:99px}
+.g-play span{transition:transform .2s}
+.g-wait{margin-top:14px;text-align:center;font-size:14px;font-weight:700;color:var(--dim2);padding:9px;border-radius:99px;border:1.5px dashed var(--line)}
+
+.game.is-live{border:2px solid var(--txt);box-shadow:var(--shadow-hi)}
+.game.is-live:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 22px 40px -18px rgba(20,24,40,.4)}
+.game.is-live:hover .g-art{transform:scale(1.08) rotate(-3deg)}
+.game.is-live:hover .g-play span{transform:translateX(4px)}
+.game.is-live .g-top::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,color-mix(in srgb,var(--hf) 55%,transparent),transparent 60%);pointer-events:none}
+
+/* coming soon: grey and quiet */
+.game.is-soon{cursor:default}
+.game.is-soon .g-top{background:var(--card2)}
+.game.is-soon .g-art,.game.is-soon .g-skills{filter:grayscale(1);opacity:.55}
+.game.is-soon h3{color:var(--dim)}
+.game.is-soon .g-line{color:var(--dim2)}
+
+/* ---------- game frame ---------- */
+main:has(.playwrap){max-width:none;padding:0}
+.playwrap{height:calc(100vh - 58px)}
+.playframe{display:block;width:100%;height:100%;border:0;background:#f7f3e8}
+body:has(.playwrap) .foot{display:none}
+
+@media (max-width:900px){.lvlbar{grid-template-columns:repeat(5,minmax(96px,1fr));overflow-x:auto;padding-bottom:4px}.lp-steps.three{grid-template-columns:1fr}.lp-steps.three .lp-step{min-height:0}}
+@media (max-width:600px){.lib-fox{display:none}.lvl{padding:10px 12px}.lvl b{font-size:19px}.lvl span{display:none}}
+@media (prefers-reduced-motion:reduce){.game,.hd-die,.hd-word{animation:none}}
+
+/* ---------- top bar links when signed in ---------- */
+.applinks{display:flex;gap:6px}
+.applinks a{text-decoration:none;color:var(--dim);font-weight:700;font-size:14px;padding:5px 12px;border-radius:99px}
+.applinks a:hover{color:var(--txt);background:var(--card)}
+.applinks a.on{color:var(--txt);background:var(--card);box-shadow:var(--shadow)}
+
+/* ---------- streak bar ---------- */
+.sbar{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:14px;margin-top:22px}
+.sbar .card{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:20px}
+.sb-big{display:block;font:800 24px/1.1 "Figtree Variable","Figtree",sans-serif;letter-spacing:-.01em}
+.sb-big small{font-size:14px;color:var(--dim);font-weight:700}
+.sb-sub{display:block;font-size:13.5px;color:var(--dim);line-height:1.35}
+.sbar .en.help.line{font-size:12.5px;margin:1px 0 0}
+.sb-streak.lit{background:linear-gradient(120deg,var(--card) 40%,var(--peach-soft))}
+.flame{flex:none;overflow:visible}
+.flame.on .fl-out{transform-origin:50% 90%;animation:flick 1.4s ease-in-out infinite}
+.flame.on .fl-in{transform-origin:50% 90%;animation:flick 1s ease-in-out infinite reverse}
+@keyframes flick{0%,100%{transform:scale(1,1) skewX(0)}30%{transform:scale(.96,1.06) skewX(-3deg)}60%{transform:scale(1.03,.97) skewX(2deg)}}
+.sb-week{display:flex;gap:6px;list-style:none;margin:0 0 0 auto;padding:0}
+.sb-week li{display:flex;flex-direction:column;align-items:center;gap:2px}
+.sb-week i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:800;background:var(--card2);border:1.5px solid var(--line);color:#fff}
+.sb-week li.ok i{background:linear-gradient(160deg,#FFB36B,#F2734A);border-color:transparent;box-shadow:0 3px 8px -3px #F2734A}
+.sb-week li.now i{outline:2px solid var(--txt);outline-offset:2px}
+.sb-week small{font-size:11px;color:var(--dim);font-weight:700}
+.ring{flex:none;width:52px;height:52px;transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--card2);stroke-width:7}
+.ring-fg{fill:none;stroke:var(--mint-ink);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1)}
+.sb-rank{text-decoration:none;color:var(--txt);transition:transform .15s,box-shadow .15s}
+.sb-rank:hover{transform:translateY(-2px);box-shadow:var(--shadow-hi)}
+.sb-trophy{font-size:34px;flex:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15));animation:bob 3s ease-in-out infinite}
+.sb-go{margin-left:auto;font-weight:800;color:var(--dim)}
+@media (max-width:1000px){.sbar{grid-template-columns:1fr 1fr}.sb-streak{grid-column:1/-1}}
+@media (max-width:600px){.sbar{grid-template-columns:1fr}.sb-streak{flex-wrap:wrap}.sb-week{margin:6px 0 0;width:100%;justify-content:space-between}}
+
+/* ---------- leaderboard ---------- */
+.lb-head{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0 4px}
+.lb-tools{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 10px}
+.seg2{display:inline-flex;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px;gap:2px}
+.seg2 button{background:none;padding:7px 15px;border-radius:99px;font-weight:700;font-size:14px;color:var(--dim)}
+.seg2 button[aria-selected="true"]{background:var(--txt);color:var(--bg)}
+.podium{display:flex;justify-content:center;align-items:flex-end;gap:14px;margin:34px auto 18px;max-width:640px}
+.pod{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;animation:podin .7s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes podin{from{opacity:0;transform:translateY(40px)}}
+.pod-medal{font-size:30px;animation:bob 3s ease-in-out infinite}
+.pod-av{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font:800 24px "Figtree Variable","Figtree",sans-serif;background:var(--hs,var(--card2));border:2.5px solid var(--txt);box-shadow:var(--shadow)}
+.pod-av.sm{width:34px;height:34px;font-size:15px;border-width:2px}
+.pod-1 .pod-av{background:var(--butter);width:72px;height:72px;font-size:30px}
+.pod-2 .pod-av{background:var(--sky)}
+.pod-3 .pod-av{background:var(--peach)}
+.pod b{font-size:16px;text-align:center}
+.pod-xp{font-size:13.5px;color:var(--dim);font-weight:700}
+.pod-block{width:100%;margin-top:6px;border-radius:14px 14px 4px 4px;display:grid;place-items:center;color:var(--bg);background:var(--txt);font:800 30px "Figtree Variable","Figtree",sans-serif;position:relative;box-shadow:inset 0 -10px 0 rgba(0,0,0,.18)}
+.pod-1 .pod-block{height:130px;background:linear-gradient(180deg,#E9C24A,#C99A1E)}
+.pod-2 .pod-block{height:96px;background:linear-gradient(180deg,#B8C3D3,#8E9AAD)}
+.pod-3 .pod-block{height:72px;background:linear-gradient(180deg,#E7A77A,#C27A4C)}
+.pod.me b{background:var(--butter-hl);padding:0 8px;border-radius:6px}
+.lb-list{list-style:none;padding:6px;margin:0 auto;max-width:640px}
+.lb-list li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;animation:cardin .4s both}
+.lb-list li+li{border-top:1px solid var(--line-soft)}
+.lb-list li.me{background:var(--butter-soft);outline:2px solid var(--butter)}
+.lb-pos{width:26px;text-align:center;font-weight:800;color:var(--dim)}
+.lb-list b{flex:1}
+.lb-streak{display:inline-flex;align-items:center;gap:3px;font-size:13px;font-weight:800;color:var(--peach-ink);min-width:40px}
+.lb-xp{font-weight:800;font-variant-numeric:tabular-nums}
+
+/* ---------- game frame extras ---------- */
+.playwrap{position:relative}
+.xpchip{position:absolute;right:18px;bottom:16px;background:var(--txt);color:var(--bg);font-size:13px;font-weight:700;padding:6px 14px;border-radius:99px;box-shadow:var(--shadow-hi);pointer-events:none;opacity:.92}
+.xpchip b{font-size:15px}
+.toasts{position:absolute;left:50%;top:18px;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;z-index:5}
+.xptoast{background:var(--mint);color:var(--mint-ink);font:800 18px "Figtree Variable","Figtree",sans-serif;padding:8px 18px;border-radius:99px;box-shadow:var(--shadow-hi);animation:toastin 1.8s cubic-bezier(.2,.9,.3,1.3) forwards}
+.xptoast.big{background:linear-gradient(120deg,#FFD36E,#F2734A);color:#3a1d0b;font-size:24px;padding:12px 26px;animation-duration:3.6s}
+@keyframes toastin{0%{opacity:0;transform:translateY(-14px) scale(.7)}12%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}

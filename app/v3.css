@@ -376,3 +376,48 @@ html { scroll-behavior: smooth; }
 .v3-subnav .v3-navlink { padding: 7px 14px; font-size: 0.9rem; white-space: nowrap; }
 @media (max-width: 600px) { .v3-subnav-in { flex-wrap: nowrap; overflow-x: auto; padding: 4px 10px; scrollbar-width: none; } }
 .lp main section[id], main > section[id], #beta { scroll-margin-top: 130px; }
+
+/* ---------- level cards: point at one (or tap it) and it opens ---------- */
+.lp-level { position: relative; cursor: pointer; outline: none; transition: translate 0.35s var(--fx-spring), box-shadow 0.3s ease, border-color 0.2s; }
+.lp-courses .lp-level:hover { transform: none; }
+.lp-level:hover, .lp-level:focus-visible, .lp-level.is-open { translate: 0 -4px; border-color: var(--ink); }
+.lp-level:focus-visible { box-shadow: 0 0 0 3px var(--tone); }
+.lp-level-hint { margin-top: auto; padding-top: 10px; font-size: 0.82rem; font-weight: 700; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
+.lp-level-hint i { font-style: normal; display: inline-block; transition: translate 0.3s var(--fx-spring); }
+.lp-level:hover .lp-level-hint i { translate: 0 3px; }
+.lp-more { position: absolute; z-index: 6; top: -1px; left: -1px; right: -1px; min-height: calc(100% + 2px); background: var(--tone); border: 1px solid var(--ink); border-radius: var(--r-lg); box-shadow: 0 22px 40px -18px rgba(20, 24, 40, 0.35); opacity: 0; scale: 0.96; transform-origin: 50% 0; pointer-events: none; transition: opacity 0.2s ease, scale 0.35s var(--fx-spring); }
+.lp-level.is-open .lp-more { opacity: 1; scale: 1; pointer-events: auto; }
+.lp-more-in { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 4px; }
+.lp-more-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.lp-more-head b { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+.lp-more-head span:last-child { font-weight: 600; color: var(--ink-2); }
+.lp-more-label { margin: 8px 0 2px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.lp-more ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 0.93rem; }
+.lp-more-can { margin: 0; font-size: 0.93rem; line-height: 1.45; }
+.lp-more-ex { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--paper) 70%, transparent); display: grid; gap: 2px; font-size: 0.9rem; }
+.lp-more-ex span { color: var(--ink-2); font-size: 0.84rem; }
+.lp-more-go { margin-top: 14px; align-self: flex-start; }
+.lp-level.is-open .lp-more-in > * { animation: lp-in 0.4s var(--fx-spring) both; }
+.lp-level.is-open .lp-more-in > :nth-child(2) { animation-delay: 0.03s; } .lp-level.is-open .lp-more-in > :nth-child(3) { animation-delay: 0.06s; }
+.lp-level.is-open .lp-more-in > :nth-child(4) { animation-delay: 0.09s; } .lp-level.is-open .lp-more-in > :nth-child(5) { animation-delay: 0.12s; }
+.lp-level.is-open .lp-more-in > :nth-child(6) { animation-delay: 0.15s; } .lp-level.is-open .lp-more-in > :nth-child(7) { animation-delay: 0.18s; }
+@keyframes lp-in { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+/* On phones the card opens in place and pushes the next one down. */
+@media (max-width: 900px), (hover: none) {
+  .lp-more { position: static; opacity: 1; scale: 1; pointer-events: auto; border: 0; box-shadow: none; background: none; min-height: 0; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s var(--fx-spring); margin: 0 -22px -22px; }
+  .lp-more-in { overflow: hidden; padding-top: 0; padding-bottom: 0; transition: padding 0.3s; }
+  .lp-level.is-open .lp-more { grid-template-rows: 1fr; }
+  .lp-level.is-open .lp-more-in { padding-bottom: 22px; }
+  .lp-more-head { display: none; }
+  .lp-level.is-open .lp-level-hint i { rotate: 180deg; }
+}
+@media (min-width: 901px) and (hover: hover) { .lp-level.is-open .lp-level-hint { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lp-level, .lp-more, .lp-more-in > * { transition: none; animation: none !important; } }
+
+/* header extras */
+.fx-head .v3-chip { padding: 5px 10px; }
+@media (max-width: 760px) { .fx-hide-sm { display: none !important; } }
+.fx-head .admin-bar { max-width: 1180px; margin: 0 auto 8px; }
+.lp-go { display: inline-flex; align-items: center; gap: 10px; }
+.lp-go span { transition: translate 0.25s var(--fx-spring); }
+.lp-go:hover span { translate: 4px 0; }

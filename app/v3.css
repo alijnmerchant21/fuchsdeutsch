@@ -258,7 +258,7 @@ a.v3-secrow:hover b { text-decoration: underline; }
 .v3-castcard { padding: 20px; }
 .cast-strip { display: flex; flex-direction: column; gap: 10px; }
 .cast-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 10px; }
-.cast-card { margin: 0; border-radius: 14px; padding: 10px 10px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.cast-card { margin: 0; background: var(--tone); border: 1px solid transparent; border-radius: 14px; padding: 10px 10px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
 .cast-card img { width: 72px; height: 72px; border-radius: 999px; object-fit: cover; background: var(--paper); }
 .cast-initial { width: 72px; height: 72px; border-radius: 999px; background: var(--paper); display: grid; place-items: center; font-weight: 800; font-size: 1.6rem; }
 .cast-card figcaption { display: flex; flex-direction: column; line-height: 1.25; }
@@ -335,27 +335,47 @@ a.v3-secrow:hover b { text-decoration: underline; }
    Same key as Fuchsdeutsch Prüfung (FDPTHEME), so both apps stay in the same mode. */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #16181d;
-  --paper: #21242b;
-  --ink: #e8eaf0;
-  --ink-2: #a9aebb;
-  --ink-3: #7c8291;
+  /* Calm neutral dark: near-black page, grey cards, the pastels only as soft tints and glows. */
+  --bg: #111214;
+  --paper: #1a1b1f;
+  --ink: #ececf1;
+  --ink-2: #a3a6ae;
+  --ink-3: #70737c;
   --ink-hover: #ffffff;
-  --line: #343944;
-  --line-2: #434957;
-  --soft: #2a2e36;
-  --soft-2: #1c1f25;
-  --mint: #1d3a2d;
-  --sky: #1d3047;
-  --lilac: #2f2950;
-  --butter: #3b3420;
-  --peach: #40291c;
-  --rose: #40222e;
-  --peach-deep: #6b4429;
-  --mint-2: #6cc79c;
-  --lilac-2: #9c88e6;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --line: #2a2c32;
+  --line-2: #3a3d45;
+  --soft: #23252a;
+  --soft-2: #16171a;
+  --mint: #22312e;
+  --sky: #242e3a;
+  --lilac: #2b2839;
+  --butter: #343026;
+  --peach: #352b28;
+  --rose: #342830;
+  --peach-deep: #513b32;
+  --mint-2: #5fd3a0;
+  --lilac-2: #a78bfa;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.03), 0 12px 30px -18px rgba(0, 0, 0, 0.8);
 }
+/* Each pastel has a bright accent for lines, glows and small marks. */
+.t-mint { --tone-accent: #8fd1ad; } .t-sky { --tone-accent: #8fc3ee; } .t-butter { --tone-accent: #e9cd5f; }
+.t-lilac { --tone-accent: #b9a8f0; } .t-peach { --tone-accent: #f5ad80; } .t-rose { --tone-accent: #ee9fb8; }
+:root[data-theme='dark'] .t-mint { --tone-accent: #5fd3a0; } :root[data-theme='dark'] .t-sky { --tone-accent: #6cb6ff; }
+:root[data-theme='dark'] .t-butter { --tone-accent: #f2cc5b; } :root[data-theme='dark'] .t-lilac { --tone-accent: #a78bfa; }
+:root[data-theme='dark'] .t-peach { --tone-accent: #ff9f6e; } :root[data-theme='dark'] .t-rose { --tone-accent: #f585ad; }
+/* Colored surfaces in dark mode: a grey card with a soft glow of its color, not a muddy fill. */
+:root[data-theme='dark'] :is(.lp-course, .lp-exam-card, .lp-deal-card, .v3-box, .lp-panel, .cast-card) {
+  background: radial-gradient(130% 120% at 0% 0%, color-mix(in srgb, var(--tone-accent, #a78bfa) 16%, transparent), transparent 62%), var(--paper);
+  border-color: color-mix(in srgb, var(--tone-accent, #a78bfa) 26%, var(--line));
+}
+:root[data-theme='dark'] :is(.v3-chip, .v3-tag) { background: color-mix(in srgb, var(--tone-accent, #a78bfa) 18%, var(--paper)); }
+:root[data-theme='dark'] .v3-chip.plain { background: var(--paper); }
+:root[data-theme='dark'] .lp-blob { background: radial-gradient(circle at 30% 30%, rgba(255, 159, 110, 0.38), transparent 58%), radial-gradient(circle at 72% 70%, rgba(95, 211, 160, 0.3), transparent 60%), radial-gradient(circle at 60% 25%, rgba(242, 204, 91, 0.22), transparent 55%); filter: blur(6px); }
+:root[data-theme='dark'] .lp-bubble { background: var(--paper); border-color: var(--line-2); color: var(--ink); }
+:root[data-theme='dark'] .lp-bubble.is-on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+:root[data-theme='dark'] .btn-ghost, :root[data-theme='dark'] .v3-btn.ghost { background: transparent; border-color: var(--line-2); }
+:root[data-theme='dark'] .btn-ghost:hover:not(:disabled) { background: var(--soft); }
+:root[data-theme='dark'] .fox-logo-img { filter: drop-shadow(0 6px 18px rgba(255, 120, 60, 0.18)); }
 :root[data-theme='dark'] .v3-navlink.is-soon, :root[data-theme='dark'] .v3-navlink.is-soon:hover { color: #6b7080; }
 /* Grammar diagrams draw with fixed light colors, so they stay a light card in dark mode. */
 :root[data-theme='dark'] .gv {
@@ -377,47 +397,46 @@ html { scroll-behavior: smooth; }
 @media (max-width: 600px) { .v3-subnav-in { flex-wrap: nowrap; overflow-x: auto; padding: 4px 10px; scrollbar-width: none; } }
 .lp main section[id], main > section[id], #beta { scroll-margin-top: 130px; }
 
-/* ---------- level cards: point at one (or tap it) and it opens ---------- */
-.lp-level { position: relative; cursor: pointer; outline: none; transition: translate 0.35s var(--fx-spring), box-shadow 0.3s ease, border-color 0.2s; }
-.lp-courses .lp-level:hover { transform: none; }
-.lp-level:hover, .lp-level:focus-visible, .lp-level.is-open { translate: 0 -4px; border-color: var(--ink); }
-.lp-level:focus-visible { box-shadow: 0 0 0 3px var(--tone); }
-.lp-level-hint { margin-top: auto; padding-top: 10px; font-size: 0.82rem; font-weight: 700; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
-.lp-level-hint i { font-style: normal; display: inline-block; transition: translate 0.3s var(--fx-spring); }
-.lp-level:hover .lp-level-hint i { translate: 0 3px; }
-.lp-more { position: absolute; z-index: 6; top: -1px; left: -1px; right: -1px; min-height: calc(100% + 2px); background: var(--tone); border: 1px solid var(--ink); border-radius: var(--r-lg); box-shadow: 0 22px 40px -18px rgba(20, 24, 40, 0.35); opacity: 0; scale: 0.96; transform-origin: 50% 0; pointer-events: none; transition: opacity 0.2s ease, scale 0.35s var(--fx-spring); }
-.lp-level.is-open .lp-more { opacity: 1; scale: 1; pointer-events: auto; }
-.lp-more-in { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 4px; }
-.lp-more-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
-.lp-more-head b { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
-.lp-more-head span:last-child { font-weight: 600; color: var(--ink-2); }
-.lp-more-label { margin: 8px 0 2px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
-.lp-more ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 0.93rem; }
-.lp-more-can { margin: 0; font-size: 0.93rem; line-height: 1.45; }
-.lp-more-ex { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--paper) 70%, transparent); display: grid; gap: 2px; font-size: 0.9rem; }
-.lp-more-ex span { color: var(--ink-2); font-size: 0.84rem; }
-.lp-more-go { margin-top: 14px; align-self: flex-start; }
-.lp-level.is-open .lp-more-in > * { animation: lp-in 0.4s var(--fx-spring) both; }
-.lp-level.is-open .lp-more-in > :nth-child(2) { animation-delay: 0.03s; } .lp-level.is-open .lp-more-in > :nth-child(3) { animation-delay: 0.06s; }
-.lp-level.is-open .lp-more-in > :nth-child(4) { animation-delay: 0.09s; } .lp-level.is-open .lp-more-in > :nth-child(5) { animation-delay: 0.12s; }
-.lp-level.is-open .lp-more-in > :nth-child(6) { animation-delay: 0.15s; } .lp-level.is-open .lp-more-in > :nth-child(7) { animation-delay: 0.18s; }
+/* ---------- levels: four cards and one detail panel under them ---------- */
+.lp-level { position: relative; text-align: left; font: inherit; color: var(--ink); cursor: pointer; transition: translate 0.35s var(--fx-spring), border-color 0.2s, box-shadow 0.3s, opacity 0.2s; }
+.lp-courses .lp-level:hover { transform: none; box-shadow: none; }
+.lp-level:hover { translate: 0 -3px; }
+.lp-courses .lp-level.is-on { translate: 0 -5px; border-color: var(--tone-accent); box-shadow: 0 0 0 1px var(--tone-accent), 0 18px 34px -22px color-mix(in srgb, var(--tone-accent) 80%, transparent); }
+.lp-level:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.lp-levels:has(.lp-level:hover) .lp-level:not(:hover):not(.is-on) { opacity: 0.82; }
+.lp-panel { position: relative; margin-top: 18px; border-radius: var(--r-lg); border: 1px solid color-mix(in srgb, var(--tone-accent) 45%, var(--line)); background: var(--tone); transition: background-color 0.35s ease, border-color 0.35s ease; }
+.lp-panel-in { position: relative; display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 28px; padding: 26px 28px; animation: lp-in 0.45s var(--fx-spring) both; }
+.lp-panel-title { margin: 0 0 4px; font-size: 1.15rem; font-weight: 600; color: var(--ink-2); }
+.lp-panel-title b { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-right: 4px; }
+.lp-more-label { margin: 10px 0 6px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-2); }
+.lp-panel-can { margin: 0 0 16px; line-height: 1.5; }
+.lp-panel ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.lp-panel li { display: flex; gap: 10px; align-items: baseline; line-height: 1.4; }
+.lp-panel li::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 3px; background: var(--tone-accent); translate: 0 -1px; }
+.lp-panel-ex { margin: 0; padding: 14px 16px; border-radius: 12px; background: color-mix(in srgb, var(--paper) 72%, transparent); border: 1px solid color-mix(in srgb, var(--tone-accent) 30%, transparent); display: grid; gap: 4px; }
+.lp-panel-ex b { font-size: 1.02rem; line-height: 1.4; }
+.lp-panel-ex span { color: var(--ink-2); font-size: 0.88rem; }
+:root[data-theme='dark'] .lp-panel-ex { background: rgba(0, 0, 0, 0.22); }
 @keyframes lp-in { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
-/* On phones the card opens in place and pushes the next one down. */
-@media (max-width: 900px), (hover: none) {
-  .lp-more { position: static; opacity: 1; scale: 1; pointer-events: auto; border: 0; box-shadow: none; background: none; min-height: 0; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s var(--fx-spring); margin: 0 -22px -22px; }
-  .lp-more-in { overflow: hidden; padding-top: 0; padding-bottom: 0; transition: padding 0.3s; }
-  .lp-level.is-open .lp-more { grid-template-rows: 1fr; }
-  .lp-level.is-open .lp-more-in { padding-bottom: 22px; }
-  .lp-more-head { display: none; }
-  .lp-level.is-open .lp-level-hint i { rotate: 180deg; }
+@media (max-width: 900px) {
+  .lp-panel-in { grid-template-columns: 1fr 1fr; }
+  .lp-panel-a { grid-column: 1 / -1; }
 }
-@media (min-width: 901px) and (hover: hover) { .lp-level.is-open .lp-level-hint { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .lp-level, .lp-more, .lp-more-in > * { transition: none; animation: none !important; } }
+@media (max-width: 600px) {
+  .lp-courses-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .lp-level { padding: 14px; gap: 2px; }
+  .lp-level .lp-course-icon { font-size: 1.5rem; }
+  .lp-level .lp-course-level { font-size: 1.7rem; }
+  .lp-level .lp-course-sub { font-size: 0.88rem; line-height: 1.3; }
+  .lp-level .lp-course-meta { font-size: 0.78rem; }
+  .lp-panel-in { grid-template-columns: 1fr; gap: 6px; padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .lp-level, .lp-panel-in { transition: none; animation: none; } }
+.lp-go { display: inline-flex; align-items: center; gap: 10px; }
+.lp-go span { transition: translate 0.25s var(--fx-spring); }
+.lp-go:hover span { translate: 4px 0; }
 
 /* header extras */
 .fx-head .v3-chip { padding: 5px 10px; }
 @media (max-width: 760px) { .fx-hide-sm { display: none !important; } }
 .fx-head .admin-bar { max-width: 1180px; margin: 0 auto 8px; }
-.lp-go { display: inline-flex; align-items: center; gap: 10px; }
-.lp-go span { transition: translate 0.25s var(--fx-spring); }
-.lp-go:hover span { translate: 4px 0; }

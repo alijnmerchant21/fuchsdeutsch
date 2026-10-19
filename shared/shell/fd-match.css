@@ -17,18 +17,18 @@
 }
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #16181d; --bg-dot: #16181d;
-  --card: #21242b; --card2: #1c1f25; --line: #343944; --line-soft: #2a2e36;
-  --txt: #e8eaf0; --dim: #a9aebb; --dim2: #7c8291;
-  --lilac: #3a3166; --lilac-soft: #2f2950;
-  --sky: #233c5a; --sky-soft: #1d3047;
-  --mint: #24493a; --mint-soft: #1d3a2d;
-  --peach: #523424; --peach-soft: #40291c;
-  --rose: #50293a; --rose-soft: #40222e;
-  --butter: #4a4124; --butter-soft: #3b3420;
-  --btn: #e8eaf0; --btn-ink: #16181d;
+  --bg: #111214; --bg-dot: #111214;
+  --card: #1a1b1f; --card2: #16171a; --line: #2a2c32; --line-soft: #222429;
+  --txt: #ececf1; --dim: #a3a6ae; --dim2: #70737c;
+  --lilac: #9c88e6; --lilac-soft: #2b2839;
+  --sky: #7db3e6; --sky-soft: #242e3a;
+  --mint: #6cc79c; --mint-soft: #22312e;
+  --peach: #e9a57a; --peach-soft: #352b28;
+  --rose: #e58da3; --rose-soft: #342830;
+  --butter: #dcc064; --butter-soft: #343026;
+  --btn: #ececf1; --btn-ink: #111214;
   --shadow: none;
-  --shadow-hi: 0 14px 30px -18px rgba(0, 0, 0, 0.6);
+  --shadow-hi: 0 14px 30px -18px rgba(0, 0, 0, 0.7);
 }
 body { background-image: none; font-family: var(--fx-font); }
 h1, h2, h3, h4 { font-family: var(--fx-font); letter-spacing: -0.02em; }
@@ -47,3 +47,6 @@ h1, h2, h3, h4 { font-family: var(--fx-font); letter-spacing: -0.02em; }
 .linkbtn { color: var(--txt); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .linkbtn:hover { text-decoration-thickness: 2px; }
 .fx-head .linkbtn { text-decoration: none; }
+/* hero glow in dark mode: soft light behind the fox, like the course */
+:root[data-theme='dark'] .ha-blob { background: radial-gradient(circle at 30% 30%, rgba(255, 159, 110, 0.38), transparent 58%), radial-gradient(circle at 72% 70%, rgba(95, 211, 160, 0.3), transparent 60%), radial-gradient(circle at 60% 25%, rgba(242, 204, 91, 0.22), transparent 55%); filter: blur(6px); opacity: 1; }
+:root[data-theme='dark'] .fox-logo-img { filter: drop-shadow(0 6px 18px rgba(255, 120, 60, 0.18)); }

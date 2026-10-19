@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Fox } from '@/components/Fox';
 import { courses, roadmapLevels } from '@/content/course';
 import { DEMO_MODE, DEPOSIT_USD } from '@/lib/config';
@@ -97,44 +97,57 @@ const LEVEL_INFO: Record<UiLang, Record<string, LevelInfo>> = {
   },
 };
 const LEVEL_UI = {
-  en: { learn: 'What you learn', can: 'After this level you can', start: (l: string) => `Start ${l}`, close: 'Close', more: 'More' },
-  de: { learn: 'Das lernst du', can: 'Danach kannst du', start: (l: string) => `${l} starten`, close: 'Schließen', more: 'Mehr' },
+  en: { learn: 'What you learn', can: 'After this level you can', start: (l: string) => `Start ${l}` },
+  de: { learn: 'Das lernst du', can: 'Danach kannst du', start: (l: string) => `${l} starten` },
 };
 
-/** A level card. Points open it with a mouse; a tap opens and closes it on a phone. */
-function LevelCard({ l, lang, meta, sub, href, soon }: { l: (typeof LEVELS)[number]; lang: UiLang; meta: string; sub: string; href: string; soon: boolean }) {
-  const [open, setOpen] = useState(false);
-  const touch = useRef(false);
-  const info = LEVEL_INFO[lang][l.level];
+/** The four levels and one detail panel under them. Pointing at a card (or tapping it) shows that level in the panel. */
+function LevelPicker({ lang, t, href }: { lang: UiLang; t: (typeof T)[UiLang]; href: string }) {
+  const [pick, setPick] = useState(0);
   const ui = LEVEL_UI[lang];
-  const go = href.startsWith('#')
-    ? <a href={href} className="btn lp-more-go" onClick={() => setOpen(false)}>{ui.start(l.level)} →</a>
-    : <Link href={href} className="btn lp-more-go">{ui.start(l.level)} →</Link>;
+  const l = LEVELS[pick];
+  const info = LEVEL_INFO[lang][l.level];
+  const course = (lv: (typeof LEVELS)[number]) => courses.find((x) => x.id === lv.course);
+  const meta = (lv: (typeof LEVELS)[number]) => {
+    const c = course(lv);
+    return c ? `${c.chapters.length} ${t.chapters}${lv.level === 'B2' ? ` · ${t.b2note}` : ''}` : t.soon;
+  };
+  const start = href.startsWith('#')
+    ? <a href={href} className="btn lp-go">{ui.start(l.level)} <span aria-hidden>→</span></a>
+    : <Link href={href} className="btn lp-go">{ui.start(l.level)} <span aria-hidden>→</span></Link>;
   return (
-    <div
-      className={`lp-course lp-level t-${l.tone} ${soon ? 'is-soon' : ''} ${open ? 'is-open' : ''}`}
-      tabIndex={0} role="button" aria-expanded={open} aria-label={`${l.level}: ${sub}`}
-      onPointerDown={(e) => { touch.current = e.pointerType !== 'mouse'; }}
-      onPointerEnter={(e) => { if (e.pointerType === 'mouse') setOpen(true); }}
-      onPointerLeave={(e) => { if (e.pointerType === 'mouse') setOpen(false); }}
-      onClick={(e) => { if ((e.target as HTMLElement).closest('a')) return; if (touch.current || e.detail === 0) setOpen((o) => !o); }}
-      onKeyDown={(e) => { if (e.key === 'Escape') setOpen(false); if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); setOpen((o) => !o); } }}
-      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false); }}
-    >
-      <span className="lp-course-icon" aria-hidden>{l.icon}</span>
-      <b className="lp-course-level">{l.level}</b>
-      <span className="lp-course-sub">{sub}</span>
-      <span className="lp-course-meta">{meta}</span>
-      <span className="lp-level-hint" aria-hidden>{ui.more} <i>↓</i></span>
-      <div className="lp-more" aria-hidden={!open}>
-        <div className="lp-more-in">
-          <div className="lp-more-head"><span aria-hidden>{l.icon}</span><b>{l.level}</b><span>{sub}</span></div>
-          <p className="lp-more-label">{ui.learn}</p>
-          <ul>{info.learn.map((x) => <li key={x}>{x}</li>)}</ul>
-          <p className="lp-more-label">{ui.can}</p>
-          <p className="lp-more-can">{info.can}</p>
-          <p className="lp-more-ex"><b lang="de">{info.de}</b><span>{info.en}</span></p>
-          {!soon && go}
+    <div className="lp-levels" style={{ '--pick': pick } as React.CSSProperties}>
+      <div className="lp-courses lp-courses-4" role="tablist" aria-label={t.levels}>
+        {LEVELS.map((lv, i) => (
+          <button
+            key={lv.level} type="button" role="tab" aria-selected={pick === i} aria-controls="lp-level-panel"
+            className={`lp-course lp-level t-${lv.tone} ${course(lv) ? '' : 'is-soon'} ${pick === i ? 'is-on' : ''}`}
+            onPointerEnter={(e) => { if (e.pointerType === 'mouse') setPick(i); }}
+            onFocus={() => setPick(i)} onClick={() => setPick(i)}
+          >
+            <span className="lp-course-icon" aria-hidden>{lv.icon}</span>
+            <b className="lp-course-level">{lv.level}</b>
+            <span className="lp-course-sub">{t.levelSub[lv.level]}</span>
+            <span className="lp-course-meta">{meta(lv)}</span>
+          </button>
+        ))}
+      </div>
+      <div id="lp-level-panel" role="tabpanel" className={`lp-panel t-${l.tone}`} aria-live="polite">
+        <div className="lp-panel-in" key={l.level}>
+          <div className="lp-panel-a">
+            <p className="lp-panel-title"><span aria-hidden>{l.icon}</span> <b>{l.level}</b> {t.levelSub[l.level]}</p>
+            <p className="lp-more-label">{ui.can}</p>
+            <p className="lp-panel-can">{info.can}</p>
+            {course(l) && start}
+          </div>
+          <div className="lp-panel-b">
+            <p className="lp-more-label">{ui.learn}</p>
+            <ul>{info.learn.map((x) => <li key={x}>{x}</li>)}</ul>
+          </div>
+          <div className="lp-panel-c">
+            <p className="lp-more-label">{lang === 'en' ? 'A sentence from this level' : 'Ein Satz aus diesem Niveau'}</p>
+            <p className="lp-panel-ex"><b lang="de">{info.de}</b><span>{info.en}</span></p>
+          </div>
         </div>
       </div>
     </div>
@@ -289,14 +302,7 @@ export default function Landing() {
 
       <section id="levels" aria-labelledby="courses-h">
         <h2 id="courses-h" className="lp-h2">{t.levels}</h2>
-        <div className="lp-courses lp-courses-4">
-          {LEVELS.map((l) => {
-            const c = courses.find((x) => x.id === l.course);
-            const meta = c ? `${c.chapters.length} ${t.chapters}${l.level === 'B2' ? ` · ${t.b2note}` : ''}` : t.soon;
-            const href = ready && user && access !== false ? '/kurs' : '#beta';
-            return <LevelCard key={l.level} l={l} lang={lang} meta={meta} sub={t.levelSub[l.level]} href={href} soon={!c} />;
-          })}
-        </div>
+        <LevelPicker lang={lang} t={t} href={ready && user && access !== false ? '/kurs' : '#beta'} />
       </section>
 
       <section id="exam" className="lp-exam" aria-labelledby="exam-h">

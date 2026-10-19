@@ -75,7 +75,7 @@ export function Nav() {
   );
   return (
     <SiteHeader
-      app="kurs" root="" foxSrc="/fox-logo.png" lang={lang} onLang={setLang}
+      app="kurs" root="" foxSrc="/fuchsi.png" lang={lang} onLang={setLang}
       kursHref={user ? (isAdmin ? '/admin' : '/lernen') : '/'} spieleLive={SPIELE_LIVE}
       sections={sections} right={right}
       below={isAdmin && adminView ? <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div> : undefined}

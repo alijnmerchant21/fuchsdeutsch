@@ -20,20 +20,20 @@
   --fx-font: 'Figtree Variable', 'Figtree', -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 :root[data-theme='dark'] {
-  --fx-bg: #1b1e24;
-  --fx-ink: #e8eaf0;
-  --fx-ink-2: #a9aebb;
-  --fx-ink-3: #6b7080;
-  --fx-line: #30343e;
-  --fx-soft: #262a32;
-  --fx-mint: #24493a;
-  --fx-peach: #523424;
-  --fx-sky: #233c5a;
-  --fx-butter: #4a4124;
-  --fx-lilac: #3a3166;
-  --fx-rose: #50293a;
-  --fx-thumb: #e8eaf0;
-  --fx-thumb-ink: #16181d;
+  --fx-bg: #141518;
+  --fx-ink: #ececf1;
+  --fx-ink-2: #a3a6ae;
+  --fx-ink-3: #6a6d76;
+  --fx-line: #26282e;
+  --fx-soft: #23252a;
+  --fx-mint: #2b473e;
+  --fx-peach: #513b32;
+  --fx-sky: #2e4055;
+  --fx-butter: #4e452d;
+  --fx-lilac: #3c3654;
+  --fx-rose: #4f3441;
+  --fx-thumb: #ececf1;
+  --fx-thumb-ink: #111214;
 }
 
 .fx-head { position: sticky; top: 0; z-index: 40; font-family: var(--fx-font); color: var(--fx-ink); background: color-mix(in srgb, var(--fx-bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--fx-line); }

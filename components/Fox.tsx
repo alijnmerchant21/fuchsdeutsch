@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 type Mood = 'happy' | 'wow' | 'sleepy' | 'proud';
 
-/** Fuchsi — low-poly 3D fox mark (public/fox-logo.png). */
+/** Fuchsi — low-poly 3D fox mark (public/fuchsi.png). */
 export function Fox({ size = 120, mood = 'happy', className = '' }: { size?: number; mood?: Mood; className?: string }) {
   return (
     <span
@@ -12,7 +12,7 @@ export function Fox({ size = 120, mood = 'happy', className = '' }: { size?: num
       aria-label="Fuchsi, der Lernfuchs"
     >
       <Image
-        src="/fox-logo.png"
+        src="/fuchsi.png"
         alt=""
         width={512}
         height={512}

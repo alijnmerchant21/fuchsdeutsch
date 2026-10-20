@@ -10,7 +10,7 @@ import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Fuchsdeutsch: Learn German, free',
-  description: 'A free German course with short lessons, a story that runs through every chapter and Goethe-style exams. A1, A2 and B2.1 are open. Closed beta, limited spots, no deposit.',
+  description: 'A free German course with short lessons, a story that runs through every chapter and Goethe-style exams. A1, A2, B1 and B2.1 are open. Closed beta, limited spots, no deposit.',
 };
 export const viewport: Viewport = {
   width: 'device-width', initialScale: 1,

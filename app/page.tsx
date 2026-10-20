@@ -35,7 +35,7 @@ const T = {
     levelSub: { A1: 'Complete beginner', A2: 'The basics', B1: 'Get by in everyday life', B2: 'Talk with confidence' } as Record<string, string>,
     deal: 'Free during the beta', free: 'Free', freeSub: 'No fees, no ads', deposit: 'deposit', noDeposit: 'No deposit', noDepositSub: 'Not needed for a limited time',
     spots: 'Limited spots', spotsSub: 'We let testers in step by step',
-    exam: 'Fuchsdeutsch Prüfung', examTitle: 'Preparing for the Goethe B1 exam?', examText: 'Mock tests in the real exam format, a plan up to your exam date, and practice focused on your weak parts. Start with a free mock test.', examGo: 'Open Prüfung',
+    exam: 'Fuchsdeutsch Prüfung', examTitle: 'Preparing for a Goethe exam, A1 to B2?', examText: 'Mock tests in the real exam format, a plan up to your exam date, and practice focused on your weak parts. Start with a free mock test.', examGo: 'Open Prüfung',
     path: 'From A1 to C2', open: 'Open now', more: 'More levels are coming.', join: 'Join the free beta',
     // Beta card
     tag: 'Closed beta · limited spots', title: 'Join the free beta', intro: 'We are looking for a small group of learners to test Fuchsdeutsch. Free, no deposit.',
@@ -60,7 +60,7 @@ const T = {
     levelSub: { A1: 'Ganz neu anfangen', A2: 'Die Grundlagen', B1: 'Im Alltag zurechtkommen', B2: 'Sicher sprechen' } as Record<string, string>,
     deal: 'Kostenlos während der Beta', free: 'Kostenlos', freeSub: 'Keine Gebühren, keine Werbung', deposit: 'Kaution', noDeposit: 'Keine Kaution', noDepositSub: 'Für kurze Zeit nicht nötig',
     spots: 'Begrenzte Plätze', spotsSub: 'Wir lassen Tester nach und nach rein',
-    exam: 'Fuchsdeutsch Prüfung', examTitle: 'Du machst bald die Goethe-B1-Prüfung?', examText: 'Modelltests im echten Prüfungsformat, ein Plan bis zu deinem Prüfungstag und Training für deine schwachen Teile. Fang mit einem kostenlosen Modelltest an.', examGo: 'Zur Prüfung',
+    exam: 'Fuchsdeutsch Prüfung', examTitle: 'Du machst bald eine Goethe-Prüfung, A1 bis B2?', examText: 'Modelltests im echten Prüfungsformat, ein Plan bis zu deinem Prüfungstag und Training für deine schwachen Teile. Fang mit einem kostenlosen Modelltest an.', examGo: 'Zur Prüfung',
     path: 'Von A1 bis C2', open: 'Jetzt offen', more: 'Weitere Niveaus folgen.', join: 'Bei der Beta mitmachen',
     tag: 'Geschlossene Beta · begrenzte Plätze', title: 'Mach bei der kostenlosen Beta mit', intro: 'Wir suchen eine kleine Gruppe von Lernenden, die Fuchsdeutsch testen. Kostenlos, ohne Kaution.',
     email: 'E-Mail', emailPh: 'du@beispiel.de', agree: 'Ich bin einverstanden, dass Fuchsdeutsch meine Daten speichert, um mich zur Beta zu kontaktieren. Ich kann das jederzeit widerrufen.', privacy: 'Datenschutz',

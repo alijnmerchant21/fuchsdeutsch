@@ -18,6 +18,16 @@ export const db = {
     fail(error); return (data as Candidate) ?? null;
   },
 
+  /** Prüfung waitlist: true once the admin approved this account (table exam_access).
+      Demo mode, or the table not set up yet (supabase/008_control_center.sql), counts as approved. */
+  async access(userId: string): Promise<boolean> {
+    const sb = supabase();
+    if (!sb) return true;
+    const { data, error } = await sb.from('exam_access').select('user_id').eq('user_id', userId).maybeSingle();
+    if (error) return true;
+    return !!data;
+  },
+
   /** Candidates save their own setup. "unlocked" is only changed by the admin. */
   async saveCandidate(c: Omit<Candidate, 'unlocked' | 'created_at'> & Partial<Pick<Candidate, 'unlocked' | 'created_at'>>) {
     const sb = supabase();

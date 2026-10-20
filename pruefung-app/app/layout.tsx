@@ -9,6 +9,7 @@ import './fd-match.css';
 import { StoreProvider } from '@/lib/store';
 import { LangProvider } from '@/lib/lang';
 import { Topbar } from '@/components/Topbar';
+import { AccessGate } from '@/components/AccessGate';
 
 export const metadata: Metadata = {
   title: 'Fuchsdeutsch Prüfung · Goethe A1 bis B2 Mock-Prüfungen',
@@ -28,7 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <LangProvider><StoreProvider>
           <Topbar />
-          <main>{children}</main>
+          <main><AccessGate>{children}</AccessGate></main>
           <footer className="foot"><div className="footrow"><span className="small dim">Fuchsdeutsch Prüfung · Übungsmaterial im Format der Goethe-Zertifikate A1 bis B2. Kein offizielles Angebot des Goethe-Instituts.</span><Link className="linkbtn" href="/garantie">Garantie-Bedingungen</Link><Link className="linkbtn" href="/datenschutz">Datenschutz</Link></div></footer>
         </StoreProvider></LangProvider>
       </body>

@@ -6,6 +6,7 @@
    Row 2: the parts of the current page or app, centered, each with its own pastel; it follows the scroll for #sections. */
 import Link from 'next/link';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { ReportButton, type ReportConfig } from './ReportButton';
 
 export type ShellApp = 'kurs' | 'pruefung' | 'spiele';
 export type ShellLang = 'de' | 'en';
@@ -19,6 +20,8 @@ export interface ShellItem {
   /** Next.js client link. False for links into another app (full page load). */
   internal?: boolean;
   soon?: boolean;
+  /** Opens in a new browser tab. */
+  newTab?: boolean;
   /** Not open yet (a lesson you have not reached): greyed out with a lock. */
   locked?: boolean;
 }
@@ -67,7 +70,7 @@ function PillRow({ items, tones, className, label, center, soon = 'soon' }: { it
           if (it.soon || it.locked) return <span key={it.key} {...common} aria-disabled="true">{body}</span>;
           if (!it.href) return <button key={it.key} type="button" {...common} onClick={it.onClick} aria-current={it.active ? 'true' : undefined}>{body}</button>;
           if (it.internal) return <Link key={it.key} href={it.href} {...common} onClick={it.onClick} aria-current={it.active ? 'page' : undefined}>{body}</Link>;
-          return <a key={it.key} href={it.href} {...common} onClick={it.onClick} aria-current={it.active ? 'page' : undefined}>{body}</a>;
+          return <a key={it.key} href={it.href} {...common} onClick={it.onClick} aria-current={it.active ? 'page' : undefined} {...(it.newTab ? { target: '_blank', rel: 'noopener' } : {})}>{body}</a>;
         })}
       </div>
     </nav>
@@ -156,9 +159,11 @@ export interface SiteHeaderProps {
   right?: ReactNode;
   /** Shown under the header, full width (admin bar and similar). */
   below?: ReactNode;
+  /** The "Report a problem" button at the bottom right. */
+  report?: ReportConfig;
 }
 
-export function SiteHeader({ app, root, foxSrc, lang, onLang, kursHref, spieleLive = false, sections = [], right, below }: SiteHeaderProps) {
+export function SiteHeader({ app, root, foxSrc, lang, onLang, kursHref, spieleLive = false, sections = [], right, below, report }: SiteHeaderProps) {
   const en = lang === 'en';
   const apps: ShellItem[] = [
     { key: 'kurs', label: en ? 'Course' : 'Kurs', href: kursHref ?? `${root}/`, active: app === 'kurs', internal: app === 'kurs' },
@@ -171,6 +176,7 @@ export function SiteHeader({ app, root, foxSrc, lang, onLang, kursHref, spieleLi
   const row2 = sections.map((s) => (s.href?.startsWith('#') ? { ...s, active: s.active ?? spied === s.href.slice(1) } : s));
   const [wiggle, setWiggle] = useState(0);
   return (
+    <>
     <header className={`fx-head fx-app-${app}`}>
       <div className="fx-top">
         <a href={`${root}/`} className="fx-brand" aria-label="Fuchsdeutsch" onMouseEnter={() => setWiggle((w) => w + 1)}>
@@ -198,5 +204,7 @@ export function SiteHeader({ app, root, foxSrc, lang, onLang, kursHref, spieleLi
       )}
       {below}
     </header>
+    {report && <ReportButton cfg={report} lang={lang} />}
+    </>
   );
 }

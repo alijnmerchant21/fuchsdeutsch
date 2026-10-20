@@ -1,8 +1,12 @@
+'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { BRAND } from '@/lib/config';
 import { LEGAL } from '@/lib/legal';
 
 export function Footer() {
+  const path = usePathname();
+  if (path.startsWith('/admin')) return null;
   return (
     <footer className="v3-footer">
       <div className="v3-footer-in">

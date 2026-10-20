@@ -9,11 +9,13 @@ import { glossaryFor } from '@/content/glossary';
 import { GlossaryContext } from '@/components/Rich';
 import { De, HintProvider } from '@/components/Hint';
 import { useStore } from '@/lib/store';
+import { useActiveTime } from '@/lib/activeTime';
 import { chapterOpen, examOpen } from '@/lib/unlock';
 
 function Exam() {
   const { kapitel } = useParams<{ kapitel: string }>();
   const { progress, isAdmin, recordExam } = useStore();
+  useActiveTime(kapitel ? `${kapitel}/pruefung` : null);
   const admin = isAdmin;
   const found = findChapter(kapitel);
   const ch = found?.chapter;

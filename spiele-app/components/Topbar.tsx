@@ -1,8 +1,11 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import { asset, DEMO_MODE, SITE } from '@/lib/config';
+import { asset, BASE, DEMO_MODE, SITE } from '@/lib/config';
 import { useLang, useT } from '@/lib/lang';
 import { useStore } from '@/lib/store';
+import { supabase } from '@/lib/supabase';
+
+const token = async () => (await supabase()?.auth.getSession())?.data.session?.access_token ?? null;
 import { SiteHeader, type ShellItem } from './SiteHeader';
 
 /** The shared Fuchsdeutsch header (components/SiteHeader.tsx) with the Spiele second row. */
@@ -42,6 +45,7 @@ export function Topbar() {
     <SiteHeader
       app="spiele" root={SITE.replace(/\/$/, '')} foxSrc={asset('fox-logo.png')} lang={lang}
       onLang={user ? undefined : setLang} spieleLive sections={sections} right={right}
+      report={{ app: 'spiele', apiBase: BASE, email: user?.email, getToken: token }}
     />
   );
 }

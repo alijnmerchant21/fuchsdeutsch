@@ -1,0 +1,69 @@
+/* Every word of the admin control center, in English and German (DE | EN switch in the top bar). */
+export const AT = {
+  en: {
+    title: 'Control center', back: 'Back to the site', viewAs: 'Course as admin', viewOn: 'All open', viewOff: 'Normal',
+    nav: { overview: 'Overview', waitlist: 'Waitlists', users: 'Learners', reports: 'Reports', writing: 'Writing', emails: 'Emails', content: 'Course content' },
+    loading: 'Loading …', none: 'Nothing here yet.', search: 'Search name or email', all: 'All', refresh: 'Refresh',
+    demo: 'Demo mode: there is no database, so lists stay empty. Connect Supabase to see real people.',
+    notAdmin: 'This account has no admin rights.', demoAdmin: 'Turn on admin mode (demo)',
+    sqlMissing: (f: string) => `Not set up yet: run ${f} in Supabase.`,
+    // overview
+    kWaitKurs: 'Course waitlist', kWaitPr: 'Prüfung waitlist', kLearners: 'Learners', kActive: 'Active in the last 7 days', kReports: 'Open reports', kTexts: 'Texts to mark',
+    signups30: 'Sign-ups, last 30 days', perLevel: 'Learners per level', activity14: 'Learning time, last 14 days (all learners)', recentReports: 'Latest reports', recentSignups: 'Latest sign-ups', open: 'Open',
+    // waitlists
+    wlKurs: 'Course (Fuchsdeutsch)', wlPr: 'Prüfung', waiting: 'Waiting', approved: 'Approved',
+    email: 'Email', name: 'Name', course: 'Course', level: 'Level', why: 'Why German', native: 'Native language', signedUp: 'Signed up', status: 'Status',
+    examDate: 'Exam date', perDay: 'Per day', modules: 'Modules', attempt: 'Attempt', center: 'Exam center',
+    approve: 'Approve', approveSend: 'Approve and send email', approveOnly: 'Approve without email', undo: 'Undo', approvedOn: (d: string) => `Approved ${d}`,
+    answersOpen: 'Questions not answered yet', copyEmails: 'Copy approved emails', copied: 'Copied ✓',
+    // users
+    usersKurs: 'Course', usersPr: 'Prüfung', lastActive: 'Last active', never: 'never', xp: 'XP', streak: 'Streak', progress: 'Progress', time: 'Time', accuracy: 'First-try right',
+    sections: 'Sections done', chapters: 'Chapters passed', examsAvg: 'Chapter tests (avg)', joined: 'Joined',
+    perChapter: 'Progress per chapter', examScores: 'Chapter test scores (pass at 60 %)', timeDays: 'Learning time per day, last 30 days', accChapter: 'First-try right per chapter',
+    form: 'Sign-up answers', gender: 'Form of address', goal: 'Daily goal', board: 'On the leaderboard', yes: 'yes', no: 'no', uiLang: 'Sign-up language',
+    texts: 'Writing tasks', reportsBy: 'Reports', emailsTo: 'Emails sent', sendEmail: 'Send email', closeDetail: 'Back to the list',
+    prAttempts: 'Mock tests and blocks', prModules: 'Score per module (latest)', prTime: 'Time spent in tests', prPlan: 'Plan', noData: 'No data yet.',
+    timeNote: 'Time is counted from Oct 20, 2026 (active time only).',
+    // reports
+    rOpen: 'Open', rDone: 'Done', markDone: 'Mark as done', reopen: 'Reopen', reply: 'Reply by email', page: 'Page', from: 'From', anonymous: 'not given', app: 'App',
+    // emails
+    eTo: 'To', eSubject: 'Subject', eText: 'Text', eButton: 'Button', eLink: 'Button link', eLang: 'Language', eSend: 'Send', eSending: 'Sending …', eCancel: 'Cancel',
+    eSent: 'Email sent ✓', eKind: 'Draft', eHint: 'Edit anything before you send. Lines starting with "- " become a list.', eWhen: 'When', eKindNames: { 'kurs-approved': 'Course approved', 'pruefung-approved': 'Prüfung approved', custom: 'Own message' } as Record<string, string>,
+    // content
+    chapterN: (n: number) => `Chapter ${n}`, chaptersN: (n: number) => `${n} chapters`, sectionsN: (n: number) => `${n} sections`, inWork: 'in progress', tasks: 'test tasks', type: 'Type', audio: 'audio', view: 'View', blocks: 'Blocks', exercises: 'Exercises', section: 'Section', chapterTest: 'Chapter test', finalTest: (l: string) => `Final exam ${l}`,
+    // writing
+    wOpen: 'Open', wDone: 'Marked', wCopy: 'Copy for Claude', wCopied: 'Copied ✓', wWhen: 'When', wWho: 'Who', wTask: 'Task', wWords: 'Words', wText: 'Text', wPoints: 'Points',
+    wHelp: '1. Press "Copy for Claude" and paste everything into Claude. 2. Paste Claude\'s answer (the JSON array) here. 3. Save: learners see points and corrections right away.',
+    wSave: 'Save marking', wSaving: 'Saving …', wSaved: (n: number) => `${n} texts saved.`, wNothing: 'Nothing to save.',
+  },
+  de: {
+    title: 'Kontrollzentrum', back: 'Zur Website', viewAs: 'Kurs als Admin', viewOn: 'Alles offen', viewOff: 'Normal',
+    nav: { overview: 'Übersicht', waitlist: 'Wartelisten', users: 'Lernende', reports: 'Meldungen', writing: 'Schreiben', emails: 'E-Mails', content: 'Kursinhalt' },
+    loading: 'Lade …', none: 'Noch nichts da.', search: 'Name oder E-Mail suchen', all: 'Alle', refresh: 'Neu laden',
+    demo: 'Demo-Modus: Es gibt keine Datenbank, die Listen bleiben leer. Verbinde Supabase, um echte Personen zu sehen.',
+    notAdmin: 'Dieses Konto hat keine Admin-Rechte.', demoAdmin: 'Admin-Modus einschalten (Demo)',
+    sqlMissing: (f: string) => `Noch nicht eingerichtet: Führe ${f} in Supabase aus.`,
+    kWaitKurs: 'Warteliste Kurs', kWaitPr: 'Warteliste Prüfung', kLearners: 'Lernende', kActive: 'Aktiv in den letzten 7 Tagen', kReports: 'Offene Meldungen', kTexts: 'Texte zu korrigieren',
+    signups30: 'Anmeldungen, letzte 30 Tage', perLevel: 'Lernende pro Niveau', activity14: 'Lernzeit, letzte 14 Tage (alle Lernenden)', recentReports: 'Neueste Meldungen', recentSignups: 'Neueste Anmeldungen', open: 'Öffnen',
+    wlKurs: 'Kurs (Fuchsdeutsch)', wlPr: 'Prüfung', waiting: 'Wartend', approved: 'Freigegeben',
+    email: 'E-Mail', name: 'Name', course: 'Kurs', level: 'Niveau', why: 'Warum Deutsch', native: 'Muttersprache', signedUp: 'Angemeldet', status: 'Status',
+    examDate: 'Prüfungstag', perDay: 'Pro Tag', modules: 'Module', attempt: 'Versuch', center: 'Prüfungszentrum',
+    approve: 'Freigeben', approveSend: 'Freigeben und E-Mail senden', approveOnly: 'Ohne E-Mail freigeben', undo: 'Zurücknehmen', approvedOn: (d: string) => `Freigegeben am ${d}`,
+    answersOpen: 'Fragen noch offen', copyEmails: 'Freigegebene E-Mails kopieren', copied: 'Kopiert ✓',
+    usersKurs: 'Kurs', usersPr: 'Prüfung', lastActive: 'Zuletzt aktiv', never: 'noch nie', xp: 'XP', streak: 'Serie', progress: 'Fortschritt', time: 'Zeit', accuracy: 'Beim ersten Mal richtig',
+    sections: 'Abschnitte fertig', chapters: 'Kapitel bestanden', examsAvg: 'Kapiteltests (Schnitt)', joined: 'Dabei seit',
+    perChapter: 'Fortschritt pro Kapitel', examScores: 'Kapiteltests (bestanden ab 60 %)', timeDays: 'Lernzeit pro Tag, letzte 30 Tage', accChapter: 'Beim ersten Mal richtig pro Kapitel',
+    form: 'Antworten bei der Anmeldung', gender: 'Anrede', goal: 'Tagesziel', board: 'In der Bestenliste', yes: 'ja', no: 'nein', uiLang: 'Sprache bei der Anmeldung',
+    texts: 'Schreibaufgaben', reportsBy: 'Meldungen', emailsTo: 'Gesendete E-Mails', sendEmail: 'E-Mail senden', closeDetail: 'Zurück zur Liste',
+    prAttempts: 'Mock Tests und Blöcke', prModules: 'Punkte pro Modul (zuletzt)', prTime: 'Zeit in Tests', prPlan: 'Plan', noData: 'Noch keine Daten.',
+    timeNote: 'Zeit wird seit dem 20.10.2026 gezählt (nur aktive Zeit).',
+    rOpen: 'Offen', rDone: 'Erledigt', markDone: 'Als erledigt markieren', reopen: 'Wieder öffnen', reply: 'Per E-Mail antworten', page: 'Seite', from: 'Von', anonymous: 'nicht angegeben', app: 'App',
+    eTo: 'An', eSubject: 'Betreff', eText: 'Text', eButton: 'Button', eLink: 'Button-Link', eLang: 'Sprache', eSend: 'Senden', eSending: 'Sende …', eCancel: 'Abbrechen',
+    eSent: 'E-Mail gesendet ✓', eKind: 'Vorlage', eHint: 'Du kannst alles ändern, bevor du sendest. Zeilen mit "- " am Anfang werden eine Liste.', eWhen: 'Wann', eKindNames: { 'kurs-approved': 'Kurs freigegeben', 'pruefung-approved': 'Prüfung freigegeben', custom: 'Eigene Nachricht' } as Record<string, string>,
+    chapterN: (n: number) => `Kapitel ${n}`, chaptersN: (n: number) => `${n} Kapitel`, sectionsN: (n: number) => `${n} Abschnitte`, inWork: 'in Arbeit', tasks: 'Prüfungsaufgaben', type: 'Art', audio: 'Hörtexte', view: 'Ansehen', blocks: 'Blöcke', exercises: 'Übungen', section: 'Abschnitt', chapterTest: 'Kapitelprüfung', finalTest: (l: string) => `Abschlussprüfung ${l}`,
+    wOpen: 'Offen', wDone: 'Korrigiert', wCopy: 'Für Claude kopieren', wCopied: 'Kopiert ✓', wWhen: 'Wann', wWho: 'Wer', wTask: 'Aufgabe', wWords: 'Wörter', wText: 'Text', wPoints: 'Punkte',
+    wHelp: '1. „Für Claude kopieren“ drücken und alles in Claude einfügen. 2. Claudes Antwort (das JSON-Array) hier einfügen. 3. Speichern: Die Lernenden sehen Punkte und Korrekturen sofort.',
+    wSave: 'Korrekturen speichern', wSaving: 'Speichere …', wSaved: (n: number) => `${n} Texte gespeichert.`, wNothing: 'Nichts zum Speichern.',
+  },
+};
+export type ATT = (typeof AT)['en'];

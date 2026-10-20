@@ -6,6 +6,9 @@ import { findChapter } from '@/content/course';
 import { useUiLang } from '@/lib/lang';
 import { streakAlive, useStore } from '@/lib/store';
 import { chapterOpen, sectionOpen } from '@/lib/unlock';
+import { supabase } from '@/lib/supabase';
+
+const token = async () => (await supabase()?.auth.getSession())?.data.session?.access_token ?? null;
 
 /** Spiele is linked once its Vercel project is live (set NEXT_PUBLIC_SPIELE_LIVE=1). Until then it shows "soon". */
 const SPIELE_LIVE = process.env.NEXT_PUBLIC_SPIELE_LIVE === '1';
@@ -44,7 +47,7 @@ export function Nav() {
     ];
   } else if (user && isAdmin) {
     sections = [
-      { key: 'admin', label: 'Admin', href: '/admin', internal: true, active: here('/admin') },
+      { key: 'admin', label: en ? 'Control center ↗' : 'Kontrollzentrum ↗', href: '/admin', newTab: true },
       { key: 'kurs', label: 'Kurse', href: '/kurs', internal: true, active: here('/kurs') },
       { key: 'geschichten', label: 'Geschichten', href: '/geschichten', internal: true, active: here('/geschichten') },
     ];
@@ -59,6 +62,8 @@ export function Nav() {
   } else sections = homeParts('/');
 
   const alive = streakAlive(progress.streak);
+  // The control center has its own layout.
+  if (path.startsWith('/admin')) return null;
   const right = (
     <>
       {user && !isAdmin && (
@@ -78,6 +83,7 @@ export function Nav() {
       app="kurs" root="" foxSrc="/fuchsi.png" lang={lang} onLang={setLang}
       kursHref={user ? (isAdmin ? '/admin' : '/lernen') : '/'} spieleLive={SPIELE_LIVE}
       sections={sections} right={right}
+      report={{ app: 'kurs', apiBase: '', email: user?.email, getToken: token }}
       below={isAdmin && adminView ? <div className="admin-bar">Admin: Kursinhalte sind frei zugänglich. <Link href="/admin">Verwaltung</Link></div> : undefined}
     />
   );

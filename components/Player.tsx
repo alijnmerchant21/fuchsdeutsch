@@ -9,6 +9,7 @@ import { storiesAfterChapter } from '@/content/stories';
 import { party } from '@/lib/fx';
 import { buildSteps, KIND_EN, KIND_LABEL, leadInstruction, stepHint, type Step } from '@/lib/phases';
 import { useStore } from '@/lib/store';
+import { useActiveTime } from '@/lib/activeTime';
 import { De, useForcedHints, useHints } from './Hint';
 import { CastStrip } from './Cast';
 import { ChapterContext, imageSrc, sceneId, useImages } from '@/lib/images';
@@ -49,10 +50,11 @@ export function Crumbs({ parts }: { parts: [string, string?][] }) {
 }
 
 export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: Chapter; sec: Section; si: number }) {
-  const { progress, isAdmin, completeSection } = useStore();
+  const { progress, isAdmin, completeSection, recordScore } = useStore();
   const steps = useMemo(() => buildSteps(sec), [sec]);
   const screens = useMemo(() => flatten(steps), [steps]);
   const key = sectionKey(ch.id, sec.id);
+  useActiveTime(key);
   const wasDone = !!progress.done[key];
   const easy = useHints();
   const pics = useImages();
@@ -202,7 +204,7 @@ export function Player({ course, ch, sec, si: secIndex }: { course: Course; ch: 
           ) : (
             <div key={`item-${pos}`} className="v3-fade v3-stack">
               <div className={isExercise(scr.b) && solved[scr.b.id] ? 'is-solved' : ''}>
-                <BlockView b={scr.b} onScore={(id, s) => { if (s >= 1) setSolved((x) => (x[id] ? x : { ...x, [id]: true })); }} />
+                <BlockView b={scr.b} onScore={(id, s) => { recordScore(key, id, s); if (s >= 1) setSolved((x) => (x[id] ? x : { ...x, [id]: true })); }} />
               </div>
               {step.leads.length > 0 && (
                 <div className="v3-peek">

@@ -1,9 +1,12 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { asset, DEMO_MODE } from '@/lib/config';
+import { asset, BASE, DEMO_MODE } from '@/lib/config';
 import { useLang, useT } from '@/lib/lang';
 import { useStore } from '@/lib/store';
+import { supabase } from '@/lib/supabase';
+
+const token = async () => (await supabase()?.auth.getSession())?.data.session?.access_token ?? null;
 import { SiteHeader, type ShellItem } from './SiteHeader';
 
 /** Fuchsdeutsch home page (same domain in production, absolute so it also works on the Vercel preview URL). */
@@ -58,6 +61,7 @@ export function Topbar() {
       app="pruefung" root={SITE} foxSrc={asset('fox-logo.png')} lang={lang}
       onLang={showLang ? setLang : undefined} spieleLive={SPIELE_LIVE}
       sections={sections} right={right}
+      report={{ app: 'pruefung', apiBase: BASE, email: user?.email, getToken: token }}
     />
   );
 }

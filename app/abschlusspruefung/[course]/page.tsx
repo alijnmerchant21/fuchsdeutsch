@@ -13,6 +13,7 @@ import type { ExamItem } from '@/content/types';
 import { PASS_MARK } from '@/lib/config';
 import { party } from '@/lib/fx';
 import { useStore } from '@/lib/store';
+import { useActiveTime } from '@/lib/activeTime';
 import { finalOpen } from '@/lib/unlock';
 
 const modules = [
@@ -48,6 +49,7 @@ function Final() {
   const { course: courseId } = useParams<{ course: string }>();
   const course = courseById(courseId);
   const { progress, isAdmin, recordExam } = useStore();
+  useActiveTime(course ? `final/${course.id}` : null);
   const admin = isAdmin;
   const [tab, setTab] = useState<ModId>('lesen');
   const [pct, setPct] = useState<Record<ModId, number>>({ lesen: 0, hoeren: 0, schreiben: 0, sprechen: 0 });

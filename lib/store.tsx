@@ -41,6 +41,12 @@ export interface Progress {
   course?: string;
   /** Marked writing tasks whose points were already added: submission id -> XP. */
   writing?: Record<string, number>;
+  /** Active learning time in seconds: sectionKey -> seconds. */
+  time?: Record<string, number>;
+  /** Active learning time per day: YYYY-MM-DD -> seconds. */
+  timeDays?: Record<string, number>;
+  /** First try on each exercise: sectionKey -> block id -> score 0..1. */
+  scores?: Record<string, Record<string, number>>;
 }
 
 const emptyProgress = (): Progress => ({
@@ -98,6 +104,10 @@ interface Store {
   setAdminView: (on: boolean) => void;
   setDemoAdmin: (on: boolean) => void;
   completeSection: (key: string, xp: number) => void;
+  /** Adds active time (seconds) to a section and to today. */
+  addTime: (key: string, seconds: number) => void;
+  /** Keeps the first score of an exercise (0..1), for the admin's accuracy numbers. */
+  recordScore: (key: string, blockId: string, score: number) => void;
   recordExam: (key: string, percent: number) => void;
   recordGame: (id: string, score: number, xp: number) => void;
   /** Adds the XP for a marked text once. */
@@ -307,6 +317,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setIsAdmin(on); setAdminViewState(on); writeLS(LS_ADMIN, { is: on, view: on });
     },
     rewardWriting: (id, xp) => { if (isAdmin) return; update((p) => (p.writing?.[id] !== undefined ? p : earn({ ...p, writing: { ...(p.writing || {}), [id]: xp } }, xp))); },
+    addTime: (key, seconds) => {
+      if (isAdmin || seconds <= 0) return;
+      const today = dayKey();
+      update((p) => ({ ...p, time: { ...p.time, [key]: Math.round((p.time?.[key] || 0) + seconds) }, timeDays: { ...p.timeDays, [today]: Math.round((p.timeDays?.[today] || 0) + seconds) } }));
+    },
+    recordScore: (key, blockId, score) => {
+      if (isAdmin) return;
+      update((p) => (p.scores?.[key]?.[blockId] !== undefined ? p : { ...p, scores: { ...p.scores, [key]: { ...p.scores?.[key], [blockId]: Math.max(0, Math.min(1, score)) } } }));
+    },
     completeSection: (key, xp) => { if (isAdmin) return; update((p) => (p.done[key] ? p : earn({ ...p, done: { ...p.done, [key]: new Date().toISOString() } }, xp))); },
     recordExam: (key, percent) => {
       if (isAdmin) return;

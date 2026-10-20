@@ -101,3 +101,52 @@
   .fx-fox.is-wiggle img, .fx-theme .is-spin { animation: none; }
 }
 html { scroll-padding-top: 130px; }
+
+/* ---------- Report a problem ---------- */
+.fx-report { position: fixed; right: 18px; bottom: 18px; z-index: 60; display: inline-flex; align-items: center; gap: 0; height: 48px; min-width: 48px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--fx-line); background: var(--fx-bg); color: #c77700; font-family: var(--fx-font); font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 10px 28px -14px rgba(20, 24, 40, 0.45); transition: gap 0.35s var(--fx-spring), padding 0.35s var(--fx-spring), border-color 0.2s, scale 0.2s var(--fx-spring); }
+:root[data-theme='dark'] .fx-report { color: #f2cc5b; box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.8); }
+.fx-report svg { flex: none; transition: rotate 0.4s var(--fx-spring); }
+.fx-report-tip { max-width: 0; overflow: hidden; white-space: nowrap; color: var(--fx-ink); opacity: 0; transition: max-width 0.4s var(--fx-spring), opacity 0.2s ease; }
+.fx-report:hover, .fx-report:focus-visible { gap: 8px; padding: 0 16px 0 13px; border-color: #f2b34a; }
+.fx-report:hover .fx-report-tip, .fx-report:focus-visible .fx-report-tip { max-width: 180px; opacity: 1; }
+.fx-report:hover svg { rotate: -10deg; }
+.fx-report:active { scale: 0.95; }
+.fx-report:focus-visible { outline: 2px solid var(--fx-ink); outline-offset: 2px; }
+@media print { .fx-report { display: none; } }
+
+.fx-modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 18px; background: rgba(10, 11, 14, 0.45); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); animation: fx-fade 0.2s ease; }
+.fx-dialog { width: min(520px, 100%); max-height: calc(100vh - 36px); overflow: auto; background: var(--fx-bg); color: var(--fx-ink); font-family: var(--fx-font); border: 1px solid var(--fx-line); border-radius: 18px; padding: 22px; box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.5); animation: fx-pop 0.4s var(--fx-spring); }
+.fx-dialog h2 { margin: 0; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
+.fx-dialog p { margin: 4px 0 0; color: var(--fx-ink-2); font-size: 0.92rem; line-height: 1.45; }
+.fx-dialog-head { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; margin-bottom: 14px; }
+.fx-dialog-icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--fx-butter); color: #b56d00; }
+:root[data-theme='dark'] .fx-dialog-icon { color: #f2cc5b; }
+.fx-x { border: 0; background: none; color: var(--fx-ink-2); font-size: 1.6rem; line-height: 1; cursor: pointer; padding: 2px 6px; border-radius: 8px; }
+.fx-x:hover { background: var(--fx-soft); color: var(--fx-ink); }
+.fx-kinds { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.fx-kinds button { border: 1px solid var(--fx-line); background: none; color: var(--fx-ink-2); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.fx-kinds button:hover { color: var(--fx-ink); border-color: var(--fx-ink-3); }
+.fx-kinds button.is-on { background: var(--fx-butter); color: var(--fx-ink); border-color: transparent; }
+.fx-field { display: grid; gap: 6px; margin-bottom: 12px; font-weight: 700; font-size: 0.9rem; }
+.fx-field small { font-weight: 500; color: var(--fx-ink-3); }
+.fx-field input, .fx-field textarea { font: inherit; font-weight: 400; font-size: 0.95rem; color: var(--fx-ink); background: var(--fx-bg); border: 1px solid var(--fx-line); border-radius: 10px; padding: 10px 12px; resize: vertical; }
+.fx-field input:focus, .fx-field textarea:focus { outline: none; border-color: var(--fx-ink); }
+.fx-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.fx-err { color: #c62828 !important; }
+:root[data-theme='dark'] .fx-err { color: #ff8a80 !important; }
+.fx-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+.fx-btn { border: 1px solid var(--fx-thumb); background: var(--fx-thumb); color: var(--fx-thumb-ink); border-radius: 10px; padding: 10px 18px; font: inherit; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
+.fx-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.fx-btn.ghost { background: none; color: var(--fx-ink); border-color: var(--fx-line); }
+.fx-done { text-align: center; padding: 12px 4px 4px; display: grid; justify-items: center; gap: 8px; }
+.fx-done-mark { width: 56px; height: 56px; border-radius: 999px; display: grid; place-items: center; background: var(--fx-mint); font-size: 1.6rem; font-weight: 800; animation: fx-pop 0.5s var(--fx-spring); }
+.fx-done .fx-btn { margin-top: 10px; }
+@keyframes fx-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fx-pop { from { opacity: 0; scale: 0.92; } to { opacity: 1; scale: 1; } }
+@media (max-width: 600px) {
+  .fx-report { right: 12px; bottom: 12px; height: 44px; min-width: 44px; }
+  .fx-modal { place-items: end center; padding: 0; }
+  .fx-dialog { border-radius: 18px 18px 0 0; max-height: 92vh; animation: fx-up 0.35s var(--fx-spring); }
+}
+@keyframes fx-up { from { translate: 0 40px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .fx-report, .fx-report-tip, .fx-dialog, .fx-modal, .fx-done-mark { transition: none; animation: none; } }

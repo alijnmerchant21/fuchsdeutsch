@@ -10,9 +10,9 @@ import type { ATT } from './text';
 
 type Which = 'kurs' | 'pruefung';
 
-export function Learners({ data, t, lang, open, setOpen, which, setWhich, compose, reload }: {
+export function Learners({ data, t, lang, open, setOpen, which, setWhich, compose, reload, toWaitlist }: {
   data: AdminData; t: ATT; lang: 'de' | 'en'; open: string | null; setOpen: (id: string | null) => void;
-  which: Which; setWhich: (w: Which) => void; compose: (r: ComposeRequest) => void; reload: () => void;
+  which: Which; setWhich: (w: Which) => void; compose: (r: ComposeRequest) => void; reload: () => void; toWaitlist: () => void;
 }) {
   const [level, setLevel] = useState('all');
   const [q, setQ] = useState('');
@@ -37,15 +37,20 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
     .map((c) => ({ c, s: examStats(c, data.attempts) }))
     .filter(({ c }) => (level === 'all' || (c.level || 'b1') === level) && (match(c.email) || match(c.name)))
     .sort((a, b) => (b.s.attempts[0]?.finished_at || b.c.created_at).localeCompare(a.s.attempts[0]?.finished_at || a.c.created_at));
+  // Signed up for the beta but never logged in (waiting, or approved and not logged in yet).
+  const known = new Set(data.profiles.map((p) => p.email?.toLowerCase()));
+  const signups = data.beta
+    .filter((b) => !known.has(b.email.toLowerCase()))
+    .filter((b) => (level === 'all' || (b.profile?.course || courses[0].id) === level) && (match(b.email) || match(b.profile?.name || '')));
   const count = (id: string) => (which === 'kurs'
-    ? learners.filter((p) => courseOf(p, betaByEmail.get(p.email?.toLowerCase())) === id).length
+    ? learners.filter((p) => courseOf(p, betaByEmail.get(p.email?.toLowerCase())) === id).length + data.beta.filter((b) => !known.has(b.email.toLowerCase()) && (b.profile?.course || courses[0].id) === id).length
     : data.cands.filter((c) => (c.level || 'b1') === id).length);
 
   return (
     <div className="ad-stack">
       <div className="ad-toolbar">
         <div className="ad-tabs" role="tablist">
-          <button type="button" role="tab" aria-selected={which === 'kurs'} onClick={() => { setWhich('kurs'); setLevel('all'); }}>{t.usersKurs} <span className="ad-count">{learners.length}</span></button>
+          <button type="button" role="tab" aria-selected={which === 'kurs'} onClick={() => { setWhich('kurs'); setLevel('all'); }}>{t.usersKurs} <span className="ad-count">{learners.length + data.beta.filter((b) => !known.has(b.email.toLowerCase())).length}</span></button>
           <button type="button" role="tab" aria-selected={which === 'pruefung'} onClick={() => { setWhich('pruefung'); setLevel('all'); }}>{t.usersPr} <span className="ad-count">{data.cands.length}</span></button>
         </div>
         <input className="ad-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t.search} aria-label={t.search} />
@@ -58,7 +63,7 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
       {which === 'kurs' ? (
         <div className="ad-card ad-table-wrap">
           <table className="ad-table ad-click">
-            <thead><tr><th>{t.name}</th><th>{t.level}</th><th>{t.progress}</th><th>{t.time}</th><th>{t.accuracy}</th><th>{t.xp}</th><th>{t.lastActive}</th></tr></thead>
+            <thead><tr><th>{t.name}</th><th>{t.level}</th><th>{t.progress}</th><th>{t.time}</th><th>{t.accuracy}</th><th>{t.xp}</th><th>{t.lastActive}</th><th>{t.status}</th></tr></thead>
             <tbody>
               {kursRows.map(({ p, s }) => (
                 <tr key={p.id} onClick={() => setOpen(p.id)} tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') setOpen(p.id); }}>
@@ -67,9 +72,19 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
                   <td className="ad-prog"><Meter value={s.total ? s.done / s.total : 0} /><small>{s.done}/{s.total}</small></td>
                   <td>{fmtTime(s.time)}</td><td>{s.acc === null ? '–' : `${Math.round(s.acc * 100)}%`}</td><td>{p.xp}</td>
                   <td>{fmtDate(lastSeen(p), lang) || <span className="ad-dim">{t.never}</span>}</td>
+                  <td><span className="ad-pill t-mint">{t.active}</span></td>
                 </tr>
               ))}
-              {!kursRows.length && <tr><td colSpan={7} className="ad-empty">{t.none}</td></tr>}
+              {signups.map((b) => (
+                <tr key={`b-${b.email}`} onClick={toWaitlist} tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') toWaitlist(); }}>
+                  <td><b>{b.profile?.name || <span className="ad-dim">{t.answersOpen}</span>}</b><small className="ad-sub">{b.email}</small></td>
+                  <td><span className="ad-pill t-mint">{courses.find((c) => c.id === b.profile?.course)?.level || '–'}</span></td>
+                  <td className="ad-dim">–</td><td className="ad-dim">–</td><td className="ad-dim">–</td><td className="ad-dim">–</td>
+                  <td className="ad-dim">{t.signedUp} {fmtDate(b.created_at, lang)}</td>
+                  <td>{b.approved ? <span className="ad-pill t-sky">{t.notLoggedIn}</span> : <span className="ad-pill t-peach">{t.waiting} →</span>}</td>
+                </tr>
+              ))}
+              {!kursRows.length && !signups.length && <tr><td colSpan={8} className="ad-empty">{t.none}</td></tr>}
             </tbody>
           </table>
         </div>

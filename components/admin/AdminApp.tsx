@@ -108,7 +108,7 @@ export function AdminApp() {
             <>
               {tab === 'overview' && <Overview data={data} t={t} lang={lang} go={go} />}
               {tab === 'waitlist' && <Waitlists data={data} t={t} lang={lang} which={which} setWhich={(w) => go('waitlist', w)} compose={setMail} reload={() => void reload()} />}
-              {tab === 'users' && <Learners data={data} t={t} lang={lang} open={sub} setOpen={(id) => go('users', id)} which={which} setWhich={setWhich} compose={setMail} reload={() => void reload()} />}
+              {tab === 'users' && <Learners data={data} t={t} lang={lang} open={sub} setOpen={(id) => go('users', id)} which={which} setWhich={setWhich} compose={setMail} reload={() => void reload()} toWaitlist={() => go('waitlist', 'kurs')} />}
               {tab === 'reports' && <Reports data={data} t={t} lang={lang} compose={setMail} reload={() => void reload()} />}
               {tab === 'writing' && <Writing t={t} lang={lang} data={data} openLearner={(id) => go('users', id)} />}
               {tab === 'emails' && <Emails data={data} t={t} lang={lang} compose={setMail} />}

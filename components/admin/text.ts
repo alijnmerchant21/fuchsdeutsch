@@ -34,7 +34,7 @@ export const AT = {
     // writing
     wOpen: 'Open', wDone: 'Marked', wCopy: 'Copy for Claude', wCopied: 'Copied ✓', wWhen: 'When', wWho: 'Who', wTask: 'Task', wWords: 'Words', wText: 'Text', wPoints: 'Points',
     wHelp: '1. Press "Copy for Claude" and paste everything into Claude. 2. Paste Claude\'s answer (the JSON array) here. 3. Save: learners see points and corrections right away.',
-    prWriting: 'Schreiben texts', prTools: 'Prüfung tools', prToolsHint: 'Copy the export for Claude, paste Claude\'s answer back, mark Schreiben, manage blocks and unlock modules. The Prüfung tools are in German.', openTab: 'Open in a new tab', task: 'Task', notMarked: 'not marked yet', wKurs: 'Course', wPr: 'Prüfung', openLearner: 'Open', comment: 'Comment',
+    prWriting: 'Schreiben texts', prTools: 'Prüfung tools', prToolsHint: 'Copy the export for Claude, paste Claude\'s answer back, mark Schreiben, manage blocks and unlock modules. The Prüfung tools are in German.', openTab: 'Open in a new tab', task: 'Task', notMarked: 'not marked yet', wKurs: 'Course', wPr: 'Prüfung', active: 'Active', notLoggedIn: 'Approved, not logged in yet', openLearner: 'Open', comment: 'Comment',
     wSave: 'Save marking', wSaving: 'Saving …', wSaved: (n: number) => `${n} texts saved.`, wNothing: 'Nothing to save.',
   },
   de: {
@@ -64,7 +64,7 @@ export const AT = {
     chapterN: (n: number) => `Kapitel ${n}`, chaptersN: (n: number) => `${n} Kapitel`, sectionsN: (n: number) => `${n} Abschnitte`, inWork: 'in Arbeit', tasks: 'Prüfungsaufgaben', type: 'Art', audio: 'Hörtexte', view: 'Ansehen', blocks: 'Blöcke', exercises: 'Übungen', section: 'Abschnitt', chapterTest: 'Kapitelprüfung', finalTest: (l: string) => `Abschlussprüfung ${l}`,
     wOpen: 'Offen', wDone: 'Korrigiert', wCopy: 'Für Claude kopieren', wCopied: 'Kopiert ✓', wWhen: 'Wann', wWho: 'Wer', wTask: 'Aufgabe', wWords: 'Wörter', wText: 'Text', wPoints: 'Punkte',
     wHelp: '1. „Für Claude kopieren“ drücken und alles in Claude einfügen. 2. Claudes Antwort (das JSON-Array) hier einfügen. 3. Speichern: Die Lernenden sehen Punkte und Korrekturen sofort.',
-    prWriting: 'Schreiben-Texte', prTools: 'Prüfung-Werkzeuge', prToolsHint: 'Export für Claude kopieren, Claudes Antwort einfügen, Schreiben korrigieren, Blöcke verwalten und Module freischalten.', openTab: 'In neuem Tab öffnen', task: 'Aufgabe', notMarked: 'noch nicht korrigiert', wKurs: 'Kurs', wPr: 'Prüfung', openLearner: 'Öffnen', comment: 'Kommentar',
+    prWriting: 'Schreiben-Texte', prTools: 'Prüfung-Werkzeuge', prToolsHint: 'Export für Claude kopieren, Claudes Antwort einfügen, Schreiben korrigieren, Blöcke verwalten und Module freischalten.', openTab: 'In neuem Tab öffnen', task: 'Aufgabe', notMarked: 'noch nicht korrigiert', wKurs: 'Kurs', wPr: 'Prüfung', active: 'Aktiv', notLoggedIn: 'Freigegeben, noch nicht angemeldet', openLearner: 'Öffnen', comment: 'Kommentar',
     wSave: 'Korrekturen speichern', wSaving: 'Speichere …', wSaved: (n: number) => `${n} Texte gespeichert.`, wNothing: 'Nichts zum Speichern.',
   },
 };

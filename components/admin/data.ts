@@ -9,7 +9,7 @@ export interface BetaRow { email: string; profile: { name?: string; course?: str
 export interface ProfileRow { id: string; email: string; name: string | null; is_admin: boolean; xp: number; streak: number; last_active: string | null; created_at: string; updated_at: string | null; progress: Partial<Progress> | null }
 export interface CandRow { user_id: string; email: string; name: string; level?: string | null; exam_date: string; study_days: number[]; minutes_per_day: number; modules: string[]; exam_center?: string | null; first_language?: string | null; attempt_type?: string | null; unlocked: string[]; created_at: string }
 export interface AccessRow { user_id: string; approved_at: string }
-export interface AttemptRow { id: string; user_id: string; kind: string; ref: string; scores: Record<string, { right: number; total: number }>; started_at: string; finished_at: string }
+export interface AttemptRow { id: string; user_id: string; kind: string; ref: string; scores: Record<string, { right: number; total: number }>; writing?: Record<string, string> | null; feedback?: Record<string, { score: number; max: number; comment: string }> | null; started_at: string; finished_at: string }
 export interface ReportRow { id: string; created_at: string; app: string; page: string | null; subject: string; body: string; email: string | null; user_id: string | null; user_agent: string | null; status: 'open' | 'done' }
 export interface EmailRow { id: string; created_at: string; to_email: string; user_id: string | null; app: string; kind: string; subject: string; body: string | null }
 
@@ -46,7 +46,7 @@ export function useAdminData(enabled: boolean) {
       q<ProfileRow>('profiles', () => sb.from('profiles').select('id,email,name,is_admin,xp,streak,last_active,created_at,updated_at,progress').order('created_at', { ascending: false }).limit(2000)),
       q<CandRow>('exam_candidates', () => sb.from('exam_candidates').select('*').order('created_at', { ascending: false }).limit(2000)),
       q<AccessRow>('exam_access', () => sb.from('exam_access').select('user_id,approved_at').limit(5000)),
-      q<AttemptRow>('exam_attempts', () => sb.from('exam_attempts').select('id,user_id,kind,ref,scores,started_at,finished_at').order('finished_at', { ascending: false }).limit(5000)),
+      q<AttemptRow>('exam_attempts', () => sb.from('exam_attempts').select('id,user_id,kind,ref,scores,writing,feedback,started_at,finished_at').order('finished_at', { ascending: false }).limit(5000)),
       q<WritingSubmission>('writing_submissions', () => sb.from('writing_submissions').select('*').order('created_at', { ascending: false }).limit(2000)),
       q<ReportRow>('site_reports', () => sb.from('site_reports').select('*').order('created_at', { ascending: false }).limit(2000)),
       q<EmailRow>('sent_emails', () => sb.from('sent_emails').select('*').order('created_at', { ascending: false }).limit(2000)),

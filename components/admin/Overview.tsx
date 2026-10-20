@@ -2,7 +2,7 @@
 import { courses } from '@/content/course';
 import { Bars, HBars, Kpi } from './Charts';
 import { fmtDate, lastDays, lastSeen, type AdminData } from './data';
-import { courseOf } from './metrics';
+import { courseOf, prTexts } from './metrics';
 import type { ATT } from './text';
 import type { Tab } from './AdminApp';
 
@@ -14,7 +14,7 @@ export function Overview({ data, t, lang, go }: { data: AdminData; t: ATT; lang:
   const week = lastDays(7)[0];
   const active = learners.filter((p) => (lastSeen(p) || '') >= week).length;
   const openReports = data.reports.filter((r) => r.status === 'open').length;
-  const openTexts = data.writing.filter((w) => w.status === 'submitted').length;
+  const openTexts = data.writing.filter((w) => w.status === 'submitted').length + prTexts(data.attempts).filter((x) => !x.fb).length;
 
   const days30 = lastDays(30);
   const signups = days30.map((k) => ({

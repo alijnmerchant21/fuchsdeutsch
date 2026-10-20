@@ -303,3 +303,6 @@ button.lp-ribbon.rise{display:flex}
 .gate-plan span{display:grid;gap:2px;padding:10px 14px;border-radius:12px;background:var(--lilac-soft);border:1px solid var(--line);min-width:120px}
 .gate-plan small{font-size:12px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .gate-actions{display:flex;gap:14px;align-items:center;margin-top:8px}
+/* shown inside the Fuchsdeutsch control center */
+.is-embed .fx-head,.is-embed .fx-report,.is-embed .foot{display:none!important}
+.is-embed body{background:transparent}

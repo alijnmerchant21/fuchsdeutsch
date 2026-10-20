@@ -7,6 +7,7 @@ import { isExercise } from '@/content/types';
 import { supabase } from '@/lib/supabase';
 import { exportForClaude, listWriting, parseReviews, saveReview, type WritingSubmission } from '@/lib/writing';
 import { fmtDate, type AdminData } from './data';
+import { prTexts } from './metrics';
 import type { ComposeRequest } from './EmailComposer';
 import type { ATT } from './text';
 
@@ -75,7 +76,46 @@ export function Emails({ data, t, lang, compose }: { data: AdminData; t: ATT; la
 }
 
 /* ---------- writing: export open texts for Claude, paste the marking back ---------- */
-export function Writing({ t, lang }: { t: ATT; lang: L }) {
+export function Writing({ t, lang, data, openLearner }: { t: ATT; lang: L; data: AdminData; openLearner: (id: string) => void }) {
+  const [which, setWhich] = useState<'kurs' | 'pruefung'>('kurs');
+  const pr = prTexts(data.attempts);
+  const prOpen = pr.filter((x) => !x.fb).length;
+  const kursOpen = data.writing.filter((w) => w.status === 'submitted').length;
+  const tabs = (
+    <div className="ad-tabs" role="tablist">
+      <button type="button" role="tab" aria-selected={which === 'kurs'} onClick={() => setWhich('kurs')}>{t.wKurs} <span className="ad-count">{kursOpen}</span></button>
+      <button type="button" role="tab" aria-selected={which === 'pruefung'} onClick={() => setWhich('pruefung')}>{t.wPr} <span className="ad-count">{prOpen}</span></button>
+    </div>
+  );
+  if (which === 'pruefung') {
+    const name = (uid: string) => { const c = data.cands.find((x) => x.user_id === uid); return c ? `${c.name || c.email} · ${(c.level || 'b1').toUpperCase()}` : uid; };
+    return (
+      <div className="ad-stack">
+        <div className="ad-toolbar">{tabs}</div>
+        <p className="ad-hint">{t.prToolsHint}</p>
+        <div className="ad-card ad-table-wrap">
+          <table className="ad-table ad-click">
+            <thead><tr><th>{t.wWhen}</th><th>{t.wWho}</th><th>{t.task}</th><th>{t.wText}</th><th>{t.wPoints}</th><th /></tr></thead>
+            <tbody>
+              {pr.map((x) => (
+                <tr key={`${x.attempt.id}-${x.taskId}`} onClick={() => openLearner(x.attempt.user_id)}>
+                  <td>{fmtDate(x.attempt.finished_at, lang)}</td><td>{name(x.attempt.user_id)}</td><td>{x.taskId}</td>
+                  <td>{x.text.slice(0, 70)}{x.text.length > 70 ? '…' : ''}</td>
+                  <td>{x.fb ? <span className="ad-pill t-mint">{x.fb.score}/{x.fb.max}</span> : <span className="ad-pill t-butter">{t.notMarked}</span>}</td>
+                  <td><span className="ad-link">{t.openLearner} →</span></td>
+                </tr>
+              ))}
+              {!pr.length && <tr><td colSpan={6} className="ad-empty">{t.none}</td></tr>}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+  return <CourseWriting t={t} lang={lang} tabs={tabs} />;
+}
+
+function CourseWriting({ t, lang, tabs }: { t: ATT; lang: L; tabs: React.ReactNode }) {
   const [filter, setFilter] = useState<'submitted' | 'reviewed'>('submitted');
   const [rows, setRows] = useState<WritingSubmission[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -101,6 +141,7 @@ export function Writing({ t, lang }: { t: ATT; lang: L }) {
   return (
     <div className="ad-stack">
       <div className="ad-toolbar">
+        {tabs}
         <div className="ad-seg" role="group">
           <button type="button" aria-pressed={filter === 'submitted'} onClick={() => setFilter('submitted')}>{t.wOpen}{filter === 'submitted' && rows ? ` (${rows.length})` : ''}</button>
           <button type="button" aria-pressed={filter === 'reviewed'} onClick={() => setFilter('reviewed')}>{t.wDone}</button>

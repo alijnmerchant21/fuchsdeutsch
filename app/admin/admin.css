@@ -199,3 +199,11 @@ button.ad-kpi:hover { translate: 0 -2px; border-color: var(--tone-accent, var(--
   .ad-list li { grid-template-columns: minmax(0, 1fr) auto; }
   .ad-list li span:not(.ad-pill) { display: none; }
 }
+
+/* Prüfung Schreiben and tools */
+.ad-texts { display: grid; gap: 10px; }
+.ad-text { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--soft-2); }
+.ad-text header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.ad-text header .ad-pill { margin-left: auto; }
+.ad-tools-open { margin-left: auto; font-size: 0.82rem; }
+.ad-tools iframe { width: 100%; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); margin-top: 10px; display: block; }

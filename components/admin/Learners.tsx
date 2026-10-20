@@ -4,14 +4,15 @@ import { courses } from '@/content/course';
 import { Bars, HBars, Kpi, Meter, Ring } from './Charts';
 import { fmtDate, fmtTime, lastSeen, type AdminData, type CandRow, type ProfileRow } from './data';
 import type { ComposeRequest } from './EmailComposer';
-import { attemptPct, attemptSecs, courseOf, courseStats, examStats, MODULE_NAME, moduleScores } from './metrics';
+import { attemptPct, attemptSecs, courseOf, courseStats, examStats, MODULE_NAME, moduleScores, prTexts } from './metrics';
+import { PruefungTools } from './PruefungTools';
 import type { ATT } from './text';
 
 type Which = 'kurs' | 'pruefung';
 
-export function Learners({ data, t, lang, open, setOpen, which, setWhich, compose }: {
+export function Learners({ data, t, lang, open, setOpen, which, setWhich, compose, reload }: {
   data: AdminData; t: ATT; lang: 'de' | 'en'; open: string | null; setOpen: (id: string | null) => void;
-  which: Which; setWhich: (w: Which) => void; compose: (r: ComposeRequest) => void;
+  which: Which; setWhich: (w: Which) => void; compose: (r: ComposeRequest) => void; reload: () => void;
 }) {
   const [level, setLevel] = useState('all');
   const [q, setQ] = useState('');
@@ -22,7 +23,7 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
   if (open) {
     const p = data.profiles.find((x) => x.id === open) || null;
     const c = data.cands.find((x) => x.user_id === open) || null;
-    if (p || c) return <Detail p={p} c={c} data={data} t={t} lang={lang} back={() => setOpen(null)} compose={compose} />;
+    if (p || c) return <Detail p={p} c={c} data={data} t={t} lang={lang} back={() => setOpen(null)} compose={compose} reload={reload} />;
   }
 
   const kursLevels = courses.map((c) => ({ id: c.id, label: c.level }));
@@ -96,7 +97,7 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
 
 function Fact({ k, v }: { k: string; v: React.ReactNode }) { return <div className="ad-fact"><span>{k}</span><b>{v || '–'}</b></div>; }
 
-function Detail({ p, c, data, t, lang, back, compose }: { p: ProfileRow | null; c: CandRow | null; data: AdminData; t: ATT; lang: 'de' | 'en'; back: () => void; compose: (r: ComposeRequest) => void }) {
+function Detail({ p, c, data, t, lang, back, compose, reload }: { p: ProfileRow | null; c: CandRow | null; data: AdminData; t: ATT; lang: 'de' | 'en'; back: () => void; compose: (r: ComposeRequest) => void; reload: () => void }) {
   const email = p?.email || c?.email || '';
   const beta = data.beta.find((b) => b.email.toLowerCase() === email.toLowerCase());
   const name = p?.progress?.profile?.name || beta?.profile?.name || c?.name || p?.name || email;
@@ -176,6 +177,20 @@ function Detail({ p, c, data, t, lang, back, compose }: { p: ProfileRow | null; 
               </table></div>
             ) : <p className="ad-empty">{t.noData}</p>}
           </section>
+          <section className="ad-card ad-span2"><h3>{t.prWriting} <span className="ad-count">{prTexts(data.attempts, c.user_id).length}</span></h3>
+            <div className="ad-texts">
+              {prTexts(data.attempts, c.user_id).map((x) => (
+                <article key={`${x.attempt.id}-${x.taskId}`} className="ad-text">
+                  <header><b>{t.task} {x.taskId}</b><span className="ad-dim">{x.attempt.ref} · {fmtDate(x.attempt.finished_at, lang)}</span>
+                    {x.fb ? <span className="ad-pill t-mint">{x.fb.score}/{x.fb.max}</span> : <span className="ad-pill t-butter">{t.notMarked}</span>}</header>
+                  <p className="ad-pre">{x.text}</p>
+                  {x.fb?.comment && <p className="ad-hint"><b>{t.comment}:</b> {x.fb.comment}</p>}
+                </article>
+              ))}
+              {!prTexts(data.attempts, c.user_id).length && <p className="ad-empty">{t.noData}</p>}
+            </div>
+          </section>
+          <PruefungTools uid={c.user_id} t={t} onChange={reload} />
         </div>
       )}
 

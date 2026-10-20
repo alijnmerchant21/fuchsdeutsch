@@ -10,6 +10,7 @@ import { EmailComposer, type ComposeRequest } from './EmailComposer';
 import { Learners } from './Learners';
 import { Content, Emails, Reports, Writing } from './More';
 import { Overview } from './Overview';
+import { prTexts } from './metrics';
 import { AT } from './text';
 import { Waitlists } from './Waitlists';
 
@@ -67,7 +68,7 @@ export function AdminApp() {
   const badge: Partial<Record<Tab, number>> = data ? {
     waitlist: data.beta.filter((b) => !b.approved).length + data.cands.filter((c) => !approvedPr.has(c.user_id)).length,
     reports: data.reports.filter((r) => r.status === 'open').length,
-    writing: data.writing.filter((w) => w.status === 'submitted').length,
+    writing: data.writing.filter((w) => w.status === 'submitted').length + prTexts(data.attempts).filter((x) => !x.fb).length,
   } : {};
 
   return (
@@ -107,9 +108,9 @@ export function AdminApp() {
             <>
               {tab === 'overview' && <Overview data={data} t={t} lang={lang} go={go} />}
               {tab === 'waitlist' && <Waitlists data={data} t={t} lang={lang} which={which} setWhich={(w) => go('waitlist', w)} compose={setMail} reload={() => void reload()} />}
-              {tab === 'users' && <Learners data={data} t={t} lang={lang} open={sub} setOpen={(id) => go('users', id)} which={which} setWhich={setWhich} compose={setMail} />}
+              {tab === 'users' && <Learners data={data} t={t} lang={lang} open={sub} setOpen={(id) => go('users', id)} which={which} setWhich={setWhich} compose={setMail} reload={() => void reload()} />}
               {tab === 'reports' && <Reports data={data} t={t} lang={lang} compose={setMail} reload={() => void reload()} />}
-              {tab === 'writing' && <Writing t={t} lang={lang} />}
+              {tab === 'writing' && <Writing t={t} lang={lang} data={data} openLearner={(id) => go('users', id)} />}
               {tab === 'emails' && <Emails data={data} t={t} lang={lang} compose={setMail} />}
               {tab === 'content' && <Content t={t} open={sub} setOpen={(id) => go('content', id)} />}
             </>

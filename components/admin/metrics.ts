@@ -74,3 +74,11 @@ export function examStats(c: CandRow, attempts: AttemptRow[]): ExamStats {
     latest: latestMock ? moduleScores(latestMock) : {}, best: pcts.length ? Math.max(...pcts) : null,
   };
 }
+
+/** Every Prüfung Schreiben text, newest first, with the marking if there is one. */
+export interface PrText { attempt: AttemptRow; taskId: string; text: string; fb: { score: number; max: number; comment: string } | null }
+export function prTexts(attempts: AttemptRow[], userId?: string): PrText[] {
+  return attempts
+    .filter((a) => (!userId || a.user_id === userId) && a.writing && Object.keys(a.writing).length)
+    .flatMap((a) => Object.entries(a.writing || {}).filter(([, text]) => String(text || '').trim()).map(([taskId, text]) => ({ attempt: a, taskId, text: String(text), fb: a.feedback?.[taskId] ?? null })));
+}

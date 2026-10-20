@@ -39,7 +39,7 @@ export function sampleData(): AdminData {
     ],
     access: [{ user_id: 'u0', approved_at: iso(4) }],
     attempts: [
-      { id: 'a1', user_id: 'u0', kind: 'diagnose', ref: 'diagnose-b2', scores: { 'hoeren-1': { right: 7, total: 10 }, 'lesen-1': { right: 5, total: 9 }, 'schreiben-1': { right: 12, total: 20 } }, started_at: iso(3), finished_at: new Date(ago(3).getTime() + 41 * 60000).toISOString() },
+      { id: 'a1', user_id: 'u0', kind: 'diagnose', ref: 'diagnose-b2', scores: { 'hoeren-1': { right: 7, total: 10 }, 'lesen-1': { right: 5, total: 9 }, 'schreiben-1': { right: 12, total: 20 } }, writing: { 'b2-schreiben-1': 'Liebe Frau Weber,\n\nvielen Dank für Ihre Einladung. Leider kann ich am Samstag nicht kommen, weil meine Schwester heiratet. Könnten wir uns nächste Woche treffen?\n\nViele Grüße\nManisha' }, feedback: null, started_at: iso(3), finished_at: new Date(ago(3).getTime() + 41 * 60000).toISOString() },
     ],
     writing: [],
     reports: [

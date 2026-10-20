@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import { asset, BASE, DEMO_MODE } from '@/lib/config';
 import { useLang, useT } from '@/lib/lang';
 import { useStore } from '@/lib/store';
@@ -22,6 +23,17 @@ export function Topbar() {
   const path = usePathname();
   const here = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
   const onLanding = path === '/';
+
+  // Inside the Fuchsdeutsch control center (iframe): no header or footer, and tell the parent our height.
+  useEffect(() => {
+    if (window.self === window.top) return;
+    document.documentElement.classList.add('is-embed');
+    const post = () => window.parent.postMessage({ type: 'fd-embed-height', h: document.documentElement.scrollHeight }, window.location.origin);
+    const ro = new ResizeObserver(post);
+    ro.observe(document.body);
+    post();
+    return () => ro.disconnect();
+  }, []);
 
   let sections: ShellItem[] = [];
   if (ready && !user) {

@@ -18,6 +18,15 @@ export function AudioPlayer({ b }: { b: AudioBlock }) {
   const el = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => { void hasRecording(b.id).then(setRecorded); return () => stop.current(); }, [b.id]);
+  // Slow can be switched on and off while the audio plays. Safari resets playbackRate when the file loads,
+  // so defaultPlaybackRate is set too.
+  const RATE = 0.75;
+  useEffect(() => {
+    const a = el.current;
+    if (!a) return;
+    a.defaultPlaybackRate = slow ? RATE : 1;
+    a.playbackRate = slow ? RATE : 1;
+  }, [slow]);
 
   const cast = [...new Set(b.lines.map((l) => l.speaker))].map((id) => speakers[id]).filter(Boolean);
 
@@ -26,9 +35,12 @@ export function AudioPlayer({ b }: { b: AudioBlock }) {
     setPlaying(true); setPlays((n) => n + 1);
     if (recorded) {
       const a = el.current ?? new Audio(`/audio/${b.id}.mp3`);
-      el.current = a; a.playbackRate = slow ? 0.8 : 1; a.currentTime = 0;
+      el.current = a; a.preservesPitch = true; a.currentTime = 0;
+      const rate = slow ? RATE : 1;
+      a.defaultPlaybackRate = rate; a.playbackRate = rate;
+      a.onloadedmetadata = () => { a.playbackRate = a.defaultPlaybackRate; };
       a.onended = () => setPlaying(false);
-      void a.play();
+      void a.play().then(() => { a.playbackRate = a.defaultPlaybackRate; });
       stop.current = () => a.pause();
     } else {
       setPlaying(false);

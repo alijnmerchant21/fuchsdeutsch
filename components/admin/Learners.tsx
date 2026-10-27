@@ -6,6 +6,7 @@ import { fmtDate, fmtTime, lastSeen, type AdminData, type CandRow, type ProfileR
 import type { ComposeRequest } from './EmailComposer';
 import { attemptPct, attemptSecs, courseOf, courseStats, examStats, MODULE_NAME, moduleScores, prTexts } from './metrics';
 import { PruefungTools } from './PruefungTools';
+import { AppPills } from './Apps';
 import type { ATT } from './text';
 
 type Which = 'kurs' | 'pruefung';
@@ -63,7 +64,7 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
       {which === 'kurs' ? (
         <div className="ad-card ad-table-wrap">
           <table className="ad-table ad-click">
-            <thead><tr><th>{t.name}</th><th>{t.level}</th><th>{t.progress}</th><th>{t.time}</th><th>{t.accuracy}</th><th>{t.xp}</th><th>{t.lastActive}</th><th>{t.status}</th></tr></thead>
+            <thead><tr><th>{t.name}</th><th>{t.level}</th><th>{t.progress}</th><th>{t.time}</th><th>{t.accuracy}</th><th>{t.xp}</th><th>{t.lastActive}</th><th>{t.apps}</th></tr></thead>
             <tbody>
               {kursRows.map(({ p, s }) => (
                 <tr key={p.id} onClick={() => setOpen(p.id)} tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') setOpen(p.id); }}>
@@ -72,7 +73,7 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
                   <td className="ad-prog"><Meter value={s.total ? s.done / s.total : 0} /><small>{s.done}/{s.total}</small></td>
                   <td>{fmtTime(s.time)}</td><td>{s.acc === null ? '–' : `${Math.round(s.acc * 100)}%`}</td><td>{p.xp}</td>
                   <td>{fmtDate(lastSeen(p), lang) || <span className="ad-dim">{t.never}</span>}</td>
-                  <td><span className="ad-pill t-mint">{t.active}</span></td>
+                  <td><AppPills rows={data.apps.filter((a) => a.email === p.email?.toLowerCase())} t={t} /></td>
                 </tr>
               ))}
               {signups.map((b) => (
@@ -91,7 +92,7 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
       ) : (
         <div className="ad-card ad-table-wrap">
           <table className="ad-table ad-click">
-            <thead><tr><th>{t.name}</th><th>{t.level}</th><th>{t.examDate}</th><th>{t.prAttempts}</th><th>Best</th><th>{t.time}</th><th>{t.status}</th></tr></thead>
+            <thead><tr><th>{t.name}</th><th>{t.level}</th><th>{t.examDate}</th><th>{t.prAttempts}</th><th>Best</th><th>{t.time}</th><th>{t.status}</th><th>{t.apps}</th></tr></thead>
             <tbody>
               {prRows.map(({ c, s }) => (
                 <tr key={c.user_id} onClick={() => setOpen(c.user_id)} tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') setOpen(c.user_id); }}>
@@ -99,9 +100,10 @@ export function Learners({ data, t, lang, open, setOpen, which, setWhich, compos
                   <td><span className="ad-pill t-peach">{s.level}</span></td><td>{fmtDate(c.exam_date, lang)}</td>
                   <td>{s.attempts.length}</td><td>{s.best === null ? '–' : `${s.best}%`}</td><td>{fmtTime(s.time)}</td>
                   <td>{data.access.some((a) => a.user_id === c.user_id) ? <span className="ad-pill t-mint">{t.approved}</span> : <span className="ad-pill t-peach">{t.waiting}</span>}</td>
+                  <td><AppPills rows={data.apps.filter((a) => a.email === c.email.toLowerCase())} t={t} /></td>
                 </tr>
               ))}
-              {!prRows.length && <tr><td colSpan={7} className="ad-empty">{t.none}</td></tr>}
+              {!prRows.length && <tr><td colSpan={8} className="ad-empty">{t.none}</td></tr>}
             </tbody>
           </table>
         </div>
@@ -135,6 +137,7 @@ function Detail({ p, c, data, t, lang, back, compose, reload }: { p: ProfileRow 
           <div className="ad-person-tags">
             {s && <span className="ad-pill t-mint">{t.usersKurs} {s.level}</span>}
             {ex && <span className="ad-pill t-peach">Prüfung {ex.level}</span>}
+            <AppPills rows={data.apps.filter((a) => a.email === email.toLowerCase())} t={t} />
           </div>
           <button type="button" className="ad-btn" onClick={mail}>✉ {t.sendEmail}</button>
         </div>

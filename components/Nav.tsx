@@ -7,6 +7,8 @@ import { useUiLang } from '@/lib/lang';
 import { streakAlive, useStore } from '@/lib/store';
 import { chapterOpen, sectionOpen } from '@/lib/unlock';
 import { supabase } from '@/lib/supabase';
+import { useEffect } from 'react';
+import { firstTouch, touchApp } from '@/shared/shell/track';
 
 const token = async () => (await supabase()?.auth.getSession())?.data.session?.access_token ?? null;
 
@@ -61,6 +63,8 @@ export function Nav() {
     ];
   } else sections = homeParts('/');
 
+  // Count who uses the course (app_access), and remember where a visitor first came from.
+  useEffect(() => { firstTouch(); if (ready && user) void touchApp(supabase(), 'kurs', user.id); }, [ready, user]);
   const alive = streakAlive(progress.streak);
   // The control center has its own layout.
   if (path.startsWith('/admin')) return null;

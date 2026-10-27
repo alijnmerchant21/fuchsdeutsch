@@ -9,6 +9,7 @@ import { supabase } from '@/lib/supabase';
 
 const token = async () => (await supabase()?.auth.getSession())?.data.session?.access_token ?? null;
 import { SiteHeader, type ShellItem } from './SiteHeader';
+import { firstTouch, touchApp } from '@/lib/track';
 
 /** Fuchsdeutsch home page (same domain in production, absolute so it also works on the Vercel preview URL). */
 const SITE = (process.env.NEXT_PUBLIC_SITE_ROOT ?? 'https://www.fuchsdeutsch.de/').replace(/\/$/, '');
@@ -23,6 +24,8 @@ export function Topbar() {
   const path = usePathname();
   const here = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
   const onLanding = path === '/';
+  // Count who uses pruefung (app_access), and remember where a visitor first came from.
+  useEffect(() => { firstTouch(); if (ready && user) void touchApp(supabase(), 'pruefung', user.id); }, [ready, user]);
 
   // Inside the Fuchsdeutsch control center (iframe): no header or footer, and tell the parent our height.
   useEffect(() => {

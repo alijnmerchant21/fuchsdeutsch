@@ -26,7 +26,17 @@ export function sampleData(): AdminData {
       progress: { course: p.course, done, time, timeDays, scores, exams, profile: { name: p.name, gender: 'none', reasons: ['job', 'exam'], nativeLanguage: ['English', 'German', 'Hindi', 'Turkish'][i], goal: 50, board: true, uiLang: 'en' } },
     };
   });
+  const apps = [
+    ...people.map((p, i) => ({ email: p.email, app: 'kurs' as const, user_id: `u${i}`, status: 'approved' as const, source: ['ref:instagram', 'site:google.com', 'direct', 'ref:reddit'][i], created_at: iso(p.days + 3), approved_at: iso(p.days + 2), last_seen_at: iso(i) })),
+    { email: 'new.person@example.com', app: 'kurs' as const, user_id: null, status: 'waiting' as const, source: 'ref:instagram', created_at: iso(0), approved_at: null, last_seen_at: null },
+    { email: 'lena@example.com', app: 'kurs' as const, user_id: null, status: 'waiting' as const, source: 'direct', created_at: iso(1), approved_at: null, last_seen_at: null },
+    { email: 'manisha@example.com', app: 'pruefung' as const, user_id: 'u0', status: 'approved' as const, source: 'ref:instagram', created_at: iso(5), approved_at: iso(4), last_seen_at: iso(1) },
+    { email: 'omar@example.com', app: 'pruefung' as const, user_id: 'p1', status: 'waiting' as const, source: 'site:google.com', created_at: iso(0), approved_at: null, last_seen_at: null },
+    { email: 'jonas@example.com', app: 'spiele' as const, user_id: 'u1', status: 'approved' as const, source: 'site:google.com', created_at: iso(2), approved_at: iso(2), last_seen_at: iso(0) },
+    { email: 'kid@example.com', app: 'spiele' as const, user_id: 's9', status: 'approved' as const, source: 'ref:tiktok', created_at: iso(1), approved_at: iso(1), last_seen_at: iso(1) },
+  ];
   return {
+    apps,
     beta: [
       ...people.map((p, i) => ({ email: p.email, profile: { name: p.name, course: p.course, reasons: ['job', 'exam'], nativeLanguage: 'English', uiLang: 'en' as const }, approved: true, created_at: iso(p.days + 3) })),
       { email: 'new.person@example.com', profile: { name: 'Sam', course: 'a1', reasons: ['travel'], nativeLanguage: 'Spanish', uiLang: 'en' as const }, approved: false, created_at: iso(0) },

@@ -5,6 +5,7 @@ import { fmtDate, lastDays, lastSeen, type AdminData } from './data';
 import { courseOf, prTexts } from './metrics';
 import type { ATT } from './text';
 import type { Tab } from './AdminApp';
+import { AppsPanel } from './Apps';
 
 export function Overview({ data, t, lang, go }: { data: AdminData; t: ATT; lang: 'de' | 'en'; go: (tab: Tab, sub?: string) => void }) {
   const learners = data.profiles.filter((p) => !p.is_admin);
@@ -42,6 +43,7 @@ export function Overview({ data, t, lang, go }: { data: AdminData; t: ATT; lang:
         <Kpi label={t.kReports} value={openReports} tone="rose" onClick={() => go('reports')} />
         <Kpi label={t.kTexts} value={openTexts} tone="lilac" onClick={() => go('writing')} />
       </div>
+      <AppsPanel data={data} t={t} />
       <div className="ad-grid2">
         <section className="ad-card"><h3>{t.signups30}</h3><Bars data={signups} tone="peach" label={t.signups30} /></section>
         <section className="ad-card"><h3>{t.activity14}</h3><Bars data={minutes} tone="sky" label={t.activity14} fmt={(v) => `${v} min`} /></section>

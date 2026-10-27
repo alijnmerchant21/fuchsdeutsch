@@ -13,14 +13,17 @@ export interface AttemptRow { id: string; user_id: string; kind: string; ref: st
 export interface ReportRow { id: string; created_at: string; app: string; page: string | null; subject: string; body: string; email: string | null; user_id: string | null; user_agent: string | null; status: 'open' | 'done' }
 export interface EmailRow { id: string; created_at: string; to_email: string; user_id: string | null; app: string; kind: string; subject: string; body: string | null }
 
+export interface AppRow { email: string; app: 'kurs' | 'pruefung' | 'spiele'; user_id: string | null; status: 'waiting' | 'approved'; source: string | null; created_at: string; approved_at: string | null; last_seen_at: string | null }
+
 export interface AdminData {
+  apps: AppRow[];
   beta: BetaRow[]; profiles: ProfileRow[]; cands: CandRow[]; access: AccessRow[]; attempts: AttemptRow[];
   writing: WritingSubmission[]; reports: ReportRow[]; emails: EmailRow[];
   /** Tables that could not be read (not set up yet). */
   missing: string[];
 }
 
-const EMPTY: AdminData = { beta: [], profiles: [], cands: [], access: [], attempts: [], writing: [], reports: [], emails: [], missing: [] };
+const EMPTY: AdminData = { apps: [], beta: [], profiles: [], cands: [], access: [], attempts: [], writing: [], reports: [], emails: [], missing: [] };
 
 export function useAdminData(enabled: boolean) {
   const [data, setData] = useState<AdminData | null>(null);
@@ -41,7 +44,8 @@ export function useAdminData(enabled: boolean) {
       if (error) { missing.push(table); return []; }
       return (rows as T[]) || [];
     };
-    const [beta, profiles, cands, access, attempts, writing, reports, emails] = await Promise.all([
+    const [apps, beta, profiles, cands, access, attempts, writing, reports, emails] = await Promise.all([
+      q<AppRow>('app_access', () => sb.from('app_access').select('*').limit(10000)),
       q<BetaRow>('beta_signups', () => sb.from('beta_signups').select('*').order('created_at', { ascending: false }).limit(2000)),
       q<ProfileRow>('profiles', () => sb.from('profiles').select('id,email,name,is_admin,xp,streak,last_active,created_at,updated_at,progress').order('created_at', { ascending: false }).limit(2000)),
       q<CandRow>('exam_candidates', () => sb.from('exam_candidates').select('*').order('created_at', { ascending: false }).limit(2000)),
@@ -51,7 +55,7 @@ export function useAdminData(enabled: boolean) {
       q<ReportRow>('site_reports', () => sb.from('site_reports').select('*').order('created_at', { ascending: false }).limit(2000)),
       q<EmailRow>('sent_emails', () => sb.from('sent_emails').select('*').order('created_at', { ascending: false }).limit(2000)),
     ]);
-    setData({ beta, profiles, cands, access, attempts, writing, reports, emails, missing });
+    setData({ apps, beta, profiles, cands, access, attempts, writing, reports, emails, missing });
   }, [enabled]);
   useEffect(() => { void load(); }, [load]);
   return { data, reload: load, setData };

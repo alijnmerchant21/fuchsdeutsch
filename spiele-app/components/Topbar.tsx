@@ -1,5 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import { asset, BASE, DEMO_MODE, SITE } from '@/lib/config';
 import { useLang, useT } from '@/lib/lang';
 import { useStore } from '@/lib/store';
@@ -7,6 +8,7 @@ import { supabase } from '@/lib/supabase';
 
 const token = async () => (await supabase()?.auth.getSession())?.data.session?.access_token ?? null;
 import { SiteHeader, type ShellItem } from './SiteHeader';
+import { firstTouch, touchApp } from '@/lib/track';
 
 /** The shared Fuchsdeutsch header (components/SiteHeader.tsx) with the Spiele second row. */
 export function Topbar() {
@@ -15,6 +17,8 @@ export function Topbar() {
   const t = useT();
   const path = usePathname();
   const onLanding = path === '/';
+  // Count who uses spiele (app_access), and remember where a visitor first came from.
+  useEffect(() => { firstTouch(); if (ready && user) void touchApp(supabase(), 'spiele', user.id); }, [ready, user]);
 
   let sections: ShellItem[] = [];
   if (ready && !user) {

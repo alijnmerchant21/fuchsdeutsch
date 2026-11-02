@@ -143,6 +143,18 @@ function writeLS(key: string, value: unknown) {
   try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
 }
 
+type SB = NonNullable<ReturnType<typeof supabase>>;
+/** Save progress. Uses the save_progress function (supabase/010_save_progress.sql); falls back to a plain upsert. */
+async function pushProgress(sb: SB, u: User, p: Progress) {
+  const { error } = await sb.rpc('save_progress', { p });
+  if (!error) return;
+  const { error: e2 } = await sb.from('profiles').upsert({
+    id: u.id, email: u.email, name: u.name, progress: p,
+    xp: p.xp, streak: p.streak.count, last_active: p.streak.last, updated_at: new Date().toISOString(),
+  });
+  if (e2) console.warn('[fuchsdeutsch] progress not saved', error.message, e2.message);
+}
+
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -202,6 +214,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           // Keep whichever copy has more XP so offline work is never lost.
           if ((remote.xp || 0) >= (cur.xp || 0)) { cur = remote; setProgress(remote); writeLS(lsKey(u.id), remote); }
         }
+        // This device has more than the database (earlier saves failed): send it up now.
+        const remoteXp = (data.progress as Partial<Progress> | null)?.xp || 0;
+        if (!admin && (cur.xp || 0) > remoteXp) void pushProgress(sb, u, cur);
       } else {
         await sb.from('profiles').upsert({ id: u.id, email: u.email, name: u.name });
       }
@@ -229,12 +244,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     const sb = supabase();
     if (!sb) return;
     if (saveTimer.current) clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => {
-      void sb.from('profiles').upsert({
-        id: u.id, email: u.email, name: u.name, progress: p,
-        xp: p.xp, streak: p.streak.count, last_active: p.streak.last, updated_at: new Date().toISOString(),
-      });
-    }, 600);
+    saveTimer.current = setTimeout(() => { void pushProgress(sb, u, p); }, 600);
   }, []);
 
   const update = useCallback((fn: (p: Progress) => Progress) => {

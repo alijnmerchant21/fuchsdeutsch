@@ -1,0 +1,98 @@
+[
+  {
+    "key": "room-wohnzimmer",
+    "prompt": "Empty room, no furniture, no decorations, no rugs. Straight-on one-point perspective view of the back wall from standing height, the back wall fills the upper 60 percent of the frame, the floor fills the lower 40 percent, narrow slices of both side walls visible at the left and right edges, white baseboards, plain back wall without windows or doors, soft warm daylight from a window out of frame on the left. Living room with warm pastel peach painted walls and light oak plank flooring. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 1152,
+    "h": 960
+  },
+  {
+    "key": "room-kueche",
+    "prompt": "Empty room, no furniture, no decorations, no rugs. Straight-on one-point perspective view of the back wall from standing height, the back wall fills the upper 60 percent of the frame, the floor fills the lower 40 percent, narrow slices of both side walls visible at the left and right edges, white baseboards, plain back wall without windows or doors, soft warm daylight from a window out of frame on the left. Kitchen with pale mint green walls, a band of white subway tiles on the lower back wall, and a cream and beige tiled floor. No cabinets, no appliances. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 1152,
+    "h": 960
+  },
+  {
+    "key": "room-schlafzimmer",
+    "prompt": "Empty room, no furniture, no decorations, no rugs. Straight-on one-point perspective view of the back wall from standing height, the back wall fills the upper 60 percent of the frame, the floor fills the lower 40 percent, narrow slices of both side walls visible at the left and right edges, white baseboards, plain back wall without windows or doors, soft warm daylight from a window out of frame on the left. Bedroom with soft lilac walls with very subtle vertical stripes and light honey oak plank flooring. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 1152,
+    "h": 960
+  },
+  {
+    "key": "sofa",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A modern three-seat fabric sofa in soft pastel sky blue, light wooden legs, two seat cushions, seen from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 1024,
+    "h": 576
+  },
+  {
+    "key": "regal",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A tall open wooden bookshelf in light oak with four open shelves, a few pastel books and one small box on the top and bottom shelves, the middle shelf completely empty, seen straight from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 640,
+    "h": 1024
+  },
+  {
+    "key": "tisch",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A rectangular light oak dining table with four straight legs, empty tabletop, open space visible under the table, seen from the front, slightly from above. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 1024,
+    "h": 704
+  },
+  {
+    "key": "bett",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A double bed with a soft lilac upholstered headboard, white sheets and a pastel mint duvet, seen from the foot end in a slightly elevated front view, no pillows. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 1024,
+    "h": 704
+  },
+  {
+    "key": "schrank",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A tall two-door wardrobe in cream white painted wood with small wooden handles and short feet, flat empty top, seen straight from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 704,
+    "h": 1024
+  },
+  {
+    "key": "lampe",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A slim floor lamp with a pastel butter yellow fabric shade, thin warm gray metal pole and round base, seen from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 384,
+    "h": 1024
+  },
+  {
+    "key": "bild",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A framed art print in a light oak frame with a white mat, showing a soft pastel landscape of green hills and a peach sun, seen straight from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 768,
+    "h": 576
+  },
+  {
+    "key": "kissen",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A square soft throw cushion in pastel rose pink linen with a center button, seen from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 640,
+    "h": 512
+  },
+  {
+    "key": "teppich",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A round woven rug in pastel peach and cream with a simple ring pattern, lying flat on the floor, seen from a low elevated angle so it appears as a wide flat ellipse. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 1024,
+    "h": 384
+  },
+  {
+    "key": "pflanze",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A leafy green potted houseplant in a matte pastel terracotta pot, seen from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 512,
+    "h": 768
+  },
+  {
+    "key": "katze",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A friendly ginger tabby cat sitting upright and looking at the camera, seen from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 640,
+    "h": 640
+  },
+  {
+    "key": "uhr",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A round wall clock with a pastel peach rim, white face and simple black hands, seen straight from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 512,
+    "h": 512
+  },
+  {
+    "key": "vase",
+    "prompt": "Product photo of a single object, centered, full object visible with a little margin, isolated on a pure white seamless background (#ffffff), soft faint contact shadow directly below, eye-level slightly elevated front view. A small pastel sky blue ceramic vase with three tulips in pink, butter yellow and lilac, seen from the front. Photorealistic, warm soft natural light, Scandinavian interior style, calm pastel tones, high detail, no text, no logos, no watermark, no people.",
+    "w": 448,
+    "h": 640
+  }
+]

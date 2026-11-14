@@ -10,6 +10,7 @@
     "audio": "node --env-file-if-exists=.env.local scripts/generate-audio.mjs",
     "check": "node scripts/check-content.mjs",
     "images": "node --env-file-if-exists=.env.local scripts/generate-images.mjs",
+    "game-images": "node --env-file-if-exists=.env.local scripts/generate-game-images.mjs",
     "shell": "node scripts/sync-shell.mjs"
   },
   "dependencies": {

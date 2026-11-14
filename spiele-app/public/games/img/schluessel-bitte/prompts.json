@@ -1,0 +1,110 @@
+[
+ {
+  "key": "start",
+  "prompt": "a cheerful front door of a German apartment building with a doormat and potted plant",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "house",
+  "prompt": "a pretty German apartment building facade with balconies on a sunny street",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "ad",
+  "prompt": "a newspaper apartment listings page lying on a cafe table next to a coffee cup, close-up, blurred print",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "key",
+  "prompt": "a single brass apartment key on a wooden table with soft shadow",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "balcony",
+  "prompt": "a small balcony with flower boxes and two chairs in a German city",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "paint",
+  "prompt": "a paint roller and a can of pastel paint on a drop cloth in an empty room",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "smile",
+  "prompt": "a friendly smiling neighbor in her forties waving in a stairwell",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "boxes",
+  "prompt": "stacked cardboard moving boxes in an empty bright apartment",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "truck",
+  "prompt": "a small white moving van parked in front of an apartment building",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "clock",
+  "prompt": "a round wall clock on a pastel wall",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "broken",
+  "prompt": "a broken dripping kitchen faucet, close-up",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "hello",
+  "prompt": "two neighbors shaking hands in front of an apartment door",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "office",
+  "prompt": "a friendly property management office desk with folders and a plant",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "pharm",
+  "prompt": "a German pharmacy storefront with a green cross sign, no text",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "tools",
+  "prompt": "a toolbox with a hammer and screwdriver on a wooden floor",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "chaos",
+  "prompt": "a messy living room full of half-unpacked moving boxes",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "grill",
+  "prompt": "a small barbecue grill in a shared courtyard garden with neighbors in the background",
+  "w": 512,
+  "h": 512
+ },
+ {
+  "key": "party",
+  "prompt": "a cozy housewarming party with friends in a living room, string lights",
+  "w": 512,
+  "h": 512
+ }
+]

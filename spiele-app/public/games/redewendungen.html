@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Tomaten auf den Augen</title>
+<style>
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree-ext.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF}
+
+:root{
+  --ink:#4a453f; --soft:#8b847a; --paper:#fffdf7; --line:#e6dfcf; --bg:#f7f3e8;
+  --peach:#f6b9a4; --peach-d:#e58f74; --sky:#bcd9f2; --sky-d:#7fb0dc; --mint:#c5e6c8; --mint-d:#8fc497;
+  --lilac:#d7c9ec; --lilac-d:#a993d1; --butter:#f3e2a0; --butter-d:#d9c165; --rose:#f5c6d6; --rose-d:#e09bb3;
+  --tomato:#f19b87; --tomato-d:#d9715c;
+  --shadow:0 10px 30px -12px rgba(90,80,60,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);user-select:none;line-height:1.4}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sky-d);outline-offset:2px}
+.e{display:block;font-size:.8em;font-style:italic;font-weight:400;color:var(--soft);margin-top:2px;line-height:1.3}
+body:not(.en-on) .e{display:none}
+
+/* ---------- studio backdrop ---------- */
+#studio{position:fixed;inset:0;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,#fff6ea 0%,#f9e7e4 40%,#efe3f3 70%,#e6e1f2 100%);pointer-events:none}
+#bgimg{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transition:opacity 1.2s}
+#bgimg.ok{opacity:.5}
+#studio::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,253,247,.55),rgba(255,253,247,.25) 40%,rgba(247,243,232,.75))}
+.curtain{position:absolute;top:-2%;bottom:18%;width:11vw;min-width:46px;background:repeating-linear-gradient(90deg,#f2b8b2 0 14px,#e9a39c 14px 22px,#f5c4be 22px 34px);box-shadow:inset -10px 0 24px rgba(160,70,60,.25);opacity:.75;z-index:1}
+.curtain.l{left:0;border-bottom-right-radius:60% 30%;transform-origin:0 0;animation:sway 9s ease-in-out infinite}
+.curtain.r{right:0;border-bottom-left-radius:60% 30%;transform:scaleX(-1);transform-origin:100% 0;animation:swayr 10s ease-in-out infinite}
+@keyframes sway{50%{transform:skewX(1.6deg)}}
+@keyframes swayr{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) skewX(1.6deg)}}
+.valance{position:absolute;left:0;right:0;top:0;height:26px;background:radial-gradient(circle at 20px -6px,#f2b8b2 22px,transparent 23px) 0 0/40px 26px repeat-x;z-index:2;opacity:.85}
+.beam{position:absolute;top:-10%;width:34vw;height:120%;background:conic-gradient(from 180deg at 50% 0%,transparent 168deg,rgba(255,248,214,.55) 176deg,rgba(255,248,214,.75) 180deg,rgba(255,248,214,.55) 184deg,transparent 192deg);transform-origin:50% 0;filter:blur(6px);mix-blend-mode:screen;z-index:1}
+.beam.b1{left:4%;animation:beam 11s ease-in-out infinite}
+.beam.b2{right:4%;animation:beam 13s ease-in-out infinite reverse}
+@keyframes beam{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+.floor{position:absolute;left:-10%;right:-10%;bottom:0;height:22vh;transform-origin:50% 100%;transform:perspective(600px) rotateX(55deg);background:repeating-linear-gradient(90deg,rgba(255,255,255,.4) 0 2px,transparent 2px 70px),linear-gradient(#efd9cc,#e3c8b8);box-shadow:0 -20px 60px rgba(255,255,255,.7) inset;opacity:.9}
+.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(255,240,190,.9);animation:twinkle 3s ease-in-out infinite;opacity:.0;z-index:1}
+@keyframes twinkle{50%{opacity:.9;transform:scale(1.4)}}
+
+/* ---------- app shell ---------- */
+#app{position:fixed;inset:0;display:flex;flex-direction:column;z-index:3}
+.hud{display:flex;align-items:center;gap:10px;padding:12px 16px;flex:0 0 auto}
+.board{display:flex;gap:8px;flex:1;min-width:0;overflow:hidden}
+.chip{display:flex;align-items:center;gap:8px;min-width:0;background:rgba(255,253,247,.88);backdrop-filter:blur(6px);border:2px solid var(--line);border-radius:999px;padding:5px 14px 5px 5px;box-shadow:0 4px 14px rgba(90,80,60,.08);transition:transform .3s cubic-bezier(.2,1.4,.4,1),border-color .3s,box-shadow .3s}
+.chip.on{border-color:var(--cd);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 45%,transparent),0 6px 18px rgba(90,80,60,.14);transform:translateY(1px) scale(1.03)}
+.chip .av{flex:0 0 30px;height:30px;border-radius:50%;background:var(--c);display:grid;place-items:center;font-weight:800;font-size:14px;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--cd)}
+.chip .nm{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:120px}
+.chip b{font-size:18px;font-variant-numeric:tabular-nums;font-weight:800}
+.chip .fl{font-size:13px;font-weight:800;color:var(--tomato-d);white-space:nowrap}
+.chip.bump{animation:bump .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes bump{40%{transform:scale(1.12)}}
+.iconbtn{flex:0 0 40px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:rgba(255,253,247,.88);border:1.5px solid var(--line);box-shadow:0 4px 14px rgba(90,80,60,.08);transition:transform .15s}
+.iconbtn:hover{transform:translateY(-2px)}
+main{flex:1;overflow-y:auto;overflow-x:hidden;padding:4px 16px 24px;-webkit-overflow-scrolling:touch}
+
+/* ---------- question layout ---------- */
+.q{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:22px;align-items:start;padding-top:6px}
+.colL,.colR{display:flex;flex-direction:column;gap:14px;min-width:0}
+.tagrow{display:flex;align-items:center;gap:10px}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;font-weight:800;font-size:14px;letter-spacing:.02em;background:var(--paper);border:1.5px solid var(--line);box-shadow:0 3px 10px rgba(90,80,60,.07)}
+.tag.m{background:#fde9e3;border-color:#f3c6b8}
+.tag.s{background:#e4f0fb;border-color:#c3dcf2}
+.tag.b{background:linear-gradient(120deg,#fff1b8,#ffd9c2,#f8cfe0);border-color:#ebcf86;animation:glint 2.4s ease-in-out infinite}
+@keyframes glint{50%{box-shadow:0 0 0 4px rgba(255,225,140,.45),0 3px 10px rgba(90,80,60,.07)}}
+.tag .e{display:inline;margin:0 0 0 4px}
+body:not(.en-on) .tag .e{display:none}
+.count{font-size:13px;font-weight:700;color:var(--soft);white-space:nowrap}
+.tagrow .sp{flex:1}
+.timer{position:relative;width:48px;height:48px;flex:0 0 48px}
+.timer svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer circle{fill:none;stroke-width:5}
+.timer .tbg{stroke:rgba(74,69,63,.1)}
+.timer .tfg{stroke:var(--mint-d);stroke-linecap:round;transition:stroke .3s}
+.timer.warn .tfg{stroke:var(--tomato-d)}
+.timer span{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}
+.timer.warn span{color:var(--tomato-d);animation:tick 1s steps(1) infinite}
+@keyframes tick{50%{transform:scale(1.18)}}
+.timer.off{display:none}
+
+/* TV with marquee bulbs */
+.tvwrap{perspective:1200px}
+.tv{position:relative;border-radius:30px;padding:14px;background:radial-gradient(circle,#fffbe6 0 3px,rgba(255,251,230,.0) 4.5px) 0 0/22px 22px,linear-gradient(145deg,#f6dc93,#eac36c 55%,#e4b65e);box-shadow:0 26px 40px -22px rgba(120,80,30,.55),0 0 0 4px #fffdf7,0 0 0 6px rgba(217,193,101,.6),inset 0 2px 0 rgba(255,255,255,.6);transform-style:preserve-3d;transition:transform .35s ease-out;animation:tvin .7s cubic-bezier(.2,.9,.3,1.12) both}
+.tv.chase{animation:tvin .7s cubic-bezier(.2,.9,.3,1.12) both,chase 1.2s steps(2) infinite}
+@keyframes chase{to{background-position:11px 0,0 0}}
+@keyframes tvin{from{transform:rotateX(-35deg) translateY(30px) scale(.92);opacity:0}}
+.tv::after{content:"";position:absolute;inset:14px;border-radius:18px;background:linear-gradient(125deg,rgba(255,255,255,.28) 0,rgba(255,255,255,0) 32%);pointer-events:none}
+.pic{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--g);box-shadow:inset 0 0 0 2px rgba(255,255,255,.6),inset 0 -30px 60px rgba(90,60,40,.08)}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s,filter .6s,transform .6s;-webkit-user-drag:none}
+.pic.ok img{opacity:1}
+.ph{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}
+.ph::before,.ph::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
+.ph::before{width:46%;aspect-ratio:1;left:-10%;top:-14%}
+.ph::after{width:30%;aspect-ratio:1;right:-6%;bottom:-8%;background:rgba(255,255,255,.3)}
+.ph .emo{position:relative;z-index:1;font-size:clamp(64px,11vw,112px);line-height:1;filter:drop-shadow(0 12px 14px rgba(90,60,40,.22));animation:bob 3.2s ease-in-out infinite;letter-spacing:-.05em}
+.ph .stage{position:absolute;left:18%;right:18%;bottom:9%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(90,60,40,.18),transparent)}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-3deg)}}
+.pic.ok .ph{visibility:hidden}
+.pic.blur img{filter:blur(22px) saturate(1.3);transform:scale(1.15)}
+.pic.blur .ph .emo{filter:blur(14px)}
+.peek{position:absolute;left:50%;bottom:16px;translate:-50% 0;z-index:3;background:rgba(255,253,247,.94);border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;font-weight:800;font-size:14px;box-shadow:0 8px 18px -8px rgba(90,80,60,.4);text-align:center;white-space:nowrap}
+.peek .e{display:block;font-size:11px}
+.peek:hover{transform:translateY(-2px)}
+.sitcard{aspect-ratio:4/3;border-radius:18px;background:linear-gradient(150deg,#eaf3fc,#f3eefb 60%,#fdf0ea);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;padding:22px 26px;text-align:center;position:relative;overflow:hidden}
+.sitcard::before{content:"“";position:absolute;left:14px;top:-18px;font-size:150px;font-weight:900;color:rgba(127,176,220,.25);line-height:1}
+.sitcard .emo{font-size:46px;animation:bob 3.2s ease-in-out infinite}
+.sitcard p{margin:0;font-size:clamp(17px,2vw,21px);font-weight:600;line-height:1.4;position:relative}
+.sitcard p .e{font-size:.78em;margin-top:6px}
+
+.title{margin:0;font-size:clamp(24px,3.2vw,34px);line-height:1.15;font-weight:800;letter-spacing:.005em;animation:rise .5s .1s both}
+.title.small{font-size:clamp(20px,2.4vw,26px)}
+.sub{margin:-6px 0 0;color:var(--soft);font-size:14px}
+.gap{display:inline-block;height:.85em;vertical-align:-.08em;border-bottom:4px dashed var(--tomato);margin:0 .14em;border-radius:2px;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{50%{border-color:var(--butter-d)}}
+.gapfill{color:var(--tomato-d);background:#fde9e3;padding:0 .25em;border-radius:8px}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+
+.dlg{display:flex;flex-direction:column;gap:10px;animation:rise .5s .2s both}
+.bub{position:relative;max-width:88%;background:var(--paper);border:1.5px solid var(--line);border-radius:20px 20px 20px 6px;padding:9px 14px 10px;box-shadow:0 6px 16px -10px rgba(90,80,60,.4);font-size:15.5px;animation:rise .45s both}
+.bub:nth-child(2){align-self:flex-end;border-radius:20px 20px 6px 20px;background:#f4f9ff;border-color:#d6e6f5;animation-delay:.25s}
+.bub:nth-child(3){animation-delay:.45s}
+.bub .who{display:block;font-size:12px;font-weight:800;color:var(--tomato-d);letter-spacing:.03em;text-transform:uppercase;margin-bottom:1px}
+.bub:nth-child(2) .who{color:var(--sky-d)}
+.hint{font-size:14px;color:var(--soft);background:rgba(255,253,247,.75);border-radius:14px;padding:9px 14px;border:1.5px dashed var(--line)}
+
+.opts{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 16px 13px 12px;border-radius:18px;background:var(--paper);border:2px solid var(--line);box-shadow:0 4px 0 var(--line),0 10px 20px -14px rgba(90,80,60,.4);font-size:16px;font-weight:600;transition:transform .12s,box-shadow .12s,border-color .15s,background .2s,opacity .3s;animation:optin .45s both}
+.opt:nth-child(2){animation-delay:.06s}.opt:nth-child(3){animation-delay:.12s}.opt:nth-child(4){animation-delay:.18s}
+@keyframes optin{from{opacity:0;transform:translateX(18px)}}
+.opt .k{flex:0 0 32px;height:32px;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:14px;background:var(--bg);border:1.5px solid var(--line);transition:.2s}
+.opt .t{flex:1;min-width:0}
+.opt .t .e{font-size:.82em}
+@media(hover:hover){.opt:hover:not(:disabled){border-color:var(--peach);transform:translateY(-2px);box-shadow:0 6px 0 var(--peach),0 12px 22px -14px rgba(90,80,60,.4)}
+.opt:hover:not(:disabled) .k{background:var(--peach);border-color:var(--peach-d)}}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.opt:disabled{cursor:default}
+.opt.right{background:#e6f5e7;border-color:var(--mint-d);box-shadow:0 4px 0 var(--mint-d);animation:yay .6s cubic-bezier(.2,1.6,.4,1)}
+.opt.right .k{background:var(--mint-d);border-color:var(--mint-d);color:#fff}
+.opt.wrong{background:#fde8ee;border-color:var(--rose-d);box-shadow:0 4px 0 var(--rose-d);animation:nope .45s}
+.opt.wrong .k{background:var(--rose-d);border-color:var(--rose-d);color:#fff}
+.opt.dim{opacity:.5}
+.opt.gone{opacity:.25;filter:grayscale(1);pointer-events:none;transform:scale(.97)}
+@keyframes yay{40%{transform:scale(1.04)}}
+@keyframes nope{20%{transform:translateX(-10px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.joker{padding:9px 16px;border-radius:999px;background:var(--lilac);font-weight:800;font-size:14px;box-shadow:0 3px 0 var(--lilac-d);transition:.12s}
+.joker:hover:not(:disabled){transform:translateY(-2px)}
+.joker:disabled{opacity:.4;cursor:default;box-shadow:none}
+.keys{font-size:12px;color:var(--soft)}
+
+/* ---------- reveal sheet ---------- */
+.sheet{position:fixed;left:50%;bottom:12px;width:min(660px,calc(100% - 20px));translate:-50% 0;z-index:8;background:var(--paper);border:1.5px solid var(--line);border-radius:28px;box-shadow:0 30px 70px -20px rgba(90,80,60,.5);padding:18px 20px 18px;transform:translateY(calc(100% + 140px));visibility:hidden;transition:transform .5s cubic-bezier(.2,1.1,.3,1),visibility 0s .5s;max-height:calc(100% - 80px);overflow-y:auto}
+.sheet.show{transform:none;visibility:visible;transition:transform .5s cubic-bezier(.2,1.1,.3,1),visibility 0s}
+.sheet .top{display:flex;align-items:center;gap:12px}
+.sheet .top h3{margin:0;font-size:24px;font-weight:800;line-height:1.1}
+.sheet .top .pts{margin-left:auto;font-weight:800;font-size:22px;color:#3f8a55;white-space:nowrap}
+.sheet .parts{font-size:12.5px;color:var(--soft);margin:2px 0 0}
+.host{width:62px;height:62px;flex:0 0 62px}
+.sheet.good .top h3{color:#3f8a55}
+.sheet.bad .top h3{color:var(--tomato-d)}
+.sbody{display:flex;gap:14px;margin-top:12px;align-items:flex-start}
+.sbody .thumb{flex:0 0 150px;border-radius:16px;padding:6px;background:linear-gradient(145deg,#f6dc93,#e4b65e);box-shadow:0 10px 20px -12px rgba(120,80,30,.6)}
+.sbody .thumb .pic{border-radius:11px}
+.sbody .thumb .ph .emo{font-size:46px}
+.stext{flex:1;min-width:0}
+.stext h4{margin:0 0 4px;font-size:19px;font-weight:800;line-height:1.2}
+.stext .mean{margin:0 0 6px;font-weight:700}
+.stext .mean small{display:block;font-weight:600;color:var(--soft);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.stext .ex{margin:0 0 8px;font-size:14.5px;color:#5d574f}
+.engl{display:inline-flex;gap:8px;align-items:center;background:#eef5fc;border:1.5px solid #d6e6f5;border-radius:12px;padding:6px 12px;font-size:14.5px;font-weight:600}
+.engl small{font-weight:800;color:var(--sky-d);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.trap{display:inline-block;margin:0 0 8px;font-size:13px;font-weight:700;background:#fff3c9;border-radius:999px;padding:3px 10px}
+.big{width:100%;padding:15px;border-radius:18px;background:var(--peach);font-weight:800;font-size:18px;box-shadow:0 5px 0 var(--peach-d);transition:.12s;margin-top:14px}
+.big:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--peach-d)}
+.big:active{transform:translateY(3px);box-shadow:0 2px 0 var(--peach-d)}
+.big .e{color:#7a5a4e}
+.ghost{width:100%;padding:12px;border-radius:16px;border:1.5px solid var(--line);margin-top:10px;font-weight:700;background:#fff}
+.ghost:hover{border-color:var(--peach)}
+#veil{position:fixed;inset:0;z-index:7;background:rgba(247,243,232,.35);opacity:0;pointer-events:none;transition:opacity .4s}
+#veil.show{opacity:1;pointer-events:auto}
+
+/* host mascot */
+.host .mh,.host .ms,.host .mo{display:none}
+.host.happy .mh,.host.sad .ms,.host.wow .mo{display:inline}
+.host.happy{animation:hop .7s cubic-bezier(.2,1.6,.4,1)}
+.host.sad{animation:droop .8s ease-in-out}
+@keyframes hop{40%{transform:translateY(-12px) rotate(-6deg)}70%{transform:translateY(0) rotate(3deg)}}
+@keyframes droop{40%{transform:rotate(8deg) translateY(3px)}}
+
+/* ---------- overlays ---------- */
+.ov{position:fixed;inset:0;display:none;place-items:center;z-index:10;padding:16px;background:rgba(247,243,232,.6);backdrop-filter:blur(5px);overflow:auto}
+.ov.show{display:grid}
+.card{position:relative;background:var(--paper);border-radius:28px;border:1.5px solid var(--line);box-shadow:0 30px 70px -20px rgba(90,80,60,.35);width:min(560px,100%);padding:24px 24px 22px;text-align:center;animation:flip .6s cubic-bezier(.2,.9,.3,1.12)}
+@keyframes flip{from{transform:perspective(1200px) rotateX(-60deg) translateY(40px);opacity:0}}
+.card h1{font:800 clamp(28px,6vw,40px)/1.05 "Figtree",system-ui,sans-serif;letter-spacing:.02em;margin:6px 0 6px;text-transform:uppercase}
+.card p{margin:6px 0;color:var(--soft)}
+.card .hostbig{width:120px;height:120px;margin:-4px auto 0;display:block;animation:bob 3s ease-in-out infinite}
+.seg{display:inline-flex;flex-wrap:wrap;justify-content:center;background:var(--bg);border-radius:999px;padding:4px;margin:6px 0 4px;gap:2px}
+.seg button{padding:8px 16px;border-radius:999px;font-weight:700;font-size:15px;transition:.2s}
+.seg button.sel{background:#fff;box-shadow:0 4px 12px rgba(90,80,60,.12)}
+.names{display:grid;gap:8px;margin:10px 0 6px}
+.names label{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:7px 12px;animation:rise .35s both}
+.names i{flex:0 0 24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--ink)}
+.names input{border:0;font:inherit;font-weight:600;color:inherit;flex:1;background:none;min-width:0;outline:none}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}
+.how div{background:var(--bg);border-radius:16px;padding:10px 8px;font-size:13px;line-height:1.3}
+.how b{display:block;font-size:22px;margin-bottom:2px}
+.small{font-size:13.5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.stats div{background:var(--bg);border-radius:16px;padding:12px 6px}
+.stats b{display:block;font:800 28px/1.1 "Figtree",system-ui,sans-serif}
+.stats span{font-size:13px;color:var(--soft)}
+.review{text-align:left;max-height:230px;overflow:auto;background:var(--bg);border-radius:16px;padding:6px 12px;margin:8px 0 4px}
+.review li{list-style:none;display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line)}
+.review li:last-child{border-bottom:0}
+.review .ic{flex:0 0 24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;color:#fff;margin-top:1px}
+.review .ic.y{background:var(--mint-d)}.review .ic.n{background:var(--rose-d)}
+.review .rt{flex:1;min-width:0;font-size:14px}
+.review .rt b{display:block;font-size:15px}
+.review .rt span{color:var(--soft)}
+.review .who{flex:0 0 10px;height:10px;border-radius:50%;margin-top:8px}
+.newbest{display:inline-block;background:linear-gradient(120deg,#ffe08a,#ffb98f);padding:4px 14px;border-radius:999px;font-weight:800;animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.podium{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin:18px 0 6px}
+.pod{flex:0 1 140px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.pod .av{width:46px;height:46px;border-radius:50%;background:var(--c);display:grid;place-items:center;font-weight:800;font-size:20px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cd),0 8px 14px -6px rgba(90,80,60,.4);animation:drop .7s cubic-bezier(.2,1.5,.4,1) both}
+.pod .nm{font-weight:800;font-size:14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pod .blk{width:100%;border-radius:16px 16px 6px 6px;padding-top:12px!important;background:linear-gradient(180deg,var(--c),color-mix(in srgb,var(--cd) 70%,var(--c)));display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:8px;font-weight:800;box-shadow:inset 0 6px 0 rgba(255,255,255,.5),0 10px 18px -10px rgba(90,80,60,.5);transform-origin:50% 100%;animation:grow .8s cubic-bezier(.2,1.2,.4,1) both}
+.pod .blk .md{font-size:26px;line-height:1}
+.pod .blk .sc{font-size:16px;margin-top:2px}
+@keyframes grow{from{transform:scaleY(0)}}
+@keyframes drop{from{transform:translateY(-40px);opacity:0}}
+.handav{width:96px;height:96px;border-radius:50%;margin:4px auto 6px;display:grid;place-items:center;font-size:42px;font-weight:800;background:var(--c);border:5px solid #fff;box-shadow:0 0 0 3px var(--cd),0 14px 24px -10px rgba(90,80,60,.5);animation:bob 2.6s ease-in-out infinite}
+.conf{position:fixed;top:-20px;width:10px;height:16px;border-radius:3px;z-index:20;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.ftext{position:fixed;pointer-events:none;z-index:9;font:800 24px/1 "Figtree",system-ui,sans-serif;white-space:nowrap;translate:-50% 0;text-shadow:0 2px 0 #fff,0 0 10px #fff}
+.burst{position:fixed;width:0;height:0;pointer-events:none;z-index:9}
+.burst i{position:absolute;width:9px;height:9px;border-radius:50%}
+
+/* ---------- responsive ---------- */
+@media(max-width:820px){
+  .q{grid-template-columns:1fr;gap:12px}
+  .colL,.colR{display:contents}
+  .tagrow{order:1}.tvwrap{order:2}.title{order:3}.sub{order:4}.dlg{order:5}.hint{order:5}.opts{order:6}.tools{order:7}
+  .pic,.sitcard{aspect-ratio:16/10}
+  .tv{padding:10px;border-radius:24px}
+  .tv::after{inset:10px}
+  .keys{display:none}
+  .bub{font-size:15px}
+}
+@media(max-width:600px){
+  .hud{padding:10px 10px;gap:6px}
+  main{padding:2px 12px 24px}
+  .chip{padding:4px 10px 4px 4px;gap:6px}
+  .chip .av{flex-basis:26px;height:26px;font-size:12px}
+  .chip .nm{max-width:64px;font-size:13px}
+  .chip b{font-size:16px}
+  .board.n3 .chip .nm{display:none}
+  .sbody .thumb{flex-basis:96px}
+  .sheet{padding:16px 16px 16px;bottom:8px;border-radius:24px}
+  .sheet .top h3{font-size:21px}
+  .host{width:52px;height:52px;flex-basis:52px}
+  .opt{padding:11px 14px 11px 10px;font-size:15.5px}
+  .sitcard{padding:16px 18px}
+  .sitcard .emo{font-size:36px}
+  .curtain{opacity:.45}
+  .tag .e{display:none!important}
+  .how{grid-template-columns:repeat(3,1fr);gap:6px}
+  .how div{font-size:12px;padding:8px 4px}
+  .how .e{display:none!important}
+  .seg button{padding:7px 11px;font-size:14px}
+  .card{padding:20px 16px 18px}
+  .card .hostbig{width:96px;height:96px}
+  .sbody .thumb .ph .emo{font-size:30px}
+  .pic,.sitcard{aspect-ratio:16/9}
+  .tv{padding:8px}
+  .tv::after{inset:8px}
+  .bub{padding:7px 12px 8px;font-size:14.5px}
+  .dlg{gap:8px}
+  .q{gap:10px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="en-on">
+<div id="studio" aria-hidden="true">
+  <div id="bgimg"></div>
+  <i class="beam b1"></i><i class="beam b2"></i>
+  <div class="floor"></div>
+  <div class="valance"></div>
+  <i class="curtain l"></i><i class="curtain r"></i>
+  <i class="spark" style="left:22%;top:18%"></i><i class="spark" style="left:72%;top:12%;animation-delay:-1s"></i><i class="spark" style="left:58%;top:30%;animation-delay:-2s"></i><i class="spark" style="left:36%;top:8%;animation-delay:-1.6s"></i>
+</div>
+
+<div id="app">
+  <div class="hud">
+    <div class="board" id="board"></div>
+    <button class="iconbtn" id="snd" title="Ton an/aus" aria-label="Ton an/aus">🔔</button>
+    <button class="iconbtn" id="pause" title="Pause" aria-label="Pause">⏸</button>
+  </div>
+  <main id="main"><div class="q" id="q"></div></main>
+</div>
+
+<div id="veil"></div>
+<div class="sheet" id="sheet" role="dialog" aria-live="polite"></div>
+
+<div class="ov show" id="setupOv"><div class="card" id="setup"></div></div>
+<div class="ov" id="handOv"><div class="card" id="hand"></div></div>
+<div class="ov" id="endOv"><div class="card" id="endCard"></div></div>
+<div class="ov" id="pauseOv"><div class="card"><h1>Pause</h1><p>Die Show macht kurz Werbepause.<span class="e">The show takes a short commercial break.</span></p><button class="big" id="resume">Weiter<span class="e">Continue</span></button><button class="ghost" id="quit">Spiel beenden<span class="e">End the game</span></button></div></div>
+
+<script>
+/* ---------- pictures: realistic AI images go to img/redewendungen/<key>.webp (see prompts.json) ---------- */
+const IMG_DIR='img/redewendungen/';
+const IMG_KEYS=['studio','tomaten','bahnhof','bier','schwein','schlauch','daumen','fettnapf','brei','nagel','halsbein','baer','katzesack','gelbeei','wurst','handfuss','kopf','baeraufbinden','nase','auge','kirschen','schweinpfeift','luftschloss','kater','holzweg','spatz','senf','kirche','hase','eis','kloss','keks','tassen','ohr','butter','zahn','katzensprung'];
+
+/* ---------- idioms ----------
+   o: [real meaning, literal trap, close but wrong, other wrong] as "Deutsch|English"
+   d: dialog lines [speaker, German, English]
+   g: gap sentence, answer, distractors
+   s: situation "Deutsch|English" for the "which idiom fits?" round
+   grp: idioms with a similar meaning never appear together as answer options */
+const IDIOMS=[
+{k:"tomaten",i:"Tomaten auf den Augen haben",emo:"🍅👀",grp:"see",
+ d:[["Lena","Wo ist denn mein Schlüssel? Ich suche schon seit zehn Minuten!","Where is my key? I've been looking for ten minutes!"],["Tarek","Hast du Tomaten auf den Augen? Der hängt doch direkt neben der Tür!","Do you have tomatoes on your eyes? It's hanging right next to the door!"]],
+ o:["etwas Offensichtliches nicht bemerken|to not notice something obvious","gerötete, müde Augen haben|to have red, tired eyes","absichtlich über etwas hinwegsehen|to deliberately overlook something","total verliebt sein|to be madly in love"],
+ en:"to not see what is right under your nose",ex:"Wer Tomaten auf den Augen hat, übersieht etwas, das eigentlich gar nicht zu übersehen ist.",exE:"If you have tomatoes on your eyes, you miss something that is impossible to miss.",
+ g:["Hast du ___ auf den Augen?","Tomaten",["Gurken","Kartoffeln","Erdbeeren"]],s:"Dein Mitbewohner sucht überall seine Brille. Dabei sitzt sie auf seiner Nase.|Your roommate is looking everywhere for his glasses. They are sitting on his nose."},
+{k:"bahnhof",i:"Ich verstehe nur Bahnhof.",emo:"🚉❓",grp:"understand",
+ d:[["Mia","Du musst nur noch den Router neu starten und die IP-Adresse freigeben.","You just need to restart the router and release the IP address."],["Opa Kurt","Wie bitte? Ich verstehe nur Bahnhof.","Pardon? It's all Greek to me."]],
+ o:["überhaupt nichts verstehen|to understand nothing at all","nur die Ansagen am Bahnhof hören|to only hear the announcements at the station","nur die Hälfte verstehen|to understand only half of it","dringend verreisen wollen|to urgently want to travel"],
+ en:"It's all Greek to me.",ex:"Man versteht gar nichts. Angeblich wollten Soldaten im Ersten Weltkrieg nur noch zum Bahnhof und nach Hause, alles andere interessierte sie nicht.",exE:"You understand nothing. Supposedly WWI soldiers only cared about getting to the station and home.",
+ g:["Ich verstehe nur ___.","Bahnhof",["Flughafen","Haltestelle","Autobahn"]],s:"Der Professor erklärt Quantenphysik und du kannst mit keinem einzigen Satz etwas anfangen.|The professor explains quantum physics and you cannot make sense of a single sentence."},
+{k:"bier",i:"Das ist nicht mein Bier.",emo:"🍺🙅",grp:"egal",
+ d:[["Jonas","Die Nachbarn streiten schon wieder über die Mülltonnen. Willst du nicht mal schlichten?","The neighbors are arguing about the trash cans again. Don't you want to settle it?"],["Sara","Nee, das ist nicht mein Bier. Sollen die das allein klären.","Nah, that's not my business. They can sort it out themselves."]],
+ o:["Das ist nicht meine Angelegenheit.|That is none of my business.","Ich habe das falsche Getränk bekommen.|I got the wrong drink.","Das gefällt mir nicht besonders.|I do not really like that.","Ich trinke keinen Alkohol.|I do not drink alcohol."],
+ en:"That's not my problem.",ex:"Etwas ist nicht meine Sache, darum kümmere ich mich nicht. Achtung: Es heißt nicht „Das gefällt mir nicht“.",exE:"It is not my business, so I stay out of it. Careful: it does not mean “not my cup of tea”.",
+ g:["Das ist nicht mein ___.","Bier",["Wein","Kaffee","Saft"]],s:"Zwei Kollegen streiten über ein Projekt, mit dem du nichts zu tun hast. Du willst dich raushalten.|Two colleagues argue about a project you have nothing to do with. You want to stay out of it."},
+{k:"schwein",i:"Schwein haben",emo:"🐷🍀",grp:"luck",
+ d:[["Ali","Ich hätte den Zug fast verpasst, aber er hatte zum Glück fünf Minuten Verspätung.","I almost missed the train, but luckily it was five minutes late."],["Nina","Da hast du aber Schwein gehabt!","You got lucky there!"]],
+ o:["großes Glück haben|to be very lucky","ein Schwein als Haustier haben|to have a pig as a pet","durch harte Arbeit Erfolg haben|to succeed through hard work","sehr unordentlich sein|to be very messy"],
+ en:"to be lucky / to luck out",ex:"Man hat unerwartet Glück. Das Schwein ist in Deutschland ein Glückssymbol, besonders an Silvester.",exE:"You get lucky unexpectedly. Pigs are a good-luck symbol in Germany, especially on New Year's Eve.",
+ g:["Da hast du aber ___ gehabt!","Schwein",["Huhn","Kuh","Hund"]],s:"Du findest auf dem Gehweg einen 50-Euro-Schein.|You find a 50-euro bill on the sidewalk."},
+{k:"schlauch",i:"auf dem Schlauch stehen",emo:"🌱💦",grp:"understand",
+ d:[["Paul","Was ist die Hälfte von einem Dutzend?","What is half of a dozen?"],["Emma","Moment … ich stehe gerade total auf dem Schlauch.","Hold on … I'm totally drawing a blank."]],
+ o:["etwas Einfaches gerade nicht kapieren|to not get something simple right now","den Gartenschlauch blockieren|to block the garden hose","keine Lust auf etwas haben|to not feel like doing something","in einer langen Schlange warten|to wait in a long line"],
+ en:"to draw a blank",ex:"Man ist gedanklich blockiert, so wie das Wasser in einem Schlauch, auf dem jemand steht.",exE:"Your mind is blocked, like the water in a hose that someone is standing on.",
+ g:["Ich stehe gerade total auf dem ___.","Schlauch",["Teppich","Rasen","Gleis"]],s:"Dein Freund erzählt einen Witz. Alle lachen, nur du verstehst die Pointe einfach nicht.|Your friend tells a joke. Everyone laughs, only you just don't get the punchline."},
+{k:"daumen",i:"jemandem die Daumen drücken",emo:"👍🍀",grp:"wish",
+ d:[["Tim","Morgen ist meine B2-Prüfung. Ich bin so nervös!","My B2 exam is tomorrow. I'm so nervous!"],["Oma","Ich drücke dir ganz fest die Daumen, mein Schatz!","I'll keep my fingers crossed for you, sweetheart!"]],
+ o:["jemandem Glück wünschen|to wish someone luck","jemandem die Hände massieren|to massage someone's hands","jemanden für etwas loben|to praise someone for something","jemanden unter Druck setzen|to put pressure on someone"],
+ en:"to keep your fingers crossed for someone",ex:"Man wünscht jemandem Erfolg. Dabei drückt man die Daumen wirklich in die Faust.",exE:"You wish someone success, and Germans really tuck their thumbs into their fists.",
+ g:["Ich drücke dir die ___!","Daumen",["Finger","Hände","Zehen"]],s:"Deine Freundin hat morgen ein wichtiges Vorstellungsgespräch.|Your friend has an important job interview tomorrow."},
+{k:"fettnapf",i:"ins Fettnäpfchen treten",emo:"🥘😬",
+ d:[["Lisa","Wann ist es denn so weit? Wird es ein Junge oder ein Mädchen?","When is it due? Is it a boy or a girl?"],["Kollegin","Ich bin nicht schwanger.","I'm not pregnant."],["Lisa","Oh nein. Da bin ich voll ins Fettnäpfchen getreten.","Oh no. I really put my foot in it."]],
+ o:["aus Versehen etwas Peinliches sagen oder tun|to accidentally say or do something embarrassing","in der Küche in Fett treten|to step in grease in the kitchen","jemanden absichtlich beleidigen|to insult someone on purpose","zu viel fettiges Essen essen|to eat too much fatty food"],
+ en:"to put your foot in it",ex:"Man macht unabsichtlich einen taktlosen Fehler. Früher stand in Bauernhäusern ein Napf mit Fett, und wer hineintrat, bekam Ärger.",exE:"You make a tactless blunder without meaning to. Farmhouses used to keep a bowl of grease on the floor, and stepping in it meant trouble.",
+ g:["Mit der Frage bist du voll ins ___ getreten.","Fettnäpfchen",["Wasserglas","Blumenbeet","Kochbuch"]],s:"Du fragst deinen neuen Chef nach seiner Frau. Er hat sich gerade scheiden lassen.|You ask your new boss about his wife. He just got divorced."},
+{k:"brei",i:"um den heißen Brei herumreden",emo:"🥣💬",grp:"direct",
+ d:[["Max","Also, das Wetter war ja toll, und dein Auto ist echt schön, und …","So, the weather was great, and your car is really nice, and …"],["Jana","Red nicht um den heißen Brei herum! Hast du mein Auto zerkratzt?","Stop beating around the bush! Did you scratch my car?"]],
+ o:["nicht direkt zur Sache kommen|to not get to the point","warten, bis das Essen abgekühlt ist|to wait until the food has cooled down","absichtlich lügen|to lie on purpose","ständig übers Kochen reden|to talk about cooking all the time"],
+ en:"to beat around the bush",ex:"Man vermeidet das eigentliche Thema, so wie man um einen zu heißen Brei herumlöffelt.",exE:"You avoid the real topic, like spooning around porridge that is too hot to eat.",
+ g:["Red nicht um den heißen ___ herum!","Brei",["Tee","Kaffee","Ofen"]],s:"Dein Kollege will um mehr Gehalt bitten, spricht aber zehn Minuten nur über das Wetter.|Your coworker wants to ask for a raise but only talks about the weather for ten minutes."},
+{k:"nagel",i:"den Nagel auf den Kopf treffen",emo:"🔨🎯",grp:"right",
+ d:[["Chef","Unser Problem ist nicht das Produkt, sondern dass es niemand kennt.","Our problem isn't the product, it's that nobody knows about it."],["Kollegin","Genau! Damit haben Sie den Nagel auf den Kopf getroffen.","Exactly! You hit the nail on the head."]],
+ o:["genau das Richtige sagen|to say exactly the right thing","beim Hämmern gut zielen|to aim well when hammering","jemanden hart kritisieren|to criticize someone harshly","handwerklich sehr begabt sein|to be very handy"],
+ en:"to hit the nail on the head",ex:"Man beschreibt etwas ganz genau und treffend. Im Englischen gibt es fast dasselbe Bild.",exE:"You describe something precisely. English uses almost the same image.",
+ g:["Du hast den ___ auf den Kopf getroffen.","Nagel",["Hammer","Ball","Punkt"]],s:"In einer langen Diskussion fasst du das Problem in einem einzigen, perfekten Satz zusammen.|In a long discussion you sum up the problem in one perfect sentence."},
+{k:"halsbein",i:"Hals- und Beinbruch!",emo:"🦴🎸",grp:"wish",
+ d:[["Leon","Gleich ist mein erster Auftritt mit der Band!","My first gig with the band is in a minute!"],["Mara","Hals- und Beinbruch! Du rockst das!","Break a leg! You've got this!"]],
+ o:["Viel Glück! (vor etwas Wichtigem)|Good luck! (before something important)","Pass auf, dass du dich nicht verletzt!|Be careful not to hurt yourself!","Gute Besserung!|Get well soon!","Das wird bestimmt gefährlich.|That is going to be dangerous."],
+ en:"Break a leg!",ex:"Ein Glückwunsch vor Prüfungen oder Auftritten. Vermutlich kommt er vom jiddischen „hatslokhe un brokhe“ (Glück und Segen).",exE:"A good-luck wish before exams or shows. It probably comes from Yiddish “hatslokhe un brokhe” (luck and blessing).",
+ g:["Hals- und ___!","Beinbruch",["Armbruch","Kopfbruch","Zehbruch"]],s:"Deine Schwester steht gleich zum ersten Mal auf einer großen Theaterbühne.|Your sister is about to go on a big theater stage for the first time."},
+{k:"baer",i:"Da steppt der Bär.",emo:"🐻🕺",
+ d:[["Can","Kommst du heute Abend mit zur Party bei Mehmet?","Are you coming to Mehmet's party tonight?"],["Julia","Klar! Da steppt bestimmt der Bär.","Sure! That's where the party's at."]],
+ o:["Da ist richtig viel los.|It is going to be really lively there.","Dort tanzt ein Bär im Zirkus.|A bear is dancing at the circus there.","Da wird es laut und gefährlich.|It will get loud and dangerous there.","Da ist es total langweilig.|It is totally boring there."],
+ en:"That's where the party's at!",ex:"Es ist viel los, es wird gefeiert und getanzt. Früher traten auf Jahrmärkten Tanzbären auf.",exE:"There is a lot going on, people party and dance. Dancing bears used to perform at fairs.",
+ g:["Heute Abend im Club steppt der ___.","Bär",["Hase","Fuchs","Elefant"]],s:"Auf dem Stadtfest spielen drei Bands und die ganze Stadt tanzt.|At the street festival three bands are playing and the whole town is dancing."},
+{k:"katzesack",i:"die Katze im Sack kaufen",emo:"🐈🛍️",
+ d:[["Ben","Ich kaufe das gebrauchte Auto online, ohne Probefahrt. Ist doch günstig!","I'm buying the used car online, no test drive. It's cheap!"],["Vater","Pass auf, du kaufst die Katze im Sack!","Careful, you're buying a pig in a poke!"]],
+ o:["etwas ungeprüft kaufen|to buy something without checking it","eine Katze in einer Tasche kaufen|to buy a cat in a bag","ein Geheimnis verraten|to reveal a secret","viel zu viel bezahlen|to pay way too much"],
+ en:"to buy a pig in a poke",ex:"Man kauft etwas, ohne es vorher anzuschauen. Vorsicht: „die Katze aus dem Sack lassen“ heißt dagegen, ein Geheimnis verraten.",exE:"You buy something without looking at it first. Careful: “letting the cat out of the bag” means revealing a secret.",
+ g:["Ich kaufe doch nicht die ___ im Sack!","Katze",["Maus","Kuh","Ente"]],s:"Du mietest eine Ferienwohnung, ohne ein einziges Foto davon gesehen zu haben.|You rent a vacation apartment without having seen a single photo of it."},
+{k:"gelbeei",i:"nicht das Gelbe vom Ei sein",emo:"🥚🤷",
+ d:[["Hanna","Und, wie war das Hotel?","So, how was the hotel?"],["Felix","Na ja, es war nicht das Gelbe vom Ei. Das Zimmer war klein, aber sauber.","Well, it was nothing to write home about. The room was small but clean."]],
+ o:["nicht besonders gut, nicht ideal sein|to be not particularly good, not ideal","Das Ei ist schon verdorben.|The egg has gone bad.","eine totale Katastrophe sein|to be a total disaster","viel zu teuer sein|to be far too expensive"],
+ en:"nothing to write home about",ex:"Etwas ist okay, aber nicht optimal. Das Eigelb galt lange als der beste Teil vom Ei.",exE:"Something is okay but not great. The yolk was long considered the best part of the egg.",
+ g:["Das ist nicht das ___ vom Ei.","Gelbe",["Weiße","Runde","Harte"]],s:"Der neue Film ist ganz okay, aber du hattest dir viel mehr erwartet.|The new movie is okay, but you expected a lot more."},
+{k:"wurst",i:"Das ist mir Wurst.",emo:"🌭🤷",grp:"egal",
+ d:[["Mama","Willst du Nudeln oder Reis zum Abendessen?","Do you want pasta or rice for dinner?"],["Sohn","Das ist mir Wurst. Hauptsache, es gibt bald was!","I couldn't care less. As long as there's food soon!"]],
+ o:["Das ist mir egal.|I do not care either way.","Ich hätte gern eine Wurst.|I would like a sausage.","Das finde ich schlecht.|I think that is bad.","Ich habe schrecklichen Hunger.|I am terribly hungry."],
+ en:"It's all the same to me.",ex:"Umgangssprachlich für „egal“. Eine Wurst hat zwei gleiche Enden, es ist also egal, wo man anfängt.",exE:"Colloquial for “I don't care”. A sausage has two identical ends, so it does not matter where you start.",
+ g:["Das ist mir doch ___!","Wurst",["Käse","Brot","Senf"]],s:"Dein Freund fragt, ob ihr ins Kino oder ins Café geht. Beides ist dir völlig recht.|Your friend asks if you go to the cinema or to a café. Either is totally fine with you."},
+{k:"handfuss",i:"Hand und Fuß haben",emo:"✋🦶",grp:"right",
+ d:[["Investorin","Ihr Businessplan ist gut durchgerechnet und realistisch.","Your business plan is well calculated and realistic."],["Gründer","Danke! Wir wollten, dass er Hand und Fuß hat.","Thanks! We wanted it to really hold water."]],
+ o:["gut durchdacht und überzeugend sein|to be well thought out and convincing","alle Körperteile haben|to have all your body parts","sehr schnell erledigt sein|to be done very quickly","körperlich anstrengend sein|to be physically exhausting"],
+ en:"to hold water / to make sense",ex:"Ein Plan oder Argument ist solide. Früher brauchte ein Mann Hand und Fuß, um zu arbeiten und zu kämpfen.",exE:"A plan or argument is solid. In the past a man needed hands and feet to work and to fight.",
+ g:["Dein Plan hat Hand und ___.","Fuß",["Kopf","Bein","Herz"]],s:"Deine Kollegin präsentiert ein Konzept mit klaren Zahlen, Zeitplan und Budget.|Your colleague presents a concept with clear numbers, a timeline and a budget."},
+{k:"kopf",i:"sich den Kopf zerbrechen",emo:"🤯💭",
+ d:[["Elif","Du siehst müde aus.","You look tired."],["Jan","Ich zerbreche mir seit Tagen den Kopf, was ich meiner Freundin zum Geburtstag schenke.","I've been racking my brain for days about what to get my girlfriend for her birthday."]],
+ o:["lange über etwas nachgrübeln|to think hard about something for a long time","sich am Kopf verletzen|to hurt your head","starke Kopfschmerzen haben|to have a bad headache","sich heftig streiten|to have a big argument"],
+ en:"to rack your brain",ex:"Man denkt intensiv nach, um eine Lösung zu finden.",exE:"You think very hard to find a solution.",
+ g:["Ich zerbreche mir schon den ganzen Tag den ___.","Kopf",["Hals","Rücken","Bauch"]],s:"Du überlegst stundenlang, wie du ein schwieriges Rätsel lösen kannst.|You spend hours thinking about how to solve a tricky puzzle."},
+{k:"baeraufbinden",i:"jemandem einen Bären aufbinden",emo:"🧸🎒",
+ d:[["Kevin","Ich habe gestern den Papst im Supermarkt getroffen. Er hat mir seine Handynummer gegeben!","Yesterday I met the Pope at the supermarket. He gave me his cell number!"],["Lea","Ja klar. Willst du mir einen Bären aufbinden?","Sure. Are you pulling my leg?"]],
+ o:["jemandem eine Lügengeschichte erzählen|to tell someone a made-up story","jemandem ein Stofftier schenken|to give someone a teddy bear","jemandem eine schwere Last aufladen|to put a heavy burden on someone","jemanden erschrecken|to scare someone"],
+ en:"to pull someone's leg",ex:"Man erzählt jemandem zum Spaß etwas Unwahres und hofft, dass er es glaubt.",exE:"You tell someone something untrue for fun and hope they believe it.",
+ g:["Willst du mir einen ___ aufbinden?","Bären",["Hasen","Schal","Knoten"]],s:"Dein Bruder erzählt dir am 1. April, dass die Schule wegen eines Pinguins geschlossen ist.|On April 1st your brother tells you that school is closed because of a penguin."},
+{k:"nase",i:"die Nase voll haben",emo:"👃😤",grp:"annoyed",
+ d:[["Sophie","Schon wieder fällt mein Zug aus. Ich habe echt die Nase voll!","My train is canceled again. I'm really fed up!"],["Karim","Verstehe ich. Das ist diese Woche schon das dritte Mal.","I get it. That's the third time this week."]],
+ o:["genug von etwas haben, genervt sein|to be fed up with something","eine verstopfte Nase haben|to have a stuffy nose","pappsatt sein|to be completely full after eating","sehr neugierig sein|to be very nosy"],
+ en:"to be fed up",ex:"Man hat endgültig genug von einer Situation und ist genervt.",exE:"You have finally had enough of a situation and you are annoyed.",
+ g:["Ich habe die ___ voll von dem Regen.","Nase",["Tasche","Hand","Brille"]],s:"Seit drei Wochen bohrt dein Nachbar jeden Morgen um sieben Uhr. Jetzt reicht es dir.|For three weeks your neighbor has been drilling every morning at seven. Now you have had enough."},
+{k:"auge",i:"ein Auge zudrücken",emo:"😉👁️",grp:"see",
+ d:[["Schüler","Entschuldigung, ich habe meine Hausaufgaben zu Hause vergessen.","Sorry, I forgot my homework at home."],["Lehrerin","Na gut, heute drücke ich noch mal ein Auge zu.","All right, today I'll let it slide."]],
+ o:["nachsichtig sein, etwas durchgehen lassen|to let something slide","mit einem Auge zwinkern|to wink","etwas wirklich nicht bemerken|to really not notice something","mit jemandem flirten|to flirt with someone"],
+ en:"to turn a blind eye",ex:"Man sieht einen kleinen Fehler, ist aber bewusst nicht streng.",exE:"You see a small mistake but choose not to be strict.",
+ g:["Heute drücke ich noch ein ___ zu.","Auge",["Ohr","Fenster","Buch"]],s:"Ein Kunde kommt zwei Minuten nach Ladenschluss. Du lässt ihn trotzdem noch rein.|A customer arrives two minutes after closing time. You let him in anyway."},
+{k:"kirschen",i:"Mit ihm ist nicht gut Kirschen essen.",emo:"🍒😠",
+ d:[["Neue Kollegin","Ist der Chef heute gut drauf?","Is the boss in a good mood today?"],["Tom","Eher nicht. Seit dem Meeting ist mit ihm nicht gut Kirschen essen.","Not really. Since the meeting he's not someone to mess with."]],
+ o:["Er ist schlecht gelaunt und unfreundlich.|He is in a bad mood and unfriendly.","Er mag kein Obst.|He does not like fruit.","Er ist sehr geizig.|He is very stingy.","Er hat schlechte Tischmanieren.|He has bad table manners."],
+ en:"He's not someone to mess with.",ex:"Mit jemandem ist schwer auszukommen. Ein alter Spruch sagt: Mit hohen Herren ist nicht gut Kirschen essen, sie werfen einem die Kerne an den Kopf.",exE:"Someone is hard to get along with. An old saying: don't eat cherries with great lords, they throw the pits at your head.",
+ g:["Mit dem Chef ist heute nicht gut ___ essen.","Kirschen",["Erdbeeren","Kuchen","Nudeln"]],s:"Dein Trainer hat furchtbare Laune und meckert über jede Kleinigkeit.|Your coach is in a terrible mood and grumbles about every little thing."},
+{k:"schweinpfeift",i:"Ich glaub, mein Schwein pfeift!",emo:"🐖🎶",
+ d:[["Mitbewohner","Ich habe die ganze Wohnung geputzt und sogar den Kühlschrank aufgeräumt.","I cleaned the whole apartment and even tidied the fridge."],["Lara","Ich glaub, mein Schwein pfeift! Das hast du ja noch nie gemacht!","Well, I'll be darned! You've never done that before!"]],
+ o:["Ich bin total überrascht!|I am totally amazed!","Mein Haustier macht komische Geräusche.|My pet is making strange noises.","Da habe ich aber Glück gehabt!|I got lucky there!","Ich bin so müde.|I am so tired."],
+ en:"Well, I'll be darned!",ex:"Ein Ausruf großer Überraschung oder Empörung. Schweine können ja bekanntlich nicht pfeifen.",exE:"An exclamation of big surprise or outrage. After all, pigs cannot whistle.",
+ g:["Ich glaub, mein ___ pfeift!","Schwein",["Hund","Pferd","Teekessel"]],s:"Dein Freund, der nie pünktlich ist, steht eine halbe Stunde zu früh vor der Tür.|Your friend, who is never on time, shows up half an hour early."},
+{k:"luftschloss",i:"Luftschlösser bauen",emo:"🏰☁️",grp:"dream",
+ d:[["Finn","Nächstes Jahr werde ich Rockstar, kaufe eine Insel und gründe eine Weltraumfirma.","Next year I'll become a rock star, buy an island and start a space company."],["Schwester","Du baust mal wieder Luftschlösser.","You're building castles in the air again."]],
+ o:["unrealistische Pläne schmieden|to make unrealistic plans","Hüpfburgen aufblasen|to inflate bouncy castles","ehrgeizige, aber realistische Ziele haben|to have ambitious but realistic goals","als Architekt arbeiten|to work as an architect"],
+ en:"to build castles in the air",ex:"Man träumt von Dingen, die kaum Wirklichkeit werden.",exE:"You dream of things that will hardly ever come true.",
+ g:["Hör auf, ___ zu bauen!","Luftschlösser",["Sandburgen","Wolkenkratzer","Brücken"]],s:"Ohne Erfahrung und ohne Geld planst du, nächsten Monat Millionär zu werden.|With no experience and no money you plan to be a millionaire next month."},
+{k:"kater",i:"einen Kater haben",emo:"🐱🤕",
+ d:[["Kollege","Warum trägst du im Büro eine Sonnenbrille?","Why are you wearing sunglasses in the office?"],["Rafael","Die Hochzeit gestern ging bis vier Uhr. Ich habe einen fürchterlichen Kater.","The wedding last night went until four. I have a terrible hangover."]],
+ o:["sich nach zu viel Alkohol schlecht fühlen|to feel awful after too much alcohol","eine männliche Katze haben|to own a tomcat","schlechte Laune haben|to be in a bad mood","erkältet sein|to have a cold"],
+ en:"to have a hangover",ex:"Das Wort kommt wahrscheinlich von „Katarrh“ (Entzündung) und hat mit der Katze gar nichts zu tun.",exE:"The word probably comes from “catarrh” (inflammation) and has nothing to do with cats.",
+ g:["Nach der Party hatte er einen dicken ___.","Kater",["Hund","Tiger","Hamster"]],s:"Am Morgen nach der Silvesterparty hast du Kopfweh und dir ist übel.|The morning after the New Year's party you have a headache and feel sick."},
+{k:"holzweg",i:"auf dem Holzweg sein",emo:"🌲🚶",
+ d:[["Detektiv","Der Gärtner war es! Ganz sicher.","It was the gardener! Definitely."],["Assistentin","Da sind Sie auf dem Holzweg. Der Gärtner war im Urlaub.","You're barking up the wrong tree. The gardener was on vacation."]],
+ o:["sich irren, falsch liegen|to be mistaken","durch den Wald wandern|to hike through the forest","einen Umweg machen|to take a detour","als Tischler arbeiten|to work as a carpenter"],
+ en:"to be barking up the wrong tree",ex:"Man glaubt, richtig zu liegen, liegt aber falsch. Holzwege führten nur zum Holzfällen in den Wald, nicht ins nächste Dorf.",exE:"You think you are right but you are wrong. Logging paths only led into the forest, not to the next village.",
+ g:["Da bist du auf dem ___!","Holzweg",["Radweg","Heimweg","Gehweg"]],s:"Du suchst den Fehler im Programm stundenlang an der völlig falschen Stelle.|You search for the bug in the program for hours in completely the wrong place."},
+{k:"spatz",i:"Lieber den Spatz in der Hand als die Taube auf dem Dach.",emo:"🐦🏠",
+ d:[["Aylin","Soll ich das sichere Jobangebot annehmen oder auf meinen Traumjob warten?","Should I take the safe job offer or wait for my dream job?"],["Mutter","Lieber den Spatz in der Hand als die Taube auf dem Dach.","A bird in the hand is worth two in the bush."]],
+ o:["Lieber etwas Kleines sicher haben als auf etwas Großes hoffen.|Better a small sure thing than hoping for something big.","Kleine Vögel sind leichter zu fangen.|Small birds are easier to catch.","Man sollte nie etwas Neues ausprobieren.|You should never try anything new.","Tiere gehören nicht auf das Dach.|Animals do not belong on the roof."],
+ en:"A bird in the hand is worth two in the bush.",ex:"Ein Sprichwort: Etwas Sicheres ist mehr wert als eine unsichere Chance.",exE:"A proverb: a sure thing is worth more than an uncertain chance.",
+ g:["Lieber den Spatz in der Hand als die ___ auf dem Dach.","Taube",["Katze","Möwe","Ente"]],s:"Du nimmst lieber sofort 100 Euro, statt auf einen Gewinn von 1000 Euro zu hoffen, der vielleicht nie kommt.|You take 100 euros right now instead of hoping for a 1000-euro prize that may never come."},
+{k:"senf",i:"seinen Senf dazugeben",emo:"🥄🗣️",
+ d:[["Paula","Wir überlegen, welche Farbe das Wohnzimmer bekommt.","We're deciding what color to paint the living room."],["Onkel Horst","Darf ich mal meinen Senf dazugeben? Beige ist doch immer gut!","Can I put in my two cents? Beige always works!"]],
+ o:["seine Meinung sagen, auch wenn keiner fragt|to give your opinion even when nobody asked","das Essen nachwürzen|to add seasoning to food","einen hilfreichen Expertenrat geben|to give helpful expert advice","sich laut beschweren|to complain loudly"],
+ en:"to put in your two cents",ex:"Man kommentiert etwas, oft ungefragt. Früher gaben Wirte zu jedem Essen Senf dazu, ob man wollte oder nicht.",exE:"You comment on something, often unasked. Innkeepers used to add mustard to every dish, wanted or not.",
+ g:["Muss er immer seinen ___ dazugeben?","Senf",["Ketchup","Pfeffer","Zucker"]],s:"Beim Fußballgucken erklärt dein Nachbar ungefragt allen, was der Trainer falsch macht.|While watching soccer your neighbor explains to everyone, unasked, what the coach is doing wrong."},
+{k:"kirche",i:"die Kirche im Dorf lassen",emo:"⛪🏘️",
+ d:[["Nico","Mein Handy ist runtergefallen! Mein Leben ist vorbei!","I dropped my phone! My life is over!"],["Freundin","Jetzt lass mal die Kirche im Dorf. Es hat nur einen kleinen Kratzer.","Let's not get carried away. It just has a little scratch."]],
+ o:["nicht übertreiben|to not exaggerate","nicht in die Stadt umziehen|to not move to the city","an alten Traditionen festhalten|to hold on to old traditions","regelmäßig in die Kirche gehen|to go to church regularly"],
+ en:"Let's not get carried away.",ex:"Man soll vernünftig bleiben und nicht übertreiben. Die Kirche gehört nun mal in die Mitte vom Dorf.",exE:"Stay reasonable and don't overdo it. The church simply belongs in the middle of the village.",
+ g:["Jetzt lass mal die ___ im Dorf!","Kirche",["Kuh","Schule","Kneipe"]],s:"Deine Freundin will gleich ein Auto kaufen, weil sie einmal den Bus verpasst hat.|Your friend wants to buy a car right away because she missed the bus once."},
+{k:"hase",i:"Da liegt der Hase im Pfeffer.",emo:"🐇🌶️",
+ d:[["Lehrer","Warum klappt die Gruppenarbeit nicht?","Why isn't the group work going well?"],["Schülerin","Niemand will die Präsentation halten. Da liegt der Hase im Pfeffer.","Nobody wants to give the presentation. That's the crux of the matter."]],
+ o:["Das ist der Kern des Problems.|That is the heart of the problem.","Das Essen ist viel zu scharf.|The food is way too spicy.","Da ist etwas gut versteckt.|Something is well hidden there.","Das ist eine gefährliche Falle.|That is a dangerous trap."],
+ en:"That's the crux of the matter.",ex:"Hier liegt die eigentliche Schwierigkeit. „Pfeffer“ war früher eine scharfe Soße, in der Hasenbraten lag.",exE:"This is the real difficulty. “Pfeffer” used to be a spicy sauce for stewed hare.",
+ g:["Da liegt der ___ im Pfeffer.","Hase",["Fuchs","Igel","Fisch"]],s:"Ihr diskutiert lange, warum das Projekt stockt. Dann merkst du: Es fehlt einfach das Geld.|You discuss for ages why the project is stuck. Then you realize: there simply is no money."},
+{k:"eis",i:"das Eis brechen",emo:"🧊🔨",
+ d:[["Gastgeberin","Am Anfang war die Stimmung so steif.","At first the mood was so stiff."],["Gast","Ja, aber dann hat Opa seinen Witz über den Dackel erzählt und das Eis gebrochen.","Yes, but then Grandpa told his dachshund joke and broke the ice."]],
+ o:["eine angespannte Stimmung lockern|to ease a tense atmosphere","Eiswürfel zerkleinern|to crush ice cubes","sich bei jemandem entschuldigen|to apologize to someone","einen Streit anfangen|to start a fight"],
+ en:"to break the ice",ex:"Man sorgt dafür, dass sich Fremde entspannen und ins Gespräch kommen. Genau wie im Englischen!",exE:"You help strangers relax and start talking. Just like in English!",
+ g:["Sein Witz hat endlich das ___ gebrochen.","Eis",["Glas","Holz","Bein"]],s:"Beim ersten Kurstreffen sagt keiner etwas. Du erzählst eine lustige Geschichte und alle fangen an zu reden.|At the first class meeting nobody says a word. You tell a funny story and everyone starts talking."},
+{k:"kloss",i:"einen Kloß im Hals haben",emo:"🥟🥹",
+ d:[["Braut","Wie war meine Rede?","How was my speech?"],["Trauzeuge","Wunderschön. Ich hatte die ganze Zeit einen Kloß im Hals.","Beautiful. I had a lump in my throat the whole time."]],
+ o:["vor Rührung kaum sprechen können|to be too moved to speak","sich beim Essen verschluckt haben|to have choked on food","Halsschmerzen haben|to have a sore throat","pappsatt sein|to be stuffed"],
+ en:"to have a lump in your throat",ex:"Starke Gefühle wie Rührung oder Angst machen das Sprechen schwer.",exE:"Strong emotions like being moved or afraid make it hard to speak.",
+ g:["Bei der Rede hatte ich einen ___ im Hals.","Kloß",["Knopf","Stein","Kuchen"]],s:"Bei der Abschiedsfeier deiner besten Freundin willst du etwas sagen, aber deine Stimme versagt vor Rührung.|At your best friend's farewell party you want to say something, but you are too moved to get the words out."},
+{k:"keks",i:"jemandem auf den Keks gehen",emo:"🍪😩",grp:"annoyed",
+ d:[["Bruder","Bist du schon fertig? Bist du schon fertig? Und jetzt?","Are you done yet? Are you done yet? And now?"],["Schwester","Du gehst mir echt auf den Keks!","You're really getting on my nerves!"]],
+ o:["jemanden nerven|to annoy someone","auf ein Plätzchen treten|to step on a cookie","jemanden besuchen|to visit someone","zu viel Süßes naschen|to eat too many sweets"],
+ en:"to get on someone's nerves",ex:"Umgangssprachlich: Jemand ist anstrengend und nervt. „Keks“ steht hier scherzhaft für den Kopf.",exE:"Colloquial: someone is tiresome and annoying. “Keks” jokingly stands for the head.",
+ g:["Du gehst mir echt auf den ___!","Keks",["Kuchen","Teller","Zucker"]],s:"Dein kleiner Bruder fragt dich im Auto alle zwei Minuten, wann ihr endlich da seid.|Your little brother asks you every two minutes in the car when you will finally get there."},
+{k:"tassen",i:"nicht alle Tassen im Schrank haben",emo:"☕🗄️",
+ d:[["Freund","Ich will im Januar im Badeanzug auf die Zugspitze klettern.","I want to climb the Zugspitze in a swimsuit in January."],["Mia","Du hast doch nicht alle Tassen im Schrank!","You must have a screw loose!"]],
+ o:["verrückt sein|to be crazy","nicht genug Geschirr haben|to not have enough dishes","sehr vergesslich sein|to be very forgetful","pleite sein|to be broke"],
+ en:"to have a screw loose",ex:"Umgangssprachlich und etwas frech: Jemand denkt oder handelt total unvernünftig.",exE:"Colloquial and a bit cheeky: someone thinks or acts in a totally irrational way.",
+ g:["Du hast wohl nicht alle ___ im Schrank!","Tassen",["Socken","Bücher","Jacken"]],s:"Ein Bekannter will sein ganzes Erspartes in Lottoscheine stecken.|An acquaintance wants to put all his savings into lottery tickets."},
+{k:"ohr",i:"sich aufs Ohr hauen",emo:"😴🛏️",
+ d:[["Oma","Es ist schon elf. Ich hau mich jetzt aufs Ohr.","It's already eleven. I'm going to hit the sack."],["Enkel","Gute Nacht, Oma! Schlaf gut.","Good night, Grandma! Sleep well."]],
+ o:["schlafen gehen|to go to bed","sich selbst aufs Ohr schlagen|to hit yourself on the ear","jemandem gut zuhören|to listen to someone carefully","laute Musik hören|to listen to loud music"],
+ en:"to hit the sack",ex:"Umgangssprachlich für „sich hinlegen und schlafen“. Man liegt dann ja auf dem Ohr.",exE:"Colloquial for lying down to sleep. After all, you end up lying on your ear.",
+ g:["Ich hau mich jetzt aufs ___.","Ohr",["Knie","Auge","Kinn"]],s:"Nach einem langen Arbeitstag willst du nur noch ins Bett.|After a long day at work you just want to go to bed."},
+{k:"butter",i:"Butter bei die Fische!",emo:"🧈🐟",grp:"direct",
+ d:[["Verkäufer","Also, das Auto ist toll, die Farbe, die Sitze, der Duft …","So, the car is great, the color, the seats, the smell …"],["Kunde","Butter bei die Fische! Was kostet es?","Let's get down to brass tacks! What does it cost?"]],
+ o:["Komm zur Sache, sag es klar!|Get to the point, say it clearly!","Brat den Fisch bitte in Butter!|Please fry the fish in butter!","Sei doch mal großzügig!|Come on, be generous!","Wir müssen dringend einkaufen.|We urgently need to go shopping."],
+ en:"Let's get down to brass tacks!",ex:"Norddeutsch und umgangssprachlich: Man fordert, endlich klar und konkret zu werden. Das „bei die“ ist absichtlich falsche Grammatik.",exE:"Northern German and colloquial: you demand that someone finally be clear and concrete. The grammar “bei die” is wrong on purpose.",
+ g:["Jetzt mal ___ bei die Fische!","Butter",["Salz","Zitrone","Soße"]],s:"Dein Kollege redet seit zehn Minuten drumherum. Du willst endlich wissen, was er will.|Your coworker has been talking around it for ten minutes. You finally want to know what he wants."},
+{k:"zahn",i:"jemandem den Zahn ziehen",emo:"🦷🎈",grp:"dream",
+ d:[["Tochter","Ich werde Influencerin und verdiene nächste Woche eine Million!","I'm going to be an influencer and make a million next week!"],["Vater","Den Zahn muss ich dir leider ziehen. Erst machst du die Schule fertig.","Sorry to burst your bubble. First you finish school."]],
+ o:["jemandem eine Illusion nehmen|to shatter someone's illusion","als Zahnarzt arbeiten|to work as a dentist","jemanden hart bestrafen|to punish someone harshly","jemanden zum Lachen bringen|to make someone laugh"],
+ en:"to burst someone's bubble",ex:"Man zeigt jemandem, dass seine Hoffnung unrealistisch ist.",exE:"You show someone that their hope is unrealistic.",
+ g:["Den ___ muss ich dir leider ziehen.","Zahn",["Nagel","Faden","Hut"]],s:"Dein Freund glaubt, er gewinnt ohne Training einen Marathon. Du sagst ihm ehrlich, dass das nicht klappt.|Your friend thinks he will win a marathon without training. You honestly tell him it won't work."},
+{k:"katzensprung",i:"ein Katzensprung sein",emo:"🐈💨",
+ d:[["Touristin","Ist der Bahnhof weit von hier?","Is the station far from here?"],["Passant","Nein, das ist nur ein Katzensprung. Zwei Minuten zu Fuß.","No, it's just a stone's throw away. Two minutes on foot."]],
+ o:["ganz in der Nähe sein|to be very close by","der Sprung einer Katze sein|to be the jump of a cat","sehr schnell erledigt sein|to be done very quickly","ziemlich gefährlich sein|to be quite dangerous"],
+ en:"just a stone's throw away",ex:"Etwas ist nur eine kurze Strecke entfernt, so kurz wie der Sprung einer Katze.",exE:"Something is only a short distance away, as short as a cat's jump.",
+ g:["Der Bäcker ist nur einen ___ entfernt.","Katzensprung",["Hasenschritt","Hundesprung","Mäusetanz"]],s:"Die Pizzeria ist nur zwei Häuser weiter.|The pizzeria is just two doors down."}
+];
+IDIOMS.forEach((it,n)=>it.n=n);
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const embedded=window.parent!==window;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const split=s=>s.split('|');
+const E=t=>`<span class="e">${t}</span>`;
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let sound=true,actx;
+function beep(f=520,d=.08,type='sine',v=.06,delay=0){if(!sound)return;try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();const t=actx.currentTime+delay,o=actx.createOscillator(),g=actx.createGain();o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(actx.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+const jingle=(fs,gap=.11,type='triangle')=>fs.forEach((f,i)=>beep(f,.16,type,.06,i*gap));
+const best=()=>{try{return +localStorage.getItem('fds:redewendungen:best')||0}catch(e){return 0}};
+const setBest=v=>{try{localStorage.setItem('fds:redewendungen:best',v)}catch(e){}};
+
+/* picture loading with graceful fallback (pastel card with emoji) */
+const imgState={};
+const GRAD=['linear-gradient(150deg,#fde3da,#fbd0c4 55%,#f6c1b5)','linear-gradient(150deg,#e3f0fb,#cfe3f6 55%,#bcd9f2)','linear-gradient(150deg,#e6f5e7,#d2ebd4 55%,#c5e6c8)','linear-gradient(150deg,#efe8f8,#e1d6f1 55%,#d7c9ec)','linear-gradient(150deg,#fdf6d8,#f8ebb8 55%,#f3e2a0)','linear-gradient(150deg,#fdebf1,#f9d7e3 55%,#f5c6d6)'];
+function imgOk(el){imgState[el.dataset.k]=true;el.parentNode.classList.add('ok')}
+function imgNo(el){imgState[el.dataset.k]=false;el.parentNode.classList.add('no');el.remove()}
+function pic(it,extra=''){
+  const k=it.k,img=imgState[k]===false?'':`<img alt="" data-k="${k}" src="${IMG_DIR+k}.webp" onload="imgOk(this)" onerror="imgNo(this)" draggable="false">`;
+  return `<div class="pic ${extra}${imgState[k]?' ok':''}" style="--g:${GRAD[it.n%GRAD.length]}"><div class="ph"><i class="stage"></i><span class="emo">${it.emo}</span></div>${img}</div>`;
+}
+function preload(k){if(k in imgState)return;imgState[k]=undefined;const i=new Image();i.onload=()=>imgState[k]=true;i.onerror=()=>imgState[k]=false;i.src=IMG_DIR+k+'.webp'}
+{const b=new Image();b.onload=()=>{const el=$('#bgimg');el.style.backgroundImage=`url(${IMG_DIR}studio.webp)`;el.classList.add('ok')};b.src=IMG_DIR+'studio.webp'}
+
+/* Toni Tomate, the quiz host */
+const HOST=(cls='')=>`<svg class="host ${cls}" viewBox="0 0 120 120" aria-hidden="true"><defs><radialGradient id="tg${cls}" cx="36%" cy="32%" r="75%"><stop offset="0" stop-color="#ffd2c4"/><stop offset=".45" stop-color="#f4927c"/><stop offset="1" stop-color="#d9654f"/></radialGradient></defs>
+<ellipse cx="60" cy="112" rx="30" ry="5" fill="rgba(90,60,40,.15)"/>
+<path d="M60 26c26 0 46 16 46 40s-20 44-46 44-46-20-46-44 20-40 46-40z" fill="url(#tg${cls})" stroke="#b8523f" stroke-width="2.5"/>
+<path d="M60 30l-6-12 10 6 4-10 3 12 12-4-9 10 13 4-15 2" fill="#9fd3a3" stroke="#5f9e66" stroke-width="2.5" stroke-linejoin="round"/>
+<ellipse cx="42" cy="44" rx="10" ry="6" fill="#fff" opacity=".45" transform="rotate(-25 42 44)"/>
+<circle cx="46" cy="64" r="6" fill="#4a453f"/><circle cx="74" cy="64" r="6" fill="#4a453f"/><circle cx="48" cy="62" r="2" fill="#fff"/><circle cx="76" cy="62" r="2" fill="#fff"/>
+<circle cx="36" cy="77" r="6" fill="#ffb3a6" opacity=".8"/><circle cx="84" cy="77" r="6" fill="#ffb3a6" opacity=".8"/>
+<path class="mh" d="M48 78q12 13 24 0" stroke="#4a453f" stroke-width="3.5" fill="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="ms" d="M49 84q11-9 22 0" stroke="#4a453f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+<ellipse class="mo" cx="60" cy="81" rx="6" ry="7" fill="#4a453f"/>
+<path d="M48 100l12 4 12-4-4 8-8-3-8 3z" fill="#bcd9f2" stroke="#7fb0dc" stroke-width="2" stroke-linejoin="round"/><circle cx="60" cy="103.5" r="3" fill="#7fb0dc"/></svg>`;
+
+/* ---------- setup ---------- */
+const TIME=25, PER={1:12,2:8,3:6};
+const COLORS=[['#d7c9ec','#a993d1'],['#c5e6c8','#8fc497'],['#bcd9f2','#7fb0dc']];
+let S={n:1,timed:true,names:['Spieler 1','Spieler 2','Spieler 3']};
+{const q=new URLSearchParams(location.search).get('name');if(q)S.names[0]=q.slice(0,14)}
+function setup(){
+  const save=()=>$('#setup').querySelectorAll('input').forEach(i=>S.names[+i.dataset.i]=i.value.trim()||('Spieler '+(+i.dataset.i+1)));
+  const render=()=>{
+    const b=best();
+    $('#setup').innerHTML=`${HOST('wow').replace('class="host wow"','class="host wow hostbig"')}
+      <h1>Tomaten auf den Augen</h1>
+      <p>Willkommen in der Rateshow! Was meint man wirklich, wenn man das sagt?${E('Welcome to the quiz show! What do people really mean when they say that?')}</p>
+      <div class="how">
+        <div><b>🖼️</b>Was bedeutet das?${E('Pick the real meaning. Watch out for the literal trap!')}</div>
+        <div><b>🎬</b>Welche Redewendung passt?${E('Match the idiom to the situation.')}</div>
+        <div><b>⭐</b>Bonus: Ergänze!${E('Complete the idiom for double points.')}</div>
+      </div>
+      <div class="seg" id="segN">${[1,2,3].map(n=>`<button data-n="${n}" class="${n===S.n?'sel':''}">${n===1?'👤 Allein':n+' Personen'}</button>`).join('')}</div>${E('Solo, or 2 to 3 players taking turns on one device')}
+      <div class="names">${[...Array(S.n)].map((_,i)=>`<label style="animation-delay:${i*.06}s"><i style="background:${COLORS[i][0]}"></i><input maxlength="14" data-i="${i}" value="${esc(S.names[i])}" aria-label="Name ${i+1}"></label>`).join('')}</div>
+      <div class="seg" id="segT"><button data-t="1" class="${S.timed?'sel':''}">⏱️ Mit Zeit</button><button data-t="0" class="${S.timed?'':'sel'}">🐢 Ohne Zeit</button></div>
+      <p class="small">${PER[S.n]} Fragen pro Person. Schnell sein und Serien bringen Extrapunkte. Jede Person hat einen 50:50-Joker.${E(`${PER[S.n]} questions per person. Speed and streaks earn bonus points. Everyone gets one 50:50 joker.`)}</p>
+      <button class="big" id="go">Show starten!${E('Start the show!')}</button>
+      ${b?`<p class="small" style="margin-top:10px">Dein Rekord allein: <b>${b}</b> Punkte${E(`Your solo best: ${b} points`)}</p>`:''}`;
+    $('#setup').querySelectorAll('[data-n]').forEach(x=>x.onclick=()=>{save();S.n=+x.dataset.n;render();beep(660,.06,'triangle')});
+    $('#setup').querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{save();S.timed=x.dataset.t==='1';render();beep(660,.06,'triangle')});
+    $('#go').onclick=()=>{save();start()};
+  };
+  render();showOv('setupOv');
+}
+function showOv(id){document.querySelectorAll('.ov').forEach(o=>o.classList.toggle('show',o.id===id))}
+
+/* ---------- game ---------- */
+let G=null;
+function mkQ(it,type,pi){
+  let opts;
+  if(type==='m')opts=shuffle(it.o.map((s,j)=>{const[t,en]=split(s);return{t,en,ok:j===0,kind:['ok','lit','near','x'][j]}}));
+  else if(type==='s'){const others=shuffle(IDIOMS.filter(x=>x!==it&&!(it.grp&&x.grp===it.grp))).slice(0,3);opts=shuffle([it,...others]).map(x=>({t:x.i,en:x.en,ok:x===it}))}
+  else opts=shuffle([it.g[1],...it.g[2]]).map(w=>({t:w,ok:w===it.g[1]}));
+  return{it,type,pi,opts};
+}
+function start(){
+  const pool=shuffle(IDIOMS),qs=[];let k=0;
+  for(let r=0;r<PER[S.n];r++)for(let pi=0;pi<S.n;pi++)qs.push(mkQ(pool[k++],r%4===3?'b':r%4===2?'s':'m',pi));
+  G={players:S.names.slice(0,S.n).map((name,i)=>({name,c:COLORS[i][0],cd:COLORS[i][1],score:0,correct:0,streak:0,best:0,joker:true})),qs,qi:0,phase:'hand',left:TIME,paused:false,locked:false,log:[]};
+  $('#board').className='board n'+S.n;
+  showOv(null);jingle([523,659,784,1047]);
+  board();turn();
+}
+function board(){
+  $('#board').innerHTML=G.players.map((p,i)=>`<div class="chip ${G.qs[G.qi]&&G.qs[G.qi].pi===i&&G.phase!=='over'?'on':''}" id="chip${i}" style="--c:${p.c};--cd:${p.cd}"><span class="av">${esc(p.name[0].toUpperCase())}</span><span class="nm">${esc(p.name)}</span><b>${p.score}</b>${p.streak>=2?`<span class="fl">🔥${p.streak}</span>`:''}</div>`).join('');
+}
+function turn(){
+  const q=G.qs[G.qi];board();
+  const nxt=G.qs[G.qi+1];if(nxt)preload(nxt.it.k);preload(q.it.k);
+  if(S.n>1){
+    const p=G.players[q.pi];G.phase='hand';
+    $('#hand').innerHTML=`<div class="handav" style="--c:${p.c};--cd:${p.cd}">${esc(p.name[0].toUpperCase())}</div>
+      <h1>${esc(p.name)} ist dran!</h1>
+      <p>Gib das Gerät an ${esc(p.name)} weiter. Frage ${Math.floor(G.qi/S.n)+1} von ${PER[S.n]}.${E(`Pass the device to ${esc(p.name)}. Question ${Math.floor(G.qi/S.n)+1} of ${PER[S.n]}.`)}</p>
+      <button class="big" id="readyBtn">Ich bin bereit!${E("I'm ready!")}</button>`;
+    showOv('handOv');$('#readyBtn').onclick=()=>{showOv(null);ask()};beep(587,.1,'triangle');
+  }else ask();
+}
+const TAGS={m:['🖼️ Was bedeutet das?','What does it mean?'],s:['🎬 Welche Redewendung passt?','Which idiom fits?'],b:['⭐ Bonusrunde: Ergänze!','Bonus: complete it, double points']};
+function ask(){
+  const q=G.qs[G.qi],it=q.it,p=G.players[q.pi];
+  G.phase='q';G.left=TIME;G.locked=false;G.ticked=TIME;
+  const num=Math.floor(G.qi/S.n)+1;
+  const tv=q.type==='s'
+    ?`<div class="sitcard"><span class="emo">🎬</span><p>${split(it.s)[0]}${E(split(it.s)[1])}</p></div>`
+    :pic(it,q.type==='b'?'blur':'')+(q.type==='b'?`<button class="peek" id="peek">👀 Bild aufdecken<span class="e">Reveal picture: single points</span></button>`:'');
+  const gapHTML=it.g[0].replace('___',`<span class="gap" style="width:${Math.max(2.6,it.g[1].length*.55).toFixed(1)}em"></span>`);
+  const title=q.type==='m'?`<h2 class="title">„${it.i}“</h2>`
+    :q.type==='s'?`<h2 class="title small">Was sagst du in dieser Situation?${E('What do you say in this situation?')}</h2>`
+    :`<h2 class="title">${gapHTML}</h2>`;
+  const extra=q.type==='m'?`<div class="dlg">${it.d.map(([w,de,en])=>`<div class="bub"><span class="who">${w}</span>${de}${E(en)}</div>`).join('')}</div>`
+    :q.type==='b'?`<div class="hint">💡 Das Bild zeigt die Redewendung wörtlich. Aufdecken hilft, kostet aber den Bonus.${E('The picture shows the idiom literally. Revealing it helps but costs the bonus.')}</div>`
+    :`<div class="hint">💡 Achte auf die Bedeutung, nicht auf die Wörter.${E('Focus on the meaning, not the words.')}</div>`;
+  const opts=`<div class="opts" id="opts">${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span class="k">${'ABCD'[j]}</span><span class="t">${o.t}${o.en?E(o.en):''}</span></button>`).join('')}</div>
+    <div class="tools"><button class="joker" id="joker" ${p.joker?'':'disabled'}>✂️ 50:50 Joker</button><span class="keys">Tasten 1 bis 4 · J für Joker</span></div>`;
+  const tag=`<div class="tagrow"><span class="tag ${q.type}">${TAGS[q.type][0]}${E(TAGS[q.type][1])}</span><span class="count">${S.n>1?esc(p.name)+' · ':''}${num}/${PER[S.n]}</span><span class="sp"></span>
+    <div class="timer ${S.timed?'':'off'}" id="timer"><svg viewBox="0 0 48 48"><circle class="tbg" cx="24" cy="24" r="20"/><circle class="tfg" id="tfg" cx="24" cy="24" r="20" stroke-dasharray="125.66" stroke-dashoffset="0"/></svg><span id="tnum">${TIME}</span></div></div>`;
+  $('#q').innerHTML=`<div class="colL"><div class="tvwrap"><div class="tv chase" id="tv">${tv}</div></div>${q.type==='m'?extra:''}</div><div class="colR">${tag}${title}${q.type!=='m'?extra:''}${opts}</div>`;
+  $('#main').scrollTop=0;
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.j,b));
+  $('#joker').onclick=joker;
+  if($('#peek'))$('#peek').onclick=peek;
+  board();beep(880,.08,'triangle');beep(1175,.1,'sine',.04,.08);
+  G.last=performance.now();
+}
+function peek(){if(!G||G.locked)return;const q=G.qs[G.qi];q.peek=true;const pc=$('#tv .pic');pc&&pc.classList.remove('blur');$('#peek').remove();beep(700,.12,'sine')}
+function joker(){
+  if(!G||G.phase!=='q'||G.locked||G.paused)return;const q=G.qs[G.qi],p=G.players[q.pi];if(!p.joker)return;
+  p.joker=false;$('#joker').disabled=true;
+  const wrong=shuffle(q.opts.map((o,j)=>j).filter(j=>!q.opts[j].ok)).slice(0,2);
+  wrong.forEach(j=>{const b=document.querySelector(`.opt[data-j="${j}"]`);b.classList.add('gone');b.disabled=true});
+  jingle([392,523],.08,'square');
+}
+function answer(j,btn){
+  if(!G||G.phase!=='q'||G.locked||G.paused)return;
+  const q=G.qs[G.qi],p=G.players[q.pi],ok=j>=0&&q.opts[j].ok;
+  if(j>=0&&q.opts[j]&&document.querySelector(`.opt[data-j="${j}"]`).disabled)return;
+  G.locked=true;G.phase='wait';
+  document.querySelectorAll('.opt').forEach(b=>{const k=+b.dataset.j;b.disabled=true;b.classList.add(q.opts[k].ok?'right':k===j?'wrong':'dim')});
+  $('#tv').classList.remove('chase');
+  if($('#peek'))$('#peek').remove();
+  if(q.type==='b'){const pc=$('#tv .pic');pc&&pc.classList.remove('blur');const g=$('.title .gap');if(g)g.outerHTML=`<span class="gapfill">${q.it.g[1]}</span>`}
+  let pts=0;const parts=[];
+  if(ok){
+    p.streak++;p.best=Math.max(p.best,p.streak);p.correct++;
+    const mult=q.type==='b'&&!q.peek?2:1,spd=S.timed?Math.round(50*Math.max(0,G.left)/TIME):0,str=p.streak>=2?25*(Math.min(p.streak,5)-1):0;
+    parts.push(`Richtig +${100*mult}`);if(spd)parts.push(`Tempo +${spd*mult}`);if(str)parts.push(`🔥 Serie +${str}`);if(mult>1)parts.push('Bonus x2');
+    pts=100*mult+spd*mult+str;p.score+=pts;
+    const r=(btn||document.querySelector('.opt.right')).getBoundingClientRect();
+    floatTxt(r.left+r.width/2,r.top-8,'+'+pts,'#3f8a55');burst(r.left+r.width/2,r.top+r.height/2);
+    jingle(p.streak>=3?[659,784,988,1319]:[659,784,1047],.08);
+  }else{
+    p.streak=0;beep(196,.28,'sawtooth',.045);beep(147,.32,'triangle',.05,.12);
+    if(!reduced)$('#q').animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(7px)'},{transform:'translateX(-4px)'},{transform:'translateX(0)'}],{duration:380});
+  }
+  G.log.push({it:q.it,ok,pi:q.pi,type:q.type});
+  board();const ch=$('#chip'+q.pi);if(ch&&ok){ch.classList.remove('bump');void ch.offsetWidth;ch.classList.add('bump')}
+  setTimeout(()=>sheet(q,j,ok,pts,parts),reduced?150:750);
+}
+function sheet(q,j,ok,pts,parts){
+  const it=q.it,[mde,men]=split(it.o[0]),last=G.qi>=G.qs.length-1,ch=j>=0?q.opts[j]:null;
+  const verdict=ok?(G.players[q.pi].streak>=3?['Grandios!','Brilliant!']:['Richtig!','Correct!']):j<0?['Zeit ist um!',"Time's up!"]:['Leider falsch!','Not quite!'];
+  const trap=!ok&&ch&&ch.kind==='lit'?`<span class="trap">🍅 Reingefallen: Das war die wörtliche Bedeutung!${E('Gotcha: that was the literal meaning!')}</span>`
+    :!ok&&ch&&ch.kind==='near'?`<span class="trap">🤏 Knapp daneben!${E('Close, but not quite!')}</span>`:'';
+  const head=q.type==='b'?it.g[0].replace('___',`<span class="gapfill">${it.g[1]}</span>`):`„${it.i}“`;
+  $('#sheet').className='sheet '+(ok?'good':'bad');
+  $('#sheet').innerHTML=`<div class="top">${HOST(ok?'happy':'sad')}<div><h3>${verdict[0]}</h3>${E(verdict[1])}${ok?`<p class="parts">${parts.join(' · ')}</p>`:''}</div>${ok?`<span class="pts">+${pts}</span>`:''}</div>
+    <div class="sbody"><div class="thumb">${pic(it)}</div><div class="stext">${trap}<h4>${head}</h4>
+      <p class="mean"><small>Bedeutung</small>${mde}${E(men)}</p>
+      <p class="ex">${it.ex}${E(it.exE)}</p>
+      <span class="engl"><small>Englisch</small>${it.en}</span></div></div>
+    <button class="big" id="nextBtn">${last?'Zum Ergebnis':'Weiter'}${E(last?'See results':'Next')}</button>`;
+  $('#sheet').classList.add('show');$('#veil').classList.add('show');G.phase='sheet';
+  $('#nextBtn').onclick=next;
+}
+function next(){
+  if(!G||G.phase!=='sheet')return;
+  $('#sheet').classList.remove('show');$('#veil').classList.remove('show');
+  G.qi++;
+  if(G.qi>=G.qs.length){end();return}
+  G.phase='hand';setTimeout(turn,reduced?0:250);
+}
+function floatTxt(x,y,t,c){const f=document.createElement('div');f.className='ftext';f.textContent=t;f.style.left=x+'px';f.style.top=y+'px';f.style.color=c;document.body.appendChild(f);
+  if(reduced){setTimeout(()=>f.remove(),800);return}
+  f.animate([{transform:'translateY(0) scale(.6)',opacity:0},{transform:'translateY(-14px) scale(1.15)',opacity:1,offset:.25},{transform:'translateY(-60px) scale(1)',opacity:0}],{duration:1100,easing:'ease-out'}).onfinish=()=>f.remove()}
+function burst(x,y){if(reduced)return;const s=document.createElement('div');s.className='burst';s.style.left=x+'px';s.style.top=y+'px';const cols=['#f19b87','#f3e2a0','#c5e6c8','#bcd9f2','#d7c9ec','#f5c6d6'];
+  for(let i=0;i<14;i++){const p=document.createElement('i');p.style.background=cols[i%6];s.appendChild(p);const a=Math.PI*2*i/14,r=40+Math.random()*40;
+    p.animate([{transform:'translate(-50%,-50%) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*r}px,${Math.sin(a)*r}px) scale(.3)`,opacity:0}],{duration:650,easing:'cubic-bezier(.2,.8,.3,1)'})}
+  document.body.appendChild(s);setTimeout(()=>s.remove(),700)}
+
+/* timer loop */
+function loop(now){
+  if(G&&G.phase==='q'&&!G.paused&&!G.locked&&S.timed){
+    const dt=Math.min(.1,(now-(G.last||now))/1000);G.left-=dt;
+    const l=Math.max(0,G.left),tf=$('#tfg'),tn=$('#tnum'),tm=$('#timer');
+    if(tf){tf.setAttribute('stroke-dashoffset',(125.66*(1-l/TIME)).toFixed(2));tn.textContent=Math.ceil(l);tm.classList.toggle('warn',l<=6)}
+    const c=Math.ceil(l);if(c<G.ticked&&c<=5&&c>0)beep(c<=3?1046:880,.05,'square',.03);G.ticked=c;
+    if(G.left<=0)answer(-1);
+  }
+  if(G)G.last=now;
+  requestAnimationFrame(loop);
+}
+
+/* ---------- end ---------- */
+function end(){
+  G.phase='over';board();
+  const me=G.players[0],xp=Math.min(100,me.correct*9);
+  if(embedded&&xp>0)window.parent.postMessage({source:'fds-game',type:'xp',amount:xp},'*');
+  const rank=G.players.slice().sort((a,b)=>b.score-a.score);
+  const solo=S.n===1,b=best(),nb=solo&&me.score>b;if(nb)setBest(me.score);
+  const per=PER[S.n],pct=me.correct/per;
+  let head,pod='';
+  if(solo){head=pct>=.9?['Redewendungs-Profi!','Idiom pro!']:pct>=.6?['Stark gemacht!','Great job!']:['Gut gespielt!','Well played!']}
+  else{const tie=rank[0].score===rank[1].score;head=tie?['Unentschieden!',"It's a tie!"]:[`${esc(rank[0].name)} gewinnt!`,`${esc(rank[0].name)} wins!`];
+    const order=rank.length===3?[1,0,2]:[1,0],H=[120,84,60],M=['🥇','🥈','🥉'];
+    pod=`<div class="podium">${order.map(r=>{const p=rank[r];return`<div class="pod" style="--c:${p.c};--cd:${p.cd}"><span class="av" style="animation-delay:${.5+r*.15}s">${esc(p.name[0].toUpperCase())}</span><span class="nm">${esc(p.name)}</span><div class="blk" style="height:${H[r]}px;animation-delay:${r*.15}s"><span class="md">${M[r]}</span><span class="sc">${p.score}</span></div></div>`}).join('')}</div>`}
+  const seen=new Set(),rev=G.log.filter(l=>!seen.has(l.it.k)&&seen.add(l.it.k));
+  $('#endCard').innerHTML=`${HOST('happy').replace('class="host happy"','class="host happy hostbig"')}
+    <h1>${head[0]}</h1>${E(head[1])}
+    ${solo?(nb&&me.score>0?'<span class="newbest">Neuer Rekord! · New best!</span>':`<p>Rekord: ${Math.max(b,me.score)}</p>`):pod}
+    ${solo?`<div class="stats"><div><b>${me.score}</b><span>Punkte</span></div><div><b>${me.correct}/${per}</b><span>richtig</span></div><div><b>${me.best}</b><span>beste Serie</span></div></div>`:
+      `<div class="stats" style="grid-template-columns:repeat(${S.n},1fr)">${G.players.map(p=>`<div><b>${p.correct}/${per}</b><span>${esc(p.name)}<br>🔥 beste Serie ${p.best}</span></div>`).join('')}</div>`}
+    ${xp?`<p><b>+${xp} XP</b> für ${solo?'deine richtigen Antworten':'die richtigen Antworten von '+esc(me.name)}.${E(`+${xp} XP for ${solo?'your':esc(me.name)+"'s"} correct answers.`)}</p>`:''}
+    <p style="margin-top:12px"><b>Deine Redewendungen</b>${E('Idioms from this show')}</p>
+    <ul class="review">${rev.map(l=>{const[m,me2]=split(l.it.o[0]);return`<li>${S.n>1?`<i class="who" style="background:${G.players[l.pi].cd}"></i>`:''}<span class="ic ${l.ok?'y':'n'}">${l.ok?'✓':'✗'}</span><span class="rt"><b>${l.it.i}</b><span>${m}</span>${E(l.it.en)}</span></li>`}).join('')}</ul>
+    <button class="big" id="again">Nochmal!${E('Play again')}</button><button class="ghost" id="menu">Neue Spieler oder Einstellungen${E('New players or settings')}</button>`;
+  setTimeout(()=>{showOv('endOv');$('#again').onclick=start;$('#menu').onclick=setup;if(G.log.some(l=>l.ok))confetti()},reduced?0:400);
+  jingle([523,659,784,1047,1319],.12);
+}
+function confetti(){if(reduced)return;const cols=['#f19b87','#f3e2a0','#c5e6c8','#bcd9f2','#d7c9ec','#f5c6d6'];for(let i=0;i<90;i++){const c=document.createElement('i');c.className='conf';c.style.cssText=`left:${Math.random()*100}vw;background:${cols[i%6]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()}s`;document.body.appendChild(c);setTimeout(()=>c.remove(),5200)}}
+
+/* ---------- pause, input ---------- */
+function pause(on){if(!G||G.phase==='over'||G.phase==='hand')return;if(on&&document.querySelector('.ov.show'))return;G.paused=on;$('#pauseOv').classList.toggle('show',on);G.last=performance.now()}
+$('#pause').onclick=()=>pause(true);
+$('#resume').onclick=()=>pause(false);
+$('#quit').onclick=()=>{pause(false);$('#sheet').classList.remove('show');$('#veil').classList.remove('show');end()};
+$('#snd').onclick=e=>{sound=!sound;e.currentTarget.textContent=sound?'🔔':'🔕'};
+addEventListener('blur',()=>{if(G&&G.phase==='q'&&!G.paused)pause(true)});
+addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'){if(e.key==='Enter'){e.preventDefault();$('#go')&&$('#go').click()}return}
+  const ov=document.querySelector('.ov.show');
+  if(ov){if(e.key==='Enter'||e.key===' '){const b=ov.querySelector('.big');if(b){e.preventDefault();b.click()}}if(ov.id==='pauseOv'&&(e.key==='Escape'||e.key==='p'))pause(false);return}
+  if(!G)return;
+  if(G.phase==='sheet'&&(e.key==='Enter'||e.key===' ')){e.preventDefault();next();return}
+  if(G.phase==='q'){
+    const k={'1':0,'2':1,'3':2,'4':3,a:0,b:1,c:2,d:3}[e.key.toLowerCase()];
+    if(k!==undefined){e.preventDefault();answer(k,document.querySelector(`.opt[data-j="${k}"]`));return}
+    if(e.key.toLowerCase()==='j'){joker();return}
+  }
+  if(e.key==='Escape'||e.key==='p')pause(true);
+});
+/* tilt the TV a little with the pointer for depth */
+document.addEventListener('pointermove',e=>{if(reduced||e.pointerType!=='mouse')return;const tv=$('#tv');if(!tv)return;const r=tv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;if(Math.abs(x)>1.2||Math.abs(y)>1.2){tv.style.transform='';return}tv.style.transform=`rotateY(${x*6}deg) rotateX(${-y*5}deg)`});
+/* English help is driven by the Fuchsdeutsch app around the game */
+addEventListener('message',e=>{const m=e.data;if(m&&m.source==='fds-app'&&m.type==='en')document.body.classList.toggle('en-on',!!m.on)});
+setup();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Schlüssel, bitte!</title>
 <style>
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree-ext.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF}
+
 :root{
   --bg:#f7f3e8; --paper:#fffdf7; --ink:#4a453f; --soft:#8b847a; --line:#e6dfcf;
   --coral:#f6b9a4; --coral-d:#e58f74; --teal:#a9d6d0; --teal-d:#6fb3ab; --yellow:#f3e2a0; --yellow-d:#d9c165;
@@ -13,15 +16,15 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
-body{background:var(--bg);color:var(--ink);font-family:"Avenir Next","Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.45}
-h1,h2,h3,.slab{font-family:"Rockwell","Roboto Slab","Courier New",Georgia,serif;font-weight:500;letter-spacing:.03em}
+body{background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.45}
+h1,h2,h3,.slab{font-family:"Figtree",system-ui,sans-serif;font-weight:800;letter-spacing:.03em}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 button:focus-visible,input:focus-visible{outline:3px solid var(--teal-d);outline-offset:2px}
 
 /* layout */
 .app{display:grid;grid-template-columns:1fr 310px;gap:20px;max-width:1500px;margin:0 auto;padding:18px;min-height:100%}
 header.top{grid-column:1/-1;display:flex;align-items:center;gap:16px}
-.chip3{background:var(--teal);color:#fff;width:54px;height:54px;border-radius:12px;display:grid;place-items:center;font-size:34px;font-family:"Rockwell",Georgia,serif}
+.chip3{background:var(--teal);color:#fff;width:54px;height:54px;border-radius:12px;display:grid;place-items:center;font-size:34px;font-family:"Figtree",system-ui,sans-serif}
 header h1{margin:0;font-size:clamp(22px,3vw,34px);text-transform:uppercase}
 header .sub{color:var(--soft);font-size:14px}
 header .sp{flex:1}
@@ -197,7 +200,7 @@ body.en-on .e{display:block}
 #dstage .cube{--s:116px}
 #dstage .face{border-width:3px}
 .dshadow{position:absolute;width:130px;height:34px;border-radius:50%;background:rgba(60,45,25,.3);filter:blur(5px);margin-top:150px}
-.dlabel{position:absolute;margin-top:270px;font:800 44px/1 "Rockwell",Georgia,serif;color:var(--ink);text-shadow:0 3px 0 #fff;opacity:0}
+.dlabel{position:absolute;margin-top:270px;font:800 44px/1 "Figtree",system-ui,sans-serif;color:var(--ink);text-shadow:0 3px 0 #fff;opacity:0}
 .dlabel.pop{animation:lpop .6s cubic-bezier(.2,1.6,.4,1) forwards}
 @keyframes lpop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
 .cube.landed .face{box-shadow:inset 0 0 10px rgba(120,100,70,.18),0 0 24px rgba(246,185,164,.9)}
@@ -288,6 +291,8 @@ const IC={
 };
 /* Realistic pictures (backlog): map an icon key to an image URL, e.g. IMG.oldman='img/oldman.webp'. Falls back to the drawing. */
 const IMG={};
+/* Pictures from img/schluessel-bitte/<key>.webp (made with npm run game-images). Missing files keep the drawing. */
+for(const k of Object.keys(IC)){const im=new Image();im.onload=()=>{IMG[k]=im.src};im.src=`img/schluessel-bitte/${k}.webp`}
 const svgIcon=k=>IMG[k]?`<img src="${IMG[k]}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:`<svg viewBox="0 0 100 100">${IC[k]}</svg>`;
 
 /* ---------- game data ---------- */
@@ -344,7 +349,7 @@ function drawBoard(){
     if(f&&f.t!=='yellow'){const cx=p.x+(p.x>1000?-64:64), cy=p.y-64;
       h+=`<g class="ill"><circle cx="${cx}" cy="${cy+5}" r="39" fill="rgba(90,70,40,.18)"/><circle cx="${cx}" cy="${cy}" r="39" fill="${TINT[f.t]}" stroke="#fffdf7" stroke-width="4"/>${IMG[f.ic]?`<clipPath id="cp${i}"><circle cx="${cx}" cy="${cy}" r="36"/></clipPath><image href="${IMG[f.ic]}" x="${cx-36}" y="${cy-36}" width="72" height="72" clip-path="url(#cp${i})" preserveAspectRatio="xMidYMid slice"/>`:`<g transform="translate(${cx-31},${cy-31}) scale(.62)">${IC[f.ic]}</g>`}</g>`}
     if(i===0||i===END){
-      h+=`<g class="node" data-i="${i}"><rect x="${p.x-56}" y="${p.y-31}" width="112" height="80" rx="14" fill="#e3b9a6"/><rect class="sq" x="${p.x-56}" y="${p.y-40}" width="112" height="80" rx="14" fill="#fffdf7" stroke="#e58f74" stroke-width="3"/><text x="${p.x}" y="${p.y+8}" text-anchor="middle" font-size="24" font-family="Rockwell,Georgia,serif" fill="#e58f74" letter-spacing="2">${i?'ZIEL':'START'}</text></g>`;
+      h+=`<g class="node" data-i="${i}"><rect x="${p.x-56}" y="${p.y-31}" width="112" height="80" rx="14" fill="#e3b9a6"/><rect class="sq" x="${p.x-56}" y="${p.y-40}" width="112" height="80" rx="14" fill="#fffdf7" stroke="#e58f74" stroke-width="3"/><text x="${p.x}" y="${p.y+8}" text-anchor="middle" font-size="24" font-family="Figtree, system-ui, sans-serif" fill="#e58f74" letter-spacing="2">${i?'ZIEL':'START'}</text></g>`;
     }else{
       const col=f.t==='task'?'#f6b9a4':f.t==='yellow'?'#f3e2a0':'#a9d6d0';
       const side=f.t==='task'?'#dd8f74':f.t==='yellow'?'#d2b955':'#78b3aa';

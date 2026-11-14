@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Hallo, Nachbar!</title>
+<style>
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree-ext.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF}
+
+:root{
+  --ink:#4a453f; --soft:#8b847a; --paper:#fffdf7; --line:#e6dfcf; --bg:#f7f3e8;
+  --peach:#f6b9a4; --peach-d:#e58f74; --sky:#bcd9f2; --sky-d:#7fb0dc; --mint:#c5e6c8; --mint-d:#8fc495;
+  --lilac:#d7c9ec; --lilac-d:#a993d1; --butter:#f3e2a0; --butter-d:#d9c165; --rose:#f5c6d6; --rose-d:#e09bb3;
+  --a:#bcd9f2; --ad:#7fb0dc; --as:#eaf3fb; --aw:#dcebf8;
+  --pc:#9cc8ee; --pcd:#5e97c9;
+  --dh:360px; --dcx:50%; --bl:16px; --bw:300px; --bt:12px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:"Figtree",system-ui,sans-serif;color:var(--ink);background:var(--bg);user-select:none}
+button,input{font:inherit;color:inherit;border:0;background:none}
+button{cursor:pointer}
+button:focus-visible{outline:3px solid var(--sky-d);outline-offset:2px}
+.e{display:block;font-size:.78em;font-style:italic;font-weight:400;color:var(--soft);margin-top:2px}
+body:not(.en-on) .e{display:none}
+.ei{display:inline;margin:0}
+
+/* ---------- scene ---------- */
+#game{position:fixed;inset:0;display:flex;flex-direction:column;overflow:hidden;overflow:clip}
+#bg{position:absolute;inset:0;overflow:hidden;background:var(--as);transition:background-color 1.1s}
+#photo{position:absolute;inset:-2%;background-size:cover;background-position:50% var(--py,100%);opacity:0;transition:opacity .8s,background-position 1.4s cubic-bezier(.4,0,.2,1)}
+#photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,253,247,.28),rgba(255,253,247,.04) 45%,rgba(247,243,232,.3))}
+.has-bg #photo{opacity:1}
+.hud{position:relative;z-index:6;flex:none;display:flex;align-items:center;gap:10px;padding:12px 16px}
+.pill{background:rgba(255,253,247,.88);backdrop-filter:blur(6px);border:1.5px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;font-weight:700;box-shadow:0 4px 14px rgba(90,80,60,.08);display:flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .3s cubic-bezier(.2,1.6,.4,1),border-color .3s,box-shadow .3s}
+.pill b{font-size:20px;font-variant-numeric:tabular-nums}
+.pill .dot{width:26px;height:26px;border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--cd);display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff;font-style:normal}
+.pill .dot svg{width:30px;height:30px}
+.pill.fox .dot{background:#fde5db;box-shadow:0 0 0 1.5px var(--peach-d);overflow:hidden}
+.pill.on{border-color:var(--cd);box-shadow:0 0 0 3px rgba(255,255,255,.8),0 6px 16px rgba(90,80,60,.14);transform:translateY(-1px)}
+.pill.bump{animation:bump .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes bump{40%{transform:scale(1.12)}}
+.pill .pn{font-size:14px}
+.sp{flex:1}
+.iconbtn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:rgba(255,253,247,.88);border:1.5px solid var(--line);flex:none}
+#rd svg{width:20px;height:20px}
+#rd{padding-left:10px}
+
+#stage{position:relative;flex:1;min-height:0;z-index:2;overflow:hidden}
+#deco{position:absolute;inset:0;transition:opacity .6s;pointer-events:none}
+.wall{position:absolute;inset:0;background:
+  linear-gradient(0deg,transparent 9.6%,var(--ad) 9.6% 10.4%,var(--aw) 10.4% 37%,#fffaf0 37% 38.2%,rgba(0,0,0,.05) 38.2% 38.6%,transparent 38.6%),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 2px,transparent 2px 72px) 0 100%/100% 9.6% no-repeat,
+  linear-gradient(0deg,#e3d4b6 0,#ecdfc4 9.6%,transparent 9.6%);transition:background-color 1s}
+.has-bg #deco{opacity:0}
+.win{position:absolute;left:5%;top:9%;width:clamp(64px,11vw,150px);aspect-ratio:.62;border-radius:999px 999px 10px 10px;background:linear-gradient(180deg,#cfe6f8,#eaf4fb 70%,#fdf3e1);border:6px solid #fffaf0;box-shadow:0 10px 24px -12px rgba(90,80,60,.4),inset 0 0 0 2px rgba(0,0,0,.04);overflow:hidden}
+.win::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:5px;translate:-50% 0;background:#fffaf0}
+.win::after{content:"";position:absolute;left:0;right:0;top:55%;height:5px;background:#fffaf0}
+.win i{position:absolute;width:46%;height:12%;border-radius:999px;background:#fff;top:22%;left:10%;animation:drift 18s ease-in-out infinite alternate}
+.win i+i{top:40%;left:50%;width:34%;animation-duration:24s}
+@keyframes drift{to{transform:translateX(40%)}}
+.lamp{position:absolute;top:0;left:calc(var(--dcx) + var(--dh)*.28 + 58px);translate:-50% 0;width:60px;height:110px}
+.lamp::before{content:"";position:absolute;left:50%;top:0;width:2px;height:62px;background:#bfb39d}
+.lamp::after{content:"";position:absolute;left:8px;right:8px;top:60px;height:26px;border-radius:30px 30px 6px 6px;background:linear-gradient(180deg,#fff8e6,var(--butter));box-shadow:0 30px 60px 24px rgba(255,236,180,.55)}
+.stairs{position:absolute;right:0;bottom:0;height:96%;width:auto;max-width:44%}
+.plant{position:absolute;bottom:9%;left:calc(var(--dcx) - var(--dh)*.28 - var(--dh)*.32);width:calc(var(--dh)*.22);transform-origin:50% 100%;animation:sway 6s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(2deg)}}
+
+#landing{position:absolute;inset:0}
+.dw{position:absolute;left:var(--dcx);bottom:9%;height:var(--dh);width:calc(var(--dh)*.56);translate:-50% 0;perspective:1100px}
+.casing{position:absolute;inset:-12px -13px 0 -13px;border-radius:8px 8px 0 0;background:linear-gradient(90deg,#f4ead6,#fffaf0 30%,#fffaf0 70%,#eadfc8);box-shadow:0 30px 40px -24px rgba(90,70,40,.5),0 0 0 1px rgba(90,70,40,.08),inset 0 2px 0 #fff}
+.inside{position:absolute;inset:0;overflow:hidden;border-radius:2px;background:radial-gradient(120% 70% at 50% 25%,#fff4de,#ecd8b6 55%,#cdb28a);box-shadow:inset 0 14px 24px -6px rgba(80,60,30,.45),inset 0 0 0 2px rgba(80,60,30,.15)}
+.inside::before{content:"";position:absolute;left:12%;right:12%;top:8%;height:30%;border-radius:6px;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,.1));opacity:.6}
+.who{position:absolute;left:3%;right:3%;bottom:0;aspect-ratio:3/4;transform-origin:50% 100%;transform:translateY(16%) scale(.84);opacity:0;transition:transform .75s cubic-bezier(.2,1.1,.3,1),opacity .5s}
+.dw.open .who{opacity:1;transform:none;transition-delay:.25s}
+.who.happy{animation:happy .7s cubic-bezier(.2,1.4,.4,1)}
+@keyframes happy{30%{transform:translateY(-5%) scale(1.03)}60%{transform:translateY(1%) scale(.99)}}
+.who.huh{animation:huh .7s ease-in-out}
+@keyframes huh{25%{transform:rotate(-4deg)}60%{transform:rotate(3deg)}}
+.pic{display:block;width:100%;height:100%;overflow:hidden}
+.pic img,.pic svg{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.who .pic{border-radius:46% 46% 0 0/34% 34% 0 0}
+.m2{display:none}
+.huh .m1{display:none}.huh .m2{display:inline}
+.door{position:absolute;inset:0;transform-origin:0 50%;transition:transform .95s cubic-bezier(.45,.05,.2,1),filter .95s;border-radius:2px;
+  background:linear-gradient(90deg,var(--ad) 0,var(--a) 9%,var(--a) 91%,var(--ad));box-shadow:inset 0 0 0 2px rgba(0,0,0,.06),inset -8px 0 14px rgba(0,0,0,.07),0 1px 0 rgba(0,0,0,.05)}
+.door.photo{background:var(--door-img) center/cover}
+.door.photo>*:not(.knob){display:none}.door.photo .knob{display:none}
+.dw.open .door{transform:rotateY(-108deg);filter:brightness(.9)}
+.door .pn1,.door .pn2{position:absolute;left:15%;right:15%;border-radius:8px;box-shadow:inset 3px 3px 0 rgba(255,255,255,.5),inset -3px -3px 0 rgba(0,0,0,.09),0 0 0 1px rgba(0,0,0,.04)}
+.door .pn1{top:7%;height:38%}.door .pn2{top:52%;height:40%}
+.door .peep{position:absolute;left:50%;top:30%;width:7%;aspect-ratio:1;translate:-50% 0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff7d8,#c9a54c 60%,#8d6e25)}
+.door .knob{position:absolute;right:8%;top:51%;width:10%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6cf,#dcb85c 55%,#a8832e);box-shadow:0 2px 3px rgba(0,0,0,.25)}
+.door .knob::after{content:"";position:absolute;right:30%;top:35%;width:220%;height:32%;border-radius:999px;background:linear-gradient(180deg,#fff2c0,#c9a24a);box-shadow:0 2px 2px rgba(0,0,0,.2)}
+.bell{position:absolute;left:calc(100% + 24px);top:44%;width:max(58px,calc(var(--dh)*.18));background:linear-gradient(160deg,#fff8e2,#ecd9a8);border-radius:8px;padding:5px 4px 7px;box-shadow:0 6px 12px -6px rgba(90,70,40,.5),inset 0 0 0 1px rgba(150,120,50,.35);text-align:center}
+.bell b{display:block;font-size:max(10px,calc(var(--dh)*.032));font-weight:800;line-height:1.2;color:#6b5a32;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bell i{display:block;width:16px;height:16px;margin:5px auto 0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#f1dfaa 60%,#c9a54c);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.bell.ring i{animation:ring .25s 3}
+@keyframes ring{50%{transform:scale(.8);box-shadow:0 0 0 6px rgba(255,220,130,.5)}}
+.mat{position:absolute;top:calc(100% + 3px);left:6%;right:6%;height:5%;border-radius:8px;background:repeating-linear-gradient(90deg,var(--ad) 0 7px,var(--a) 7px 14px);box-shadow:0 6px 10px -4px rgba(90,70,40,.35);opacity:.9}
+.spill{position:absolute;top:96%;left:-30%;right:-30%;height:16%;background:radial-gradient(closest-side,rgba(255,232,180,.9),transparent);opacity:0;transition:opacity .8s;pointer-events:none}
+.dw.open .spill{opacity:1}
+.ftag{position:absolute;bottom:calc(100% + 26px);left:50%;translate:-50% 0;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 6px 14px -8px rgba(90,80,60,.4);letter-spacing:.02em}
+.ftag .e{display:inline;margin-left:4px}
+body:not(.en-on) .ftag .e{display:none}
+
+/* speech bubble */
+#say{position:absolute;z-index:3;left:var(--bl);top:var(--bt);width:var(--bw);background:var(--paper);border:1.5px solid var(--line);border-radius:26px;padding:14px 18px 16px;box-shadow:0 22px 44px -18px rgba(90,80,60,.4),inset 0 2px 0 #fff;opacity:0;transform:translateY(10px) scale(.94);transform-origin:0 40%;transition:opacity .3s,transform .45s cubic-bezier(.2,1.4,.4,1)}
+#say.show{opacity:1;transform:none}
+#say::before{content:"";position:absolute;left:-11px;top:38px;width:20px;height:20px;background:var(--paper);border-left:1.5px solid var(--line);border-bottom:1.5px solid var(--line);transform:rotate(45deg);border-radius:0 0 0 5px}
+.srow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nchip{background:var(--a);border-radius:999px;padding:3px 11px;font-weight:800;font-size:14px}
+.role{font-size:13px;color:var(--soft);font-weight:600}
+.ds{margin-left:auto;font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--ink);color:#fff;opacity:0;transform:scale(.4);transition:.35s cubic-bezier(.2,1.6,.4,1)}
+.ds.show{opacity:1;transform:none}
+.spk{width:32px;height:32px;border-radius:50%;background:var(--bg);display:grid;place-items:center;flex:none}
+.spk svg{width:18px;height:18px}
+#line{font-size:clamp(19px,2.3vw,26px);font-weight:800;line-height:1.22;margin:8px 0 0;min-height:1.22em}
+#lineEn{font-size:15px}
+
+/* answer panel */
+#panel{position:relative;z-index:5;flex:none;padding:10px 16px calc(16px + env(safe-area-inset-bottom,0px));background:rgba(255,253,247,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1.5px solid var(--line);box-shadow:0 -16px 34px -24px rgba(90,80,60,.45)}
+.pin{max-width:1100px;margin:0 auto}
+.trow{display:flex;align-items:center;gap:12px;margin-bottom:10px;min-height:28px}
+.turn{display:flex;align-items:center;gap:7px;font-weight:800;font-size:14px;white-space:nowrap}
+.turn .dot{width:20px;height:20px;border-radius:50%;background:var(--pc);box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--pcd)}
+.turn .e{display:inline;margin-left:4px}
+body:not(.en-on) .turn .e{display:none}
+.timer{position:relative;flex:1;height:12px;border-radius:999px;background:#ece4d3;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
+.timer i{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,var(--peach-d),var(--butter-d) 45%,var(--mint-d));transform-origin:0 50%;transform:scaleX(var(--t,1))}
+.timer.late i{background:var(--peach-d);animation:late 1s ease-in-out infinite}
+@keyframes late{50%{opacity:.55}}
+.cpum{position:absolute;top:50%;width:30px;height:30px;translate:-50% -50%;border-radius:50%;background:#fde5db;box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--peach-d),0 6px 12px -4px rgba(90,60,40,.4);overflow:hidden;display:none}
+.cpum.show{display:block;animation:pop .5s cubic-bezier(.2,1.8,.4,1)}
+.cpum svg{width:100%;height:100%}
+@keyframes pop{from{transform:scale(0)}}
+.tlab{font-size:13px;font-weight:700;color:var(--soft);min-width:70px;text-align:right;white-space:nowrap}
+#answers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ans{position:relative;text-align:left;background:#fff;border:2px solid var(--line);border-radius:22px 22px 22px 6px;padding:11px 14px 11px 50px;font-weight:700;font-size:17px;line-height:1.25;min-height:60px;box-shadow:0 4px 0 var(--line),0 14px 22px -18px rgba(90,80,60,.6);transition:transform .15s,box-shadow .15s,background .25s,border-color .25s,opacity .35s}
+.ans .k{position:absolute;left:12px;top:50%;translate:0 -50%;width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--soft);transition:.25s}
+.ans .e{font-size:13px}
+.ans:hover:not(:disabled){transform:translateY(-2px);border-color:var(--pcd);box-shadow:0 6px 0 var(--pc),0 16px 24px -18px rgba(90,80,60,.6)}
+.ans:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.ans:disabled{cursor:default}
+.ans.right{background:#ecf7ed;border-color:var(--mint-d);box-shadow:0 4px 0 var(--mint-d)}
+.ans.right .k{background:var(--mint-d);color:#fff}
+.ans.wrong{background:#fdeef3;border-color:var(--rose-d);box-shadow:0 4px 0 var(--rose-d);animation:nope .45s}
+.ans.wrong .k{background:var(--rose-d);color:#fff}
+.ans.dim{opacity:.42}
+.ans.in{animation:ansin .5s cubic-bezier(.2,1.3,.4,1) both}
+.ans.in:nth-child(2){animation-delay:.07s}.ans.in:nth-child(3){animation-delay:.14s}
+@keyframes ansin{from{opacity:0;transform:translateY(14px) scale(.96)}}
+@keyframes nope{20%{transform:translateX(-10px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+#answers{position:relative}
+#answers.wait .ans{opacity:0;pointer-events:none}
+#answers.wait::after{content:"Hör gut zu …";position:absolute;inset:0;display:grid;place-items:center;color:var(--soft);font-weight:700;font-size:15px;letter-spacing:.02em;animation:late 1.6s ease-in-out infinite}
+body.en-on #answers.wait::after{content:"Hör gut zu …  ·  Listen closely"}
+
+#hint{position:absolute;z-index:3;left:16px;right:16px;bottom:calc(100% + 12px);max-width:620px;margin:0 auto;background:var(--paper);border:2px solid var(--rose-d);border-radius:22px;padding:12px 12px 12px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 18px 36px -14px rgba(120,70,80,.4);opacity:0;transform:translateY(12px) scale(.97);pointer-events:none;transition:.3s cubic-bezier(.2,1.3,.4,1)}
+#hint.show{opacity:1;transform:none;pointer-events:auto}
+#hint .tx{flex:1;font-size:15px;line-height:1.35}
+#hint .tx b{display:block;font-size:13px;color:var(--rose-d);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+#hint .cpu{display:block;font-size:13px;color:var(--soft);margin-top:4px}
+.go{flex:none;padding:12px 18px;border-radius:16px;background:var(--peach);box-shadow:0 4px 0 var(--peach-d);font-weight:800;transition:.12s}
+.go:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--peach-d)}
+.go:active{transform:translateY(3px);box-shadow:0 1px 0 var(--peach-d)}
+.go .e{font-size:12px}
+#rres{position:absolute;z-index:3;left:50%;bottom:calc(100% + 14px);translate:-50% 0;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:8px 18px;font-weight:800;box-shadow:0 12px 26px -12px rgba(90,80,60,.45);white-space:nowrap;opacity:0;transform:translateY(10px) scale(.8);transition:.35s cubic-bezier(.2,1.5,.4,1);pointer-events:none;text-align:center}
+#rres.show{opacity:1;transform:none}
+#rres.won{border-color:var(--mint-d);background:#f1f9f1}
+#rres .e{display:block;font-size:12px}
+
+.ftext{position:absolute;pointer-events:none;z-index:7;font:800 28px/1 "Figtree",system-ui,sans-serif;white-space:nowrap;translate:-50% 0;text-shadow:0 2px 0 #fff,0 0 12px #fff}
+.spark{position:absolute;pointer-events:none;z-index:7;font:800 22px/1 "Figtree",system-ui,sans-serif}
+.wave{position:absolute;left:50%;top:40%;translate:-50% -50%;font:800 clamp(30px,6vw,56px)/1.05 "Figtree",system-ui,sans-serif;color:var(--ink);text-shadow:0 4px 0 #fff,0 0 24px rgba(255,255,255,.9);z-index:8;pointer-events:none;opacity:0;text-align:center;white-space:nowrap}
+.wave.show{animation:wave 1.6s cubic-bezier(.2,1.2,.4,1) forwards}
+.wave small{display:block;font:700 16px/1.4 "Figtree",system-ui,sans-serif;color:var(--soft);margin-top:6px}
+@keyframes wave{0%{opacity:0;transform:scale(.4) rotate(-6deg)}20%{opacity:1;transform:scale(1.05)}30%{transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+
+/* ---------- overlays ---------- */
+.ov{position:fixed;inset:0;display:none;place-items:center;z-index:10;padding:16px;background:rgba(247,243,232,.6);backdrop-filter:blur(5px);overflow:auto}
+.ov.show{display:grid}
+.card{position:relative;background:var(--paper);border-radius:28px;border:1.5px solid var(--line);box-shadow:0 30px 70px -20px rgba(90,80,60,.35);width:min(560px,100%);padding:24px 24px 22px;text-align:center;animation:flip .6s cubic-bezier(.2,.9,.3,1.12)}
+@keyframes flip{from{transform:perspective(1200px) rotateX(-60deg) translateY(40px);opacity:0}}
+.card h1{font:800 clamp(30px,6vw,42px)/1.05 "Figtree",system-ui,sans-serif;letter-spacing:.03em;margin:10px 0 6px;text-transform:uppercase}
+.card p{margin:6px 0;color:var(--soft)}
+.faces{display:flex;justify-content:center;margin:4px 0 2px;padding-left:14px}
+.faces .f{width:62px;height:62px;border-radius:50%;margin-left:-14px;border:4px solid var(--paper);box-shadow:0 8px 16px -8px rgba(90,80,60,.5);overflow:hidden;background:var(--c);animation:bob 3s ease-in-out infinite}
+.faces .f:nth-child(2){animation-delay:-.5s}.faces .f:nth-child(3){animation-delay:-1s}.faces .f:nth-child(4){animation-delay:-1.5s}.faces .f:nth-child(5){animation-delay:-2s}.faces .f:nth-child(6){animation-delay:-2.5s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.persona{display:flex;gap:12px;align-items:center;text-align:left;background:var(--bg);border-radius:18px;padding:10px 14px;margin:12px 0;font-size:14px}
+.persona .tagb{flex:none;width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--line)}
+.persona .tagb svg{width:30px;height:30px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.how div{background:var(--bg);border-radius:16px;padding:10px 8px;font-size:13.5px}
+.how b{display:block;font-size:22px;line-height:1.2;margin-bottom:2px}
+.seg{display:inline-flex;flex-wrap:wrap;justify-content:center;background:var(--bg);border-radius:999px;padding:4px;margin:4px 0}
+.seg button{padding:8px 16px;border-radius:999px;font-weight:700;font-size:15px}
+.seg button.sel{background:#fff;box-shadow:0 4px 12px rgba(90,80,60,.14)}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 4px}
+.names label{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 12px}
+.names i{flex:none;width:20px;height:20px;border-radius:50%}
+.names input{flex:1;min-width:0;font-weight:700;outline:none;user-select:text}
+.big{width:100%;padding:15px;border-radius:18px;background:var(--peach);font-weight:800;font-size:18px;box-shadow:0 5px 0 var(--peach-d);transition:.12s;margin-top:10px}
+.big:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--peach-d)}
+.big:active{transform:translateY(3px);box-shadow:0 2px 0 var(--peach-d)}
+.ghost{width:100%;padding:12px;border-radius:16px;border:1.5px solid var(--line);margin-top:10px;font-weight:700;background:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.stats div{background:var(--bg);border-radius:16px;padding:12px 6px}
+.stats b{display:block;font-size:30px;line-height:1.1;font-weight:800}
+.stats span{font-size:13px;color:var(--soft)}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:14px 0}
+.vs .side{background:var(--bg);border-radius:18px;padding:12px 8px;border:2px solid transparent}
+.vs .side.best{border-color:var(--mint-d);background:#f1f9f1}
+.vs .side .av{width:46px;height:46px;border-radius:50%;margin:0 auto 4px;display:grid;place-items:center;font-weight:800;color:#fff;overflow:hidden}
+.vs .side .av svg{width:100%;height:100%}
+.vs .side b{display:block;font-size:28px;font-weight:800}
+.vs .side small{color:var(--soft);font-size:13px}
+.vs .mid{font-weight:800;color:var(--soft)}
+.review{text-align:left;max-height:230px;overflow:auto;background:var(--bg);border-radius:16px;padding:6px 12px;margin:8px 0;list-style:none}
+.review li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line)}
+.review li:last-child{border-bottom:0}
+.review .av{flex:none;width:36px;height:36px;border-radius:50%;overflow:hidden;background:var(--c)}
+.review .q{font-weight:800;font-size:14px}
+.review .bad{color:#c0607e;text-decoration:line-through;font-size:14px}
+.review .good{color:#3f8a4c;font-weight:700;font-size:14px}
+.review .tip{display:block;font-size:13px;color:var(--soft);margin-top:2px}
+.newbest{display:inline-block;background:linear-gradient(120deg,#ffe08a,#ffb98f);padding:4px 14px;border-radius:999px;font-weight:800;animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.conf{position:fixed;top:-20px;width:10px;height:16px;border-radius:3px;z-index:20;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+
+/* ---------- phone ---------- */
+@media(max-width:760px){
+  #answers{grid-template-columns:1fr;gap:8px}
+  .ans{min-height:50px;font-size:16px;padding:9px 12px 9px 46px;border-radius:20px 20px 20px 6px}
+  .ans .k{width:26px;height:26px;left:10px}
+  #say{transform-origin:50% 100%;padding:12px 16px 14px;border-radius:22px}
+  #say::before{left:50%;top:auto;bottom:-11px;margin-left:-10px;transform:rotate(-45deg)}
+  #line{font-size:20px;margin-top:6px}
+  #lineEn{font-size:14px}
+  .hud{gap:7px;padding:10px 12px}
+  .pill{padding:5px 11px 5px 6px;gap:6px}
+  .pill b{font-size:18px}
+  .how{grid-template-columns:1fr;gap:6px}
+  .how div{display:flex;gap:10px;align-items:center;text-align:left;padding:8px 12px}
+  .how b{margin:0;font-size:20px}
+  .tlab{display:none}
+  .bell{left:calc(100% + 16px)}
+  .ftag{bottom:calc(100% + 18px)}
+  #panel{padding:8px 12px calc(12px + env(safe-area-inset-bottom,0px))}
+  .trow{margin-bottom:8px}
+  .card{padding:20px 18px 18px}
+}
+@media(max-width:420px){.duo .pill .pn,.pill.fox .pn{display:none}.names{grid-template-columns:1fr}#rd svg{display:none}}
+@media(max-width:760px){.lamp,.ftag{display:none}}
+@media(max-height:620px) and (min-width:761px){.ans{min-height:48px;padding-top:8px;padding-bottom:8px}}
+@media(prefers-reduced-motion:reduce){.win i,.plant,.faces .f,.newbest{animation:none!important}.door,.who{transition-duration:.01s!important}}
+</style>
+</head>
+<body class="en-on">
+<div id="game">
+  <div id="bg"><div id="photo"></div></div>
+
+  <div class="hud">
+    <div class="pill" id="s0" style="--c:var(--pc);--cd:var(--pcd)"><i class="dot" id="d0">1</i><span class="pn" id="n0">Du</span><b id="sc0">0</b></div>
+    <div class="pill" id="s1"><i class="dot" id="d1"></i><span class="pn" id="n1">Fuchsi</span><b id="sc1">0</b></div>
+    <div class="sp"></div>
+    <div class="pill" id="rd" title="Runde"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v9H4Z" fill="#f3e2a0" stroke="#4a453f" stroke-width="2" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="#f6b9a4" stroke="#4a453f" stroke-width="2" stroke-linejoin="round"/></svg><b id="rdn">1</b><span style="color:var(--soft)">/<span id="rdt">18</span></span></div>
+    <button class="iconbtn" id="snd" title="Ton an/aus">🔔</button>
+    <button class="iconbtn" id="pause" title="Pause">⏸</button>
+  </div>
+
+  <div id="stage">
+    <div id="deco">
+      <div class="wall"></div>
+      <div class="win"><i></i><i></i></div>
+      <div class="lamp"></div>
+      <svg class="stairs" viewBox="0 0 300 520" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+        <defs><linearGradient id="stp" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f4ead6"/><stop offset="1" stop-color="#e2d2b2"/></linearGradient></defs>
+        <path d="M40 520 L40 470 L80 470 L80 420 L120 420 L120 370 L160 370 L160 320 L200 320 L200 270 L240 270 L240 220 L280 220 L280 170 L300 170 L300 520Z" fill="url(#stp)"/>
+        <path d="M40 470 h40 M80 420 h40 M120 370 h40 M160 320 h40 M200 270 h40 M240 220 h40 M280 170 h20" stroke="#fffaf0" stroke-width="5"/>
+        <path d="M40 520 V470 H80 V420 H120 V370 H160 V320 H200 V270 H240 V220 H280 V170 H300" fill="none" stroke="#cdb995" stroke-width="2"/>
+        <g stroke="#fffaf0" stroke-width="5" stroke-linecap="round"><path d="M60 470 V392 M100 420 V342 M140 370 V292 M180 320 V242 M220 270 V192 M260 220 V142"/></g>
+        <path d="M44 398 L300 120" stroke="#c9a37a" stroke-width="11" stroke-linecap="round"/>
+        <path d="M44 394 L300 116" stroke="#e4c49c" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="44" cy="398" r="9" fill="#c9a37a"/>
+      </svg>
+      <svg class="plant" viewBox="0 0 80 120" aria-hidden="true"><path d="M40 70 C30 50 10 46 6 30 C24 30 36 44 40 62 C42 40 30 22 38 4 C52 20 48 44 42 66 C50 48 64 40 76 42 C70 58 54 62 42 72Z" fill="#a9d6a0" stroke="#4a453f" stroke-width="2.5" stroke-linejoin="round"/><path d="M40 72 V60" stroke="#4a453f" stroke-width="2.5"/><path d="M20 72 H60 L54 116 H26Z" fill="#f6b9a4" stroke="#4a453f" stroke-width="2.5" stroke-linejoin="round"/><path d="M18 72 H62" stroke="#4a453f" stroke-width="5" stroke-linecap="round"/></svg>
+    </div>
+    <div id="landing">
+      <div class="dw" id="dw">
+        <div class="ftag" id="ftag">Erdgeschoss</div>
+        <div class="casing"></div>
+        <div class="inside"><div class="who" id="who"></div></div>
+        <div class="door" id="door"><div class="pn1"></div><div class="pn2"></div><i class="peep"></i><i class="knob"></i></div>
+        <div class="spill"></div>
+        <div class="mat"></div>
+        <div class="bell" id="bell"><b id="plate">Yılmaz</b><i></i></div>
+      </div>
+    </div>
+    <div id="say">
+      <div class="srow"><span class="nchip" id="snm">Herr Yılmaz</span><span class="role" id="srole"></span><span class="ds" id="ds">Sie</span><button class="spk" id="spk" title="Vorlesen" aria-label="Vorlesen"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4Z" fill="#f3e2a0" stroke="#4a453f" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="#4a453f" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+      <p id="line"></p><span class="e" id="lineEn"></span>
+    </div>
+    <div class="wave" id="wave"></div>
+  </div>
+
+  <div id="panel"><div class="pin">
+    <div id="hint"><div class="tx" id="htx"></div><button class="go" id="next">Weiter<span class="e">Next</span></button></div>
+    <div id="rres"></div>
+    <div class="trow">
+      <div class="turn"><i class="dot"></i><span id="turnT">Du bist dran</span></div>
+      <div class="timer" id="timer"><i></i><span class="cpum" id="cpum"></span></div>
+      <div class="tlab" id="tlab"></div>
+    </div>
+    <div id="answers" class="wait"></div>
+  </div></div>
+</div>
+
+<div class="ov show" id="startOv"><div class="card" id="startCard"></div></div>
+<div class="ov" id="endOv"><div class="card" id="endCard"></div></div>
+<div class="ov" id="pauseOv"><div class="card"><h1>Pause</h1><p>Die Nachbarn warten gern.<span class="e">The neighbors are happy to wait.</span></p><button class="big" id="resume">Weiter<span class="e">Continue</span></button><button class="ghost" id="quit">Spiel beenden<span class="e">End the game</span></button></div></div>
+
+<script>
+/* ---------- pictures ---------- */
+/* Realistic photos live in img/hallo-nachbar/<key>.webp. Each one is loaded once; if a file is missing the drawn fallback stays. */
+const IMG_KEYS=['treppenhaus','treppenhaus-hoch','tuer','yilmaz','max','lena','schmidt','nguyen','jonas'];
+const IMG_DIR='img/hallo-nachbar/';
+const IMG_OK={};
+
+/* ---------- neighbors ---------- */
+const ACC={sky:['#bcd9f2','#7fb0dc','#eaf3fb','#d6e8f7'],butter:['#f3e2a0','#d9c165','#fbf6e2','#f5ebc2'],lilac:['#d7c9ec','#a993d1','#f3effa','#e4daf3'],rose:['#f5c6d6','#e09bb3','#fcf0f4','#f8dbe5'],mint:['#c5e6c8','#8fc495','#eef7ee','#d7eed9'],peach:['#f6b9a4','#e58f74','#fdefe8','#f9d7ca']};
+const N={
+ yilmaz:{nm:'Herr Yılmaz',role:'Hausmeister',roleEn:'caretaker',floor:'Erdgeschoss',floorEn:'ground floor',plate:'Yılmaz',sie:true,acc:'sky'},
+ max:{nm:'Max',role:'8 Jahre alt',roleEn:'8 years old',floor:'1. Stock',floorEn:'2nd floor (US)',plate:'Becker',sie:false,acc:'butter'},
+ lena:{nm:'Lena',role:'Studentin',roleEn:'student',floor:'2. Stock',floorEn:'3rd floor (US)',plate:'L. Wolf',sie:false,acc:'lilac'},
+ schmidt:{nm:'Frau Schmidt',role:'Rentnerin',roleEn:'retiree',floor:'3. Stock',floorEn:'4th floor (US)',plate:'Schmidt',sie:true,acc:'rose'},
+ nguyen:{nm:'Frau Nguyen',role:'Ärztin',roleEn:'doctor',floor:'4. Stock',floorEn:'5th floor (US)',plate:'Dr. Nguyen',sie:true,acc:'mint'},
+ jonas:{nm:'Jonas',role:'Musiker',roleEn:'musician',floor:'Dachgeschoss',floorEn:'top floor',plate:'J. Krüger',sie:false,acc:'peach'}
+};
+const ORDER=['yilmaz','max','lena','schmidt','nguyen','jonas'];
+
+/* ---------- dialogs: o = opener, m = middle, c = closer. a[0] is the right reply; wrong replies carry a hint (de, en) ---------- */
+const I=(s,se,ok,w1,w2)=>({s,se,a:[ok,w1,w2]});
+const SIE_Y=['Zum Hausmeister sagt man Sie.','Use Sie with the caretaker.'];
+const D={
+yilmaz:{
+ o:[I('Guten Tag! Ich bin Herr Yılmaz, der Hausmeister.','Hello! I am Mr. Yılmaz, the caretaker.',
+    ['Guten Tag, Herr Yılmaz! Freut mich.','Hello, Mr. Yılmaz! Nice to meet you.'],
+    ['Hallo, Hausmeister!','Hi, caretaker!','Man sagt Herr und den Nachnamen: Herr Yılmaz.','Use Herr plus the last name: Herr Yılmaz.'],
+    ['Hi! Wie geht\'s dir?','Hi! How are you doing?','Zum Hausmeister sagt man Sie: Wie geht es Ihnen?','Use Sie with the caretaker: Wie geht es Ihnen?']),
+   I('Herzlich willkommen im Haus!','A warm welcome to the building!',
+    ['Vielen Dank! Das ist sehr nett.','Thank you very much! That is very kind.'],
+    ['Danke, du bist sehr nett.','Thanks, you are very kind. (informal)','Herr Yılmaz ist kein Freund. Man sagt Sie: Sie sind sehr nett.','Mr. Yılmaz is not a friend. Use Sie: Sie sind sehr nett.'],
+    ['Gute Besserung!','Get well soon!','Gute Besserung sagt man, wenn jemand krank ist.','You say Gute Besserung when someone is sick.'])],
+ m:[I('Wie ist Ihr Name, bitte?','What is your name, please?',
+    ['Mein Name ist Costa. Alex Costa.','My name is Costa. Alex Costa.'],
+    ['Meine Name ist Alex Costa.','My name is Alex Costa. (wrong form)','Es heißt der Name, also: mein Name, nicht meine Name.','It is der Name, so: mein Name, not meine Name.'],
+    ['Und wie heißt du?','And what is your name? (informal)','Herr Yılmaz sagt Sie. Frag auch mit Sie: Und wie heißen Sie?','Mr. Yılmaz uses Sie. Ask back with Sie too.']),
+   I('Wie schreibt man Ihren Nachnamen?','How do you spell your last name?',
+    ['C-O-S-T-A.','C-O-S-T-A.'],
+    ['Mit dem Kuli.','With a pen.','Wie schreibt man ...? heißt hier: Bitte buchstabieren Sie!','Here Wie schreibt man ...? means: please spell it.'],
+    ['Ich schreibe gern E-Mails.','I like writing emails.','Er fragt nicht, was du gern machst. Buchstabiere deinen Namen.','He is not asking what you like. Spell your name.']),
+   I('In welchem Stock wohnen Sie?','Which floor do you live on?',
+    ['Im zweiten Stock, links.','On the second floor, on the left.'],
+    ['Seit gestern.','Since yesterday.','Seit gestern antwortet auf Seit wann? Hier ist die Frage: Wo?','Seit gestern answers Since when? This question asks where.'],
+    ['Um zwei Uhr.','At two o\'clock.','Um zwei Uhr ist eine Uhrzeit. Er fragt nach dem Stock.','That is a time of day. He asks about the floor.'])],
+ c:[I('Schönen Tag noch!','Have a nice day!',
+    ['Danke, Ihnen auch!','Thanks, you too!'],
+    ['Danke, dir auch!','Thanks, you too! (informal)','Zum Hausmeister sagt man Sie: Ihnen auch!','Use Sie with the caretaker: Ihnen auch!'],
+    ['Gern geschehen!','You are welcome!','Gern geschehen ist die Antwort auf Danke.','Gern geschehen is the reply to Danke.']),
+   I('So, ich muss weiterarbeiten. Auf Wiedersehen!','Well, I have to get back to work. Goodbye!',
+    ['Auf Wiedersehen, Herr Yılmaz!','Goodbye, Mr. Yılmaz!'],
+    ['Guten Tag, Herr Yılmaz!','Hello, Mr. Yılmaz!','Guten Tag sagt man zur Begrüßung. Zum Abschied: Auf Wiedersehen!','Guten Tag is a greeting. To say goodbye: Auf Wiedersehen!'],
+    ['Auf Wiederhören!','Goodbye! (on the phone)','Auf Wiederhören sagt man nur am Telefon.','Auf Wiederhören is only for the phone.'])]
+},
+max:{
+ o:[I('Hallo! Ich bin Max. Wie heißt du?','Hi! I am Max. What is your name?',
+    ['Hallo Max! Ich heiße Alex.','Hi Max! My name is Alex.'],
+    ['Guten Tag! Wie heißen Sie?','Good day! What is your name? (formal)','Max ist ein Kind. Zu Kindern sagt man du.','Max is a child. Use du with children.'],
+    ['Ich heiße Max.','My name is Max.','Max ist sein Name. Sag deinen eigenen Namen: Ich heiße Alex.','Max is his name. Say your own name.']),
+   I('Hi! Bist du neu hier?','Hi! Are you new here?',
+    ['Ja, ich bin gestern eingezogen.','Yes, I moved in yesterday.'],
+    ['Ja. Und Sie? Wohnen Sie auch hier?','Yes. And you? Do you live here too? (formal)','Max ist ein Kind. Mit Kindern spricht man per du.','Max is a child. Talk to children with du.'],
+    ['Nein, ich bin alt.','No, I am old.','neu heißt hier: neu im Haus. Es geht nicht um das Alter.','neu here means new in the building, not young.'])],
+ m:[I('Ich bin acht. Wie alt bist du?','I am eight. How old are you?',
+    ['Ich bin 29 Jahre alt.','I am 29 years old.'],
+    ['Ich habe 29 Jahre.','I have 29 years. (wrong form)','Auf Deutsch sagt man: Ich bin ... Jahre alt.','In German you say: Ich bin ... Jahre alt.'],
+    ['Mir geht es gut.','I am doing fine.','Max fragt nach dem Alter, nicht wie es dir geht.','Max asks your age, not how you are.']),
+   I('Hast du ein Haustier?','Do you have a pet?',
+    ['Nein, aber ich mag Katzen.','No, but I like cats.'],
+    ['Ja, ich habe Hunger.','Yes, I am hungry.','Ein Haustier ist zum Beispiel ein Hund oder eine Katze.','A Haustier is a pet, like a dog or a cat.'],
+    ['Hast du Zeit?','Do you have time?','Max fragt nach einem Tier. Antworte auf die Frage.','Max asks about a pet. Answer the question.']),
+   I('Spielst du mit mir Fußball?','Will you play soccer with me?',
+    ['Jetzt nicht, aber morgen gern!','Not now, but tomorrow I would love to!'],
+    ['Spielen Sie gern Fußball?','Do you like playing soccer? (formal)','Zu Max sagt man du, nicht Sie.','Use du with Max, not Sie.'],
+    ['Danke, gleichfalls!','Thanks, same to you!','Gleichfalls sagt man auf gute Wünsche, zum Beispiel: Schönes Wochenende!','Gleichfalls answers good wishes like Have a nice weekend!'])],
+ c:[I('Tschüss! Ich muss zur Schule.','Bye! I have to go to school.',
+    ['Tschüss, Max! Viel Spaß!','Bye, Max! Have fun!'],
+    ['Auf Wiedersehen, Herr Max!','Goodbye, Mr. Max!','Zu Kindern sagt man nicht Herr. Einfach: Tschüss, Max!','Do not call a child Herr. Just say: Tschüss, Max!'],
+    ['Guten Appetit!','Enjoy your meal!','Guten Appetit sagt man vor dem Essen.','You say Guten Appetit before a meal.']),
+   I('Mama ruft. Bis später!','Mom is calling. See you later!',
+    ['Bis später, Max!','See you later, Max!'],
+    ['Bis später, Frau Becker!','See you later, Mrs. Becker!','Max spricht mit dir, nicht seine Mama.','Max is the one talking to you, not his mom.'],
+    ['Hallo, Max!','Hello, Max!','Hallo ist eine Begrüßung. Max geht. Sag: Bis später!','Hallo is a greeting. Max is leaving, so say: Bis später!'])]
+},
+lena:{
+ o:[I('Hey! Ich bin Lena von gegenüber. Und du?','Hey! I am Lena from across the hall. And you?',
+    ['Hi Lena! Ich bin Alex.','Hi Lena! I am Alex.'],
+    ['Sehr geehrte Frau Lena, mein Name ist Costa.','Dear Ms. Lena, my name is Costa.','Lena sagt du. Unter jungen Leuten sagt man einfach: Hi, ich bin Alex.','Lena uses du. Among young people just say: Hi, ich bin Alex.'],
+    ['Danke, gut!','Fine, thanks!','Lena fragt nach deinem Namen, nicht wie es dir geht.','Lena asks your name, not how you are.']),
+   I('Hallo! Wie geht\'s dir?','Hello! How are you?',
+    ['Gut, danke! Und dir?','Good, thanks! And you?'],
+    ['Gut, danke! Und Ihnen?','Good, thanks! And you? (formal)','Lena sagt du, also fragst du zurück: Und dir?','Lena uses du, so ask back: Und dir?'],
+    ['Ich heiße Alex.','My name is Alex.','Lena fragt: Wie geht\'s? Die Antwort ist zum Beispiel: Gut, danke!','Lena asks how you are, for example: Gut, danke!'])],
+ m:[I('Woher kommst du eigentlich?','So where are you from?',
+    ['Aus Brasilien, aus São Paulo.','From Brazil, from São Paulo.'],
+    ['Nach Brasilien.','To Brazil.','Woher? Antwort mit aus. Wohin? Antwort mit nach.','Woher? takes aus. Wohin? takes nach.'],
+    ['Um acht Uhr.','At eight o\'clock.','Woher fragt nach dem Land oder der Stadt.','Woher asks about the country or city.']),
+   I('Studierst du auch?','Are you a student too?',
+    ['Nein, ich arbeite in einem Hotel.','No, I work in a hotel.'],
+    ['Ja, ich wohne gern hier.','Yes, I like living here.','Lena fragt: Studium oder Arbeit?','Lena asks whether you study or work.'],
+    ['Nein, ich habe keinen Hunger.','No, I am not hungry.','Die Frage ist: Studierst du? Antworte mit Studium oder Beruf.','The question is about studying. Answer with your studies or job.']),
+   I('Wir machen am Samstag eine Party. Kommst du?','We are having a party on Saturday. Are you coming?',
+    ['Ja, gern! Um wie viel Uhr?','Yes, I would love to! What time?'],
+    ['Ja, ich habe eine Uhr.','Yes, I have a watch.','Nach der Zeit fragt man: Um wie viel Uhr?','To ask about the time: Um wie viel Uhr?'],
+    ['Nein, danke, ich bin satt.','No, thanks, I am full.','Ich bin satt sagt man beim Essen.','You say Ich bin satt when eating.'])],
+ c:[I('Tschüss, bis später!','Bye, see you later!',
+    ['Tschüss, bis dann!','Bye, see you!'],
+    ['Guten Tag!','Good day!','Lena geht. Zum Abschied sagt man: Tschüss!','Lena is leaving. Say Tschüss!'],
+    ['Auf Wiederhören!','Goodbye! (on the phone)','Auf Wiederhören sagt man nur am Telefon.','Auf Wiederhören is only for the phone.']),
+   I('Schönes Wochenende!','Have a nice weekend!',
+    ['Danke, gleichfalls!','Thanks, same to you!'],
+    ['Gern geschehen!','You are welcome!','Gern geschehen ist die Antwort auf Danke.','Gern geschehen is the reply to Danke.'],
+    ['Guten Morgen!','Good morning!','Das ist eine Begrüßung. Auf gute Wünsche sagt man: Danke, gleichfalls!','That is a greeting. Answer good wishes with: Danke, gleichfalls!'])]
+},
+schmidt:{
+ o:[I('Guten Morgen! Sind Sie neu hier im Haus?','Good morning! Are you new in the building?',
+    ['Guten Morgen! Ja, ich wohne jetzt im zweiten Stock.','Good morning! Yes, I live on the second floor now.'],
+    ['Ja, und du? Wohnst du auch hier?','Yes, and you? Do you live here too? (informal)','Zu Frau Schmidt sagt man Sie, nicht du.','With Mrs. Schmidt you use Sie, not du.'],
+    ['Gute Nacht, Frau Schmidt!','Good night, Mrs. Schmidt!','Gute Nacht sagt man spät am Abend, vor dem Schlafen.','Gute Nacht is for late evening, before bed.']),
+   I('Ach, guten Tag! Ich bin Frau Schmidt.','Oh, hello! I am Mrs. Schmidt.',
+    ['Guten Tag, Frau Schmidt! Ich bin Alex Costa.','Hello, Mrs. Schmidt! I am Alex Costa.'],
+    ['Hi! Ich bin Alex. Und du?','Hi! I am Alex. And you? (informal)','Zu Frau Schmidt sagt man Sie. Und sie hat ihren Namen schon gesagt.','Use Sie with Mrs. Schmidt. And she already told you her name.'],
+    ['Hallo, Oma! Ich bin Alex.','Hi, Grandma! I am Alex.','Frau Schmidt ist nicht deine Oma. Man sagt Frau und den Nachnamen.','She is not your grandma. Use Frau plus the last name.'])],
+ m:[I('Wie geht es Ihnen?','How are you?',
+    ['Danke, gut. Und Ihnen?','Fine, thank you. And you?'],
+    ['Danke, gut. Und dir?','Fine, thanks. And you? (informal)','Frau Schmidt sagt Sie. Frag zurück: Und Ihnen?','She uses Sie. Ask back: Und Ihnen?'],
+    ['Ich komme aus Brasilien.','I am from Brazil.','Wie geht es Ihnen? fragt, wie es dir geht.','She is asking how you are.']),
+   I('Und woher kommen Sie?','And where are you from?',
+    ['Ich komme aus Brasilien.','I am from Brazil.'],
+    ['Ich gehe nach Hause.','I am going home.','Woher kommen Sie? fragt nach deinem Land.','She asks which country you are from.'],
+    ['Aus dem zweiten Stock.','From the second floor.','Woher kommen Sie? fragt nach dem Land, nicht nach der Wohnung.','She means your country, not your apartment.']),
+   I('Möchten Sie einen Kaffee?','Would you like a coffee?',
+    ['Ja, gern. Vielen Dank!','Yes, please. Thank you very much!'],
+    ['Ja, gern. Und du?','Yes, please. And you? (informal)','Zu Frau Schmidt sagt man Sie: Und Sie?','Use Sie with Mrs. Schmidt: Und Sie?'],
+    ['Guten Appetit!','Enjoy your meal!','Auf Möchten Sie ...? sagt man: Ja, gern! oder: Nein, danke.','Answer Möchten Sie ...? with Ja, gern! or Nein, danke.'])],
+ c:[I('So, ich gehe jetzt einkaufen. Auf Wiedersehen!','Well, I am going shopping now. Goodbye!',
+    ['Auf Wiedersehen, Frau Schmidt!','Goodbye, Mrs. Schmidt!'],
+    ['Hallo, Frau Schmidt!','Hello, Mrs. Schmidt!','Hallo ist eine Begrüßung. Zum Abschied: Auf Wiedersehen!','Hallo is a greeting. To say goodbye: Auf Wiedersehen!'],
+    ['Bis später, Oma!','See you later, Grandma!','Frau Schmidt ist nicht deine Oma. Sag: Auf Wiedersehen, Frau Schmidt!','She is not your grandma. Say: Auf Wiedersehen, Frau Schmidt!']),
+   I('Es war schön, Sie kennenzulernen.','It was nice to meet you.',
+    ['Das finde ich auch! Auf Wiedersehen.','I think so too! Goodbye.'],
+    ['Schön, dich kennenzulernen!','Nice to meet you! (informal)','Zu Frau Schmidt sagt man Sie: Schön, Sie kennenzulernen.','Use Sie: Schön, Sie kennenzulernen.'],
+    ['Gesundheit!','Bless you!','Gesundheit sagt man, wenn jemand niest.','You say Gesundheit when someone sneezes.'])]
+},
+nguyen:{
+ o:[I('Guten Abend! Wohnen Sie auch hier?','Good evening! Do you live here too?',
+    ['Guten Abend! Ja, seit gestern.','Good evening! Yes, since yesterday.'],
+    ['Gute Nacht! Ja, seit gestern.','Good night! Yes, since yesterday.','Zur Begrüßung sagt man Guten Abend. Gute Nacht sagt man zum Abschied.','Guten Abend is a greeting. Gute Nacht is a goodbye.'],
+    ['Ja. Und du?','Yes. And you? (informal)','Frau Nguyen ist eine Erwachsene, die du nicht kennst. Man sagt Sie.','Use Sie with adults you do not know.']),
+   I('Guten Tag! Mein Name ist Nguyen. Ich wohne im vierten Stock.','Hello! My name is Nguyen. I live on the fourth floor.',
+    ['Freut mich, Frau Nguyen! Ich bin Alex Costa.','Nice to meet you, Ms. Nguyen! I am Alex Costa.'],
+    ['Freut mich, Nguyen!','Nice to meet you, Nguyen!','Mit Sie sagt man Frau oder Herr und den Nachnamen: Frau Nguyen.','With Sie, use Frau or Herr plus the last name.'],
+    ['Bis morgen, Frau Nguyen!','See you tomorrow, Ms. Nguyen!','Das ist ein Abschied. Ihr lernt euch gerade kennen.','That is a goodbye. You are just meeting.'])],
+ m:[I('Was machen Sie beruflich?','What do you do for a living?',
+    ['Ich arbeite in einem Hotel, an der Rezeption.','I work in a hotel, at the front desk.'],
+    ['Ich bin müde.','I am tired.','beruflich fragt nach der Arbeit, nach dem Beruf.','beruflich asks about your job.'],
+    ['Und was machst du beruflich?','And what do you do? (informal)','Frau Nguyen sagt Sie. Frag zurück: Und Sie?','She uses Sie. Ask back: Und Sie?']),
+   I('Sprechen Sie Deutsch?','Do you speak German?',
+    ['Ja, ein bisschen.','Yes, a little.'],
+    ['Ja. Sprichst du Englisch?','Yes. Do you speak English? (informal)','Zu Frau Nguyen sagt man Sie: Sprechen Sie Englisch?','Use Sie with Ms. Nguyen: Sprechen Sie Englisch?'],
+    ['Ja, ich wohne hier.','Yes, I live here.','Sie fragt nach der Sprache. Zum Beispiel: Ja, ein bisschen.','She asks about the language, for example: Ja, ein bisschen.']),
+   I('Sind Sie verheiratet?','Are you married?',
+    ['Nein, ich bin ledig.','No, I am single.'],
+    ['Ja, ich bin 29.','Yes, I am 29.','verheiratet fragt nach der Familie, nicht nach dem Alter.','verheiratet is about marriage, not age.'],
+    ['Bist du verheiratet?','Are you married? (informal)','Frau Nguyen sagt Sie. Frag zurück mit Sie: Und Sie?','She uses Sie. Ask back with Sie: Und Sie?'])],
+ c:[I('Gute Nacht! Ich bin sehr müde.','Good night! I am very tired.',
+    ['Gute Nacht, Frau Nguyen! Schlafen Sie gut.','Good night, Ms. Nguyen! Sleep well.'],
+    ['Guten Abend, Frau Nguyen!','Good evening, Ms. Nguyen!','Guten Abend ist eine Begrüßung. Zum Abschied spät am Abend: Gute Nacht!','Guten Abend is a greeting. Late at night say: Gute Nacht!'],
+    ['Gute Nacht! Schlaf gut.','Good night! Sleep well. (informal)','Mit Sie sagt man: Schlafen Sie gut.','With Sie you say: Schlafen Sie gut.']),
+   I('Ich muss los. Ich arbeite heute im Krankenhaus.','I have to go. I am working at the hospital today.',
+    ['Auf Wiedersehen! Bis bald.','Goodbye! See you soon.'],
+    ['Guten Appetit!','Enjoy your meal!','Guten Appetit sagt man vor dem Essen.','You say Guten Appetit before a meal.'],
+    ['Gute Besserung!','Get well soon!','Gute Besserung sagt man zu kranken Menschen. Frau Nguyen ist die Ärztin.','Gute Besserung is for sick people. Ms. Nguyen is the doctor.'])]
+},
+jonas:{
+ o:[I('Na, alles klar?','Hey, all good?',
+    ['Ja, alles klar! Und bei dir?','Yes, all good! And you?'],
+    ['Ja, alles klar! Und bei Ihnen?','Yes, all good! And you? (formal)','Na, alles klar? ist sehr locker. Jonas sagt du, also: Und bei dir?','Na, alles klar? is very casual. Jonas uses du: Und bei dir?'],
+    ['Ja, ich bin Alex Costa.','Yes, I am Alex Costa.','Jonas fragt, wie es dir geht. Er fragt nicht nach dem Namen.','Jonas asks how you are, not your name.']),
+   I('Servus! Ich bin Jonas. Ich wohne unterm Dach.','Hi! I am Jonas. I live up in the attic.',
+    ['Hi Jonas, ich bin Alex. Freut mich!','Hi Jonas, I am Alex. Nice to meet you!'],
+    ['Freut mich, Herr Jonas.','Nice to meet you, Mr. Jonas.','Jonas ist ein Vorname. Herr sagt man nur mit dem Nachnamen.','Jonas is a first name. Herr only goes with a last name.'],
+    ['Ja, ich wohne unterm Dach.','Yes, I live in the attic.','Jonas wohnt unterm Dach, du wohnst im zweiten Stock. Stell dich vor!','Jonas lives in the attic, you live on the second floor. Introduce yourself!'])],
+ m:[I('Ich spiele Gitarre. Ist das zu laut für dich?','I play the guitar. Is that too loud for you?',
+    ['Nein, kein Problem!','No, no problem!'],
+    ['Bitte, gern geschehen.','Please, you are welcome.','Gern geschehen ist die Antwort auf Danke.','Gern geschehen is the reply to Danke.'],
+    ['Ja, Sie spielen sehr laut.','Yes, you play very loudly. (formal)','Jonas sagt du. Antworte auch mit du.','Jonas uses du. Answer with du too.']),
+   I('Danke für die Hilfe mit dem Fahrrad!','Thanks for helping with the bike!',
+    ['Gern geschehen!','You are welcome!'],
+    ['Gesundheit!','Bless you!','Gesundheit sagt man, wenn jemand niest.','You say Gesundheit when someone sneezes.'],
+    ['Danke, gleichfalls!','Thanks, same to you!','Gleichfalls sagt man auf gute Wünsche. Auf Danke sagt man: Gern geschehen!','Gleichfalls answers good wishes. Danke gets: Gern geschehen!']),
+   I('Wie ist deine Handynummer?','What is your cell number?',
+    ['Null eins sieben sechs, drei vier fünf, zwei acht.','0176 345 28'],
+    ['Ich habe ein Handy.','I have a cell phone.','Jonas möchte die Nummer wissen, nicht nur, ob du ein Handy hast.','Jonas wants the number, not just whether you have a phone.'],
+    ['Im zweiten Stock.','On the second floor.','Er fragt nach der Telefonnummer, nicht nach der Wohnung.','He asks for your phone number, not your apartment.'])],
+ c:[I('Ciao, bis bald!','Bye, see you soon!',
+    ['Ciao, bis bald!','Bye, see you soon!'],
+    ['Herzlich willkommen!','Welcome!','Jonas geht. Zum Abschied: Ciao, bis bald! oder Tschüss!','Jonas is leaving. Say Ciao, bis bald! or Tschüss!'],
+    ['Auf Wiedersehen, Herr Jonas!','Goodbye, Mr. Jonas!','Jonas sagt du. Mit dem Vornamen sagt man kein Herr.','Jonas uses du. No Herr with a first name.']),
+   I('Gute Nacht, ich gehe jetzt schlafen.','Good night, I am going to bed now.',
+    ['Gute Nacht! Schlaf gut.','Good night! Sleep well.'],
+    ['Schlafen Sie gut, Herr Jonas.','Sleep well, Mr. Jonas. (formal)','Jonas sagt du: Schlaf gut!','Jonas uses du: Schlaf gut!'],
+    ['Guten Abend!','Good evening!','Guten Abend sagt man zur Begrüßung. Vor dem Schlafen: Gute Nacht!','Guten Abend is a greeting. Before bed: Gute Nacht!'])]
+}};
+
+/* ---------- drawn fallback faces ---------- */
+const LOOK={
+ yilmaz:{bg:'#d6e8f7',skin:'#d9a57c',hair:'#3d322c',shirt:'#7fa8d1',hs:'short',x:'mous'},
+ max:{bg:'#f5ebc2',skin:'#f6d2b5',hair:'#c98f45',shirt:'#f3c969',hs:'mop',x:'freck',kid:1},
+ lena:{bg:'#e4daf3',skin:'#f1c9a5',hair:'#8a5a3b',shirt:'#b9a4dd',hs:'long',x:'ear'},
+ schmidt:{bg:'#f8dbe5',skin:'#f3d3bd',hair:'#e9e5dd',shirt:'#e7a3b9',hs:'bun',x:'glasses'},
+ nguyen:{bg:'#d7eed9',skin:'#ecc7a2',hair:'#2d2626',shirt:'#ffffff',hs:'bob',x:'steth'},
+ jonas:{bg:'#f9d7ca',skin:'#e6b48a',hair:'#5a4030',shirt:'#9fc6e8',hs:'curly',x:'beanie'}
+};
+const INK='#4a453f',SW=`stroke="${INK}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"`;
+function avatar(k,crop){
+  const L=LOOK[k],y=L.kid?72:62,r=L.kid?25:24,cx=60;
+  let back='',front='',xtra='';
+  if(L.hs==='long')back=`<path d="M${cx-r-3} ${y} Q${cx-r-6} ${y+48} ${cx-r+2} ${y+56} H${cx+r-2} Q${cx+r+6} ${y+48} ${cx+r+3} ${y}Z" fill="${L.hair}" ${SW}/>`;
+  if(L.hs==='bob')back=`<path d="M${cx-r-4} ${y-4} Q${cx-r-6} ${y+22} ${cx-r+2} ${y+24} H${cx+r-2} Q${cx+r+6} ${y+22} ${cx+r+4} ${y-4}Z" fill="${L.hair}" ${SW}/>`;
+  const cap=`M${cx-r} ${y-2} Q${cx-r} ${y-r-4} ${cx} ${y-r-4} Q${cx+r} ${y-r-4} ${cx+r} ${y-2} Q${cx+r-6} ${y-14} ${cx} ${y-15} Q${cx-r+6} ${y-14} ${cx-r} ${y-2}Z`;
+  if(L.hs==='short'||L.hs==='long'||L.hs==='bob')front=`<path d="${cap}" fill="${L.hair}" ${SW}/>`;
+  if(L.hs==='bob')front+=`<path d="M${cx-r} ${y-2} Q${cx-r-1} ${y+12} ${cx-r+4} ${y+18}" fill="none" ${SW}/>`;
+  if(L.hs==='bun')front=`<circle cx="${cx}" cy="${y-r-6}" r="10" fill="${L.hair}" ${SW}/><path d="${cap}" fill="${L.hair}" ${SW}/>`;
+  if(L.hs==='mop')front=`<path d="M${cx-r-1} ${y+2} Q${cx-r-4} ${y-r} ${cx-8} ${y-r-5} Q${cx+2} ${y-r-11} ${cx+10} ${y-r-4} Q${cx+r+5} ${y-r} ${cx+r+1} ${y+2} Q${cx+r-3} ${y-9} ${cx+12} ${y-12} Q${cx+8} ${y-6} ${cx+2} ${y-13} Q${cx-4} ${y-7} ${cx-9} ${y-13} Q${cx-16} ${y-8} ${cx-r-1} ${y+2}Z" fill="${L.hair}" ${SW}/><path d="M${cx-4} ${y-r-6} q4-6 9-3" fill="none" ${SW}/>`;
+  if(L.hs==='curly')front=[-20,-10,0,10,20].map((d,i)=>`<circle cx="${cx+d}" cy="${y-r+4-(i%2)*3}" r="9" fill="${L.hair}" ${SW}/>`).join('');
+  if(L.x==='beanie')front+=`<path d="M${cx-r-1} ${y-6} Q${cx-r} ${y-r-12} ${cx} ${y-r-12} Q${cx+r} ${y-r-12} ${cx+r+1} ${y-6}Z" fill="#f6b9a4" ${SW}/><rect x="${cx-r-3}" y="${y-10}" width="${2*r+6}" height="9" rx="4" fill="#f9d7ca" ${SW}/><circle cx="${cx}" cy="${y-r-14}" r="5" fill="#fffdf7" ${SW}/>`;
+  const ey=y+2;
+  if(L.x==='glasses')xtra+=`<circle cx="${cx-9}" cy="${ey}" r="6" fill="rgba(255,255,255,.35)" ${SW}/><circle cx="${cx+9}" cy="${ey}" r="6" fill="rgba(255,255,255,.35)" ${SW}/><path d="M${cx-3} ${ey}h6" ${SW}/>`;
+  if(L.x==='mous')xtra+=`<path d="M${cx-9} ${y+12} Q${cx} ${y+7} ${cx+9} ${y+12} Q${cx} ${y+11} ${cx-9} ${y+12}Z" fill="${L.hair}" ${SW}/>`;
+  if(L.x==='freck')xtra+=[-14,-11,11,14].map((d,i)=>`<circle cx="${cx+d}" cy="${y+8+(i%2)*2}" r="1.1" fill="#c98f5e"/>`).join('');
+  if(L.x==='ear')xtra+=`<circle cx="${cx-r+1}" cy="${y+9}" r="2.2" fill="#f3e2a0" ${SW}/><circle cx="${cx+r-1}" cy="${y+9}" r="2.2" fill="#f3e2a0" ${SW}/>`;
+  const by=L.kid?y+r+6:y+r+8, bw=L.kid?38:46;
+  let body=`<path d="M${cx-bw} 162 Q${cx-bw} ${by+6} ${cx-14} ${by} H${cx+14} Q${cx+bw} ${by+6} ${cx+bw} 162Z" fill="${L.shirt}" ${SW}/>`;
+  if(L.x==='steth')body+=`<path d="M${cx-8} ${by} L${cx} ${by+22} L${cx+8} ${by}" fill="#c5e6c8" ${SW}/><path d="M${cx-14} ${by} L${cx-6} ${by+40} M${cx+14} ${by} L${cx+6} ${by+40}" fill="none" ${SW}/><path d="M${cx-18} ${by+2} Q${cx-24} ${by+30} ${cx-8} ${by+34}" fill="none" stroke="#7fa8d1" stroke-width="3" stroke-linecap="round"/><circle cx="${cx-6}" cy="${by+35}" r="3.5" fill="#cfd8e3" ${SW}/>`;
+  if(L.x==='mous')body+=`<path d="M${cx-14} ${by} L${cx} ${by+14} L${cx+14} ${by}" fill="#e8f2fb" ${SW}/><rect x="${cx+14}" y="${by+20}" width="14" height="10" rx="2" fill="#e8f2fb" ${SW}/>`;
+  if(L.x==='glasses')body+=[-8,-3,3,8].map(d=>`<circle cx="${cx+d}" cy="${by+5+Math.abs(d)*.3}" r="2" fill="#fffdf7" stroke="${INK}" stroke-width="1"/>`).join('');
+  if(L.kid)body+=`<path d="M${cx-bw+4} ${by+26} H${cx+bw-4}" stroke="#fffdf7" stroke-width="6"/>`;
+  const face=`<circle cx="${cx-r+1}" cy="${y+3}" r="5" fill="${L.skin}" ${SW}/><circle cx="${cx+r-1}" cy="${y+3}" r="5" fill="${L.skin}" ${SW}/><circle cx="${cx}" cy="${y}" r="${r}" fill="${L.skin}" ${SW}/>
+   <circle cx="${cx-9}" cy="${ey}" r="2.6" fill="${INK}"/><circle cx="${cx+9}" cy="${ey}" r="2.6" fill="${INK}"/><circle cx="${cx-8.2}" cy="${ey-1}" r=".9" fill="#fff"/><circle cx="${cx+9.8}" cy="${ey-1}" r=".9" fill="#fff"/>
+   <path d="M${cx-13} ${ey-7} q4-3 8 0 M${cx+5} ${ey-7} q4-3 8 0" fill="none" stroke="${INK}" stroke-width="2" stroke-linecap="round"/>
+   <circle cx="${cx-15}" cy="${y+10}" r="4.5" fill="#f6b9a4" opacity=".55"/><circle cx="${cx+15}" cy="${y+10}" r="4.5" fill="#f6b9a4" opacity=".55"/>
+   <path d="M${cx-1} ${ey+3} q2 4 0 5" fill="none" stroke="${INK}" stroke-width="1.8" stroke-linecap="round"/>
+   <path class="m1" d="M${cx-8} ${y+14} Q${cx} ${y+21} ${cx+8} ${y+14}" fill="#fff" ${SW}/>
+   <path class="m2" d="M${cx-7} ${y+16} q3.5-3 7 0 t7 0" fill="none" ${SW}/>`;
+  const vb=crop?(L.kid?'16 30 88 88':'16 18 88 88'):'0 0 120 160';
+  return `<svg viewBox="${vb}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="-10" y="-10" width="140" height="180" fill="${L.bg}"/><circle cx="60" cy="${y-6}" r="58" fill="#fff" opacity=".35"/>${back}${body}<rect x="${cx-7}" y="${y+r-6}" width="14" height="12" fill="${L.skin}" ${SW}/>${face}${front}${xtra}</svg>`;
+}
+const FOX=`<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#fde5db"/><path d="M10 10 L24 24 H40 L54 10 L52 36 Q50 54 32 58 Q14 54 12 36Z" fill="#f2a582" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 38 Q22 35 32 46 Q42 35 50 38 Q47 53 32 56 Q17 53 14 38Z" fill="#fffdf7"/><path d="M15 16 L22 25 L17 28Z M49 16 L42 25 L47 28Z" fill="#fffdf7"/><circle cx="24" cy="34" r="2.8" fill="${INK}"/><circle cx="40" cy="34" r="2.8" fill="${INK}"/><path d="M29 44 h6 l-3 3.5z" fill="${INK}"/><circle cx="19" cy="41" r="3" fill="#f6b9a4" opacity=".7"/><circle cx="45" cy="41" r="3" fill="#f6b9a4" opacity=".7"/></svg>`;
+
+function pic(k,crop){return `<span class="pic" data-k="${k}" data-c="${crop?1:0}">${IMG_OK[k]?`<img src="${IMG_OK[k]}" alt="">`:avatar(k,crop)}</span>`}
+function upgrade(k){
+  if(k==='tuer'){document.documentElement.style.setProperty('--door-img',`url("${IMG_OK[k]}")`);$('#door').classList.add('photo');return}
+  if(k.startsWith('treppenhaus')){setBg();return}
+  document.querySelectorAll(`.pic[data-k="${k}"]`).forEach(el=>el.innerHTML=`<img src="${IMG_OK[k]}" alt="">`);
+}
+function loadImgs(){IMG_KEYS.forEach(k=>{const im=new Image();im.onload=()=>{IMG_OK[k]=im.src;upgrade(k)};im.onerror=()=>{};im.src=IMG_DIR+k+'.webp'})}
+function setBg(){
+  const tall=innerHeight>innerWidth;
+  const k=tall?(IMG_OK['treppenhaus-hoch']?'treppenhaus-hoch':IMG_OK.treppenhaus?'treppenhaus':null):(IMG_OK.treppenhaus?'treppenhaus':IMG_OK['treppenhaus-hoch']?'treppenhaus-hoch':null);
+  if(!k)return;
+  $('#photo').style.backgroundImage=`url("${IMG_OK[k]}")`;document.body.classList.add('has-bg');
+}
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const embedded=window.parent!==window;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let sound=true,actx;
+function beep(f=520,d=.08,type='sine',v=.06,delay=0){if(!sound)return;try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();const t=actx.currentTime+delay,o=actx.createOscillator(),g=actx.createGain();o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(actx.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+const plink=k=>{const base=[523,587,659,784,880,988,1047][Math.min(k,6)];beep(base,.14,'triangle',.07);beep(base*1.5,.12,'sine',.04,.06);beep(base*2,.1,'sine',.025,.12)};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const best=()=>{try{return +localStorage.getItem('fds:nachbar:best')||0}catch(e){return 0}};
+const setBest=v=>{try{localStorage.setItem('fds:nachbar:best',v)}catch(e){}};
+const E=t=>`<span class="e">${t}</span>`;
+const ini=n=>{const m=/^Spieler (\d)$/.exec(n);return m?m[1]:(n[0]||'?').toUpperCase()};
+
+/* ---------- state ---------- */
+const TIME=10;
+const DIFF={leicht:{t:[5.5,9.5],acc:.65},mittel:{t:[3.6,7.4],acc:.8},schwer:{t:[2.3,5.2],acc:.92}};
+const PCOL=[['#9cc8ee','#5e97c9'],['#f3a9bd','#d5728f']];
+let G=null,gid=0,mode='cpu',diff='mittel',names=['Spieler 1','Spieler 2'];
+{const q=new URLSearchParams(location.search).get('name');if(q)names[0]=q.slice(0,14)}
+
+/* a pause-aware timeout that is dropped when a new game starts */
+function wait(ms){const g=gid;return new Promise(res=>{let left=ms,last=performance.now();const tick=now=>{if(g!==gid)return;if(!(G&&G.paused))left-=now-last;last=now;if(left<=0)res();else requestAnimationFrame(tick)};requestAnimationFrame(tick)})}
+
+function layout(){
+  const r=$('#stage').getBoundingClientRect(),W=r.width,H=r.height,root=document.documentElement.style;
+  if(W<761){
+    const dh=Math.max(150,Math.min(H*.56,380,(W-150)/.56));
+    root.setProperty('--dh',dh+'px');root.setProperty('--dcx',W/2+'px');
+    root.setProperty('--bl','14px');root.setProperty('--bw',(W-28)+'px');root.setProperty('--bt','6px');
+  }else{
+    const dh=Math.max(200,Math.min(H*.74,480)),dw=dh*.56,cx=Math.max(W*.3,dw/2+110),bl=cx+dw/2+118;
+    root.setProperty('--dh',dh+'px');root.setProperty('--dcx',cx+'px');
+    root.setProperty('--bl',bl+'px');root.setProperty('--bw',Math.min(480,W-bl-24)+'px');root.setProperty('--bt',Math.max(16,H*.12)+'px');
+  }
+  setBg();
+}
+function setAccent(k){const [a,ad,as,aw]=ACC[N[k].acc],s=document.documentElement.style;s.setProperty('--a',a);s.setProperty('--ad',ad);s.setProperty('--as',as);s.setProperty('--aw',aw)}
+function setPlayerColor(i){const s=document.documentElement.style;s.setProperty('--pc',PCOL[i][0]);s.setProperty('--pcd',PCOL[i][1])}
+
+/* ---------- HUD ---------- */
+function hud(){
+  const p=G.players;
+  $('#sc0').textContent=p[0].score;
+  $('#sc1').textContent=G.cpu?G.cpu.score:p[1].score;
+  $('#rdn').textContent=Math.max(1,G.ri+1);$('#rdt').textContent=G.rounds.length;
+}
+function setupHud(){
+  const s0=$('#s0'),s1=$('#s1');
+  s0.style.cssText=`--c:${PCOL[0][0]};--cd:${PCOL[0][1]}`;
+  $('#d0').textContent=G.cpu?'':ini(G.players[0].name);document.body.classList.toggle('duo',!G.cpu);
+  $('#n0').textContent=G.cpu?'Du':G.players[0].name;
+  if(G.cpu){s1.className='pill fox';s1.style.cssText='--cd:#e58f74';$('#d1').innerHTML=FOX;$('#n1').textContent='Fuchsi'}
+  else{s1.className='pill';s1.style.cssText=`--c:${PCOL[1][0]};--cd:${PCOL[1][1]}`;$('#d1').textContent=ini(G.players[1].name);$('#n1').textContent=G.players[1].name}
+}
+function bump(el){el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
+function banner(t,sub){const w=$('#wave');w.innerHTML=t+(sub?`<small>${sub}</small>`:'');w.classList.remove('show');void w.offsetWidth;w.classList.add('show')}
+
+/* ---------- game flow ---------- */
+function start(){
+  gid++;
+  const rounds=[];
+  ORDER.forEach((k,vi)=>['o','m','c'].forEach((part,li)=>{const pool=D[k][part];rounds.push({k,vi,li,it:pool[Math.random()*pool.length|0]})}));
+  const pl=(mode==='cpu'?[names[0]]:names).map(n=>({name:n,score:0,correct:0,n:0,streak:0,bestStreak:0,wins:0,fast:[]}));
+  G={rounds,ri:-1,players:pl,cpu:mode==='cpu'?{score:0,correct:0,wins:0}:null,wrong:[],state:'idle',el:0,paused:false,over:false,cur:0};
+  ['#startOv','#endOv','#pauseOv'].forEach(s=>$(s).classList.remove('show'));
+  $('#hint').classList.remove('show');$('#rres').classList.remove('show');$('#say').classList.remove('show');
+  $('#answers').innerHTML='';$('#answers').classList.add('wait');
+  setPlayerColor(0);setupHud();hud();layout();
+  visit(0,true);
+}
+async function visit(vi,first){
+  const k=ORDER[vi],n=N[k];
+  G.state='walk';
+  const Ld=$('#landing'),Dc=$('#deco');
+  if(!first&&!reduced){
+    const ease='cubic-bezier(.5,0,.75,.3)';
+    Ld.animate([{transform:'none',opacity:1},{transform:'translateY(75%)',opacity:0}],{duration:650,easing:ease,fill:'forwards'});
+    Dc.animate([{transform:'none'},{transform:'translateY(45%)'}],{duration:650,easing:ease,fill:'forwards'});
+    [0,.16,.32,.48].forEach((d,i)=>beep(110+i*14,.06,'triangle',.08,d));
+    await wait(650);
+  }
+  setAccent(k);
+  $('#photo').style.setProperty('--py',(100-vi*20)+'%');
+  $('#ftag').innerHTML=`${n.floor}<span class="e">${n.floorEn}</span>`;
+  $('#plate').textContent=n.plate;
+  $('#dw').classList.remove('open');
+  const who=$('#who');who.className='who';who.innerHTML=pic(k);
+  if(!reduced){
+    Ld.animate([{transform:'translateY(-55%)',opacity:0},{transform:'none',opacity:1}],{duration:800,easing:'cubic-bezier(.2,.8,.3,1)',fill:'forwards'});
+    Dc.animate([{transform:'translateY(-45%)'},{transform:'none'}],{duration:800,easing:'cubic-bezier(.2,.8,.3,1)',fill:'forwards'});
+  }
+  banner(n.floor,`${n.nm} · ${n.role}`);
+  await wait(reduced?200:900);
+  const b=$('#bell');b.classList.remove('ring');void b.offsetWidth;b.classList.add('ring');
+  beep(784,.4,'sine',.07);beep(622,.6,'sine',.07,.34);
+  await wait(800);
+  $('#dw').classList.add('open');beep(220,.25,'triangle',.03);beep(180,.3,'triangle',.025,.12);
+  await wait(reduced?100:950);
+  ask();
+}
+async function ask(){
+  G.ri++;
+  const r=G.rounds[G.ri],it=r.it,n=N[r.k],g=gid;
+  G.cur=mode==='2p'?G.ri%2:0;
+  const p=G.players[G.cur];
+  setPlayerColor(G.cur);
+  $('#s0').classList.toggle('on',G.cur===0);$('#s1').classList.toggle('on',!G.cpu&&G.cur===1);
+  $('#turnT').innerHTML=G.cpu?`Du bist dran<span class="e">your turn</span>`:`${esc(p.name)} ist dran<span class="e">${esc(p.name)}'s turn</span>`;
+  hud();
+  $('#rres').classList.remove('show');$('#hint').classList.remove('show');
+  const tm=$('#timer');tm.classList.remove('late');tm.style.setProperty('--t',1);$('#cpum').className='cpum';$('#tlab').textContent='';
+  $('#answers').classList.add('wait');
+  if(mode==='2p'&&G.ri>0)banner(esc(p.name),'ist dran · your turn');
+  /* bubble */
+  const say=$('#say');
+  if(r.li===0||!say.classList.contains('show')){say.classList.remove('show');void say.offsetWidth}
+  $('#snm').textContent=n.nm;$('#srole').innerHTML=`${n.role}<span class="e ei"> · ${n.roleEn}</span>`;
+  const ds=$('#ds');ds.textContent=n.sie?'Sie':'du';ds.classList.remove('show');
+  $('#lineEn').textContent=it.se;$('#line').textContent='';
+  say.classList.add('show');
+  if(r.li>0&&!reduced)say.animate([{transform:'scale(.97)'},{transform:'scale(1.02)'},{transform:'none'}],{duration:350});
+  beep(n.sie?440:560,.08,'sine',.04);beep(n.sie?520:660,.08,'sine',.035,.08);
+  if(reduced)$('#line').textContent=it.s;
+  else for(let i=1;i<=it.s.length;i++){$('#line').textContent=it.s.slice(0,i);await wait(16);if(g!==gid)return}
+  /* answers */
+  const opts=shuffle(it.a.map((a,i)=>({de:a[0],en:a[1],h:a[2],he:a[3],ok:i===0})));
+  G.opts=opts;
+  $('#answers').innerHTML=opts.map((o,i)=>`<button class="ans in" data-i="${i}" data-ok="${o.ok?1:0}"><span class="k">${i+1}</span>${esc(o.de)}${E(esc(o.en))}</button>`).join('');
+  $('#answers').querySelectorAll('.ans').forEach(b=>b.addEventListener('click',()=>choose(+b.dataset.i)));
+  $('#answers').classList.remove('wait');
+  if(G.cpu){const d=DIFF[diff];G.cpuT=d.t[0]+Math.random()*(d.t[1]-d.t[0]);G.cpuOk=Math.random()<d.acc}
+  G.el=0;G.cpuShown=false;G.tick=6;G.state='ask';
+}
+const ptsFor=t=>t>TIME?30:Math.round((40+60*(1-t/TIME))/5)*5;
+
+function choose(i){
+  if(!G||G.state!=='ask'||G.paused)return;
+  G.state='reveal';
+  const o=G.opts[i],t=G.el,p=G.players[G.cur],r=G.rounds[G.ri],n=N[r.k];
+  const btns=[...$('#answers').querySelectorAll('.ans')];
+  btns.forEach(b=>b.disabled=true);
+  const ci=G.opts.findIndex(x=>x.ok);
+  p.n++;
+  let pts=0;
+  if(o.ok){
+    p.streak++;p.bestStreak=Math.max(p.bestStreak,p.streak);p.correct++;p.fast.push(t);
+    pts=ptsFor(t)+(p.streak>=3?10:0);p.score+=pts;
+    btns[i].classList.add('right');btns.forEach((b,j)=>{if(j!==i)b.classList.add('dim')});
+    react(true);plink(Math.min(p.streak,6));
+    const br=btns[i].getBoundingClientRect();floatTxt(br.left+br.width/2,br.top-6,`+${pts}`,'#3f8a4c');
+    if(p.streak===3)setTimeout(()=>banner('Serie x3!','+10 Bonus pro Antwort · bonus per answer'),250);
+    if(p.streak===6)setTimeout(()=>banner('Super Nachbar!','6 richtig in Folge · 6 in a row'),250);
+  }else{
+    p.streak=0;
+    btns[i].classList.add('wrong');btns[ci].classList.add('right');btns.forEach((b,j)=>{if(j!==i&&j!==ci)b.classList.add('dim')});
+    react(false);beep(196,.22,'sawtooth',.045);beep(147,.3,'triangle',.06,.1);
+    G.wrong.push({k:r.k,s:r.it.s,se:r.it.se,pick:o,ok:G.opts[ci],who:p.name});
+  }
+  $('#ds').classList.add('show');
+  /* computer neighbor */
+  let res='',win=false;
+  if(G.cpu){
+    const cpts=G.cpuOk?ptsFor(G.cpuT):0;G.cpu.score+=cpts;if(G.cpuOk)G.cpu.correct++;
+    const mine=o.ok?ptsFor(t):0;
+    if(!G.cpuShown)showCpu();
+    if(mine>cpts){p.wins++;win=true;res=`Du warst schneller als Fuchsi!${E('You beat Fuchsi to it!')}`}
+    else if(cpts>mine){G.cpu.wins++;res=G.cpuOk?(o.ok?`Fuchsi war schneller.${E('Fuchsi was faster.')}`:`Fuchsi hatte recht: +${cpts}${E('Fuchsi got it right.')}`):''}
+    else res=o.ok?`Gleich schnell!${E('A tie!')}`:`Fuchsi lag auch falsch.${E('Fuchsi got it wrong too.')}`;
+    if(cpts)bump($('#s1'));
+  }else if(o.ok){res=`${esc(p.name)}: +${pts} in ${t.toFixed(1).replace('.',',')} s${E(`answered in ${t.toFixed(1)} seconds`)}`;win=true}
+  if(o.ok)bump(G.cur===0?$('#s0'):$('#s1'));
+  hud();
+  if(o.ok){
+    const rr=$('#rres');rr.innerHTML=res;rr.classList.toggle("won",win);if(res)rr.classList.add('show');
+    wait(1500).then(()=>{if(G.state==='reveal')advance()});
+  }else{
+    $('#htx').innerHTML=`<b>Tipp</b>${esc(o.h)}${E(esc(o.he))}${res?`<span class="cpu">${res.replace(/<span class="e">.*<\/span>/,'')}</span>`:''}`;
+    $('#hint').classList.add('show');
+    setTimeout(()=>{if(G&&G.state==='reveal')$('#next').focus({preventScroll:true})},50);
+  }
+}
+function showCpu(){
+  G.cpuShown=true;const m=$('#cpum');m.innerHTML=FOX;m.style.left=Math.max(0,(1-G.cpuT/TIME))*100+'%';m.className='cpum show';
+  $('#tlab').textContent='Fuchsi ✓';beep(990,.05,'square',.02);
+}
+function react(ok){
+  const w=$('#who');w.classList.remove('happy','huh');void w.offsetWidth;w.classList.add(ok?'happy':'huh');
+  if(ok&&!reduced){
+    const r=w.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.3,cols=['#e58f74','#e09bb3','#d9c165','#8fc495','#7fb0dc'];
+    for(let k=0;k<10;k++){const s=document.createElement('span');s.className='spark';s.textContent=k%3?'✦':'♥';s.style.color=cols[k%5];s.style.left=cx+'px';s.style.top=cy+'px';document.body.appendChild(s);
+      const a=-Math.PI/2+(Math.random()-.5)*2.6,d=60+Math.random()*70;
+      s.animate([{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:`translate(calc(-50% + ${Math.cos(a)*d}px),calc(-50% + ${Math.sin(a)*d}px)) scale(1)`,opacity:0}],{duration:900+Math.random()*300,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=()=>s.remove()}
+  }
+}
+function floatTxt(x,y,t,c){const f=document.createElement('div');f.className='ftext';f.textContent=t;f.style.left=x+'px';f.style.top=y+'px';f.style.color=c;document.body.appendChild(f);
+  f.animate([{transform:'translateY(0) scale(.6)',opacity:0},{transform:'translateY(-14px) scale(1.15)',opacity:1,offset:.25},{transform:'translateY(-60px) scale(1)',opacity:0}],{duration:1100,easing:'ease-out'}).onfinish=()=>f.remove()}
+
+async function advance(){
+  if(!G||G.state!=='reveal')return;
+  G.state='walk';
+  $('#hint').classList.remove('show');$('#rres').classList.remove('show');
+  $('#answers').classList.add('wait');
+  $('#cpum').className='cpum';$('#tlab').textContent='';$('#timer').classList.remove('late');$('#timer').style.setProperty('--t',1);
+  const r=G.rounds[G.ri];
+  if(r.li<2){await wait(250);ask();return}
+  await wait(250);
+  $('#say').classList.remove('show');
+  $('#dw').classList.remove('open');beep(150,.12,'triangle',.08,.6);beep(110,.1,'square',.03,.62);
+  await wait(reduced?200:1000);
+  if(r.vi<ORDER.length-1)visit(r.vi+1,false);else end();
+}
+
+/* ---------- timer loop ---------- */
+let last=performance.now();
+function loop(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(G&&G.state==='ask'&&!G.paused){
+    G.el+=dt;
+    const tm=$('#timer');tm.style.setProperty('--t',Math.max(0,1-G.el/TIME));
+    if(G.el>TIME&&!tm.classList.contains('late')){tm.classList.add('late');if(!G.cpu||G.cpuShown)$('#tlab').textContent='Zeit!'}
+    if(G.el>=G.tick&&G.el<TIME){beep(1200,.03,'sine',.018);G.tick++}
+    if(G.cpu&&!G.cpuShown&&G.el>=G.cpuT)showCpu();
+  }
+  requestAnimationFrame(loop);
+}
+
+/* ---------- end ---------- */
+function end(){
+  if(!G||G.over)return;
+  G.over=true;G.state='end';
+  $('#say').classList.remove('show');$('#hint').classList.remove('show');$('#rres').classList.remove('show');
+  const p=G.players,p0=p[0];
+  const xp=Math.min(100,Math.round(p0.correct*(mode==='cpu'?5.5:11)));
+  if(embedded&&xp>0)window.parent.postMessage({source:'fds-game',type:'xp',amount:xp},'*');
+  const b=best(),nb=mode==='cpu'&&p0.score>b&&p0.n>0;if(nb)setBest(p0.score);
+  const avg=a=>a.length?(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1).replace('.',','):'–';
+  let head,vs,party=false;
+  if(G.cpu){
+    const won=p0.score>G.cpu.score,tie=p0.score===G.cpu.score;party=won;
+    head=won?'Du kennst alle Nachbarn!':tie?'Unentschieden!':'Fuchsi war schneller!';
+    vs=`<div class="vs"><div class="side ${won||tie?'best':''}"><div class="av" style="background:${PCOL[0][0]}">Du</div><b>${p0.score}</b><small>Du · ${p0.correct}/${p0.n} richtig</small></div><div class="mid">vs</div><div class="side ${!won||tie?'best':''}"><div class="av">${FOX}</div><b>${G.cpu.score}</b><small>Fuchsi · ${G.cpu.correct}/${p0.n}</small></div></div>
+      <p style="font-size:14px">${won?'Gewonnen! Die Nachbarn freuen sich auf dich.':tie?'Gleich viele Punkte. Nochmal?':'Fast! Probier es gleich nochmal.'}${E(won?'You won! The neighbors look forward to seeing you.':tie?'Same score. One more time?':'So close! Try again right away.')}</p>`;
+  }else{
+    const w=p[0].score===p[1].score?-1:p[0].score>p[1].score?0:1;party=true;
+    head=w<0?'Unentschieden!':`${esc(p[w].name)} gewinnt!`;
+    vs=`<div class="vs">${[0,1].map(i=>`<div class="side ${w<0||w===i?'best':''}"><div class="av" style="background:${PCOL[i][0]}">${esc(ini(p[i].name))}</div><b>${p[i].score}</b><small>${esc(p[i].name)} · ${p[i].correct}/${p[i].n} richtig</small></div>`).join('<div class="mid">vs</div>')}</div>`;
+  }
+  const stats=`<div class="stats"><div><b>${p0.correct}/${p0.n}</b><span>richtig${E('correct')}</span></div><div><b>${p0.bestStreak}</b><span>beste Serie${E('best streak')}</span></div><div><b>${avg(p0.fast)} s</b><span>Ø Zeit${E('avg. time')}</span></div></div>`;
+  const rev=G.wrong.length?`<p style="margin-top:12px"><b style="color:var(--ink)">Wiederholen</b>${E('Review your mistakes')}</p><ul class="review">${G.wrong.map(w=>`<li><span class="av">${pic(w.k,1)}</span><div><span class="q">${esc(N[w.k].nm)}: „${esc(w.s)}“</span>${E(esc(w.se))}<div class="bad">${esc(w.pick.de)}</div><div class="good">✓ ${esc(w.ok.de)}</div><span class="tip">${esc(w.pick.h)}${E(esc(w.pick.he))}</span>${mode==='2p'?`<span class="tip">(${esc(w.who)})</span>`:''}</div></li>`).join('')}</ul>`:`<p>Keine Fehler! Perfekte Nachbarschaft.${E('No mistakes! Perfect neighbor.')}</p>`;
+  $('#endCard').innerHTML=`<div class="faces">${ORDER.map(k=>`<span class="f" style="--c:${LOOK[k].bg}">${pic(k,1)}</span>`).join('')}</div>
+    <h1>${head}</h1>
+    ${mode==='cpu'?(nb?'<span class="newbest">Neuer Rekord! · New best!</span>':`<p>Rekord: ${Math.max(b,p0.score)} Punkte${E('Best: '+Math.max(b,p0.score)+' points')}</p>`):''}
+    ${vs}${mode==='cpu'?stats:''}
+    ${xp?`<p><b style="color:var(--ink)">+${xp} XP</b> für ${mode==='cpu'?'dich':esc(p0.name)}.${E(`+${xp} XP for ${mode==='cpu'?'you':esc(p0.name)}.`)}</p>`:''}
+    ${rev}
+    <button class="big" id="again">Nochmal!<span class="e">Play again</span></button><button class="ghost" id="menu">Zum Menü<span class="e">Back to menu</span></button>`;
+  setTimeout(()=>{$('#endOv').classList.add('show');$('#again').onclick=start;$('#menu').onclick=menu;if(party||G.wrong.length===0)confetti()},700);
+  [523,659,784,1047].forEach((f,i)=>beep(f,.2,'triangle',.06,i*.13));
+}
+function confetti(){if(reduced)return;const cols=['#bcd9f2','#f5c6d6','#c5e6c8','#f3e2a0','#f6b9a4','#d7c9ec'];for(let i=0;i<90;i++){const c=document.createElement('i');c.className='conf';c.style.cssText=`left:${Math.random()*100}vw;background:${cols[i%6]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()}s`;document.body.appendChild(c);setTimeout(()=>c.remove(),5200)}}
+
+/* ---------- start card ---------- */
+function menu(){gid++;G=null;$('#endOv').classList.remove('show');$('#pauseOv').classList.remove('show');renderStart();$('#startOv').classList.add('show')}
+function renderStart(){
+  const b=best();
+  $('#startCard').innerHTML=`<div class="faces">${ORDER.map(k=>`<span class="f" style="--c:${LOOK[k].bg}">${pic(k,1)}</span>`).join('')}</div>
+    <h1>Hallo, Nachbar!</h1>
+    <p>Die Nachbarn öffnen ihre Türen. Wer findet die passende Antwort zuerst?${E('The neighbors open their doors. Who finds the right reply first?')}</p>
+    <div class="persona"><span class="tagb"><svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="18" rx="4" fill="#f3e2a0" stroke="#4a453f" stroke-width="2"/><circle cx="11" cy="15" r="3.4" fill="#fffdf7" stroke="#4a453f" stroke-width="1.8"/><path d="M6.5 22q4.5-5 9 0M18 13h7M18 18h5" fill="none" stroke="#4a453f" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Du bist <b>Alex Costa</b> aus Brasilien, 29 Jahre alt. Du arbeitest in einem Hotel und wohnst jetzt im 2. Stock.${E('You are Alex Costa from Brazil, 29. You work in a hotel and just moved to the 2nd floor (3rd floor US).')}</span></div>
+    <div class="how"><div><b>🚪</b><span>Eine Tür geht auf.${E('A door opens.')}</span></div><div><b>💬</b><span>Wähl die passende Antwort.${E('Pick the fitting reply.')}</span></div><div><b>⏱️</b><span>Schneller = mehr Punkte.${E('Faster = more points.')}</span></div></div>
+    <p style="font-size:14px">Achtung: du oder Sie? Kinder und junge Leute duzt man, Erwachsene siezt man.${E('Watch out: du or Sie? Use du with kids and young people, Sie with other adults.')}</p>
+    <div class="seg" id="modes"><button data-m="cpu" class="${mode==='cpu'?'sel':''}">Gegen Fuchsi</button><button data-m="2p" class="${mode==='2p'?'sel':''}">2 Personen</button></div>
+    ${mode==='cpu'?`<div><div class="seg" id="diffs">${[['leicht','Leicht'],['mittel','Mittel'],['schwer','Schwer']].map(([d,t])=>`<button data-d="${d}" class="${d===diff?'sel':''}">${t}</button>`).join('')}</div>${E('How fast is Fuchsi, the computer neighbor? Easy, medium or hard.')}</div>`
+      :`<div class="names">${[0,1].map(i=>`<label><i style="background:${PCOL[i][0]};box-shadow:0 0 0 1.5px ${PCOL[i][1]}"></i><input maxlength="14" data-i="${i}" value="${esc(names[i])}" aria-label="Name ${i+1}"></label>`).join('')}</div>${E('Take turns on one device. Each player answers every other line.')}`}
+    <button class="big" id="go">Los geht's!<span class="e">Let's go!</span></button>
+    ${b?`<p style="font-size:14px;margin-top:12px">Dein Rekord: <b>${b}</b> Punkte${E('Your best: '+b+' points')}</p>`:''}`;
+  const save=()=>$('#startCard').querySelectorAll('input').forEach(i=>names[+i.dataset.i]=i.value.trim()||('Spieler '+(+i.dataset.i+1)));
+  $('#startCard').querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{save();mode=b.dataset.m;renderStart()});
+  $('#startCard').querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{diff=b.dataset.d;renderStart()});
+  $('#go').onclick=()=>{save();start()};
+}
+function pause(on){if(!G||G.over||G.state==='idle')return;G.paused=on;$('#pauseOv').classList.toggle('show',on)}
+
+/* ---------- speech (optional, if the browser has a German voice) ---------- */
+const canSpeak='speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined';
+if(!canSpeak)$('#spk').style.display='none';
+$('#spk').onclick=()=>{if(!canSpeak||!G||G.ri<0)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(G.rounds[G.ri].it.s);u.lang='de-DE';u.rate=.92;speechSynthesis.speak(u)}catch(e){}};
+
+/* ---------- input ---------- */
+addEventListener('keydown',e=>{
+  if(e.target&&e.target.tagName==='INPUT'){if(e.key==='Enter'){e.preventDefault();$('#go').click()}return}
+  if($('#startOv').classList.contains('show')){if(e.key==='Enter'){e.preventDefault();$('#go').click()}return}
+  if($('#endOv').classList.contains('show')){if(e.key==='Enter'){e.preventDefault();$('#again').click()}return}
+  if(e.key==='Escape'||e.key==='p'){pause(!(G&&G.paused));return}
+  if(!G||G.paused)return;
+  const k={1:0,2:1,3:2}[e.key];
+  if(k!==undefined&&G.state==='ask'){e.preventDefault();choose(k);return}
+  if((e.key==='Enter'||e.key===' ')&&G.state==='reveal'&&$('#hint').classList.contains('show')){e.preventDefault();advance()}
+});
+$('#next').onclick=()=>advance();
+$('#resume').onclick=()=>pause(false);
+$('#quit').onclick=()=>{pause(false);end()};
+$('#pause').onclick=()=>pause(true);
+$('#snd').onclick=e=>{sound=!sound;e.currentTarget.textContent=sound?'🔔':'🔕'};
+addEventListener('blur',()=>{if(G&&!G.over&&!G.paused&&G.state!=='idle')pause(true)});
+addEventListener('resize',layout);
+/* English help is driven by the Fuchsdeutsch app around the game */
+addEventListener('message',e=>{const m=e.data;if(m&&m.source==='fds-app'&&m.type==='en')document.body.classList.toggle('en-on',!!m.on)});
+
+setAccent('yilmaz');
+$('#who').innerHTML=pic('yilmaz');
+loadImgs();renderStart();layout();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

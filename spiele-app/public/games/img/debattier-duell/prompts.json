@@ -1,0 +1,68 @@
+[
+ {
+  "key": "studio",
+  "prompt": "Wide shot of an empty modern TV talk-show debate studio, seen from the audience at stage height. Curved stage with a glossy light wooden floor, large back wall of softly glowing rounded LED panels in lilac and peach tones, round soft-focus bokeh lights, two gentle spotlight beams from above, center of the stage completely empty with no podiums, no furniture and no people, lots of calm space in the middle and upper half. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 1536,
+  "h": 896
+ },
+ {
+  "key": "audience",
+  "prompt": "Wide horizontal shot of a cheerful, diverse TV studio audience in tiered seats facing the camera, people of different ages and backgrounds smiling and clapping, cropped at chest height, faces small and softly out of focus, warm stage light spilling over them, pastel clothing in sky blue, rose, mint, butter yellow and lilac, dim soft background. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 1536,
+  "h": 448
+ },
+ {
+  "key": "player",
+  "prompt": "Head-and-shoulders studio portrait of a friendly, confident young adult debater in their late twenties, gender-neutral smart casual look, sky-blue blazer over a white shirt, open warm smile, looking slightly to the right toward the camera, face centered in the upper half of the frame, plain soft sky-blue backdrop, flattering portrait lighting. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 640,
+  "h": 768
+ },
+ {
+  "key": "opponent",
+  "prompt": "Head-and-shoulders studio portrait of a charismatic, playfully smug fictional male debater around 55, neat silver hair, round tortoiseshell glasses, lilac tweed jacket and a rose bow tie, one eyebrow slightly raised with a competitive but good-natured grin, looking slightly to the left toward the camera, face centered in the upper half of the frame, plain soft lilac backdrop. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 640,
+  "h": 768
+ },
+ {
+  "key": "host",
+  "prompt": "Head-and-shoulders studio portrait of a cheerful fictional female TV talk-show host in her early forties, dark brown chin-length bob, butter-yellow blazer, small skin-tone headset microphone, warm welcoming smile, looking straight at the camera, face centered in the upper half of the frame, plain soft butter-yellow backdrop. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 640,
+  "h": 768
+ },
+ {
+  "key": "topic-homeoffice",
+  "prompt": "Cozy home office corner by a bright window in the morning, wooden desk with a closed laptop, a ceramic coffee mug, a notebook and a green plant, soft sunlight and light curtains, no people, no screen content. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 768,
+  "h": 512
+ },
+ {
+  "key": "topic-tempolimit",
+  "prompt": "A wide German autobahn curving gently through green rolling hills at golden hour, a few cars with soft motion blur, hazy warm sky, viewed from a slightly elevated angle, no readable road signs, no license plates. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 768,
+  "h": 512
+ },
+ {
+  "key": "topic-handy",
+  "prompt": "Bright empty school classroom with wooden desks, in the foreground a small woven basket on the teacher's desk filled with collected smartphones with dark screens, soft daylight through large windows, chalkboard blurred and blank, no people. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 768,
+  "h": 512
+ },
+ {
+  "key": "topic-viertage",
+  "prompt": "Bright modern office desk on a sunny Friday afternoon, laptop closed, sunglasses and a bicycle helmet resting on top, a backpack on the chair, large window showing a green park in sunshine, relaxed weekend feeling, no people. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 768,
+  "h": 512
+ },
+ {
+  "key": "topic-tourismus",
+  "prompt": "Picturesque European old-town square with pastel historic facades, crowded with many small, softly blurred tourists with backpacks and cameras, a guide's umbrella raised in the distance, soft afternoon light, no readable shop signs. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 768,
+  "h": 512
+ },
+ {
+  "key": "topic-fleisch",
+  "prompt": "Rustic wooden kitchen table seen from above at an angle, on one side raw steaks on a wooden cutting board, on the other side colorful fresh vegetables, herbs and legumes, warm overhead light, no packaging, no labels, no people. Photorealistic, warm soft diffused studio light, calm pastel color palette (peach, lilac, sky blue, mint, butter yellow, cream), gentle film grain, shallow depth of field, friendly inviting mood. Fictional people only, no celebrities. No text, no letters, no numbers, no logos, no signs, no watermarks.",
+  "w": 768,
+  "h": 512
+ }
+]

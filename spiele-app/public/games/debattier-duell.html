@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Debattier-Duell</title>
+<style>
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree-ext.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF}
+
+:root{
+  --ink:#4a453f; --soft:#8b847a; --paper:#fffdf7; --line:#e6dfcf; --bg:#f7f3e8;
+  --sky:#9cc8ee; --sky-d:#5e97c9; --sky-s:#e6f2fc;
+  --lilac:#d7c9ec; --lilac-d:#a28bcc; --lilac-s:#f3eefa;
+  --mint:#9fdcb9; --mint-d:#5cb388; --mint-s:#e7f7ee;
+  --peach:#f6b9a4; --peach-d:#e58f74; --peach-s:#fdeee8;
+  --butter:#f5e3a0; --butter-d:#d9c165; --rose:#f3a9bd; --rose-d:#d5728f; --rose-s:#fdebf0;
+  --gold:#f5cf5a;
+  --audh:clamp(64px,13vh,130px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:"Figtree",system-ui,sans-serif;color:var(--ink);background:var(--bg);user-select:none;line-height:1.35}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible{outline:3px solid var(--sky-d);outline-offset:2px}
+.e{display:block;font-size:.78em;font-style:italic;font-weight:400;color:var(--soft);margin-top:2px}
+body:not(.en-on) .e{display:none}
+[data-img]{background-size:cover;background-position:center;background-repeat:no-repeat}
+[data-img].has>.alt{display:none}
+mark{background:linear-gradient(transparent 55%,rgba(245,207,90,.6) 55%);color:inherit;font-weight:800;padding:0 1px}
+
+/* ---------- studio ---------- */
+#studio{position:fixed;inset:0;display:flex;flex-direction:column;overflow:hidden;overflow:clip}
+.bg{position:absolute;inset:0;z-index:0;background-color:#f3eaf4;background-position:center 35%}
+.bg .alt{position:absolute;inset:0;background:radial-gradient(70% 45% at 50% 22%,rgba(255,255,255,.85),transparent 70%),linear-gradient(180deg,#ece3f6 0%,#f6e9f1 38%,#fbeee2 62%,#f2e2cc 100%)}
+.bg .alt svg{position:absolute;left:50%;top:0;translate:-50% 0;width:max(100%,900px);height:62%}
+.bg.has::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,253,247,.25),rgba(255,253,247,.05) 40%,rgba(247,243,232,.35) 100%)}
+.floor{position:absolute;left:-30%;right:-30%;bottom:0;height:44%;z-index:1;transform-origin:50% 100%;transform:perspective(700px) rotateX(58deg);pointer-events:none;
+  background:radial-gradient(50% 60% at 50% 30%,rgba(255,255,255,.7),transparent 70%),repeating-linear-gradient(90deg,rgba(255,255,255,.28) 0 2px,transparent 2px 90px),repeating-linear-gradient(0deg,rgba(255,255,255,.28) 0 2px,transparent 2px 90px),linear-gradient(#efdcc6,#e2c8ad)}
+.bg.has~.floor{opacity:.35}
+.beam{position:absolute;top:-8%;width:34vw;height:110%;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0) 78%);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);filter:blur(8px);transform-origin:50% 0;mix-blend-mode:screen;opacity:.75;animation:sweep 11s ease-in-out infinite alternate}
+.beam.b1{left:2%;--r1:-18deg;--r2:-6deg}
+.beam.b2{right:2%;--r1:18deg;--r2:6deg;animation-delay:-5s}
+.beam.b3{left:33vw;--r1:-5deg;--r2:5deg;opacity:.45;animation-duration:15s}
+@keyframes sweep{from{transform:rotate(var(--r1))}to{transform:rotate(var(--r2))}}
+#studio.flash .beam{opacity:1;filter:blur(5px) brightness(1.2)}
+
+/* ---------- HUD ---------- */
+.hud{position:relative;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 16px 6px}
+.pill{background:rgba(255,253,247,.88);backdrop-filter:blur(6px);border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:700;box-shadow:0 4px 14px rgba(90,80,60,.08);display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:15px}
+.pill b{font-size:18px;font-variant-numeric:tabular-nums}
+.dots{display:flex;gap:4px}
+.dots i{width:12px;height:12px;border-radius:50%;background:var(--line);transition:.3s}
+.dots i.w{background:var(--gold);box-shadow:0 0 0 2px #fff,0 0 8px rgba(245,207,90,.8)}
+.dots i.l{background:var(--lilac-d)}
+.dots i.t{background:var(--soft)}
+.dots i.now{box-shadow:0 0 0 2px var(--ink)}
+.sp{flex:1}
+#streak{opacity:0;transform:scale(.6);transition:.25s cubic-bezier(.2,1.6,.4,1)}
+#streak.on{opacity:1;transform:none;background:linear-gradient(120deg,#ffe08a,#ffb98f,#f6a9c6);border-color:transparent}
+.iconbtn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:rgba(255,253,247,.88);border:1.5px solid var(--line);flex:none}
+
+/* ---------- applause meter ---------- */
+.meter{position:relative;z-index:6;width:min(760px,calc(100% - 32px));margin:2px auto 0;display:flex;align-items:center;gap:10px}
+.mside{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;min-width:64px}
+.mside.r{justify-content:flex-end;text-align:right}
+.mside .pct{font-variant-numeric:tabular-nums;font-size:16px}
+.mini{width:30px;height:30px;border-radius:50%;flex:none;border:2px solid #fff;box-shadow:0 2px 6px rgba(90,80,60,.2);overflow:hidden;background-position:center 18%}
+.mini .alt,.por .alt,.hostpic .alt{width:100%;height:100%;display:block}
+.track{position:relative;flex:1;height:22px;border-radius:999px;background:linear-gradient(180deg,#ddd0ef,var(--lilac));border:2.5px solid #fff;box-shadow:0 6px 16px -6px rgba(90,80,60,.35),inset 0 2px 4px rgba(0,0,0,.08)}
+.track .fill{position:absolute;left:0;top:0;bottom:0;width:50%;border-radius:999px 0 0 999px;background:linear-gradient(180deg,#bfdcf5,var(--sky));transition:width .8s cubic-bezier(.3,1.4,.5,1)}
+.track .mid{position:absolute;left:50%;top:-6px;bottom:-6px;width:2px;background:rgba(74,69,63,.35);border-radius:2px}
+.track .knob{position:absolute;top:50%;left:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:var(--paper);border:2.5px solid var(--ink);display:grid;place-items:center;font-size:19px;box-shadow:0 6px 12px rgba(90,80,60,.3);transition:left .8s cubic-bezier(.3,1.4,.5,1)}
+.track .knob.pop{animation:kpop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes kpop{40%{transform:scale(1.3) rotate(-12deg)}}
+.mlabel .e{display:inline;margin-left:4px}
+.mlabel{position:absolute;left:50%;top:100%;translate:-50% 0;margin-top:4px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+
+/* ---------- stage ---------- */
+.stage{position:relative;z-index:4;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:end;gap:clamp(8px,3vw,40px);width:min(1120px,100%);margin:22px auto 0;padding:0 16px}
+.pod{display:flex;flex-direction:column;align-items:center;width:clamp(88px,17vw,190px);position:relative}
+.por{position:relative;width:clamp(64px,min(11.5vw,15vh),138px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:4px solid #fff;background-color:var(--s);background-position:center 18%;box-shadow:0 0 0 3px var(--c),0 14px 26px -10px rgba(70,60,50,.45);transition:transform .3s,box-shadow .3s}
+.pod.talk .por{box-shadow:0 0 0 4px var(--d),0 0 0 10px rgba(255,255,255,.6),0 0 30px 8px var(--c)}
+.pod.yay .por{animation:yay .7s cubic-bezier(.2,1.4,.4,1)}
+@keyframes yay{35%{transform:translateY(-12px) scale(1.08) rotate(-5deg)}70%{transform:translateY(0) scale(.97) rotate(3deg)}}
+.pod.ugh .por{animation:ugh .5s}
+@keyframes ugh{20%{transform:translateX(-7px) rotate(-6deg)}50%{transform:translateX(6px) rotate(4deg)}80%{transform:translateX(-3px)}}
+.plate{position:relative;margin-top:-14px;z-index:2;background:var(--paper);border:2px solid var(--c);border-radius:12px;padding:3px 10px;font-weight:800;font-size:clamp(12px,1.5vw,15px);box-shadow:0 4px 10px rgba(90,80,60,.15);white-space:nowrap;text-align:center}
+.plate small{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--d);line-height:1.1}
+.desk{position:relative;width:84%;height:clamp(34px,7vh,72px);margin-top:-2px;clip-path:polygon(6% 0,94% 0,100% 100%,0 100%);border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#fffdf7 0,#f2ebdc 60%,#e3d8c2 100%);box-shadow:0 18px 24px -14px rgba(70,60,50,.55),inset 0 -6px 0 rgba(0,0,0,.05);overflow:hidden}
+.desk::before{content:"";position:absolute;left:12%;right:12%;top:38%;height:5px;border-radius:5px;background:var(--c);box-shadow:0 0 12px 2px var(--c)}
+.desk::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.7) 45%,transparent 60%);transform:translateX(-100%);animation:gloss 6s ease-in-out infinite}
+@keyframes gloss{60%,100%{transform:translateX(100%)}}
+.pod.me{--c:var(--sky);--d:var(--sky-d);--s:var(--sky-s)}
+.pod.cpu{--c:var(--lilac);--d:var(--lilac-d);--s:var(--lilac-s)}
+.screen{align-self:center;position:relative;background:rgba(255,253,247,.9);backdrop-filter:blur(6px);border:1.5px solid var(--line);border-radius:22px;padding:10px 14px;box-shadow:0 18px 40px -18px rgba(90,70,60,.45);display:flex;align-items:center;gap:12px;min-width:0;transition:transform .5s}
+.screen::before{content:"LIVE";position:absolute;top:-10px;left:16px;background:var(--rose-d);color:#fff;font-size:10px;font-weight:800;letter-spacing:.14em;padding:2px 8px;border-radius:999px;box-shadow:0 0 0 3px var(--paper)}
+.screen::after{content:"";position:absolute;top:-6px;left:9px;width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.4s infinite;z-index:1}
+@keyframes blink{50%{opacity:.2}}
+.thumb{flex:none;width:clamp(54px,7vw,84px);aspect-ratio:1;border-radius:16px;background-color:var(--butter);display:grid;place-items:center;font-size:30px;box-shadow:inset 0 0 0 3px rgba(255,255,255,.7)}
+.screen .q{font-weight:800;font-size:clamp(14px,1.9vw,21px);line-height:1.22}
+.screen .kick{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:2px}
+.screen.new{animation:scr .7s cubic-bezier(.2,1.2,.4,1)}
+@keyframes scr{from{transform:perspective(700px) rotateX(-80deg);opacity:0}}
+
+/* ---------- arena ---------- */
+.arena{position:relative;z-index:5;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 16px calc(var(--audh)*.7);overflow-y:auto;overflow-x:hidden}
+.arena{justify-content:flex-start}
+.arena>*{width:min(640px,100%);flex:none}
+.arena>:first-child{margin-top:auto}
+.arena>:last-child{margin-bottom:auto}
+#oops{min-height:66px}
+.tag{display:inline-flex;align-self:center;width:auto!important;gap:6px;align-items:center;background:rgba(255,253,247,.9);border:1.5px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-bottom:10px;box-shadow:0 4px 12px rgba(90,80,60,.08)}
+.tag .e{display:inline;margin:0 0 0 4px;text-transform:none;letter-spacing:0}
+body:not(.en-on) .tag .e{display:none}
+
+/* sort phase */
+.deck{position:relative;min-height:150px;display:grid;place-items:center;perspective:1000px}
+.acard{position:relative;width:min(480px,100%);background:linear-gradient(180deg,#fff,#fffaf0);border:2px solid var(--line);border-radius:22px;padding:18px 20px 24px;text-align:center;font-weight:700;font-size:clamp(18px,2.3vw,23px);line-height:1.3;box-shadow:0 26px 40px -22px rgba(70,60,50,.55),0 2px 0 #fff inset;touch-action:pan-y;cursor:grab;will-change:transform;animation:cardin .55s cubic-bezier(.2,1.1,.3,1)}
+@keyframes cardin{from{transform:translateY(-70px) rotateX(60deg) scale(.7);opacity:0}}
+.acard .e{font-size:.7em}
+.acard .num{position:absolute;top:-11px;left:50%;translate:-50% 0;background:var(--ink);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.08em;padding:2px 10px;border-radius:999px}
+.acard .quote{position:absolute;top:6px;left:12px;font-size:44px;line-height:1;color:var(--butter-d);opacity:.55;font-family:Georgia,serif}
+.tbar{position:absolute;left:16px;right:16px;bottom:9px;height:6px;border-radius:6px;background:var(--line);overflow:hidden}
+.tbar i{display:block;height:100%;width:100%;transform-origin:0 50%;border-radius:6px;background:linear-gradient(90deg,var(--peach-d),var(--butter-d),var(--mint-d))}
+.acard.lean-L{box-shadow:-18px 0 0 -8px var(--lc),0 26px 40px -22px rgba(70,60,50,.55)}
+.acard.lean-R{box-shadow:18px 0 0 -8px var(--rc),0 26px 40px -22px rgba(70,60,50,.55)}
+.sbins{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.sbin{position:relative;padding:12px 10px 13px;border-radius:20px;background:linear-gradient(180deg,var(--s),var(--c));border:2.5px solid var(--d);box-shadow:0 6px 0 var(--d),0 14px 20px -10px rgba(70,60,50,.4);font-weight:800;font-size:clamp(17px,2.2vw,21px);transition:transform .12s,box-shadow .12s;text-align:center}
+.sbin small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--d);opacity:.95}
+.sbin .k{position:absolute;top:8px;font-size:11px;font-weight:800;color:var(--d);background:rgba(255,255,255,.8);border-radius:999px;padding:1px 7px}
+.sbin.L .k{left:10px}.sbin.R .k{right:10px}
+.sbin:hover{transform:translateY(-2px)}
+.sbin:active,.sbin.press{transform:translateY(4px);box-shadow:0 2px 0 var(--d)}
+.sbin.pro{--c:var(--mint);--d:var(--mint-d);--s:var(--mint-s)}
+.sbin.con{--c:var(--peach);--d:var(--peach-d);--s:var(--peach-s)}
+.sbin.yum{animation:yum .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes yum{30%{transform:scale(1.07,.92)}60%{transform:scale(.97,1.05) translateY(-5px)}}
+.sbin.nope{animation:ugh .45s}
+.swipehint{text-align:center;font-size:12.5px;color:var(--soft);margin-top:10px;font-weight:600}
+.oops{margin-top:10px;background:var(--paper);border:2px solid var(--rose-d);border-radius:16px;padding:8px 14px;text-align:center;font-size:14.5px;animation:pop .3s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+
+/* duel phase */
+.bub{position:relative;background:var(--paper);border:2.5px solid var(--lilac-d);border-radius:22px;padding:14px 18px 14px;box-shadow:0 20px 34px -20px rgba(70,60,50,.55);font-size:clamp(16.5px,2.1vw,20px);font-weight:700;min-height:64px;animation:pop .35s cubic-bezier(.3,1.5,.5,1)}
+.bub::after{content:"";position:absolute;top:-14px;right:42px;border:12px solid transparent;border-bottom:14px solid var(--lilac-d);border-top:0}
+.bub::before{content:"";position:absolute;top:-9px;right:45px;border:9px solid transparent;border-bottom:11px solid var(--paper);border-top:0;z-index:1}
+.bub .who{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac-d);margin-bottom:3px}
+.bub .e{font-size:.78em}
+.typing{display:inline-flex;gap:5px;padding:8px 0}
+.typing i{width:8px;height:8px;border-radius:50%;background:var(--lilac-d);animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{40%{transform:translateY(-6px);opacity:.5}}
+.dbar{position:relative;height:7px;border-radius:7px;background:rgba(230,223,207,.9);overflow:hidden;margin:12px 4px 2px}
+.dbar i{display:block;height:100%;transform-origin:0 50%;background:linear-gradient(90deg,var(--peach-d),var(--butter-d),var(--sky-d))}
+.dlabel{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);font-weight:700;padding:0 4px}
+.opts{display:grid;gap:9px;margin-top:10px}
+.opt{position:relative;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:11px 14px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);font-size:clamp(15px,1.8vw,17px);font-weight:600;transition:transform .15s,border-color .15s,opacity .3s,box-shadow .15s;animation:optin .45s both}
+.opt:nth-child(2){animation-delay:.08s}.opt:nth-child(3){animation-delay:.16s}
+@keyframes optin{from{opacity:0;transform:translateY(14px)}}
+.opt .l{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--sky-s);color:var(--sky-d);font-weight:800;font-size:14px;border:2px solid var(--sky)}
+.opt:hover:not(:disabled){border-color:var(--sky-d);transform:translateY(-2px)}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--mint-s);border-color:var(--mint-d);box-shadow:0 4px 0 var(--mint-d)}
+.opt.right .l{background:var(--mint-d);border-color:var(--mint-d);color:#fff}
+.opt.wrong{background:var(--rose-s);border-color:var(--rose-d);box-shadow:0 4px 0 var(--rose-d);animation:ugh .45s}
+.opt.wrong .l{background:var(--rose-d);border-color:var(--rose-d);color:#fff}
+.opt.fade{opacity:.35}
+.opt.gone{display:none}
+.fbx{margin-top:10px;border-radius:18px;padding:11px 16px;font-size:15px;animation:pop .3s cubic-bezier(.3,1.5,.5,1);box-shadow:0 10px 20px -14px rgba(70,60,50,.5)}
+.fbx.good{background:var(--mint-s);border:2px solid var(--mint)}
+.fbx.bad{background:var(--rose-s);border:2px solid var(--rose)}
+.fbx b.h{font-size:17px}
+.fbx .rm{display:inline-block;margin-top:6px;background:#fff;border-radius:10px;padding:3px 10px;font-weight:700;font-size:14px}
+.row2{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.row2 .next{margin:8px 0 0 auto}
+.next{display:block;margin:12px auto 0;padding:11px 26px;border-radius:16px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;box-shadow:0 5px 0 #2f2b27;transition:.12s;animation:pop .3s .15s both}
+.next:hover{transform:translateY(-2px)}
+.next:active{transform:translateY(3px);box-shadow:0 1px 0 #2f2b27}
+.next .e{color:#d9d2c6;display:inline;margin-left:6px}
+body:not(.en-on) .next .e{display:none}
+
+/* connect phase */
+.sent{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:18px 20px;font-size:clamp(18px,2.3vw,23px);font-weight:700;line-height:1.7;text-align:center;box-shadow:0 22px 36px -22px rgba(70,60,50,.55);animation:pop .35s cubic-bezier(.3,1.5,.5,1)}
+.sent .e{line-height:1.3;margin-top:6px;font-size:.68em}
+.gap{display:inline-block;min-width:4.2em;padding:0 10px;border-radius:10px;background:var(--butter);border-bottom:3px solid var(--butter-d);color:transparent;line-height:1.45;transition:background .3s}
+.gap.fill{color:var(--ink);animation:drop .45s cubic-bezier(.2,1.6,.4,1)}
+.gap.ok{background:var(--mint);border-color:var(--mint-d)}
+@keyframes drop{from{transform:translateY(-24px) scale(1.3);opacity:0}}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.chip{padding:13px 8px;border-radius:18px;background:#fff;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);font-weight:800;font-size:clamp(15px,1.9vw,18px);transition:.15s;animation:optin .45s both;position:relative}
+.chip:nth-child(2){animation-delay:.08s}.chip:nth-child(3){animation-delay:.16s}
+.chip small{position:absolute;top:4px;left:8px;font-size:10px;color:var(--soft)}
+.chip:hover:not(:disabled){border-color:var(--butter-d);transform:translateY(-2px)}
+.chip.right{background:var(--mint-s);border-color:var(--mint-d);box-shadow:0 4px 0 var(--mint-d)}
+.chip.wrong{background:var(--rose-s);border-color:var(--rose-d);box-shadow:0 4px 0 var(--rose-d);animation:ugh .45s}
+.chip:disabled{cursor:default}
+
+/* ---------- audience ---------- */
+.aud{position:absolute;left:0;right:0;bottom:0;height:var(--audh);z-index:3;pointer-events:none;background-position:center 30%}
+.aud::before{content:"";position:absolute;left:0;right:0;top:-40px;height:40px;background:linear-gradient(transparent,rgba(247,243,232,.0))}
+.aud.has{-webkit-mask-image:linear-gradient(transparent,#000 35%);mask-image:linear-gradient(transparent,#000 35%)}
+.aud .alt{position:absolute;inset:0;width:100%;height:100%}
+.aud .p{transform-box:fill-box;transform-origin:50% 100%}
+.aud.cheer .p{animation:hop .36s ease-in-out 4 alternate}
+.aud.cheer.has{animation:audhop .36s ease-in-out 4 alternate}
+@keyframes hop{to{transform:translateY(-7px)}}
+@keyframes audhop{to{transform:translateY(-4px) scale(1.01)}}
+.aud.boo{filter:saturate(.4) brightness(.97)}
+.aud .arm{opacity:0;transition:opacity .2s}
+.aud.cheer .arm{opacity:1}
+.fx{position:absolute;z-index:7;pointer-events:none;font-size:26px;will-change:transform}
+.ftext{position:absolute;z-index:8;pointer-events:none;font:800 24px/1 "Figtree",system-ui,sans-serif;white-space:nowrap;translate:-50% 0;text-shadow:0 2px 0 #fff,0 0 10px #fff}
+
+/* ---------- banner ---------- */
+.wave{position:fixed;left:50%;top:40%;translate:-50% -50%;z-index:9;pointer-events:none;opacity:0;text-align:center;width:min(92vw,700px)}
+.wave .in{display:inline-block;background:var(--paper);border:2.5px solid var(--ink);border-radius:22px;padding:14px 26px;box-shadow:0 8px 0 var(--ink),0 30px 50px -20px rgba(70,60,50,.5);font:800 clamp(26px,5vw,44px)/1.05 "Figtree",system-ui,sans-serif}
+.wave small{display:block;font:700 15px/1.4 "Figtree",system-ui,sans-serif;color:var(--soft);margin-top:6px}
+.wave.show{animation:wave 1.9s cubic-bezier(.2,1.2,.4,1) forwards}
+@keyframes wave{0%{opacity:0;transform:scale(.4) rotate(-6deg)}18%{opacity:1;transform:scale(1.05) rotate(1deg)}28%{transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+
+/* ---------- panels ---------- */
+.ov{position:fixed;inset:0;display:none;place-items:center;z-index:10;padding:16px;background:rgba(247,243,232,.6);backdrop-filter:blur(5px);overflow:auto}
+.ov.show{display:grid}
+.card{position:relative;background:var(--paper);border-radius:28px;border:1.5px solid var(--line);box-shadow:0 30px 70px -20px rgba(90,80,60,.4);width:min(560px,100%);padding:24px 24px 20px;text-align:center;animation:flip .6s cubic-bezier(.2,.9,.3,1.12)}
+@keyframes flip{from{transform:perspective(1200px) rotateX(-60deg) translateY(40px);opacity:0}}
+.card h1{font:800 clamp(28px,6vw,40px)/1.05 "Figtree",system-ui,sans-serif;letter-spacing:.03em;margin:8px 0 6px;text-transform:uppercase}
+.card h2{font:800 clamp(20px,4vw,26px)/1.2 "Figtree",system-ui,sans-serif;margin:8px 0 4px}
+.card p{margin:6px 0;color:var(--soft)}
+.hero{display:flex;justify-content:center;align-items:flex-end;gap:0;margin:-4px auto 4px;height:110px}
+.hero .por{width:88px;border-width:3px}
+.hero .vs{font:900 26px/1 "Figtree",system-ui,sans-serif;color:var(--rose-d);margin:0 -6px 26px;z-index:2;background:var(--paper);border-radius:50%;width:46px;height:46px;display:grid;place-items:center;box-shadow:0 4px 12px rgba(90,80,60,.2);animation:vs 2s ease-in-out infinite}
+@keyframes vs{50%{transform:scale(1.12) rotate(-8deg)}}
+.hero .pod{width:auto}
+.hostpic{width:64px;height:64px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 0 0 3px var(--butter-d),0 8px 16px -6px rgba(90,80,60,.4);background-color:#fbf1cc;background-position:center 18%;flex:none}
+.host{display:flex;gap:12px;align-items:center;text-align:left;background:var(--bg);border-radius:18px;padding:10px 14px;margin:12px 0}
+.host p{margin:0;color:var(--ink);font-size:15px}
+.host p b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--butter-d)}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.how div{background:var(--bg);border-radius:16px;padding:12px 8px;font-size:13.5px}
+.how b{display:block;font:800 18px/1.2 "Figtree",system-ui,sans-serif;margin:2px 0}
+.how i{font-style:normal;font-size:24px}
+.big{width:100%;padding:15px;border-radius:18px;background:var(--peach);font-weight:800;font-size:18px;box-shadow:0 5px 0 var(--peach-d);transition:.12s;margin-top:8px}
+.big:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--peach-d)}
+.big:active{transform:translateY(3px);box-shadow:0 2px 0 var(--peach-d)}
+.ghost{width:100%;padding:12px;border-radius:16px;border:1.5px solid var(--line);margin-top:10px;font-weight:700;background:#fff}
+.levels{display:flex;gap:8px;justify-content:center;margin:12px 0 4px;flex-wrap:wrap}
+.levels button{padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);font-weight:700;background:#fff;font-size:14.5px}
+.levels button.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+.levels button .e{display:inline;margin-left:4px}
+.levels button.sel .e{color:#d9d2c6}
+body:not(.en-on) .levels button .e{display:none}
+.tpic{height:150px;border-radius:20px;margin:-6px -6px 10px;background-color:var(--butter);position:relative;overflow:hidden;display:grid;place-items:center}
+.tpic .alt{font-size:64px;filter:drop-shadow(0 8px 10px rgba(90,70,40,.25))}
+.tpic .lbl{position:absolute;left:12px;top:12px;background:rgba(255,253,247,.92);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.side{display:inline-block;margin:10px 0 4px;padding:9px 20px;border-radius:16px;font-weight:800;font-size:19px;border:2.5px solid var(--d);background:var(--s);box-shadow:0 5px 0 var(--d);animation:pulse 1.6s ease-in-out infinite}
+.side.pro{--d:var(--mint-d);--s:var(--mint-s)}.side.con{--d:var(--peach-d);--s:var(--peach-s)}
+.side .e{display:block}
+@keyframes pulse{50%{transform:scale(1.05)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.stats div{background:var(--bg);border-radius:16px;padding:12px 6px}
+.stats b{display:block;font:800 28px/1.1 "Figtree",system-ui,sans-serif}
+.stats span{font-size:13px;color:var(--soft)}
+.result{display:flex;align-items:center;justify-content:center;gap:16px;margin:10px 0}
+.result .por{width:76px}
+.result .pc{font:900 34px/1 "Figtree",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.result .pc small{display:block;font-size:12px;font-weight:700;color:var(--soft);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.result .win .por{box-shadow:0 0 0 4px var(--gold),0 0 24px 6px rgba(245,207,90,.7)}
+.result .pod{width:auto}
+.review{text-align:left;max-height:220px;overflow:auto;background:var(--bg);border-radius:16px;padding:6px 14px;margin:8px 0}
+.review h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:10px 0 4px}
+.review li{margin:6px 0;list-style:none;display:flex;gap:8px;align-items:baseline}
+.review ul{margin:0;padding:0}
+.review .m{flex:none;width:18px;font-weight:800}
+.review .m.ok{color:var(--mint-d)}.review .m.no{color:var(--rose-d)}
+.review .t b{font-weight:800}
+.review .t .e{display:block}
+.newbest{display:inline-block;background:linear-gradient(120deg,#ffe08a,#ffb98f);padding:4px 14px;border-radius:999px;font-weight:800;animation:pulse 1s ease-in-out infinite}
+.trophy{position:relative;width:130px;height:130px;margin:-8px auto 0}
+.trophy .rays{position:absolute;inset:-30px;border-radius:50%;background:repeating-conic-gradient(rgba(245,207,90,.35) 0 10deg,transparent 10deg 24deg);-webkit-mask-image:radial-gradient(closest-side,#000 40%,transparent);mask-image:radial-gradient(closest-side,#000 40%,transparent);animation:spin 14s linear infinite}
+.trophy svg{position:relative;width:100%;height:100%;animation:bob 3s ease-in-out infinite;filter:drop-shadow(0 10px 12px rgba(150,110,30,.35))}
+.trophy.silver svg{filter:grayscale(1) brightness(1.15) drop-shadow(0 10px 12px rgba(90,80,60,.3))}
+.trophy.silver .rays{opacity:.3;filter:grayscale(1)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.conf{position:fixed;top:-20px;width:10px;height:16px;border-radius:3px;z-index:20;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+
+@media(max-width:600px){
+  .hud{gap:6px;padding:10px 12px 4px}.pill{padding:5px 10px;font-size:13.5px}.pill b{font-size:16px}
+  .pill .hide-s{display:none}
+  #streak{display:none}.iconbtn{width:36px;height:36px;font-size:16px}
+  .mlabel{font-size:10px}.mlabel .e{display:none}
+  .desk{display:none}.plate{margin-top:-10px}
+  .arena{padding-bottom:calc(var(--audh)*.5)}
+  .opt{padding:10px 12px;gap:10px}
+  .mside{min-width:0;font-size:12px}.mside .nm{display:none}.mini{width:26px;height:26px}
+  .stage{gap:8px;padding:0 10px;margin-top:22px}
+  .screen{padding:9px 10px;flex-direction:column;gap:6px;text-align:center}
+  .thumb{display:none}
+  .screen .q{font-size:13.5px}
+  .plate{font-size:12px;padding:2px 8px}
+  .how{gap:6px}.how div{padding:10px 4px;font-size:12px}.how b{font-size:15px}
+  .chips{gap:7px}.chip{padding:12px 4px}
+  .tpic{height:120px}
+  .card{padding:20px 18px 18px}
+}
+@media(max-height:700px){.stage{margin-top:10px}.desk{height:22px}.por{width:clamp(60px,10vw,110px)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.beam{animation:none!important}}
+</style>
+</head>
+<body class="en-on">
+<div id="studio">
+  <div class="bg" data-img="studio"><div class="alt" id="bgAlt"></div></div>
+  <div class="floor"></div>
+  <i class="beam b1"></i><i class="beam b3"></i><i class="beam b2"></i>
+
+  <div class="hud">
+    <div class="pill" title="Thema"><span>🎙️</span><span class="hide-s">Thema</span><b id="tN">1/5</b></div>
+    <div class="pill dots" id="dots" title="Ergebnisse"></div>
+    <div class="pill" title="Punkte"><span>⭐</span><b id="score">0</b></div>
+    <div class="pill" id="streak">🔥 <b id="streakN">3</b></div>
+    <div class="sp"></div>
+    <button class="iconbtn" id="snd" title="Ton an/aus">🔔</button>
+    <button class="iconbtn" id="pause" title="Pause">⏸</button>
+  </div>
+
+  <div class="meter">
+    <div class="mside"><span class="mini" data-img="player" id="miniMe"></span><span class="nm">Du</span><span class="pct" id="pMe">50 %</span></div>
+    <div class="track"><div class="fill" id="fill"></div><i class="mid"></i><div class="knob" id="knob">👏</div><div class="mlabel">Applaus-O-Meter<span class="e">applause meter</span></div></div>
+    <div class="mside r"><span class="pct" id="pCpu">50 %</span><span class="nm">Viktor</span><span class="mini" data-img="opponent" id="miniCpu"></span></div>
+  </div>
+
+  <div class="stage">
+    <div class="pod me" id="podMe"><div class="por" data-img="player" id="porMe"></div><div class="plate">Du<small id="sideMe">PRO</small></div><div class="desk"></div></div>
+    <div class="screen" id="screen"><div class="thumb" data-img="" id="thumb"><span class="alt" id="thumbAlt">🎙️</span></div><div><div class="kick" id="kick">Heute im Studio</div><div class="q" id="q">Debattier-Duell</div><span class="e" id="qe"></span></div></div>
+    <div class="pod cpu" id="podCpu"><div class="por" data-img="opponent" id="porCpu"></div><div class="plate">Viktor<small id="sideCpu">CONTRA</small></div><div class="desk"></div></div>
+  </div>
+
+  <div class="arena" id="arena"></div>
+  <div class="aud" data-img="audience" id="aud"></div>
+</div>
+<div class="wave" id="wave"></div>
+
+<div class="ov show" id="startOv"><div class="card">
+  <div class="hero"><div class="pod me"><div class="por" data-img="player" id="hMe"></div></div><div class="vs">VS</div><div class="pod cpu"><div class="por" data-img="opponent" id="hCpu"></div></div></div>
+  <h1>Debattier-Duell</h1>
+  <p>Pro oder contra? Sortier die Argumente und gewinn die Diskussion gegen Viktor Vielrede.<span class="e">For or against? Sort the arguments and win the debate against Viktor Vielrede.</span></p>
+  <div class="how">
+    <div><i>🗂️</i><b>Sortieren</b>Pro oder contra?<span class="e">Sort the arguments</span></div>
+    <div><i>⚔️</i><b>Kontern</b>Die beste Antwort<span class="e">Pick the best counter</span></div>
+    <div><i>🔗</i><b>Verbinden</b>Der richtige Konnektor<span class="e">Choose the connector</span></div>
+  </div>
+  <p style="font-size:14px">Das Publikum entscheidet: Jede gute Antwort bringt Applaus. Wer am Ende mehr Applaus hat, gewinnt das Thema.<span class="e">The audience decides: every good answer earns applause. Whoever has more applause at the end wins the topic.</span></p>
+  <div class="levels" id="lvls"><button data-n="3">Kurze Show · 3<span class="e">short</span></button><button data-n="5" class="sel">Ganze Show · 5<span class="e">full</span></button><button data-n="6">Marathon · 6<span class="e">all topics</span></button></div>
+  <button class="big" id="go">Bühne frei!<span class="e">Let's go!</span></button>
+  <p id="bestLine" style="font-size:14px;margin-top:12px"></p>
+</div></div>
+
+<div class="ov" id="topicOv"><div class="card" id="topicCard"></div></div>
+<div class="ov" id="resOv"><div class="card" id="resCard"></div></div>
+<div class="ov" id="endOv"><div class="card" id="endCard"></div></div>
+<div class="ov" id="pauseOv"><div class="card"><h1>Werbepause</h1><p>Kurz durchatmen, gleich geht es weiter.<span class="e">Commercial break. Take a breath.</span></p><button class="big" id="resume">Weiter<span class="e">Continue</span></button><button class="ghost" id="quit">Show beenden<span class="e">End the show</span></button></div></div>
+
+<script>
+/* ---------- pictures: img/debattier-duell/<key>.webp, generated later. Missing files keep the drawn fallback. ---------- */
+const IMG_KEYS=['studio','audience','player','opponent','host','topic-homeoffice','topic-tempolimit','topic-handy','topic-viertage','topic-tourismus','topic-fleisch'];
+const IMG={};
+function applyImgs(root=document){root.querySelectorAll('[data-img]').forEach(el=>{const k=el.dataset.img;if(k&&IMG[k]&&!el.classList.contains('has')){el.style.backgroundImage=`url("${IMG[k]}")`;el.classList.add('has')}})}
+for(const k of IMG_KEYS){const im=new Image();im.onload=()=>{IMG[k]=im.src;applyImgs()};im.src=`img/debattier-duell/${k}.webp`}
+
+/* ---------- phrase bank for the end review ---------- */
+const R={
+ zwar:['Das mag zwar stimmen, aber …','That may be true, but …'],
+ ueber:['Dabei wird übersehen, dass …','This overlooks the fact that …'],
+ anders:['Das sehe ich anders: …','I see it differently: …'],
+ entsch:['Entscheidend ist doch …','What really matters is …'],
+ ein:['Einerseits …, andererseits …','On the one hand …, on the other hand …'],
+ einwand:['Ich verstehe den Einwand, dennoch …','I understand the objection, but still …'],
+ verall:['Das kann man so nicht verallgemeinern.','You can’t generalize like that.'],
+ vergessen:['Man darf aber nicht vergessen, dass …','But we must not forget that …'],
+ dennoch:['… ist wichtig, dennoch …','… matters, yet …'],
+ ueberz:['Das ist kein überzeugendes Argument, denn …','That is not a convincing argument, because …'],
+ nichtum:['Es geht nicht um …, sondern um …','It is not about …, but about …'],
+ zunaechst:['Das klingt zunächst gut, allerdings …','That sounds good at first, however …'],
+ gegenteil:['Ganz im Gegenteil: …','Quite the opposite: …'],
+ real:['Die Realität sieht anders aus: …','Reality looks different: …'],
+ mussnicht:['Das muss nicht sein: …','Not necessarily: …'],
+ berecht:['Das ist ein berechtigter Einwand, allerdings …','That is a fair objection, however …'],
+};
+/* feedback for the three kinds of wrong answers */
+const KIND={
+ off:['Thema verfehlt!','Das hat mit der Aussage nichts zu tun. Das Publikum gähnt.','Off topic! That has nothing to do with the claim. The audience yawns.','😴'],
+ agree:['Eigentor!','Damit gibst du Viktor recht, statt ihm zu widersprechen.','Own goal! You just agreed with Viktor instead of arguing against him.','😂'],
+ rude:['Autsch, zu unhöflich!','Persönliche Angriffe kommen beim Publikum nicht gut an.','Ouch, too rude! Personal attacks go down badly with the audience.','😬'],
+ weak:['Zu schwach!','Ohne Begründung überzeugst du niemanden.','Too weak! Without a reason you convince nobody.','🤷'],
+ slow:['Sendezeit vorbei!','Du hast zu lange gezögert. Viktor redet einfach weiter.','Airtime is up! You hesitated too long and Viktor keeps talking.','⏰'],
+};
+
+/* ---------- topics ----------
+ sort: [side, German, English]   side p = pro (for), c = contra (against)
+ duel.p = claims Viktor makes when he is PRO (you counter as contra), duel.c = the other way round
+ each duel: c claim, g strong counter (*marks* the phrase), r phrase key, o off-topic, b weak/agreeing/rude answer + kind
+ link: s sentence with {0}/{1} gaps, o options (first one is correct), r connector, x explanation */
+const D=(c,ce,g,ge,r,o,oe,b,be,k)=>({c,ce,g,ge,r,o,oe,b,be,k});
+const TOPICS=[
+{id:'homeoffice',img:'topic-homeoffice',ic:'🏠',t:'Homeoffice',q:'Sollte jeder ein Recht auf Homeoffice haben?',qe:'Should everyone have a right to work from home?',
+ sort:[['p','Wer zu Hause arbeitet, spart sich den langen Arbeitsweg.','Working from home saves you the long commute.'],
+  ['p','Eltern können Beruf und Familie besser vereinbaren.','Parents can balance work and family better.'],
+  ['p','Weniger Pendler bedeuten weniger Staus und weniger Abgase.','Fewer commuters mean fewer traffic jams and less exhaust.'],
+  ['p','Viele arbeiten zu Hause konzentrierter und ohne Unterbrechungen.','Many people work with more focus at home, without interruptions.'],
+  ['c','Der spontane Austausch mit Kollegen geht verloren.','Spontaneous exchange with colleagues gets lost.'],
+  ['c','Nicht jeder hat zu Hause einen ruhigen Arbeitsplatz.','Not everyone has a quiet workspace at home.'],
+  ['c','Die Grenze zwischen Arbeit und Freizeit verschwimmt.','The line between work and free time blurs.'],
+  ['c','In vielen Berufen, etwa in der Pflege, ist Homeoffice gar nicht möglich.','In many jobs, such as nursing, working from home is not possible at all.']],
+ duel:{p:[
+  D('Im Homeoffice sind die Leute nachweislich produktiver.','People are demonstrably more productive when working from home.',
+    '*Das mag zwar* für manche *stimmen, aber* Teamarbeit und neue Ideen entstehen oft erst im direkten Gespräch.','That may be true for some, but teamwork and new ideas often only come from face-to-face conversation.','zwar',
+    'Ich finde, die Bahn sollte im Winter pünktlicher fahren.','I think the trains should run more punctually in winter.',
+    'Da haben Sie völlig recht, zu Hause arbeitet man einfach besser.','You are absolutely right, people simply work better at home.','agree'),
+  D('Homeoffice spart den Firmen teure Büroflächen.','Remote work saves companies expensive office space.',
+    '*Dabei wird übersehen, dass* die Kosten nur verlagert werden: Strom, Heizung und Möbel zahlen dann die Beschäftigten selbst.','This overlooks that the costs are only shifted: employees then pay for electricity, heating and furniture themselves.','ueber',
+    'Im Sommer fahre ich am liebsten an die Ostsee.','In summer I like going to the Baltic Sea best.',
+    'So einen Unsinn habe ich noch nie gehört, Sie haben doch keine Ahnung!','I have never heard such nonsense, you have no idea!','rude'),
+  D('Wer zu Hause arbeitet, ist zufriedener und seltener krank.','People who work from home are happier and get sick less often.',
+    '*Das sehe ich anders:* Viele fühlen sich im Homeoffice einsam und können abends schlechter abschalten.','I see it differently: many people feel lonely working from home and find it harder to switch off in the evening.','anders',
+    'Meine Nachbarin hat sich gerade einen Hund gekauft.','My neighbor just bought a dog.',
+    'Na ja, vielleicht. Ich weiß es nicht so genau.','Well, maybe. I am not really sure.','weak')],
+ c:[
+  D('Im Homeoffice arbeiten die Leute weniger, weil niemand sie kontrolliert.','At home people work less because nobody checks on them.',
+    '*Entscheidend ist doch* das Ergebnis, nicht die Anwesenheit. Und viele erledigen zu Hause sogar mehr.','What really matters is the result, not being present. And many people even get more done at home.','entsch',
+    'Ich trinke morgens immer zwei Tassen Tee.','I always drink two cups of tea in the morning.',
+    'Stimmt, ohne Chef sitzt man eh nur auf dem Sofa.','True, without a boss you just sit on the sofa anyway.','agree'),
+  D('Ohne Büro leidet der Zusammenhalt im Team.','Without an office, team spirit suffers.',
+    '*Einerseits* ist der persönliche Kontakt wichtig, *andererseits* lässt er sich auch durch feste Teamtage im Büro sichern.','On the one hand personal contact matters, on the other hand it can also be secured with fixed team days at the office.','ein',
+    'Fußball ist in Deutschland der beliebteste Sport.','Soccer is the most popular sport in Germany.',
+    'Typisch, Sie wollen die Leute doch nur überwachen!','Typical, you just want to keep people under surveillance!','rude'),
+  D('Homeoffice ist ungerecht gegenüber allen, die vor Ort arbeiten müssen.','Remote work is unfair to everyone who has to work on site.',
+    '*Ich verstehe den Einwand, dennoch* ist das kein Grund, allen anderen diese Möglichkeit zu verweigern.','I understand the objection, but that is still no reason to deny everyone else this option.','einwand',
+    'Am Wochenende gehe ich gern ins Kino.','On weekends I like going to the movies.',
+    'Hm, ungerecht ist ja vieles im Leben.','Hm, lots of things in life are unfair.','weak')]},
+ link:[{s:'{0} spart man im Homeoffice viel Zeit, {1} fehlt der direkte Kontakt zu den Kollegen.',se:'Admittedly you save a lot of time working from home, but direct contact with colleagues is missing.',o:[['Zwar','aber'],['Weder','noch'],['Je','desto']],r:'zwar … aber',re:'admittedly … but',x:'Mit zwar … aber gibst du etwas zu und nennst dann das Gegenargument.',xe:'With zwar … aber you concede a point and then give the counterpoint.'},
+  {s:'Viele Beschäftigte haben zu Hause kein Arbeitszimmer. {0} arbeiten sie oft am Küchentisch.',se:'Many employees have no study at home. Consequently they often work at the kitchen table.',o:[['Folglich'],['Trotzdem'],['Obwohl']],r:'folglich',re:'consequently',x:'Folglich nennt eine Folge, wie deshalb. Das Verb steht direkt danach.',xe:'Folglich introduces a consequence, like deshalb. The verb comes right after it.'}]},
+
+{id:'tempolimit',img:'topic-tempolimit',ic:'🚗',t:'Tempolimit',q:'Brauchen deutsche Autobahnen ein generelles Tempolimit?',qe:'Do German autobahns need a general speed limit?',
+ sort:[['p','Ein Tempolimit senkt den CO₂-Ausstoß.','A speed limit cuts CO₂ emissions.'],
+  ['p','Bei niedrigeren Geschwindigkeiten gibt es weniger schwere Unfälle.','Lower speeds mean fewer serious accidents.'],
+  ['p','Der Verkehr fließt gleichmäßiger, und es gibt weniger Staus.','Traffic flows more evenly, and there are fewer jams.'],
+  ['p','Fast alle anderen Länder Europas haben längst ein Tempolimit.','Almost all other European countries have had a speed limit for a long time.'],
+  ['c','Viele Abschnitte haben schon heute eine Geschwindigkeitsbegrenzung.','Many sections already have a speed limit today.'],
+  ['c','Autofahrer sollten selbst entscheiden dürfen, wie schnell sie fahren.','Drivers should be allowed to decide for themselves how fast they drive.'],
+  ['c','Auf leeren Autobahnen kommt man schneller ans Ziel.','On empty autobahns you reach your destination faster.'],
+  ['c','Die deutschen Autobahnen gehören schon jetzt zu den sichersten Straßen.','German autobahns are already among the safest roads.']],
+ duel:{p:[
+  D('Ein Tempolimit würde jedes Jahr Tausende Unfälle verhindern.','A speed limit would prevent thousands of accidents every year.',
+    '*Das mag zwar* plausibel klingen, *aber* die meisten schweren Unfälle passieren gar nicht auf Autobahnen, sondern auf Landstraßen.','That may sound plausible, but most serious accidents do not happen on autobahns at all, but on country roads.','zwar',
+    'Ich fahre im Urlaub am liebsten mit dem Zug nach Italien.','On vacation I prefer to take the train to Italy.',
+    'Genau, deshalb sollte man am besten überall nur noch 100 fahren.','Exactly, that is why everyone should only drive 100 everywhere.','agree'),
+  D('Mit Tempo 130 sparen wir sofort und ohne Kosten CO₂.','At 130 km/h we save CO₂ immediately and at no cost.',
+    '*Dabei wird übersehen, dass* der Effekt im Vergleich zum gesamten Verkehr eher klein ist. Wichtiger wäre ein besseres Bahnnetz.','This overlooks that the effect is rather small compared to all traffic. A better rail network would matter more.','ueber',
+    'Mein Lieblingsessen ist Spaghetti mit Tomatensoße.','My favorite food is spaghetti with tomato sauce.',
+    'Sie wollen den Leuten doch nur den Spaß verderben, Sie Spielverderber!','You just want to spoil everyone’s fun, you killjoy!','rude'),
+  D('Ein Tempolimit macht das Fahren für alle entspannter.','A speed limit makes driving more relaxed for everyone.',
+    '*Das kann man so nicht verallgemeinern.* Viele empfinden gerade eine freie Strecke als entspannend, und Staus entstehen vor allem durch Baustellen.','You can’t generalize like that. Many find an open road relaxing, and traffic jams mainly come from roadworks.','verall',
+    'Im Herbst fallen die Blätter von den Bäumen.','In the fall the leaves drop from the trees.',
+    'Kann sein, aber egal.','Could be, but whatever.','weak')],
+ c:[
+  D('Ein Tempolimit schränkt die Freiheit der Autofahrer ein.','A speed limit restricts drivers’ freedom.',
+    'Freiheit *ist wichtig, dennoch* endet sie dort, wo sie andere gefährdet. In der Stadt akzeptieren wir schließlich auch Tempo 50.','Freedom matters, yet it ends where it endangers others. After all, we accept 50 km/h in town too.','dennoch',
+    'Ich habe mir gestern eine neue Jacke gekauft.','I bought a new jacket yesterday.',
+    'Stimmt, jeder soll so schnell fahren, wie er will.','True, everyone should drive as fast as they like.','agree'),
+  D('Unsere Autobahnen sind auch ohne Limit sehr sicher.','Our autobahns are very safe even without a limit.',
+    '*Das mag zwar stimmen, aber* auf Strecken mit Tempolimit gibt es deutlich weniger Verkehrstote.','That may be true, but there are significantly fewer road deaths on stretches with a speed limit.','zwar',
+    'Das Oktoberfest findet jedes Jahr in München statt.','Oktoberfest takes place in Munich every year.',
+    'Das sagen nur Leute, die zu viel Geld für schnelle Autos ausgeben.','Only people who spend too much money on fast cars say that.','rude'),
+  D('Wer schneller fährt, kommt schneller an. Zeit ist Geld.','Faster driving gets you there sooner. Time is money.',
+    '*Man darf aber nicht vergessen, dass* man mit 130 statt 160 km/h auf 100 Kilometern nur etwa neun Minuten verliert, aber viel Sprit spart.','But we must not forget that at 130 instead of 160 km/h you only lose about nine minutes over 100 kilometers, but save a lot of fuel.','vergessen',
+    'Mein Bruder studiert Medizin in Leipzig.','My brother studies medicine in Leipzig.',
+    'Ja, Zeit ist wirklich Geld.','Yes, time really is money.','agree')]},
+ link:[{s:'{0} schützt ein Tempolimit die Umwelt, {1} verlieren Autofahrer etwas Zeit.',se:'On the one hand a speed limit protects the environment, on the other hand drivers lose a little time.',o:[['Einerseits','andererseits'],['Entweder','oder'],['Weder','noch']],r:'einerseits … andererseits',re:'on the one hand … on the other hand',x:'Mit einerseits … andererseits wägst du zwei Seiten eines Themas ab.',xe:'With einerseits … andererseits you weigh up two sides of an issue.'},
+  {s:'Auf vielen Strecken gilt bereits ein Limit. {0} fordern Umweltverbände eine Regel für ganz Deutschland.',se:'Many stretches already have a limit. Nevertheless environmental groups demand a rule for all of Germany.',o:[['Dennoch'],['Folglich'],['Weil']],r:'dennoch',re:'nevertheless',x:'Dennoch bedeutet trotzdem: ein Gegensatz zum ersten Satz. Das Verb folgt direkt.',xe:'Dennoch means nevertheless: a contrast to the first sentence. The verb follows directly.'}]},
+
+{id:'handy',img:'topic-handy',ic:'📱',t:'Handyverbot an Schulen',q:'Sollten Handys an Schulen verboten werden?',qe:'Should cell phones be banned at schools?',
+ sort:[['p','Ohne Handy können sich Schüler im Unterricht besser konzentrieren.','Without phones, students can concentrate better in class.'],
+  ['p','In den Pausen reden und spielen die Kinder wieder mehr miteinander.','During breaks children talk and play with each other more again.'],
+  ['p','Ein Verbot schützt vor Cybermobbing während der Schulzeit.','A ban protects against cyberbullying during school hours.'],
+  ['p','Wer kein teures Smartphone hat, fühlt sich weniger ausgeschlossen.','Students without an expensive smartphone feel less left out.'],
+  ['c','Im Notfall müssen Kinder ihre Eltern erreichen können.','In an emergency, children must be able to reach their parents.'],
+  ['c','Smartphones können im Unterricht sinnvoll zum Lernen eingesetzt werden.','Smartphones can be used meaningfully for learning in class.'],
+  ['c','Schüler sollten lernen, verantwortungsvoll mit dem Handy umzugehen.','Students should learn to use their phones responsibly.'],
+  ['c','Ein Verbot ist im Schulalltag kaum zu kontrollieren.','A ban is hard to enforce in everyday school life.']],
+ duel:{p:[
+  D('Handys lenken die Schüler ständig vom Unterricht ab.','Phones constantly distract students from lessons.',
+    '*Das mag zwar stimmen, aber* dafür reicht eine klare Regel im Unterricht. Ein komplettes Verbot geht zu weit.','That may be true, but a clear rule in class is enough for that. A total ban goes too far.','zwar',
+    'Die Sommerferien beginnen in Bayern immer ziemlich spät.','Summer vacation always starts quite late in Bavaria.',
+    'Richtig, Handys sind für Kinder einfach schädlich.','Right, phones are simply harmful for children.','agree'),
+  D('Ohne Handys gäbe es an der Schule kein Cybermobbing mehr.','Without phones there would be no more cyberbullying at school.',
+    '*Dabei wird übersehen, dass* Cybermobbing vor allem nach der Schule stattfindet. Wichtiger wäre deshalb Medienerziehung.','This overlooks that cyberbullying mostly happens after school. Media education would therefore matter more.','ueber',
+    'In der Mensa gibt es dienstags immer Nudeln.','The cafeteria always serves pasta on Tuesdays.',
+    'So naiv kann doch nur jemand sein, der nie ein Handy benutzt hat.','Only someone who has never used a phone could be that naive.','rude'),
+  D('Früher ging es doch auch ohne Handy.','We managed without phones in the past, too.',
+    '*Das ist kein überzeugendes Argument, denn* die Welt hat sich verändert, und digitale Kompetenz gehört heute zur Bildung.','That is not a convincing argument, because the world has changed, and digital skills are part of education today.','ueberz',
+    'Mein Opa hat früher auf einem Bauernhof gearbeitet.','My grandpa used to work on a farm.',
+    'Früher war eben vieles anders, keine Ahnung.','Lots of things were different back then, no idea.','weak')],
+ c:[
+  D('Kinder müssen im Notfall jederzeit ihre Eltern erreichen können.','Children must be able to reach their parents at any time in an emergency.',
+    '*Ich verstehe den Einwand, dennoch* kann im Notfall das Sekretariat die Eltern anrufen. Dafür braucht kein Kind ein Handy in der Tasche.','I understand the objection, but in an emergency the school office can call the parents. No child needs a phone in their pocket for that.','einwand',
+    'Im Winter wird es schon um fünf Uhr dunkel.','In winter it gets dark as early as five o’clock.',
+    'Stimmt, ohne Handy sind Kinder in Gefahr.','True, without a phone children are in danger.','agree'),
+  D('Mit Smartphones kann man im Unterricht toll recherchieren.','Smartphones are great for research in class.',
+    '*Einerseits* stimmt das, *andererseits* kann die Schule dafür Tablets bereitstellen, die nur zum Lernen da sind.','On the one hand that is true, on the other hand the school can provide tablets that are only for learning.','ein',
+    'Ich lese abends gern Krimis.','I like reading crime novels in the evening.',
+    'Sie haben wohl schon lange keine Schule mehr von innen gesehen!','You obviously haven’t seen the inside of a school in ages!','rude'),
+  D('Ein Verbot ist altmodisch und bevormundet die Jugendlichen.','A ban is old-fashioned and patronizes young people.',
+    '*Es geht nicht um* Bevormundung, *sondern um* einen geschützten Raum zum Lernen, wie es ihn zum Beispiel in Frankreich schon gibt.','It is not about patronizing anyone, but about a protected space for learning, as already exists in France, for example.','nichtum',
+    'Morgen soll es den ganzen Tag regnen.','It is supposed to rain all day tomorrow.',
+    'Na ja, altmodisch ist ja nicht unbedingt schlecht.','Well, old-fashioned isn’t necessarily bad.','weak')]},
+ link:[{s:'{0} das Handy im Notfall nützlich ist, stört es im Unterricht oft.',se:'Although the phone is useful in an emergency, it often disrupts lessons.',o:[['Obwohl'],['Deshalb'],['Trotzdem']],r:'obwohl',re:'although',x:'Obwohl leitet einen Nebensatz ein. Das Verb steht am Ende: … nützlich ist.',xe:'Obwohl starts a subordinate clause. The verb goes to the end: … nützlich ist.'},
+  {s:'In den Pausen haben die Schüler kaum noch miteinander gesprochen. {0} hat die Schule ein Handyverbot eingeführt.',se:'During breaks students hardly talked to each other anymore. That is why the school introduced a phone ban.',o:[['Deshalb'],['Dennoch'],['Zwar']],r:'deshalb',re:'that is why',x:'Deshalb nennt die Folge aus dem ersten Satz. Danach steht direkt das Verb.',xe:'Deshalb gives the consequence of the first sentence. The verb comes right after it.'}]},
+
+{id:'viertage',img:'topic-viertage',ic:'📅',t:'Vier-Tage-Woche',q:'Sollte die Vier-Tage-Woche bei vollem Lohn zur Regel werden?',qe:'Should the four-day week at full pay become the norm?',
+ sort:[['p','Mit drei freien Tagen erholen sich die Beschäftigten besser.','With three days off, employees recover better.'],
+  ['p','Ausgeruhte Mitarbeiter machen weniger Fehler.','Well-rested employees make fewer mistakes.'],
+  ['p','Firmen werden für Fachkräfte attraktiver.','Companies become more attractive to skilled workers.'],
+  ['p','In Pilotprojekten blieb die Produktivität gleich oder stieg sogar.','In pilot projects productivity stayed the same or even rose.'],
+  ['c','In Krankenhäusern und Geschäften muss trotzdem jeden Tag jemand da sein.','Hospitals and shops still need someone there every day.'],
+  ['c','Viele müssten dieselbe Arbeit in weniger Zeit schaffen und hätten mehr Stress.','Many would have to do the same work in less time and would have more stress.'],
+  ['c','Für kleine Betriebe sind die zusätzlichen Kosten kaum zu tragen.','For small businesses the extra costs are hard to bear.'],
+  ['c','Beim aktuellen Fachkräftemangel fehlen dann noch mehr Arbeitsstunden.','With the current skills shortage, even more working hours would be lost.']],
+ duel:{p:[
+  D('Wer vier Tage arbeitet, ist motivierter und schafft genauso viel.','People who work four days are more motivated and get just as much done.',
+    '*Das mag zwar* in manchen Büros *stimmen, aber* in der Pflege oder im Handwerk lässt sich die Arbeit nicht einfach verdichten.','That may be true in some offices, but in nursing or the trades the work can’t simply be squeezed into less time.','zwar',
+    'Im Garten wachsen dieses Jahr besonders viele Tomaten.','There are lots of tomatoes growing in the garden this year.',
+    'Genau, vier Tage reichen völlig aus.','Exactly, four days are completely enough.','agree'),
+  D('Die Pilotprojekte waren ein voller Erfolg.','The pilot projects were a complete success.',
+    '*Dabei wird übersehen, dass* vor allem Firmen teilgenommen haben, die ohnehin gut geeignet waren. Das Ergebnis ist also nicht repräsentativ.','This overlooks that mainly companies that were well suited anyway took part. So the result is not representative.','ueber',
+    'Die Fußball-WM findet alle vier Jahre statt.','The soccer World Cup takes place every four years.',
+    'Sie haben doch noch nie richtig gearbeitet!','You have never done a proper day’s work!','rude'),
+  D('Mehr Freizeit bedeutet mehr Zeit für Familie und Ehrenamt.','More free time means more time for family and volunteering.',
+    '*Das klingt zunächst gut, allerdings* müssten viele dann an vier Tagen je zehn Stunden arbeiten, und das belastet das Familienleben ebenfalls.','That sounds good at first, however many would then have to work ten hours on each of four days, which also strains family life.','zunaechst',
+    'Ich habe am Wochenende einen Kuchen gebacken.','I baked a cake on the weekend.',
+    'Freizeit ist halt schön.','Free time is just nice.','weak')],
+ c:[
+  D('Die Vier-Tage-Woche ist für die Wirtschaft viel zu teuer.','The four-day week is far too expensive for the economy.',
+    '*Das sehe ich anders:* Weniger Krankheitstage und weniger Kündigungen sparen den Firmen viel Geld.','I see it differently: fewer sick days and fewer resignations save companies a lot of money.','anders',
+    'Ich spiele seit drei Jahren Gitarre.','I have been playing guitar for three years.',
+    'Stimmt, das kann sich niemand leisten.','True, nobody can afford that.','agree'),
+  D('Dieselbe Arbeit in weniger Zeit führt nur zu mehr Stress.','The same work in less time just leads to more stress.',
+    '*Das muss nicht sein:* Viele Firmen streichen dabei unnötige Meetings, sodass die Arbeit sogar effizienter wird.','Not necessarily: many companies cut unnecessary meetings, so the work becomes even more efficient.','mussnicht',
+    'Mein Handy-Akku hält nur noch einen halben Tag.','My phone battery only lasts half a day now.',
+    'Wer bei vier Tagen gestresst ist, ist einfach faul.','Anyone who is stressed by four days is simply lazy.','rude'),
+  D('Gerade beim Fachkräftemangel können wir uns weniger Arbeit nicht leisten.','With the skills shortage, we especially can’t afford less work.',
+    '*Ganz im Gegenteil:* Eine Vier-Tage-Woche lockt Fachkräfte an, und viele Teilzeitkräfte könnten ihre Stunden sogar erhöhen.','Quite the opposite: a four-day week attracts skilled workers, and many part-timers could even increase their hours.','gegenteil',
+    'Im Sommer ist es in den Büros oft zu heiß.','In summer it is often too hot in the offices.',
+    'Fachkräfte gibt es halt zu wenige.','There just aren’t enough skilled workers.','weak')]},
+ link:[{s:'{0} profitieren die Beschäftigten von der Vier-Tage-Woche, {1} die Firmen.',se:'Not only the employees benefit from the four-day week, but also the companies.',o:[['Nicht nur','sondern auch'],['Zwar','aber'],['Entweder','oder']],r:'nicht nur … sondern auch',re:'not only … but also',x:'Nicht nur … sondern auch verbindet zwei Punkte, die in dieselbe Richtung gehen.',xe:'Nicht nur … sondern auch links two points that go in the same direction.'},
+  {s:'{0} kürzer die Arbeitswoche ist, {1} besser können sich die Menschen erholen.',se:'The shorter the working week, the better people can recover.',o:[['Je','desto'],['Weder','noch'],['Sowohl','als auch']],r:'je … desto',re:'the … the …',x:'Je + Komparativ (Verb am Ende), desto + Komparativ (Verb danach).',xe:'Je + comparative (verb at the end), desto + comparative (verb right after).'}]},
+
+{id:'tourismus',img:'topic-tourismus',ic:'🏛️',t:'Tourismus begrenzen',q:'Sollten beliebte Städte die Zahl der Touristen begrenzen?',qe:'Should popular cities limit the number of tourists?',
+ sort:[['p','In manchen Altstädten finden Einheimische kaum noch bezahlbare Wohnungen.','In some old towns, locals can hardly find affordable apartments anymore.'],
+  ['p','Massentourismus belastet die Umwelt und historische Gebäude.','Mass tourism puts a strain on the environment and historic buildings.'],
+  ['p','Weniger Gedränge macht den Besuch auch für die Touristen schöner.','Less crowding makes the visit nicer for tourists, too.'],
+  ['p','Eine Begrenzung schützt den Charakter einer Stadt.','A limit protects a city’s character.'],
+  ['c','Der Tourismus schafft viele Arbeitsplätze in Hotels und Restaurants.','Tourism creates many jobs in hotels and restaurants.'],
+  ['c','Reisen sollte nicht nur für Menschen mit viel Geld möglich sein.','Travel should not only be possible for people with a lot of money.'],
+  ['c','Touristen bringen Steuereinnahmen, von denen alle profitieren.','Tourists bring tax revenue that benefits everyone.'],
+  ['c','Reisen fördert das Verständnis zwischen verschiedenen Kulturen.','Travel promotes understanding between different cultures.']],
+ duel:{p:[
+  D('Die Touristenmassen machen unsere Altstädte kaputt.','The crowds of tourists are ruining our old towns.',
+    '*Das mag zwar* für einige Hotspots *stimmen, aber* eine starre Obergrenze würde vor allem kleinen Geschäften schaden, die von den Besuchern leben.','That may be true for some hotspots, but a rigid cap would mainly hurt small shops that live off visitors.','zwar',
+    'Ich habe mir neulich neue Laufschuhe gekauft.','I recently bought new running shoes.',
+    'Richtig, Touristen sollte man am besten ganz verbieten.','Right, tourists should just be banned completely.','agree'),
+  D('Durch Ferienwohnungen werden die Mieten für Einheimische unbezahlbar.','Holiday rentals make rents unaffordable for locals.',
+    '*Dabei wird übersehen, dass* man dieses Problem gezielt lösen kann, etwa durch strengere Regeln für Ferienwohnungen, statt alle Besucher auszusperren.','This overlooks that this problem can be tackled directly, for example with stricter rules for holiday rentals, instead of locking out all visitors.','ueber',
+    'Mein Nachbar spielt jeden Abend Klavier.','My neighbor plays the piano every evening.',
+    'Sie waren wohl noch nie im Urlaub, sonst würden Sie so etwas nicht sagen!','You have obviously never been on vacation, or you wouldn’t say that!','rude'),
+  D('Ohne Begrenzung ist ein Stadtbesuch für niemanden mehr schön.','Without a limit, a city visit is no longer nice for anyone.',
+    '*Das kann man so nicht verallgemeinern.* Oft reicht es, die Besucher besser zu verteilen, etwa durch Zeitfenster oder Tipps für weniger bekannte Viertel.','You can’t generalize like that. Often it is enough to spread visitors out better, for example with time slots or tips for lesser-known neighborhoods.','verall',
+    'Der Rhein ist einer der längsten Flüsse Europas.','The Rhine is one of the longest rivers in Europe.',
+    'Schön ist ja Geschmackssache.','Nice is a matter of taste.','weak')],
+ c:[
+  D('Der Tourismus sichert Millionen Arbeitsplätze.','Tourism secures millions of jobs.',
+    '*Ich verstehe den Einwand, dennoch* hilft eine kluge Begrenzung langfristig, weil eine überfüllte Stadt irgendwann für alle unattraktiv wird.','I understand the objection, but a smart limit still helps in the long run, because an overcrowded city eventually becomes unattractive to everyone.','einwand',
+    'Mein Hund geht nicht gern spazieren, wenn es regnet.','My dog doesn’t like going for walks when it rains.',
+    'Stimmt, ohne Touristen wären viele arbeitslos.','True, without tourists many people would be unemployed.','agree'),
+  D('Eine Obergrenze macht Reisen zu einem Luxus für Reiche.','A cap turns travel into a luxury for the rich.',
+    '*Das muss nicht sein:* Statt hoher Preise kann man zum Beispiel kostenlose Zeitfenster vergeben, die man vorher reserviert.','Not necessarily: instead of high prices you can, for example, hand out free time slots that people book in advance.','mussnicht',
+    'Ich esse am liebsten Pizza mit Pilzen.','My favorite is pizza with mushrooms.',
+    'Das ist doch lächerlich, denken Sie mal nach, bevor Sie reden!','That is ridiculous, think before you speak!','rude'),
+  D('Jede Stadt freut sich doch über Gäste und ihr Geld.','Every city is surely happy about guests and their money.',
+    '*Die Realität sieht anders aus:* In Venedig oder Barcelona protestieren Einheimische, weil ihr Alltag unter den Massen leidet.','Reality looks different: in Venice or Barcelona locals are protesting because their everyday life suffers from the crowds.','real',
+    'Barcelona hat eine sehr gute Fußballmannschaft.','Barcelona has a very good soccer team.',
+    'Geld ist eben nicht alles.','Money just isn’t everything.','weak')]},
+ link:[{s:'{0} der vielen Touristen ist die Altstadt am frühen Morgen noch ruhig.',se:'Despite the many tourists, the old town is still quiet early in the morning.',o:[['Trotz'],['Wegen'],['Obwohl']],r:'trotz + Genitiv',re:'despite + genitive',x:'Trotz + Genitiv drückt einen Gegensatz aus, ganz ohne Nebensatz.',xe:'Trotz + genitive expresses a contrast without a subordinate clause.'},
+  {s:'Die Stadt hat Zeitfenster eingeführt, {0} die Besucher besser zu verteilen.',se:'The city introduced time slots in order to spread visitors out better.',o:[['um'],['damit'],['weil']],r:'um … zu',re:'in order to',x:'Um … zu + Infinitiv nennt ein Ziel. Damit und weil brauchen einen ganzen Nebensatz.',xe:'Um … zu + infinitive states a purpose. Damit and weil need a full subordinate clause.'}]},
+
+{id:'fleisch',img:'topic-fleisch',ic:'🥩',t:'Fleischsteuer',q:'Sollte es in Deutschland eine Steuer auf Fleisch geben?',qe:'Should there be a tax on meat in Germany?',
+ sort:[['p','Die Einnahmen könnten in eine bessere Tierhaltung fließen.','The revenue could go into better animal welfare.'],
+  ['p','Weniger Fleischkonsum schützt das Klima.','Eating less meat protects the climate.'],
+  ['p','Der Preis würde endlich die wahren Kosten für Umwelt und Gesundheit zeigen.','The price would finally show the true costs for the environment and health.'],
+  ['p','Wer weniger Fleisch isst, lebt oft gesünder.','People who eat less meat often live healthier lives.'],
+  ['c','Eine Fleischsteuer trifft vor allem Familien mit wenig Geld.','A meat tax mainly hits families with little money.'],
+  ['c','Der Staat sollte den Menschen nicht vorschreiben, was sie essen.','The state should not tell people what to eat.'],
+  ['c','Viele würden ihr Fleisch dann einfach günstiger im Ausland kaufen.','Many people would simply buy their meat cheaper abroad.'],
+  ['c','Für Landwirte in der Region wäre die Steuer eine zusätzliche Belastung.','For local farmers the tax would be an additional burden.']],
+ duel:{p:[
+  D('Eine Fleischsteuer ist der schnellste Weg, das Klima zu schützen.','A meat tax is the fastest way to protect the climate.',
+    '*Das mag zwar* gut gemeint sein, *aber* ohne Ausgleich trifft die Steuer vor allem kleine Einkommen, während Wohlhabende weiter essen wie bisher.','That may be well meant, but without compensation the tax mainly hits low incomes, while the wealthy keep eating as before.','zwar',
+    'Im Frühling blühen in unserem Park die Kirschbäume.','In spring the cherry trees bloom in our park.',
+    'Genau, Fleisch sollte am besten doppelt so viel kosten.','Exactly, meat should ideally cost twice as much.','agree'),
+  D('Mit dem Geld könnten wir die Tierhaltung endlich verbessern.','With the money we could finally improve animal farming.',
+    '*Dabei wird übersehen, dass* Steuern nicht automatisch zweckgebunden sind. Ob das Geld wirklich bei den Tieren ankommt, ist fraglich.','This overlooks that taxes are not automatically earmarked. Whether the money really reaches the animals is questionable.','ueber',
+    'Mein Fahrrad hat seit gestern einen Platten.','My bike has had a flat tire since yesterday.',
+    'Sie wollen uns wohl alle umerziehen, Sie Moralapostel!','You just want to re-educate us all, you moralizer!','rude'),
+  D('Fleisch ist viel zu billig, so kann es nicht weitergehen.','Meat is far too cheap, it can’t go on like this.',
+    '*Einerseits* mag das stimmen, *andererseits* wären Aufklärung und eine bessere Kennzeichnung fairer als eine Steuer, die alle gleich trifft.','On the one hand that may be true, on the other hand education and better labeling would be fairer than a tax that hits everyone equally.','ein',
+    'Abends trinke ich am liebsten einen Kräutertee.','In the evening I prefer a cup of herbal tea.',
+    'Billig ist halt billig.','Cheap is just cheap.','weak')],
+ c:[
+  D('Eine Fleischsteuer ist unsozial, weil sie arme Familien besonders trifft.','A meat tax is unfair because it hits poor families especially hard.',
+    '*Das ist ein berechtigter Einwand, allerdings* lässt er sich lösen: Man könnte zum Beispiel die Mehrwertsteuer auf Obst und Gemüse senken.','That is a fair objection, however it can be solved: for example, by lowering the sales tax on fruit and vegetables.','berecht',
+    'Die Bahn hat schon wieder Verspätung.','The train is late again.',
+    'Stimmt, Fleisch muss billig bleiben.','True, meat has to stay cheap.','agree'),
+  D('Der Staat darf den Bürgern nicht vorschreiben, was auf den Teller kommt.','The state must not tell citizens what goes on their plates.',
+    '*Es geht nicht um* ein Verbot, *sondern um* einen fairen Preis. Jeder darf weiterhin Fleisch essen und zahlt nur die wahren Kosten.','It is not about a ban, but about a fair price. Everyone may still eat meat and just pays the true costs.','nichtum',
+    'Meine Schwester zieht nächsten Monat nach Hamburg.','My sister is moving to Hamburg next month.',
+    'Typisch Fleischesser, die denken immer nur an sich selbst!','Typical meat eaters, they only ever think of themselves!','rude'),
+  D('Dann kaufen die Leute ihr Fleisch eben im Nachbarland.','Then people will just buy their meat in a neighboring country.',
+    '*Das kann man so nicht verallgemeinern.* Die meisten wohnen weit weg von der Grenze und fahren nicht extra für ein Schnitzel ins Ausland.','You can’t generalize like that. Most people live far from the border and won’t drive abroad just for a schnitzel.','verall',
+    'Ich gehe morgen zum Zahnarzt.','I am going to the dentist tomorrow.',
+    'Kann schon sein.','Could be.','weak')]},
+ link:[{s:'{0} Fleisch {1} Milchprodukte verursachen viele Treibhausgase.',se:'Both meat and dairy products cause a lot of greenhouse gases.',o:[['Sowohl','als auch'],['Zwar','aber'],['Je','desto']],r:'sowohl … als auch',re:'both … and',x:'Sowohl … als auch bedeutet: Beides gilt.',xe:'Sowohl … als auch means: both apply.'},
+  {s:'Viele Menschen essen täglich Fleisch, {0} andere ganz darauf verzichten.',se:'Many people eat meat every day, whereas others go without it completely.',o:[['während'],['trotzdem'],['deshalb']],r:'während',re:'whereas',x:'Während zeigt hier einen Gegensatz zwischen zwei Gruppen. Das Verb steht am Ende.',xe:'Während shows a contrast between two groups here. The verb goes to the end.'}]}
+];
+
+/* ---------- drawn fallbacks ---------- */
+function face(o){
+ // o: bg, skin, suit, hair (svg), extra (svg)
+ return `<svg class="alt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"><rect width="100" height="100" fill="${o.bg}"/><circle cx="50" cy="40" r="34" fill="#fff" opacity=".35"/>
+ <path d="M10 104C12 80 30 70 50 70S88 80 90 104Z" fill="${o.suit}"/><path d="M42 70l8 14 8-14" fill="#fff" opacity=".9"/>
+ <rect x="43" y="58" width="14" height="14" rx="5" fill="${o.skin}"/><ellipse cx="50" cy="44" rx="17" ry="20" fill="${o.skin}"/>
+ ${o.hair}<circle cx="43.5" cy="46" r="2.2" fill="#4a453f"/><circle cx="56.5" cy="46" r="2.2" fill="#4a453f"/>
+ <circle cx="39" cy="53" r="3.4" fill="#f3a9bd" opacity=".55"/><circle cx="61" cy="53" r="3.4" fill="#f3a9bd" opacity=".55"/>
+ <path d="${o.mouth||'M44 55q6 5 12 0'}" stroke="#4a453f" stroke-width="2.2" fill="none" stroke-linecap="round"/>${o.extra||''}</svg>`}
+const FACE={
+ player:face({bg:'#e6f2fc',skin:'#f1c9a5',suit:'#9cc8ee',hair:'<path d="M32 44C30 24 42 18 52 19C64 20 70 30 68 44C64 34 58 30 50 31C42 31 36 36 32 44Z" fill="#7a5a44"/><circle cx="63" cy="22" r="7" fill="#7a5a44"/>'}),
+ opponent:face({bg:'#f3eefa',skin:'#efc4a0',suit:'#a28bcc',hair:'<path d="M33 46C30 34 33 27 38 25C37 31 37 36 36 46ZM67 46C70 34 67 27 62 25C63 31 63 36 64 46Z" fill="#cfc9c2"/><path d="M38 26C42 22 58 22 62 26C56 24 44 24 38 26Z" fill="#cfc9c2"/>',mouth:'M44 56q7 3 12-2',
+  extra:'<circle cx="43.5" cy="46" r="6" fill="none" stroke="#4a453f" stroke-width="1.8"/><circle cx="56.5" cy="46" r="6" fill="none" stroke="#4a453f" stroke-width="1.8"/><path d="M49.5 46h1" stroke="#4a453f" stroke-width="1.8"/><path d="M41 38l6-2M53 36l6 1" stroke="#a9a29a" stroke-width="2" stroke-linecap="round"/><path d="M42 80l8-4 8 4-8 4z" fill="#d5728f"/><circle cx="50" cy="80" r="2.4" fill="#b85a77"/>'}),
+ host:face({bg:'#fbf1cc',skin:'#e2b08a',suit:'#f5cf5a',hair:'<path d="M30 52C26 28 38 20 50 20S74 28 70 52C68 42 66 36 62 33C56 30 44 30 38 33C34 36 32 42 30 52Z" fill="#3d322c"/>',
+  extra:'<path d="M33 48C30 54 34 60 40 60" stroke="#4a453f" stroke-width="2" fill="none"/><circle cx="41" cy="60" r="2.4" fill="#4a453f"/>'})
+};
+function studioSvg(){
+ let s='<svg viewBox="0 0 900 400" preserveAspectRatio="xMidYMin slice"><defs><linearGradient id="pn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity=".15"/></linearGradient><radialGradient id="bk"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>';
+ s+='<path d="M-50 400C120 210 300 150 450 150S780 210 950 400" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="14"/><path d="M-50 400C120 240 300 190 450 190S780 240 950 400" fill="none" stroke="#f6b9a4" stroke-opacity=".45" stroke-width="5"/>';
+ const cols=['#d7c9ec','#f6b9a4','#9cc8ee','#f5e3a0','#9fdcb9'];
+ for(let r=0;r<3;r++)for(let c=0;c<9;c++){const x=40+c*94,y=30+r*58;s+=`<rect x="${x}" y="${y}" width="80" height="46" rx="10" fill="${cols[(c+r*2)%5]}" opacity="${.22+((c*7+r*3)%5)*.06}"/><rect x="${x}" y="${y}" width="80" height="46" rx="10" fill="url(#pn)" opacity=".5"/>`}
+ for(let i=0;i<16;i++){const x=(i*137)%900,y=20+(i*61)%200,r=8+(i*13)%22;s+=`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#bk)" opacity=".7"/>`}
+ return s+'</svg>'}
+function audSvg(){
+ const cols=['#9cc8ee','#f3a9bd','#9fdcb9','#f5cf5a','#d7c9ec','#f6b9a4'],skins=['#f1c9a5','#e2b08a','#c98f6b','#a8775a','#f5d6bc'],hairs=['#3d322c','#7a5a44','#b5713c','#d9c27a','#5a4a3f','#cfc9c2'];
+ let s='<svg class="alt" viewBox="0 0 1000 140" preserveAspectRatio="xMidYMax slice">';
+ const row=(n,base,sc,op,off)=>{for(let i=0;i<n;i++){const x=off+i*(1000/n)+((i*37)%17)-8,k=i*7+base,c=cols[k%6],sk=skins[(k>>1)%5],h=hairs[(k*3)%6],d=((i*53)%40)/100;
+  s+=`<g class="p" style="animation-delay:${d}s" opacity="${op}"><g transform="translate(${x} ${base}) scale(${sc})"><path d="M-26 0C-24 -26 -14 -34 0 -34S24 -26 26 0Z" fill="${c}"/><circle cy="-46" r="14" fill="${sk}"/><path d="M-14 -48A14 14 0 0 1 14 -48C10 -56 -10 -56 -14 -48Z" fill="${h}"/><g class="arm"><path d="M-22 -22L-30 -56" stroke="${c}" stroke-width="7" stroke-linecap="round"/><path d="M22 -22L30 -56" stroke="${c}" stroke-width="7" stroke-linecap="round"/><circle cx="-30" cy="-58" r="5" fill="${sk}"/><circle cx="30" cy="-58" r="5" fill="${sk}"/></g></g></g>`}};
+ row(16,104,.85,.55,20);row(13,142,1.05,1,0);
+ return s+'</svg>'}
+const TROPHY=`<svg viewBox="0 0 120 120"><defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#fbe7a1"/><stop offset=".45" stop-color="#f5cf5a"/><stop offset="1" stop-color="#d9a93c"/></linearGradient></defs>
+<path d="M36 30H20c0 16 8 24 20 26M84 30h16c0 16-8 24-20 26" fill="none" stroke="#d9a93c" stroke-width="6" stroke-linecap="round"/>
+<path d="M34 16h52v22c0 18-11 32-26 32S34 56 34 38z" fill="url(#tg)" stroke="#b98a2a" stroke-width="3"/>
+<path d="M42 22v14c0 10 5 18 12 22" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+<path d="M60 26l4.5 9 10 1.4-7.3 7 1.8 10L60 48.6 51 53.4l1.8-10-7.3-7 10-1.4z" fill="#fff" opacity=".9"/>
+<rect x="53" y="70" width="14" height="14" fill="#d9a93c"/><rect x="40" y="84" width="40" height="10" rx="4" fill="url(#tg)" stroke="#b98a2a" stroke-width="3"/>
+<rect x="32" y="94" width="56" height="16" rx="5" fill="#d7c9ec" stroke="#a28bcc" stroke-width="3"/></svg>`;
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const embedded=window.parent!==window;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let sound=true,actx;
+function ac(){actx=actx||new(window.AudioContext||window.webkitAudioContext)();return actx}
+function beep(f=520,d=.08,type='sine',v=.06,delay=0){if(!sound)return;try{const a=ac(),t=a.currentTime+delay,o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+function applause(n=24,dur=1.3,vol=1){if(!sound)return;try{const a=ac(),sr=a.sampleRate,len=Math.floor(sr*.025);for(let i=0;i<n;i++){const b=a.createBuffer(1,len,sr),d=b.getChannelData(0);for(let j=0;j<len;j++)d[j]=(Math.random()*2-1)*Math.pow(1-j/len,4);const s=a.createBufferSource();s.buffer=b;const f=a.createBiquadFilter();f.type='bandpass';f.frequency.value=1300+Math.random()*1800;f.Q.value=.9;const g=a.createGain();g.gain.value=(.05+Math.random()*.07)*vol;s.connect(f).connect(g).connect(a.destination);s.start(a.currentTime+Math.random()*dur*(i/n+.2))}}catch(e){}}
+const plink=k=>{const base=[523,587,659,784,880,988,1047][Math.min(k,6)];beep(base,.12,'triangle',.07);beep(base*1.5,.1,'sine',.04,.05)};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const best=()=>{try{return +localStorage.getItem('fds:debatte:best')||0}catch(e){return 0}};
+const setBest=v=>{try{localStorage.setItem('fds:debatte:best',v)}catch(e){}};
+const plain=s=>s.replace(/\*/g,'');
+const hl=s=>s.replace(/\*(.+?)\*/g,'<mark>$1</mark>');
+const other=s=>s==='p'?'c':'p';
+const SIDE={p:['PRO','dafür','for'],c:['CONTRA','dagegen','against']};
+
+/* ---------- static scenery ---------- */
+$('#bgAlt').innerHTML=studioSvg();
+$('#aud').innerHTML=audSvg();
+for(const [id,k] of [['miniMe','player'],['miniCpu','opponent'],['porMe','player'],['porCpu','opponent'],['hMe','player'],['hCpu','opponent']])$('#'+id).innerHTML=FACE[k];
+applyImgs();
+
+/* ---------- game state ---------- */
+let G=null,nTopics=5,T=null,last=performance.now();
+function later(fn,ms){const tok=G&&G.tok;setTimeout(()=>{if(G&&!G.over&&G.tok===tok)fn()},ms)}
+function hud(){
+ $('#score').textContent=G.score;$('#tN').textContent=Math.min(G.ti+1,G.list.length)+'/'+G.list.length;
+ $('#dots').innerHTML=G.list.map((_,i)=>{const r=G.results[i];return `<i class="${r?(r.tie?'t':r.win?'w':'l'):''} ${i===G.ti&&!r?'now':''}"></i>`}).join('');
+ $('#streakN').textContent=G.streak;$('#streak').classList.toggle('on',G.streak>=3);
+}
+function renderMeter(pop){
+ const v=Math.round(G.meter);$('#fill').style.width=v+'%';$('#knob').style.left=v+'%';
+ $('#pMe').textContent=v+' %';$('#pCpu').textContent=(100-v)+' %';
+ if(pop){const k=$('#knob');k.classList.remove('pop');void k.offsetWidth;k.classList.add('pop')}
+}
+function swing(d){G.meter=Math.max(2,Math.min(98,G.meter+d));renderMeter(true)}
+function banner(t,sub){const w=$('#wave');w.innerHTML=`<div class="in">${t}${sub?`<small>${sub}</small>`:''}</div>`;w.classList.remove('show');void w.offsetWidth;w.classList.add('show')}
+function mood(who,c){const el=$(who==='me'?'#podMe':'#podCpu');el.classList.remove('yay','ugh');void el.offsetWidth;el.classList.add(c);setTimeout(()=>el.classList.remove(c),800)}
+function talk(who){$('#podMe').classList.toggle('talk',who==='me');$('#podCpu').classList.toggle('talk',who==='cpu')}
+function react(type,side='me'){
+ const a=$('#aud');a.classList.remove('cheer','boo');void a.offsetWidth;
+ if(type==='cheer'||type==='small'){a.classList.add('cheer');setTimeout(()=>a.classList.remove('cheer'),1500);applause(type==='cheer'?30:14,type==='cheer'?1.5:.9,type==='cheer'?1:.6);particles(type==='cheer'?9:4,['👏','👏','🎉','⭐'],side)}
+ else if(type==='boo'){a.classList.add('boo');setTimeout(()=>a.classList.remove('boo'),1400);particles(4,['😬','💤','🙄'],side)}
+ else if(type==='laugh'){particles(5,['😂','🤭'],side)}
+}
+function particles(n,set,side){
+ if(reduced)return;const st=$('#studio'),h=innerHeight,w=innerWidth;
+ for(let i=0;i<n;i++){const f=document.createElement('span');f.className='fx';f.textContent=set[i%set.length];
+  const x=side==='cpu'?w*(.55+Math.random()*.4):side==='me'?w*(.05+Math.random()*.4):w*Math.random();
+  f.style.left=x+'px';f.style.top=(h-40)+'px';st.appendChild(f);
+  f.animate([{transform:'translateY(0) scale(.5)',opacity:0},{transform:`translateY(-60px) scale(1.1) rotate(${Math.random()*30-15}deg)`,opacity:1,offset:.25},{transform:`translateY(-${180+Math.random()*120}px) scale(.9)`,opacity:0}],{duration:1300+Math.random()*600,delay:i*70,easing:'ease-out',fill:'both'}).onfinish=()=>f.remove()}
+}
+function floatTxt(x,y,t,c){const f=document.createElement('div');f.className='ftext';f.textContent=t;f.style.left=x+'px';f.style.top=y+'px';f.style.color=c;$('#studio').appendChild(f);
+ f.animate([{transform:'translateY(0) scale(.6)',opacity:0},{transform:'translateY(-14px) scale(1.15)',opacity:1,offset:.25},{transform:'translateY(-60px) scale(1)',opacity:0}],{duration:1100,easing:'ease-out'}).onfinish=()=>f.remove()}
+function flash(){const s=$('#studio');s.classList.add('flash');setTimeout(()=>s.classList.remove('flash'),500)}
+function setTimer(sec,barSel,cb){T={left:sec,total:sec,bar:barSel?$(barSel):null,cb}}
+
+/* ---------- flow ---------- */
+function start(){
+ const list=shuffle(TOPICS).slice(0,nTopics);let side=Math.random()<.5?'p':'c';
+ G={list,ti:0,results:[],score:0,streak:0,bestStreak:0,sortOk:0,sortN:0,duelOk:0,duelN:0,connOk:0,connN:0,meter:50,used:{},conns:[],tok:Math.random(),paused:false,over:false,ph:'',sides:list.map((_,i)=>i%2?other(side):side)};
+ ['#startOv','#endOv','#resOv'].forEach(s=>$(s).classList.remove('show'));
+ hud();renderMeter();topicIntro();
+}
+function topicIntro(){
+ const tp=G.list[G.ti];G.topic=tp;G.side=G.sides[G.ti];G.meter=50;renderMeter();G.ph='intro';T=null;talk('');
+ const [S,de,en]=SIDE[G.side];
+ $('#sideMe').textContent=S;$('#sideCpu').textContent=SIDE[other(G.side)][0];
+ const sc=$('#screen');sc.classList.remove('new');void sc.offsetWidth;sc.classList.add('new');
+ $('#kick').textContent=`Thema ${G.ti+1} · ${tp.t}`;$('#q').textContent=tp.q;$('#qe').textContent=tp.qe;
+ const th=$('#thumb');th.dataset.img=tp.img;th.classList.remove('has');th.style.backgroundImage='';$('#thumbAlt').textContent=tp.ic;
+ $('#arena').innerHTML='';hud();
+ const greet=G.ti===0?'Herzlich willkommen im Studio! Heute diskutieren wir:':G.ti===G.list.length-1?'Unser letztes Thema heute, jetzt wird es spannend:':'Weiter geht es mit unserem nächsten Thema:';
+ const greetE=G.ti===0?'A warm welcome to the studio! Today we are debating:':G.ti===G.list.length-1?'Our last topic today, now it gets exciting:':'On to our next topic:';
+ $('#topicCard').innerHTML=`<div class="tpic" data-img="${tp.img}"><span class="alt">${tp.ic}</span><span class="lbl">Thema ${G.ti+1} von ${G.list.length}</span></div>
+  <div class="host"><span class="hostpic" data-img="host">${FACE.host}</span><p><b>Moderatorin Lena Licht</b>${greet}<span class="e">${greetE}</span></p></div>
+  <h2>${tp.q}</h2><span class="e">${tp.qe}</span>
+  <div class="side ${G.side==='p'?'pro':'con'}">Du bist ${de.toUpperCase()} (${S})<span class="e">You argue ${en} (${S.toLowerCase()})</span></div>
+  <p style="font-size:14px">Viktor vertritt die Gegenseite.<span class="e">Viktor takes the opposite side.</span></p>
+  <button class="big" id="startTopic">Debatte starten<span class="e">Start the debate</span></button>`;
+ applyImgs($('#topicCard'));applyImgs($('#screen'));
+ $('#topicOv').classList.add('show');$('#startTopic').onclick=sortStart;
+ [392,523,659].forEach((f,i)=>beep(f,.18,'triangle',.05,i*.12));
+}
+
+/* --- phase 1: sort --- */
+function sortStart(){
+ if(G.ph!=='intro')return;
+ $('#topicOv').classList.remove('show');G.ph='sortwait';G.cards=shuffle(G.topic.sort);G.ci=0;
+ flash();applause(20,1.2,.7);react('small','all');
+ banner('Runde 1: Sortieren','Pro oder contra? Schnell! · For or against? Quick!');
+ const L=G.side,Rr=other(G.side),lab=s=>`${SIDE[s][0]}<small>${SIDE[s][1]}</small>`;
+ $('#arena').innerHTML=`<span class="tag">🗂️ Runde 1 · Blitz-Sortierung<span class="e">speed sort</span></span>
+  <div class="deck" id="deck"></div>
+  <div class="sbins"><button class="sbin L ${L==='p'?'pro':'con'}" id="binL"><span class="k">← 1</span>${lab(L)}<small style="color:var(--sky-d)">deine Seite</small></button><button class="sbin R ${Rr==='p'?'pro':'con'}" id="binR"><span class="k">2 →</span>${lab(Rr)}<small style="color:var(--lilac-d)">Viktors Seite</small></button></div>
+  <div class="swipehint">Tippen, wischen oder Pfeiltasten<span class="e">Tap, swipe or use the arrow keys</span></div><div id="oops"></div>`;
+ $('#binL').onclick=()=>sortPick('L');$('#binR').onclick=()=>sortPick('R');
+ later(nextCard,1500);
+}
+function nextCard(){
+ if(G.ci>=G.cards.length){G.ph='';later(duelStart,700);return}
+ const [s,de,en]=G.cards[G.ci];G.cur={s,de,en};G.ph='sort';G.t0=performance.now();
+ const lc=getComputedStyle($('#binL')).getPropertyValue('--c'),rc=getComputedStyle($('#binR')).getPropertyValue('--c');
+ $('#deck').innerHTML=`<div class="acard" id="acard" style="--lc:${lc};--rc:${rc}"><span class="num">${G.ci+1} / ${G.cards.length}</span><span class="quote">„</span>${de}<span class="e">${en}</span><div class="tbar"><i id="sbar"></i></div></div>`;
+ setTimer(9,'#sbar',()=>sortPick(null));drag($('#acard'));beep(700,.05,'sine',.03);
+}
+function drag(el){
+ let x0=null,dx=0,id=null;
+ el.addEventListener('pointerdown',e=>{if(G.ph!=='sort')return;x0=e.clientX;dx=0;id=e.pointerId;el.setPointerCapture(id);el.style.transition='none';el.style.animation='none'});
+ el.addEventListener('pointermove',e=>{if(x0===null)return;dx=e.clientX-x0;el.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`;el.classList.toggle('lean-L',dx<-30);el.classList.toggle('lean-R',dx>30)});
+ const up=()=>{if(x0===null)return;x0=null;el.style.transition='transform .25s';if(Math.abs(dx)>70)sortPick(dx<0?'L':'R');else{el.style.transform='';el.classList.remove('lean-L','lean-R')}};
+ el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
+}
+function sortPick(dir){
+ if(!G||G.ph!=='sort'||G.paused)return;
+ G.ph='sortlock';T=null;G.sortN++;
+ const c=G.cur,sideOf=dir==='L'?G.side:dir==='R'?other(G.side):null,ok=sideOf===c.s;
+ const fast=performance.now()-G.t0<4000;
+ const el=$('#acard'),bin=dir?$('#bin'+dir):null;
+ if(bin){bin.classList.remove('press','yum','nope');void bin.offsetWidth;bin.classList.add(ok?'yum':'nope')}
+ if(el&&!reduced){const tx=dir==='L'?-innerWidth*.7:dir==='R'?innerWidth*.7:0;el.style.animation='none';
+  el.animate([{transform:getComputedStyle(el).transform==='none'?'none':getComputedStyle(el).transform},{transform:`translate(${tx}px,${dir?-160:120}px) rotate(${dir==='L'?-25:dir==='R'?25:0}deg) scale(.4)`,opacity:0}],{duration:420,easing:'cubic-bezier(.4,.1,.6,1)',fill:'forwards'})}
+ const r=(bin||$('#deck')).getBoundingClientRect();
+ if(ok){
+  G.sortOk++;G.streak++;G.bestStreak=Math.max(G.bestStreak,G.streak);
+  const pts=10+(fast?5:0)+(G.streak>=3?5:0);G.score+=pts;swing(fast?4:3);
+  plink(G.streak);floatTxt(r.left+r.width/2,r.top-10,`+${pts}${fast?' ⚡':''}`,'#2f7a52');
+  mood('me','yay');if(G.streak%3===0)react('small','me');$('#oops').innerHTML='';
+ }else{
+  G.streak=0;swing(-5);beep(180,.25,'sawtooth',.045);mood('cpu','yay');
+  $('#oops').innerHTML=`<div class="oops">${dir?'Falsch!':'Zu langsam!'} Das ist ein Argument <b>${SIDE[c.s][0]}</b> (${SIDE[c.s][1]}).<span class="e">${dir?'Wrong!':'Too slow!'} That is an argument ${SIDE[c.s][2]} (${SIDE[c.s][0].toLowerCase()}).</span></div>`;
+ }
+ hud();G.ci++;later(nextCard,ok?520:1500);
+}
+
+/* --- phase 2: duel --- */
+function duelStart(){
+ G.ph='duelwait';G.di=0;G.duels=G.topic.duel[other(G.side)];
+ banner('Runde 2: Schlagabtausch','Viktor behauptet, du konterst! · Viktor claims, you counter!');beep(523,.15,'triangle',.06);beep(784,.2,'triangle',.06,.15);
+ $('#arena').innerHTML='';later(duelNext,1700);
+}
+function duelNext(){
+ if(G.di>=G.duels.length){G.ph='';$('#arena').innerHTML='';later(connStart,400);return}
+ const d=G.duels[G.di];G.ph='duelwait';talk('cpu');
+ $('#arena').innerHTML=`<span class="tag">⚔️ Schlagabtausch ${G.di+1}/${G.duels.length}<span class="e">exchange of blows</span></span>
+  <div class="bub" id="bub"><span class="who">Viktor Vielrede · ${SIDE[other(G.side)][0]}</span><span class="typing"><i></i><i></i><i></i></span></div><div id="dpart"></div>`;
+ later(()=>{
+  const b=$('#bub');b.innerHTML=`<span class="who">Viktor Vielrede · ${SIDE[other(G.side)][0]}</span><span id="ctext"></span><span class="e">${d.ce}</span>`;
+  swing(-6);react('small','cpu');mood('cpu','yay');
+  typeText($('#ctext'),d.c,()=>{
+   if(!G||G.over)return;talk('me');
+   G.opts=shuffle([{t:d.g,e:d.ge,k:'good'},{t:d.o,e:d.oe,k:'off'},{t:d.b,e:d.be,k:d.k}]);
+   $('#dpart').innerHTML=`<div class="dbar"><i id="dbar"></i></div><div class="dlabel"><span>Deine Antwort?<span class="e" style="display:inline;margin-left:4px">your reply?</span></span><span>⏱ Sendezeit</span></div>
+    <div class="opts">${G.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="l">${'ABC'[i]}</span><span>${plain(o.t)}<span class="e">${o.e}</span></span></button>`).join('')}</div>`;
+   document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>duelPick(+b.dataset.i));
+   G.ph='duel';setTimer(35,'#dbar',()=>duelPick(-1));
+  });
+ },700);
+}
+function typeText(el,txt,done){
+ if(reduced){el.textContent=txt;done();return}
+ let i=0;const step=()=>{if(!G||G.over)return;if(G.paused){setTimeout(step,100);return}i+=2;el.textContent=txt.slice(0,i);if(i%6===0)beep(320+Math.random()*80,.03,'square',.012);if(i<txt.length)setTimeout(step,22);else done()};step();
+}
+function duelPick(i){
+ if(!G||G.ph!=='duel'||G.paused)return;
+ G.ph='duellock';T=null;G.duelN++;talk('');
+ const d=G.duels[G.di],o=i>=0?G.opts[i]:null,kind=o?o.k:'slow',ok=kind==='good',gi=G.opts.findIndex(x=>x.k==='good');
+ document.querySelectorAll('.opt').forEach((b,j)=>{b.disabled=true;if(j===gi)b.classList.add('right');else if(j===i)b.classList.add('wrong');else b.classList.add('gone')});
+ const prev=G.used[d.r];G.used[d.r]=prev===undefined?ok:(prev||ok);
+ let fb;
+ if(ok){
+  G.duelOk++;G.streak++;G.bestStreak=Math.max(G.bestStreak,G.streak);G.score+=30;swing(11);
+  react('cheer','me');mood('me','yay');mood('cpu','ugh');flash();[659,784,988].forEach((f,k)=>beep(f,.14,'triangle',.06,k*.08));
+  fb=`<div class="fbx good"><b class="h">👏 Stark gekontert!</b> Du greifst die Aussage auf und widersprichst mit einem Grund.<span class="e">Strong counter! You pick up the claim and push back with a reason.</span><div class="row2"><div class="rm">💬 ${R[d.r][0]}<span class="e">${R[d.r][1]}</span></div>NEXT</div></div>`;
+ }else{
+  G.streak=0;swing(-7);mood('cpu','yay');mood('me','ugh');react(kind==='agree'?'laugh':'boo','cpu');beep(196,.3,'sawtooth',.04);
+  const K=KIND[kind];
+  fb=`<div class="fbx bad"><b class="h">${K[3]} ${K[0]}</b> ${K[1]}<span class="e">${K[2]}</span><div style="margin-top:6px">Besser: ${hl(d.g)}</div><div class="row2"><span></span>NEXT</div></div>`;
+ }
+ const opts=document.querySelectorAll('.opt');if(opts[gi])opts[gi].querySelector('span:not(.l)').innerHTML=hl(d.g)+`<span class="e">${d.ge}</span>`;
+ $('#dpart').querySelector('.dbar').remove();$('#dpart').querySelector('.dlabel').remove();
+ $('#dpart').insertAdjacentHTML('beforeend',fb.replace('NEXT',`<button class="next" id="nextBtn">Weiter →<span class="e">next</span></button>`));
+ $('#nextBtn').onclick=()=>{if(G.ph!=='duellock')return;G.di++;duelNext()};hud();
+ const ar=$('#arena');ar.scrollTop=ar.scrollHeight;
+}
+
+/* --- phase 3: connect --- */
+function connStart(){
+ G.ph='connwait';G.li=0;talk('me');
+ banner('Runde 3: Schlusswort','Verbinde deine Argumente! · Connect your arguments!');beep(587,.15,'triangle',.06);beep(880,.2,'triangle',.06,.15);
+ $('#arena').innerHTML='';later(connNext,1700);
+}
+function gapHtml(s,fill,ok){let k=0;return s.replace(/\{(\d)\}/g,(_,n)=>`<span class="gap${fill?' fill'+(ok?' ok':''):''}" data-g="${n}">${fill?fill[+n]:'xxxx'}</span>`)}
+function connNext(){
+ const L=G.topic.link;
+ if(G.li>=L.length){$('#arena').innerHTML='';topicEnd();return}
+ const l=L[G.li];G.lopts=shuffle(l.o.map((o,i)=>({o,ok:i===0})));G.ph='conn';
+ $('#arena').innerHTML=`<span class="tag">🔗 Schlusswort ${G.li+1}/${L.length}<span class="e">closing statement</span></span>
+  <div class="sent" id="sent">${gapHtml(l.s)}</div><div class="dbar"><i id="cbar"></i></div>
+  <div class="chips">${G.lopts.map((x,i)=>`<button class="chip" data-i="${i}"><small>${i+1}</small>${x.o.join(' … ')}</button>`).join('')}</div><div id="cfb"></div>`;
+ document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>connPick(+b.dataset.i));
+ setTimer(30,'#cbar',()=>connPick(-1));
+}
+function connPick(i){
+ if(!G||G.ph!=='conn'||G.paused)return;
+ G.ph='connlock';T=null;G.connN++;
+ const l=G.topic.link[G.li],x=i>=0?G.lopts[i]:null,ok=!!(x&&x.ok),ci=G.lopts.findIndex(y=>y.ok);
+ document.querySelectorAll('.chip').forEach((b,j)=>{b.disabled=true;if(j===ci)b.classList.add('right');else if(j===i)b.classList.add('wrong')});
+ $('#sent').innerHTML=gapHtml(l.s,l.o[0],true)+`<span class="e">${l.se}</span>`;const cb=$('#cbar');if(cb)cb.parentNode.remove();
+ G.conns.push({r:l.r,re:l.re,ok});
+ if(ok){G.connOk++;G.streak++;G.bestStreak=Math.max(G.bestStreak,G.streak);G.score+=20;swing(6);react('cheer','me');mood('me','yay');plink(4)}
+ else{G.streak=0;swing(-6);react('boo','cpu');mood('cpu','yay');beep(196,.3,'sawtooth',.04)}
+ $('#cfb').innerHTML=`<div class="fbx ${ok?'good':'bad'}"><b class="h">${ok?'✅ Perfekt verbunden!':i<0?'⏰ Zu spät!':'❌ Passt nicht.'}</b> ${l.x}<span class="e">${l.xe}</span><div class="row2"><span></span><button class="next" id="nextBtn">Weiter →<span class="e">next</span></button></div></div>`;
+ $('#nextBtn').onclick=()=>{if(G.ph!=='connlock')return;G.li++;connNext()};hud();
+ const ar=$('#arena');ar.scrollTop=ar.scrollHeight;
+}
+
+/* --- topic result --- */
+function topicEnd(){
+ G.ph='res';T=null;talk('');
+ const v=Math.round(G.meter),win=v>50,tie=v===50;G.results.push({win,tie,v});
+ if(win){G.score+=50}
+ hud();$('#arena').innerHTML='';
+ const tp=G.topic,last=G.ti>=G.list.length-1;
+ if(win){react('cheer','me');applause(50,2.2,1);[523,659,784,1047].forEach((f,i)=>beep(f,.2,'triangle',.06,i*.12))}else{react('small','cpu');[440,392,330].forEach((f,i)=>beep(f,.2,'triangle',.05,i*.14))}
+ const title=win?'Das Publikum ist auf deiner Seite!':tie?'Unentschieden!':'Viktor gewinnt diese Runde.';
+ const tE=win?'The audience is on your side!':tie?'It’s a tie!':'Viktor wins this round.';
+ $('#resCard').innerHTML=`<p style="margin:0;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:12px">${tp.t} · Abstimmung</p>
+  <h2>${title}</h2><span class="e">${tE}</span>
+  <div class="result"><div class="pod me ${win?'win':''}"><div class="por" data-img="player">${FACE.player}</div></div><div class="pc" style="color:var(--sky-d)">${v} %<small>Du</small></div><div class="pc" style="color:var(--lilac-d)">${100-v} %<small>Viktor</small></div><div class="pod cpu ${!win&&!tie?'win':''}"><div class="por" data-img="opponent">${FACE.opponent}</div></div></div>
+  <p>${win?'+50 Bonuspunkte für den Themensieg.':'Kopf hoch, das nächste Thema wartet!'}<span class="e">${win?'+50 bonus points for winning the topic.':'Chin up, the next topic is waiting!'}</span></p>
+  <button class="big" id="resBtn">${last?'Zum großen Finale':'Nächstes Thema'}<span class="e">${last?'On to the grand finale':'Next topic'}</span></button>`;
+ applyImgs($('#resCard'));
+ later(()=>{$('#resOv').classList.add('show');$('#resBtn').onclick=()=>{$('#resOv').classList.remove('show');if(last)end();else{G.ti++;topicIntro()}}},900);
+}
+
+/* --- end --- */
+function end(){
+ if(!G||G.over)return;
+ G.over=true;T=null;G.ph='end';talk('');
+ ['#topicOv','#resOv','#pauseOv'].forEach(s=>$(s).classList.remove('show'));
+ const wins=G.results.filter(r=>r.win).length,losses=G.results.filter(r=>!r.win&&!r.tie).length,champ=wins>losses&&wins>0;
+ const b=best(),nb=G.score>b;if(nb)setBest(G.score);
+ const xp=Math.min(100,Math.round(G.sortOk*1.2+G.duelOk*4+G.connOk*3+wins*3));
+ if(window.parent!==window&&xp>0)window.parent.postMessage({source:'fds-game',type:'xp',amount:xp},'*');
+ const tot=G.sortN+G.duelN+G.connN,ok=G.sortOk+G.duelOk+G.connOk,pct=tot?Math.round(ok/tot*100):0;
+ const phr=Object.entries(G.used).map(([k,v])=>`<li><span class="m ${v?'ok':'no'}">${v?'✓':'↻'}</span><span class="t"><b>${R[k][0]}</b><span class="e">${R[k][1]}</span></span></li>`).join('');
+ const seen=new Set(),cn=G.conns.filter(c=>!seen.has(c.r)&&seen.add(c.r)).map(c=>`<li><span class="m ${c.ok?'ok':'no'}">${c.ok?'✓':'↻'}</span><span class="t"><b>${c.r}</b><span class="e">${c.re}</span></span></li>`).join('');
+ const title=champ?'Debattier-Champion!':wins===losses&&G.results.length?'Gleichstand!':G.results.length?'Viktor gewinnt knapp':'Show beendet';
+ const sub=champ?`Du hast ${wins} von ${G.results.length} Themen gewonnen. Das Publikum tobt!`:G.results.length?`Du hast ${wins} von ${G.results.length} Themen gewonnen. Revanche?`:'Bis zum nächsten Mal im Studio!';
+ const subE=champ?`You won ${wins} of ${G.results.length} topics. The crowd goes wild!`:G.results.length?`You won ${wins} of ${G.results.length} topics. Rematch?`:'See you next time in the studio!';
+ $('#endCard').innerHTML=`<div class="trophy ${champ?'':'silver'}"><div class="rays"></div>${TROPHY}</div>
+  <h1>${title}</h1><p>${sub}<span class="e">${subE}</span></p>
+  ${nb&&G.score>0?'<span class="newbest">Neuer Rekord! · New best!</span>':`<p>Rekord: ${Math.max(b,G.score)}</p>`}
+  <div class="stats"><div><b>${wins}/${G.results.length}</b><span>Themen</span></div><div><b>${pct} %</b><span>richtig</span></div><div><b>${G.score}</b><span>Punkte</span></div></div>
+  ${xp?`<p><b>+${xp} XP</b> für deine Argumente.<span class="e">+${xp} XP for your arguments.</span></p>`:''}
+  ${phr||cn?`<div class="review">${phr?`<h3>Nützliche Redemittel · useful phrases</h3><ul>${phr}</ul>`:''}${cn?`<h3>Konnektoren · connectors</h3><ul>${cn}</ul>`:''}</div><p style="font-size:12.5px">✓ sicher benutzt · ↻ noch einmal üben<span class="e">✓ used well · ↻ practice again</span></p>`:''}
+  <button class="big" id="again">Nochmal!<span class="e">Play again</span></button><button class="ghost" id="menu">Andere Showlänge<span class="e">Change show length</span></button>`;
+ $('#arena').innerHTML='';
+ setTimeout(()=>{$('#endOv').classList.add('show');$('#again').onclick=start;$('#menu').onclick=menu;if(champ||nb&&G.score>0){confetti();applause(60,2.5,1)}},500);
+}
+function confetti(){if(reduced)return;const cols=['#9cc8ee','#f3a9bd','#9fdcb9','#f5cf5a','#d7c9ec','#f6b9a4'];for(let i=0;i<90;i++){const c=document.createElement('i');c.className='conf';c.style.cssText=`left:${Math.random()*100}vw;background:${cols[i%6]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()}s`;document.body.appendChild(c);setTimeout(()=>c.remove(),5000)}}
+function menu(){$('#endOv').classList.remove('show');$('#startOv').classList.add('show');showBest()}
+function showBest(){const b=best();$('#bestLine').innerHTML=b?`Dein Rekord: <b>${b}</b> Punkte<span class="e">Your best: ${b} points</span>`:''}
+function pause(on){if(!G||G.over)return;G.paused=on;$('#pauseOv').classList.toggle('show',on);last=performance.now()}
+
+/* ---------- timer loop ---------- */
+function loop(now){
+ const dt=Math.min(.05,(now-last)/1000);last=now;
+ if(T&&G&&!G.paused&&!G.over){T.left-=dt;if(T.bar)T.bar.style.transform=`scaleX(${Math.max(0,T.left/T.total)})`;if(T.left<=0){const cb=T.cb;T=null;cb()}}
+ requestAnimationFrame(loop);
+}
+
+/* ---------- input ---------- */
+addEventListener('keydown',e=>{
+ if($('#startOv').classList.contains('show')){if(e.key==='Enter'||e.key===' '){e.preventDefault();start()}return}
+ if(e.key==='Escape'||e.key==='p'){pause(!(G&&G.paused));return}
+ if(!G||G.paused)return;
+ if($('#topicOv').classList.contains('show')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();sortStart();return}
+ if($('#resOv').classList.contains('show')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();$('#resBtn').click();return}
+ if(G.ph==='sort'){const k={ArrowLeft:'L',1:'L',a:'L',ArrowRight:'R',2:'R',d:'R'}[e.key];if(k){e.preventDefault();sortPick(k)}return}
+ if(G.ph==='duel'){const k={1:0,2:1,3:2,a:0,b:1,c:2}[e.key.toLowerCase()];if(k!==undefined){e.preventDefault();duelPick(k)}return}
+ if(G.ph==='conn'){const k={1:0,2:1,3:2}[e.key];if(k!==undefined){e.preventDefault();connPick(k)}return}
+ if((e.key==='Enter'||e.key===' ')&&$('#nextBtn')){e.preventDefault();$('#nextBtn').click()}
+});
+$('#go').onclick=start;
+$('#resume').onclick=()=>pause(false);
+$('#quit').onclick=()=>{pause(false);end()};
+$('#pause').onclick=()=>pause(true);
+$('#snd').onclick=e=>{sound=!sound;e.currentTarget.textContent=sound?'🔔':'🔕'};
+document.querySelectorAll('#lvls button').forEach(b=>b.onclick=()=>{nTopics=+b.dataset.n;document.querySelectorAll('#lvls button').forEach(x=>x.classList.toggle('sel',x===b))});
+addEventListener('blur',()=>{if(G&&!G.over&&!G.paused&&/^(sort|duel|conn)/.test(G.ph))pause(true)});
+/* English help is driven by the Fuchsdeutsch app around the game */
+addEventListener('message',e=>{const m=e.data;if(m&&m.source==='fds-app'&&m.type==='en')document.body.classList.toggle('en-on',!!m.on)});
+showBest();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

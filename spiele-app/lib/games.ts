@@ -39,13 +39,13 @@ export const GAMES: Game[] = [
     skills: ['Wohnen', 'Mietvertrag', 'Höflich fragen'], players: '1 bis 3 · gegen den Computer', playersEn: '1 to 3 · vs the computer', minutes: 20, hue: 'butter', art: 'key',
   },
   {
-    id: 'hallo-nachbar', level: 'a1', title: 'Hallo, Nachbar!',
+    id: 'hallo-nachbar', level: 'a1', title: 'Hallo, Nachbar!', live: true, isNew: true, href: '/spiel/hallo-nachbar',
     tagline: 'Begrüßen, vorstellen, verabschieden. Wer findet die passende Antwort zuerst?',
     taglineEn: 'Greet, introduce yourself, say goodbye. Who finds the right reply first?',
     skills: ['Begrüßung', 'sich vorstellen'], players: '1 bis 2', playersEn: '1 to 2', minutes: 10, hue: 'peach', art: 'wave',
   },
   {
-    id: 'zahlen-sprint', level: 'a1', title: 'Zahlen-Sprint',
+    id: 'zahlen-sprint', level: 'a1', title: 'Zahlen-Sprint', live: true, isNew: true, href: '/spiel/zahlen-sprint',
     tagline: 'Hör die Zahl, tipp sie ein. Von 1 bis 1000, immer schneller.',
     taglineEn: 'Hear the number, type it. From 1 to 1000, faster and faster.',
     skills: ['Zahlen', 'Hören', 'Uhrzeit'], players: '1', playersEn: '1', minutes: 5, hue: 'sky', art: 'numbers',
@@ -63,7 +63,7 @@ export const GAMES: Game[] = [
     skills: ['Artikel', 'Wortschatz'], players: '1 · Highscore', playersEn: '1 · high score', minutes: 5, hue: 'sky', art: 'rain',
   },
   {
-    id: 'satzbaustelle', level: 'a2', title: 'Satzbaustelle',
+    id: 'satzbaustelle', level: 'a2', title: 'Satzbaustelle', live: true, isNew: true, href: '/spiel/satzbaustelle',
     tagline: 'Bau Sätze aus Bausteinen. Das Verb muss an die richtige Stelle.',
     taglineEn: 'Build sentences from blocks. The verb has to go in the right place.',
     skills: ['Satzbau', 'Perfekt', 'Nebensätze'], players: '1 bis 2', playersEn: '1 to 2', minutes: 10, hue: 'peach', art: 'blocks',
@@ -75,7 +75,7 @@ export const GAMES: Game[] = [
     skills: ['Wegbeschreibung', 'Präpositionen'], players: '1 bis 3', playersEn: '1 to 3', minutes: 15, hue: 'lilac', art: 'map',
   },
   {
-    id: 'wohin-damit', level: 'b1', title: 'Wohin damit?',
+    id: 'wohin-damit', level: 'b1', title: 'Wohin damit?', live: true, isNew: true, href: '/spiel/wohin-damit',
     tagline: 'Richte die neue Wohnung ein: auf den Tisch oder auf dem Tisch?',
     taglineEn: 'Furnish the new apartment: auf den Tisch or auf dem Tisch?',
     skills: ['Wechselpräpositionen', 'Wohnen'], players: '1', playersEn: '1', minutes: 10, hue: 'rose', art: 'sofa',
@@ -87,13 +87,13 @@ export const GAMES: Game[] = [
     skills: ['Konnektoren', 'Wortstellung'], players: '1 bis 2', playersEn: '1 to 2', minutes: 10, hue: 'mint', art: 'chain',
   },
   {
-    id: 'debattier-duell', level: 'b2', title: 'Debattier-Duell',
+    id: 'debattier-duell', level: 'b2', title: 'Debattier-Duell', live: true, isNew: true, href: '/spiel/debattier-duell',
     tagline: 'Pro oder contra? Sortier die Argumente und gewinn die Diskussion.',
     taglineEn: 'For or against? Sort the arguments and win the debate.',
     skills: ['Argumentieren', 'Meinung'], players: '2 · gegen den Computer', playersEn: '2 · vs the computer', minutes: 15, hue: 'lilac', art: 'debate',
   },
   {
-    id: 'redewendungen', level: 'b2', title: 'Tomaten auf den Augen',
+    id: 'redewendungen', level: 'b2', title: 'Tomaten auf den Augen', live: true, isNew: true, href: '/spiel/redewendungen',
     tagline: 'Redewendungen raten: Was meint man wirklich, wenn man das sagt?',
     taglineEn: 'Guess the idioms: what do people really mean when they say that?',
     skills: ['Redewendungen', 'Umgangssprache'], players: '1 bis 3', playersEn: '1 to 3', minutes: 10, hue: 'rose', art: 'tomato',

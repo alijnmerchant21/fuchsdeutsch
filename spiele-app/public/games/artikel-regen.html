@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Der, die, das: Regen</title>
 <style>
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(../fonts/figtree-ext.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF}
+
 :root{
   --ink:#4a453f; --soft:#8b847a; --paper:#fffdf7; --line:#e6dfcf;
   --der:#9cc8ee; --der-d:#5e97c9; --der-s:#e6f2fc;
@@ -14,7 +17,7 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden}
-body{font-family:"Avenir Next","Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#f7f3e8;user-select:none}
+body{font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#f7f3e8;user-select:none}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .e{display:block;font-size:.78em;font-style:italic;font-weight:400;color:var(--soft);margin-top:2px}
 body:not(.en-on) .e{display:none}
@@ -39,7 +42,7 @@ canvas#rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none
 /* ---------- HUD ---------- */
 .hud{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:14px;padding:14px 18px;z-index:5;pointer-events:none}
 .pill{pointer-events:auto;background:rgba(255,253,247,.85);backdrop-filter:blur(6px);border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;font-weight:700;box-shadow:0 4px 14px rgba(90,80,60,.08);display:flex;align-items:center;gap:8px}
-.pill b{font-size:20px;font-family:"Rockwell",Georgia,serif;font-variant-numeric:tabular-nums}
+.pill b{font-size:20px;font-family:"Figtree",system-ui,sans-serif;font-variant-numeric:tabular-nums}
 .hearts{display:flex;gap:4px;font-size:22px}
 .hearts span{transition:transform .3s,filter .3s}
 .hearts span.gone{filter:grayscale(1) opacity(.35);transform:scale(.75)}
@@ -48,7 +51,7 @@ canvas#rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none
 #combo.on{opacity:1;transform:none}
 #combo.hot{background:linear-gradient(120deg,#ffe08a,#ffb98f,#f6a9c6);border-color:transparent}
 .iconbtn{pointer-events:auto;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:rgba(255,253,247,.85);border:1.5px solid var(--line)}
-.wave{position:absolute;left:50%;top:22%;translate:-50% 0;font:800 clamp(34px,6vw,64px)/1 "Rockwell",Georgia,serif;color:var(--ink);text-shadow:0 4px 0 #fff;z-index:6;pointer-events:none;opacity:0;text-align:center}
+.wave{position:absolute;left:50%;top:22%;translate:-50% 0;font:800 clamp(34px,6vw,64px)/1 "Figtree",system-ui,sans-serif;color:var(--ink);text-shadow:0 4px 0 #fff;z-index:6;pointer-events:none;opacity:0;text-align:center}
 .wave.show{animation:wave 1.8s cubic-bezier(.2,1.2,.4,1) forwards}
 .wave small{display:block;font:600 16px/1.4 system-ui,sans-serif;color:var(--soft);margin-top:6px}
 @keyframes wave{0%{opacity:0;transform:scale(.4) rotate(-6deg)}20%{opacity:1;transform:scale(1.05)}30%{transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
@@ -71,7 +74,7 @@ body:not(.en-on) .drop .t{display:none}
 @keyframes wob{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 .splash{position:absolute;width:0;height:0;pointer-events:none;z-index:4}
 .splash i{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--c,#9cc8ee)}
-.ftext{position:absolute;pointer-events:none;z-index:6;font:800 26px/1 "Rockwell",Georgia,serif;white-space:nowrap;translate:-50% 0;text-shadow:0 2px 0 #fff,0 0 10px #fff}
+.ftext{position:absolute;pointer-events:none;z-index:6;font:800 26px/1 "Figtree",system-ui,sans-serif;white-space:nowrap;translate:-50% 0;text-shadow:0 2px 0 #fff,0 0 10px #fff}
 
 /* ---------- article clouds (the targets) ---------- */
 .bins{position:absolute;left:0;right:0;bottom:3vh;display:flex;justify-content:center;gap:clamp(10px,4vw,60px);z-index:4;perspective:700px}
@@ -79,7 +82,7 @@ body:not(.en-on) .drop .t{display:none}
 .bin .body{position:absolute;inset:0;border-radius:24px 24px 40px 40px;background:linear-gradient(180deg,var(--s) 0,var(--c) 60%,var(--d) 100%);border:3px solid var(--d);
   box-shadow:0 18px 26px -12px rgba(60,50,40,.45),inset 0 10px 0 rgba(255,255,255,.55),inset 0 -14px 0 rgba(0,0,0,.08);transform:rotateX(14deg);transform-origin:50% 100%}
 .bin .rim{position:absolute;left:-4%;right:-4%;top:-10px;height:26px;border-radius:50%;background:radial-gradient(ellipse at 50% 70%,rgba(0,0,0,.18),transparent 60%),var(--c);border:3px solid var(--d);transform:rotateX(14deg)}
-.bin .lbl{position:absolute;left:0;right:0;top:34%;text-align:center;font:800 clamp(28px,5vw,48px)/1 "Rockwell",Georgia,serif;color:#fff;text-shadow:0 3px 0 var(--d),0 6px 14px rgba(0,0,0,.15);letter-spacing:.04em}
+.bin .lbl{position:absolute;left:0;right:0;top:34%;text-align:center;font:800 clamp(28px,5vw,48px)/1 "Figtree",system-ui,sans-serif;color:#fff;text-shadow:0 3px 0 var(--d),0 6px 14px rgba(0,0,0,.15);letter-spacing:.04em}
 .bin .key{position:absolute;left:50%;bottom:10px;translate:-50% 0;font-size:12px;font-weight:800;color:var(--d);background:rgba(255,255,255,.85);padding:2px 9px;border-radius:999px}
 .bin .face{position:absolute;left:50%;top:62%;translate:-50% 0;width:46px;height:16px}
 .bin.der{--c:var(--der);--d:var(--der-d);--s:var(--der-s)}
@@ -108,13 +111,13 @@ body:not(.en-on) .drop .t{display:none}
 .ov.show{display:grid}
 .card{background:var(--paper);border-radius:28px;border:1.5px solid var(--line);box-shadow:0 30px 70px -20px rgba(90,80,60,.35);width:min(560px,100%);padding:26px 26px 22px;text-align:center;animation:flip .6s cubic-bezier(.2,.9,.3,1.12)}
 @keyframes flip{from{transform:perspective(1200px) rotateX(-60deg) translateY(40px);opacity:0}}
-.card h1{font:400 clamp(30px,6vw,42px)/1.05 "Rockwell",Georgia,serif;letter-spacing:.03em;margin:8px 0 6px;text-transform:uppercase}
+.card h1{font:800 clamp(30px,6vw,42px)/1.05 "Figtree",system-ui,sans-serif;letter-spacing:.03em;margin:8px 0 6px;text-transform:uppercase}
 .card p{margin:6px 0;color:var(--soft)}
 .mascot{width:150px;height:110px;margin:-6px auto 0;animation:bob 3s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-8px)}}
 .how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
 .how div{background:#f7f3e8;border-radius:16px;padding:12px 8px;font-size:14px}
-.how b{display:block;font:800 22px/1.2 "Rockwell",Georgia,serif}
+.how b{display:block;font:800 22px/1.2 "Figtree",system-ui,sans-serif}
 .how .der b{color:var(--der-d)}.how .die b{color:var(--die-d)}.how .das b{color:var(--das-d)}
 .big{width:100%;padding:15px;border-radius:18px;background:var(--coral);font-weight:800;font-size:18px;box-shadow:0 5px 0 var(--coral-d);transition:.12s;margin-top:8px}
 .big:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--coral-d)}
@@ -122,7 +125,7 @@ body:not(.en-on) .drop .t{display:none}
 .ghost{width:100%;padding:12px;border-radius:16px;border:1.5px solid var(--line);margin-top:10px;font-weight:700;background:#fff}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
 .stats div{background:#f7f3e8;border-radius:16px;padding:12px 6px}
-.stats b{display:block;font:800 30px/1.1 "Rockwell",Georgia,serif}
+.stats b{display:block;font:800 30px/1.1 "Figtree",system-ui,sans-serif}
 .stats span{font-size:13px;color:var(--soft)}
 .review{text-align:left;max-height:190px;overflow:auto;background:#f7f3e8;border-radius:16px;padding:8px 14px;margin:10px 0}
 .review li{margin:5px 0;list-style:none;display:flex;gap:8px;align-items:baseline}
